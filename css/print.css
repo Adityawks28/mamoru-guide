@@ -2,10 +2,13 @@
   body {
     background: #fff !important;
     color: #1a1a1a !important;
+    font-size: 12pt;
   }
 
+  /* Hide decorative / interactive elements */
   #stars,
   .navbar,
+  .mobile-menu,
   .mode-toggle,
   .lang-switcher,
   .scroll-hint,
@@ -15,7 +18,11 @@
   .skyline-container,
   .mountains-container,
   .water,
-  .kobe-tower {
+  .kobe-tower,
+  .skip-link,
+  .hamburger,
+  .share-url-box,
+  .copy-url-btn {
     display: none !important;
   }
 
@@ -27,8 +34,10 @@
   .section {
     opacity: 1 !important;
     transform: none !important;
+    page-break-inside: avoid;
   }
 
+  /* Linearize grids for print */
   .split-panel,
   .yasashii-grid,
   .alert-grid,
@@ -39,38 +48,78 @@
     grid-template-columns: 1fr !important;
   }
 
-  a[href]::after {
+  /* Show URLs for external links */
+  a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 0.85em;
     color: #666;
   }
 
+  /* Card backgrounds */
   .card-bg,
   .bag-item,
   .vocab-card,
   .alert-card,
   .step-card,
   .panel,
-  .yasashii-card {
+  .yasashii-card,
+  .about-card {
     background: #fff !important;
-    border-color: #ccc !important;
+    border: 1px solid #ccc !important;
+    color: #1a1a1a !important;
   }
 
+  /* Hero section */
   .hero {
     min-height: auto !important;
     background: #fff !important;
-    padding: 40px 20px !important;
+    padding: 20px !important;
   }
+  .hero-title { color: #1a1a1a !important; text-shadow: none !important; }
+  .hero-kanji { color: #333 !important; }
+  .mascot-char { display: none !important; }
 
   .footer {
     background: #f5f5f5 !important;
+    border-top: 2px solid #333 !important;
   }
 
-  /* Emergency Plan print styles */
+  /* === EMERGENCY PLAN — Print-Optimized === */
   #myplan {
     page-break-before: always;
-    border: 2px solid #333;
-    padding: 1.5rem;
+    border: 3px solid #333;
+    padding: 2rem;
+    margin: 0;
+  }
+  #myplan .section-label {
+    color: #333 !important;
+    font-size: 12pt;
+  }
+  #myplan .section-title {
+    color: #1a1a1a !important;
+    font-size: 16pt;
+    margin-bottom: 4px;
+  }
+  #myplan .section-note {
+    color: #555 !important;
+    font-size: 10pt;
+    margin-bottom: 16px;
+  }
+
+  .plan-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+  .plan-field-full {
+    grid-column: 1 / -1 !important;
+  }
+  .plan-field label {
+    color: #333 !important;
+    font-weight: bold;
+    font-size: 10pt;
+    display: block;
+    margin-bottom: 4px;
   }
   .plan-field input,
   .plan-field select,
@@ -78,7 +127,44 @@
     border: 1px solid #999 !important;
     background: white !important;
     color: black !important;
+    padding: 6px 8px !important;
+    font-size: 11pt !important;
+    width: 100% !important;
+    box-sizing: border-box;
     -webkit-print-color-adjust: exact;
   }
-  .plan-btn { display: none !important; }
+  .plan-field textarea {
+    min-height: 60px;
+  }
+  .plan-btn,
+  .plan-actions { display: none !important; }
+
+  /* Emergency numbers — keep visible in print */
+  .emergency-card {
+    border: 2px solid #333 !important;
+    background: #fff !important;
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+  }
+  .emergency-card::after { display: none !important; }
+  .emergency-number {
+    color: #c00 !important;
+    font-size: 18pt !important;
+  }
+  .emergency-label {
+    color: #333 !important;
+    opacity: 1 !important;
+  }
+  .emergency-title {
+    color: #333 !important;
+  }
+
+  /* Footer links in print */
+  .footer-links a {
+    color: #333 !important;
+  }
+  .footer-copy {
+    color: #666 !important;
+    opacity: 1 !important;
+  }
 }

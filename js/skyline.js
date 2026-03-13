@@ -1,15 +1,27 @@
 // === SKYLINE ===
-// Bug #4 fix: removed trailing space from 'bld-window' (was 'bld-window ' when lit)
+// Dynamically generates buildings to fill viewport width
 function buildSkyline(){
   const c=document.getElementById('skyline');
+  if(!c)return;
   c.innerHTML='';
-  const blds=[
-    {w:16,h:35},{w:20,h:45,type:'eu'},{w:14,h:30},
-    {w:22,h:50,type:'eu'},{w:18,h:40,type:'eu'},{w:30,h:70},{w:16,h:55},
-    {w:40,h:100},{w:24,h:80},{w:35,h:110},{w:20,h:60},
-    {w:28,h:75},{w:36,h:90},{w:20,h:50},{w:24,h:65},{w:18,h:45,type:'eu'},
-    {w:14,h:35},{w:22,h:55},{w:16,h:40,type:'eu'},{w:20,h:30},
+  const vw=window.innerWidth;
+  // Building templates: width, min/max height, optional European roof style
+  const templates=[
+    {w:16,hMin:25,hMax:45},{w:20,hMin:30,hMax:55,type:'eu'},{w:14,hMin:20,hMax:40},
+    {w:22,hMin:40,hMax:65,type:'eu'},{w:18,hMin:30,hMax:50,type:'eu'},{w:30,hMin:55,hMax:80},
+    {w:16,hMin:40,hMax:60},{w:40,hMin:80,hMax:120},{w:24,hMin:60,hMax:90},
+    {w:35,hMin:90,hMax:120},{w:20,hMin:45,hMax:70},{w:28,hMin:55,hMax:85},
+    {w:36,hMin:70,hMax:100},{w:20,hMin:35,hMax:55},{w:24,hMin:50,hMax:75},
   ];
+  // Fill the full viewport width with buildings
+  let totalW=0;
+  const blds=[];
+  while(totalW<vw+60){
+    const t=templates[Math.floor(Math.random()*templates.length)];
+    const h=Math.floor(t.hMin+Math.random()*(t.hMax-t.hMin));
+    blds.push({w:t.w,h:h,type:t.type});
+    totalW+=t.w;
+  }
   blds.forEach(b=>{
     const el=document.createElement('div');
     el.className='bld';

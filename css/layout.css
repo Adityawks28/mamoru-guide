@@ -117,11 +117,54 @@
   filter: drop-shadow(0 0 8px rgba(200,50,50,0.3));
 }
 .footer-emergency {
+  margin-bottom: 24px;
+}
+.emergency-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--meriken-amber);
-  margin-bottom: 20px;
-  line-height: 2;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.emergency-numbers {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.emergency-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(245,166,35,0.3);
+  border-radius: 8px;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--kitano-white);
+  transition: all 0.2s;
+  min-width: 120px;
+}
+.emergency-card:hover {
+  border-color: var(--meriken-amber);
+  background: rgba(245,166,35,0.1);
+  transform: translateY(-2px);
+}
+.emergency-icon {
+  font-size: 24px;
+}
+.emergency-number {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px;
+  color: var(--alert-red);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.emergency-label {
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: center;
 }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
 .footer-links a {
@@ -217,70 +260,3 @@ body.day-mode .mobile-menu a {
   color: var(--text);
 }
 
-/* Install Banner */
-.install-banner {
-  position: fixed;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  transition: bottom 0.4s ease;
-  width: 90%;
-  max-width: 500px;
-}
-.install-banner.show {
-  bottom: 1rem;
-}
-.install-content {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: rgba(15, 31, 61, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(245, 166, 35, 0.3);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-.install-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-.install-text {
-  flex: 1;
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-.install-btn {
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.8rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: transform 0.2s;
-}
-.install-btn:hover {
-  transform: scale(1.05);
-}
-.install-dismiss {
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 1.2rem;
-  cursor: pointer;
-  opacity: 0.5;
-  padding: 0 0.25rem;
-  transition: opacity 0.2s;
-}
-.install-dismiss:hover {
-  opacity: 1;
-}
-body.day-mode .install-content {
-  background: rgba(245, 240, 230, 0.95);
-  border-color: rgba(245, 166, 35, 0.4);
-}

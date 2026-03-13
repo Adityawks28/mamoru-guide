@@ -787,9 +787,40 @@
     </svg>
   </div>
   <div class="footer-emergency">
-    <span data-lang="en">Emergency: Fire/Ambulance 119 · Police 110 · Coast Guard 118</span>
-    <span data-lang="ja">緊急番号：消防・救急 119 · 警察 110 · 海上保安 118</span>
-    <span data-lang="id">Darurat: Pemadam/Ambulans 119 · Polisi 110 · Penjaga Pantai 118</span>
+    <div class="emergency-title">
+      <span data-lang="en">Emergency Numbers</span>
+      <span data-lang="ja">緊急番号</span>
+      <span data-lang="id">Nomor Darurat</span>
+    </div>
+    <div class="emergency-numbers">
+      <a href="tel:119" class="emergency-card">
+        <span class="emergency-icon">🚒</span>
+        <span class="emergency-number">119</span>
+        <span class="emergency-label">
+          <span data-lang="en">Fire / Ambulance</span>
+          <span data-lang="ja">消防・救急</span>
+          <span data-lang="id">Pemadam / Ambulans</span>
+        </span>
+      </a>
+      <a href="tel:110" class="emergency-card">
+        <span class="emergency-icon">👮</span>
+        <span class="emergency-number">110</span>
+        <span class="emergency-label">
+          <span data-lang="en">Police</span>
+          <span data-lang="ja">警察</span>
+          <span data-lang="id">Polisi</span>
+        </span>
+      </a>
+      <a href="tel:118" class="emergency-card">
+        <span class="emergency-icon">⚓</span>
+        <span class="emergency-number">118</span>
+        <span class="emergency-label">
+          <span data-lang="en">Coast Guard</span>
+          <span data-lang="ja">海上保安</span>
+          <span data-lang="id">Penjaga Pantai</span>
+        </span>
+      </a>
+    </div>
   </div>
   <div class="footer-links">
     <a href="https://www.jma.go.jp/en/" target="_blank" rel="noopener noreferrer">気象庁 JMA</a>
@@ -804,24 +835,6 @@
     <span data-lang="id">Mamoru Guide 守る — Dibangun dengan ketahanan, terinspirasi Kobe. Kolaborasi dengan PPI Kobe.</span>
   </div>
 </footer>
-
-<!-- Install Banner -->
-<div class="install-banner" id="installBanner">
-  <div class="install-content">
-    <span class="install-icon">📲</span>
-    <div class="install-text">
-      <span data-lang="en"><strong>Install MAMORU</strong> for offline access</span>
-      <span data-lang="ja"><strong>守るアプリ</strong>をインストールしてオフラインアクセス</span>
-      <span data-lang="id"><strong>Instal MAMORU</strong> untuk akses offline</span>
-    </div>
-    <button class="install-btn" id="installBtn" onclick="installApp()">
-      <span data-lang="en">Install</span>
-      <span data-lang="ja">インストール</span>
-      <span data-lang="id">Instal</span>
-    </button>
-    <button class="install-dismiss" id="installDismiss" onclick="dismissInstall()" aria-label="Dismiss">&times;</button>
-  </div>
-</div>
 
 <div class="toast" id="toast"></div>
 <script>

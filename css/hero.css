@@ -81,8 +81,7 @@
 }
 .skyline {
   position: absolute; bottom: 40px; left:0; right:0;
-  display: flex; align-items: flex-end; justify-content: space-evenly; gap: 0;
-  padding: 0 5%;
+  display: flex; align-items: flex-end; justify-content: flex-start; gap: 0;
 }
 .bld {
   position: relative;

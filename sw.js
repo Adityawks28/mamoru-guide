@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mamoru-guide-v2';
+const CACHE_NAME = 'mamoru-guide-v3';
 const ASSETS = [
   './',
   './index.html',

@@ -47,21 +47,26 @@ const vocabData = {
 };
 
 // Emergency bag items with weight and priority
+// Total weight ~14.2kg — max bag 8.0kg — forces real prioritization choices
 const bagItems = [
-  {e:'💧',en:'Water (500ml × 3)',ja:'水（500ml × 3）',id:'Air (500ml × 3)',weight:1.5,priority:10,det_en:'Minimum 3 days supply',det_ja:'最低3日分',det_id:'Persediaan minimal 3 hari'},
-  {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:1.2,priority:9,det_en:'Onigiri, crackers, energy bars',det_ja:'おにぎり、クラッカー、栄養バー',det_id:'Onigiri, kerupuk, bar energi'},
-  {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.3,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
-  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.4,priority:7,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
-  {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.5,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
+  {e:'💧',en:'Water (500ml × 6)',ja:'水（500ml × 6）',id:'Air (500ml × 6)',weight:3.0,priority:10,det_en:'3L minimum for 3 days',det_ja:'3日分で最低3L',det_id:'Minimal 3L untuk 3 hari'},
+  {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:2.0,priority:9,det_en:'Canned food, crackers, energy bars',det_ja:'缶詰、クラッカー、栄養バー',det_id:'Makanan kaleng, kerupuk, bar energi'},
+  {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.4,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
+  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.5,priority:7,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
+  {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.8,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
   {e:'💊',en:'Personal medications (5+ days)',ja:'常備薬（5日分以上）',id:'Obat pribadi (5+ hari)',weight:0.2,priority:10,det_en:'With prescription copy',det_ja:'処方箋のコピーがあれば',det_id:'Dengan salinan resep'},
   {e:'📄',en:'Important documents (copies)',ja:'重要書類（コピー）',id:'Dokumen penting (salinan)',weight:0.1,priority:8,det_en:'Passport, zairyu card, insurance',det_ja:'パスポート、在留カード、保険証',det_id:'Paspor, kartu zairyu, asuransi'},
   {e:'💴',en:'Cash (coins + small bills)',ja:'現金（小銭 + 千円札）',id:'Uang tunai (koin + uang kecil)',weight:0.2,priority:8,det_en:'ATMs may not work',det_ja:'ATMが使えない場合',det_id:'ATM mungkin tidak berfungsi'},
-  {e:'🔋',en:'Portable phone charger',ja:'モバイルバッテリー',id:'Pengisi daya portabel',weight:0.3,priority:7,det_en:'Keep it charged!',det_ja:'充電を忘れずに！',det_id:'Tetap terisi!'},
+  {e:'🔋',en:'Portable phone charger',ja:'モバイルバッテリー',id:'Pengisi daya portabel',weight:0.4,priority:7,det_en:'Keep it charged!',det_ja:'充電を忘れずに！',det_id:'Tetap terisi!'},
   {e:'🧤',en:'Work gloves + dust mask',ja:'軍手 + 防塵マスク',id:'Sarung tangan + masker',weight:0.3,priority:6,det_en:'For moving debris safely',det_ja:'がれき撤去時の安全',det_id:'Untuk memindahkan puing'},
-  {e:'🧦',en:'Warm clothes + rain poncho',ja:'防寒着 + レインポンチョ',id:'Pakaian hangat + jas hujan',weight:1.0,priority:5,det_en:'Especially for winter',det_ja:'特に冬の緊急時に',det_id:'Terutama musim dingin'},
+  {e:'🧥',en:'Warm clothes + rain poncho',ja:'防寒着 + レインポンチョ',id:'Pakaian hangat + jas hujan',weight:1.8,priority:5,det_en:'Especially for winter',det_ja:'特に冬の緊急時に',det_id:'Terutama musim dingin'},
   {e:'🗺️',en:'Printed hazard map',ja:'印刷したハザードマップ',id:'Peta bahaya cetak',weight:0.1,priority:6,det_en:'Mark evacuation route!',det_ja:'避難ルートを記入！',det_id:'Tandai rute evakuasi!'},
   {e:'📞',en:'Emergency contacts (paper)',ja:'緊急連絡先（紙）',id:'Kontak darurat (kertas)',weight:0.05,priority:7,det_en:'Phone may die',det_ja:'スマホが使えない時',det_id:'Ponsel bisa mati'},
-  {e:'🧴',en:'Hygiene essentials',ja:'衛生用品',id:'Kebutuhan kebersihan',weight:0.8,priority:4,det_en:'Wet wipes, toilet paper, sanitizer',det_ja:'ウェットティッシュ、トイレットペーパー',det_id:'Tisu basah, kertas toilet'},
+  {e:'🧴',en:'Hygiene essentials',ja:'衛生用品',id:'Kebutuhan kebersihan',weight:1.0,priority:4,det_en:'Wet wipes, toilet paper, sanitizer',det_ja:'ウェットティッシュ、トイレットペーパー',det_id:'Tisu basah, kertas toilet'},
+  {e:'🛏️',en:'Emergency blanket',ja:'防災ブランケット',id:'Selimut darurat',weight:1.5,priority:5,det_en:'Mylar or compact sleeping bag',det_ja:'アルミブランケット又は寝袋',det_id:'Mylar atau kantong tidur kompak'},
+  {e:'👟',en:'Sturdy shoes',ja:'丈夫な靴',id:'Sepatu kokoh',weight:1.0,priority:6,det_en:'Broken glass, debris on ground',det_ja:'ガラス片・がれきから足を守る',det_id:'Pecahan kaca, puing di tanah'},
+  {e:'🔧',en:'Multi-tool knife',ja:'マルチツールナイフ',id:'Pisau multifungsi',weight:0.3,priority:4,det_en:'Cutting, opening cans, repairs',det_ja:'切断、缶開け、修理',det_id:'Memotong, membuka kaleng, perbaikan'},
+  {e:'📢',en:'Emergency whistle',ja:'防災ホイッスル',id:'Peluit darurat',weight:0.05,priority:8,det_en:'Signal for help when trapped',det_ja:'閉じ込められた時の助け呼び',det_id:'Sinyal minta tolong saat terperangkap'},
 ];
 
 const MAX_BAG_WEIGHT = 8.0;
