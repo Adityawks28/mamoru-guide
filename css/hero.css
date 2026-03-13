@@ -1,0 +1,156 @@
+/* Stars */
+#stars { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity: var(--star-opacity); transition: opacity 0.6s; }
+.star {
+  position: absolute; background: #fff;
+  animation: twinkle var(--dur) ease-in-out infinite alternate;
+  opacity: 0;
+}
+@keyframes twinkle { 0%{opacity:0.15;} 100%{opacity:0.85;} }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 20px 120px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky-grad-top) 0%, var(--sky-grad-bot) 100%);
+  transition: background 0.6s;
+}
+.hero-content { position:relative; z-index:4; }
+.hero-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(28px, 6vw, 56px);
+  color: var(--meriken-amber);
+  text-shadow: 0 0 30px rgba(245,166,35,0.4), 0 4px 0 #8a5a00;
+  margin-bottom: 12px;
+  animation: fadeUp 1s 0.3s both;
+}
+.hero-kanji {
+  font-size: clamp(20px, 4vw, 36px);
+  color: var(--kitano-white);
+  margin-bottom: 24px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  animation: fadeUp 1s 0.5s both;
+}
+.hero-kanji .big { font-size: 1.4em; color: var(--meriken-amber); }
+.hero-subtitle {
+  font-size: clamp(13px, 2vw, 17px);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  opacity: 0.85;
+  animation: fadeUp 1s 0.7s both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* Mascot */
+.mascot-char {
+  width: 64px; height: 80px;
+  margin: 0 auto 16px;
+  animation: bob 2.5s ease-in-out infinite;
+  image-rendering: pixelated;
+}
+.mascot-char svg { width:100%; height:100%; image-rendering:pixelated; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* Scroll hint */
+.scroll-hint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--meriken-amber);
+  animation: fadeUp 1s 1s both, bob 2s 1.5s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Mountains */
+.mountains-container {
+  position: absolute; bottom: 40px; left:0; right:0;
+  height: 300px; z-index: 1; pointer-events: none;
+}
+.mountain-layer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+}
+
+/* Skyline */
+.skyline-container {
+  position: absolute; bottom: 0; left:0; right:0;
+  height: 260px; z-index:2; overflow: hidden;
+}
+.skyline {
+  position: absolute; bottom: 40px; left:0; right:0;
+  display: flex; align-items: flex-end; justify-content: center; gap: 0;
+}
+.bld {
+  position: relative;
+  background: #0a1628;
+  flex-shrink: 0;
+  transition: background 0.6s;
+}
+.bld-window {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--meriken-amber);
+  opacity: 0.7;
+  transition: background 0.6s, opacity 0.6s;
+}
+.bld-window.off { opacity: 0.1; background: #2a4a6a; }
+
+/* Kobe Tower */
+.kobe-tower {
+  position: absolute;
+  bottom: 40px; right: 15%;
+  width: 72px; height: 200px;
+  z-index: 3;
+  image-rendering: pixelated;
+}
+.kobe-tower svg { width:100%; height:100%; image-rendering:pixelated; }
+@keyframes tower-crown-pulse {
+  0%,100% { opacity:1; filter:brightness(1); }
+  50% { opacity:0.8; filter:brightness(1.8) drop-shadow(0 0 6px #ffffff); }
+}
+@keyframes tower-glow-pulse {
+  0%,100% { opacity:0.9; }
+  50% { opacity:1; filter:drop-shadow(0 0 8px #e84040) drop-shadow(0 0 16px #c03030); }
+}
+@keyframes top-light-blink {
+  0%,48% { opacity:1; }
+  49%,100% { opacity:0; }
+}
+.tower-crown-anim { animation: tower-crown-pulse 2.5s ease-in-out infinite; }
+.tower-body-anim { animation: tower-glow-pulse 3s ease-in-out infinite; }
+.tower-top-light { animation: top-light-blink 1.4s step-end infinite; }
+
+/* Water */
+.water {
+  position: absolute; bottom:0; left:0; right:0;
+  height: 40px;
+  background: repeating-linear-gradient(0deg,
+    var(--water-dark) 0px, var(--water-dark) 4px,
+    var(--water-shimmer) 4px, var(--water-shimmer) 6px);
+  animation: waves 3s linear infinite;
+  z-index: 5;
+  transition: background 0.6s;
+}
+@keyframes waves { from{background-position:0 0} to{background-position:40px 0} }
+
+/* Sun / Moon */
+.celestial-body {
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  top: 15%;
+  left: 18%;
+  z-index: 1;
+  transition: all 0.6s;
+}
+.night-sky .celestial-body {
+  background: #f0e8c0;
+  box-shadow: 0 0 30px rgba(240,232,192,0.4), 0 0 60px rgba(240,232,192,0.15);
+}
+.day-sky .celestial-body {
+  background: #ffe040;
+  box-shadow: 0 0 40px rgba(255,224,64,0.5), 0 0 80px rgba(255,200,0,0.3);
+}

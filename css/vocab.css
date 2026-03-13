@@ -1,0 +1,90 @@
+/* Tabs */
+.tab-bar {
+  display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.tab-btn {
+  background: var(--card-bg);
+  color: var(--kitano-white);
+  border: 2px solid var(--card-border);
+  padding: 8px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--meriken-amber); }
+.tab-btn.active { background: var(--alert-red); border-color: var(--alert-red); }
+.tab-content { display: none; animation: tabIn 0.3s ease; }
+.tab-content.active { display: block; }
+@keyframes tabIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* Vocab cards */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.vocab-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 14px;
+  border-left: 5px solid;
+}
+.vocab-card.cat-danger { border-left-color: var(--alert-red); }
+.vocab-card.cat-action { border-left-color: var(--safe-green); }
+.vocab-card.cat-places { border-left-color: var(--portopia-blue); }
+.vocab-card.cat-help { border-left-color: var(--meriken-amber); }
+.vocab-jp {
+  font-size: 22px; font-weight: 800;
+}
+.vocab-romaji {
+  font-size: 12px; color: var(--portopia-blue); margin-bottom: 6px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+.vocab-meaning {
+  font-size: 13px; line-height: 1.5;
+}
+.vocab-meaning .flag { font-size: 14px; margin-right: 4px; }
+
+/* Yasashii nihongo with furigana */
+.yasashii-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.yasashii-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 16px;
+}
+.yasashii-card.hard { border-top: 3px solid var(--alert-red); }
+.yasashii-card.easy { border-top: 3px solid var(--safe-green); }
+.yasashii-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  margin-bottom: 8px;
+}
+.yasashii-card.hard .yasashii-label { color: var(--alert-red); }
+.yasashii-card.easy .yasashii-label { color: var(--safe-green); }
+.yasashii-text {
+  font-size: 18px; line-height: 2.2; font-weight: 700;
+}
+ruby { ruby-position: over; }
+ruby rt {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--portopia-blue);
+}
+.romaji-line {
+  font-size: 12px;
+  color: var(--portopia-blue);
+  font-weight: 400;
+  margin-top: 6px;
+  font-style: italic;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}

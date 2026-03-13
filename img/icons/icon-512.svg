@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 576">
+  <polygon points="256,0 512,144 512,432 256,576 0,432 0,144" fill="#f5a623"/>
+  <polygon points="256,64 448,176 448,400 256,512 64,400 64,176" fill="#0f1f3d"/>
+  <text x="256" y="384" text-anchor="middle" font-family="sans-serif" font-size="224" font-weight="bold" fill="#f5a623">守</text>
+</svg>

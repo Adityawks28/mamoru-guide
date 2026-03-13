@@ -1,0 +1,44 @@
+:root {
+  --harbor-navy: #0f1f3d;
+  --port-fog: #1e3a5f;
+  --rokko-green: #2d5a3d;
+  --meriken-amber: #f5a623;
+  --kitano-white: #f8f4ed;
+  --motomachi-brick: #c4634a;
+  --portopia-blue: #4cc9f0;
+  --maiko-sakura: #f0a0b8;
+  --alert-red: #e84040;
+  --safe-green: #4ecb71;
+  --water-dark: #1a4060;
+  --water-shimmer: #2a5a80;
+  --card-bg: rgba(15,31,61,0.85);
+  --card-border: rgba(245,166,35,0.25);
+  --bg-main: var(--harbor-navy);
+  --text-main: var(--kitano-white);
+  --sky-grad-top: #0a1428;
+  --sky-grad-bot: #1e3a5f;
+  --mountain-far: #0d1a30;
+  --mountain-mid: #112244;
+  --mountain-near: #0a1628;
+  --star-opacity: 1;
+  --water-opacity: 1;
+}
+
+body.day-mode {
+  --harbor-navy: #e8f0f8;
+  --bg-main: #d4e6f4;
+  --text-main: #1a2a3a;
+  --sky-grad-top: #87CEEB;
+  --sky-grad-bot: #c8e8ff;
+  --mountain-far: #8aaa9a;
+  --mountain-mid: #6a9080;
+  --mountain-near: #4a7060;
+  --card-bg: rgba(255,255,255,0.88);
+  --card-border: rgba(100,80,40,0.2);
+  --water-dark: #3a90c0;
+  --water-shimmer: #5ab0e0;
+  --star-opacity: 0;
+  --water-opacity: 1;
+  --port-fog: #b0d0e8;
+  --kitano-white: #1a2a3a;
+}

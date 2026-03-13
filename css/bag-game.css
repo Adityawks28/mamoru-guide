@@ -1,0 +1,150 @@
+/* ===== EMERGENCY BAG MINI GAME ===== */
+.bag-game {
+  margin-top: 20px;
+}
+.bag-stats {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+}
+.bag-stat {
+  text-align: center;
+}
+.bag-stat-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+.bag-stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--meriken-amber);
+}
+.bag-stat-value.over { color: var(--alert-red); animation: pulse7 1s infinite; }
+.bag-weight-bar {
+  flex: 1;
+  min-width: 200px;
+}
+.weight-bar-outer {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+}
+.weight-bar-fill {
+  height: 100%;
+  background: var(--safe-green);
+  transition: width 0.4s, background 0.3s;
+  border-radius: 4px;
+}
+.weight-bar-fill.warning { background: var(--meriken-amber); }
+.weight-bar-fill.danger { background: var(--alert-red); }
+.weight-bar-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+.bag-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.bag-item {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+.bag-item:hover { border-color: var(--meriken-amber); transform: translateY(-2px); }
+.bag-item.packed {
+  border-color: var(--safe-green);
+  background: rgba(78,203,113,0.1);
+}
+.bag-item.packed::after {
+  content: '\2713 PACKED';
+  position: absolute;
+  top: 4px; right: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--safe-green);
+}
+.bag-item.rejected {
+  opacity: 0.4;
+  border-color: var(--alert-red);
+}
+.bag-item-emoji { font-size: 22px; flex-shrink: 0; }
+.bag-item-info { flex: 1; }
+.bag-item-name { font-size: 13px; font-weight: 700; }
+.bag-item-detail { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+.bag-item-meta {
+  display: flex; gap: 8px; margin-top: 4px;
+}
+.bag-meta-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+}
+.bag-meta-tag.weight { color: var(--portopia-blue); }
+.bag-meta-tag.priority-high { color: var(--alert-red); }
+.bag-meta-tag.priority-med { color: var(--meriken-amber); }
+.bag-meta-tag.priority-low { color: var(--safe-green); }
+
+.bag-result {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  text-align: center;
+  display: none;
+}
+.bag-result.show { display: block; animation: tabIn 0.3s ease; }
+.bag-result h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.bag-result p { font-size: 13px; opacity: 0.85; }
+.bag-result .score {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 28px;
+  color: var(--meriken-amber);
+  margin: 12px 0;
+}
+.bag-actions {
+  display: flex; gap: 10px; justify-content: center; margin-top: 16px;
+}
+.bag-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 10px 20px;
+  border: 2px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: transparent;
+}
+.bag-btn.primary { border-color: var(--safe-green); color: var(--safe-green); }
+.bag-btn.primary:hover { background: var(--safe-green); color: #fff; }
+.bag-btn.secondary { border-color: var(--meriken-amber); color: var(--meriken-amber); }
+.bag-btn.secondary:hover { background: var(--meriken-amber); color: #000; }

@@ -1,0 +1,45 @@
+/* Day-mode component overrides */
+body.day-mode .navbar {
+  background: rgba(228,240,248,0.95);
+  border-bottom-color: var(--motomachi-brick);
+}
+body.day-mode .nav-logo span,
+body.day-mode .section-title { color: #c07020; }
+body.day-mode .nav-links a { color: #2a4060; }
+body.day-mode .section-label { color: #2080a0; }
+body.day-mode .section-note { color: rgba(30,50,70,0.7); }
+body.day-mode .footer { background: rgba(200,220,240,0.95); }
+body.day-mode .footer-copy,
+body.day-mode .footer-emergency { color: #2a4060; }
+body.day-mode .bld { background: #a0b8c8; }
+body.day-mode .bld-window { background: #6090b0; }
+body.day-mode .bld-window.off { background: #c0d4e0; }
+body.day-mode .hero-title { color: #c07020; text-shadow: 0 2px 0 #906010; }
+body.day-mode .hero-kanji { color: #2a4060; }
+body.day-mode .hero-kanji .big { color: #c07020; }
+body.day-mode .hero-subtitle { color: #3a5a7a; }
+body.day-mode .scroll-hint { color: #c07020; }
+
+/* Reset */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+  transition: background 0.6s, color 0.6s;
+}
+[data-lang] { display: none; }
+body.lang-en [data-lang="en"],
+body.lang-ja [data-lang="ja"],
+body.lang-id [data-lang="id"] { display: inline; }
+[data-block-lang] { display: none; }
+body.lang-en [data-block-lang="en"],
+body.lang-ja [data-block-lang="ja"],
+body.lang-id [data-block-lang="id"] { display: block; }
+
+.pixel-font { font-family: 'Press Start 2P', monospace; }

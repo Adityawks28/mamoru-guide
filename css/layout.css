@@ -1,0 +1,148 @@
+/* Day/Night Toggle */
+.mode-toggle {
+  background: transparent;
+  border: 2px solid var(--meriken-amber);
+  color: var(--meriken-amber);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: all 0.3s;
+  line-height: 1;
+}
+.mode-toggle:hover { background: var(--meriken-amber); color: #000; }
+
+/* Navbar */
+.navbar {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(15,31,61,0.95);
+  border-bottom: 3px solid var(--motomachi-brick);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  backdrop-filter: blur(6px);
+  transition: background 0.6s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo .shield {
+  width: 32px; height: 36px;
+  background: var(--meriken-amber);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+}
+.shield-inner {
+  width: 22px; height: 26px;
+  background: var(--harbor-navy);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.nav-logo span {
+  font-family: 'Press Start 2P', monospace;
+  color: var(--meriken-amber);
+  font-size: 14px;
+}
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-links { display:flex; gap:16px; }
+.nav-links a {
+  color: var(--kitano-white);
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { opacity:1; color: var(--meriken-amber); }
+.lang-switcher { display:flex; gap:6px; }
+.lang-btn {
+  background: transparent;
+  color: var(--kitano-white);
+  border: 2px solid var(--kitano-white);
+  padding: 4px 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lang-btn:hover { border-color: var(--meriken-amber); color: var(--meriken-amber); }
+.lang-btn.active { background: var(--alert-red); border-color: var(--alert-red); color: #fff; }
+
+/* Sections */
+.section {
+  position: relative; z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.section.visible { opacity:1; transform:translateY(0); }
+.section-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--portopia-blue);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(16px, 3vw, 22px);
+  color: var(--meriken-amber);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.section-note {
+  color: rgba(248,244,237,0.7);
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+
+/* Footer */
+.footer {
+  position: relative; z-index: 2;
+  background: rgba(10,22,40,0.9);
+  border-top: 3px solid var(--motomachi-brick);
+  padding: 40px 20px;
+  text-align: center;
+  transition: background 0.6s;
+}
+.footer-logo {
+  margin-bottom: 16px;
+}
+.footer-logo .ppi-logo-svg {
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 8px rgba(200,50,50,0.3));
+}
+.footer-emergency {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--meriken-amber);
+  margin-bottom: 20px;
+  line-height: 2;
+}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
+.footer-links a {
+  color: var(--portopia-blue);
+  font-size: 12px;
+  text-decoration: none;
+}
+.footer-links a:hover { text-decoration: underline; }
+.footer-copy { font-size: 11px; opacity: 0.5; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: -60px; right: 20px;
+  background: var(--safe-green);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  z-index: 200;
+  transition: bottom 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.toast.show { bottom: 20px; }

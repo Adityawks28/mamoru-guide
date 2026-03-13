@@ -1,0 +1,68 @@
+@media print {
+  body {
+    background: #fff !important;
+    color: #1a1a1a !important;
+  }
+
+  #stars,
+  .navbar,
+  .mode-toggle,
+  .lang-switcher,
+  .scroll-hint,
+  .toast,
+  .bag-actions,
+  .celestial-body,
+  .skyline-container,
+  .mountains-container,
+  .water,
+  .kobe-tower {
+    display: none !important;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .split-panel,
+  .yasashii-grid,
+  .alert-grid,
+  .app-list,
+  .step-grid,
+  .bag-items-grid,
+  .vocab-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #666;
+  }
+
+  .card-bg,
+  .bag-item,
+  .vocab-card,
+  .alert-card,
+  .step-card,
+  .panel,
+  .yasashii-card {
+    background: #fff !important;
+    border-color: #ccc !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+    background: #fff !important;
+    padding: 40px 20px !important;
+  }
+
+  .footer {
+    background: #f5f5f5 !important;
+  }
+}

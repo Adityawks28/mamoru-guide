@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .split-panel, .yasashii-grid, .alert-grid, .app-list, .step-grid, .bag-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .navbar { padding: 0 12px; }
+  .bag-stats { flex-direction: column; align-items: stretch; }
+  .scale-row .desc { font-size: 11px; }
+  .scale-row .num { font-size: 16px; min-width: 40px; }
+}
+@media (max-width: 480px) {
+  .scale-row { flex-wrap: wrap; }
+}
