@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAMORU GUIDE 守る</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --harbor-navy: #0f1f3d;
+  --port-fog: #1e3a5f;
+  --rokko-green: #2d5a3d;
+  --meriken-amber: #f5a623;
+  --kitano-white: #f8f4ed;
+  --motomachi-brick: #c4634a;
+  --portopia-blue: #4cc9f0;
+  --maiko-sakura: #f0a0b8;
+  --alert-red: #e84040;
+  --safe-green: #4ecb71;
+  --water-dark: #1a4060;
+  --water-shimmer: #2a5a80;
+  --card-bg: rgba(15,31,61,0.85);
+  --card-border: rgba(245,166,35,0.25);
+  --bg-main: var(--harbor-navy);
+  --text-main: var(--kitano-white);
+  --sky-grad-top: #0a1428;
+  --sky-grad-bot: #1e3a5f;
+  --mountain-far: #0d1a30;
+  --mountain-mid: #112244;
+  --mountain-near: #0a1628;
+  --star-opacity: 1;
+  --water-opacity: 1;
+}
+
+body.day-mode {
+  --harbor-navy: #e8f0f8;
+  --bg-main: #d4e6f4;
+  --text-main: #1a2a3a;
+  --sky-grad-top: #87CEEB;
+  --sky-grad-bot: #c8e8ff;
+  --mountain-far: #8aaa9a;
+  --mountain-mid: #6a9080;
+  --mountain-near: #4a7060;
+  --card-bg: rgba(255,255,255,0.88);
+  --card-border: rgba(100,80,40,0.2);
+  --water-dark: #3a90c0;
+  --water-shimmer: #5ab0e0;
+  --star-opacity: 0;
+  --water-opacity: 1;
+  --port-fog: #b0d0e8;
+  --kitano-white: #1a2a3a;
+}
+body.day-mode .navbar {
+  background: rgba(228,240,248,0.95);
+  border-bottom-color: var(--motomachi-brick);
+}
+body.day-mode .nav-logo span,
+body.day-mode .section-title { color: #c07020; }
+body.day-mode .nav-links a { color: #2a4060; }
+body.day-mode .section-label { color: #2080a0; }
+body.day-mode .section-note { color: rgba(30,50,70,0.7); }
+body.day-mode .footer { background: rgba(200,220,240,0.95); }
+body.day-mode .footer-copy,
+body.day-mode .footer-emergency { color: #2a4060; }
+body.day-mode .bld { background: #a0b8c8; }
+body.day-mode .bld-window { background: #6090b0; }
+body.day-mode .bld-window.off { background: #c0d4e0; }
+body.day-mode .hero-title { color: #c07020; text-shadow: 0 2px 0 #906010; }
+body.day-mode .hero-kanji { color: #2a4060; }
+body.day-mode .hero-kanji .big { color: #c07020; }
+body.day-mode .hero-subtitle { color: #3a5a7a; }
+body.day-mode .scroll-hint { color: #c07020; }
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+  transition: background 0.6s, color 0.6s;
+}
+[data-lang] { display: none; }
+body.lang-en [data-lang="en"],
+body.lang-ja [data-lang="ja"],
+body.lang-id [data-lang="id"] { display: inline; }
+[data-block-lang] { display: none; }
+body.lang-en [data-block-lang="en"],
+body.lang-ja [data-block-lang="ja"],
+body.lang-id [data-block-lang="id"] { display: block; }
+
+.pixel-font { font-family: 'Press Start 2P', monospace; }
+
+/* Stars */
+#stars { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity: var(--star-opacity); transition: opacity 0.6s; }
+.star {
+  position: absolute; background: #fff;
+  animation: twinkle var(--dur) ease-in-out infinite alternate;
+  opacity: 0;
+}
+@keyframes twinkle { 0%{opacity:0.15;} 100%{opacity:0.85;} }
+
+/* Day/Night Toggle */
+.mode-toggle {
+  background: transparent;
+  border: 2px solid var(--meriken-amber);
+  color: var(--meriken-amber);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: all 0.3s;
+  line-height: 1;
+}
+.mode-toggle:hover { background: var(--meriken-amber); color: #000; }
+
+/* Navbar */
+.navbar {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(15,31,61,0.95);
+  border-bottom: 3px solid var(--motomachi-brick);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  backdrop-filter: blur(6px);
+  transition: background 0.6s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo .shield {
+  width: 32px; height: 36px;
+  background: var(--meriken-amber);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+}
+.shield-inner {
+  width: 22px; height: 26px;
+  background: var(--harbor-navy);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.nav-logo span {
+  font-family: 'Press Start 2P', monospace;
+  color: var(--meriken-amber);
+  font-size: 14px;
+}
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-links { display:flex; gap:16px; }
+.nav-links a {
+  color: var(--kitano-white);
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { opacity:1; color: var(--meriken-amber); }
+.lang-switcher { display:flex; gap:6px; }
+.lang-btn {
+  background: transparent;
+  color: var(--kitano-white);
+  border: 2px solid var(--kitano-white);
+  padding: 4px 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lang-btn:hover { border-color: var(--meriken-amber); color: var(--meriken-amber); }
+.lang-btn.active { background: var(--alert-red); border-color: var(--alert-red); color: #fff; }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 20px 120px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky-grad-top) 0%, var(--sky-grad-bot) 100%);
+  transition: background 0.6s;
+}
+.hero-content { position:relative; z-index:4; }
+.hero-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(28px, 6vw, 56px);
+  color: var(--meriken-amber);
+  text-shadow: 0 0 30px rgba(245,166,35,0.4), 0 4px 0 #8a5a00;
+  margin-bottom: 12px;
+  animation: fadeUp 1s 0.3s both;
+}
+.hero-kanji {
+  font-size: clamp(20px, 4vw, 36px);
+  color: var(--kitano-white);
+  margin-bottom: 24px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  animation: fadeUp 1s 0.5s both;
+}
+.hero-kanji .big { font-size: 1.4em; color: var(--meriken-amber); }
+.hero-subtitle {
+  font-size: clamp(13px, 2vw, 17px);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  opacity: 0.85;
+  animation: fadeUp 1s 0.7s both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+.mascot-char {
+  width: 64px; height: 80px;
+  margin: 0 auto 16px;
+  animation: bob 2.5s ease-in-out infinite;
+  image-rendering: pixelated;
+}
+.mascot-char svg { width:100%; height:100%; image-rendering:pixelated; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.scroll-hint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--meriken-amber);
+  animation: fadeUp 1s 1s both, bob 2s 1.5s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Mountains */
+.mountains-container {
+  position: absolute; bottom: 40px; left:0; right:0;
+  height: 300px; z-index: 1; pointer-events: none;
+}
+.mountain-layer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+}
+
+/* Skyline */
+.skyline-container {
+  position: absolute; bottom: 0; left:0; right:0;
+  height: 260px; z-index:2; overflow: hidden;
+}
+.skyline {
+  position: absolute; bottom: 40px; left:0; right:0;
+  display: flex; align-items: flex-end; justify-content: center; gap: 0;
+}
+.bld {
+  position: relative;
+  background: #0a1628;
+  flex-shrink: 0;
+  transition: background 0.6s;
+}
+.bld-window {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--meriken-amber);
+  opacity: 0.7;
+  transition: background 0.6s, opacity 0.6s;
+}
+.bld-window.off { opacity: 0.1; background: #2a4a6a; }
+
+.kobe-tower {
+  position: absolute;
+  bottom: 40px; right: 15%;
+  width: 72px; height: 200px;
+  z-index: 3;
+  image-rendering: pixelated;
+}
+.kobe-tower svg { width:100%; height:100%; image-rendering:pixelated; }
+@keyframes tower-crown-pulse {
+  0%,100% { opacity:1; filter:brightness(1); }
+  50% { opacity:0.8; filter:brightness(1.8) drop-shadow(0 0 6px #ffffff); }
+}
+@keyframes tower-glow-pulse {
+  0%,100% { opacity:0.9; }
+  50% { opacity:1; filter:drop-shadow(0 0 8px #e84040) drop-shadow(0 0 16px #c03030); }
+}
+@keyframes top-light-blink {
+  0%,48% { opacity:1; }
+  49%,100% { opacity:0; }
+}
+.tower-crown-anim { animation: tower-crown-pulse 2.5s ease-in-out infinite; }
+.tower-body-anim { animation: tower-glow-pulse 3s ease-in-out infinite; }
+.tower-top-light { animation: top-light-blink 1.4s step-end infinite; }
+
+.water {
+  position: absolute; bottom:0; left:0; right:0;
+  height: 40px;
+  background: repeating-linear-gradient(0deg,
+    var(--water-dark) 0px, var(--water-dark) 4px,
+    var(--water-shimmer) 4px, var(--water-shimmer) 6px);
+  animation: waves 3s linear infinite;
+  z-index: 5;
+  transition: background 0.6s;
+}
+@keyframes waves { from{background-position:0 0} to{background-position:40px 0} }
+
+/* Sun / Moon */
+.celestial-body {
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  top: 15%;
+  left: 18%;
+  z-index: 1;
+  transition: all 0.6s;
+}
+.night-sky .celestial-body {
+  background: #f0e8c0;
+  box-shadow: 0 0 30px rgba(240,232,192,0.4), 0 0 60px rgba(240,232,192,0.15);
+}
+.day-sky .celestial-body {
+  background: #ffe040;
+  box-shadow: 0 0 40px rgba(255,224,64,0.5), 0 0 80px rgba(255,200,0,0.3);
+}
+
+/* Sections */
+.section {
+  position: relative; z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.section.visible { opacity:1; transform:translateY(0); }
+.section-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--portopia-blue);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(16px, 3vw, 22px);
+  color: var(--meriken-amber);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.section-note {
+  color: rgba(248,244,237,0.7);
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+
+/* ===== VERTICAL EARTHQUAKE SCALE ===== */
+.scale-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 32px;
+  position: relative;
+}
+.scale-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-left: 4px solid;
+  background: var(--card-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+.scale-row:first-child { border-radius: 8px 8px 0 0; }
+.scale-row:last-child { border-radius: 0 0 8px 8px; border-bottom: none; }
+.scale-row:hover { background: rgba(15,31,61,0.95); }
+.scale-row .num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  min-width: 50px;
+  text-align: center;
+}
+.scale-row .jp-name {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 70px;
+}
+.scale-row .desc {
+  font-size: 13px;
+  opacity: 0.85;
+  flex: 1;
+}
+.scale-row .shake-demo {
+  font-size: 24px;
+  min-width: 40px;
+  text-align: center;
+  display: inline-block;
+}
+.scale-row.s7 {
+  border-left-color: var(--alert-red);
+  animation: pulse7 2s ease-in-out infinite;
+}
+@keyframes pulse7 { 0%,100%{box-shadow:inset 0 0 8px rgba(232,64,64,0.2)} 50%{box-shadow:inset 0 0 24px rgba(232,64,64,0.5)} }
+
+/* Shaking animations - intensity scales up */
+@keyframes shake0 { 0%,100%{transform:translateX(0)} }
+@keyframes shake1 { 0%,100%{transform:translateX(0)} 25%{transform:translateX(0.5px)} 75%{transform:translateX(-0.5px)} }
+@keyframes shake2 { 0%,100%{transform:translateX(0)} 25%{transform:translateX(1px)} 75%{transform:translateX(-1px)} }
+@keyframes shake3 { 0%,100%{transform:translateX(0)} 20%{transform:translate(1.5px,0.5px)} 40%{transform:translate(-1.5px,-0.5px)} 60%{transform:translate(1px,1px)} 80%{transform:translate(-1px,-0.5px)} }
+@keyframes shake4 { 0%,100%{transform:translateX(0)} 10%{transform:translate(2px,1px)} 30%{transform:translate(-3px,-1px)} 50%{transform:translate(2px,1px)} 70%{transform:translate(-2px,0)} 90%{transform:translate(1px,-1px)} }
+@keyframes shake5m { 0%,100%{transform:translateX(0)} 10%{transform:translate(3px,1px) rotate(0.3deg)} 30%{transform:translate(-4px,-1px) rotate(-0.3deg)} 50%{transform:translate(3px,2px)} 70%{transform:translate(-3px,-1px) rotate(0.2deg)} 90%{transform:translate(2px,1px)} }
+@keyframes shake5p { 0%,100%{transform:translateX(0)} 8%{transform:translate(4px,2px) rotate(0.5deg)} 24%{transform:translate(-5px,-2px) rotate(-0.5deg)} 40%{transform:translate(4px,1px) rotate(0.3deg)} 56%{transform:translate(-4px,-2px)} 72%{transform:translate(3px,2px) rotate(-0.3deg)} 88%{transform:translate(-3px,1px)} }
+@keyframes shake6m { 0%,100%{transform:translateX(0)} 5%{transform:translate(6px,3px) rotate(0.7deg)} 15%{transform:translate(-7px,-2px) rotate(-0.8deg)} 25%{transform:translate(5px,3px) rotate(0.5deg)} 35%{transform:translate(-6px,-3px) rotate(-0.5deg)} 50%{transform:translate(7px,2px) rotate(0.8deg)} 65%{transform:translate(-5px,-3px) rotate(-0.6deg)} 80%{transform:translate(4px,2px) rotate(0.3deg)} }
+@keyframes shake6p { 0%,100%{transform:translateX(0)} 4%{transform:translate(8px,4px) rotate(1deg)} 12%{transform:translate(-9px,-3px) rotate(-1.2deg)} 20%{transform:translate(7px,4px) rotate(0.8deg)} 28%{transform:translate(-8px,-4px) rotate(-0.8deg)} 40%{transform:translate(9px,3px) rotate(1deg)} 52%{transform:translate(-7px,-4px) rotate(-1deg)} 64%{transform:translate(8px,3px) rotate(0.7deg)} 80%{transform:translate(-6px,-2px) rotate(-0.5deg)} }
+@keyframes shake7 { 0%,100%{transform:translateX(0)} 3%{transform:translate(10px,5px) rotate(1.5deg)} 8%{transform:translate(-12px,-4px) rotate(-1.8deg)} 13%{transform:translate(9px,6px) rotate(1.2deg)} 18%{transform:translate(-11px,-5px) rotate(-1.5deg)} 25%{transform:translate(12px,4px) rotate(1.8deg)} 32%{transform:translate(-10px,-6px) rotate(-1.2deg)} 40%{transform:translate(11px,5px) rotate(1.5deg)} 50%{transform:translate(-12px,-4px) rotate(-1.8deg)} 60%{transform:translate(9px,6px) rotate(1deg)} 72%{transform:translate(-8px,-4px) rotate(-0.8deg)} 85%{transform:translate(6px,3px) rotate(0.5deg)} }
+
+.scale-row.shaking-0 .shake-demo { animation: shake0 0.5s infinite; }
+.scale-row.shaking-1 .shake-demo { animation: shake1 0.5s infinite; }
+.scale-row.shaking-2 .shake-demo { animation: shake2 0.4s infinite; }
+.scale-row.shaking-3 .shake-demo { animation: shake3 0.35s infinite; }
+.scale-row.shaking-4 .shake-demo { animation: shake4 0.3s infinite; }
+.scale-row.shaking-5m .shake-demo { animation: shake5m 0.28s infinite; }
+.scale-row.shaking-5p .shake-demo { animation: shake5p 0.25s infinite; }
+.scale-row.shaking-6m .shake-demo { animation: shake6m 0.22s infinite; }
+.scale-row.shaking-6p .shake-demo { animation: shake6p 0.2s infinite; }
+.scale-row.shaking-7 .shake-demo { animation: shake7 0.18s infinite; }
+
+.scale-row.shaking-0 { animation: none; }
+.scale-row.shaking-1 { animation: shake1 0.8s infinite; }
+.scale-row.shaking-2 { animation: shake2 0.7s infinite; }
+.scale-row.shaking-3 { animation: shake3 0.5s infinite; }
+.scale-row.shaking-4 { animation: shake4 0.4s infinite; }
+.scale-row.shaking-5m { animation: shake5m 0.35s infinite; }
+.scale-row.shaking-5p { animation: shake5p 0.3s infinite; }
+.scale-row.shaking-6m { animation: shake6m 0.25s infinite; }
+.scale-row.shaking-6p { animation: shake6p 0.22s infinite; }
+.scale-row.shaking-7 { animation: shake7 0.18s infinite !important; }
+
+.scale-row .intensity-bar {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  opacity: 0.08;
+  transition: width 0.3s;
+}
+
+/* Split panels */
+.split-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.panel {
+  background: var(--card-bg);
+  border-radius: 4px;
+  padding: 20px;
+  border-top: 4px solid;
+}
+.panel.do-panel { border-color: var(--safe-green); }
+.panel.dont-panel { border-color: var(--alert-red); }
+.panel h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.panel.do-panel h3 { color: var(--safe-green); }
+.panel.dont-panel h3 { color: var(--alert-red); }
+.panel li {
+  list-style: none;
+  padding: 4px 0;
+  font-size: 14px;
+  padding-left: 20px;
+  position: relative;
+}
+.panel li::before { position: absolute; left: 0; font-size: 12px; }
+.do-panel li::before { content: '✓'; color: var(--safe-green); }
+.dont-panel li::before { content: '✗'; color: var(--alert-red); }
+
+/* Vocab */
+.tab-bar {
+  display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.tab-btn {
+  background: var(--card-bg);
+  color: var(--kitano-white);
+  border: 2px solid var(--card-border);
+  padding: 8px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--meriken-amber); }
+.tab-btn.active { background: var(--alert-red); border-color: var(--alert-red); }
+.tab-content { display: none; animation: tabIn 0.3s ease; }
+.tab-content.active { display: block; }
+@keyframes tabIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.vocab-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 14px;
+  border-left: 5px solid;
+}
+.vocab-card.cat-danger { border-left-color: var(--alert-red); }
+.vocab-card.cat-action { border-left-color: var(--safe-green); }
+.vocab-card.cat-places { border-left-color: var(--portopia-blue); }
+.vocab-card.cat-help { border-left-color: var(--meriken-amber); }
+.vocab-jp {
+  font-size: 22px; font-weight: 800;
+}
+.vocab-romaji {
+  font-size: 12px; color: var(--portopia-blue); margin-bottom: 6px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+.vocab-meaning {
+  font-size: 13px; line-height: 1.5;
+}
+.vocab-meaning .flag { font-size: 14px; margin-right: 4px; }
+
+/* Yasashii with furigana */
+.yasashii-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.yasashii-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 16px;
+}
+.yasashii-card.hard { border-top: 3px solid var(--alert-red); }
+.yasashii-card.easy { border-top: 3px solid var(--safe-green); }
+.yasashii-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  margin-bottom: 8px;
+}
+.yasashii-card.hard .yasashii-label { color: var(--alert-red); }
+.yasashii-card.easy .yasashii-label { color: var(--safe-green); }
+.yasashii-text {
+  font-size: 18px; line-height: 2.2; font-weight: 700;
+}
+ruby { ruby-position: over; }
+ruby rt {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--portopia-blue);
+}
+.romaji-line {
+  font-size: 12px;
+  color: var(--portopia-blue);
+  font-weight: 400;
+  margin-top: 6px;
+  font-style: italic;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ===== EMERGENCY BAG MINI GAME ===== */
+.bag-game {
+  margin-top: 20px;
+}
+.bag-stats {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+}
+.bag-stat {
+  text-align: center;
+}
+.bag-stat-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+.bag-stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--meriken-amber);
+}
+.bag-stat-value.over { color: var(--alert-red); animation: pulse7 1s infinite; }
+.bag-weight-bar {
+  flex: 1;
+  min-width: 200px;
+}
+.weight-bar-outer {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+}
+.weight-bar-fill {
+  height: 100%;
+  background: var(--safe-green);
+  transition: width 0.4s, background 0.3s;
+  border-radius: 4px;
+}
+.weight-bar-fill.warning { background: var(--meriken-amber); }
+.weight-bar-fill.danger { background: var(--alert-red); }
+.weight-bar-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+.bag-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.bag-item {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+.bag-item:hover { border-color: var(--meriken-amber); transform: translateY(-2px); }
+.bag-item.packed {
+  border-color: var(--safe-green);
+  background: rgba(78,203,113,0.1);
+}
+.bag-item.packed::after {
+  content: '✓ PACKED';
+  position: absolute;
+  top: 4px; right: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--safe-green);
+}
+.bag-item.rejected {
+  opacity: 0.4;
+  border-color: var(--alert-red);
+}
+.bag-item-emoji { font-size: 22px; flex-shrink: 0; }
+.bag-item-info { flex: 1; }
+.bag-item-name { font-size: 13px; font-weight: 700; }
+.bag-item-detail { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+.bag-item-meta {
+  display: flex; gap: 8px; margin-top: 4px;
+}
+.bag-meta-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+}
+.bag-meta-tag.weight { color: var(--portopia-blue); }
+.bag-meta-tag.priority-high { color: var(--alert-red); }
+.bag-meta-tag.priority-med { color: var(--meriken-amber); }
+.bag-meta-tag.priority-low { color: var(--safe-green); }
+
+.bag-result {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  text-align: center;
+  display: none;
+}
+.bag-result.show { display: block; animation: tabIn 0.3s ease; }
+.bag-result h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.bag-result p { font-size: 13px; opacity: 0.85; }
+.bag-result .score {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 28px;
+  color: var(--meriken-amber);
+  margin: 12px 0;
+}
+.bag-actions {
+  display: flex; gap: 10px; justify-content: center; margin-top: 16px;
+}
+.bag-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 10px 20px;
+  border: 2px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: transparent;
+}
+.bag-btn.primary { border-color: var(--safe-green); color: var(--safe-green); }
+.bag-btn.primary:hover { background: var(--safe-green); color: #fff; }
+.bag-btn.secondary { border-color: var(--meriken-amber); color: var(--meriken-amber); }
+.bag-btn.secondary:hover { background: var(--meriken-amber); color: #000; }
+
+/* Alert cards */
+.alert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.alert-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 18px;
+  border-top: 4px solid;
+}
+.alert-card.type-jalert { border-top-color: var(--alert-red); }
+.alert-card.type-eew { border-top-color: var(--meriken-amber); }
+.alert-card.type-tsunami { border-top-color: var(--portopia-blue); }
+.alert-card.type-evac { border-top-color: #f0c040; }
+.alert-card .alert-icon { font-size: 24px; margin-bottom: 8px; }
+.alert-card h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.alert-card p { font-size: 13px; line-height: 1.6; opacity: 0.85; }
+.alert-card .jp-sub { font-size: 12px; color: var(--portopia-blue); margin-bottom: 6px; }
+
+.app-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.app-item {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px;
+  display: flex; align-items: center; gap: 8px;
+}
+.app-check {
+  width: 16px; height: 16px;
+  background: var(--safe-green);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: #fff; flex-shrink: 0;
+}
+.app-check.rec { background: var(--alert-red); }
+
+.step-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.step-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  padding: 18px;
+}
+.step-card .step-icon { font-size: 24px; margin-bottom: 8px; }
+.step-card h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  margin-bottom: 8px;
+  color: var(--meriken-amber);
+}
+.step-card p { font-size: 13px; line-height: 1.6; opacity: 0.85; }
+.step-card a { color: var(--portopia-blue); }
+
+/* Footer */
+.footer {
+  position: relative; z-index: 2;
+  background: rgba(10,22,40,0.9);
+  border-top: 3px solid var(--motomachi-brick);
+  padding: 40px 20px;
+  text-align: center;
+  transition: background 0.6s;
+}
+.footer-logo {
+  margin-bottom: 16px;
+}
+.footer-logo .ppi-logo-svg {
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 8px rgba(200,50,50,0.3));
+}
+.footer-emergency {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--meriken-amber);
+  margin-bottom: 20px;
+  line-height: 2;
+}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
+.footer-links a {
+  color: var(--portopia-blue);
+  font-size: 12px;
+  text-decoration: none;
+}
+.footer-links a:hover { text-decoration: underline; }
+.footer-copy { font-size: 11px; opacity: 0.5; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: -60px; right: 20px;
+  background: var(--safe-green);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  z-index: 200;
+  transition: bottom 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.toast.show { bottom: 20px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .split-panel, .yasashii-grid, .alert-grid, .app-list, .step-grid, .bag-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .navbar { padding: 0 12px; }
+  .bag-stats { flex-direction: column; align-items: stretch; }
+  .scale-row .desc { font-size: 11px; }
+  .scale-row .num { font-size: 16px; min-width: 40px; }
+}
+@media (max-width: 480px) {
+  .scale-row { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<div id="stars"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="shield"><div class="shield-inner"></div></div>
+    <span>MAMORU 守る</span>
+  </a>
+  <div class="nav-links">
+    <a href="#earthquake">Earthquake</a>
+    <a href="#vocab">Vocab</a>
+    <a href="#bag">Bag</a>
+    <a href="#alerts">Alerts</a>
+    <a href="#hazard">Hazard Map</a>
+  </div>
+  <div class="nav-right">
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Toggle Day/Night">☀️</button>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+      <button class="lang-btn" onclick="setLang('id')">ID</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero night-sky" id="hero">
+  <div class="celestial-body" id="celestialBody"></div>
+  <div class="hero-content">
+    <div class="mascot-char" title="Mamoru-kun">
+      <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+        <rect x="16" y="2" width="32" height="6" fill="#f5a623"/>
+        <rect x="12" y="8" width="40" height="8" fill="#f5a623"/>
+        <rect x="14" y="6" width="36" height="4" fill="#ffc44d"/>
+        <rect x="20" y="8" width="24" height="2" fill="#e89510"/>
+        <rect x="10" y="14" width="44" height="3" fill="#e89510"/>
+        <rect x="14" y="17" width="36" height="28" fill="#fdd9a0"/>
+        <rect x="12" y="20" width="4" height="20" fill="#fdd9a0"/>
+        <rect x="48" y="20" width="4" height="20" fill="#fdd9a0"/>
+        <rect x="22" y="26" width="6" height="6" fill="#1a1a2e"/>
+        <rect x="36" y="26" width="6" height="6" fill="#1a1a2e"/>
+        <rect x="24" y="27" width="2" height="2" fill="#fff" opacity="0.9"/>
+        <rect x="38" y="27" width="2" height="2" fill="#fff" opacity="0.9"/>
+        <rect x="26" y="36" width="12" height="2" fill="#c07040"/>
+        <rect x="24" y="34" width="2" height="2" fill="#c07040"/>
+        <rect x="38" y="34" width="2" height="2" fill="#c07040"/>
+        <rect x="16" y="33" width="6" height="4" fill="#f0a0b8" opacity="0.5"/>
+        <rect x="42" y="33" width="6" height="4" fill="#f0a0b8" opacity="0.5"/>
+        <rect x="16" y="45" width="32" height="24" fill="#4cc9f0"/>
+        <rect x="14" y="48" width="4" height="18" fill="#4cc9f0"/>
+        <rect x="46" y="48" width="4" height="18" fill="#4cc9f0"/>
+        <rect x="18" y="52" width="28" height="3" fill="#f5a623"/>
+        <rect x="18" y="60" width="28" height="3" fill="#f5a623"/>
+        <rect x="8" y="58" width="6" height="8" fill="#fdd9a0"/>
+        <rect x="50" y="54" width="6" height="8" fill="#fdd9a0"/>
+        <rect x="50" y="48" width="6" height="6" fill="#fdd9a0"/>
+        <rect x="52" y="44" width="6" height="6" fill="#fdd9a0"/>
+      </svg>
+    </div>
+    <h1 class="hero-title">MAMORU GUIDE</h1>
+    <div class="hero-kanji"><span class="big">守る</span> · まもる · protect</div>
+    <p class="hero-subtitle">
+      <span data-lang="en">Disaster preparedness for international students in Japan</span>
+      <span data-lang="ja">日本の留学生のための防災ガイド</span>
+      <span data-lang="id">Panduan kesiapsiagaan bencana untuk mahasiswa internasional di Jepang</span>
+    </p>
+    <div class="scroll-hint">▼</div>
+  </div>
+
+  <!-- Mountains -->
+  <div class="mountains-container">
+    <svg class="mountain-layer" viewBox="0 0 1400 300" preserveAspectRatio="none" style="height:280px;">
+      <!-- Rokko Mountains - far -->
+      <path d="M0,300 L0,180 Q100,100 200,140 Q280,80 360,120 Q420,60 500,100 Q560,50 640,90 Q700,40 800,80 Q860,50 940,70 Q1020,30 1100,80 Q1160,50 1240,100 Q1320,70 1400,120 L1400,300Z" fill="var(--mountain-far)" opacity="0.7"/>
+      <!-- Mid mountains -->
+      <path d="M0,300 L0,200 Q120,140 240,170 Q340,120 440,160 Q520,100 620,150 Q700,110 800,140 Q880,100 980,130 Q1060,90 1140,140 Q1240,110 1340,160 L1400,180 L1400,300Z" fill="var(--mountain-mid)" opacity="0.8"/>
+      <!-- Near hills -->
+      <path d="M0,300 L0,230 Q150,190 300,210 Q450,180 600,200 Q750,170 900,200 Q1050,180 1200,210 Q1350,190 1400,220 L1400,300Z" fill="var(--mountain-near)" opacity="0.9"/>
+    </svg>
+  </div>
+
+  <div class="skyline-container">
+    <div class="skyline" id="skyline"></div>
+    <div class="kobe-tower" title="Kobe Port Tower 神戸ポートタワー">
+      <svg viewBox="0 0 72 200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+        <ellipse cx="36" cy="160" rx="28" ry="12" fill="#c03020" opacity="0.18"/>
+        <rect x="16" y="190" width="40" height="10" fill="#3a1a10"/>
+        <rect x="20" y="188" width="32" height="4" fill="#5a2a18"/>
+        <g class="tower-body-anim">
+          <rect x="14" y="182" width="44" height="8" fill="#c02818"/>
+          <rect x="22" y="182" width="28" height="8" fill="#d4600a" opacity="0.5"/>
+          <rect x="13" y="180" width="46" height="3" fill="#e84040"/>
+          <rect x="16" y="172" width="40" height="8" fill="#b82418"/>
+          <line x1="16" y1="172" x2="28" y2="180" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="30" y1="172" x2="42" y2="180" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="56" y1="172" x2="44" y2="180" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <line x1="28" y1="172" x2="16" y2="180" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <rect x="15" y="170" width="42" height="3" fill="#e84040"/>
+          <rect x="18" y="162" width="36" height="8" fill="#b02010"/>
+          <line x1="18" y1="162" x2="30" y2="170" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="32" y1="162" x2="44" y2="170" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="44" y1="162" x2="32" y2="170" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <line x1="30" y1="162" x2="18" y2="170" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <rect x="17" y="160" width="38" height="3" fill="#e84040"/>
+          <rect x="20" y="152" width="32" height="8" fill="#a81e0e"/>
+          <line x1="20" y1="152" x2="31" y2="160" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="33" y1="152" x2="44" y2="160" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="44" y1="152" x2="33" y2="160" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <line x1="31" y1="152" x2="20" y2="160" stroke="#e84040" stroke-width="1.5" opacity="0.5"/>
+          <rect x="19" y="150" width="34" height="3" fill="#e84040"/>
+          <rect x="22" y="142" width="28" height="8" fill="#a01c0c"/>
+          <line x1="22" y1="142" x2="32" y2="150" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <line x1="34" y1="142" x2="44" y2="150" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <rect x="21" y="140" width="30" height="3" fill="#e84040"/>
+          <rect x="23" y="132" width="26" height="8" fill="#981808"/>
+          <line x1="23" y1="132" x2="33" y2="140" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <line x1="35" y1="132" x2="45" y2="140" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <rect x="22" y="130" width="28" height="3" fill="#e84040"/>
+          <rect x="25" y="122" width="22" height="8" fill="#901408"/>
+          <line x1="25" y1="122" x2="34" y2="130" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <line x1="36" y1="122" x2="47" y2="130" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <rect x="24" y="120" width="24" height="3" fill="#e84040"/>
+          <rect x="26" y="112" width="20" height="8" fill="#881208"/>
+          <line x1="26" y1="112" x2="35" y2="120" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <line x1="37" y1="112" x2="46" y2="120" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <rect x="25" y="110" width="22" height="3" fill="#e84040"/>
+          <rect x="24" y="102" width="24" height="8" fill="#901408"/>
+          <line x1="24" y1="102" x2="34" y2="110" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <line x1="38" y1="102" x2="48" y2="110" stroke="#cc3030" stroke-width="1.5" opacity="0.7"/>
+          <rect x="23" y="100" width="26" height="3" fill="#e84040"/>
+          <rect x="22" y="90" width="28" height="10" fill="#981408"/>
+          <rect x="29" y="92" width="4" height="5" fill="#f5a623" opacity="0.7"/>
+          <rect x="35" y="92" width="4" height="5" fill="#f5a623" opacity="0.7"/>
+          <line x1="22" y1="90" x2="33" y2="100" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <line x1="37" y1="90" x2="48" y2="100" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <rect x="21" y="88" width="30" height="3" fill="#e84040"/>
+          <rect x="20" y="78" width="32" height="10" fill="#a01810"/>
+          <rect x="27" y="80" width="4" height="5" fill="#f5a623" opacity="0.75"/>
+          <rect x="33" y="80" width="4" height="5" fill="#f5a623" opacity="0.75"/>
+          <rect x="39" y="80" width="4" height="5" fill="#f5a623" opacity="0.6"/>
+          <line x1="20" y1="78" x2="32" y2="88" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <line x1="36" y1="78" x2="48" y2="88" stroke="#dd3838" stroke-width="1.5" opacity="0.7"/>
+          <rect x="19" y="76" width="34" height="3" fill="#e84040"/>
+          <rect x="17" y="66" width="38" height="10" fill="#a81c12"/>
+          <rect x="24" y="68" width="5" height="5" fill="#f5a623" opacity="0.8"/>
+          <rect x="31" y="68" width="5" height="5" fill="#f5a623" opacity="0.8"/>
+          <rect x="38" y="68" width="5" height="5" fill="#f5a623" opacity="0.7"/>
+          <line x1="17" y1="66" x2="30" y2="76" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <line x1="36" y1="66" x2="49" y2="76" stroke="#e84040" stroke-width="1.5" opacity="0.7"/>
+          <rect x="16" y="64" width="40" height="3" fill="#e84040"/>
+        </g>
+        <g class="tower-crown-anim">
+          <rect x="12" y="50" width="48" height="15" fill="#c02010" opacity="0.7"/>
+          <rect x="15" y="53" width="6" height="8" fill="#f5a623" opacity="0.9"/>
+          <rect x="23" y="53" width="6" height="8" fill="#f5a623" opacity="0.9"/>
+          <rect x="31" y="53" width="6" height="8" fill="#fff0c0" opacity="0.95"/>
+          <rect x="39" y="53" width="6" height="8" fill="#f5a623" opacity="0.9"/>
+          <rect x="47" y="53" width="6" height="8" fill="#f5a623" opacity="0.85"/>
+          <rect x="11" y="48" width="50" height="4" fill="#e84040"/>
+          <rect x="11" y="48" width="50" height="2" fill="#ff8060" opacity="0.5"/>
+          <rect x="11" y="64" width="50" height="3" fill="#e84040"/>
+          <rect x="10" y="40" width="52" height="10" fill="#0a1428"/>
+          <rect x="10" y="40" width="52" height="10" fill="#1040a0" opacity="0.6"/>
+          <rect x="14" y="43" width="2" height="4" fill="white" opacity="0.9"/>
+          <rect x="18" y="43" width="4" height="4" fill="white" opacity="0.9"/>
+          <rect x="24" y="43" width="2" height="4" fill="white" opacity="0.9"/>
+          <rect x="28" y="43" width="4" height="4" fill="white" opacity="0.9"/>
+          <rect x="34" y="43" width="2" height="4" fill="white" opacity="0.9"/>
+          <rect x="38" y="43" width="4" height="4" fill="white" opacity="0.9"/>
+          <rect x="44" y="43" width="2" height="4" fill="white" opacity="0.9"/>
+          <rect x="48" y="43" width="4" height="4" fill="white" opacity="0.9"/>
+          <rect x="10" y="40" width="52" height="2" fill="#4060c0" opacity="0.7"/>
+        </g>
+        <rect x="34" y="20" width="4" height="22" fill="#cc2010"/>
+        <rect x="35" y="18" width="2" height="4" fill="#dd3020"/>
+        <rect x="33" y="16" width="6" height="5" fill="#ff4444" class="tower-top-light"/>
+        <rect x="34" y="14" width="4" height="3" fill="#ff6666" class="tower-top-light"/>
+        <ellipse cx="36" cy="192" rx="20" ry="5" fill="#e84040" opacity="0.25"/>
+        <ellipse cx="36" cy="192" rx="10" ry="3" fill="#f5a623" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="water"></div>
+  </div>
+</section>
+
+<!-- Section 02: Earthquake Scale (Vertical) -->
+<section class="section" id="earthquake">
+  <div class="section-label">01 — EARTHQUAKE INTENSITY</div>
+  <div class="section-title">
+    <span data-lang="en">Japan's Seismic Intensity Scale (震度 Shindo)</span>
+    <span data-lang="ja">日本の震度階級（震度 Shindo）</span>
+    <span data-lang="id">Skala Intensitas Seismik Jepang (震度 Shindo)</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Shindo measures what you <em>feel</em>, not the quake's energy. <strong>Tap any row</strong> to feel the shaking!</span>
+    <span data-lang="ja">震度はあなたが<em>感じる</em>揺れの強さ。<strong>各行をタップ</strong>して揺れを体験！</span>
+    <span data-lang="id">Shindo mengukur apa yang Anda <em>rasakan</em>. <strong>Ketuk baris</strong> untuk merasakan guncangan!</span>
+  </p>
+  <div class="scale-vertical" id="scaleVertical"></div>
+
+  <div class="split-panel">
+    <div class="panel do-panel">
+      <h3>
+        <span data-lang="en">✓ DO</span>
+        <span data-lang="ja">✓ やるべきこと</span>
+        <span data-lang="id">✓ LAKUKAN</span>
+      </h3>
+      <ul>
+        <li><span data-lang="en">Drop, cover, hold on</span><span data-lang="ja">身を低くし、頭を守り、動かない</span><span data-lang="id">Merunduk, berlindung, bertahan</span></li>
+        <li><span data-lang="en">Open a door for an exit route</span><span data-lang="ja">出口確保のためにドアを開ける</span><span data-lang="id">Buka pintu untuk jalur keluar</span></li>
+        <li><span data-lang="en">Stay calm — most buildings survive</span><span data-lang="ja">落ち着いて — ほとんどの建物は耐えます</span><span data-lang="id">Tetap tenang — kebanyakan bangunan tahan</span></li>
+        <li><span data-lang="en">Turn on NHK for updates</span><span data-lang="ja">NHKをつけて情報を確認</span><span data-lang="id">Nyalakan NHK untuk informasi terbaru</span></li>
+        <li><span data-lang="en">If coastal: run to high ground</span><span data-lang="ja">沿岸部なら：高台へ走る</span><span data-lang="id">Jika di pesisir: lari ke tempat tinggi</span></li>
+      </ul>
+    </div>
+    <div class="panel dont-panel">
+      <h3>
+        <span data-lang="en">✗ DON'T</span>
+        <span data-lang="ja">✗ やってはいけないこと</span>
+        <span data-lang="id">✗ JANGAN</span>
+      </h3>
+      <ul>
+        <li><span data-lang="en">Rush outside during shaking</span><span data-lang="ja">揺れている間に外に出る</span><span data-lang="id">Berlari keluar saat gempa</span></li>
+        <li><span data-lang="en">Use fire or gas appliances</span><span data-lang="ja">火やガス器具を使う</span><span data-lang="id">Menggunakan api atau kompor gas</span></li>
+        <li><span data-lang="en">Use elevators</span><span data-lang="ja">エレベーターを使う</span><span data-lang="id">Menggunakan lift</span></li>
+        <li><span data-lang="en">Flood phone lines with calls</span><span data-lang="ja">電話回線をパンクさせる</span><span data-lang="id">Membanjiri saluran telepon</span></li>
+        <li><span data-lang="en">Drive unless absolutely necessary</span><span data-lang="ja">必要がなければ車を運転する</span><span data-lang="id">Mengemudi kecuali benar-benar perlu</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Section 03: Vocabulary -->
+<section class="section" id="vocab">
+  <div class="section-label">02 — EMERGENCY VOCABULARY</div>
+  <div class="section-title">
+    <span data-lang="en">Important Kotoba (言葉) to Know</span>
+    <span data-lang="ja">大切な言葉（ことば）</span>
+    <span data-lang="id">Kotoba (言葉) Penting untuk Diketahui</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('danger','vocab')">🚨 <span data-lang="en">Danger</span><span data-lang="ja">危険</span><span data-lang="id">Bahaya</span></button>
+    <button class="tab-btn" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
+    <button class="tab-btn" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
+    <button class="tab-btn" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
+  </div>
+
+  <div class="tab-content active" data-tab="danger" data-group="vocab">
+    <div class="vocab-grid" id="vocabDanger"></div>
+  </div>
+  <div class="tab-content" data-tab="action" data-group="vocab">
+    <div class="vocab-grid" id="vocabAction"></div>
+  </div>
+  <div class="tab-content" data-tab="places" data-group="vocab">
+    <div class="vocab-grid" id="vocabPlaces"></div>
+  </div>
+  <div class="tab-content" data-tab="help" data-group="vocab">
+    <div class="vocab-grid" id="vocabHelp"></div>
+  </div>
+
+  <!-- Yasashii Nihongo with furigana and romaji -->
+  <div style="margin-top:40px;">
+    <div class="section-title" style="font-size:14px;">
+      <span data-lang="en">やさしい日本語 — Easy Japanese</span>
+      <span data-lang="ja">やさしい日本語</span>
+      <span data-lang="id">やさしい日本語 — Bahasa Jepang Mudah</span>
+    </div>
+    <p class="section-note">
+      <span data-lang="en">Official announcements are hard to understand. Here's the simplified version with furigana and romaji:</span>
+      <span data-lang="ja">公式な発表は難しいです。やさしい日本語版（ふりがな・ローマ字つき）：</span>
+      <span data-lang="id">Pengumuman resmi sulit dipahami. Ini versi sederhana dengan furigana dan romaji:</span>
+    </p>
+    <div class="yasashii-grid">
+      <div class="yasashii-card hard">
+        <div class="yasashii-label">❌ <span data-lang="en">HARD</span><span data-lang="ja">むずかしい</span><span data-lang="id">SULIT</span></div>
+        <div class="yasashii-text"><ruby>大雨<rt>おおあめ</rt></ruby>により<ruby>河川<rt>かせん</rt></ruby>の<ruby>水位<rt>すいい</rt></ruby>が<ruby>上昇<rt>じょうしょう</rt></ruby>しており、<ruby>氾濫<rt>はんらん</rt></ruby>の<ruby>危険性<rt>きけんせい</rt></ruby>が<ruby>高<rt>たか</rt></ruby>まっています。</div>
+        <div class="romaji-line">Ooame ni yori kasen no suii ga joushou shite ori, hanran no kikensei ga takamatte imasu.</div>
+      </div>
+      <div class="yasashii-card easy">
+        <div class="yasashii-label">✓ やさしい / Simple</div>
+        <div class="yasashii-text"><ruby>雨<rt>あめ</rt></ruby>がたくさん<ruby>降<rt>ふ</rt></ruby>っています。<ruby>危<rt>あぶ</rt></ruby>ないです。<ruby>逃<rt>に</rt></ruby>げてください。</div>
+        <div class="romaji-line">Ame ga takusan futte imasu. Abunai desu. Nigete kudasai.</div>
+      </div>
+      <div class="yasashii-card hard">
+        <div class="yasashii-label">❌ <span data-lang="en">HARD</span><span data-lang="ja">むずかしい</span><span data-lang="id">SULIT</span></div>
+        <div class="yasashii-text"><ruby>震源地<rt>しんげんち</rt></ruby><ruby>付近<rt>ふきん</rt></ruby>の<ruby>沿岸部<rt>えんがんぶ</rt></ruby>に<ruby>津波<rt>つなみ</rt></ruby><ruby>警報<rt>けいほう</rt></ruby>が<ruby>発令<rt>はつれい</rt></ruby>されました。<ruby>直<rt>ただ</rt></ruby>ちに<ruby>高台<rt>たかだい</rt></ruby>へ<ruby>避難<rt>ひなん</rt></ruby>してください。</div>
+        <div class="romaji-line">Shingenchi fukin no enganbu ni tsunami keihou ga hatsurei saremashita. Tadachi ni takadai e hinan shite kudasai.</div>
+      </div>
+      <div class="yasashii-card easy">
+        <div class="yasashii-label">✓ やさしい / Simple</div>
+        <div class="yasashii-text"><ruby>大<rt>おお</rt></ruby>きい<ruby>地震<rt>じしん</rt></ruby>でした。<ruby>津波<rt>つなみ</rt></ruby>が<ruby>来<rt>く</rt></ruby>るかもしれません。<ruby>高<rt>たか</rt></ruby>いところへ<ruby>行<rt>い</rt></ruby>ってください。</div>
+        <div class="romaji-line">Ookii jishin deshita. Tsunami ga kuru kamo shiremasen. Takai tokoro e itte kudasai.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 04: Emergency Bag MINI GAME -->
+<section class="section" id="bag">
+  <div class="section-label">03 — EMERGENCY BAG</div>
+  <div class="section-title">
+    <span data-lang="en">🎒 非常袋 Hijou-bukuro — Pack Your Bag!</span>
+    <span data-lang="ja">🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！</span>
+    <span data-lang="id">🎒 非常袋 Hijou-bukuro — Isi Tas Darurat!</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Your bag can hold <strong>8.0 kg max</strong>. Choose wisely based on priority and weight — you can't take everything! Tap items to pack or unpack them.</span>
+    <span data-lang="ja">バッグの容量は<strong>最大8.0kg</strong>。優先度と重さを考えて選ぼう！全部は入りません。タップで詰める・戻す。</span>
+    <span data-lang="id">Tas Anda hanya bisa menampung <strong>maks 8.0 kg</strong>. Pilih dengan bijak berdasarkan prioritas dan berat — tidak bisa bawa semua! Ketuk untuk memasukkan atau mengeluarkan.</span>
+  </p>
+
+  <div class="bag-game">
+    <div class="bag-stats">
+      <div class="bag-stat">
+        <div class="bag-stat-label"><span data-lang="en">ITEMS</span><span data-lang="ja">アイテム</span><span data-lang="id">ITEM</span></div>
+        <div class="bag-stat-value" id="bagItemCount">0 / 14</div>
+      </div>
+      <div class="bag-stat">
+        <div class="bag-stat-label"><span data-lang="en">SCORE</span><span data-lang="ja">スコア</span><span data-lang="id">SKOR</span></div>
+        <div class="bag-stat-value" id="bagScore">0</div>
+      </div>
+      <div class="bag-weight-bar">
+        <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
+        <div class="weight-bar-outer">
+          <div class="weight-bar-fill" id="weightBarFill"></div>
+          <div class="weight-bar-text" id="weightBarText">0.0 / 8.0 kg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bag-items-grid" id="bagItemsGrid"></div>
+
+    <div class="bag-result" id="bagResult">
+      <h3 id="bagResultTitle"></h3>
+      <div class="score" id="bagFinalScore"></div>
+      <p id="bagResultMsg"></p>
+      <div class="bag-actions">
+        <button class="bag-btn primary" onclick="resetBag()"><span data-lang="en">🔄 Try Again</span><span data-lang="ja">🔄 もう一度</span><span data-lang="id">🔄 Coba Lagi</span></button>
+        <button class="bag-btn secondary" onclick="checkBag()"><span data-lang="en">📋 Check Score</span><span data-lang="ja">📋 スコア確認</span><span data-lang="id">📋 Cek Skor</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 05: Alert System -->
+<section class="section" id="alerts">
+  <div class="section-label">04 — ALERT SYSTEM</div>
+  <div class="section-title">
+    <span data-lang="en">Japan's Emergency Alert System</span>
+    <span data-lang="ja">日本の緊急警報システム</span>
+    <span data-lang="id">Sistem Peringatan Darurat Jepang</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Your phone will make a loud alarm sound even on silent mode. Don't panic — here's what each one means.</span>
+    <span data-lang="ja">サイレントモードでも大音量のアラームが鳴ります。パニックにならないで。</span>
+    <span data-lang="id">Ponsel Anda akan berbunyi keras bahkan dalam mode senyap. Jangan panik.</span>
+  </p>
+
+  <div class="alert-grid">
+    <div class="alert-card type-jalert">
+      <div class="alert-icon">📱</div>
+      <h3>J-Alert</h3>
+      <div class="jp-sub">全国瞬時警報システム</div>
+      <p><span data-lang="en">National instant alert for missiles, major earthquakes, and tsunamis. ALL phones receive it.</span><span data-lang="ja">ミサイル、大地震、津波の全国瞬時警報。すべての携帯電話に届きます。</span><span data-lang="id">Peringatan instan nasional untuk rudal, gempa besar, dan tsunami. SEMUA ponsel menerimanya.</span></p>
+    </div>
+    <div class="alert-card type-eew">
+      <div class="alert-icon">🌍</div>
+      <h3>EEW</h3>
+      <div class="jp-sub">緊急地震速報</div>
+      <p><span data-lang="en">Earthquake early warning. Gives you seconds before shaking. Drop and cover IMMEDIATELY.</span><span data-lang="ja">緊急地震速報。揺れの数秒前に届きます。すぐに身を守って。</span><span data-lang="id">Peringatan dini gempa. Memberi Anda beberapa detik sebelum guncangan.</span></p>
+    </div>
+    <div class="alert-card type-tsunami">
+      <div class="alert-icon">🌊</div>
+      <h3><span data-lang="en">Tsunami Warning</span><span data-lang="ja">津波警報</span><span data-lang="id">Peringatan Tsunami</span></h3>
+      <div class="jp-sub">津波警報</div>
+      <p><span data-lang="en">3 levels: Advisory, Warning, Major. Run to high ground immediately.</span><span data-lang="ja">3段階：注意報、警報、大津波警報。すぐに高台へ。</span><span data-lang="id">3 tingkat: Peringatan, Siaga, Besar. Segera lari ke tempat tinggi.</span></p>
+    </div>
+    <div class="alert-card type-evac">
+      <div class="alert-icon">🌧️</div>
+      <h3><span data-lang="en">Evacuation Order</span><span data-lang="ja">避難指示</span><span data-lang="id">Perintah Evakuasi</span></h3>
+      <div class="jp-sub">避難指示</div>
+      <p><span data-lang="en">5-level system. Level 4 = evacuate NOW. Level 5 = disaster already occurring.</span><span data-lang="ja">5段階。レベル4=今すぐ避難。レベル5=災害発生中。</span><span data-lang="id">Sistem 5 tingkat. Level 4 = evakuasi SEKARANG. Level 5 = bencana sudah terjadi.</span></p>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size:13px; margin-top:24px;">
+    <span data-lang="en">📲 Apps to Download</span>
+    <span data-lang="ja">📲 ダウンロードすべきアプリ</span>
+    <span data-lang="id">📲 Aplikasi untuk Diunduh</span>
+  </div>
+  <div class="app-list">
+    <div class="app-item"><div class="app-check rec">✓</div><span><strong>NHK World</strong> — <span data-lang="en">News & alerts in 17 languages</span><span data-lang="ja">17言語でニュースと警報</span><span data-lang="id">Berita & peringatan dalam 17 bahasa</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>Safety Tips</strong> — <span data-lang="en">Official multilingual disaster app</span><span data-lang="ja">多言語の公式防災アプリ</span><span data-lang="id">Aplikasi bencana multibahasa resmi</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>Yahoo! 防災速報</strong> — <span data-lang="en">Real-time alerts by location</span><span data-lang="ja">位置情報リアルタイム警報</span><span data-lang="id">Peringatan real-time berdasarkan lokasi</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>171</strong> — <span data-lang="en">Disaster voice message board</span><span data-lang="ja">災害用伝言ダイヤル</span><span data-lang="id">Papan pesan suara bencana</span></span></div>
+  </div>
+</section>
+
+<!-- Section 06: Hazard Map -->
+<section class="section" id="hazard">
+  <div class="section-label">05 — HAZARD MAP</div>
+  <div class="section-title">
+    <span data-lang="en">How to Read a Hazard Map</span>
+    <span data-lang="ja">ハザードマップの読み方</span>
+    <span data-lang="id">Cara Membaca Peta Bahaya</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Every city in Japan has a hazard map. Your first week: find yours, read it, memorize your evacuation point.</span>
+    <span data-lang="ja">日本のすべての市町村にハザードマップがあります。最初の一週間で確認しましょう。</span>
+    <span data-lang="id">Setiap kota di Jepang punya peta bahaya. Minggu pertama: temukan, baca, hafalkan.</span>
+  </p>
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-icon">🔍</div>
+      <h3><span data-lang="en">Find Your Map</span><span data-lang="ja">地図を見つける</span><span data-lang="id">Temukan Peta</span></h3>
+      <p><span data-lang="en">Search "[city] ハザードマップ" or visit <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span><span data-lang="ja">「[市名] ハザードマップ」で検索 or <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span><span data-lang="id">Cari "[kota] ハザードマップ" atau <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span></p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🎨</div>
+      <h3><span data-lang="en">Read the Colors</span><span data-lang="ja">色を読む</span><span data-lang="id">Baca Warna</span></h3>
+      <p><span data-lang="en">🟦 Blue = flood · 🟨 Yellow = mild risk · 🟥 Red = high danger · White = safe</span><span data-lang="ja">🟦 青=浸水域 · 🟨 黄=軽度 · 🟥 赤=高危険 · 白=安全</span><span data-lang="id">🟦 Biru=banjir · 🟨 Kuning=ringan · 🟥 Merah=bahaya · Putih=aman</span></p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">📍</div>
+      <h3><span data-lang="en">Find Your Shelter</span><span data-lang="ja">避難場所を見つける</span><span data-lang="id">Temukan Tempat Perlindungan</span></h3>
+      <p><span data-lang="en">Look for 避難場所 markers — schools, parks, community centers.</span><span data-lang="ja">避難場所のマーカーを探す — 学校、公園、コミュニティセンター。</span><span data-lang="id">Cari penanda 避難場所 — sekolah, taman, pusat komunitas.</span></p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🚶</div>
+      <h3><span data-lang="en">Walk the Route</span><span data-lang="ja">ルートを歩く</span><span data-lang="id">Jalan Rutenya</span></h3>
+      <p><span data-lang="en">Walk it once in daylight. Notice bridges, slopes, narrow alleys.</span><span data-lang="ja">日中に一度歩く。橋、坂道、狭い路地に注意。</span><span data-lang="id">Jalan sekali di siang hari. Perhatikan jembatan, lereng, gang.</span></p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🖨️</div>
+      <h3><span data-lang="en">Print & Post It</span><span data-lang="ja">印刷して貼る</span><span data-lang="id">Cetak & Tempel</span></h3>
+      <p><span data-lang="en">Print it and put on your fridge. Your phone may die in a disaster.</span><span data-lang="ja">印刷して冷蔵庫に貼る。災害時にスマホが使えなくなるかも。</span><span data-lang="id">Cetak dan tempel di kulkas. Ponsel bisa mati saat bencana.</span></p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🗾</div>
+      <h3><span data-lang="en">Map Types</span><span data-lang="ja">地図の種類</span><span data-lang="id">Jenis Peta</span></h3>
+      <p><span data-lang="en">洪水 flood · 土砂 landslide · 津波 tsunami · 高潮 storm surge · 液状化 liquefaction</span><span data-lang="ja">洪水 · 土砂災害 · 津波 · 高潮 · 液状化</span><span data-lang="id">洪水 banjir · 土砂 longsor · 津波 · 高潮 gelombang · 液状化 likuefaksi</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer with PPI Kobe logo -->
+<footer class="footer">
+  <div class="footer-logo">
+    <svg class="ppi-logo-svg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" width="100" height="108">
+      <!-- Red circle background -->
+      <circle cx="60" cy="52" r="40" fill="#c83232"/>
+      <!-- Tower base -->
+      <rect x="38" y="88" width="44" height="6" fill="#1a1a1a"/>
+      <rect x="42" y="86" width="36" height="4" fill="#2a2a2a"/>
+      <!-- Tower body - hyperboloid lattice -->
+      <!-- Bottom wide -->
+      <rect x="34" y="80" width="52" height="6" fill="#1a1a1a"/>
+      <rect x="36" y="74" width="48" height="6" fill="#1a1a1a"/>
+      <line x1="36" y1="80" x2="50" y2="74" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="50" y1="80" x2="64" y2="74" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="64" y1="80" x2="78" y2="74" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="84" y1="80" x2="70" y2="74" stroke="#c83232" stroke-width="1" opacity="0.3"/>
+      <line x1="70" y1="80" x2="56" y2="74" stroke="#c83232" stroke-width="1" opacity="0.3"/>
+      <!-- Mid-lower band -->
+      <rect x="34" y="72" width="52" height="2" fill="#c83232" opacity="0.5"/>
+      <rect x="38" y="66" width="44" height="6" fill="#1a1a1a"/>
+      <line x1="38" y1="72" x2="52" y2="66" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="52" y1="72" x2="66" y2="66" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="66" y1="72" x2="80" y2="66" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <!-- Narrow waist band -->
+      <rect x="36" y="64" width="48" height="2" fill="#c83232" opacity="0.5"/>
+      <rect x="42" y="58" width="36" height="6" fill="#1a1a1a"/>
+      <line x1="42" y1="64" x2="54" y2="58" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="54" y1="64" x2="66" y2="58" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <line x1="66" y1="64" x2="78" y2="58" stroke="#c83232" stroke-width="1" opacity="0.4"/>
+      <!-- Narrowest band -->
+      <rect x="40" y="56" width="40" height="2" fill="#c83232" opacity="0.5"/>
+      <rect x="44" y="50" width="32" height="6" fill="#1a1a1a"/>
+      <line x1="44" y1="56" x2="54" y2="50" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="56" y1="56" x2="66" y2="50" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="56" x2="76" y2="50" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <!-- Expanding upward band -->
+      <rect x="42" y="48" width="36" height="2" fill="#c83232" opacity="0.5"/>
+      <rect x="42" y="42" width="36" height="6" fill="#1a1a1a"/>
+      <line x1="42" y1="48" x2="52" y2="42" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="54" y1="48" x2="64" y2="42" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="66" y1="48" x2="76" y2="42" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <!-- Upper wider band -->
+      <rect x="40" y="40" width="40" height="2" fill="#c83232" opacity="0.5"/>
+      <rect x="38" y="34" width="44" height="6" fill="#1a1a1a"/>
+      <line x1="38" y1="40" x2="50" y2="34" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="52" y1="40" x2="64" y2="34" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <line x1="66" y1="40" x2="78" y2="34" stroke="#c83232" stroke-width="1" opacity="0.5"/>
+      <!-- Observation deck / crown -->
+      <rect x="36" y="30" width="48" height="4" fill="#1a1a1a"/>
+      <rect x="40" y="31" width="4" height="2" fill="#c83232" opacity="0.7"/>
+      <rect x="46" y="31" width="4" height="2" fill="#c83232" opacity="0.7"/>
+      <rect x="52" y="31" width="4" height="2" fill="#fff0c0" opacity="0.8"/>
+      <rect x="58" y="31" width="4" height="2" fill="#c83232" opacity="0.7"/>
+      <rect x="64" y="31" width="4" height="2" fill="#c83232" opacity="0.7"/>
+      <rect x="70" y="31" width="4" height="2" fill="#c83232" opacity="0.6"/>
+      <!-- Top band -->
+      <rect x="34" y="28" width="52" height="3" fill="#1a1a1a"/>
+      <!-- Antenna -->
+      <rect x="58" y="14" width="4" height="14" fill="#1a1a1a"/>
+      <rect x="59" y="10" width="2" height="6" fill="#2a2a2a"/>
+      <rect x="57" y="8" width="6" height="4" fill="#c83232" opacity="0.9"/>
+      <!-- PPI KOBE text -->
+      <text x="60" y="118" text-anchor="middle" font-family="'Press Start 2P',monospace" font-size="11" fill="#c83232" font-weight="bold" letter-spacing="1">PPI KOBE</text>
+    </svg>
+  </div>
+  <div class="footer-emergency">
+    <span data-lang="en">Emergency: Fire/Ambulance 119 · Police 110 · Coast Guard 118</span>
+    <span data-lang="ja">緊急番号：消防・救急 119 · 警察 110 · 海上保安 118</span>
+    <span data-lang="id">Darurat: Pemadam/Ambulans 119 · Polisi 110 · Penjaga Pantai 118</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.jma.go.jp/en/" target="_blank">気象庁 JMA</a>
+    <a href="https://disaportal.gsi.go.jp/" target="_blank">Hazard Map Portal</a>
+    <a href="https://www3.nhk.or.jp/nhkworld/" target="_blank">NHK World</a>
+    <a href="https://www.fdma.go.jp/en/" target="_blank">FDMA</a>
+    <a href="https://www.bousai.go.jp/en/" target="_blank">Cabinet Office 防災</a>
+  </div>
+  <div class="footer-copy">
+    <span data-lang="en">Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.</span>
+    <span data-lang="ja">守るガイド — 神戸の精神で、PPI Kobeと協力して。</span>
+    <span data-lang="id">Mamoru Guide 守る — Dibangun dengan ketahanan, terinspirasi Kobe. Kolaborasi dengan PPI Kobe.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script>
+// === DATA ===
+const scaleData = [
+  {n:'0',jp:'震度0',colors:['#667','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
+  {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',shakeClass:'shaking-1',icon:'🏠',pct:5},
+  {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',shakeClass:'shaking-2',icon:'🏠',pct:10},
+  {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',shakeClass:'shaking-3',icon:'🍽️',pct:20},
+  {n:'4',jp:'震度4',colors:['#4ecb71','#3ba'],en:'Strong shaking, objects fall',ja:'強い揺れ、物が落ちる',id:'Guncangan kuat, benda jatuh',shakeClass:'shaking-4',icon:'📦',pct:35},
+  {n:'5-',jp:'震度5弱',colors:['#f5a623','#d89'],en:'Very strong — furniture moves',ja:'非常に強い — 家具が動く',id:'Sangat kuat — furnitur bergerak',shakeClass:'shaking-5m',icon:'🪑',pct:50},
+  {n:'5+',jp:'震度5強',colors:['#e87','#d76'],en:'Hard to stand, walls crack',ja:'立っていられない、壁にひび',id:'Sulit berdiri, dinding retak',shakeClass:'shaking-5p',icon:'🧱',pct:60},
+  {n:'6-',jp:'震度6弱',colors:['#e65','#d54'],en:'Impossible to stand, buildings damaged',ja:'立てない、建物損壊',id:'Tidak bisa berdiri, bangunan rusak',shakeClass:'shaking-6m',icon:'🏚️',pct:75},
+  {n:'6+',jp:'震度6強',colors:['#d43','#c32'],en:'Widespread collapse possible',ja:'広範囲で倒壊の可能性',id:'Keruntuhan luas mungkin',shakeClass:'shaking-6p',icon:'💥',pct:88},
+  {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,shakeClass:'shaking-7',icon:'🔴',pct:100},
+];
+
+const vocabData = {
+  danger: [
+    {jp:'危ない！',rom:'Abunai!',en:'Danger! Watch out!',id:'Bahaya! Awas!'},
+    {jp:'地震',rom:'Jishin',en:'Earthquake',id:'Gempa bumi'},
+    {jp:'津波',rom:'Tsunami',en:'Tsunami',id:'Tsunami'},
+    {jp:'台風',rom:'Taifuu',en:'Typhoon',id:'Topan'},
+    {jp:'洪水',rom:'Kouzui',en:'Flood',id:'Banjir'},
+    {jp:'土砂崩れ',rom:'Dosha kuzure',en:'Landslide',id:'Tanah longsor'},
+    {jp:'火事',rom:'Kaji',en:'Fire',id:'Kebakaran'},
+    {jp:'大雨警報',rom:'Ooame keihou',en:'Heavy rain warning',id:'Peringatan hujan lebat'},
+  ],
+  action: [
+    {jp:'逃げて！',rom:'Nigete!',en:'Run away! Evacuate!',id:'Lari! Mengungsi!'},
+    {jp:'避難する',rom:'Hinan suru',en:'To evacuate',id:'Mengungsi'},
+    {jp:'身を守る',rom:'Mi wo mamoru',en:'Protect yourself',id:'Lindungi diri'},
+    {jp:'頭を守れ',rom:'Atama wo mamore',en:'Protect your head',id:'Lindungi kepala'},
+    {jp:'高いところへ',rom:'Takai tokoro e',en:'Go to high ground',id:'Pergi ke tempat tinggi'},
+  ],
+  places: [
+    {jp:'避難場所',rom:'Hinan basho',en:'Evacuation site',id:'Tempat pengungsian'},
+    {jp:'避難所',rom:'Hinanjo',en:'Evacuation shelter',id:'Penampungan pengungsi'},
+    {jp:'集会所',rom:'Shuukaijo',en:'Assembly hall',id:'Aula pertemuan'},
+    {jp:'高台',rom:'Takadai',en:'High ground / hilltop',id:'Tanah tinggi'},
+  ],
+  help: [
+    {jp:'助けて！',rom:'Tasukete!',en:'Help me!',id:'Tolong!'},
+    {jp:'救急車',rom:'Kyuukyuusha',en:'Ambulance — call 119',id:'Ambulans — telp 119'},
+    {jp:'警察',rom:'Keisatsu',en:'Police — call 110',id:'Polisi — telp 110'},
+    {jp:'怪我をしました',rom:'Kega wo shimashita',en:'I am injured',id:'Saya terluka'},
+    {jp:'下に埋まっています',rom:'Shita ni umatte imasu',en:'I am trapped under debris',id:'Saya terperangkap di bawah puing'},
+    {jp:'外国人です',rom:'Gaikokujin desu',en:'I am a foreigner',id:'Saya orang asing'},
+  ]
+};
+
+// Emergency bag items with weight and priority
+const bagItems = [
+  {e:'💧',en:'Water (500ml × 3)',ja:'水（500ml × 3）',id:'Air (500ml × 3)',weight:1.5,priority:10,det_en:'Minimum 3 days supply',det_ja:'最低3日分',det_id:'Persediaan minimal 3 hari'},
+  {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:1.2,priority:9,det_en:'Onigiri, crackers, energy bars',det_ja:'おにぎり、クラッカー、栄養バー',det_id:'Onigiri, kerupuk, bar energi'},
+  {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.3,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
+  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.4,priority:7,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
+  {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.5,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
+  {e:'💊',en:'Personal medications (5+ days)',ja:'常備薬（5日分以上）',id:'Obat pribadi (5+ hari)',weight:0.2,priority:10,det_en:'With prescription copy',det_ja:'処方箋のコピーがあれば',det_id:'Dengan salinan resep'},
+  {e:'📄',en:'Important documents (copies)',ja:'重要書類（コピー）',id:'Dokumen penting (salinan)',weight:0.1,priority:8,det_en:'Passport, zairyu card, insurance',det_ja:'パスポート、在留カード、保険証',det_id:'Paspor, kartu zairyu, asuransi'},
+  {e:'💴',en:'Cash (coins + small bills)',ja:'現金（小銭 + 千円札）',id:'Uang tunai (koin + uang kecil)',weight:0.2,priority:8,det_en:'ATMs may not work',det_ja:'ATMが使えない場合',det_id:'ATM mungkin tidak berfungsi'},
+  {e:'🔋',en:'Portable phone charger',ja:'モバイルバッテリー',id:'Pengisi daya portabel',weight:0.3,priority:7,det_en:'Keep it charged!',det_ja:'充電を忘れずに！',det_id:'Tetap terisi!'},
+  {e:'🧤',en:'Work gloves + dust mask',ja:'軍手 + 防塵マスク',id:'Sarung tangan + masker',weight:0.3,priority:6,det_en:'For moving debris safely',det_ja:'がれき撤去時の安全',det_id:'Untuk memindahkan puing'},
+  {e:'🧦',en:'Warm clothes + rain poncho',ja:'防寒着 + レインポンチョ',id:'Pakaian hangat + jas hujan',weight:1.0,priority:5,det_en:'Especially for winter',det_ja:'特に冬の緊急時に',det_id:'Terutama musim dingin'},
+  {e:'🗺️',en:'Printed hazard map',ja:'印刷したハザードマップ',id:'Peta bahaya cetak',weight:0.1,priority:6,det_en:'Mark evacuation route!',det_ja:'避難ルートを記入！',det_id:'Tandai rute evakuasi!'},
+  {e:'📞',en:'Emergency contacts (paper)',ja:'緊急連絡先（紙）',id:'Kontak darurat (kertas)',weight:0.05,priority:7,det_en:'Phone may die',det_ja:'スマホが使えない時',det_id:'Ponsel bisa mati'},
+  {e:'🧴',en:'Hygiene essentials',ja:'衛生用品',id:'Kebutuhan kebersihan',weight:0.8,priority:4,det_en:'Wet wipes, toilet paper, sanitizer',det_ja:'ウェットティッシュ、トイレットペーパー',det_id:'Tisu basah, kertas toilet'},
+];
+
+const MAX_BAG_WEIGHT = 8.0;
+let packedItems = new Set();
+
+// === STARS ===
+const starField = document.getElementById('stars');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz = Math.random()>0.7 ? 4 : 2;
+  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${1.5+Math.random()*3}s;animation-delay:${Math.random()*3}s`;
+  starField.appendChild(s);
+}
+
+// === DAY/NIGHT ===
+let isDayMode = false;
+function toggleDayNight(){
+  isDayMode = !isDayMode;
+  document.body.classList.toggle('day-mode', isDayMode);
+  const hero = document.getElementById('hero');
+  hero.classList.toggle('night-sky', !isDayMode);
+  hero.classList.toggle('day-sky', isDayMode);
+  document.getElementById('modeToggle').textContent = isDayMode ? '🌙' : '☀️';
+}
+
+// === SKYLINE ===
+function buildSkyline(){
+  const c=document.getElementById('skyline');
+  c.innerHTML='';
+  const blds=[
+    {w:22,h:50,type:'eu'},{w:18,h:40,type:'eu'},{w:30,h:70},{w:16,h:55},
+    {w:40,h:100},{w:24,h:80},{w:35,h:110},{w:20,h:60},
+    {w:28,h:75},{w:36,h:90},{w:20,h:50},{w:24,h:65},{w:18,h:45,type:'eu'},
+  ];
+  blds.forEach(b=>{
+    const el=document.createElement('div');
+    el.className='bld';
+    el.style.width=b.w+'px';
+    el.style.height=b.h+'px';
+    if(b.type==='eu'){
+      el.style.borderRadius='4px 4px 0 0';
+      el.style.clipPath='polygon(50% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 15%)';
+    }
+    const cols=Math.floor(b.w/8);
+    const rows=Math.floor(b.h/10);
+    for(let r=1;r<rows;r++){
+      for(let cl=0;cl<cols;cl++){
+        const w=document.createElement('div');
+        w.className='bld-window'+(Math.random()>0.45?' ':' off');
+        w.style.left=(4+cl*8)+'px';
+        w.style.top=(4+r*10)+'px';
+        el.appendChild(w);
+      }
+    }
+    c.appendChild(el);
+  });
+}
+buildSkyline();
+
+// === VERTICAL EARTHQUAKE SCALE ===
+const sv = document.getElementById('scaleVertical');
+let activeShake = null;
+scaleData.forEach((s,i) => {
+  const row = document.createElement('div');
+  row.className = 'scale-row' + (s.s7 ? ' s7' : '');
+  row.style.borderLeftColor = s.colors[0];
+  row.innerHTML = `
+    <div class="num" style="color:${s.colors[0]}">${s.n}</div>
+    <div class="jp-name">${s.jp}</div>
+    <div class="desc"><span data-lang="en">${s.en}</span><span data-lang="ja">${s.ja}</span><span data-lang="id">${s.id}</span></div>
+    <div class="shake-demo">${s.icon}</div>
+    <div class="intensity-bar" style="width:${s.pct}%;background:${s.colors[0]}"></div>
+  `;
+  row.addEventListener('click', () => {
+    // Toggle shake
+    if(activeShake === i) {
+      row.classList.remove(s.shakeClass);
+      activeShake = null;
+      return;
+    }
+    // Remove previous
+    if(activeShake !== null) {
+      const prev = sv.children[activeShake];
+      prev.classList.remove(scaleData[activeShake].shakeClass);
+    }
+    row.classList.add(s.shakeClass);
+    activeShake = i;
+  });
+  sv.appendChild(row);
+});
+
+// === VOCAB ===
+function renderVocab(cat,containerId){
+  const c=document.getElementById(containerId);
+  vocabData[cat].forEach(v=>{
+    const d=document.createElement('div');
+    d.className=`vocab-card cat-${cat}`;
+    d.innerHTML=`<div class="vocab-jp">${v.jp}</div>
+      <div class="vocab-romaji">${v.rom}</div>
+      <div class="vocab-meaning"><span class="flag">🇬🇧</span>${v.en}</div>
+      <div class="vocab-meaning"><span class="flag">🇮🇩</span>${v.id}</div>`;
+    c.appendChild(d);
+  });
+}
+renderVocab('danger','vocabDanger');
+renderVocab('action','vocabAction');
+renderVocab('places','vocabPlaces');
+renderVocab('help','vocabHelp');
+
+// === EMERGENCY BAG GAME ===
+function renderBagItems(){
+  const grid = document.getElementById('bagItemsGrid');
+  grid.innerHTML = '';
+  bagItems.forEach((item,i) => {
+    const d = document.createElement('div');
+    d.className = 'bag-item' + (packedItems.has(i) ? ' packed' : '');
+    d.id = 'bagItem' + i;
+    const prClass = item.priority >= 8 ? 'priority-high' : item.priority >= 6 ? 'priority-med' : 'priority-low';
+    const prLabel = item.priority >= 8 ? '★★★' : item.priority >= 6 ? '★★' : '★';
+    d.innerHTML = `
+      <div class="bag-item-emoji">${item.e}</div>
+      <div class="bag-item-info">
+        <div class="bag-item-name"><span data-lang="en">${item.en}</span><span data-lang="ja">${item.ja}</span><span data-lang="id">${item.id}</span></div>
+        <div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>
+        <div class="bag-item-meta">
+          <span class="bag-meta-tag weight">⚖ ${item.weight}kg</span>
+          <span class="bag-meta-tag ${prClass}">${prLabel}</span>
+        </div>
+      </div>`;
+    d.onclick = () => toggleBagItem(i);
+    grid.appendChild(d);
+  });
+  applyLang(currentLang);
+}
+
+function getCurrentWeight(){
+  let w = 0;
+  packedItems.forEach(i => w += bagItems[i].weight);
+  return Math.round(w * 100) / 100;
+}
+
+function toggleBagItem(idx){
+  if(packedItems.has(idx)){
+    packedItems.delete(idx);
+    document.getElementById('bagItem'+idx).classList.remove('packed','rejected');
+    showToast('↩ Removed');
+  } else {
+    const newWeight = getCurrentWeight() + bagItems[idx].weight;
+    if(newWeight > MAX_BAG_WEIGHT){
+      const el = document.getElementById('bagItem'+idx);
+      el.classList.add('rejected');
+      setTimeout(() => el.classList.remove('rejected'), 800);
+      showToast('⚠ Too heavy! Remove something first.');
+      return;
+    }
+    packedItems.add(idx);
+    document.getElementById('bagItem'+idx).classList.add('packed');
+    showToast('✓ Packed!');
+  }
+  updateBagStats();
+}
+
+function updateBagStats(){
+  const weight = getCurrentWeight();
+  const pct = (weight / MAX_BAG_WEIGHT) * 100;
+  const fill = document.getElementById('weightBarFill');
+  fill.style.width = Math.min(pct, 100) + '%';
+  fill.className = 'weight-bar-fill' + (pct > 90 ? ' danger' : pct > 70 ? ' warning' : '');
+  document.getElementById('weightBarText').textContent = weight.toFixed(1) + ' / ' + MAX_BAG_WEIGHT.toFixed(1) + ' kg';
+  document.getElementById('bagItemCount').textContent = packedItems.size + ' / ' + bagItems.length;
+  
+  let score = 0;
+  packedItems.forEach(i => score += bagItems[i].priority);
+  document.getElementById('bagScore').textContent = score;
+}
+
+function checkBag(){
+  let score = 0;
+  packedItems.forEach(i => score += bagItems[i].priority);
+  const maxScore = bagItems.reduce((s,item) => s + item.priority, 0);
+  const result = document.getElementById('bagResult');
+  result.classList.add('show');
+  document.getElementById('bagFinalScore').textContent = score + ' / ' + maxScore;
+  
+  let title, msg;
+  const pct = score / maxScore;
+  if(pct >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You prioritized perfectly — ready for any emergency!'; }
+  else if(pct >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices! Consider swapping low-priority items for essentials you missed.'; }
+  else if(pct >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basics, but missing critical items. Focus on water, food, and medical supplies.'; }
+  else { title = '⚠ Underprepared'; msg = 'Your bag is missing essential survival items. Prioritize: water, food, first aid, medications, and documents.'; }
+  
+  document.getElementById('bagResultTitle').textContent = title;
+  document.getElementById('bagResultMsg').textContent = msg;
+}
+
+function resetBag(){
+  packedItems.clear();
+  document.getElementById('bagResult').classList.remove('show');
+  renderBagItems();
+  updateBagStats();
+  showToast('🔄 Bag reset!');
+}
+
+// === LANGUAGE (must be before renderBagItems) ===
+let currentLang='en';
+function setLang(lang){
+  currentLang=lang;
+  const classes = ['lang-'+lang];
+  if(isDayMode) classes.push('day-mode');
+  document.body.className = classes.join(' ');
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  applyLang(lang);
+}
+function applyLang(lang){
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.style.display = el.getAttribute('data-lang')===lang ? 'inline' : 'none';
+  });
+  document.querySelectorAll('[data-block-lang]').forEach(el=>{
+    el.style.display = el.getAttribute('data-block-lang')===lang ? 'block' : 'none';
+  });
+}
+
+// === TOAST ===
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+renderBagItems();
+updateBagStats();
+
+// === TABS ===
+function switchTab(tabId, group){
+  document.querySelectorAll(`.tab-content[data-group="${group}"]`).forEach(t=>t.classList.remove('active'));
+  document.querySelector(`.tab-content[data-tab="${tabId}"][data-group="${group}"]`).classList.add('active');
+  const btns = document.querySelector(`.tab-content[data-tab="${tabId}"]`).closest('.section').querySelectorAll('.tab-btn');
+  btns.forEach((b,i)=>{
+    const tabs=['danger','action','places','help'];
+    b.classList.toggle('active',tabs[i]===tabId);
+  });
+}
+
+// === SCROLL REVEAL ===
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+
+// Init lang
+applyLang('en');
+</script>
+</body>
+</html>
