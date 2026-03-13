@@ -65,4 +65,20 @@
   .footer {
     background: #f5f5f5 !important;
   }
+
+  /* Emergency Plan print styles */
+  #myplan {
+    page-break-before: always;
+    border: 2px solid #333;
+    padding: 1.5rem;
+  }
+  .plan-field input,
+  .plan-field select,
+  .plan-field textarea {
+    border: 1px solid #999 !important;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+  }
+  .plan-btn { display: none !important; }
 }

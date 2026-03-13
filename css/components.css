@@ -103,3 +103,176 @@
 }
 .step-card p { font-size: 13px; line-height: 1.6; opacity: 0.85; }
 .step-card a { color: var(--portopia-blue); }
+
+/* About Section */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.about-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.about-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.about-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.about-card h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.about-card p {
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+body.day-mode .about-card {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* Share URL Box */
+.share-url-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.share-url-box code {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--accent);
+  word-break: break-all;
+}
+.copy-url-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  transition: background 0.2s;
+}
+.copy-url-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+body.day-mode .share-url-box {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* Emergency Plan Form */
+.plan-form {
+  margin-top: 2rem;
+}
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.plan-field-full {
+  grid-column: 1 / -1;
+}
+.plan-field label {
+  display: block;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.plan-field input,
+.plan-field select,
+.plan-field textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+.plan-field input:focus,
+.plan-field select:focus,
+.plan-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.plan-field input::placeholder,
+.plan-field textarea::placeholder {
+  color: rgba(232, 220, 200, 0.3);
+}
+.plan-field select option {
+  background: var(--bg);
+  color: var(--text);
+}
+.plan-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.plan-btn {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan-btn:hover {
+  transform: translateY(-1px);
+}
+.plan-btn-save {
+  background: var(--accent);
+  color: var(--bg);
+}
+.plan-btn-print {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.plan-btn-clear {
+  background: rgba(200, 50, 50, 0.15);
+  color: #e85555;
+  border: 1px solid rgba(200, 50, 50, 0.2);
+}
+
+/* Day mode overrides */
+body.day-mode .plan-field input,
+body.day-mode .plan-field select,
+body.day-mode .plan-field textarea {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.15);
+  color: var(--text);
+}
+body.day-mode .plan-field input::placeholder,
+body.day-mode .plan-field textarea::placeholder {
+  color: rgba(0,0,0,0.3);
+}
+body.day-mode .plan-btn-print {
+  background: rgba(0,0,0,0.05);
+  color: var(--text);
+  border-color: rgba(0,0,0,0.15);
+}

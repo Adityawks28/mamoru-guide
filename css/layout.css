@@ -146,3 +146,141 @@
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 .toast.show { bottom: 20px; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 2px;
+}
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu overlay */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: rgba(15, 31, 61, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1rem 0;
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-menu.open {
+  transform: translateY(0);
+}
+.mobile-menu a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s;
+}
+.mobile-menu a:hover {
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--accent);
+}
+body.day-mode .mobile-menu {
+  background: rgba(245, 240, 230, 0.98);
+}
+body.day-mode .mobile-menu a {
+  color: var(--text);
+}
+
+/* Install Banner */
+.install-banner {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  transition: bottom 0.4s ease;
+  width: 90%;
+  max-width: 500px;
+}
+.install-banner.show {
+  bottom: 1rem;
+}
+.install-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 31, 61, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.install-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.install-text {
+  flex: 1;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.install-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+.install-btn:hover {
+  transform: scale(1.05);
+}
+.install-dismiss {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 0 0.25rem;
+  transition: opacity 0.2s;
+}
+.install-dismiss:hover {
+  opacity: 1;
+}
+body.day-mode .install-content {
+  background: rgba(245, 240, 230, 0.95);
+  border-color: rgba(245, 166, 35, 0.4);
+}

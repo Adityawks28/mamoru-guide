@@ -22,7 +22,9 @@ function switchTab(tabId, group) {
   if (section) {
     section.querySelectorAll('.tab-btn').forEach(b => {
       const btnTab = b.getAttribute('data-tab');
-      b.classList.toggle('active', btnTab === tabId);
+      const isActive = btnTab === tabId;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
   }
 }

@@ -39,10 +39,12 @@
 </head>
 <body class="lang-en">
 
-<div id="stars"></div>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div id="stars" aria-hidden="true"></div>
 
 <!-- Navbar -->
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
   <a href="#hero" class="nav-logo">
     <div class="shield"><div class="shield-inner"></div></div>
     <span>MAMORU 守る</span>
@@ -53,8 +55,12 @@
     <a href="#bag">Bag</a>
     <a href="#alerts">Alerts</a>
     <a href="#hazard">Hazard Map</a>
+    <a href="#myplan">My Plan</a>
   </div>
   <div class="nav-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <button class="mode-toggle" id="shareBtn" onclick="shareGuide()" title="Share">📤</button>
     <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Toggle Day/Night">☀️</button>
     <div class="lang-switcher">
@@ -65,11 +71,21 @@
   </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#earthquake">Earthquake</a>
+  <a href="#vocab">Vocab</a>
+  <a href="#bag">Bag</a>
+  <a href="#alerts">Alerts</a>
+  <a href="#hazard">Hazard Map</a>
+  <a href="#myplan">My Plan</a>
+  <a href="#about">About</a>
+</div>
+
 <!-- Hero -->
 <section class="hero night-sky" id="hero">
   <div class="celestial-body" id="celestialBody"></div>
   <div class="hero-content">
-    <div class="mascot-char" title="Mamoru-kun">
+    <div class="mascot-char" title="Mamoru-kun" aria-hidden="true">
       <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
         <rect x="16" y="2" width="32" height="6" fill="#f5a623"/>
         <rect x="12" y="8" width="40" height="8" fill="#f5a623"/>
@@ -110,7 +126,7 @@
   </div>
 
   <!-- Mountains -->
-  <div class="mountains-container">
+  <div class="mountains-container" aria-hidden="true">
     <svg class="mountain-layer" viewBox="0 0 1400 300" preserveAspectRatio="none" style="height:280px;">
       <!-- Rokko Mountains - far -->
       <path d="M0,300 L0,180 Q100,100 200,140 Q280,80 360,120 Q420,60 500,100 Q560,50 640,90 Q700,40 800,80 Q860,50 940,70 Q1020,30 1100,80 Q1160,50 1240,100 Q1320,70 1400,120 L1400,300Z" fill="var(--mountain-far)" opacity="0.7"/>
@@ -121,7 +137,7 @@
     </svg>
   </div>
 
-  <div class="skyline-container">
+  <div class="skyline-container" aria-hidden="true">
     <div class="skyline" id="skyline"></div>
     <div class="kobe-tower" title="Kobe Port Tower 神戸ポートタワー">
       <svg viewBox="0 0 72 200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
@@ -225,6 +241,8 @@
   </div>
 </section>
 
+<main id="main-content">
+
 <!-- Section 02: Earthquake Scale (Vertical) -->
 <section class="section" id="earthquake">
   <div class="section-label">01 — EARTHQUAKE INTENSITY</div>
@@ -281,23 +299,23 @@
     <span data-lang="id">Kotoba (言葉) Penting untuk Diketahui</span>
   </div>
 
-  <div class="tab-bar">
-    <button class="tab-btn active" data-tab="danger" onclick="switchTab('danger','vocab')">🚨 <span data-lang="en">Danger</span><span data-lang="ja">危険</span><span data-lang="id">Bahaya</span></button>
-    <button class="tab-btn" data-tab="action" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
-    <button class="tab-btn" data-tab="places" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
-    <button class="tab-btn" data-tab="help" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
+  <div class="tab-bar" role="tablist" aria-label="Vocabulary categories">
+    <button class="tab-btn active" data-tab="danger" role="tab" aria-selected="true" aria-controls="vocabPanelDanger" onclick="switchTab('danger','vocab')">🚨 <span data-lang="en">Danger</span><span data-lang="ja">危険</span><span data-lang="id">Bahaya</span></button>
+    <button class="tab-btn" data-tab="action" role="tab" aria-selected="false" aria-controls="vocabPanelAction" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
+    <button class="tab-btn" data-tab="places" role="tab" aria-selected="false" aria-controls="vocabPanelPlaces" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
+    <button class="tab-btn" data-tab="help" role="tab" aria-selected="false" aria-controls="vocabPanelHelp" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
   </div>
 
-  <div class="tab-content active" data-tab="danger" data-group="vocab">
+  <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel">
     <div class="vocab-grid" id="vocabDanger"></div>
   </div>
-  <div class="tab-content" data-tab="action" data-group="vocab">
+  <div class="tab-content" id="vocabPanelAction" data-tab="action" data-group="vocab" role="tabpanel">
     <div class="vocab-grid" id="vocabAction"></div>
   </div>
-  <div class="tab-content" data-tab="places" data-group="vocab">
+  <div class="tab-content" id="vocabPanelPlaces" data-tab="places" data-group="vocab" role="tabpanel">
     <div class="vocab-grid" id="vocabPlaces"></div>
   </div>
-  <div class="tab-content" data-tab="help" data-group="vocab">
+  <div class="tab-content" id="vocabPanelHelp" data-tab="help" data-group="vocab" role="tabpanel">
     <div class="vocab-grid" id="vocabHelp"></div>
   </div>
 
@@ -457,7 +475,7 @@
     <div class="step-card">
       <div class="step-icon">🔍</div>
       <h3><span data-lang="en">Find Your Map</span><span data-lang="ja">地図を見つける</span><span data-lang="id">Temukan Peta</span></h3>
-      <p><span data-lang="en">Search "[city] ハザードマップ" or visit <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span><span data-lang="ja">「[市名] ハザードマップ」で検索 or <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span><span data-lang="id">Cari "[kota] ハザードマップ" atau <a href="https://disaportal.gsi.go.jp/" target="_blank">disaportal.gsi.go.jp</a></span></p>
+      <p><span data-lang="en">Search "[city] ハザードマップ" or visit <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span><span data-lang="ja">「[市名] ハザードマップ」で検索 or <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span><span data-lang="id">Cari "[kota] ハザードマップ" atau <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span></p>
     </div>
     <div class="step-card">
       <div class="step-icon">🎨</div>
@@ -487,10 +505,225 @@
   </div>
 </section>
 
+<!-- Section 07: About -->
+<section class="section" id="about">
+  <div class="section-label">06 — ABOUT</div>
+  <div class="section-title">
+    <span data-lang="en">About This Guide</span>
+    <span data-lang="ja">このガイドについて</span>
+    <span data-lang="id">Tentang Panduan Ini</span>
+  </div>
+
+  <!-- Mission statement -->
+  <p class="section-note">
+    <span data-lang="en">MAMORU GUIDE was created to help international students in Japan prepare for natural disasters. "Mamoru" (守る) means "to protect" — because preparedness protects lives.</span>
+    <span data-lang="ja">守るガイドは、日本に住む留学生が自然災害に備えるために作られました。「守る」— 備えることが命を守ります。</span>
+    <span data-lang="id">MAMORU GUIDE dibuat untuk membantu mahasiswa internasional di Jepang mempersiapkan diri menghadapi bencana alam. "Mamoru" (守る) berarti "melindungi" — karena kesiapsiagaan melindungi nyawa.</span>
+  </p>
+
+  <!-- About cards grid using step-card pattern -->
+  <div class="about-grid">
+
+    <!-- PPI Kobe card -->
+    <div class="about-card">
+      <div class="about-icon">🏛️</div>
+      <h3>
+        <span data-lang="en">PPI Kobe</span>
+        <span data-lang="ja">PPI Kobe（神戸インドネシア留学生協会）</span>
+        <span data-lang="id">PPI Kobe</span>
+      </h3>
+      <p>
+        <span data-lang="en">Perhimpunan Pelajar Indonesia (PPI) Kobe is an Indonesian student association in Kobe, Japan. Kobe experienced the devastating Great Hanshin Earthquake in 1995 — this history drives our mission to prepare the next generation of international students.</span>
+        <span data-lang="ja">PPI Kobeは神戸のインドネシア留学生協会です。1995年の阪神・淡路大震災の経験から、次世代の留学生の防災意識向上に取り組んでいます。</span>
+        <span data-lang="id">Perhimpunan Pelajar Indonesia (PPI) Kobe adalah organisasi mahasiswa Indonesia di Kobe, Jepang. Kobe mengalami Gempa Besar Hanshin 1995 — sejarah ini mendorong misi kami untuk mempersiapkan generasi berikutnya.</span>
+      </p>
+    </div>
+
+    <!-- Why this guide card -->
+    <div class="about-card">
+      <div class="about-icon">💡</div>
+      <h3>
+        <span data-lang="en">Why This Guide?</span>
+        <span data-lang="ja">なぜこのガイド？</span>
+        <span data-lang="id">Mengapa Panduan Ini?</span>
+      </h3>
+      <p>
+        <span data-lang="en">Most disaster resources in Japan are in Japanese only. International students often miss critical safety information due to language barriers. This guide bridges that gap with interactive, multilingual content designed to be remembered when it matters most.</span>
+        <span data-lang="ja">日本の防災情報の多くは日本語のみです。留学生は言語の壁により重要な安全情報を見逃しがちです。このガイドは、インタラクティブで多言語のコンテンツでそのギャップを埋めます。</span>
+        <span data-lang="id">Sebagian besar sumber daya bencana di Jepang hanya dalam bahasa Jepang. Mahasiswa internasional sering melewatkan informasi keselamatan penting karena hambatan bahasa. Panduan ini menjembatani kesenjangan itu dengan konten interaktif dan multibahasa.</span>
+      </p>
+    </div>
+
+    <!-- Sources card -->
+    <div class="about-card">
+      <div class="about-icon">📚</div>
+      <h3>
+        <span data-lang="en">Sources &amp; References</span>
+        <span data-lang="ja">出典・参考資料</span>
+        <span data-lang="id">Sumber &amp; Referensi</span>
+      </h3>
+      <p>
+        <span data-lang="en">Information in this guide is based on official sources: Japan Meteorological Agency (JMA), Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, and NHK World safety guidelines.</span>
+        <span data-lang="ja">このガイドの情報は、気象庁（JMA）、消防庁（FDMA）、内閣府防災、NHK Worldの公式資料に基づいています。</span>
+        <span data-lang="id">Informasi dalam panduan ini berdasarkan sumber resmi: Japan Meteorological Agency (JMA), Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, dan panduan keselamatan NHK World.</span>
+      </p>
+    </div>
+
+    <!-- Last updated card -->
+    <div class="about-card">
+      <div class="about-icon">🔄</div>
+      <h3>
+        <span data-lang="en">Last Updated</span>
+        <span data-lang="ja">最終更新</span>
+        <span data-lang="id">Terakhir Diperbarui</span>
+      </h3>
+      <p>
+        <span data-lang="en"><time datetime="2026-03">March 2026</time> — This guide is maintained and updated regularly. Content is reviewed against the latest official guidelines.</span>
+        <span data-lang="ja"><time datetime="2026-03">2026年3月</time> — このガイドは定期的に更新されています。最新の公式ガイドラインに基づいて内容を確認しています。</span>
+        <span data-lang="id"><time datetime="2026-03">Maret 2026</time> — Panduan ini dipelihara dan diperbarui secara berkala. Konten ditinjau berdasarkan pedoman resmi terbaru.</span>
+      </p>
+    </div>
+    <div class="about-card about-card-share">
+      <div class="about-icon">📱</div>
+      <h3>
+        <span data-lang="en">Share This Guide</span>
+        <span data-lang="ja">このガイドを共有</span>
+        <span data-lang="id">Bagikan Panduan Ini</span>
+      </h3>
+      <p>
+        <span data-lang="en">Share with friends, classmates, or at university events. Every prepared student helps the whole community.</span>
+        <span data-lang="ja">友人やクラスメートと共有しましょう。備えた一人が、コミュニティ全体を助けます。</span>
+        <span data-lang="id">Bagikan dengan teman, teman sekelas, atau di acara kampus. Setiap mahasiswa yang siap membantu seluruh komunitas.</span>
+      </p>
+      <div class="share-url-box">
+        <code>adityawks28.github.io/mamoru-guide</code>
+        <button class="copy-url-btn" onclick="navigator.clipboard.writeText('https://adityawks28.github.io/mamoru-guide/').then(()=>showToast('Link copied!'))">
+          <span data-lang="en">📋 Copy</span>
+          <span data-lang="ja">📋 コピー</span>
+          <span data-lang="id">📋 Salin</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section 08: My Emergency Plan -->
+<section class="section" id="myplan">
+  <div class="section-label">07 — MY PLAN</div>
+  <div class="section-title">
+    <span data-lang="en">My Emergency Plan</span>
+    <span data-lang="ja">私の防災計画</span>
+    <span data-lang="id">Rencana Darurat Saya</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Fill in your personal emergency details. Data is saved locally on your device only — never sent anywhere. Print it and keep a copy at home.</span>
+    <span data-lang="ja">個人の緊急情報を入力してください。データはデバイスにのみ保存され、外部に送信されません。印刷して自宅に保管しましょう。</span>
+    <span data-lang="id">Isi detail darurat pribadi Anda. Data hanya disimpan di perangkat Anda — tidak pernah dikirim ke mana pun. Cetak dan simpan salinan di rumah.</span>
+  </p>
+
+  <form id="emergencyPlanForm" class="plan-form" onsubmit="return false;">
+    <div class="plan-grid">
+      <div class="plan-field">
+        <label for="planShelter">
+          <span data-lang="en">Nearest Shelter</span>
+          <span data-lang="ja">最寄りの避難場所</span>
+          <span data-lang="id">Tempat Perlindungan Terdekat</span>
+        </label>
+        <input type="text" id="planShelter" name="shelter" placeholder="e.g. Kobe City Chuo Ward Community Center">
+      </div>
+
+      <div class="plan-field">
+        <label for="planShelterAddr">
+          <span data-lang="en">Shelter Address</span>
+          <span data-lang="ja">避難場所の住所</span>
+          <span data-lang="id">Alamat Tempat Perlindungan</span>
+        </label>
+        <input type="text" id="planShelterAddr" name="shelterAddress" placeholder="e.g. 1-2-3 Sannomiya, Chuo-ku, Kobe">
+      </div>
+
+      <div class="plan-field">
+        <label for="planMeeting">
+          <span data-lang="en">Meeting Point</span>
+          <span data-lang="ja">集合場所</span>
+          <span data-lang="id">Titik Pertemuan</span>
+        </label>
+        <input type="text" id="planMeeting" name="meetingPoint" placeholder="e.g. Front of Sannomiya Station">
+      </div>
+
+      <div class="plan-field">
+        <label for="planContact">
+          <span data-lang="en">Emergency Contact</span>
+          <span data-lang="ja">緊急連絡先</span>
+          <span data-lang="id">Kontak Darurat</span>
+        </label>
+        <input type="text" id="planContact" name="emergencyContact" placeholder="Name — Phone number">
+      </div>
+
+      <div class="plan-field">
+        <label for="planBlood">
+          <span data-lang="en">Blood Type</span>
+          <span data-lang="ja">血液型</span>
+          <span data-lang="id">Golongan Darah</span>
+        </label>
+        <select id="planBlood" name="bloodType">
+          <option value="">—</option>
+          <option value="A+">A+</option>
+          <option value="A-">A−</option>
+          <option value="B+">B+</option>
+          <option value="B-">B−</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB−</option>
+          <option value="O+">O+</option>
+          <option value="O-">O−</option>
+        </select>
+      </div>
+
+      <div class="plan-field">
+        <label for="planCity">
+          <span data-lang="en">My City / Ward</span>
+          <span data-lang="ja">住んでいる市区町村</span>
+          <span data-lang="id">Kota / Distrik Saya</span>
+        </label>
+        <input type="text" id="planCity" name="city" placeholder="e.g. Kobe-shi, Chuo-ku">
+      </div>
+
+      <div class="plan-field plan-field-full">
+        <label for="planNotes">
+          <span data-lang="en">Medical Notes / Allergies</span>
+          <span data-lang="ja">医療メモ・アレルギー</span>
+          <span data-lang="id">Catatan Medis / Alergi</span>
+        </label>
+        <textarea id="planNotes" name="medicalNotes" rows="3" placeholder="e.g. Peanut allergy, asthma medication"></textarea>
+      </div>
+    </div>
+
+    <div class="plan-actions">
+      <button type="button" class="plan-btn plan-btn-save" onclick="savePlan()">
+        <span data-lang="en">💾 Save Plan</span>
+        <span data-lang="ja">💾 保存</span>
+        <span data-lang="id">💾 Simpan</span>
+      </button>
+      <button type="button" class="plan-btn plan-btn-print" onclick="printPlan()">
+        <span data-lang="en">🖨️ Print Plan</span>
+        <span data-lang="ja">🖨️ 印刷</span>
+        <span data-lang="id">🖨️ Cetak</span>
+      </button>
+      <button type="button" class="plan-btn plan-btn-clear" onclick="clearPlan()">
+        <span data-lang="en">🗑️ Clear</span>
+        <span data-lang="ja">🗑️ 消去</span>
+        <span data-lang="id">🗑️ Hapus</span>
+      </button>
+    </div>
+  </form>
+</section>
+
+</main>
+
 <!-- Footer with PPI Kobe logo -->
-<footer class="footer">
+<footer class="footer" role="contentinfo" aria-label="Site footer">
   <div class="footer-logo">
-    <svg class="ppi-logo-svg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" width="100" height="108">
+    <svg class="ppi-logo-svg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" width="100" height="108" aria-hidden="true">
       <!-- Red circle background -->
       <circle cx="60" cy="52" r="40" fill="#c83232"/>
       <!-- Tower base -->
@@ -559,11 +792,11 @@
     <span data-lang="id">Darurat: Pemadam/Ambulans 119 · Polisi 110 · Penjaga Pantai 118</span>
   </div>
   <div class="footer-links">
-    <a href="https://www.jma.go.jp/en/" target="_blank">気象庁 JMA</a>
-    <a href="https://disaportal.gsi.go.jp/" target="_blank">Hazard Map Portal</a>
-    <a href="https://www3.nhk.or.jp/nhkworld/" target="_blank">NHK World</a>
-    <a href="https://www.fdma.go.jp/en/" target="_blank">FDMA</a>
-    <a href="https://www.bousai.go.jp/en/" target="_blank">Cabinet Office 防災</a>
+    <a href="https://www.jma.go.jp/en/" target="_blank" rel="noopener noreferrer">気象庁 JMA</a>
+    <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">Hazard Map Portal</a>
+    <a href="https://www3.nhk.or.jp/nhkworld/" target="_blank" rel="noopener noreferrer">NHK World</a>
+    <a href="https://www.fdma.go.jp/en/" target="_blank" rel="noopener noreferrer">FDMA</a>
+    <a href="https://www.bousai.go.jp/en/" target="_blank" rel="noopener noreferrer">Cabinet Office 防災</a>
   </div>
   <div class="footer-copy">
     <span data-lang="en">Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.</span>
@@ -572,11 +805,34 @@
   </div>
 </footer>
 
+<!-- Install Banner -->
+<div class="install-banner" id="installBanner">
+  <div class="install-content">
+    <span class="install-icon">📲</span>
+    <div class="install-text">
+      <span data-lang="en"><strong>Install MAMORU</strong> for offline access</span>
+      <span data-lang="ja"><strong>守るアプリ</strong>をインストールしてオフラインアクセス</span>
+      <span data-lang="id"><strong>Instal MAMORU</strong> untuk akses offline</span>
+    </div>
+    <button class="install-btn" id="installBtn" onclick="installApp()">
+      <span data-lang="en">Install</span>
+      <span data-lang="ja">インストール</span>
+      <span data-lang="id">Instal</span>
+    </button>
+    <button class="install-dismiss" id="installDismiss" onclick="dismissInstall()" aria-label="Dismiss">&times;</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js');
+  });
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'SW_UPDATED') {
+      showToast('New version available — refresh to update');
+    }
   });
 }
 </script>
@@ -590,6 +846,13 @@ if ('serviceWorker' in navigator) {
 <script src="js/vocab.js"></script>
 <script src="js/bag-game.js"></script>
 <script src="js/scroll-reveal.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/emergency-plan.js"></script>
 <script src="js/app.js"></script>
+
+<!-- Cloudflare Web Analytics — cookie-free, GDPR-compliant -->
+<!-- To activate: replace 'YOUR_TOKEN' with your Cloudflare beacon token -->
+<!-- Get yours free at: https://dash.cloudflare.com/ → Web Analytics → Add Site -->
+<!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_TOKEN"}'></script> -->
 </body>
 </html>

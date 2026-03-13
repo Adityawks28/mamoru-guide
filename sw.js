@@ -1,7 +1,8 @@
-const CACHE_NAME = 'mamoru-guide-v1';
+const CACHE_NAME = 'mamoru-guide-v2';
 const ASSETS = [
   './',
   './index.html',
+  './404.html',
   './css/variables.css',
   './css/base.css',
   './css/layout.css',
@@ -22,9 +23,12 @@ const ASSETS = [
   './js/vocab.js',
   './js/bag-game.js',
   './js/scroll-reveal.js',
+  './js/nav.js',
+  './js/emergency-plan.js',
   './js/app.js',
   './img/favicon.svg',
-  './manifest.json'
+  './manifest.json',
+  './sitemap.xml'
 ];
 
 // Install: cache all assets
@@ -36,12 +40,19 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activate: clean old caches
+// Activate: clean old caches + notify clients of update
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches.keys().then(keys => {
+      const old = keys.filter(k => k !== CACHE_NAME);
+      return Promise.all(old.map(k => caches.delete(k))).then(() => {
+        if (old.length > 0) {
+          self.clients.matchAll().then(clients => {
+            clients.forEach(c => c.postMessage({ type: 'SW_UPDATED' }));
+          });
+        }
+      });
+    }).then(() => self.clients.claim())
   );
 });
 
