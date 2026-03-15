@@ -1,50 +1,16 @@
-// === EMERGENCY BAG GAME ===
-// Bug #3 fix: more robust rejected animation handling
-// Bug #5 fix: null checks on all DOM lookups
-let packedItems = new Set();
+import { bagItems, MAX_BAG_WEIGHT } from './data';
+import { showToast } from './toast';
+import { currentLang } from './lang';
 
-function renderBagItems() {
-  const grid = document.getElementById('bagItemsGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  bagItems.forEach((item, i) => {
-    const d = document.createElement('div');
-    d.className = 'bag-item' + (packedItems.has(i) ? ' packed' : '');
-    d.id = 'bagItem' + i;
-    d.setAttribute('tabindex', '0');
-    d.setAttribute('role', 'button');
-    const prClass = item.priority >= 8 ? 'priority-high' : item.priority >= 6 ? 'priority-med' : 'priority-low';
-    const prLabel = item.priority >= 8 ? '★★★' : item.priority >= 6 ? '★★' : '★';
-    d.innerHTML = `
-      <div class="bag-item-emoji">${item.e}</div>
-      <div class="bag-item-info">
-        <div class="bag-item-name"><span data-lang="en">${item.en}</span><span data-lang="ja">${item.ja}</span><span data-lang="id">${item.id}</span></div>
-        <div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>
-        <div class="bag-item-meta">
-          <span class="bag-meta-tag weight">⚖ ${item.weight}kg</span>
-          <span class="bag-meta-tag ${prClass}">${prLabel}</span>
-        </div>
-      </div>`;
-    d.onclick = () => toggleBagItem(i);
-    d.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBagItem(i); }
-    });
-    grid.appendChild(d);
-  });
-  // Re-apply language visibility after rendering
-  if (typeof setLang === 'function') {
-    document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
-    document.body.classList.add('lang-' + currentLang);
-  }
-}
+let packedItems = new Set<number>();
 
-function getCurrentWeight() {
+function getCurrentWeight(): number {
   let w = 0;
   packedItems.forEach(i => w += bagItems[i].weight);
   return Math.round(w * 100) / 100;
 }
 
-function toggleBagItem(idx) {
+function toggleBagItem(idx: number): void {
   const el = document.getElementById('bagItem' + idx);
   if (!el) return;
 
@@ -67,7 +33,40 @@ function toggleBagItem(idx) {
   updateBagStats();
 }
 
-function updateBagStats() {
+export function renderBagItems(): void {
+  const grid = document.getElementById('bagItemsGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  bagItems.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'bag-item' + (packedItems.has(i) ? ' packed' : '');
+    d.id = 'bagItem' + i;
+    d.setAttribute('tabindex', '0');
+    d.setAttribute('role', 'button');
+    const prClass = item.priority >= 8 ? 'priority-high' : item.priority >= 6 ? 'priority-med' : 'priority-low';
+    const prLabel = item.priority >= 8 ? '★★★' : item.priority >= 6 ? '★★' : '★';
+    d.innerHTML = `
+      <div class="bag-item-emoji">${item.e}</div>
+      <div class="bag-item-info">
+        <div class="bag-item-name"><span data-lang="en">${item.en}</span><span data-lang="ja">${item.ja}</span><span data-lang="id">${item.id}</span></div>
+        <div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>
+        <div class="bag-item-meta">
+          <span class="bag-meta-tag weight">⚖ ${item.weight}kg</span>
+          <span class="bag-meta-tag ${prClass}">${prLabel}</span>
+        </div>
+      </div>`;
+    d.onclick = () => toggleBagItem(i);
+    d.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBagItem(i); }
+    });
+    grid.appendChild(d);
+  });
+  // Re-apply language visibility after rendering
+  document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
+  document.body.classList.add('lang-' + currentLang);
+}
+
+export function updateBagStats(): void {
   const weight = getCurrentWeight();
   const pct = (weight / MAX_BAG_WEIGHT) * 100;
   const fill = document.getElementById('weightBarFill');
@@ -83,15 +82,15 @@ function updateBagStats() {
   let score = 0;
   packedItems.forEach(i => score += bagItems[i].priority);
   const scoreEl = document.getElementById('bagScore');
-  if (scoreEl) scoreEl.textContent = score;
+  if (scoreEl) scoreEl.textContent = String(score);
 }
 
-function loadBestScore() {
+function loadBestScore(): number {
   const saved = localStorage.getItem('mamoru-best-score');
   return saved ? parseInt(saved, 10) : 0;
 }
 
-function checkBag() {
+export function checkBag(): void {
   let score = 0;
   packedItems.forEach(i => score += bagItems[i].priority);
   const maxScore = bagItems.reduce((s, item) => s + item.priority, 0);
@@ -101,20 +100,19 @@ function checkBag() {
   const finalScore = document.getElementById('bagFinalScore');
   if (finalScore) finalScore.textContent = score + ' / ' + maxScore;
 
-  // Personal best tracking
   let best = loadBestScore();
   if (score > best) {
     best = score;
-    localStorage.setItem('mamoru-best-score', best);
+    localStorage.setItem('mamoru-best-score', String(best));
   }
   const bestEl = document.getElementById('bagBestScore');
   if (bestEl) bestEl.textContent = best + ' / ' + maxScore;
 
-  let title, msg;
-  const pct = score / maxScore;
-  if (pct >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You prioritized perfectly — ready for any emergency!'; }
-  else if (pct >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices! Consider swapping low-priority items for essentials you missed.'; }
-  else if (pct >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basics, but missing critical items. Focus on water, food, and medical supplies.'; }
+  let title: string, msg: string;
+  const pctScore = score / maxScore;
+  if (pctScore >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You prioritized perfectly — ready for any emergency!'; }
+  else if (pctScore >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices! Consider swapping low-priority items for essentials you missed.'; }
+  else if (pctScore >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basics, but missing critical items. Focus on water, food, and medical supplies.'; }
   else { title = '⚠ Underprepared'; msg = 'Your bag is missing essential survival items. Prioritize: water, food, first aid, medications, and documents.'; }
 
   const titleEl = document.getElementById('bagResultTitle');
@@ -123,7 +121,7 @@ function checkBag() {
   if (msgEl) msgEl.textContent = msg;
 }
 
-function resetBag() {
+export function resetBag(): void {
   packedItems.clear();
   const result = document.getElementById('bagResult');
   if (result) result.classList.remove('show');

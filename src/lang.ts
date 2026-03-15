@@ -1,9 +1,8 @@
-// === LANGUAGE ===
-// Bug #1 fix: use classList.remove/add instead of wiping document.body.className
-// Bug #7 fix: removed applyLang() — CSS handles [data-lang] visibility via body.lang-* classes
-let currentLang = 'en';
+import type { Language } from './types';
 
-function setLang(lang) {
+export let currentLang: Language = 'en';
+
+export function setLang(lang: Language): void {
   currentLang = lang;
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + lang);
@@ -17,7 +16,7 @@ function setLang(lang) {
   localStorage.setItem('mamoru-lang', lang);
 }
 
-function initLang() {
-  const saved = localStorage.getItem('mamoru-lang') || 'en';
+export function initLang(): void {
+  const saved = (localStorage.getItem('mamoru-lang') || 'en') as Language;
   setLang(saved);
 }

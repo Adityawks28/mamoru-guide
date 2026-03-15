@@ -1,7 +1,9 @@
-// === VOCAB ===
-// Bug #2 fix: replaced hardcoded index mapping with data-tab attribute lookup
-function renderVocab(cat, containerId) {
+import { vocabData } from './data';
+import type { VocabCategory } from './types';
+
+export function renderVocab(cat: VocabCategory, containerId: string): void {
   const c = document.getElementById(containerId);
+  if (!c) return;
   vocabData[cat].forEach(v => {
     const d = document.createElement('div');
     d.className = `vocab-card cat-${cat}`;
@@ -13,7 +15,7 @@ function renderVocab(cat, containerId) {
   });
 }
 
-function switchTab(tabId, group) {
+export function switchTab(tabId: string, group: string): void {
   document.querySelectorAll(`.tab-content[data-group="${group}"]`).forEach(t => t.classList.remove('active'));
   const target = document.querySelector(`.tab-content[data-tab="${tabId}"][data-group="${group}"]`);
   if (target) target.classList.add('active');
@@ -29,7 +31,7 @@ function switchTab(tabId, group) {
   }
 }
 
-function initVocab() {
+export function initVocab(): void {
   renderVocab('danger', 'vocabDanger');
   renderVocab('action', 'vocabAction');
   renderVocab('places', 'vocabPlaces');

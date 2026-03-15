@@ -1,0 +1,74 @@
+import { initStars } from './stars';
+import { buildSkyline } from './skyline';
+import { initTheme, toggleDayNight } from './theme';
+import { initLang, setLang } from './lang';
+import { initEarthquakeScale } from './earthquake-scale';
+import { initVocab, switchTab } from './vocab';
+import { renderBagItems, updateBagStats, checkBag, resetBag } from './bag-game';
+import { initScrollReveal } from './scroll-reveal';
+import { initMobileNav } from './nav';
+import { initEmergencyPlan, savePlan, clearPlan, printPlan } from './emergency-plan';
+import { showToast } from './toast';
+
+// === SHARE ===
+async function shareGuide(): Promise<void> {
+  const shareData = {
+    title: 'MAMORU GUIDE 守る',
+    text: 'Disaster preparedness guide for international students in Japan',
+    url: window.location.href
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast('Link copied!');
+    }
+  } catch (err) {
+    if (err instanceof Error && err.name !== 'AbortError') {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast('Link copied!');
+    }
+  }
+}
+
+// Expose functions for inline onclick handlers in HTML
+Object.assign(window, {
+  setLang,
+  toggleDayNight,
+  shareGuide,
+  switchTab,
+  checkBag,
+  resetBag,
+  savePlan,
+  clearPlan,
+  printPlan,
+  showToast,
+});
+
+// === MAIN INIT ===
+document.addEventListener('DOMContentLoaded', () => {
+  initStars();
+  buildSkyline();
+  initTheme();
+  initLang();
+  initEarthquakeScale();
+  initVocab();
+  renderBagItems();
+  updateBagStats();
+  initScrollReveal();
+  initMobileNav();
+  initEmergencyPlan();
+});
+
+// === SERVICE WORKER ===
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+  navigator.serviceWorker.addEventListener('message', (e: MessageEvent) => {
+    if (e.data && e.data.type === 'SW_UPDATED') {
+      showToast('New version available — refresh to update');
+    }
+  });
+}

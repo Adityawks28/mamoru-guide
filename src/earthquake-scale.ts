@@ -1,9 +1,10 @@
-// === VERTICAL EARTHQUAKE SCALE ===
-// Bug #6 fix: added tabindex, role, aria-label, and keydown handler for accessibility
-function initEarthquakeScale() {
+import { scaleData } from './data';
+
+export function initEarthquakeScale(): void {
   const sv = document.getElementById('scaleVertical');
-  let activeShake = null;
-  scaleData.forEach((s,i) => {
+  if (!sv) return;
+  let activeShake: number | null = null;
+  scaleData.forEach((s, i) => {
     const row = document.createElement('div');
     row.className = 'scale-row' + (s.s7 ? ' s7' : '');
     row.style.borderLeftColor = s.colors[0];
@@ -18,21 +19,21 @@ function initEarthquakeScale() {
       <div class="intensity-bar" style="width:${s.pct}%;background:${s.colors[0]}"></div>
     `;
     function toggleShake() {
-      if(activeShake === i) {
+      if (activeShake === i) {
         row.classList.remove(s.shakeClass);
         activeShake = null;
         return;
       }
-      if(activeShake !== null) {
-        const prev = sv.children[activeShake];
+      if (activeShake !== null) {
+        const prev = sv!.children[activeShake] as HTMLElement;
         prev.classList.remove(scaleData[activeShake].shakeClass);
       }
       row.classList.add(s.shakeClass);
       activeShake = i;
     }
     row.addEventListener('click', toggleShake);
-    row.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleShake(); }
+    row.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleShake(); }
     });
     sv.appendChild(row);
   });

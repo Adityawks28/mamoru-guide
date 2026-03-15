@@ -1,41 +1,17 @@
-const CACHE_NAME = 'mamoru-guide-v3';
-const ASSETS = [
+const CACHE_NAME = 'mamoru-guide-v4';
+const PRECACHE = [
   './',
   './index.html',
   './404.html',
-  './css/variables.css',
-  './css/base.css',
-  './css/layout.css',
-  './css/hero.css',
-  './css/earthquake-scale.css',
-  './css/components.css',
-  './css/vocab.css',
-  './css/bag-game.css',
-  './css/responsive.css',
-  './css/print.css',
-  './js/data.js',
-  './js/toast.js',
-  './js/lang.js',
-  './js/theme.js',
-  './js/stars.js',
-  './js/skyline.js',
-  './js/earthquake-scale.js',
-  './js/vocab.js',
-  './js/bag-game.js',
-  './js/scroll-reveal.js',
-  './js/nav.js',
-  './js/emergency-plan.js',
-  './js/app.js',
-  './img/favicon.svg',
   './manifest.json',
-  './sitemap.xml'
+  './img/favicon.svg',
 ];
 
-// Install: cache all assets
+// Install: pre-cache core assets; JS/CSS get cached on first fetch
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS))
+      .then(cache => cache.addAll(PRECACHE))
       .then(() => self.skipWaiting())
   );
 });
@@ -56,13 +32,12 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch: cache-first, fallback to network
+// Fetch: cache-first, fallback to network (caches new responses automatically)
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(cached => cached || fetch(event.request)
         .then(response => {
-          // Cache successful network responses for future offline use
           if (response.ok && event.request.method === 'GET') {
             const clone = response.clone();
             caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
@@ -71,7 +46,6 @@ self.addEventListener('fetch', event => {
         })
       )
       .catch(() => {
-        // If both cache and network fail, return offline page
         if (event.request.mode === 'navigate') {
           return caches.match('./index.html');
         }

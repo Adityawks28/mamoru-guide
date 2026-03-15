@@ -1,5 +1,6 @@
-// === DATA ===
-const scaleData = [
+import type { ScaleEntry, VocabData, BagItem } from './types';
+
+export const scaleData: ScaleEntry[] = [
   {n:'0',jp:'震度0',colors:['#667','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
   {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',shakeClass:'shaking-1',icon:'🏠',pct:5},
   {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',shakeClass:'shaking-2',icon:'🏠',pct:10},
@@ -12,7 +13,7 @@ const scaleData = [
   {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,shakeClass:'shaking-7',icon:'🔴',pct:100},
 ];
 
-const vocabData = {
+export const vocabData: VocabData = {
   danger: [
     {jp:'危ない！',rom:'Abunai!',en:'Danger! Watch out!',id:'Bahaya! Awas!'},
     {jp:'地震',rom:'Jishin',en:'Earthquake',id:'Gempa bumi'},
@@ -46,9 +47,7 @@ const vocabData = {
   ]
 };
 
-// Emergency bag items with weight and priority
-// Total weight ~14.2kg — max bag 8.0kg — forces real prioritization choices
-const bagItems = [
+export const bagItems: BagItem[] = [
   {e:'💧',en:'Water (500ml × 6)',ja:'水（500ml × 6）',id:'Air (500ml × 6)',weight:3.0,priority:10,det_en:'3L minimum for 3 days',det_ja:'3日分で最低3L',det_id:'Minimal 3L untuk 3 hari'},
   {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:2.0,priority:9,det_en:'Canned food, crackers, energy bars',det_ja:'缶詰、クラッカー、栄養バー',det_id:'Makanan kaleng, kerupuk, bar energi'},
   {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.4,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
@@ -69,4 +68,4 @@ const bagItems = [
   {e:'📢',en:'Emergency whistle',ja:'防災ホイッスル',id:'Peluit darurat',weight:0.05,priority:8,det_en:'Signal for help when trapped',det_ja:'閉じ込められた時の助け呼び',det_id:'Sinyal minta tolong saat terperangkap'},
 ];
 
-const MAX_BAG_WEIGHT = 8.0;
+export const MAX_BAG_WEIGHT = 8.0;
