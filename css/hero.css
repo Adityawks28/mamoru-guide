@@ -48,7 +48,7 @@
 
 /* Mascot */
 .mascot-char {
-  width: 64px; height: 80px;
+  width: 64px; height: 96px;
   margin: 0 auto 16px;
   animation: bob 2.5s ease-in-out infinite;
   image-rendering: pixelated;
