@@ -8,6 +8,9 @@ import { renderBagItems, updateBagStats, checkBag, resetBag } from './bag-game';
 import { initScrollReveal } from './scroll-reveal';
 import { initMobileNav } from './nav';
 import { initEmergencyPlan, savePlan, clearPlan, printPlan } from './emergency-plan';
+import { initContacts } from './contacts';
+import { initTyphoonScale } from './typhoon';
+import { initQuiz } from './quiz';
 import { showToast } from './toast';
 
 // === SHARE ===
@@ -56,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initVocab();
   renderBagItems();
   updateBagStats();
+  initTyphoonScale();
+  initQuiz();
+  initContacts();
   initScrollReveal();
   initMobileNav();
   initEmergencyPlan();
