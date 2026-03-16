@@ -1,0 +1,103 @@
+/* Floating Emergency Button (FAB) */
+.emergency-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--alert-red);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(232, 64, 64, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fab-pulse 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emergency-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(232, 64, 64, 0.5);
+}
+.emergency-fab.active {
+  animation: none;
+  transform: rotate(45deg);
+}
+
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(232, 64, 64, 0.4); }
+  50% { box-shadow: 0 4px 24px rgba(232, 64, 64, 0.6), 0 0 0 8px rgba(232, 64, 64, 0.1); }
+}
+
+/* FAB Panel */
+.emergency-fab-panel {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 8px;
+  z-index: 999;
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: none;
+  animation: fab-panel-in 0.2s ease;
+}
+.emergency-fab-panel.open {
+  display: block;
+}
+
+@keyframes fab-panel-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fab-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: var(--kitano-white);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.fab-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.fab-item-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.fab-item-number {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: var(--alert-red);
+}
+
+.fab-divider {
+  height: 1px;
+  background: var(--card-border);
+  margin: 4px 8px;
+}
+
+/* Day mode */
+body.day-mode .emergency-fab-panel {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+body.day-mode .fab-item {
+  color: #1a1a2e;
+}
+body.day-mode .fab-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}

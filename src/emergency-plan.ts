@@ -38,7 +38,11 @@ export function clearPlan(): void {
 }
 
 export function printPlan(): void {
+  document.body.classList.add('print-plan-only');
   window.print();
+  window.addEventListener('afterprint', () => {
+    document.body.classList.remove('print-plan-only');
+  }, { once: true });
 }
 
 export function initEmergencyPlan(): void {
