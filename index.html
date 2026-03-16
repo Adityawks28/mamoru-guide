@@ -748,58 +748,37 @@
   <div id="contactsGrid" class="contacts-grid"></div>
 </section>
 
-<!-- Section 09: My Emergency Plan -->
+<!-- Section 10: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
   <div class="section-label">10 — MY PLAN</div>
   <div class="section-title">
-    <span data-lang="en">My Emergency Plan</span>
-    <span data-lang="ja">私の防災計画</span>
-    <span data-lang="id">Rencana Darurat Saya</span>
+    <span data-lang="en">My Emergency Preparation Worksheet</span>
+    <span data-lang="ja">私の防災準備ワークシート</span>
+    <span data-lang="id">Lembar Kerja Persiapan Darurat Saya</span>
   </div>
   <p class="section-note">
-    <span data-lang="en">Fill in your personal emergency details. Data is saved locally on your device only — never sent anywhere. Print it and keep a copy at home.</span>
-    <span data-lang="ja">個人の緊急情報を入力してください。データはデバイスにのみ保存され、外部に送信されません。印刷して自宅に保管しましょう。</span>
-    <span data-lang="id">Isi detail darurat pribadi Anda. Data hanya disimpan di perangkat Anda — tidak pernah dikirim ke mana pun. Cetak dan simpan salinan di rumah.</span>
+    <span data-lang="en">Fill in your personal emergency plan. Print it and keep a copy at home, in your bag, and at school. Data is saved locally on your device only — never sent anywhere.</span>
+    <span data-lang="ja">個人の防災計画を記入してください。印刷して自宅、カバン、学校に保管しましょう。データはデバイスにのみ保存されます。</span>
+    <span data-lang="id">Isi rencana darurat pribadi Anda. Cetak dan simpan salinan di rumah, tas, dan sekolah. Data hanya disimpan di perangkat Anda.</span>
   </p>
 
   <form id="emergencyPlanForm" class="plan-form" onsubmit="return false;">
+
+    <!-- Personal Info -->
+    <div class="plan-section-header">
+      <span data-lang="en">👤 Personal Information</span>
+      <span data-lang="ja">👤 個人情報</span>
+      <span data-lang="id">👤 Informasi Pribadi</span>
+    </div>
     <div class="plan-grid">
       <div class="plan-field">
-        <label for="planShelter">
-          <span data-lang="en">Nearest Shelter</span>
-          <span data-lang="ja">最寄りの避難場所</span>
-          <span data-lang="id">Tempat Perlindungan Terdekat</span>
+        <label for="planName">
+          <span data-lang="en">Full Name</span>
+          <span data-lang="ja">氏名</span>
+          <span data-lang="id">Nama Lengkap</span>
         </label>
-        <input type="text" id="planShelter" name="shelter" placeholder="e.g. Kobe City Chuo Ward Community Center">
+        <input type="text" id="planName" name="fullName" placeholder="e.g. Aditya Wirayutha">
       </div>
-
-      <div class="plan-field">
-        <label for="planShelterAddr">
-          <span data-lang="en">Shelter Address</span>
-          <span data-lang="ja">避難場所の住所</span>
-          <span data-lang="id">Alamat Tempat Perlindungan</span>
-        </label>
-        <input type="text" id="planShelterAddr" name="shelterAddress" placeholder="e.g. 1-2-3 Sannomiya, Chuo-ku, Kobe">
-      </div>
-
-      <div class="plan-field">
-        <label for="planMeeting">
-          <span data-lang="en">Meeting Point</span>
-          <span data-lang="ja">集合場所</span>
-          <span data-lang="id">Titik Pertemuan</span>
-        </label>
-        <input type="text" id="planMeeting" name="meetingPoint" placeholder="e.g. Front of Sannomiya Station">
-      </div>
-
-      <div class="plan-field">
-        <label for="planContact">
-          <span data-lang="en">Emergency Contact</span>
-          <span data-lang="ja">緊急連絡先</span>
-          <span data-lang="id">Kontak Darurat</span>
-        </label>
-        <input type="text" id="planContact" name="emergencyContact" placeholder="Name — Phone number">
-      </div>
-
       <div class="plan-field">
         <label for="planBlood">
           <span data-lang="en">Blood Type</span>
@@ -808,33 +787,222 @@
         </label>
         <select id="planBlood" name="bloodType">
           <option value="">—</option>
-          <option value="A+">A+</option>
-          <option value="A-">A−</option>
-          <option value="B+">B+</option>
-          <option value="B-">B−</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB−</option>
-          <option value="O+">O+</option>
-          <option value="O-">O−</option>
+          <option value="A+">A+</option><option value="A-">A−</option>
+          <option value="B+">B+</option><option value="B-">B−</option>
+          <option value="AB+">AB+</option><option value="AB-">AB−</option>
+          <option value="O+">O+</option><option value="O-">O−</option>
         </select>
       </div>
-
       <div class="plan-field">
         <label for="planCity">
-          <span data-lang="en">My City / Ward</span>
-          <span data-lang="ja">住んでいる市区町村</span>
-          <span data-lang="id">Kota / Distrik Saya</span>
+          <span data-lang="en">My Address / City</span>
+          <span data-lang="ja">住所・市区町村</span>
+          <span data-lang="id">Alamat / Kota Saya</span>
         </label>
         <input type="text" id="planCity" name="city" placeholder="e.g. Kobe-shi, Chuo-ku">
       </div>
-
-      <div class="plan-field plan-field-full">
+      <div class="plan-field">
         <label for="planNotes">
           <span data-lang="en">Medical Notes / Allergies</span>
           <span data-lang="ja">医療メモ・アレルギー</span>
           <span data-lang="id">Catatan Medis / Alergi</span>
         </label>
-        <textarea id="planNotes" name="medicalNotes" rows="3" placeholder="e.g. Peanut allergy, asthma medication"></textarea>
+        <input type="text" id="planNotes" name="medicalNotes" placeholder="e.g. Peanut allergy, asthma inhaler">
+      </div>
+    </div>
+
+    <!-- Evacuation Plan -->
+    <div class="plan-section-header">
+      <span data-lang="en">🏃 Evacuation Plan</span>
+      <span data-lang="ja">🏃 避難計画</span>
+      <span data-lang="id">🏃 Rencana Evakuasi</span>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-field">
+        <label for="planShelter1">
+          <span data-lang="en">Nearest Evacuation Site (Primary)</span>
+          <span data-lang="ja">最寄りの避難場所（第1）</span>
+          <span data-lang="id">Tempat Evakuasi Terdekat (Utama)</span>
+        </label>
+        <input type="text" id="planShelter1" name="shelter1" placeholder="e.g. Higashi Yuenchi Park (500m)">
+      </div>
+      <div class="plan-field">
+        <label for="planShelter2">
+          <span data-lang="en">Secondary Evacuation Site</span>
+          <span data-lang="ja">第2の避難場所</span>
+          <span data-lang="id">Tempat Evakuasi Cadangan</span>
+        </label>
+        <input type="text" id="planShelter2" name="shelter2" placeholder="e.g. Chuo Ward Community Center (1.2km)">
+      </div>
+      <div class="plan-field">
+        <label for="planHighGround">
+          <span data-lang="en">Nearest High Ground (Tsunami)</span>
+          <span data-lang="ja">最寄りの高台（津波用）</span>
+          <span data-lang="id">Dataran Tinggi Terdekat (Tsunami)</span>
+        </label>
+        <input type="text" id="planHighGround" name="highGround" placeholder="e.g. Kitano-cho hillside (800m)">
+      </div>
+      <div class="plan-field">
+        <label for="planRoute">
+          <span data-lang="en">My Evacuation Route</span>
+          <span data-lang="ja">避難ルート</span>
+          <span data-lang="id">Rute Evakuasi Saya</span>
+        </label>
+        <input type="text" id="planRoute" name="evacRoute" placeholder="e.g. Go north on Flower Road → turn right at City Hall">
+      </div>
+      <div class="plan-field">
+        <label for="planMeeting">
+          <span data-lang="en">Family/Friends Meeting Point</span>
+          <span data-lang="ja">家族・友人の集合場所</span>
+          <span data-lang="id">Titik Pertemuan Keluarga/Teman</span>
+        </label>
+        <input type="text" id="planMeeting" name="meetingPoint" placeholder="e.g. Front gate of Kobe University">
+      </div>
+      <div class="plan-field">
+        <label for="planWalkTime">
+          <span data-lang="en">Walking Time to Shelter</span>
+          <span data-lang="ja">避難場所までの徒歩時間</span>
+          <span data-lang="id">Waktu Jalan ke Tempat Evakuasi</span>
+        </label>
+        <input type="text" id="planWalkTime" name="walkTime" placeholder="e.g. 10 minutes on foot">
+      </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="plan-section-header">
+      <span data-lang="en">📞 My Emergency Contacts</span>
+      <span data-lang="ja">📞 緊急連絡先</span>
+      <span data-lang="id">📞 Kontak Darurat Saya</span>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-field">
+        <label for="planContact1">
+          <span data-lang="en">Contact 1 (Name — Phone)</span>
+          <span data-lang="ja">連絡先1（名前 — 電話番号）</span>
+          <span data-lang="id">Kontak 1 (Nama — Telepon)</span>
+        </label>
+        <input type="text" id="planContact1" name="contact1" placeholder="e.g. Budi — 080-1234-5678">
+      </div>
+      <div class="plan-field">
+        <label for="planContact2">
+          <span data-lang="en">Contact 2 (Name — Phone)</span>
+          <span data-lang="ja">連絡先2（名前 — 電話番号）</span>
+          <span data-lang="id">Kontak 2 (Nama — Telepon)</span>
+        </label>
+        <input type="text" id="planContact2" name="contact2" placeholder="e.g. University Office — 078-XXX-XXXX">
+      </div>
+      <div class="plan-field">
+        <label for="planContactHome">
+          <span data-lang="en">Family Back Home (Name — Phone)</span>
+          <span data-lang="ja">母国の家族（名前 — 電話番号）</span>
+          <span data-lang="id">Keluarga di Rumah (Nama — Telepon)</span>
+        </label>
+        <input type="text" id="planContactHome" name="contactHome" placeholder="e.g. Mom — +62-812-XXX-XXXX">
+      </div>
+      <div class="plan-field">
+        <label for="planEmbassy">
+          <span data-lang="en">Embassy / Consulate Phone</span>
+          <span data-lang="ja">大使館・領事館の電話番号</span>
+          <span data-lang="id">Telepon Kedutaan / Konsulat</span>
+        </label>
+        <input type="text" id="planEmbassy" name="embassy" placeholder="e.g. KJRI Osaka — 06-6449-9898">
+      </div>
+    </div>
+
+    <!-- Emergency Food & Water -->
+    <div class="plan-section-header">
+      <span data-lang="en">🍙 Emergency Food & Water Supply</span>
+      <span data-lang="ja">🍙 非常食と水の備蓄</span>
+      <span data-lang="id">🍙 Persediaan Makanan & Air Darurat</span>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-field">
+        <label for="planDays">
+          <span data-lang="en">Days of Supply Prepared</span>
+          <span data-lang="ja">備蓄日数</span>
+          <span data-lang="id">Hari Persediaan yang Disiapkan</span>
+        </label>
+        <select id="planDays" name="supplyDays">
+          <option value="">—</option>
+          <option value="0">Not prepared yet</option>
+          <option value="1">1 day</option>
+          <option value="2">2 days</option>
+          <option value="3">3 days (minimum recommended)</option>
+          <option value="5">5 days</option>
+          <option value="7">7 days (ideal)</option>
+        </select>
+      </div>
+      <div class="plan-field">
+        <label for="planWater">
+          <span data-lang="en">Water (liters stored)</span>
+          <span data-lang="ja">水（保管リットル数）</span>
+          <span data-lang="id">Air (liter yang disimpan)</span>
+        </label>
+        <input type="text" id="planWater" name="waterLiters" placeholder="e.g. 6L (2L/day × 3 days)">
+      </div>
+      <div class="plan-field plan-field-full">
+        <label for="planFood">
+          <span data-lang="en">Emergency Food List (what you have)</span>
+          <span data-lang="ja">非常食リスト（備蓄しているもの）</span>
+          <span data-lang="id">Daftar Makanan Darurat (yang Anda punya)</span>
+        </label>
+        <textarea id="planFood" name="foodList" rows="3" placeholder="e.g. Canned tuna × 4, instant rice × 6, crackers × 2, energy bars × 5, canned soup × 3"></textarea>
+      </div>
+    </div>
+
+    <!-- Emergency Tools & Equipment -->
+    <div class="plan-section-header">
+      <span data-lang="en">🔦 Emergency Tools & Equipment</span>
+      <span data-lang="ja">🔦 防災道具・装備</span>
+      <span data-lang="id">🔦 Peralatan & Perlengkapan Darurat</span>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-field plan-field-full">
+        <label for="planTools">
+          <span data-lang="en">Tools & Equipment List (what you have)</span>
+          <span data-lang="ja">道具・装備リスト（備蓄しているもの）</span>
+          <span data-lang="id">Daftar Peralatan (yang Anda punya)</span>
+        </label>
+        <textarea id="planTools" name="toolsList" rows="3" placeholder="e.g. Flashlight ✓, Radio ✓, First aid kit ✓, Portable charger ✓, Whistle ✓, Work gloves ✗ (need to buy)"></textarea>
+      </div>
+      <div class="plan-field">
+        <label for="planBagLocation">
+          <span data-lang="en">Emergency Bag Location</span>
+          <span data-lang="ja">非常持ち出し袋の保管場所</span>
+          <span data-lang="id">Lokasi Tas Darurat</span>
+        </label>
+        <input type="text" id="planBagLocation" name="bagLocation" placeholder="e.g. Genkan (entrance), next to shoes">
+      </div>
+      <div class="plan-field">
+        <label for="planDocsCopies">
+          <span data-lang="en">Document Copies Stored?</span>
+          <span data-lang="ja">書類のコピーを保管していますか？</span>
+          <span data-lang="id">Salinan Dokumen Disimpan?</span>
+        </label>
+        <select id="planDocsCopies" name="docsCopies">
+          <option value="">—</option>
+          <option value="none">Not yet</option>
+          <option value="physical">Physical copies in bag</option>
+          <option value="digital">Digital copies (phone/cloud)</option>
+          <option value="both">Both physical & digital</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Items Still Needed -->
+    <div class="plan-section-header">
+      <span data-lang="en">📝 Items I Still Need to Buy/Prepare</span>
+      <span data-lang="ja">📝 まだ買う・準備する必要があるもの</span>
+      <span data-lang="id">📝 Barang yang Masih Perlu Dibeli/Disiapkan</span>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-field plan-field-full">
+        <label for="planToBuy">
+          <span data-lang="en">Shopping / To-Do List</span>
+          <span data-lang="ja">買い物・やることリスト</span>
+          <span data-lang="id">Daftar Belanja / Yang Harus Dilakukan</span>
+        </label>
+        <textarea id="planToBuy" name="toBuyList" rows="3" placeholder="e.g. Buy work gloves, Print hazard map, Copy zairyu card, Buy portable radio, Walk evacuation route"></textarea>
       </div>
     </div>
 
@@ -845,9 +1013,9 @@
         <span data-lang="id">💾 Simpan</span>
       </button>
       <button type="button" class="plan-btn plan-btn-print" onclick="printPlan()">
-        <span data-lang="en">🖨️ Print Plan</span>
-        <span data-lang="ja">🖨️ 印刷</span>
-        <span data-lang="id">🖨️ Cetak</span>
+        <span data-lang="en">🖨️ Print Worksheet</span>
+        <span data-lang="ja">🖨️ ワークシート印刷</span>
+        <span data-lang="id">🖨️ Cetak Lembar Kerja</span>
       </button>
       <button type="button" class="plan-btn plan-btn-clear" onclick="clearPlan()">
         <span data-lang="en">🗑️ Clear</span>
