@@ -1,0 +1,241 @@
+/* First Aid Guide */
+.firstaid-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.firstaid-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.firstaid-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.firstaid-card-icon {
+  font-size: 32px;
+}
+.firstaid-card-title {
+  font-weight: 700;
+  font-size: 13px;
+}
+.firstaid-card-count {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* Back button */
+.firstaid-back {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 12px;
+  transition: opacity 0.2s;
+}
+.firstaid-back:hover { opacity: 0.7; }
+
+/* Header */
+.firstaid-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.firstaid-header-icon { font-size: 28px; }
+.firstaid-header-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* Progress */
+.firstaid-progress {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+/* Step content */
+.firstaid-step-content {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  border-left: 5px solid var(--accent);
+  margin-bottom: 12px;
+}
+.firstaid-step-number {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.firstaid-step-text {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Warning box */
+.firstaid-warning {
+  padding: 12px 14px;
+  background: rgba(232, 64, 64, 0.12);
+  border-left: 4px solid var(--alert-red);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.firstaid-warning strong {
+  margin-right: 4px;
+}
+
+/* Timer */
+.firstaid-timer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+.firstaid-timer.running {
+  border-color: var(--accent);
+  animation: timerPulse 2s infinite;
+}
+.firstaid-timer.done {
+  border-color: var(--safe-green);
+}
+@keyframes timerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(245, 166, 35, 0); }
+}
+.firstaid-timer-display {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  color: var(--accent);
+  min-width: 80px;
+}
+.firstaid-timer.done .firstaid-timer-display {
+  color: var(--safe-green);
+  font-size: 12px;
+}
+.firstaid-timer-btn {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.firstaid-timer-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.firstaid-timer-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* Navigation */
+.firstaid-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.firstaid-nav-btn {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.firstaid-nav-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.firstaid-nav-btn.primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Progress dots */
+.firstaid-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.firstaid-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.2s;
+}
+.firstaid-dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+.firstaid-dot.completed {
+  background: var(--safe-green);
+}
+
+/* Day mode */
+body.day-mode .firstaid-card {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body.day-mode .firstaid-card:hover {
+  border-color: var(--accent);
+}
+body.day-mode .firstaid-step-content {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  border-left-color: var(--accent);
+}
+body.day-mode .firstaid-timer {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body.day-mode .firstaid-nav-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body.day-mode .firstaid-nav-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+body.day-mode .firstaid-dot {
+  background: rgba(0, 0, 0, 0.15);
+}

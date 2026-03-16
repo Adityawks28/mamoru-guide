@@ -17,6 +17,7 @@
   .yasashii-grid { grid-template-columns: 1fr; }
   .plan-grid { grid-template-columns: 1fr; }
   .vocab-grid { grid-template-columns: 1fr; }
+  .firstaid-grid { grid-template-columns: 1fr; }
 
   .bag-stats { flex-direction: column; align-items: stretch; }
   .scale-row .desc { font-size: 11px; }

@@ -1,0 +1,183 @@
+/* Shelter Finder */
+
+/* Map container */
+.shelter-map-container {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--card-border);
+  margin-bottom: 16px;
+  min-height: 250px;
+}
+.shelter-map-container.offline {
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shelter-map-offline {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.6;
+  padding: 20px;
+}
+
+/* Loading */
+.shelter-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.shelter-loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: shelterSpin 0.8s linear infinite;
+}
+@keyframes shelterSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Result header */
+.shelter-result-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* Shelter list */
+.shelter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.shelter-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  padding: 14px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.shelter-card:hover {
+  transform: translateX(4px);
+  border-color: var(--accent);
+}
+.shelter-card-main {
+  flex: 1;
+  min-width: 0;
+}
+.shelter-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.shelter-name-en {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+.shelter-address {
+  font-size: 11px;
+  opacity: 0.55;
+  margin-bottom: 6px;
+}
+
+/* Type badges */
+.shelter-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.shelter-type-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Distance info */
+.shelter-distance-info {
+  text-align: center;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+.shelter-distance {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.shelter-walk {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Manual fallback */
+.shelter-fallback {
+  margin-bottom: 16px;
+}
+.shelter-fallback-msg {
+  font-size: 14px;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+.shelter-city-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.shelter-city-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.shelter-city-select option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Day mode */
+body.day-mode .shelter-card {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body.day-mode .shelter-card:hover {
+  border-color: var(--accent);
+}
+body.day-mode .shelter-type-badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.day-mode .shelter-map-container {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+body.day-mode .shelter-city-select {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+body.day-mode .shelter-loading-spinner {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-top-color: var(--accent);
+}
+body.day-mode .shelter-map-container.offline {
+  background: rgba(0, 0, 0, 0.03);
+}
