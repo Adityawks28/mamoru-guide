@@ -26,7 +26,9 @@
   .skip-link,
   .hamburger,
   .share-url-box,
-  .copy-url-btn {
+  .copy-url-btn,
+  .emergency-fab,
+  .emergency-fab-panel {
     display: none !important;
   }
 
@@ -171,5 +173,30 @@
   .footer-copy {
     color: #666 !important;
     opacity: 1 !important;
+  }
+
+  /* === PLAN-ONLY PRINT (triggered by Print Worksheet button) === */
+  body.print-plan-only .hero,
+  body.print-plan-only #earthquake,
+  body.print-plan-only #vocab,
+  body.print-plan-only #showthis,
+  body.print-plan-only #bag,
+  body.print-plan-only #alerts,
+  body.print-plan-only #typhoon,
+  body.print-plan-only #firstaid,
+  body.print-plan-only #shelter,
+  body.print-plan-only #drill,
+  body.print-plan-only #quiz,
+  body.print-plan-only #about,
+  body.print-plan-only #contacts,
+  body.print-plan-only .footer-links,
+  body.print-plan-only .footer-logo,
+  body.print-plan-only .footer-copy,
+  body.print-plan-only .emergency-fab,
+  body.print-plan-only .emergency-fab-panel {
+    display: none !important;
+  }
+  body.print-plan-only #myplan {
+    page-break-before: avoid;
   }
 }

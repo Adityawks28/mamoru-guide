@@ -36,7 +36,9 @@
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/first-aid.css">
 <link rel="stylesheet" href="css/drill.css">
+<link rel="stylesheet" href="css/show-this.css">
 <link rel="stylesheet" href="css/shelter-finder.css">
+<link rel="stylesheet" href="css/emergency-fab.css">
 <link rel="stylesheet" href="css/print.css" media="print">
 <link rel="manifest" href="manifest.json">
 </head>
@@ -55,8 +57,7 @@
   <div class="nav-links">
     <a href="#earthquake">Earthquake</a>
     <a href="#vocab">Vocab</a>
-    <a href="#bag">Bag</a>
-    <a href="#alerts">Alerts</a>
+    <a href="#showthis">Show This</a>
     <a href="#firstaid">First Aid</a>
     <a href="#shelter">Shelter</a>
     <a href="#myplan">My Plan</a>
@@ -78,12 +79,13 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#earthquake">Earthquake</a>
   <a href="#vocab">Vocab</a>
+  <a href="#showthis">Show This</a>
   <a href="#bag">Bag</a>
   <a href="#alerts">Alerts</a>
   <a href="#firstaid">First Aid</a>
-  <a href="#hazard">Hazard Map</a>
+  <a href="#shelter">Shelter</a>
+  <a href="#drill">Drill</a>
   <a href="#myplan">My Plan</a>
-  <a href="#about">About</a>
 </div>
 
 <!-- Hero -->
@@ -373,9 +375,25 @@
   </div>
 </section>
 
+<!-- Section 03: Show This Phrase Cards -->
+<section class="section" id="showthis">
+  <div class="section-label">03 — SHOW THIS</div>
+  <div class="section-title">
+    <span data-lang="en">Show This Card 見せるカード</span>
+    <span data-lang="ja">見せるカード Show This Card</span>
+    <span data-lang="id">Kartu Tunjukkan 見せるカード</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Can't speak Japanese? Show these cards to people around you. The Japanese text is large so they can read it easily. Swipe or tap arrows to browse phrases.</span>
+    <span data-lang="ja">日本語が話せない時に、周りの人にこのカードを見せましょう。日本語が大きく表示されているので、相手がすぐ読めます。</span>
+    <span data-lang="id">Tidak bisa berbicara bahasa Jepang? Tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepang ditampilkan besar agar mudah dibaca. Geser atau ketuk panah untuk menelusuri frasa.</span>
+  </p>
+  <div id="showThisContainer"></div>
+</section>
+
 <!-- Section 04: Emergency Bag MINI GAME -->
 <section class="section" id="bag">
-  <div class="section-label">03 — EMERGENCY BAG</div>
+  <div class="section-label">04 — EMERGENCY BAG</div>
   <div class="section-title">
     <span data-lang="en">🎒 非常袋 Hijou-bukuro — Pack Your Bag!</span>
     <span data-lang="ja">🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！</span>
@@ -423,7 +441,7 @@
 
 <!-- Section 05: Alert System -->
 <section class="section" id="alerts">
-  <div class="section-label">04 — ALERT SYSTEM</div>
+  <div class="section-label">05 — ALERT SYSTEM</div>
   <div class="section-title">
     <span data-lang="en">Japan's Emergency Alert System</span>
     <span data-lang="ja">日本の緊急警報システム</span>
@@ -477,7 +495,7 @@
 
 <!-- Section 06: Typhoon Preparedness -->
 <section class="section" id="typhoon">
-  <div class="section-label">05 — TYPHOON</div>
+  <div class="section-label">06 — TYPHOON</div>
   <div class="section-title">
     <span data-lang="en">Typhoon Preparedness</span>
     <span data-lang="ja">台風への備え</span>
@@ -548,7 +566,7 @@
 
 <!-- Section 06: First Aid Guide -->
 <section class="section" id="firstaid">
-  <div class="section-label">06 — FIRST AID</div>
+  <div class="section-label">07 — FIRST AID</div>
   <div class="section-title">
     <span data-lang="en">First Aid Guide</span>
     <span data-lang="ja">応急処置ガイド</span>
@@ -564,7 +582,7 @@
 
 <!-- Section 07: Shelter Finder -->
 <section class="section" id="shelter">
-  <div class="section-label">07 — SHELTER FINDER</div>
+  <div class="section-label">08 — SHELTER FINDER</div>
   <div class="section-title">
     <span data-lang="en">Find Nearest Shelter</span>
     <span data-lang="ja">最寄りの避難所を探す</span>
@@ -585,7 +603,7 @@
 
 <!-- Section 08: Earthquake Drill -->
 <section class="section" id="drill">
-  <div class="section-label">08 — EARTHQUAKE DRILL</div>
+  <div class="section-label">09 — EARTHQUAKE DRILL</div>
   <div class="section-title">
     <span data-lang="en">Earthquake Drill</span>
     <span data-lang="ja">地震防災訓練</span>
@@ -606,7 +624,7 @@
 
 <!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
-  <div class="section-label">09 — QUIZ</div>
+  <div class="section-label">10 — QUIZ</div>
   <div class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
@@ -627,7 +645,7 @@
 
 <!-- Section 08: About -->
 <section class="section" id="about">
-  <div class="section-label">10 — ABOUT</div>
+  <div class="section-label">11 — ABOUT</div>
   <div class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
@@ -730,7 +748,7 @@
 
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
-  <div class="section-label">11 — CONTACTS</div>
+  <div class="section-label">12 — CONTACTS</div>
   <div class="section-title">
     <span data-lang="en">Emergency Contacts Directory</span>
     <span data-lang="ja">緊急連絡先ディレクトリ</span>
@@ -766,7 +784,7 @@
 
 <!-- Section 12: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
-  <div class="section-label">12 — MY PLAN</div>
+  <div class="section-label">13 — MY PLAN</div>
   <div class="section-title">
     <span data-lang="en">My Emergency Card & Preparation</span>
     <span data-lang="ja">緊急カード＆防災準備</span>
@@ -1071,7 +1089,7 @@
     </div>
   </div>
   <div class="footer-links">
-    <a href="https://www.jma.go.jp/en/" target="_blank" rel="noopener noreferrer">気象庁 JMA</a>
+    <a href="https://www.jma.go.jp/jma/indexe.html" target="_blank" rel="noopener noreferrer">気象庁 JMA</a>
     <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">Hazard Map Portal</a>
     <a href="https://www3.nhk.or.jp/nhkworld/" target="_blank" rel="noopener noreferrer">NHK World</a>
     <a href="https://www.fdma.go.jp/en/" target="_blank" rel="noopener noreferrer">FDMA</a>
@@ -1083,6 +1101,34 @@
     <span data-lang="id">Mamoru Guide 守る — Dibangun dengan ketahanan, terinspirasi Kobe. Kolaborasi dengan PPI Kobe.</span>
   </div>
 </footer>
+
+<!-- Emergency FAB -->
+<button class="emergency-fab" id="emergencyFab" aria-label="Emergency quick access" aria-expanded="false">🆘</button>
+<div class="emergency-fab-panel" id="emergencyFabPanel">
+  <a href="tel:119" class="fab-item">
+    <span class="fab-item-icon">🚒</span>
+    <span class="fab-item-number">119</span>
+    <span>Fire / Ambulance</span>
+  </a>
+  <a href="tel:110" class="fab-item">
+    <span class="fab-item-icon">👮</span>
+    <span class="fab-item-number">110</span>
+    <span>Police</span>
+  </a>
+  <div class="fab-divider"></div>
+  <a href="#firstaid" class="fab-item">
+    <span class="fab-item-icon">🏥</span>
+    <span data-lang="en">First Aid Guide</span><span data-lang="ja">応急処置</span><span data-lang="id">Pertolongan Pertama</span>
+  </a>
+  <a href="#shelter" class="fab-item">
+    <span class="fab-item-icon">📍</span>
+    <span data-lang="en">Find Shelter</span><span data-lang="ja">避難所を探す</span><span data-lang="id">Cari Shelter</span>
+  </a>
+  <a href="#showthis" class="fab-item">
+    <span class="fab-item-icon">💬</span>
+    <span data-lang="en">Show This Card</span><span data-lang="ja">見せるカード</span><span data-lang="id">Kartu Tunjukkan</span>
+  </a>
+</div>
 
 <div class="toast" id="toast"></div>
 <script type="module" src="/src/main.ts"></script>

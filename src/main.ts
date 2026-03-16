@@ -10,6 +10,8 @@ import { initMobileNav } from './nav';
 import { initEmergencyPlan, savePlan, clearPlan, printPlan } from './emergency-plan';
 import { initContacts } from './contacts';
 import { initTyphoonScale } from './typhoon';
+import { initShowThis } from './show-this';
+import { initEmergencyFab } from './emergency-fab';
 import { initFirstAid } from './first-aid';
 import { initDrill } from './drill';
 import { initShelterFinder } from './shelter-finder';
@@ -63,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBagItems();
   updateBagStats();
   initTyphoonScale();
+  initShowThis();
   initFirstAid();
   initShelterFinder();
   initDrill();
@@ -71,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initMobileNav();
   initEmergencyPlan();
+  initEmergencyFab();
 });
 
 // === SERVICE WORKER ===
