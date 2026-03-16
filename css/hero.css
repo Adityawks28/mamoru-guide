@@ -71,7 +71,8 @@
   height: 300px; z-index: 1; pointer-events: none;
 }
 .mountain-layer {
-  position: absolute; bottom: 0; left: 0; right: 0;
+  position: absolute; bottom: 0; left: 0;
+  width: 100%;
 }
 
 /* Skyline */

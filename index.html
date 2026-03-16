@@ -764,43 +764,43 @@
   <div id="contactsGrid" class="contacts-grid"></div>
 </section>
 
-<!-- Section 10: My Emergency Preparation Worksheet -->
+<!-- Section 12: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
   <div class="section-label">12 — MY PLAN</div>
   <div class="section-title">
-    <span data-lang="en">My Emergency Preparation Worksheet</span>
-    <span data-lang="ja">私の防災準備ワークシート</span>
-    <span data-lang="id">Lembar Kerja Persiapan Darurat Saya</span>
+    <span data-lang="en">My Emergency Card & Preparation</span>
+    <span data-lang="ja">緊急カード＆防災準備</span>
+    <span data-lang="id">Kartu Darurat & Persiapan Saya</span>
   </div>
   <p class="section-note">
-    <span data-lang="en">Fill in your personal emergency plan. Print it and keep a copy at home, in your bag, and at school. Data is saved locally on your device only — never sent anywhere.</span>
-    <span data-lang="ja">個人の防災計画を記入してください。印刷して自宅、カバン、学校に保管しましょう。データはデバイスにのみ保存されます。</span>
-    <span data-lang="id">Isi rencana darurat pribadi Anda. Cetak dan simpan salinan di rumah, tas, dan sekolah. Data hanya disimpan di perangkat Anda.</span>
+    <span data-lang="en">Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can't speak. Print it and keep a copy in your wallet, bag, and at home.</span>
+    <span data-lang="ja">プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。</span>
+    <span data-lang="id">Isi profil dan rencana Anda. Label dwibahasa (Inggris + Jepang) agar penolong, dokter, dan polisi bisa membaca informasi Anda. Cetak dan simpan di dompet, tas, dan rumah.</span>
   </p>
 
   <form id="emergencyPlanForm" class="plan-form" onsubmit="return false;">
 
-    <!-- Personal Info -->
-    <div class="plan-section-header">
-      <span data-lang="en">👤 Personal Information</span>
-      <span data-lang="ja">👤 個人情報</span>
-      <span data-lang="id">👤 Informasi Pribadi</span>
-    </div>
+    <!-- Emergency Profile Card -->
+    <div class="plan-section-header">👤 Emergency Profile Card ・ 緊急プロフィールカード</div>
     <div class="plan-grid">
       <div class="plan-field">
-        <label for="planName">
-          <span data-lang="en">Full Name</span>
-          <span data-lang="ja">氏名</span>
-          <span data-lang="id">Nama Lengkap</span>
-        </label>
+        <label for="planName">Full Name ・ 氏名</label>
         <input type="text" id="planName" name="fullName" placeholder="e.g. Aditya Wirayutha">
       </div>
       <div class="plan-field">
-        <label for="planBlood">
-          <span data-lang="en">Blood Type</span>
-          <span data-lang="ja">血液型</span>
-          <span data-lang="id">Golongan Darah</span>
-        </label>
+        <label for="planNameKana">Name in Katakana ・ カタカナ</label>
+        <input type="text" id="planNameKana" name="nameKana" placeholder="e.g. アディティヤ ウィラユタ">
+      </div>
+      <div class="plan-field">
+        <label for="planNationality">Nationality ・ 国籍</label>
+        <input type="text" id="planNationality" name="nationality" placeholder="e.g. Indonesia / インドネシア">
+      </div>
+      <div class="plan-field">
+        <label for="planLanguages">Languages Spoken ・ 話せる言語</label>
+        <input type="text" id="planLanguages" name="languages" placeholder="e.g. English, Indonesian, basic Japanese">
+      </div>
+      <div class="plan-field">
+        <label for="planBlood">Blood Type ・ 血液型</label>
         <select id="planBlood" name="bloodType">
           <option value="">—</option>
           <option value="A+">A+</option><option value="A-">A−</option>
@@ -810,134 +810,90 @@
         </select>
       </div>
       <div class="plan-field">
-        <label for="planCity">
-          <span data-lang="en">My Address / City</span>
-          <span data-lang="ja">住所・市区町村</span>
-          <span data-lang="id">Alamat / Kota Saya</span>
-        </label>
-        <input type="text" id="planCity" name="city" placeholder="e.g. Kobe-shi, Chuo-ku">
+        <label for="planDOB">Date of Birth ・ 生年月日</label>
+        <input type="text" id="planDOB" name="dob" placeholder="e.g. 1998/05/12">
       </div>
       <div class="plan-field">
-        <label for="planNotes">
-          <span data-lang="en">Medical Notes / Allergies</span>
-          <span data-lang="ja">医療メモ・アレルギー</span>
-          <span data-lang="id">Catatan Medis / Alergi</span>
-        </label>
-        <input type="text" id="planNotes" name="medicalNotes" placeholder="e.g. Peanut allergy, asthma inhaler">
+        <label for="planCity">Address ・ 住所</label>
+        <input type="text" id="planCity" name="city" placeholder="e.g. 神戸市中央区... / Kobe-shi, Chuo-ku">
+      </div>
+      <div class="plan-field">
+        <label for="planUniversity">School / University ・ 学校名</label>
+        <input type="text" id="planUniversity" name="university" placeholder="e.g. Kobe University / 神戸大学">
+      </div>
+      <div class="plan-field">
+        <label for="planResidenceCard">Residence Card # ・ 在留カード番号</label>
+        <input type="text" id="planResidenceCard" name="residenceCard" placeholder="e.g. AB12345678CD">
+      </div>
+      <div class="plan-field">
+        <label for="planInsurance">Insurance # ・ 保険証番号</label>
+        <input type="text" id="planInsurance" name="insurance" placeholder="e.g. National Health Insurance #">
+      </div>
+      <div class="plan-field plan-field-full">
+        <label for="planNotes">Medical Conditions / Allergies ・ 持病・アレルギー</label>
+        <input type="text" id="planNotes" name="medicalNotes" placeholder="e.g. Peanut allergy (ピーナッツアレルギー), Asthma inhaler needed (喘息吸入器が必要)">
+      </div>
+      <div class="plan-field plan-field-full">
+        <label for="planMedications">Current Medications ・ 服用中の薬</label>
+        <input type="text" id="planMedications" name="medications" placeholder="e.g. Insulin (インスリン), Ventolin inhaler (ベントリン)">
       </div>
     </div>
 
     <!-- Evacuation Plan -->
-    <div class="plan-section-header">
-      <span data-lang="en">🏃 Evacuation Plan</span>
-      <span data-lang="ja">🏃 避難計画</span>
-      <span data-lang="id">🏃 Rencana Evakuasi</span>
-    </div>
+    <div class="plan-section-header">🏃 Evacuation Plan ・ 避難計画</div>
     <div class="plan-grid">
       <div class="plan-field">
-        <label for="planShelter1">
-          <span data-lang="en">Nearest Evacuation Site (Primary)</span>
-          <span data-lang="ja">最寄りの避難場所（第1）</span>
-          <span data-lang="id">Tempat Evakuasi Terdekat (Utama)</span>
-        </label>
+        <label for="planShelter1">Primary Shelter ・ 第1避難場所</label>
         <input type="text" id="planShelter1" name="shelter1" placeholder="e.g. Higashi Yuenchi Park (500m)">
       </div>
       <div class="plan-field">
-        <label for="planShelter2">
-          <span data-lang="en">Secondary Evacuation Site</span>
-          <span data-lang="ja">第2の避難場所</span>
-          <span data-lang="id">Tempat Evakuasi Cadangan</span>
-        </label>
+        <label for="planShelter2">Secondary Shelter ・ 第2避難場所</label>
         <input type="text" id="planShelter2" name="shelter2" placeholder="e.g. Chuo Ward Community Center (1.2km)">
       </div>
       <div class="plan-field">
-        <label for="planHighGround">
-          <span data-lang="en">Nearest High Ground (Tsunami)</span>
-          <span data-lang="ja">最寄りの高台（津波用）</span>
-          <span data-lang="id">Dataran Tinggi Terdekat (Tsunami)</span>
-        </label>
+        <label for="planHighGround">High Ground (Tsunami) ・ 高台（津波用）</label>
         <input type="text" id="planHighGround" name="highGround" placeholder="e.g. Kitano-cho hillside (800m)">
       </div>
       <div class="plan-field">
-        <label for="planRoute">
-          <span data-lang="en">My Evacuation Route</span>
-          <span data-lang="ja">避難ルート</span>
-          <span data-lang="id">Rute Evakuasi Saya</span>
-        </label>
-        <input type="text" id="planRoute" name="evacRoute" placeholder="e.g. Go north on Flower Road → turn right at City Hall">
+        <label for="planRoute">Evacuation Route ・ 避難ルート</label>
+        <input type="text" id="planRoute" name="evacRoute" placeholder="e.g. Go north on Flower Road → right at City Hall">
       </div>
       <div class="plan-field">
-        <label for="planMeeting">
-          <span data-lang="en">Family/Friends Meeting Point</span>
-          <span data-lang="ja">家族・友人の集合場所</span>
-          <span data-lang="id">Titik Pertemuan Keluarga/Teman</span>
-        </label>
+        <label for="planMeeting">Meeting Point ・ 集合場所</label>
         <input type="text" id="planMeeting" name="meetingPoint" placeholder="e.g. Front gate of Kobe University">
       </div>
       <div class="plan-field">
-        <label for="planWalkTime">
-          <span data-lang="en">Walking Time to Shelter</span>
-          <span data-lang="ja">避難場所までの徒歩時間</span>
-          <span data-lang="id">Waktu Jalan ke Tempat Evakuasi</span>
-        </label>
+        <label for="planWalkTime">Walking Time ・ 徒歩時間</label>
         <input type="text" id="planWalkTime" name="walkTime" placeholder="e.g. 10 minutes on foot">
       </div>
     </div>
 
     <!-- Emergency Contacts -->
-    <div class="plan-section-header">
-      <span data-lang="en">📞 My Emergency Contacts</span>
-      <span data-lang="ja">📞 緊急連絡先</span>
-      <span data-lang="id">📞 Kontak Darurat Saya</span>
-    </div>
+    <div class="plan-section-header">📞 Emergency Contacts ・ 緊急連絡先</div>
     <div class="plan-grid">
       <div class="plan-field">
-        <label for="planContact1">
-          <span data-lang="en">Contact 1 (Name — Phone)</span>
-          <span data-lang="ja">連絡先1（名前 — 電話番号）</span>
-          <span data-lang="id">Kontak 1 (Nama — Telepon)</span>
-        </label>
+        <label for="planContact1">Contact 1 ・ 連絡先1</label>
         <input type="text" id="planContact1" name="contact1" placeholder="e.g. Budi — 080-1234-5678">
       </div>
       <div class="plan-field">
-        <label for="planContact2">
-          <span data-lang="en">Contact 2 (Name — Phone)</span>
-          <span data-lang="ja">連絡先2（名前 — 電話番号）</span>
-          <span data-lang="id">Kontak 2 (Nama — Telepon)</span>
-        </label>
+        <label for="planContact2">Contact 2 ・ 連絡先2</label>
         <input type="text" id="planContact2" name="contact2" placeholder="e.g. University Office — 078-XXX-XXXX">
       </div>
       <div class="plan-field">
-        <label for="planContactHome">
-          <span data-lang="en">Family Back Home (Name — Phone)</span>
-          <span data-lang="ja">母国の家族（名前 — 電話番号）</span>
-          <span data-lang="id">Keluarga di Rumah (Nama — Telepon)</span>
-        </label>
+        <label for="planContactHome">Family Back Home ・ 母国の家族</label>
         <input type="text" id="planContactHome" name="contactHome" placeholder="e.g. Mom — +62-812-XXX-XXXX">
       </div>
       <div class="plan-field">
-        <label for="planEmbassy">
-          <span data-lang="en">Embassy / Consulate Phone</span>
-          <span data-lang="ja">大使館・領事館の電話番号</span>
-          <span data-lang="id">Telepon Kedutaan / Konsulat</span>
-        </label>
+        <label for="planEmbassy">Embassy / Consulate ・ 大使館・領事館</label>
         <input type="text" id="planEmbassy" name="embassy" placeholder="e.g. KJRI Osaka — 06-6449-9898">
       </div>
     </div>
 
     <!-- Emergency Food & Water -->
-    <div class="plan-section-header">
-      <span data-lang="en">🍙 Emergency Food & Water Supply</span>
-      <span data-lang="ja">🍙 非常食と水の備蓄</span>
-      <span data-lang="id">🍙 Persediaan Makanan & Air Darurat</span>
-    </div>
+    <div class="plan-section-header">🍙 Food & Water Supply ・ 非常食と水の備蓄</div>
     <div class="plan-grid">
       <div class="plan-field">
-        <label for="planDays">
-          <span data-lang="en">Days of Supply Prepared</span>
-          <span data-lang="ja">備蓄日数</span>
-          <span data-lang="id">Hari Persediaan yang Disiapkan</span>
-        </label>
+        <label for="planDays">Days Prepared ・ 備蓄日数</label>
         <select id="planDays" name="supplyDays">
           <option value="">—</option>
           <option value="0">Not prepared yet</option>
@@ -949,52 +905,28 @@
         </select>
       </div>
       <div class="plan-field">
-        <label for="planWater">
-          <span data-lang="en">Water (liters stored)</span>
-          <span data-lang="ja">水（保管リットル数）</span>
-          <span data-lang="id">Air (liter yang disimpan)</span>
-        </label>
+        <label for="planWater">Water Stored ・ 水の備蓄量</label>
         <input type="text" id="planWater" name="waterLiters" placeholder="e.g. 6L (2L/day × 3 days)">
       </div>
       <div class="plan-field plan-field-full">
-        <label for="planFood">
-          <span data-lang="en">Emergency Food List (what you have)</span>
-          <span data-lang="ja">非常食リスト（備蓄しているもの）</span>
-          <span data-lang="id">Daftar Makanan Darurat (yang Anda punya)</span>
-        </label>
-        <textarea id="planFood" name="foodList" rows="3" placeholder="e.g. Canned tuna × 4, instant rice × 6, crackers × 2, energy bars × 5, canned soup × 3"></textarea>
+        <label for="planFood">Food List ・ 非常食リスト</label>
+        <textarea id="planFood" name="foodList" rows="3" placeholder="e.g. Canned tuna × 4, instant rice × 6, crackers × 2, energy bars × 5"></textarea>
       </div>
     </div>
 
     <!-- Emergency Tools & Equipment -->
-    <div class="plan-section-header">
-      <span data-lang="en">🔦 Emergency Tools & Equipment</span>
-      <span data-lang="ja">🔦 防災道具・装備</span>
-      <span data-lang="id">🔦 Peralatan & Perlengkapan Darurat</span>
-    </div>
+    <div class="plan-section-header">🔦 Tools & Equipment ・ 防災道具・装備</div>
     <div class="plan-grid">
       <div class="plan-field plan-field-full">
-        <label for="planTools">
-          <span data-lang="en">Tools & Equipment List (what you have)</span>
-          <span data-lang="ja">道具・装備リスト（備蓄しているもの）</span>
-          <span data-lang="id">Daftar Peralatan (yang Anda punya)</span>
-        </label>
-        <textarea id="planTools" name="toolsList" rows="3" placeholder="e.g. Flashlight ✓, Radio ✓, First aid kit ✓, Portable charger ✓, Whistle ✓, Work gloves ✗ (need to buy)"></textarea>
+        <label for="planTools">Equipment List ・ 装備リスト</label>
+        <textarea id="planTools" name="toolsList" rows="3" placeholder="e.g. Flashlight ✓, Radio ✓, First aid kit ✓, Portable charger ✓, Whistle ✓"></textarea>
       </div>
       <div class="plan-field">
-        <label for="planBagLocation">
-          <span data-lang="en">Emergency Bag Location</span>
-          <span data-lang="ja">非常持ち出し袋の保管場所</span>
-          <span data-lang="id">Lokasi Tas Darurat</span>
-        </label>
+        <label for="planBagLocation">Bag Location ・ 非常袋の場所</label>
         <input type="text" id="planBagLocation" name="bagLocation" placeholder="e.g. Genkan (entrance), next to shoes">
       </div>
       <div class="plan-field">
-        <label for="planDocsCopies">
-          <span data-lang="en">Document Copies Stored?</span>
-          <span data-lang="ja">書類のコピーを保管していますか？</span>
-          <span data-lang="id">Salinan Dokumen Disimpan?</span>
-        </label>
+        <label for="planDocsCopies">Document Copies ・ 書類コピー</label>
         <select id="planDocsCopies" name="docsCopies">
           <option value="">—</option>
           <option value="none">Not yet</option>
@@ -1006,19 +938,11 @@
     </div>
 
     <!-- Items Still Needed -->
-    <div class="plan-section-header">
-      <span data-lang="en">📝 Items I Still Need to Buy/Prepare</span>
-      <span data-lang="ja">📝 まだ買う・準備する必要があるもの</span>
-      <span data-lang="id">📝 Barang yang Masih Perlu Dibeli/Disiapkan</span>
-    </div>
+    <div class="plan-section-header">📝 Still Need to Buy ・ まだ必要なもの</div>
     <div class="plan-grid">
       <div class="plan-field plan-field-full">
-        <label for="planToBuy">
-          <span data-lang="en">Shopping / To-Do List</span>
-          <span data-lang="ja">買い物・やることリスト</span>
-          <span data-lang="id">Daftar Belanja / Yang Harus Dilakukan</span>
-        </label>
-        <textarea id="planToBuy" name="toBuyList" rows="3" placeholder="e.g. Buy work gloves, Print hazard map, Copy zairyu card, Buy portable radio, Walk evacuation route"></textarea>
+        <label for="planToBuy">Shopping / To-Do List ・ 買い物リスト</label>
+        <textarea id="planToBuy" name="toBuyList" rows="3" placeholder="e.g. Buy work gloves, Print hazard map, Copy zairyu card, Buy portable radio"></textarea>
       </div>
     </div>
 
