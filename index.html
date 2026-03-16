@@ -34,6 +34,9 @@
 <link rel="stylesheet" href="css/vocab.css">
 <link rel="stylesheet" href="css/bag-game.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/first-aid.css">
+<link rel="stylesheet" href="css/drill.css">
+<link rel="stylesheet" href="css/shelter-finder.css">
 <link rel="stylesheet" href="css/print.css" media="print">
 <link rel="manifest" href="manifest.json">
 </head>
@@ -54,7 +57,8 @@
     <a href="#vocab">Vocab</a>
     <a href="#bag">Bag</a>
     <a href="#alerts">Alerts</a>
-    <a href="#hazard">Hazard Map</a>
+    <a href="#firstaid">First Aid</a>
+    <a href="#shelter">Shelter</a>
     <a href="#myplan">My Plan</a>
   </div>
   <div class="nav-right">
@@ -76,6 +80,7 @@
   <a href="#vocab">Vocab</a>
   <a href="#bag">Bag</a>
   <a href="#alerts">Alerts</a>
+  <a href="#firstaid">First Aid</a>
   <a href="#hazard">Hazard Map</a>
   <a href="#myplan">My Plan</a>
   <a href="#about">About</a>
@@ -541,56 +546,67 @@
   </div>
 </section>
 
-<!-- Section 07: Hazard Map -->
-<section class="section" id="hazard">
-  <div class="section-label">06 — HAZARD MAP</div>
+<!-- Section 06: First Aid Guide -->
+<section class="section" id="firstaid">
+  <div class="section-label">06 — FIRST AID</div>
   <div class="section-title">
-    <span data-lang="en">How to Read a Hazard Map</span>
-    <span data-lang="ja">ハザードマップの読み方</span>
-    <span data-lang="id">Cara Membaca Peta Bahaya</span>
+    <span data-lang="en">First Aid Guide</span>
+    <span data-lang="ja">応急処置ガイド</span>
+    <span data-lang="id">Panduan Pertolongan Pertama</span>
   </div>
   <p class="section-note">
-    <span data-lang="en">Every city in Japan has a hazard map. Your first week: find yours, read it, memorize your evacuation point.</span>
-    <span data-lang="ja">日本のすべての市町村にハザードマップがあります。最初の一週間で確認しましょう。</span>
-    <span data-lang="id">Setiap kota di Jepang punya peta bahaya. Minggu pertama: temukan, baca, hafalkan.</span>
+    <span data-lang="en">Step-by-step first aid for common disaster injuries. Works offline — no internet needed.</span>
+    <span data-lang="ja">災害時の一般的な怪我に対する応急処置ガイド。オフラインで使用可能。</span>
+    <span data-lang="id">Pertolongan pertama langkah demi langkah untuk cedera bencana. Berfungsi offline.</span>
   </p>
-  <div class="step-grid">
-    <div class="step-card">
-      <div class="step-icon">🔍</div>
-      <h3><span data-lang="en">Find Your Map</span><span data-lang="ja">地図を見つける</span><span data-lang="id">Temukan Peta</span></h3>
-      <p><span data-lang="en">Search "[city] ハザードマップ" or visit <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span><span data-lang="ja">「[市名] ハザードマップ」で検索 or <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span><span data-lang="id">Cari "[kota] ハザードマップ" atau <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">disaportal.gsi.go.jp</a></span></p>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🎨</div>
-      <h3><span data-lang="en">Read the Colors</span><span data-lang="ja">色を読む</span><span data-lang="id">Baca Warna</span></h3>
-      <p><span data-lang="en">🟦 Blue = flood · 🟨 Yellow = mild risk · 🟥 Red = high danger · White = safe</span><span data-lang="ja">🟦 青=浸水域 · 🟨 黄=軽度 · 🟥 赤=高危険 · 白=安全</span><span data-lang="id">🟦 Biru=banjir · 🟨 Kuning=ringan · 🟥 Merah=bahaya · Putih=aman</span></p>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">📍</div>
-      <h3><span data-lang="en">Find Your Shelter</span><span data-lang="ja">避難場所を見つける</span><span data-lang="id">Temukan Tempat Perlindungan</span></h3>
-      <p><span data-lang="en">Look for 避難場所 markers — schools, parks, community centers.</span><span data-lang="ja">避難場所のマーカーを探す — 学校、公園、コミュニティセンター。</span><span data-lang="id">Cari penanda 避難場所 — sekolah, taman, pusat komunitas.</span></p>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🚶</div>
-      <h3><span data-lang="en">Walk the Route</span><span data-lang="ja">ルートを歩く</span><span data-lang="id">Jalan Rutenya</span></h3>
-      <p><span data-lang="en">Walk it once in daylight. Notice bridges, slopes, narrow alleys.</span><span data-lang="ja">日中に一度歩く。橋、坂道、狭い路地に注意。</span><span data-lang="id">Jalan sekali di siang hari. Perhatikan jembatan, lereng, gang.</span></p>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🖨️</div>
-      <h3><span data-lang="en">Print & Post It</span><span data-lang="ja">印刷して貼る</span><span data-lang="id">Cetak & Tempel</span></h3>
-      <p><span data-lang="en">Print it and put on your fridge. Your phone may die in a disaster.</span><span data-lang="ja">印刷して冷蔵庫に貼る。災害時にスマホが使えなくなるかも。</span><span data-lang="id">Cetak dan tempel di kulkas. Ponsel bisa mati saat bencana.</span></p>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🗾</div>
-      <h3><span data-lang="en">Map Types</span><span data-lang="ja">地図の種類</span><span data-lang="id">Jenis Peta</span></h3>
-      <p><span data-lang="en">洪水 flood · 土砂 landslide · 津波 tsunami · 高潮 storm surge · 液状化 liquefaction</span><span data-lang="ja">洪水 · 土砂災害 · 津波 · 高潮 · 液状化</span><span data-lang="id">洪水 banjir · 土砂 longsor · 津波 · 高潮 gelombang · 液状化 likuefaksi</span></p>
-    </div>
-  </div>
+  <div id="firstAidContainer"></div>
 </section>
 
-<!-- Section 07: Disaster Drill Quiz -->
+<!-- Section 07: Shelter Finder -->
+<section class="section" id="shelter">
+  <div class="section-label">07 — SHELTER FINDER</div>
+  <div class="section-title">
+    <span data-lang="en">Find Nearest Shelter</span>
+    <span data-lang="ja">最寄りの避難所を探す</span>
+    <span data-lang="id">Temukan Tempat Perlindungan Terdekat</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Find evacuation shelters near your current location. Shows distance, walking time, and disaster types covered.</span>
+    <span data-lang="ja">現在地付近の避難所を検索。距離、徒歩時間、対応する災害の種類を表示。</span>
+    <span data-lang="id">Temukan tempat perlindungan evakuasi di dekat lokasi Anda. Menampilkan jarak, waktu jalan kaki, dan jenis bencana.</span>
+  </p>
+  <button class="bag-btn primary" id="shelterFindBtn" style="margin-bottom:16px;">
+    <span data-lang="en">📍 Find Shelters Near Me</span>
+    <span data-lang="ja">📍 近くの避難所を探す</span>
+    <span data-lang="id">📍 Cari Tempat Perlindungan</span>
+  </button>
+  <div id="shelterContainer"></div>
+</section>
+
+<!-- Section 08: Earthquake Drill -->
+<section class="section" id="drill">
+  <div class="section-label">08 — EARTHQUAKE DRILL</div>
+  <div class="section-title">
+    <span data-lang="en">Earthquake Drill</span>
+    <span data-lang="ja">地震防災訓練</span>
+    <span data-lang="id">Latihan Gempa</span>
+  </div>
+  <p class="section-note">
+    <span data-lang="en">Experience a simulated earthquake scenario. Make decisions under pressure and learn the correct responses step by step.</span>
+    <span data-lang="ja">地震シナリオをシミュレーション体験。プレッシャーの中で判断し、正しい対応を段階的に学びます。</span>
+    <span data-lang="id">Alami skenario gempa simulasi. Buat keputusan di bawah tekanan dan pelajari respons yang benar langkah demi langkah.</span>
+  </p>
+  <button class="bag-btn primary" id="drillStartBtn" style="margin-bottom:16px;">
+    <span data-lang="en">🚨 Start Drill</span>
+    <span data-lang="ja">🚨 訓練開始</span>
+    <span data-lang="id">🚨 Mulai Latihan</span>
+  </button>
+  <div id="drillContainer"></div>
+</section>
+
+<!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
-  <div class="section-label">07 — QUIZ</div>
+  <div class="section-label">09 — QUIZ</div>
   <div class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
@@ -611,7 +627,7 @@
 
 <!-- Section 08: About -->
 <section class="section" id="about">
-  <div class="section-label">08 — ABOUT</div>
+  <div class="section-label">10 — ABOUT</div>
   <div class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
@@ -714,7 +730,7 @@
 
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
-  <div class="section-label">09 — CONTACTS</div>
+  <div class="section-label">11 — CONTACTS</div>
   <div class="section-title">
     <span data-lang="en">Emergency Contacts Directory</span>
     <span data-lang="ja">緊急連絡先ディレクトリ</span>
@@ -750,7 +766,7 @@
 
 <!-- Section 10: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
-  <div class="section-label">10 — MY PLAN</div>
+  <div class="section-label">12 — MY PLAN</div>
   <div class="section-title">
     <span data-lang="en">My Emergency Preparation Worksheet</span>
     <span data-lang="ja">私の防災準備ワークシート</span>

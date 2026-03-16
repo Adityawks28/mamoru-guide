@@ -14,6 +14,10 @@
   .scroll-hint,
   .toast,
   .bag-actions,
+  #drillContainer,
+  #drillStartBtn,
+  .shelter-map-container,
+  #shelterFindBtn,
   .celestial-body,
   .skyline-container,
   .mountains-container,
@@ -44,7 +48,8 @@
   .app-list,
   .step-grid,
   .bag-items-grid,
-  .vocab-grid {
+  .vocab-grid,
+  .firstaid-grid {
     grid-template-columns: 1fr !important;
   }
 

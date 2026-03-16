@@ -10,6 +10,9 @@ import { initMobileNav } from './nav';
 import { initEmergencyPlan, savePlan, clearPlan, printPlan } from './emergency-plan';
 import { initContacts } from './contacts';
 import { initTyphoonScale } from './typhoon';
+import { initFirstAid } from './first-aid';
+import { initDrill } from './drill';
+import { initShelterFinder } from './shelter-finder';
 import { initQuiz } from './quiz';
 import { showToast } from './toast';
 
@@ -60,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBagItems();
   updateBagStats();
   initTyphoonScale();
+  initFirstAid();
+  initShelterFinder();
+  initDrill();
   initQuiz();
   initContacts();
   initScrollReveal();
