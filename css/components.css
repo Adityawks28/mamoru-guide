@@ -394,6 +394,17 @@ body.day-mode .share-url-box {
 .contact-card:hover .contact-call { opacity: 1; }
 
 /* Emergency Plan Form */
+.plan-section-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  padding: 20px 0 8px;
+  border-bottom: 2px solid rgba(245,166,35,0.2);
+  margin-bottom: 14px;
+}
+.plan-section-header:first-of-type {
+  padding-top: 0;
+}
 .plan-form {
   margin-top: 2rem;
 }
