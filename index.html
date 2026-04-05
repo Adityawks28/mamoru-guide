@@ -87,8 +87,13 @@
   <a href="#drill">Drill</a>
   <a href="#myplan">My Plan</a>
   <button id="mobileThemeToggle" onclick="toggleDayNight()" class="mobile-theme-btn">☀️ Day Mode</button>
+  <button onclick="shareGuide()" class="mobile-theme-btn">📤 Share</button>
+  <div class="mobile-lang-row">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" onclick="setLang('id')">ID</button>
+  </div>
 </div>
-
 <!-- Hero -->
 <section class="hero night-sky" id="hero">
   <div class="celestial-body" id="celestialBody"></div>
