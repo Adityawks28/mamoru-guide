@@ -10,6 +10,8 @@ export function toggleDayNight(): void {
   }
   const modeToggle = document.getElementById('modeToggle');
   if (modeToggle) modeToggle.textContent = isDayMode ? '🌙' : '☀️';
+  const mobileToggle = document.getElementById('mobileThemeToggle');
+  if (mobileToggle) mobileToggle.textContent = isDayMode ? '🌙 Night Mode' : '☀️ Day Mode';
   localStorage.setItem('mamoru-theme', isDayMode ? 'day' : 'night');
 }
 

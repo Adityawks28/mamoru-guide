@@ -259,4 +259,25 @@ body.day-mode .mobile-menu {
 body.day-mode .mobile-menu a {
   color: var(--text);
 }
+.mobile-theme-btn {
+  background: none;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: var(--text);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.mobile-theme-btn:hover {
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--accent);
+}
+body.day-mode .mobile-theme-btn {
+  color: var(--text);
+  border-top-color: rgba(0,0,0,0.1);
+}
 
