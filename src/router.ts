@@ -63,12 +63,15 @@ export function activateRoute(hash: string): void {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+let initialized = false;
+
 export function initRouter(): void {
-  // Re-route whenever the user clicks a link or hits back/forward
+  if (initialized) return;
+  initialized = true;
+
   window.addEventListener('hashchange', () => {
     activateRoute(window.location.hash);
   });
 
-  // Activate the correct route on first load
   activateRoute(window.location.hash || '#/');
 }
