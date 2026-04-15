@@ -55,11 +55,11 @@
     <span>MAMORU 守る</span>
   </a>
   <div class="nav-links">
-    <a href="#/emergency" data-nav-route="#/emergency" aria-current="false">🚨 Emergency</a>
-    <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false">Prepare</a>
-    <a href="#/learn"     data-nav-route="#/learn"      aria-current="false">Learn</a>
-    <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false">Shelter</a>
-    <a href="#/plan"      data-nav-route="#/plan"       aria-current="false">My Plan</a>
+    <a href="#/emergency" data-nav-route="#/emergency" aria-current="false"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
+    <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false"><span data-i18n="nav.prepare">Prepare</span></a>
+    <a href="#/learn"     data-nav-route="#/learn"      aria-current="false"><span data-i18n="nav.learn">Learn</span></a>
+    <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false"><span data-i18n="nav.shelter">Shelter</span></a>
+    <a href="#/plan"      data-nav-route="#/plan"       aria-current="false"><span data-i18n="nav.plan">My Plan</span></a>
   </div>
   <div class="nav-right">
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -76,11 +76,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#/emergency" data-nav-route="#/emergency" aria-current="false">🚨 Emergency</a>
-  <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false">Prepare</a>
-  <a href="#/learn"     data-nav-route="#/learn"      aria-current="false">Learn</a>
-  <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false">Shelter</a>
-  <a href="#/plan"      data-nav-route="#/plan"       aria-current="false">My Plan</a>
+  <a href="#/emergency" data-nav-route="#/emergency" aria-current="false"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
+  <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false"><span data-i18n="nav.prepare">Prepare</span></a>
+  <a href="#/learn"     data-nav-route="#/learn"      aria-current="false"><span data-i18n="nav.learn">Learn</span></a>
+  <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false"><span data-i18n="nav.shelter">Shelter</span></a>
+  <a href="#/plan"      data-nav-route="#/plan"       aria-current="false"><span data-i18n="nav.plan">My Plan</span></a>
   <button id="mobileThemeToggle" onclick="toggleDayNight()" class="mobile-theme-btn">☀️ Day Mode</button>
   <button onclick="shareGuide()" class="mobile-theme-btn">📤 Share</button>
   <div class="mobile-lang-row">
@@ -137,11 +137,7 @@
     </div>
     <h1 class="hero-title">MAMORU GUIDE</h1>
     <div class="hero-kanji"><span class="big">守る</span> · まもる · protect</div>
-    <p class="hero-subtitle">
-      <span data-lang="en">Disaster preparedness for international students in Japan</span>
-      <span data-lang="ja">日本の留学生のための防災ガイド</span>
-      <span data-lang="id">Panduan kesiapsiagaan bencana untuk mahasiswa internasional di Jepang</span>
-    </p>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">Disaster preparedness for international students in Japan</p>
     <div class="scroll-hint">▼</div>
   </div>
 
@@ -264,50 +260,22 @@
 <!-- MODE SELECTOR — shown on landing (#/) -->
 <section id="mode-selector" class="mode-selector route-hidden" aria-label="Choose a mode">
   <div class="mode-selector-inner">
-    <p class="mode-selector-label">
-      <span data-lang="en">What do you need right now?</span>
-      <span data-lang="ja">今、何が必要ですか？</span>
-      <span data-lang="id">Apa yang Anda butuhkan sekarang?</span>
-    </p>
+    <p class="mode-selector-label" data-i18n="mode.prompt">What do you need right now?</p>
     <div class="mode-cards">
       <a href="#/emergency" class="mode-card mode-card--emergency" data-nav-route="#/emergency">
         <span class="mode-card-icon" aria-hidden="true">🚨</span>
-        <span class="mode-card-title">
-          <span data-lang="en">Emergency</span>
-          <span data-lang="ja">緊急</span>
-          <span data-lang="id">Darurat</span>
-        </span>
-        <span class="mode-card-desc">
-          <span data-lang="en">I need help right now</span>
-          <span data-lang="ja">今すぐ助けが必要</span>
-          <span data-lang="id">Saya butuh bantuan sekarang</span>
-        </span>
+        <span class="mode-card-title" data-i18n="mode.emergency.title">Emergency</span>
+        <span class="mode-card-desc"  data-i18n="mode.emergency.desc">I need help right now</span>
       </a>
       <a href="#/prepare" class="mode-card mode-card--prepare" data-nav-route="#/prepare">
         <span class="mode-card-icon" aria-hidden="true">📋</span>
-        <span class="mode-card-title">
-          <span data-lang="en">Prepare</span>
-          <span data-lang="ja">準備する</span>
-          <span data-lang="id">Bersiap</span>
-        </span>
-        <span class="mode-card-desc">
-          <span data-lang="en">Make a plan, find shelter</span>
-          <span data-lang="ja">計画を立て、避難所を探す</span>
-          <span data-lang="id">Buat rencana, cari tempat berlindung</span>
-        </span>
+        <span class="mode-card-title" data-i18n="mode.prepare.title">Prepare</span>
+        <span class="mode-card-desc"  data-i18n="mode.prepare.desc">Make a plan, find shelter</span>
       </a>
       <a href="#/learn" class="mode-card mode-card--learn" data-nav-route="#/learn">
         <span class="mode-card-icon" aria-hidden="true">📚</span>
-        <span class="mode-card-title">
-          <span data-lang="en">Learn</span>
-          <span data-lang="ja">学ぶ</span>
-          <span data-lang="id">Belajar</span>
-        </span>
-        <span class="mode-card-desc">
-          <span data-lang="en">Drills, vocabulary, quizzes</span>
-          <span data-lang="ja">訓練・語彙・クイズ</span>
-          <span data-lang="id">Latihan, kosakata, kuis</span>
-        </span>
+        <span class="mode-card-title" data-i18n="mode.learn.title">Learn</span>
+        <span class="mode-card-desc"  data-i18n="mode.learn.desc">Drills, vocabulary, quizzes</span>
       </a>
     </div>
   </div>
@@ -1162,11 +1130,7 @@
     <a href="https://www.fdma.go.jp/en/" target="_blank" rel="noopener noreferrer">FDMA</a>
     <a href="https://www.bousai.go.jp/en/" target="_blank" rel="noopener noreferrer">Cabinet Office 防災</a>
   </div>
-  <div class="footer-copy">
-    <span data-lang="en">Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.</span>
-    <span data-lang="ja">守るガイド — 神戸の精神で、PPI Kobeと協力して。</span>
-    <span data-lang="id">Mamoru Guide 守る — Dibangun dengan ketahanan, terinspirasi Kobe. Kolaborasi dengan PPI Kobe.</span>
-  </div>
+  <div class="footer-copy" data-i18n="footer.copy">Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.</div>
 </footer>
 
 <!-- Emergency FAB -->
@@ -1185,15 +1149,15 @@
   <div class="fab-divider"></div>
   <a href="#firstaid" class="fab-item">
     <span class="fab-item-icon">🏥</span>
-    <span data-lang="en">First Aid Guide</span><span data-lang="ja">応急処置</span><span data-lang="id">Pertolongan Pertama</span>
+    <span data-i18n="fab.firstaid">First Aid Guide</span>
   </a>
   <a href="#shelter" class="fab-item">
     <span class="fab-item-icon">📍</span>
-    <span data-lang="en">Find Shelter</span><span data-lang="ja">避難所を探す</span><span data-lang="id">Cari Shelter</span>
+    <span data-i18n="fab.shelter">Find Shelter</span>
   </a>
   <a href="#showthis" class="fab-item">
     <span class="fab-item-icon">💬</span>
-    <span data-lang="en">Show This Card</span><span data-lang="ja">見せるカード</span><span data-lang="id">Kartu Tunjukkan</span>
+    <span data-i18n="fab.showthis">Show This Card</span>
   </a>
 </div>
 

@@ -1,4 +1,5 @@
 import type { Language } from './types';
+import { applyTranslations, setI18nLang } from './i18n';
 
 export let currentLang: Language = 'en';
 
@@ -14,6 +15,8 @@ export function setLang(lang: Language): void {
   });
   document.documentElement.setAttribute('lang', lang === 'ja' ? 'ja' : lang === 'id' ? 'id' : 'en');
   localStorage.setItem('mamoru-lang', lang);
+  setI18nLang(lang);
+  applyTranslations();
 }
 
 export function initLang(): void {
