@@ -50,17 +50,16 @@
 
 <!-- Navbar -->
 <nav class="navbar" aria-label="Main navigation">
-  <a href="#hero" class="nav-logo">
+  <a href="#/" class="nav-logo" data-nav-route="#/" aria-label="Mamoru Guide home">
     <div class="shield"><div class="shield-inner"></div></div>
     <span>MAMORU 守る</span>
   </a>
   <div class="nav-links">
-    <a href="#earthquake">Earthquake</a>
-    <a href="#vocab">Vocab</a>
-    <a href="#showthis">Show This</a>
-    <a href="#firstaid">First Aid</a>
-    <a href="#shelter">Shelter</a>
-    <a href="#myplan">My Plan</a>
+    <a href="#/emergency" data-nav-route="#/emergency" aria-current="false">🚨 Emergency</a>
+    <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false">Prepare</a>
+    <a href="#/learn"     data-nav-route="#/learn"      aria-current="false">Learn</a>
+    <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false">Shelter</a>
+    <a href="#/plan"      data-nav-route="#/plan"       aria-current="false">My Plan</a>
   </div>
   <div class="nav-right">
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -77,15 +76,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#earthquake">Earthquake</a>
-  <a href="#vocab">Vocab</a>
-  <a href="#showthis">Show This</a>
-  <a href="#bag">Bag</a>
-  <a href="#alerts">Alerts</a>
-  <a href="#firstaid">First Aid</a>
-  <a href="#shelter">Shelter</a>
-  <a href="#drill">Drill</a>
-  <a href="#myplan">My Plan</a>
+  <a href="#/emergency" data-nav-route="#/emergency" aria-current="false">🚨 Emergency</a>
+  <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false">Prepare</a>
+  <a href="#/learn"     data-nav-route="#/learn"      aria-current="false">Learn</a>
+  <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false">Shelter</a>
+  <a href="#/plan"      data-nav-route="#/plan"       aria-current="false">My Plan</a>
   <button id="mobileThemeToggle" onclick="toggleDayNight()" class="mobile-theme-btn">☀️ Day Mode</button>
   <button onclick="shareGuide()" class="mobile-theme-btn">📤 Share</button>
   <div class="mobile-lang-row">
@@ -263,6 +258,72 @@
       </svg>
     </div>
     <div class="water"></div>
+  </div>
+</section>
+
+<!-- MODE SELECTOR — shown on landing (#/) -->
+<section id="mode-selector" class="mode-selector route-hidden" aria-label="Choose a mode">
+  <div class="mode-selector-inner">
+    <p class="mode-selector-label">
+      <span data-lang="en">What do you need right now?</span>
+      <span data-lang="ja">今、何が必要ですか？</span>
+      <span data-lang="id">Apa yang Anda butuhkan sekarang?</span>
+    </p>
+    <div class="mode-cards">
+      <a href="#/emergency" class="mode-card mode-card--emergency" data-nav-route="#/emergency">
+        <span class="mode-card-icon" aria-hidden="true">🚨</span>
+        <span class="mode-card-title">
+          <span data-lang="en">Emergency</span>
+          <span data-lang="ja">緊急</span>
+          <span data-lang="id">Darurat</span>
+        </span>
+        <span class="mode-card-desc">
+          <span data-lang="en">I need help right now</span>
+          <span data-lang="ja">今すぐ助けが必要</span>
+          <span data-lang="id">Saya butuh bantuan sekarang</span>
+        </span>
+      </a>
+      <a href="#/prepare" class="mode-card mode-card--prepare" data-nav-route="#/prepare">
+        <span class="mode-card-icon" aria-hidden="true">📋</span>
+        <span class="mode-card-title">
+          <span data-lang="en">Prepare</span>
+          <span data-lang="ja">準備する</span>
+          <span data-lang="id">Bersiap</span>
+        </span>
+        <span class="mode-card-desc">
+          <span data-lang="en">Make a plan, find shelter</span>
+          <span data-lang="ja">計画を立て、避難所を探す</span>
+          <span data-lang="id">Buat rencana, cari tempat berlindung</span>
+        </span>
+      </a>
+      <a href="#/learn" class="mode-card mode-card--learn" data-nav-route="#/learn">
+        <span class="mode-card-icon" aria-hidden="true">📚</span>
+        <span class="mode-card-title">
+          <span data-lang="en">Learn</span>
+          <span data-lang="ja">学ぶ</span>
+          <span data-lang="id">Belajar</span>
+        </span>
+        <span class="mode-card-desc">
+          <span data-lang="en">Drills, vocabulary, quizzes</span>
+          <span data-lang="ja">訓練・語彙・クイズ</span>
+          <span data-lang="id">Latihan, kosakata, kuis</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY MODE — minimal 4-action layout (#/emergency) — Phase 4 fills this in -->
+<section id="emergency-mode" class="route-hidden" aria-label="Emergency mode">
+  <div class="emergency-mode-placeholder">
+    <p style="font-family:'Press Start 2P',monospace;color:var(--alert-red);font-size:clamp(18px,4vw,28px);margin-bottom:24px;">🚨 EMERGENCY</p>
+    <a href="#/prepare" style="display:inline-block;padding:16px 32px;background:var(--alert-red);color:#fff;font-family:'Press Start 2P',monospace;font-size:11px;text-decoration:none;border-radius:4px;margin:8px;">
+      ← Back to Prepare
+    </a>
+    <a href="tel:119" style="display:inline-block;padding:16px 32px;background:var(--safe-green);color:#fff;font-family:'Press Start 2P',monospace;font-size:11px;text-decoration:none;border-radius:4px;margin:8px;">
+      📞 Call 119
+    </a>
+    <p style="color:var(--text);opacity:0.6;font-size:12px;margin-top:24px;">Full emergency layout coming in Phase 4</p>
   </div>
 </section>
 
