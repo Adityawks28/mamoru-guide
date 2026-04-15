@@ -5,3 +5,5 @@ node_modules/
 .vscode/
 .idea/
 dist/
+docs/
+CLAUDE.md
