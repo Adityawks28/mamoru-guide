@@ -19,23 +19,80 @@
 .tab-content.active { display: block; }
 @keyframes tabIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-/* Vocab cards */
-.vocab-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 12px;
+/* Flashcard stage */
+.flashcard-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.vocab-card {
+.flashcard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.flashcard-counter {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--portopia-blue);
+  min-width: 64px;
+  text-align: center;
+  user-select: none;
+}
+.flashcard-card {
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 4px;
-  padding: 14px;
-  border-left: 5px solid;
+  border-left: 6px solid var(--card-border);
+  border-radius: 8px;
+  padding: 36px 32px;
+  text-align: center;
+  animation: fcSlideIn 0.22s ease;
 }
-.vocab-card.cat-danger { border-left-color: var(--alert-red); }
-.vocab-card.cat-action { border-left-color: var(--safe-green); }
-.vocab-card.cat-places { border-left-color: var(--portopia-blue); }
-.vocab-card.cat-help { border-left-color: var(--meriken-amber); }
+@keyframes fcSlideIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.flashcard-card.cat-danger { border-left-color: var(--alert-red); }
+.flashcard-card.cat-action { border-left-color: var(--safe-green); }
+.flashcard-card.cat-places { border-left-color: var(--portopia-blue); }
+.flashcard-card.cat-help   { border-left-color: var(--meriken-amber); }
+.flashcard-jp {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.flashcard-romaji {
+  font-size: 15px;
+  color: var(--portopia-blue);
+  font-style: italic;
+  margin-bottom: 20px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  letter-spacing: 0.03em;
+}
+.flashcard-divider {
+  border: none;
+  border-top: 1px solid var(--card-border);
+  margin: 0 0 20px;
+}
+.flashcard-translations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.flashcard-translation {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.flashcard-translation .flag {
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+/* Vocab cards (kept for reference, not rendered in flashcard mode) */
 .vocab-jp {
   font-size: 22px; font-weight: 800;
 }

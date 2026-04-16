@@ -155,6 +155,34 @@
   color: var(--text);
 }
 
+/* Stats bar */
+.shelter-stats-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.shelter-stat-chip {
+  flex: 1;
+  min-width: 100px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-align: center;
+}
+.shelter-stat-chip-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+.shelter-stat-chip-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--meriken-amber);
+}
+
 /* Day mode */
 body.day-mode .shelter-card {
   background: rgba(0, 0, 0, 0.03);
