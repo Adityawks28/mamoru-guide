@@ -31,6 +31,7 @@ function toggleBagItem(idx: number): void {
     showToast('✓ Packed!');
   }
   updateBagStats();
+  updatePackPanel();
 }
 
 export function renderBagItems(): void {
@@ -64,6 +65,42 @@ export function renderBagItems(): void {
   // Re-apply language visibility after rendering
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + currentLang);
+}
+
+function updatePackPanel(): void {
+  const list = document.getElementById('bagPackList');
+  const weightLabel = document.getElementById('bagPackWeight');
+  if (!list) return;
+
+  if (packedItems.size === 0) {
+    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty — start packing!</span><span data-lang="ja">空 — 詰め始めよう！</span><span data-lang="id">Kosong — mulai isi!</span></div>`;
+    document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
+    document.body.classList.add('lang-' + currentLang);
+  } else {
+    list.innerHTML = Array.from(packedItems).map(i => {
+      const item = bagItems[i];
+      const name = currentLang === 'ja' ? item.ja : currentLang === 'id' ? item.id : item.en;
+      return `<div class="bag-pack-item">
+        <span class="bag-pack-item-emoji">${item.e}</span>
+        <span class="bag-pack-item-name">${name}</span>
+        <span class="bag-pack-item-weight">${item.weight}kg</span>
+      </div>`;
+    }).join('');
+  }
+
+  if (weightLabel) {
+    const w = getCurrentWeight();
+    const pct = Math.min((w / MAX_BAG_WEIGHT) * 100, 100);
+    const colorClass = pct > 90 ? 'danger' : pct > 70 ? 'warning' : '';
+    weightLabel.innerHTML = `
+      <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
+      <div class="weight-bar-outer">
+        <div class="weight-bar-fill${colorClass ? ' ' + colorClass : ''}" style="width:${pct}%"></div>
+        <div class="weight-bar-text">${w.toFixed(1)} / ${MAX_BAG_WEIGHT.toFixed(1)} kg</div>
+      </div>`;
+    document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
+    document.body.classList.add('lang-' + currentLang);
+  }
 }
 
 export function updateBagStats(): void {
@@ -127,5 +164,6 @@ export function resetBag(): void {
   if (result) result.classList.remove('show');
   renderBagItems();
   updateBagStats();
+  updatePackPanel();
   showToast('🔄 Bag reset!');
 }

@@ -4,7 +4,7 @@ import { initTheme, toggleDayNight } from './theme';
 import { initLang, setLang } from './lang';
 import { initRouter } from './router';
 import { initEarthquakeScale } from './earthquake-scale';
-import { initVocab, switchTab } from './vocab';
+import { initVocab, switchTab, prevCard, nextCard } from './vocab';
 import { renderBagItems, updateBagStats, checkBag, resetBag } from './bag-game';
 import { initScrollReveal } from './scroll-reveal';
 import { initMobileNav } from './nav';
@@ -47,6 +47,8 @@ Object.assign(window, {
   toggleDayNight,
   shareGuide,
   switchTab,
+  prevCard,
+  nextCard,
   checkBag,
   resetBag,
   savePlan,
