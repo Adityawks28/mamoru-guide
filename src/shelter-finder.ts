@@ -135,6 +135,27 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
   map.fitBounds(bounds, { padding: [30, 30] });
 }
 
+function renderStatsBar(nearest: ShelterWithDistance[]): void {
+  const bar = document.getElementById('shelterStatsBar');
+  if (!bar || nearest.length === 0) return;
+  const nearest1 = nearest[0];
+  const avgWalk = Math.round(nearest.reduce((s, n) => s + n.walkMinutes, 0) / nearest.length);
+  bar.innerHTML = `
+    <div class="shelter-stat-chip">
+      <div class="shelter-stat-chip-label"><span data-lang="en">FOUND</span><span data-lang="ja">件数</span><span data-lang="id">DITEMUKAN</span></div>
+      <div class="shelter-stat-chip-value">${nearest.length}</div>
+    </div>
+    <div class="shelter-stat-chip">
+      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">最寄り</span><span data-lang="id">TERDEKAT</span></div>
+      <div class="shelter-stat-chip-value">${formatDistance(nearest1.distance)}</div>
+    </div>
+    <div class="shelter-stat-chip">
+      <div class="shelter-stat-chip-label"><span data-lang="en">AVG WALK</span><span data-lang="ja">平均徒歩</span><span data-lang="id">RATA JALAN</span></div>
+      <div class="shelter-stat-chip-value">~${avgWalk}min</div>
+    </div>`;
+  reapplyLang();
+}
+
 function renderShelterList(_lat: number, _lng: number, nearest: ShelterWithDistance[]): void {
   const listEl = document.getElementById('shelterList');
   if (!listEl) return;
@@ -186,6 +207,7 @@ function showManualFallback(): void {
     </div>
     <div id="shelterMap" class="shelter-map-container" style="display:none;"></div>
     <div id="shelterList" class="shelter-list"></div>
+    <div class="shelter-stats-bar" id="shelterStatsBar"></div>
   `;
   reapplyLang();
 
@@ -195,6 +217,7 @@ function showManualFallback(): void {
     const city = cities[idx];
     const nearest = findNearest(city.lat, city.lng, 5);
     renderShelterList(city.lat, city.lng, nearest);
+    renderStatsBar(nearest);
 
     try {
       await loadLeaflet();
@@ -239,10 +262,12 @@ async function findShelters(): Promise<void> {
         <span data-lang="id">📍 ${nearest.length} tempat perlindungan terdekat</span>
       </div>
       <div id="shelterList" class="shelter-list"></div>
+      <div class="shelter-stats-bar" id="shelterStatsBar"></div>
     `;
     reapplyLang();
 
     renderShelterList(lat, lng, nearest);
+    renderStatsBar(nearest);
 
     // Load map (non-blocking)
     try {

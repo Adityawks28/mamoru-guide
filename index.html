@@ -361,16 +361,44 @@
   </div>
 
   <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel">
-    <div class="vocab-grid" id="vocabDanger"></div>
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('danger')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterDanger">1 / 8</span>
+        <button class="bag-btn secondary" onclick="nextCard('danger')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardDanger"></div>
+    </div>
   </div>
   <div class="tab-content" id="vocabPanelAction" data-tab="action" data-group="vocab" role="tabpanel">
-    <div class="vocab-grid" id="vocabAction"></div>
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('action')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterAction">1 / 5</span>
+        <button class="bag-btn secondary" onclick="nextCard('action')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardAction"></div>
+    </div>
   </div>
   <div class="tab-content" id="vocabPanelPlaces" data-tab="places" data-group="vocab" role="tabpanel">
-    <div class="vocab-grid" id="vocabPlaces"></div>
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('places')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterPlaces">1 / 4</span>
+        <button class="bag-btn secondary" onclick="nextCard('places')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardPlaces"></div>
+    </div>
   </div>
   <div class="tab-content" id="vocabPanelHelp" data-tab="help" data-group="vocab" role="tabpanel">
-    <div class="vocab-grid" id="vocabHelp"></div>
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('help')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterHelp">1 / 6</span>
+        <button class="bag-btn secondary" onclick="nextCard('help')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardHelp"></div>
+    </div>
   </div>
 
   <!-- Yasashii Nihongo with furigana and romaji -->
@@ -444,7 +472,7 @@
     <div class="bag-stats">
       <div class="bag-stat">
         <div class="bag-stat-label"><span data-lang="en">ITEMS</span><span data-lang="ja">アイテム</span><span data-lang="id">ITEM</span></div>
-        <div class="bag-stat-value" id="bagItemCount">0 / 14</div>
+        <div class="bag-stat-value" id="bagItemCount">0 / 18</div>
       </div>
       <div class="bag-stat">
         <div class="bag-stat-label"><span data-lang="en">SCORE</span><span data-lang="ja">スコア</span><span data-lang="id">SKOR</span></div>
@@ -459,7 +487,27 @@
       </div>
     </div>
 
-    <div class="bag-items-grid" id="bagItemsGrid"></div>
+    <div class="bag-layout">
+      <div class="bag-items-col">
+        <div class="bag-items-grid" id="bagItemsGrid"></div>
+      </div>
+      <div class="bag-pack-panel">
+        <div class="bag-pack-header">
+          <span class="bag-pack-icon">🎒</span>
+          <span data-lang="en">YOUR BAG</span><span data-lang="ja">あなたのバッグ</span><span data-lang="id">TAS ANDA</span>
+        </div>
+        <div class="bag-pack-list" id="bagPackList">
+          <div class="bag-pack-empty"><span data-lang="en">Empty — start packing!</span><span data-lang="ja">空 — 詰め始めよう！</span><span data-lang="id">Kosong — mulai isi!</span></div>
+        </div>
+        <div class="bag-pack-weight" id="bagPackWeight">
+          <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
+          <div class="weight-bar-outer">
+            <div class="weight-bar-fill" style="width:0%"></div>
+            <div class="weight-bar-text">0.0 / 8.0 kg</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="bag-result" id="bagResult">
       <h3 id="bagResultTitle"></h3>
