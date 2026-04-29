@@ -20,6 +20,19 @@ export const en: Record<string, string> = {
   'mode.learn.title':       'Learn',
   'mode.learn.desc':        'Drills, vocabulary, quizzes',
 
+  // Emergency mode (4-action layout)
+  'em.title':       '🚨 EMERGENCY',
+  'em.subtitle':    'Tap an action — keep calm, breathe, act',
+  'em.back':        '← Back',
+  'em.call.title':  'Call 119',
+  'em.call.desc':   'Fire / Ambulance',
+  'em.show.title':  'Show Card',
+  'em.show.desc':   'Japanese phrases for helpers',
+  'em.shelter.title': 'Find Shelter',
+  'em.shelter.desc':  'Nearest evacuation point',
+  'em.alerts.title':  'Alert Info',
+  'em.alerts.desc':   'What the warnings mean',
+
   // Earthquake section
   'eq.title':    "Japan's Seismic Intensity Scale (震度 Shindo)",
   'eq.subtitle': 'Shindo measures what you feel, not the quake\'s energy. Tap any row to feel the shaking!',

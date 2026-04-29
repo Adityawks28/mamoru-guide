@@ -20,6 +20,19 @@ export const ja: Record<string, string> = {
   'mode.learn.title':       '学ぶ',
   'mode.learn.desc':        '訓練・語彙・クイズ',
 
+  // Emergency mode
+  'em.title':       '🚨 緊急',
+  'em.subtitle':    '行動をタップ — 落ち着いて、深呼吸、行動',
+  'em.back':        '← 戻る',
+  'em.call.title':  '119に電話',
+  'em.call.desc':   '消防・救急',
+  'em.show.title':  'カードを見せる',
+  'em.show.desc':   '助けを求める日本語フレーズ',
+  'em.shelter.title': '避難所を探す',
+  'em.shelter.desc':  '最寄りの避難場所',
+  'em.alerts.title':  '警報情報',
+  'em.alerts.desc':   '警報の意味',
+
   // Earthquake section
   'eq.title':    '日本の震度階級（震度 Shindo）',
   'eq.subtitle': '震度はあなたが感じる揺れの強さ。各行をタップして揺れを体験！',

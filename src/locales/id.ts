@@ -20,6 +20,19 @@ export const id: Record<string, string> = {
   'mode.learn.title':       'Belajar',
   'mode.learn.desc':        'Latihan, kosakata, kuis',
 
+  // Emergency mode
+  'em.title':       '🚨 DARURAT',
+  'em.subtitle':    'Ketuk tindakan — tetap tenang, ambil napas, bertindak',
+  'em.back':        '← Kembali',
+  'em.call.title':  'Telepon 119',
+  'em.call.desc':   'Pemadam / Ambulans',
+  'em.show.title':  'Tunjukkan Kartu',
+  'em.show.desc':   'Frasa Jepang untuk penolong',
+  'em.shelter.title': 'Cari Tempat Berlindung',
+  'em.shelter.desc':  'Titik evakuasi terdekat',
+  'em.alerts.title':  'Info Peringatan',
+  'em.alerts.desc':   'Arti peringatan',
+
   // Earthquake section
   'eq.title':    'Skala Intensitas Seismik Jepang (震度 Shindo)',
   'eq.subtitle': 'Shindo mengukur apa yang Anda rasakan. Ketuk baris untuk merasakan guncangan!',
