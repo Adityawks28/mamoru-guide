@@ -40,7 +40,7 @@
   right: 24px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 8px;
   z-index: 999;
   min-width: 220px;
@@ -64,13 +64,13 @@
   padding: 10px 14px;
   color: var(--kitano-white);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 13px;
   font-weight: 600;
   transition: background 0.15s;
 }
 .fab-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-hover);
 }
 .fab-item-icon {
   font-size: 18px;

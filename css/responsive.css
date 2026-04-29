@@ -10,7 +10,7 @@
   .section-title { font-size: 1.3rem; }
   .section-label { font-size: 0.6rem; }
 
-  .split-panel { flex-direction: column; }
+  .split-panel { grid-template-columns: 1fr !important; }
   .alert-grid { grid-template-columns: 1fr; }
   .app-list { grid-template-columns: 1fr; }
   .step-grid { grid-template-columns: 1fr; }
@@ -21,6 +21,8 @@
   .firstaid-grid { grid-template-columns: 1fr; }
 
   .bag-stats { flex-direction: column; align-items: stretch; }
+  .bag-weight-bar { min-width: 0; }
+  .bag-items-grid { grid-template-columns: 1fr; }
   .scale-row .desc { font-size: 11px; }
   .scale-row .num { font-size: 16px; min-width: 40px; }
 
@@ -32,18 +34,27 @@
 }
 
 @media (max-width: 480px) {
-  .scale-row { flex-wrap: wrap; }
+  .scale-row {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .scale-row .jp-name,
+  .scale-row .desc {
+    min-width: 0;
+  }
 
   .nav-right { gap: 0.25rem; }
   .lang-switcher { flex-wrap: wrap; }
-  .lang-btn { font-size: 0.65rem; padding: 2px 6px; }
+  .lang-btn { font-size: 0.58rem; padding: 4px 6px; }
 
   .section-label { font-size: 0.6rem; }
   .section-title { font-size: 1.1rem; }
 
-  .bag-items { grid-template-columns: repeat(2, 1fr); }
+  .tab-bar { display: grid; grid-template-columns: 1fr 1fr; }
+  .tab-btn { min-height: 44px; white-space: normal; line-height: 1.4; }
   .vocab-grid { grid-template-columns: 1fr; }
 
   .about-card { padding: 1rem; }
   .step-card { padding: 1rem; }
+  .toast { left: 12px; right: 12px; text-align: center; }
 }

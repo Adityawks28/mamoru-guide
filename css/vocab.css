@@ -12,8 +12,9 @@
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
+  min-height: 44px;
 }
-.tab-btn:hover { border-color: var(--meriken-amber); }
+.tab-btn:hover { border-color: var(--accent); }
 .tab-btn.active { background: var(--alert-red); border-color: var(--alert-red); }
 .tab-content { display: none; animation: tabIn 0.3s ease; }
 .tab-content.active { display: block; }
@@ -43,7 +44,7 @@
   background: var(--card-bg);
   border: 2px solid var(--card-border);
   border-left: 6px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 36px 32px;
   text-align: center;
   animation: fcSlideIn 0.22s ease;
@@ -144,4 +145,17 @@ ruby rt {
   font-style: italic;
   line-height: 1.5;
   letter-spacing: 0.02em;
+}
+
+body.day-mode .tab-btn,
+body.day-mode .flashcard-card,
+body.day-mode .yasashii-card {
+  background: var(--surface-soft);
+  border-color: rgba(0,0,0,0.12);
+}
+
+body.day-mode .tab-btn.active {
+  background: var(--alert-red);
+  border-color: var(--alert-red);
+  color: #fff;
 }

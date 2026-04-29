@@ -2,7 +2,7 @@
 .showthis-card {
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 32px 24px;
   max-width: 600px;
   margin: 0 auto;
@@ -31,7 +31,7 @@
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 16px;
-  opacity: 0.9;
+  color: var(--text-muted);
 }
 
 .showthis-en,
@@ -41,7 +41,7 @@
 
 .showthis-context {
   font-size: 12px;
-  color: var(--meriken-amber);
+  color: var(--accent);
   background: rgba(245, 166, 35, 0.08);
   border: 1px solid rgba(245, 166, 35, 0.2);
   border-radius: 4px;
@@ -68,20 +68,21 @@
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
+  min-height: 44px;
 }
 .showthis-nav-btn:hover:not(:disabled) {
-  border-color: var(--meriken-amber);
+  border-color: var(--accent);
   transform: translateY(-2px);
 }
 .showthis-nav-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .showthis-counter {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
-  color: var(--meriken-amber);
+  color: var(--accent);
   min-width: 60px;
 }
 
