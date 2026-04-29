@@ -4,21 +4,21 @@ body.day-mode .navbar {
   border-bottom-color: var(--motomachi-brick);
 }
 body.day-mode .nav-logo span,
-body.day-mode .section-title { color: #c07020; }
+body.day-mode .section-title { color: var(--accent); }
 body.day-mode .nav-links a { color: #2a4060; }
 body.day-mode .section-label { color: #2080a0; }
-body.day-mode .section-note { color: rgba(30,50,70,0.7); }
+body.day-mode .section-note { color: var(--text-muted); }
 body.day-mode .footer { background: rgba(200,220,240,0.95); }
 body.day-mode .footer-copy,
 body.day-mode .footer-emergency { color: #2a4060; }
 body.day-mode .bld { background: #a0b8c8; }
 body.day-mode .bld-window { background: #6090b0; }
 body.day-mode .bld-window.off { background: #c0d4e0; }
-body.day-mode .hero-title { color: #c07020; text-shadow: 0 2px 0 #906010; }
+body.day-mode .hero-title { color: var(--accent); text-shadow: 0 2px 0 #906010; }
 body.day-mode .hero-kanji { color: #2a4060; }
-body.day-mode .hero-kanji .big { color: #c07020; }
+body.day-mode .hero-kanji .big { color: var(--accent); }
 body.day-mode .hero-subtitle { color: #3a5a7a; }
-body.day-mode .scroll-hint { color: #c07020; }
+body.day-mode .scroll-hint { color: var(--accent); }
 
 /* Reset */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -32,6 +32,17 @@ body {
   overflow-x: hidden;
   image-rendering: pixelated;
   transition: background 0.6s, color 0.6s;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 [data-lang] { display: none; }
 body.lang-en [data-lang="en"],
@@ -50,9 +61,9 @@ body.lang-id [data-block-lang="id"] { display: block; }
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-contrast);
   padding: 0.5rem 1.5rem;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 4px 4px;
   z-index: 10000;
   font-weight: 700;
   text-decoration: none;

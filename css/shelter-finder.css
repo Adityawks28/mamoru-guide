@@ -4,7 +4,7 @@
 .shelter-map-container {
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
   border: 2px solid var(--card-border);
   margin-bottom: 16px;
@@ -19,7 +19,7 @@
 .shelter-map-offline {
   text-align: center;
   font-size: 14px;
-  opacity: 0.6;
+  color: var(--text-muted);
   padding: 20px;
 }
 
@@ -65,7 +65,7 @@
   gap: 14px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 14px;
   transition: transform 0.2s, border-color 0.2s;
 }
@@ -84,12 +84,12 @@
 }
 .shelter-name-en {
   font-size: 12px;
-  opacity: 0.7;
+  color: var(--text-muted);
   margin-bottom: 2px;
 }
 .shelter-address {
   font-size: 11px;
-  opacity: 0.55;
+  color: var(--text-soft);
   margin-bottom: 6px;
 }
 
@@ -122,7 +122,7 @@
 }
 .shelter-walk {
   font-size: 11px;
-  opacity: 0.7;
+  color: var(--text-muted);
 }
 
 /* Manual fallback */
@@ -132,7 +132,7 @@
 .shelter-fallback-msg {
   font-size: 14px;
   margin-bottom: 10px;
-  opacity: 0.85;
+  color: var(--text-muted);
 }
 .shelter-city-select {
   width: 100%;
@@ -167,20 +167,20 @@
   min-width: 100px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 12px 14px;
   text-align: center;
 }
 .shelter-stat-chip-label {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
-  opacity: 0.6;
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 .shelter-stat-chip-value {
   font-family: 'Press Start 2P', monospace;
   font-size: 14px;
-  color: var(--meriken-amber);
+  color: var(--accent);
 }
 
 /* Day mode */

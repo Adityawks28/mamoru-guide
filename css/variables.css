@@ -15,6 +15,15 @@
   --card-border: rgba(245,166,35,0.25);
   --bg-main: var(--harbor-navy);
   --text-main: var(--kitano-white);
+  --bg: var(--bg-main);
+  --text: var(--text-main);
+  --accent: var(--meriken-amber);
+  --accent-contrast: #0f1f3d;
+  --text-muted: rgba(248,244,237,0.78);
+  --text-soft: rgba(248,244,237,0.68);
+  --surface-soft: rgba(255,255,255,0.06);
+  --surface-hover: rgba(255,255,255,0.1);
+  --focus-ring: #ffe28a;
   --sky-grad-top: #0a1428;
   --sky-grad-bot: #1e3a5f;
   --mountain-far: #0d1a30;
@@ -28,6 +37,15 @@ body.day-mode {
   --harbor-navy: #e8f0f8;
   --bg-main: #d4e6f4;
   --text-main: #1a2a3a;
+  --bg: var(--bg-main);
+  --text: var(--text-main);
+  --accent: #8a4f08;
+  --accent-contrast: #ffffff;
+  --text-muted: rgba(26,42,58,0.76);
+  --text-soft: rgba(26,42,58,0.66);
+  --surface-soft: rgba(0,0,0,0.045);
+  --surface-hover: rgba(0,0,0,0.075);
+  --focus-ring: #6a3d05;
   --sky-grad-top: #87CEEB;
   --sky-grad-bot: #c8e8ff;
   --mountain-far: #8aaa9a;
@@ -41,4 +59,5 @@ body.day-mode {
   --water-opacity: 1;
   --port-fog: #b0d0e8;
   --kitano-white: #1a2a3a;
+  --portopia-blue: #15607e;
 }
