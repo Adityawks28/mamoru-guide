@@ -63,6 +63,8 @@ export const ja: Record<string, string> = {
   'plan.btn.save':  '💾 保存',
   'plan.btn.print': '🖨️ ワークシート印刷',
   'plan.btn.clear': '🗑️ 消去',
+  'plan.btn.next':  '次へ →',
+  'plan.btn.prev':  '← 戻る',
 
   // About section
   'about.title': 'このガイドについて',
