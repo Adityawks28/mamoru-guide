@@ -1,0 +1,157 @@
+#emergency-mode {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 40px;
+  background: linear-gradient(180deg, rgba(232,64,64,0.06), transparent 240px);
+}
+
+.em-header {
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+.em-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--kitano-white);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+}
+.em-back:hover { background: rgba(255,255,255,0.12); transform: translateX(-2px); }
+body.day-mode .em-back {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.15);
+}
+
+.em-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(20px, 5vw, 32px);
+  color: var(--alert-red);
+  letter-spacing: 2px;
+  margin: 16px 0 8px;
+  text-shadow: 0 0 24px rgba(232,64,64,0.4);
+  animation: em-pulse 2s ease-in-out infinite;
+}
+@keyframes em-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.85; }
+}
+.em-subtitle {
+  color: var(--kitano-white);
+  opacity: 0.75;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.em-grid {
+  width: 100%;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.em-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 180px;
+  padding: 28px 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  text-decoration: none;
+  text-align: center;
+  color: var(--kitano-white);
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.em-card:hover,
+.em-card:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+.em-card:active { transform: translateY(0); }
+
+.em-card-icon {
+  font-size: clamp(38px, 9vw, 54px);
+  line-height: 1;
+}
+.em-card-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.em-card-desc {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+
+.em-card-call {
+  border-color: rgba(232,64,64,0.4);
+  background: linear-gradient(160deg, rgba(232,64,64,0.18), var(--card-bg));
+}
+.em-card-call:hover {
+  border-color: var(--alert-red);
+  box-shadow: 0 8px 24px rgba(232,64,64,0.25);
+}
+.em-card-call .em-card-title { color: var(--alert-red); }
+
+.em-card-show {
+  border-color: rgba(245,166,35,0.4);
+  background: linear-gradient(160deg, rgba(245,166,35,0.16), var(--card-bg));
+}
+.em-card-show:hover {
+  border-color: var(--meriken-amber);
+  box-shadow: 0 8px 24px rgba(245,166,35,0.25);
+}
+.em-card-show .em-card-title { color: var(--meriken-amber); }
+
+.em-card-shelter {
+  border-color: rgba(78,203,113,0.4);
+  background: linear-gradient(160deg, rgba(78,203,113,0.16), var(--card-bg));
+}
+.em-card-shelter:hover {
+  border-color: var(--safe-green);
+  box-shadow: 0 8px 24px rgba(78,203,113,0.25);
+}
+.em-card-shelter .em-card-title { color: var(--safe-green); }
+
+.em-card-alerts {
+  border-color: rgba(76,201,240,0.4);
+  background: linear-gradient(160deg, rgba(76,201,240,0.16), var(--card-bg));
+}
+.em-card-alerts:hover {
+  border-color: var(--portopia-blue);
+  box-shadow: 0 8px 24px rgba(76,201,240,0.25);
+}
+.em-card-alerts .em-card-title { color: var(--portopia-blue); }
+
+@media (max-width: 540px) {
+  #emergency-mode { padding: 16px 14px 24px; }
+  .em-back {
+    position: static;
+    margin-bottom: 12px;
+    align-self: flex-start;
+  }
+  .em-header { display: flex; flex-direction: column; }
+  .em-grid { grid-template-columns: 1fr; gap: 12px; }
+  .em-card { min-height: 130px; padding: 20px; flex-direction: row; gap: 16px; text-align: left; justify-content: flex-start; }
+  .em-card-icon { font-size: 38px; }
+  .em-card-title { font-size: 11px; }
+}
