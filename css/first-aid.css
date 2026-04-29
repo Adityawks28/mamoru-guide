@@ -12,10 +12,11 @@
   padding: 20px 14px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 6px;
   color: var(--text);
   font-family: 'M PLUS Rounded 1c', sans-serif;
   cursor: pointer;
+  min-height: 44px;
   transition: all 0.2s;
   text-align: center;
 }
@@ -32,7 +33,7 @@
 }
 .firstaid-card-count {
   font-size: 11px;
-  opacity: 0.6;
+  color: var(--text-muted);
 }
 
 /* Back button */
@@ -79,7 +80,7 @@
   padding: 18px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 6px;
   border-left: 5px solid var(--accent);
   margin-bottom: 12px;
 }
@@ -90,7 +91,7 @@
   align-items: center;
   justify-content: center;
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-contrast);
   border-radius: 50%;
   font-family: 'Press Start 2P', monospace;
   font-size: 14px;
@@ -107,7 +108,7 @@
   padding: 12px 14px;
   background: rgba(232, 64, 64, 0.12);
   border-left: 4px solid var(--alert-red);
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 13px;
   line-height: 1.5;
   margin-bottom: 12px;
@@ -125,7 +126,7 @@
   padding: 14px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 6px;
   margin-bottom: 12px;
 }
 .firstaid-timer.running {
@@ -152,13 +153,14 @@
 .firstaid-timer-btn {
   padding: 8px 16px;
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-contrast);
   border: none;
   border-radius: 6px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
+  min-height: 44px;
   transition: transform 0.2s;
 }
 .firstaid-timer-btn:hover:not(:disabled) { transform: translateY(-1px); }
@@ -173,20 +175,21 @@
 }
 .firstaid-nav-btn {
   padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-soft);
   border: 2px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 4px;
   color: var(--text);
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  min-height: 44px;
   transition: all 0.2s;
 }
 .firstaid-nav-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
 .firstaid-nav-btn.primary {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-contrast);
   border-color: var(--accent);
 }
 
