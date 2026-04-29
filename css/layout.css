@@ -1,16 +1,8 @@
 /* Router */
 .route-hidden { display: none !important; }
-body[data-route="emergency"] .navbar { display: none; }
-
-.emergency-mode-placeholder {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px 20px;
-}
+body[data-route="emergency"] .navbar,
+body[data-route="emergency"] #emergencyFab,
+body[data-route="emergency"] footer { display: none; }
 
 .mode-selector {
   min-height: calc(100vh - 56px); /* full screen minus navbar */
@@ -46,6 +38,7 @@ body[data-route="emergency"] .navbar { display: none; }
   padding: 32px 20px;
   border-radius: 8px;
   text-decoration: none;
+  color: var(--text-main);
   border: 3px solid transparent;
   transition: transform 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
   background: var(--card-bg);
@@ -69,7 +62,8 @@ body[data-route="emergency"] .navbar { display: none; }
 }
 .mode-card-desc {
   font-size: 13px;
-  opacity: 0.75;
+  color: var(--text-main);
+  opacity: 0.85;
   line-height: 1.5;
 }
 .mode-card--emergency {
@@ -153,14 +147,15 @@ body[data-route="emergency"] .navbar { display: none; }
   color: var(--meriken-amber);
   font-size: 14px;
 }
-.nav-right { display: flex; align-items: center; gap: 12px; }
-.nav-links { display:flex; gap:16px; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-links { display:flex; gap: 28px; }
 .nav-links a {
   color: var(--kitano-white);
   text-decoration: none;
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
-  opacity: 0.7;
+  font-size: 10px;
+  letter-spacing: 1px;
+  opacity: 0.75;
   transition: opacity 0.2s, color 0.2s;
   white-space: nowrap;
 }
