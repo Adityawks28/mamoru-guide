@@ -2,7 +2,7 @@
   .nav-links { display: none; }
   .hamburger { display: flex; flex-direction: column; }
   .mobile-menu { display: flex; }
-  #shareBtn, #modeToggle, .lang-switcher { display: none; }
+  #shareBtn, .lang-switcher { display: none; }
 
   .navbar { padding: 0 12px; }
 
