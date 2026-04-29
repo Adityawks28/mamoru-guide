@@ -63,6 +63,8 @@ export const en: Record<string, string> = {
   'plan.btn.save':  '💾 Save Plan',
   'plan.btn.print': '🖨️ Print Worksheet',
   'plan.btn.clear': '🗑️ Clear',
+  'plan.btn.next':  'Next →',
+  'plan.btn.prev':  '← Back',
 
   // About section
   'about.title': 'About This Guide',

@@ -63,6 +63,8 @@ export const id: Record<string, string> = {
   'plan.btn.save':  '💾 Simpan',
   'plan.btn.print': '🖨️ Cetak Lembar Kerja',
   'plan.btn.clear': '🗑️ Hapus',
+  'plan.btn.next':  'Berikutnya →',
+  'plan.btn.prev':  '← Kembali',
 
   // About section
   'about.title': 'Tentang Panduan Ini',
