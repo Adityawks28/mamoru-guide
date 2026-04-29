@@ -9,6 +9,8 @@ const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/learn':     ['drill', 'quiz', 'about'],
   '#/plan':      ['myplan'],
   '#/shelter':   ['shelter'],
+  '#/show':      ['showthis'],
+  '#/alerts':    ['alerts'],
 };
 
 // Legacy v1 anchors → redirect to new route format
