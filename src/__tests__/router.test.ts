@@ -113,6 +113,18 @@ describe('activateRoute()', () => {
     expect(visibleSections()).toEqual(['shelter']);
   });
 
+  // --- Show / Alerts (emergency mode targets) ---
+
+  it('shows only showthis on #/show', () => {
+    activateRoute('#/show');
+    expect(visibleSections()).toEqual(['showthis']);
+  });
+
+  it('shows only alerts on #/alerts', () => {
+    activateRoute('#/alerts');
+    expect(visibleSections()).toEqual(['alerts']);
+  });
+
   // --- Unknown hash → fallback to landing ---
 
   it('falls back to landing for an unknown hash', () => {
