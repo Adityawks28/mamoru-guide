@@ -82,6 +82,31 @@ function loadLeaflet(): Promise<void> {
   });
 }
 
+const LAST_LOC_KEY = 'mamoru-shelter-last-location';
+const LAST_LOC_TTL_MS = 60 * 60 * 1000;
+
+interface CachedLocation { lat: number; lng: number; ts: number }
+
+function readCachedLocation(): CachedLocation | null {
+  try {
+    const raw = localStorage.getItem(LAST_LOC_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as CachedLocation;
+    if (Date.now() - parsed.ts > LAST_LOC_TTL_MS) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function writeCachedLocation(lat: number, lng: number): void {
+  try {
+    localStorage.setItem(LAST_LOC_KEY, JSON.stringify({ lat, lng, ts: Date.now() }));
+  } catch {
+    // ignore quota errors
+  }
+}
+
 function getUserLocation(): Promise<{ lat: number; lng: number }> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -244,11 +269,12 @@ function showLoading(): void {
   reapplyLang();
 }
 
-async function findShelters(): Promise<void> {
+async function findShelters(useCached?: CachedLocation): Promise<void> {
   showLoading();
 
   try {
-    const { lat, lng } = await getUserLocation();
+    const { lat, lng } = useCached ?? await getUserLocation();
+    if (!useCached) writeCachedLocation(lat, lng);
     const nearest = findNearest(lat, lng, 5);
 
     const container = document.getElementById('shelterContainer');
@@ -292,8 +318,31 @@ async function findShelters(): Promise<void> {
   }
 }
 
+function renderCachedHint(): void {
+  const hint = document.getElementById('shelterCachedHint');
+  if (!hint) return;
+  const cached = readCachedLocation();
+  if (!cached) {
+    hint.innerHTML = '';
+    return;
+  }
+  const minsAgo = Math.max(1, Math.round((Date.now() - cached.ts) / 60000));
+  hint.innerHTML = `
+    <button type="button" class="shelter-cached-btn" id="shelterCachedBtn">
+      <span data-lang="en">📍 Use last location (saved ${minsAgo}m ago)</span>
+      <span data-lang="ja">📍 前回の位置を使用 (${minsAgo}分前)</span>
+      <span data-lang="id">📍 Gunakan lokasi terakhir (${minsAgo}m lalu)</span>
+    </button>
+  `;
+  reapplyLang();
+  document.getElementById('shelterCachedBtn')?.addEventListener('click', () => {
+    findShelters(cached);
+  });
+}
+
 export function initShelterFinder(): void {
   const findBtn = document.getElementById('shelterFindBtn');
   if (!findBtn) return;
-  findBtn.addEventListener('click', findShelters);
+  findBtn.addEventListener('click', () => findShelters());
+  renderCachedHint();
 }

@@ -697,11 +697,19 @@
     <span data-lang="ja">現在地付近の避難所を検索。距離、徒歩時間、対応する災害の種類を表示。</span>
     <span data-lang="id">Temukan tempat perlindungan evakuasi di dekat lokasi Anda. Menampilkan jarak, waktu jalan kaki, dan jenis bencana.</span>
   </p>
-  <button class="bag-btn primary" id="shelterFindBtn" style="margin-bottom:16px;">
-    <span data-lang="en">📍 Find Shelters Near Me</span>
-    <span data-lang="ja">📍 近くの避難所を探す</span>
-    <span data-lang="id">📍 Cari Tempat Perlindungan</span>
-  </button>
+  <div class="shelter-actions">
+    <button class="bag-btn primary" id="shelterFindBtn">
+      <span data-lang="en">📍 Find Shelters Near Me</span>
+      <span data-lang="ja">📍 近くの避難所を探す</span>
+      <span data-lang="id">📍 Cari Tempat Perlindungan</span>
+    </button>
+    <div id="shelterCachedHint" class="shelter-cached-hint"></div>
+  </div>
+  <p class="shelter-privacy-hint">
+    <span data-lang="en">🔒 Your location is used locally only — never sent to a server.</span>
+    <span data-lang="ja">🔒 位置情報は端末内でのみ使用 — サーバーに送信されません。</span>
+    <span data-lang="id">🔒 Lokasi Anda hanya digunakan secara lokal — tidak dikirim ke server.</span>
+  </p>
   <div id="shelterContainer"></div>
 </section>
 
