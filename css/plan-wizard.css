@@ -217,6 +217,121 @@ body.day-mode .wizard-review-group {
   .wizard-nav-btn { flex: 1; padding: 0.65rem 1rem; font-size: 0.85rem; }
 }
 
+.wizard-btn-show {
+  background: var(--alert-red);
+  color: #fff;
+  border: 2px solid var(--alert-red);
+}
+.wizard-btn-show:hover { box-shadow: 0 6px 18px rgba(232,64,64,0.35); }
+
+.plan-show-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.78);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+  animation: plan-show-fade 0.18s ease-out;
+}
+@keyframes plan-show-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.plan-show-card {
+  width: 100%;
+  max-width: 640px;
+  background: #fff;
+  color: #1a1a1a;
+  border: 6px solid var(--alert-red);
+  border-radius: 6px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+}
+.plan-show-header {
+  text-align: center;
+  border-bottom: 3px solid var(--alert-red);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+.plan-show-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 3.2vw, 18px);
+  color: var(--alert-red);
+  letter-spacing: 1.5px;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+.plan-show-subtitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+.plan-show-dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 0 0 22px;
+}
+.plan-show-dl dt {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.plan-show-dl dd {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.plan-show-dl dd.emphasis {
+  font-size: 1.25rem;
+  color: var(--alert-red);
+}
+.plan-show-empty {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  padding: 24px 0;
+}
+.plan-show-close {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  min-height: 48px;
+  background: var(--alert-red);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.15s;
+}
+.plan-show-close:hover {
+  box-shadow: 0 6px 18px rgba(232,64,64,0.4);
+}
+.plan-show-close:active { transform: translateY(1px); }
+
+@media (max-width: 520px) {
+  .plan-show-overlay { padding: 12px 8px; }
+  .plan-show-card { padding: 18px 18px 20px; border-width: 4px; }
+  .plan-show-dl dd { font-size: 1rem; }
+  .plan-show-dl dd.emphasis { font-size: 1.15rem; }
+}
+
+@media print {
+  .plan-show-overlay { display: none !important; }
+}
+
 @media print {
   .wizard-progress,
   .wizard-nav,
