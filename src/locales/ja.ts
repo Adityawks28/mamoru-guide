@@ -33,6 +33,19 @@ export const ja: Record<string, string> = {
   'em.alerts.title':  '警報情報',
   'em.alerts.desc':   '警報の意味',
 
+  // Section chip-nav
+  'chip.earthquake': '🏚 地震',
+  'chip.alerts':     '📡 警報',
+  'chip.typhoon':    '🌀 台風',
+  'chip.vocab':      '🗣 言葉',
+  'chip.showthis':   '💬 カード',
+  'chip.bag':        '🎒 防災袋',
+  'chip.firstaid':   '🩹 応急手当',
+  'chip.contacts':   '📞 連絡先',
+  'chip.drill':      '🎮 訓練',
+  'chip.quiz':       '📝 クイズ',
+  'chip.about':      'ℹ 紹介',
+
   // Earthquake section
   'eq.title':    '日本の震度階級（震度 Shindo）',
   'eq.subtitle': '震度はあなたが感じる揺れの強さ。各行をタップして揺れを体験！',

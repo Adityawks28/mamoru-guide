@@ -33,6 +33,19 @@ export const en: Record<string, string> = {
   'em.alerts.title':  'Alert Info',
   'em.alerts.desc':   'What the warnings mean',
 
+  // Section chip-nav (Prepare / Learn jump-nav)
+  'chip.earthquake': '🏚 Quake',
+  'chip.alerts':     '📡 Alerts',
+  'chip.typhoon':    '🌀 Typhoon',
+  'chip.vocab':      '🗣 Vocab',
+  'chip.showthis':   '💬 Card',
+  'chip.bag':        '🎒 Bag',
+  'chip.firstaid':   '🩹 First Aid',
+  'chip.contacts':   '📞 Contacts',
+  'chip.drill':      '🎮 Drill',
+  'chip.quiz':       '📝 Quiz',
+  'chip.about':      'ℹ About',
+
   // Earthquake section
   'eq.title':    "Japan's Seismic Intensity Scale (震度 Shindo)",
   'eq.subtitle': 'Shindo measures what you feel, not the quake\'s energy. Tap any row to feel the shaking!',
