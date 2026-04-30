@@ -1,6 +1,7 @@
 // router.ts — hash-based view router
 // Maps #/route → section IDs to show. Everything else gets route-hidden.
 
+import { mountSectionNav } from './section-nav';
 
 const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/':          ['hero', 'mode-selector'],
@@ -56,11 +57,14 @@ export function activateRoute(hash: string): void {
     }
   });
 
-  document.body.dataset.route = route.replace('#/', '') || 'home';
+  const routeName = route.replace('#/', '') || 'home';
+  document.body.dataset.route = routeName;
 
   document.querySelectorAll<HTMLAnchorElement>('[data-nav-route]').forEach(link => {
     link.setAttribute('aria-current', link.dataset.navRoute === route ? 'page' : 'false');
   });
+
+  mountSectionNav(routeName);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }

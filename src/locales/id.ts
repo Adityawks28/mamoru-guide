@@ -33,6 +33,19 @@ export const id: Record<string, string> = {
   'em.alerts.title':  'Info Peringatan',
   'em.alerts.desc':   'Arti peringatan',
 
+  // Section chip-nav
+  'chip.earthquake': '🏚 Gempa',
+  'chip.alerts':     '📡 Alarm',
+  'chip.typhoon':    '🌀 Topan',
+  'chip.vocab':      '🗣 Kosakata',
+  'chip.showthis':   '💬 Kartu',
+  'chip.bag':        '🎒 Tas',
+  'chip.firstaid':   '🩹 P3K',
+  'chip.contacts':   '📞 Kontak',
+  'chip.drill':      '🎮 Latihan',
+  'chip.quiz':       '📝 Kuis',
+  'chip.about':      'ℹ Tentang',
+
   // Earthquake section
   'eq.title':    'Skala Intensitas Seismik Jepang (震度 Shindo)',
   'eq.subtitle': 'Shindo mengukur apa yang Anda rasakan. Ketuk baris untuk merasakan guncangan!',
