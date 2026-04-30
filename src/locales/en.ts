@@ -88,9 +88,14 @@ export const en: Record<string, string> = {
   'plan.subtitle': 'Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can\'t speak. Print it and keep a copy in your wallet, bag, and at home.',
   'plan.btn.save':  '💾 Save Plan',
   'plan.btn.print': '🖨️ Print Worksheet',
+  'plan.btn.show':  '🆘 Show My Plan',
   'plan.btn.clear': '🗑️ Clear',
   'plan.btn.next':  'Next →',
   'plan.btn.prev':  '← Back',
+  'plan.show.title':    '🆘 Emergency Info — 緊急情報',
+  'plan.show.subtitle': 'Please help / 助けてください',
+  'plan.show.close':    'Close',
+  'plan.show.empty':    'Plan is empty. Fill in the wizard first to show your information here.',
 
   // About section
   'about.title': 'About This Guide',
