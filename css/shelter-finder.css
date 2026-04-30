@@ -1,5 +1,38 @@
 /* Shelter Finder */
 
+.shelter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.shelter-cached-hint:empty { display: none; }
+.shelter-cached-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-soft);
+  border: 2px dashed var(--card-border);
+  border-radius: 4px;
+  color: var(--text-main);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0 14px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.shelter-cached-btn:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+.shelter-privacy-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 4px 0 16px;
+}
+
 /* Map container */
 .shelter-map-container {
   width: 100%;
