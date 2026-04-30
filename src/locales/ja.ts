@@ -88,9 +88,14 @@ export const ja: Record<string, string> = {
   'plan.subtitle': 'プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。',
   'plan.btn.save':  '💾 保存',
   'plan.btn.print': '🖨️ ワークシート印刷',
+  'plan.btn.show':  '🆘 プランを見せる',
   'plan.btn.clear': '🗑️ 消去',
   'plan.btn.next':  '次へ →',
   'plan.btn.prev':  '← 戻る',
+  'plan.show.title':    '🆘 緊急情報 — Emergency Info',
+  'plan.show.subtitle': '助けてください / Please help',
+  'plan.show.close':    '閉じる',
+  'plan.show.empty':    'プランが空です。先にウィザードに記入してください。',
 
   // About section
   'about.title': 'このガイドについて',

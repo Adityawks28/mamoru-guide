@@ -32,3 +32,18 @@ if (typeof window !== 'undefined') {
     configurable: true,
   });
 }
+
+class StubIntersectionObserver {
+  observe(): void {}
+  unobserve(): void {}
+  disconnect(): void {}
+  takeRecords(): IntersectionObserverEntry[] { return []; }
+  root = null;
+  rootMargin = '';
+  thresholds: ReadonlyArray<number> = [];
+}
+
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  (globalThis as unknown as { IntersectionObserver: typeof IntersectionObserver }).IntersectionObserver =
+    StubIntersectionObserver as unknown as typeof IntersectionObserver;
+}

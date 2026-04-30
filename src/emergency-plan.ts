@@ -3,6 +3,7 @@ import { t } from './i18n';
 import { removeItem } from './storage';
 import { EmergencyPlan, emptyPlan } from './plan-model';
 import { loadPlanV2, savePlanV2, clearPlanV2, migrateV1ToV2 } from './plan-storage';
+import { showPlan } from './show-plan';
 
 type FieldType = 'text' | 'textarea' | 'select';
 interface FieldOption { value: string; label: string }
@@ -218,12 +219,14 @@ function renderReview(): HTMLElement {
 
   const actions = el('div', { class: 'wizard-review-actions' });
   const saveBtn  = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-next' }, t('plan.btn.save'));
+  const showBtn  = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-show' }, t('plan.btn.show'));
   const printBtn = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-prev' }, t('plan.btn.print'));
   const clearBtn = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-clear' }, t('plan.btn.clear'));
   saveBtn.addEventListener('click',  () => savePlan());
+  showBtn.addEventListener('click',  () => showPlan());
   printBtn.addEventListener('click', () => printPlan());
   clearBtn.addEventListener('click', () => clearPlan());
-  actions.append(saveBtn, printBtn, clearBtn);
+  actions.append(saveBtn, showBtn, printBtn, clearBtn);
   card.appendChild(actions);
 
   return card;
