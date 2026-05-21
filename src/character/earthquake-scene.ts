@@ -15,8 +15,11 @@ const TARGETS: Record<number, IntensityTarget> = {
   3: { pose: 'stand', x: 165, y: 92, flip: true },
   4: { pose: 'brace', x: 158, y: 92, flip: true },
   5: { pose: 'cover', x: 175, y: 100, flip: false },
-  6: { pose: 'hide',  x: 208, y: 96, flip: true },
-  7: { pose: 'headcover', x: 210, y: 96, flip: true },
+  // Shindo 6/7: 'cower' pose (scale 0.5 + crouchY 42) packs the body into
+  // a tucked huddle so she fits under the table cavity (room y 126-160).
+  // y=77 anchors her so the head crowns at room y~126 and feet land at ~163.
+  6: { pose: 'cower', x: 210, y: 77, flip: true },
+  7: { pose: 'cower', x: 210, y: 77, flip: true },
 };
 
 interface Hazards {
@@ -44,15 +47,15 @@ interface PoseStep { pose: Pose; delay: number; }
 
 function sequenceForIntensity(i: number, t: IntensityTarget): PoseStep[] {
   if (i >= 7) return [
-    { pose: 'run',       delay: 0    },
-    { pose: 'cover',     delay: 850  },
-    { pose: 'hide',      delay: 1500 },
-    { pose: 'headcover', delay: 2200 },
+    { pose: 'run',   delay: 0    },
+    { pose: 'cover', delay: 850  },
+    { pose: 'hide',  delay: 1500 },
+    { pose: 'cower', delay: 2200 }, // final tucked-under-table position
   ];
   if (i === 6) return [
     { pose: 'run',   delay: 0    },
     { pose: 'cover', delay: 850  },
-    { pose: 'hide',  delay: 1500 },
+    { pose: 'cower', delay: 1500 },
   ];
   if (i === 5) return [
     { pose: 'run',   delay: 0   },

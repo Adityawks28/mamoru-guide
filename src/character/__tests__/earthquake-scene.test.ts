@@ -61,12 +61,12 @@ describe('earthquake-scene', () => {
     expect(actorPose()).toBe('brace');
   });
 
-  it('shindo 7 → final headcover pose at 2200ms', async () => {
+  it('shindo 7 → final cower pose at 2200ms (tucked under table)', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 7 } }));
     vi.advanceTimersByTime(2300);
-    expect(actorPose()).toBe('headcover');
+    expect(actorPose()).toBe('cower');
   });
 
   it('shindo 6 → actor renders BEFORE table (depth: actor under tabletop)', async () => {
