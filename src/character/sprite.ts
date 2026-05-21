@@ -232,11 +232,6 @@ function fillSvg(svg: SVGSVGElement, opts: SpriteOptions): void {
   const flipTx = opts.flip ? 64 : 0;
   const tilt = opts.tilt ? ` rotate(${opts.tilt} 32 64)` : '';
 
-  const shadow = el('ellipse', {
-    cx: 32, cy: 92, rx: 14, ry: 2.5, fill: '#000000', opacity: 0.3,
-  });
-  svg.appendChild(shadow);
-
   const outer = el('g', {
     transform: `translate(${flipTx},${crouchY}) scale(${flipScaleX} ${scale})${tilt}`,
   });
