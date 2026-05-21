@@ -233,13 +233,12 @@ export function initEarthquakeScene(): void {
   const shakeGroup = svgEl('g', {}, svg as unknown as SVGElement);
   const parts = buildStaticRoom(shakeGroup);
 
-  // Actor — nested character SVG positioned by transform on a <g>.
+  // Actor — nested character SVG anchored top-left at the actor group's translate
+  // (matches prototype: target.y is the SPRITE TOP, not its center).
   const actorGroup = svgEl('g', { class: 'mr-actor', transform: `translate(${TARGETS[0].x},${TARGETS[0].y})` }, shakeGroup);
   const actorSvg = createSprite({ pose: 'stand', gender: 'female' });
   actorSvg.setAttribute('width', '64');
   actorSvg.setAttribute('height', '96');
-  actorSvg.setAttribute('x', '-32');
-  actorSvg.setAttribute('y', '-48');
   actorGroup.appendChild(actorSvg);
 
   // <style> tag for dynamic shake keyframes.
@@ -320,16 +319,15 @@ export function initEarthquakeScene(): void {
     clearWalkTimers();
     const t = TARGETS[Math.max(0, Math.min(7, i))];
     actorGroup.setAttribute('transform', `translate(${t.x},${t.y})`);
-    actorSvg.style.transform = t.flip ? 'scaleX(-1)' : '';
-    actorSvg.style.transformOrigin = '32px 48px';
+    // Flip is handled inside createSprite via opts.flip — no CSS transform.
     if (!allowed) {
-      updateSprite(actorSvg, { pose: t.pose, gender: 'female' });
+      updateSprite(actorSvg, { pose: t.pose, gender: 'female', flip: t.flip });
       return;
     }
     const seq = sequenceForIntensity(i, t);
     for (const step of seq) {
       const id = window.setTimeout(() => {
-        updateSprite(actorSvg, { pose: step.pose, gender: 'female' });
+        updateSprite(actorSvg, { pose: step.pose, gender: 'female', flip: t.flip });
       }, step.delay);
       walkTimers.push(id);
     }
