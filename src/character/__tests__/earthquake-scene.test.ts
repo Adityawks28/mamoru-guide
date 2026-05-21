@@ -69,6 +69,25 @@ describe('earthquake-scene', () => {
     expect(actorPose()).toBe('headcover');
   });
 
+  it('shindo 6 → actor renders BEFORE table (depth: actor under tabletop)', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
+    const actor = document.querySelector('#earthquake-scene .mr-actor') as SVGGElement;
+    const table = document.querySelector('#earthquake-scene .mr-table') as SVGGElement;
+    expect(actor.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it('shindo 0 → actor renders AFTER table (depth: actor in front)', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
+    const actor = document.querySelector('#earthquake-scene .mr-actor') as SVGGElement;
+    const table = document.querySelector('#earthquake-scene .mr-table') as SVGGElement;
+    expect(actor.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
+  });
+
   it('shindo 7 → shelf becomes fallen', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
