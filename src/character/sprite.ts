@@ -1,7 +1,7 @@
 export type Pose =
   | 'stand' | 'brace' | 'cover' | 'hide' | 'headcover'
   | 'crouch' | 'kneel' | 'run' | 'walk' | 'tired'
-  | 'phone' | 'reach' | 'thrust' | 'choke';
+  | 'phone' | 'reach' | 'thrust' | 'choke' | 'cower';
 export type Gender = 'male' | 'female';
 export type Emote =
   | 'idle' | 'wave' | 'jump' | 'spin' | 'peace' | 'burst' | 'bow';
@@ -9,7 +9,7 @@ export type Emote =
 export const POSES: Pose[] = [
   'stand', 'brace', 'cover', 'hide', 'headcover',
   'crouch', 'kneel', 'run', 'walk', 'tired',
-  'phone', 'reach', 'thrust', 'choke',
+  'phone', 'reach', 'thrust', 'choke', 'cower',
 ];
 
 export interface SpriteOptions {
@@ -63,6 +63,7 @@ function armRotations(pose: Pose): [number, number] {
     pose === 'brace' ? -90 :
     pose === 'cover' ? -130 :
     pose === 'hide'  ? -150 :
+    pose === 'cower' ? -150 :
     pose === 'crouch' ? -40 :
     pose === 'choke'  ? -140 :
     pose === 'phone'  ? -150 :
@@ -76,6 +77,7 @@ function armRotations(pose: Pose): [number, number] {
     pose === 'brace' ?  90 :
     pose === 'cover' ?  130 :
     pose === 'hide'  ?  150 :
+    pose === 'cower' ?  150 :
     pose === 'crouch' ?  40 :
     pose === 'choke'  ?  140 :
     pose === 'phone'  ?  20 :
@@ -89,12 +91,15 @@ function armRotations(pose: Pose): [number, number] {
 
 function crouchTransform(pose: Pose): { y: number; scale: number } {
   const y =
+    pose === 'cower' ? 42 :
     pose === 'crouch' ? 14 :
     pose === 'hide'   ? 22 :
     pose === 'cover'  ? 18 :
     pose === 'headcover' ? 8 :
     pose === 'kneel'  ? 16 : 0;
-  const scale = (pose === 'hide' || pose === 'crouch' || pose === 'kneel') ? 0.85 : 1;
+  const scale =
+    pose === 'cower' ? 0.5 :
+    (pose === 'hide' || pose === 'crouch' || pose === 'kneel') ? 0.85 : 1;
   return { y, scale };
 }
 
@@ -103,7 +108,7 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
   const isTired = pose === 'tired';
   const [armL, armR] = armRotations(pose);
 
-  if (pose === 'hide' || pose === 'crouch') {
+  if (pose === 'hide' || pose === 'crouch' || pose === 'cower') {
     parent.append(
       rect(20, 74, 10, 10, PALETTE.pants),
       rect(34, 74, 10, 10, PALETTE.pants),
@@ -190,7 +195,7 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
     );
   }
 
-  if (pose === 'hide' || isTired) {
+  if (pose === 'hide' || pose === 'cower' || isTired) {
     parent.append(
       rect(26, 32, 4, 1, PALETTE.ink),
       rect(34, 32, 4, 1, PALETTE.ink),
@@ -209,7 +214,7 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
     );
   }
 
-  if (pose === 'brace' || pose === 'cover' || pose === 'hide') {
+  if (pose === 'brace' || pose === 'cover' || pose === 'hide' || pose === 'cower') {
     parent.appendChild(rect(29, 38, 6, 2, PALETTE.ink));
   } else if (isTired) {
     parent.appendChild(rect(28, 38, 8, 1, PALETTE.ink));
