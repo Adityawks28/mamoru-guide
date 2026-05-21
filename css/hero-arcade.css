@@ -122,7 +122,9 @@
   border-color: var(--neon-cyan);
 }
 
-/* Mode rail — Emergency / Prepare / Learn cards */
+/* Mode rail — Emergency / Prepare / Learn cards.
+   All selectors scoped to .mode-rail so they don't leak into the pre-existing
+   `<section id="mode-selector">` cards that already use `.mode-card`. */
 .mode-rail {
   display: flex;
   flex-direction: column;
@@ -130,7 +132,7 @@
   width: 100%;
   max-width: 320px;
 }
-.mode-card {
+.mode-rail .mode-card {
   display: grid;
   grid-template-columns: 56px 1fr 24px;
   align-items: center;
@@ -145,12 +147,12 @@
   cursor: pointer;
   transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
 }
-.mode-card:hover {
+.mode-rail .mode-card:hover {
   border-color: var(--amber);
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 var(--harbor-deep);
 }
-.mode-card .mode-glyph {
+.mode-rail .mode-card .mode-glyph {
   width: 56px;
   height: 56px;
   display: grid;
@@ -162,49 +164,64 @@
   border: 2px solid var(--amber);
   box-shadow: 2px 2px 0 var(--harbor-deep);
 }
-.mode-card.urgent .mode-glyph {
+.mode-rail .mode-card.urgent .mode-glyph {
   border-color: var(--crt-red);
   color: var(--crt-red);
   box-shadow: 2px 2px 0 var(--harbor-deep), 0 0 12px rgba(232, 64, 64, 0.4);
 }
-.mode-card .mode-title {
+.mode-rail .mode-card .mode-title {
   font-family: var(--arcade-font);
   font-size: 11px;
   line-height: 1.4;
   color: var(--amber);
   margin-bottom: 4px;
 }
-.mode-card .mode-desc {
+.mode-rail .mode-card .mode-desc {
   font-family: var(--pixel-font);
   font-size: 16px;
   color: #c8d4e6;
 }
-[data-theme="day"] .mode-card .mode-desc { color: #1a1a2e; }
-.mode-card .mode-arrow {
+[data-theme="day"] .mode-rail .mode-card .mode-desc { color: #1a1a2e; }
+.mode-rail .mode-card .mode-arrow {
   font-size: 18px;
   color: var(--amber);
 }
 
-/* Mascot frame on the side column */
+/* Mascot frame on the side column.
+   Override the global `.mascot { width:128; height:192 }` from character.css so
+   the hero mascot reads as a centerpiece (matches the title's visual weight). */
 .hero-side .mascot {
   position: relative;
-  padding: 18px;
+  width: 220px;
+  height: 330px;
+  padding: 24px;
   background: rgba(15, 31, 61, 0.6);
   border: 3px solid var(--amber);
   box-shadow: 0 0 0 3px var(--harbor-deep), 0 0 30px rgba(245, 166, 35, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hero-side .mascot .mamoru-sprite {
+  width: 176px;
+  height: 264px;
 }
 .hero-side .mascot::before {
   content: 'MASCOT.EXE';
   position: absolute;
-  top: -10px;
-  left: 12px;
+  top: -12px;
+  left: 16px;
   background: var(--harbor-deep);
   color: var(--amber);
   font-family: var(--arcade-font);
-  font-size: 9px;
-  padding: 2px 8px;
+  font-size: 10px;
+  padding: 3px 10px;
   letter-spacing: 0.08em;
 }
+/* Hide the mascot's auto-rotating fact bubble in the hero frame — title area
+   already carries the messaging. */
+.hero-side .mascot .mascot-fact { display: none; }
 
 /* Cherry blossom petals — day only */
 .ks-blossoms {
