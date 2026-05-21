@@ -22,6 +22,7 @@ export function initEarthquakeScale(): void {
       if (activeShake === i) {
         row.classList.remove(s.shakeClass);
         activeShake = null;
+        document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
         return;
       }
       if (activeShake !== null) {
@@ -30,6 +31,7 @@ export function initEarthquakeScale(): void {
       }
       row.classList.add(s.shakeClass);
       activeShake = i;
+      document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: i } }));
     }
     row.addEventListener('click', toggleShake);
     row.addEventListener('keydown', (e: KeyboardEvent) => {
