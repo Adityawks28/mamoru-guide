@@ -120,6 +120,12 @@ export function updateBagStats(): void {
   packedItems.forEach(i => score += bagItems[i].priority);
   const scoreEl = document.getElementById('bagScore');
   if (scoreEl) scoreEl.textContent = String(score);
+
+  const w = getCurrentWeight();
+  let status: 'ok' | 'over' | 'perfect' = 'ok';
+  if (w > MAX_BAG_WEIGHT) status = 'over';
+  else if (w >= 8 && w <= MAX_BAG_WEIGHT) status = 'perfect';
+  document.dispatchEvent(new CustomEvent('mamoru:bag-weight', { detail: { weight: w, status } }));
 }
 
 function loadBestScore(): number {
