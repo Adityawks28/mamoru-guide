@@ -18,6 +18,12 @@ import { initDrill } from './drill';
 import { initShelterFinder } from './shelter-finder';
 import { initQuiz } from './quiz';
 import { showToast } from './toast';
+import { initMascot } from './character/mascot';
+import { initEarthquakeScene } from './character/earthquake-scene';
+import { initFirstAidScene } from './character/firstaid-scene';
+import { initTyphoonScene } from './character/typhoon-scene';
+import { initBagScene } from './character/bag-scene';
+import { initBible } from './character/bible';
 
 // === SHARE ===
 async function shareGuide(): Promise<void> {
@@ -79,6 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initEmergencyPlan();
   initEmergencyFab();
+  initMascot();
+  initEarthquakeScene();
+  initFirstAidScene();
+  initTyphoonScene();
+  initBagScene();
+  initBible();
 });
 
 // === SERVICE WORKER ===
