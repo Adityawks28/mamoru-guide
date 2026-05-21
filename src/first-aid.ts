@@ -169,6 +169,9 @@ function renderCategories(): void {
       currentCategory = parseInt(btn.dataset.idx!, 10);
       currentStep = 0;
       renderSteps();
+      document.dispatchEvent(new CustomEvent('mamoru:firstaid-step', {
+        detail: { step: categories[currentCategory].id },
+      }));
     });
   });
 
@@ -247,6 +250,7 @@ function renderSteps(): void {
 
   document.getElementById('firstaidBack')?.addEventListener('click', () => {
     currentCategory = null;
+    document.dispatchEvent(new CustomEvent('mamoru:firstaid-step', { detail: { step: null } }));
     renderCategories();
   });
 
@@ -263,6 +267,7 @@ function renderSteps(): void {
 
   document.getElementById('firstaidDone')?.addEventListener('click', () => {
     currentCategory = null;
+    document.dispatchEvent(new CustomEvent('mamoru:firstaid-step', { detail: { step: null } }));
     renderCategories();
   });
 
