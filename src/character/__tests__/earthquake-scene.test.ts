@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
+function actorPose(): string | null {
+  const actor = document.querySelector('#earthquake-scene .mr-actor svg') as SVGElement | null;
+  return actor?.getAttribute('data-pose') ?? null;
+}
+
 beforeEach(() => {
   document.body.innerHTML = `
     <section class="section" id="earthquake">
@@ -12,10 +17,6 @@ beforeEach(() => {
     onchange: null, addListener: () => {}, removeListener: () => {},
     media: '', dispatchEvent: () => false,
   });
-  (globalThis as any).IntersectionObserver = class {
-    observe() {} unobserve() {} disconnect() {}
-    takeRecords() { return []; }
-  };
   vi.useFakeTimers();
 });
 
@@ -26,36 +27,79 @@ describe('earthquake-scene', () => {
     expect(() => initEarthquakeScene()).not.toThrow();
   });
 
-  it('mounts an SVG and a tip bubble', async () => {
+  it('mounts the room stage, actor sprite, tip bubble, procedure text', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    expect(document.querySelector('#earthquake-scene svg')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene.mamoru-room')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene .mr-stage svg.mr-svg')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene .mr-actor svg')).toBeTruthy();
     expect(document.querySelector('#earthquake-scene .tip-bubble')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene .mr-procedure')).toBeTruthy();
   });
 
-  it('shindo 4 → cover pose', async () => {
+  it('builds room hazards: lamp, shelf, doorGlow', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    expect(document.querySelector('#earthquake-scene .mr-lamp')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene .mr-shelf')).toBeTruthy();
+    expect(document.querySelector('#earthquake-scene .mr-door-glow')).toBeTruthy();
+  });
+
+  it('actor mounts as Mamo (female) in stand', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const actor = document.querySelector('#earthquake-scene .mr-actor svg') as SVGElement;
+    expect(actor.getAttribute('data-gender')).toBe('female');
+    expect(actor.getAttribute('data-pose')).toBe('stand');
+  });
+
+  it('shindo 4 → eventually brace pose after walk sequence', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 4 } }));
-    const svg = document.querySelector('#earthquake-scene svg')!;
-    expect(svg.getAttribute('data-pose')).toBe('cover');
+    vi.advanceTimersByTime(800);
+    expect(actorPose()).toBe('brace');
   });
 
-  it('shindo 7 → headcover pose', async () => {
+  it('shindo 7 → final headcover pose at 2200ms', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 7 } }));
-    const svg = document.querySelector('#earthquake-scene svg')!;
-    expect(svg.getAttribute('data-pose')).toBe('headcover');
+    vi.advanceTimersByTime(2300);
+    expect(actorPose()).toBe('headcover');
   });
 
-  it('null shindo → returns to scroll-driven default (stand)', async () => {
+  it('shindo 7 → shelf becomes fallen', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 7 } }));
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeTruthy();
+  });
+
+  it('shindo 5 → door glow visible', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 5 } }));
+    const glow = document.querySelector('#earthquake-scene .mr-door-glow') as SVGGElement;
+    expect(glow.style.display).toBe('');
+  });
+
+  it('null shindo → resets to intensity 0 (stand)', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
     document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
-    vi.advanceTimersByTime(4100);
-    const svg = document.querySelector('#earthquake-scene svg')!;
-    expect(svg.getAttribute('data-pose')).toBe('stand');
+    vi.advanceTimersByTime(800);
+    expect(actorPose()).toBe('stand');
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeFalsy();
+  });
+
+  it('procedure text updates per intensity', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
+    expect(procEn()).toContain('stay calm');
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 5 } }));
+    expect(procEn()).toContain('drop, cover');
   });
 });
