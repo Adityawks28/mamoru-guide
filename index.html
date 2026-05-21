@@ -44,6 +44,7 @@
 <link rel="stylesheet" href="css/print.css" media="print">
 <link rel="stylesheet" href="css/character.css">
 <link rel="stylesheet" href="css/earthquake-room.css">
+<link rel="stylesheet" href="css/hero-arcade.css">
 <link rel="manifest" href="manifest.json">
 </head>
 <body class="lang-en">
@@ -94,14 +95,76 @@
   </div>
 </div>
 <!-- Hero -->
-<section class="hero night-sky" id="hero">
+<section class="hero arcade-hero night-sky" id="hero">
   <div class="celestial-body" id="celestialBody"></div>
-  <div class="hero-content">
+
+  <!-- Cherry blossoms (day) + shooting stars (night) — pure CSS animations -->
+  <div class="ks-blossoms" aria-hidden="true">
+    <span class="ks-petal" style="left:6%;  animation-delay:0s;   animation-duration:12s; --drift:-20px;"></span>
+    <span class="ks-petal" style="left:14%; animation-delay:3s;   animation-duration:14s; --drift:18px;"></span>
+    <span class="ks-petal" style="left:22%; animation-delay:6s;   animation-duration:11s; --drift:-12px;"></span>
+    <span class="ks-petal" style="left:31%; animation-delay:1.5s; animation-duration:13s; --drift:24px;"></span>
+    <span class="ks-petal" style="left:39%; animation-delay:5s;   animation-duration:15s; --drift:-8px;"></span>
+    <span class="ks-petal" style="left:48%; animation-delay:8s;   animation-duration:12s; --drift:14px;"></span>
+    <span class="ks-petal" style="left:56%; animation-delay:2s;   animation-duration:13s; --drift:-22px;"></span>
+    <span class="ks-petal" style="left:64%; animation-delay:7s;   animation-duration:14s; --drift:10px;"></span>
+    <span class="ks-petal" style="left:72%; animation-delay:4s;   animation-duration:12s; --drift:-18px;"></span>
+    <span class="ks-petal" style="left:80%; animation-delay:9s;   animation-duration:15s; --drift:6px;"></span>
+    <span class="ks-petal" style="left:88%; animation-delay:1s;   animation-duration:11s; --drift:-14px;"></span>
+    <span class="ks-petal" style="left:96%; animation-delay:6.5s; animation-duration:13s; --drift:20px;"></span>
+  </div>
+  <div class="ks-shooters" aria-hidden="true">
+    <span class="ks-shooter" style="top:8%;  left:14%; animation-delay:0s;"></span>
+    <span class="ks-shooter" style="top:16%; left:48%; animation-delay:4s;"></span>
+    <span class="ks-shooter" style="top:12%; left:72%; animation-delay:8s;"></span>
+    <span class="ks-shooter" style="top:24%; left:32%; animation-delay:12s;"></span>
+  </div>
+
+  <div class="hero-text">
+    <div class="hero-eyebrow">▶ INSERT COIN · 100 ¥ · PRESS START ◀</div>
+    <h1 class="hero-title arcade-title">
+      MAMORU<br>GUIDE
+      <span class="kanji-large">守る · まもる · to protect</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.subtitle">
+      <span data-lang="en">A retro field-guide to staying safe in Japan — built by PPI Kobe in the city that rebuilt itself after 1995.</span>
+      <span data-lang="ja">日本で安全に暮らすためのレトロガイド — 1995年に立ち直った街、PPI神戸が制作。</span>
+      <span data-lang="id">Panduan retro untuk hidup aman di Jepang — dibuat oleh PPI Kobe, kota yang bangkit setelah 1995.</span>
+    </p>
+    <div class="hero-actions">
+      <a class="arcade-btn btn-primary" href="#earthquake">▶ PRESS START</a>
+      <a class="arcade-btn btn-ghost" href="#myplan">⊞ MAKE PLAN</a>
+    </div>
+  </div>
+
+  <div class="hero-side">
     <div id="mascot" class="mascot" aria-hidden="true"></div>
-    <h1 class="hero-title">MAMORU GUIDE</h1>
-    <div class="hero-kanji"><span class="big">守る</span> · まもる · protect</div>
-    <p class="hero-subtitle" data-i18n="hero.subtitle">Disaster preparedness for international students in Japan</p>
-    <div class="scroll-hint">▼</div>
+    <nav class="mode-rail" aria-label="Quick navigation">
+      <a class="mode-card urgent" href="#emergency-mode">
+        <div class="mode-glyph">急</div>
+        <div class="mode-text">
+          <div class="mode-title">Emergency</div>
+          <div class="mode-desc"><span data-lang="en">I need help right now</span><span data-lang="ja">今すぐ助けが必要</span><span data-lang="id">Saya butuh bantuan sekarang</span></div>
+        </div>
+        <div class="mode-arrow">→</div>
+      </a>
+      <a class="mode-card" href="#myplan">
+        <div class="mode-glyph">備</div>
+        <div class="mode-text">
+          <div class="mode-title">Prepare</div>
+          <div class="mode-desc"><span data-lang="en">Make a plan, find shelter</span><span data-lang="ja">計画を立て、避難所を探す</span><span data-lang="id">Buat rencana, cari tempat berlindung</span></div>
+        </div>
+        <div class="mode-arrow">→</div>
+      </a>
+      <a class="mode-card" href="#vocab">
+        <div class="mode-glyph">学</div>
+        <div class="mode-text">
+          <div class="mode-title">Learn</div>
+          <div class="mode-desc"><span data-lang="en">Drills, vocab, quizzes</span><span data-lang="ja">訓練・語彙・クイズ</span><span data-lang="id">Latihan, kosakata, kuis</span></div>
+        </div>
+        <div class="mode-arrow">→</div>
+      </a>
+    </nav>
   </div>
 
   <!-- Mountains -->

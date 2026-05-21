@@ -1,0 +1,277 @@
+/* Hero — arcade typography, two-column layout, mode cards.
+   Ported from prototype: arcade.css §"KOBE SCENE" and §"ARCADE TYPOGRAPHY". */
+
+:root {
+  --arcade-font: 'Press Start 2P', monospace;
+  --pixel-font: 'VT323', monospace;
+  --amber: #f5a623;
+  --amber-glow: #ffc44d;
+  --neon-cyan: #4cc9f0;
+  --crt-yellow: #ffe040;
+  --crt-red: #e84040;
+  --harbor-deep: #060d1f;
+}
+
+.hero.arcade-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 60px 36px 240px;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.arcade-hero .hero-text {
+  position: relative;
+  z-index: 10;
+  text-align: left;
+}
+.arcade-hero .hero-side {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.arcade-hero .hero-eyebrow {
+  font-family: var(--arcade-font);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--crt-yellow);
+  text-shadow: 0 0 10px rgba(255, 224, 64, 0.6);
+  animation: arcade-blink 1.6s step-end infinite;
+  margin-bottom: 20px;
+}
+@keyframes arcade-blink {
+  0%, 80%   { opacity: 1; }
+  80.1%,100%{ opacity: 0.5; }
+}
+
+.arcade-hero .arcade-title {
+  font-family: var(--arcade-font);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.2;
+  color: var(--amber);
+  text-shadow:
+    4px 4px 0 #8a5a00,
+    0 0 30px rgba(245, 166, 35, 0.5),
+    0 0 60px rgba(245, 166, 35, 0.25);
+  letter-spacing: 0.04em;
+  margin: 0 0 24px;
+}
+.arcade-hero .kanji-large {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(76, 201, 240, 0.5);
+  margin-top: 16px;
+  display: block;
+}
+
+.arcade-hero .hero-sub {
+  font-family: var(--pixel-font);
+  font-size: 22px;
+  line-height: 1.4;
+  color: #e8e0d0;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.3);
+  max-width: 50ch;
+  margin: 0 0 28px;
+}
+[data-theme="day"] .arcade-hero .hero-sub {
+  color: #1a1a2e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.arcade-hero .hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.arcade-btn {
+  font-family: var(--arcade-font);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 16px 22px;
+  border-radius: 0;
+  border: 3px solid currentColor;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 4px 4px 0 var(--harbor-deep);
+  transition: transform 0.1s, box-shadow 0.1s;
+  cursor: pointer;
+  background: transparent;
+}
+.arcade-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--harbor-deep); }
+.arcade-btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--harbor-deep); }
+.arcade-btn.btn-primary {
+  background: var(--amber);
+  color: var(--harbor-deep);
+  border-color: var(--amber-glow);
+}
+.arcade-btn.btn-ghost {
+  background: transparent;
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+/* Mode rail — Emergency / Prepare / Learn cards */
+.mode-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+}
+.mode-card {
+  display: grid;
+  grid-template-columns: 56px 1fr 24px;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(15, 31, 61, 0.7);
+  border: 3px solid var(--harbor-deep);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--harbor-deep);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
+}
+.mode-card:hover {
+  border-color: var(--amber);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--harbor-deep);
+}
+.mode-card .mode-glyph {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 28px;
+  color: var(--amber);
+  background: var(--harbor-deep);
+  border: 2px solid var(--amber);
+  box-shadow: 2px 2px 0 var(--harbor-deep);
+}
+.mode-card.urgent .mode-glyph {
+  border-color: var(--crt-red);
+  color: var(--crt-red);
+  box-shadow: 2px 2px 0 var(--harbor-deep), 0 0 12px rgba(232, 64, 64, 0.4);
+}
+.mode-card .mode-title {
+  font-family: var(--arcade-font);
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--amber);
+  margin-bottom: 4px;
+}
+.mode-card .mode-desc {
+  font-family: var(--pixel-font);
+  font-size: 16px;
+  color: #c8d4e6;
+}
+[data-theme="day"] .mode-card .mode-desc { color: #1a1a2e; }
+.mode-card .mode-arrow {
+  font-size: 18px;
+  color: var(--amber);
+}
+
+/* Mascot frame on the side column */
+.hero-side .mascot {
+  position: relative;
+  padding: 18px;
+  background: rgba(15, 31, 61, 0.6);
+  border: 3px solid var(--amber);
+  box-shadow: 0 0 0 3px var(--harbor-deep), 0 0 30px rgba(245, 166, 35, 0.3);
+}
+.hero-side .mascot::before {
+  content: 'MASCOT.EXE';
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--harbor-deep);
+  color: var(--amber);
+  font-family: var(--arcade-font);
+  font-size: 9px;
+  padding: 2px 8px;
+  letter-spacing: 0.08em;
+}
+
+/* Cherry blossom petals — day only */
+.ks-blossoms {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ks-petal { display: none; }
+[data-theme="day"] .ks-petal {
+  display: block;
+  position: absolute;
+  top: -10px;
+  width: 6px;
+  height: 6px;
+  background: #f8c0d0;
+  box-shadow: 2px -1px 0 #f8c0d0, -2px -1px 0 #f8c0d0, 0 2px 0 #f8c0d0;
+  animation: ks-fall linear infinite;
+  opacity: 0.85;
+}
+@keyframes ks-fall {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(var(--drift, 0), 100vh) rotate(540deg); }
+}
+
+/* Shooting stars — night only */
+.ks-shooters {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ks-shooter {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff, #fff);
+  opacity: 0;
+  transform: rotate(-25deg);
+  animation: ks-shoot 14s ease-in infinite;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+[data-theme="day"] .ks-shooter { display: none; }
+@keyframes ks-shoot {
+  0%   { opacity: 0; transform: rotate(-25deg) translate(0, 0); }
+  3%   { opacity: 1; }
+  10%  { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
+  100% { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
+}
+
+/* Reduced motion: stop blink, fall, shoot */
+@media (prefers-reduced-motion: reduce) {
+  .arcade-hero .hero-eyebrow { animation: none; }
+  .ks-petal { animation: none; display: none; }
+  .ks-shooter { animation: none; display: none; }
+}
+
+/* Mobile: stack to single column */
+@media (max-width: 800px) {
+  .hero.arcade-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 80px 20px 200px;
+  }
+  .arcade-hero .hero-text { text-align: center; }
+  .arcade-hero .hero-actions { justify-content: center; }
+  .mode-rail { max-width: 360px; margin: 0 auto; }
+}
