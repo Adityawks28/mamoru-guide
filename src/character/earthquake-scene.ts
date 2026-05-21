@@ -96,6 +96,7 @@ interface RoomParts {
   warningGroup: SVGGElement;
   pictureFrame: SVGGElement;
   lamp: SVGGElement;
+  tableGroup: SVGGElement;
 }
 
 function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
@@ -188,7 +189,7 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   warningText.textContent = 'AVOID';
   warningGroup.style.display = 'none';
 
-  return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp };
+  return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
 }
 
 const PROCEDURE_TEXT: Record<number, { en: string; ja: string; id: string }> = {
@@ -283,6 +284,20 @@ export function initEarthquakeScene(): void {
     walkTimers = [];
   }
 
+  function applyDepth(i: number): void {
+    // At shindo 6/7 the actor is hiding under the table — table draws ON TOP of actor.
+    // Otherwise the actor stands in front of furniture — actor draws ON TOP of table.
+    const parent = parts.tableGroup.parentNode;
+    if (!parent) return;
+    const hiding = i >= 6;
+    const actorIsBeforeTable = !!(actorGroup.compareDocumentPosition(parts.tableGroup) & Node.DOCUMENT_POSITION_FOLLOWING);
+    if (hiding && !actorIsBeforeTable) {
+      parent.insertBefore(actorGroup, parts.tableGroup);
+    } else if (!hiding && actorIsBeforeTable) {
+      parent.insertBefore(actorGroup, parts.tableGroup.nextSibling);
+    }
+  }
+
   function applyHazards(i: number): void {
     const h = hazardsForIntensity(i);
     parts.windowCrack.style.display = h.windowCrack ? '' : 'none';
@@ -336,6 +351,7 @@ export function initEarthquakeScene(): void {
   function applyIntensity(i: number, lockUntilTimeout = true): void {
     intensity = i;
     applyHazards(i);
+    applyDepth(i);
     applyShake(i);
     walkTo(i);
     showProcedure(i);
