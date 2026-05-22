@@ -100,32 +100,17 @@
 .bld-window.off { opacity: 0.1; background: #2a4a6a; }
 
 /* Kobe Tower */
-.kobe-tower {
+.ks-tower {
   position: absolute;
   bottom: 40px; right: 15%;
   width: 72px; height: 200px;
   z-index: 3;
   image-rendering: pixelated;
 }
-.kobe-tower svg { width:100%; height:100%; image-rendering:pixelated; }
-@keyframes tower-crown-pulse {
-  0%,100% { opacity:1; filter:brightness(1); }
-  50% { opacity:0.8; filter:brightness(1.8) drop-shadow(0 0 6px #ffffff); }
-}
-@keyframes tower-glow-pulse {
-  0%,100% { opacity:0.9; }
-  50% { opacity:1; filter:drop-shadow(0 0 8px #e84040) drop-shadow(0 0 16px #c03030); }
-}
-@keyframes top-light-blink {
-  0%,48% { opacity:1; }
-  49%,100% { opacity:0; }
-}
-.tower-crown-anim { animation: tower-crown-pulse 2.5s ease-in-out infinite; }
-.tower-body-anim { animation: tower-glow-pulse 3s ease-in-out infinite; }
-.tower-top-light { animation: top-light-blink 1.4s step-end infinite; }
+.ks-tower svg { width:100%; height:100%; image-rendering:pixelated; }
 
 /* Water */
-.water {
+.ks-water {
   position: absolute; bottom:0; left:0; right:0;
   height: 40px;
   background: repeating-linear-gradient(0deg,
