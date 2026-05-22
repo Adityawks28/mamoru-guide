@@ -14,6 +14,27 @@
   --paper: #f6f4ef;
 }
 
+/* ───── KOBE SCENE WRAPPER ───── */
+.kobe-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  margin: -14px -100vw 0;
+  background: linear-gradient(180deg, var(--harbor-deep) 0%, var(--harbor-navy) 50%, var(--harbor-mid) 100%);
+}
+[data-theme="day"] .kobe-scene,
+body.day-mode .kobe-scene {
+  background:
+    linear-gradient(180deg, #a8d8f0 0%, #c8e8f8 35%, #f8e8c8 80%, #e8d8a8 100%);
+}
+.ks-foreground {
+  position: absolute;
+  inset: 0 100vw 0 100vw;
+  pointer-events: none;
+}
+
 /* ───── HERO LAYOUT ───── */
 .hero.arcade-hero {
   display: grid;
