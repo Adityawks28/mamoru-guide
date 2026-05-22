@@ -37,57 +37,9 @@
   border-right-color: var(--surface, #1a1a2e);
 }
 
-/* Hero mascot — bigger, with motion. */
-.mascot {
-  position: relative;
-  width: 128px;
-  height: 192px;
-  cursor: pointer;
-  user-select: none;
-}
-.mascot .mamoru-sprite {
-  width: 128px;
-  height: 192px;
-}
-.mascot.bobbing { animation: mamoru-bob 1.6s ease-in-out infinite; }
-@keyframes mamoru-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-.mascot-fact {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 12px;
-  white-space: nowrap;
-}
-
-.mascot-heart {
-  position: absolute;
-  pointer-events: none;
-  font-size: 14px;
-  color: #f5a623;
-  animation: mamoru-heart 900ms ease-out forwards;
-}
-@keyframes mamoru-heart {
-  0% { opacity: 1; transform: translate(0, 0); }
-  100% { opacity: 0; transform: translate(var(--dx, 0), -40px); }
-}
-.mascot-ripple {
-  position: absolute;
-  border-radius: 50%;
-  border: 2px solid rgba(245, 166, 35, 0.6);
-  pointer-events: none;
-  animation: mamoru-ripple 600ms ease-out forwards;
-}
-@keyframes mamoru-ripple {
-  0% { width: 8px; height: 8px; opacity: 1; }
-  100% { width: 80px; height: 80px; opacity: 0; }
-}
+/* Hero mascot styles live in css/hero-arcade.css (mascot-wrap, .mascot, etc.)
+   to match the prototype's class structure. */
 
 @media (prefers-reduced-motion: reduce) {
   .character-scene { transition: none; opacity: 1; transform: none; }
-  .mascot.bobbing { animation: none; }
-  .mascot-heart, .mascot-ripple { animation: none; display: none; }
 }

@@ -23,53 +23,53 @@ describe('mascot', () => {
     expect(() => initMascot()).not.toThrow();
   });
 
-  it('mounts an SVG sprite into #mascot', async () => {
+  it('renders mascot-wrap with pixel-bubble, mascot character, and hint', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
-    const svg = document.querySelector('#mascot svg');
-    expect(svg).toBeTruthy();
-    expect(svg!.getAttribute('data-pose')).toBe('stand');
-    expect(svg!.getAttribute('data-gender')).toBe('male');
+    const wrap = document.getElementById('mascot')!;
+    expect(wrap.classList.contains('mascot-wrap')).toBe(true);
+    expect(wrap.querySelector('.pixel-bubble.fact-bubble')).toBeTruthy();
+    expect(wrap.querySelector('.mascot')).toBeTruthy();
+    expect(wrap.querySelector('.mascot svg.mascot-svg')).toBeTruthy();
+    expect(wrap.querySelector('.mascot-hint')).toBeTruthy();
   });
 
-  it('mounts a fact bubble with EN/JA/ID spans', async () => {
+  it('bubble has pb-tag, pb-t with EN, pb-sub with JA + ID, pb-cta', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
-    const bubble = document.querySelector('#mascot .mascot-fact');
-    expect(bubble).toBeTruthy();
-    expect(bubble!.querySelector('[data-lang="en"]')).toBeTruthy();
-    expect(bubble!.querySelector('[data-lang="ja"]')).toBeTruthy();
-    expect(bubble!.querySelector('[data-lang="id"]')).toBeTruthy();
+    const bubble = document.querySelector('#mascot .pixel-bubble')!;
+    expect(bubble.querySelector('.pb-tag')!.textContent).toBe('DID YOU KNOW?');
+    expect(bubble.querySelector('.pb-t [data-lang="en"]')).toBeTruthy();
+    expect(bubble.querySelector('.pb-sub [data-lang="ja"]')).toBeTruthy();
+    expect(bubble.querySelector('.pb-sub [data-lang="id"]')).toBeTruthy();
+    expect(bubble.querySelector('.pb-cta')!.textContent).toContain('TAP FOR NEXT');
   });
 
-  it('advances to next fact on click', async () => {
+  it('clicking the mascot character advances the fact', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
-    const host = document.getElementById('mascot')!;
-    const en = () => host.querySelector('[data-lang="en"]')!.textContent;
+    const charWrap = document.querySelector('#mascot .mascot') as HTMLDivElement;
+    const en = () => document.querySelector('#mascot [data-lang="en"]')!.textContent;
     const before = en();
-    host.click();
+    charWrap.click();
     expect(en()).not.toBe(before);
   });
 
-  it('rotates facts on a 7s timer', async () => {
+  it('rotates facts on the 8s timer', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
-    const host = document.getElementById('mascot')!;
-    const en = () => host.querySelector('[data-lang="en"]')!.textContent;
+    const en = () => document.querySelector('#mascot [data-lang="en"]')!.textContent;
     const before = en();
-    vi.advanceTimersByTime(7100);
+    vi.advanceTimersByTime(8100);
     expect(en()).not.toBe(before);
   });
 
-  it('reduced motion: no bobbing class, no fact rotation', async () => {
+  it('reduced motion: no fact rotation', async () => {
     localStorage.setItem('a11y-reduced-motion', 'true');
     vi.resetModules();
     const { initMascot } = await import('../mascot');
     initMascot();
-    const host = document.getElementById('mascot')!;
-    expect(host.classList.contains('bobbing')).toBe(false);
-    const en = () => host.querySelector('[data-lang="en"]')!.textContent;
+    const en = () => document.querySelector('#mascot [data-lang="en"]')!.textContent;
     const before = en();
     vi.advanceTimersByTime(20000);
     expect(en()).toBe(before);

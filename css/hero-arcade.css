@@ -1,5 +1,6 @@
-/* Hero — arcade typography, two-column layout, mode cards.
-   Ported from prototype: arcade.css §"KOBE SCENE" and §"ARCADE TYPOGRAPHY". */
+/* Hero — faithful port of prototype arcade.css §"KOBE SCENE", §"PIXEL MASCOT",
+   §"ARCADE TYPOGRAPHY". JSX class names preserved verbatim so swapping the
+   prototype's CSS in is a future no-op. */
 
 :root {
   --arcade-font: 'Press Start 2P', monospace;
@@ -10,19 +11,21 @@
   --crt-yellow: #ffe040;
   --crt-red: #e84040;
   --harbor-deep: #060d1f;
+  --paper: #f6f4ef;
 }
 
+/* ───── HERO LAYOUT ───── */
 .hero.arcade-hero {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 60px 36px 240px;
+  padding: 60px 48px 200px;
   min-height: 100vh;
-  max-width: 1280px;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
 }
-
 .arcade-hero .hero-text {
   position: relative;
   z-index: 10;
@@ -37,6 +40,7 @@
   gap: 24px;
 }
 
+/* ───── ARCADE TYPOGRAPHY ───── */
 .arcade-hero .hero-eyebrow {
   font-family: var(--arcade-font);
   font-size: 11px;
@@ -73,7 +77,6 @@
   margin-top: 16px;
   display: block;
 }
-
 .arcade-hero .hero-sub {
   font-family: var(--pixel-font);
   font-size: 22px;
@@ -87,7 +90,6 @@
   color: #1a1a2e;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
-
 .arcade-hero .hero-actions {
   display: flex;
   gap: 16px;
@@ -109,7 +111,7 @@
   cursor: pointer;
   background: transparent;
 }
-.arcade-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--harbor-deep); }
+.arcade-btn:hover  { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--harbor-deep); }
 .arcade-btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--harbor-deep); }
 .arcade-btn.btn-primary {
   background: var(--amber);
@@ -122,15 +124,151 @@
   border-color: var(--neon-cyan);
 }
 
-/* Mode rail — Emergency / Prepare / Learn cards.
-   All selectors scoped to .mode-rail so they don't leak into the pre-existing
-   `<section id="mode-selector">` cards that already use `.mode-card`. */
+/* ───── PIXEL MASCOT (port of prototype §"PIXEL MASCOT") ───── */
+.mascot-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(15, 31, 61, 0.6);
+  border: 3px solid var(--amber);
+  box-shadow: 0 0 0 3px var(--harbor-deep), 0 0 30px rgba(245, 166, 35, 0.3);
+}
+.mascot-wrap::before {
+  content: 'MASCOT.EXE';
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--harbor-deep);
+  font-family: var(--arcade-font);
+  font-size: 8px;
+  padding: 2px 6px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+}
+
+/* Override the global `.mascot { width:128; height:192 }` from character.css
+   ONLY when the mascot is the hero one (inside .mascot-wrap). */
+.mascot-wrap > .mascot {
+  width: 192px;
+  height: 288px;
+  cursor: pointer;
+  user-select: none;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 0 var(--harbor-deep));
+  transition: transform 0.12s steps(2);
+  position: relative;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.mascot-wrap > .mascot:hover  { transform: translateY(-2px); }
+.mascot-wrap > .mascot:active { transform: translateY(2px); }
+.mascot-svg {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  overflow: visible;
+  display: block;
+}
+
+.mascot-hint {
+  font-family: var(--arcade-font);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--crt-yellow);
+  text-shadow: 0 0 6px rgba(255, 224, 64, 0.6);
+  animation: arcade-blink 1.4s step-end infinite;
+  margin: 0;
+}
+
+/* Pixel speech bubble — pokes out to the upper-right of the mascot frame */
+.pixel-bubble {
+  position: absolute;
+  top: -40px;
+  right: -200px;
+  background: var(--paper);
+  color: var(--amber);
+  padding: 10px 14px;
+  border: 3px solid var(--amber);
+  box-shadow: 4px 4px 0 var(--harbor-deep);
+  font-family: var(--arcade-font);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  z-index: 20;
+  max-width: 220px;
+  animation: bubble-pop 0.15s steps(2);
+}
+.pixel-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top-color: var(--amber);
+}
+.pb-tag {
+  font-size: 8px;
+  color: var(--crt-red);
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.pb-t {
+  color: var(--harbor-deep);
+  font-size: 9px;
+  line-height: 1.5;
+}
+.pb-sub {
+  font-size: 7px;
+  color: #5a5a8a;
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+}
+.pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
+.pb-cta {
+  margin-top: 8px;
+  font-size: 8px;
+  color: var(--crt-red);
+  letter-spacing: 0.12em;
+}
+@keyframes bubble-pop {
+  0%   { transform: scale(0); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Touch ripple */
+.mk-ripple {
+  position: absolute;
+  border-radius: 0;
+  border: 2px solid var(--amber);
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  animation: mk-ripple-expand 700ms ease-out forwards;
+}
+@keyframes mk-ripple-expand {
+  0%   { width: 8px;  height: 8px;  opacity: 1; }
+  100% { width: 80px; height: 80px; opacity: 0; transform: translate(-36px, -36px); }
+}
+
+/* ───── MODE RAIL ─────
+   Scoped to .mode-rail to avoid leaking into the pre-existing
+   `<section id="mode-selector">` that also uses `.mode-card`. */
 .mode-rail {
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
-  max-width: 320px;
+  max-width: 360px;
+  margin-top: 24px;
 }
 .mode-rail .mode-card {
   display: grid;
@@ -187,50 +325,9 @@
   color: var(--amber);
 }
 
-/* Mascot frame on the side column.
-   Override the global `.mascot { width:128; height:192 }` from character.css so
-   the hero mascot reads as a centerpiece (matches the title's visual weight). */
-.hero-side .mascot {
-  position: relative;
-  width: 220px;
-  height: 330px;
-  padding: 24px;
-  background: rgba(15, 31, 61, 0.6);
-  border: 3px solid var(--amber);
-  box-shadow: 0 0 0 3px var(--harbor-deep), 0 0 30px rgba(245, 166, 35, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.hero-side .mascot .mamoru-sprite {
-  width: 176px;
-  height: 264px;
-}
-.hero-side .mascot::before {
-  content: 'MASCOT.EXE';
-  position: absolute;
-  top: -12px;
-  left: 16px;
-  background: var(--harbor-deep);
-  color: var(--amber);
-  font-family: var(--arcade-font);
-  font-size: 10px;
-  padding: 3px 10px;
-  letter-spacing: 0.08em;
-}
-/* Hide the mascot's auto-rotating fact bubble in the hero frame — title area
-   already carries the messaging. */
-.hero-side .mascot .mascot-fact { display: none; }
-
+/* ───── BACKGROUND POLISH ───── */
 /* Cherry blossom petals — day only */
-.ks-blossoms {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  pointer-events: none;
-  overflow: hidden;
-}
+.ks-blossoms { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; }
 .ks-petal { display: none; }
 [data-theme="day"] .ks-petal {
   display: block;
@@ -249,13 +346,7 @@
 }
 
 /* Shooting stars — night only */
-.ks-shooters {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
+.ks-shooters { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
 .ks-shooter {
   position: absolute;
   width: 80px;
@@ -274,21 +365,23 @@
   100% { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
 }
 
-/* Reduced motion: stop blink, fall, shoot */
 @media (prefers-reduced-motion: reduce) {
-  .arcade-hero .hero-eyebrow { animation: none; }
-  .ks-petal { animation: none; display: none; }
-  .ks-shooter { animation: none; display: none; }
+  .arcade-hero .hero-eyebrow,
+  .mascot-hint { animation: none; }
+  .ks-petal, .ks-shooter { animation: none; display: none; }
+  .mascot-wrap > .mascot { transition: none; }
 }
 
-/* Mobile: stack to single column */
-@media (max-width: 800px) {
+/* ───── RESPONSIVE ───── */
+@media (max-width: 900px) {
   .hero.arcade-hero {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding: 80px 20px 200px;
+    padding: 60px 20px 160px;
   }
   .arcade-hero .hero-text { text-align: center; }
   .arcade-hero .hero-actions { justify-content: center; }
-  .mode-rail { max-width: 360px; margin: 0 auto; }
+  .mode-rail { max-width: 360px; margin: 24px auto 0; }
+  .pixel-bubble { position: static; max-width: 100%; margin-bottom: 16px; }
+  .pixel-bubble::before { display: none; }
 }
