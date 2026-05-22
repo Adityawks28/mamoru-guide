@@ -26,11 +26,21 @@
   --focus-ring: #ffe28a;
   --sky-grad-top: #0a1428;
   --sky-grad-bot: #1e3a5f;
-  --mountain-far: #0d1a30;
-  --mountain-mid: #112244;
-  --mountain-near: #0a1628;
+  --mt-far: #1a3050;
+  --mt-mid: #122440;
+  --mt-near: #081830;
   --star-opacity: 1;
   --water-opacity: 1;
+  /* Harbor cluster — night defaults (per arcade.css:57-61) */
+  --crystal-body: #d8e0e8;
+  --crystal-crown: #5a6a7a;
+  --crystal-line: #6a7a8a;
+  --crystal-pane: #2a4a6a;
+  --ferris-frame: #4a5a7a;
+  --museum-white: #d8d0c0;
+  --museum-line: #6a7a9a;
+  --bridge-tower: #c44048;
+  --bridge-cable: #6a4848;
 }
 
 body.day-mode {
@@ -48,9 +58,9 @@ body.day-mode {
   --focus-ring: #6a3d05;
   --sky-grad-top: #87CEEB;
   --sky-grad-bot: #c8e8ff;
-  --mountain-far: #8aaa9a;
-  --mountain-mid: #6a9080;
-  --mountain-near: #4a7060;
+  --mt-far: #8aaa9a;
+  --mt-mid: #6a9a78;
+  --mt-near: #4a7a58;
   --card-bg: rgba(255,255,255,0.88);
   --card-border: rgba(100,80,40,0.2);
   --water-dark: #3a90c0;
@@ -60,4 +70,13 @@ body.day-mode {
   --port-fog: #b0d0e8;
   --kitano-white: #1a2a3a;
   --portopia-blue: #15607e;
+  --crystal-body: #e8eef4;
+  --crystal-crown: #4a5a6a;
+  --crystal-line: #8090a0;
+  --crystal-pane: #6a90b0;
+  --ferris-frame: #4a4a4a;
+  --museum-white: #f8f5e8;
+  --museum-line: #6a7a9a;
+  --bridge-tower: #d8504a;
+  --bridge-cable: #d8b890;
 }
