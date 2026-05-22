@@ -2,8 +2,22 @@ import { createSprite, updateSprite, type Emote } from './sprite';
 import { DISASTER_FACTS } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
 
+// Faithful port of prototype mascot.jsx — structure:
+//   <#mascot.mascot-wrap>
+//     <div class="pixel-bubble fact-bubble">
+//       <div class="pb-tag">DID YOU KNOW?</div>
+//       <div class="pb-t"><span data-lang="en">…</span></div>
+//       <div class="pb-sub"><span data-lang="ja">…</span><span data-lang="id">…</span></div>
+//       <div class="pb-cta">→ TAP FOR NEXT</div>
+//     </div>
+//     <div class="mascot" role="button"> <!-- the clickable sprite -->
+//       <svg class="mascot-svg"...> Moru SVG </svg>
+//     </div>
+//     <div class="mascot-hint">▼ TAP FOR NEXT FACT ▼</div>
+//   </#mascot.mascot-wrap>
+
 const EMOTE_CYCLE: Emote[] = ['wave', 'jump', 'spin', 'peace', 'burst', 'bow'];
-const FACT_INTERVAL_MS = 7000;
+const FACT_INTERVAL_MS = 8000;
 const BLINK_MIN_MS = 2400;
 const BLINK_MAX_MS = 6000;
 const BLINK_DURATION_MS = 130;
@@ -18,17 +32,53 @@ export function initMascot(): void {
   let blinkTimer: number | null = null;
   let allowed = motionAllowed();
 
-  const sprite = createSprite({ pose: 'stand', gender: 'male' });
+  host.classList.add('mascot-wrap');
   host.innerHTML = '';
-  host.appendChild(sprite);
 
+  // 1) Fact bubble — pixel-bubble with pb-tag/pb-t/pb-sub/pb-cta.
   const bubble = document.createElement('div');
-  bubble.className = 'mascot-fact tip-bubble';
+  bubble.className = 'pixel-bubble fact-bubble';
+
+  const tag = document.createElement('div');
+  tag.className = 'pb-tag';
+  tag.textContent = 'DID YOU KNOW?';
+  bubble.appendChild(tag);
+
+  const tEn = document.createElement('div');
+  tEn.className = 'pb-t';
   const enSpan = document.createElement('span'); enSpan.dataset.lang = 'en';
+  tEn.appendChild(enSpan);
+  bubble.appendChild(tEn);
+
+  const sub = document.createElement('div');
+  sub.className = 'pb-sub';
   const jaSpan = document.createElement('span'); jaSpan.dataset.lang = 'ja';
   const idSpan = document.createElement('span'); idSpan.dataset.lang = 'id';
-  bubble.append(enSpan, jaSpan, idSpan);
+  sub.append(jaSpan, idSpan);
+  bubble.appendChild(sub);
+
+  const cta = document.createElement('div');
+  cta.className = 'pb-cta';
+  cta.textContent = '→ TAP FOR NEXT';
+  bubble.appendChild(cta);
+
   host.appendChild(bubble);
+
+  // 2) Character — wrapper div + SVG inside (matches prototype's `.mascot`).
+  const charWrap = document.createElement('div');
+  charWrap.className = 'mascot';
+  charWrap.setAttribute('role', 'button');
+  charWrap.setAttribute('aria-label', 'Tap Moru for the next disaster fact');
+  const sprite = createSprite({ pose: 'stand', gender: 'male' });
+  sprite.classList.add('mascot-svg');
+  charWrap.appendChild(sprite);
+  host.appendChild(charWrap);
+
+  // 3) Below-character hint.
+  const hint = document.createElement('div');
+  hint.className = 'mascot-hint';
+  hint.textContent = '▼ TAP FOR NEXT FACT ▼';
+  host.appendChild(hint);
 
   function renderFact(): void {
     const t = DISASTER_FACTS[factIdx];
@@ -47,7 +97,6 @@ export function initMascot(): void {
     if (!allowed) return;
     factTimer = window.setInterval(nextFact, FACT_INTERVAL_MS);
   }
-
   function clearFactTimer(): void {
     if (factTimer !== null) { window.clearInterval(factTimer); factTimer = null; }
   }
@@ -63,14 +112,13 @@ export function initMascot(): void {
       }, BLINK_DURATION_MS);
     }, delay);
   }
-
   function clearBlink(): void {
     if (blinkTimer !== null) { window.clearTimeout(blinkTimer); blinkTimer = null; }
   }
 
-  function onPointerMove(e: PointerEvent | MouseEvent): void {
+  function onPointerMove(e: MouseEvent): void {
     if (!allowed) return;
-    const r = host!.getBoundingClientRect();
+    const r = charWrap.getBoundingClientRect();
     const cx = r.left + r.width / 2;
     const cy = r.top + r.height * 0.32;
     const dx = e.clientX - cx;
@@ -89,38 +137,21 @@ export function initMascot(): void {
     window.setTimeout(() => updateSprite(sprite, { emote: 'idle' }), 600);
   }
 
-  function spawnHeart(x: number, y: number): void {
-    if (!allowed) return;
-    const heart = document.createElement('span');
-    heart.className = 'mascot-heart';
-    heart.textContent = '♥';
-    heart.style.left = `${x}px`;
-    heart.style.top = `${y}px`;
-    heart.style.setProperty('--dx', `${(Math.random() - 0.5) * 30}px`);
-    host!.appendChild(heart);
-    window.setTimeout(() => heart.remove(), 900);
-  }
-
   function spawnRipple(x: number, y: number): void {
     if (!allowed) return;
     const ripple = document.createElement('span');
-    ripple.className = 'mascot-ripple';
+    ripple.className = 'mk-ripple';
     ripple.style.left = `${x - 4}px`;
     ripple.style.top = `${y - 4}px`;
-    host!.appendChild(ripple);
-    window.setTimeout(() => ripple.remove(), 600);
+    charWrap.appendChild(ripple);
+    window.setTimeout(() => ripple.remove(), 700);
   }
 
-  host.addEventListener('click', (e) => {
+  charWrap.addEventListener('click', (e) => {
     flashEmote();
     nextFact();
-    const r = host!.getBoundingClientRect();
+    const r = charWrap.getBoundingClientRect();
     spawnRipple(e.clientX - r.left, e.clientY - r.top);
-  });
-
-  host.addEventListener('mouseenter', (e) => {
-    const r = host!.getBoundingClientRect();
-    spawnHeart(e.clientX - r.left, e.clientY - r.top);
   });
 
   function applyMotion(now: boolean): void {
@@ -128,12 +159,10 @@ export function initMascot(): void {
     clearFactTimer();
     clearBlink();
     if (allowed) {
-      host!.classList.add('bobbing');
       scheduleFactTimer();
       scheduleBlink();
       window.addEventListener('mousemove', onPointerMove);
     } else {
-      host!.classList.remove('bobbing');
       window.removeEventListener('mousemove', onPointerMove);
       updateSprite(sprite, { pupil: { x: 0, y: 0 }, blink: false });
     }
