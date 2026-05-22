@@ -97,16 +97,6 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 }
 .ks-win.off { background: #2a4a6a; opacity: 0.2; box-shadow: none; }
 
-/* Kobe Tower */
-.ks-tower {
-  position: absolute;
-  bottom: 40px; right: 15%;
-  width: 72px; height: 200px;
-  z-index: 3;
-  image-rendering: pixelated;
-}
-.ks-tower svg { width:100%; height:100%; image-rendering:pixelated; }
-
 /* Water */
 .ks-water {
   position: absolute; bottom:0; left:0; right:0;
