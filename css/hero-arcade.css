@@ -487,3 +487,33 @@ body.day-mode .ks-stars,
 @media (prefers-reduced-motion: reduce) {
   .ks-star { animation: none; opacity: 0.6; }
 }
+
+/* ───── KOBE CITY HALL ───── */
+.ks-cityhall {
+  position: absolute;
+  bottom: 40px;
+  right: 32%;
+  width: 38px;
+  height: 200px;
+  z-index: 3;
+}
+.ch-body {
+  width: 38px;
+  height: 180px;
+  background:
+    linear-gradient(90deg, transparent 4px, rgba(245,166,35,0.6) 4px, rgba(245,166,35,0.6) 6px, transparent 6px, transparent 14px, rgba(245,166,35,0.6) 14px, rgba(245,166,35,0.6) 16px, transparent 16px, transparent 24px, rgba(245,166,35,0.6) 24px, rgba(245,166,35,0.6) 26px, transparent 26px, transparent 34px),
+    linear-gradient(0deg, transparent 4px, rgba(245,166,35,0.4) 4px, rgba(245,166,35,0.4) 5px, transparent 5px),
+    linear-gradient(180deg, #1a2a4a 0%, #2a3a5a 100%);
+  background-size: 38px 180px, 38px 12px, 100% 100%;
+  border: 1px solid #0a1424;
+}
+.ch-top {
+  width: 28px;
+  height: 24px;
+  margin-left: 5px;
+  background: #1a2a4a;
+}
+body.day-mode .ch-body,
+[data-theme="day"] .ch-body { background: #6a7a9a; background-image: none; }
+body.day-mode .ch-top,
+[data-theme="day"] .ch-top { background: #6a7a9a; }
