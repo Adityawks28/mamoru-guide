@@ -406,3 +406,58 @@ body.day-mode .kobe-scene {
   .pixel-bubble { position: static; max-width: 100%; margin-bottom: 16px; }
   .pixel-bubble::before { display: none; }
 }
+
+/* ───── ATMOSPHERE (day-only) ───── */
+.ks-sun-rays { display: none; }
+body.day-mode .ks-sun-rays,
+[data-theme="day"] .ks-sun-rays {
+  display: block;
+  position: absolute;
+  top: 8%; left: 12%;
+  width: 280px; height: 280px;
+  background: conic-gradient(from 0deg,
+    rgba(255,224,64,0.25) 0deg, transparent 12deg,
+    rgba(255,224,64,0.25) 30deg, transparent 42deg,
+    rgba(255,224,64,0.25) 60deg, transparent 72deg,
+    rgba(255,224,64,0.25) 90deg, transparent 102deg,
+    rgba(255,224,64,0.25) 120deg, transparent 132deg,
+    rgba(255,224,64,0.25) 150deg, transparent 162deg,
+    rgba(255,224,64,0.25) 180deg, transparent 192deg,
+    rgba(255,224,64,0.25) 210deg, transparent 222deg,
+    rgba(255,224,64,0.25) 240deg, transparent 252deg,
+    rgba(255,224,64,0.25) 270deg, transparent 282deg,
+    rgba(255,224,64,0.25) 300deg, transparent 312deg,
+    rgba(255,224,64,0.25) 330deg, transparent 342deg);
+  transform: translate(-50%, -50%);
+  animation: ks-sun-spin 80s linear infinite;
+  z-index: 0;
+}
+@keyframes ks-sun-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.ks-clouds { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.ks-cloud { display: none; position: absolute; }
+body.day-mode .ks-cloud,
+[data-theme="day"] .ks-cloud {
+  display: block;
+  background: #f8f5e8;
+  box-shadow:
+    -16px 0 0 -4px #f8f5e8, 16px 0 0 -4px #f8f5e8,
+    -28px -2px 0 -10px #f8f5e8, 28px -2px 0 -10px #f8f5e8;
+  width: 64px; height: 16px;
+  image-rendering: pixelated;
+  animation: ks-drift 50s linear infinite;
+}
+body.day-mode .ks-cloud.c1,
+[data-theme="day"] .ks-cloud.c1 { top: 14%; left: -10%; animation-duration: 60s; }
+body.day-mode .ks-cloud.c2,
+[data-theme="day"] .ks-cloud.c2 { top: 22%; left: -10%; animation-delay: -20s; animation-duration: 75s; transform: scale(1.4); }
+body.day-mode .ks-cloud.c3,
+[data-theme="day"] .ks-cloud.c3 { top:  8%; left: -10%; animation-delay: -40s; animation-duration: 90s; transform: scale(0.8); }
+@keyframes ks-drift { from { left: -10%; } to { left: 110%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body.day-mode .ks-sun-rays, [data-theme="day"] .ks-sun-rays,
+  body.day-mode .ks-cloud, [data-theme="day"] .ks-cloud {
+    animation: none;
+  }
+}
