@@ -11,9 +11,9 @@ body.day-mode .section-note { color: var(--text-muted); }
 body.day-mode .footer { background: rgba(200,220,240,0.95); }
 body.day-mode .footer-copy,
 body.day-mode .footer-emergency { color: #2a4060; }
-body.day-mode .bld { background: #a0b8c8; }
-body.day-mode .bld-window { background: #6090b0; }
-body.day-mode .bld-window.off { background: #c0d4e0; }
+body.day-mode .ks-bld { background: #2a3a5a; }
+body.day-mode .ks-win.off { background: #6a7a9a; opacity: 0.4; }
+body.day-mode .ks-win:not(.off) { background: rgba(255,224,64,0.4); box-shadow: none; }
 body.day-mode .hero-title { color: var(--accent); text-shadow: 0 2px 0 #906010; }
 body.day-mode .hero-kanji { color: #2a4060; }
 body.day-mode .hero-kanji .big { color: var(--accent); }
