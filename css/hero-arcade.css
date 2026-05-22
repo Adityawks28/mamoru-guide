@@ -461,3 +461,29 @@ body.day-mode .ks-cloud.c3,
     animation: none;
   }
 }
+
+/* ───── STARS (night-only) ───── */
+.ks-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: var(--star-opacity, 1);
+  transition: opacity 0.6s;
+}
+body.day-mode .ks-stars,
+[data-theme="day"] .ks-stars { display: none; }
+.ks-star {
+  position: absolute;
+  background: #fff;
+  animation: ks-twinkle var(--dur, 3s) ease-in-out infinite alternate;
+  opacity: 0;
+}
+@keyframes ks-twinkle {
+  0%   { opacity: 0.15; }
+  100% { opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-star { animation: none; opacity: 0.6; }
+}
