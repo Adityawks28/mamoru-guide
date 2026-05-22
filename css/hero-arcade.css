@@ -37,6 +37,8 @@ body.day-mode .kobe-scene {
 
 /* ───── HERO LAYOUT ───── */
 .hero.arcade-hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 60px;
@@ -46,6 +48,8 @@ body.day-mode .kobe-scene {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
+  background: transparent;
+  overflow: visible;
 }
 .arcade-hero .hero-text {
   position: relative;
