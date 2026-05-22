@@ -27,7 +27,7 @@ export function buildSkyline(): void {
   }
   blds.forEach(b => {
     const el = document.createElement('div');
-    el.className = 'bld';
+    el.className = 'ks-bld';
     el.style.width = b.w + 'px';
     el.style.height = b.h + 'px';
     if (b.type === 'eu') {
@@ -39,7 +39,7 @@ export function buildSkyline(): void {
     for (let r = 1; r < rows; r++) {
       for (let cl = 0; cl < cols; cl++) {
         const w = document.createElement('div');
-        w.className = 'bld-window' + (Math.random() > 0.45 ? '' : ' off');
+        w.className = 'ks-win' + (Math.random() > 0.45 ? '' : ' off');
         w.style.left = (4 + cl * 8) + 'px';
         w.style.top = (4 + r * 10) + 'px';
         el.appendChild(w);
