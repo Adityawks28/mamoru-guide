@@ -663,3 +663,14 @@ body.day-mode .ks-tower,
 @media (prefers-reduced-motion: reduce) {
   .ks-tower, .tower-top { animation: none; }
 }
+
+/* ───── MOBILE — scale harbor cluster down ───── */
+@media (max-width: 900px) {
+  .ks-tower    { left: 50%; transform: scale(0.55); transform-origin: bottom left; }
+  .ks-crystal  { left: 60%; transform: scale(0.55); transform-origin: bottom left; }
+  .ks-ferris   { left: 4%;  transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-museum   { left: 22%; transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-boat     { transform: scale(0.7); }
+  .ks-cityhall { right: 8%; transform: scale(0.65); transform-origin: bottom right; }
+  .ks-bridge   { width: 50%; }
+}
