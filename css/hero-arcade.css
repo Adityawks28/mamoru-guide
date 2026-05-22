@@ -586,3 +586,30 @@ body.day-mode .ks-ferris,
 .ks-museum svg { width: 100%; height: 100%; }
 body.day-mode .ks-museum,
 [data-theme="day"] .ks-museum { filter: none; }
+
+/* ───── HARBOR BOAT ───── */
+.ks-boat {
+  position: absolute;
+  bottom: 18px;
+  left: -180px;
+  width: 160px;
+  height: 70px;
+  z-index: 5;
+  animation: boat-drift 38s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.ks-boat svg { width: 100%; height: 100%; overflow: visible; }
+@keyframes boat-drift {
+  0%   { transform: translateX(0)     translateY(0); }
+  50%  { transform: translateX(60vw)  translateY(-3px); }
+  100% { transform: translateX(120vw) translateY(0); }
+}
+.boat-wake { animation: wake-pulse 1.4s ease-in-out infinite alternate; }
+@keyframes wake-pulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; transform: translateX(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-boat, .boat-wake { animation: none; }
+}
