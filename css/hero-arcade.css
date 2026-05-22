@@ -517,3 +517,17 @@ body.day-mode .ch-body,
 [data-theme="day"] .ch-body { background: #6a7a9a; background-image: none; }
 body.day-mode .ch-top,
 [data-theme="day"] .ch-top { background: #6a7a9a; }
+
+/* ───── AKASHI-KAIKYO BRIDGE ───── */
+.ks-bridge {
+  position: absolute;
+  bottom: 220px;
+  left: 0;
+  width: 36%;
+  height: 80px;
+  z-index: 3;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(232,64,64,0.4));
+}
+body.day-mode .ks-bridge,
+[data-theme="day"] .ks-bridge { opacity: 0.7; filter: none; }
