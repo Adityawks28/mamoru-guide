@@ -6,6 +6,7 @@ const cardIndex: Record<VocabCategory, number> = {
   action: 0,
   places: 0,
   help: 0,
+  medical: 0,
 };
 
 function renderFlashcard(cat: VocabCategory): void {
@@ -69,7 +70,7 @@ export function switchTab(tabId: string, group: string): void {
 }
 
 export function initVocab(): void {
-  const cats: VocabCategory[] = ['danger', 'action', 'places', 'help'];
+  const cats: VocabCategory[] = ['danger', 'action', 'places', 'help', 'medical'];
   cats.forEach(cat => renderFlashcard(cat));
 
   // Keyboard navigation for flashcards

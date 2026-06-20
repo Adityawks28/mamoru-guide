@@ -18,7 +18,7 @@ export interface VocabItem {
   id: string;
 }
 
-export type VocabCategory = 'danger' | 'action' | 'places' | 'help';
+export type VocabCategory = 'danger' | 'action' | 'places' | 'help' | 'medical';
 
 export type VocabData = Record<VocabCategory, VocabItem[]>;
 

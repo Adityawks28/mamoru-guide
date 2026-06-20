@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="css/character-bible.css">
 <link rel="stylesheet" href="css/earthquake-room.css">
 <link rel="stylesheet" href="css/hero-arcade.css">
+<link rel="stylesheet" href="css/earthquake-now.css">
 <link rel="manifest" href="manifest.json">
 </head>
 <body class="lang-en">
@@ -581,6 +582,7 @@
     <button class="tab-btn" data-tab="action" role="tab" aria-selected="false" aria-controls="vocabPanelAction" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
     <button class="tab-btn" data-tab="places" role="tab" aria-selected="false" aria-controls="vocabPanelPlaces" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
     <button class="tab-btn" data-tab="help" role="tab" aria-selected="false" aria-controls="vocabPanelHelp" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
+    <button class="tab-btn" data-tab="medical" role="tab" aria-selected="false" aria-controls="vocabPanelMedical" onclick="switchTab('medical','vocab')">🏥 <span data-lang="en">Medical</span><span data-lang="ja">医療</span><span data-lang="id">Medis</span></button>
   </div>
 
   <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel">
@@ -621,6 +623,16 @@
         <button class="bag-btn secondary" onclick="nextCard('help')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardHelp"></div>
+    </div>
+  </div>
+  <div class="tab-content" id="vocabPanelMedical" data-tab="medical" data-group="vocab" role="tabpanel">
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('medical')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterMedical" aria-live="polite">1 / 8</span>
+        <button class="bag-btn secondary" onclick="nextCard('medical')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardMedical"></div>
     </div>
   </div>
 
@@ -1235,6 +1247,13 @@
 <!-- Emergency FAB -->
 <button class="emergency-fab" id="emergencyFab" aria-label="Emergency quick access" aria-expanded="false">🆘</button>
 <div class="emergency-fab-panel" id="emergencyFabPanel">
+  <button class="fab-item" onclick="showEarthquakeNow()">
+    <span class="fab-item-icon">🔴</span>
+    <span data-lang="en">EARTHQUAKE NOW</span>
+    <span data-lang="ja">地震！今すぐ</span>
+    <span data-lang="id">GEMPA SEKARANG</span>
+  </button>
+  <div class="fab-divider"></div>
   <a href="tel:119" class="fab-item">
     <span class="fab-item-icon">🚒</span>
     <span class="fab-item-number">119</span>
@@ -1259,6 +1278,8 @@
     <span data-i18n="fab.showthis">Show This Card</span>
   </a>
 </div>
+
+<div id="earthquakeNow" class="earthquake-now" role="dialog" aria-label="Earthquake emergency guide"></div>
 
 <div class="toast" id="toast"></div>
 <script type="module" src="/src/main.ts"></script>
