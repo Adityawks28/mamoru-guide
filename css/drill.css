@@ -43,7 +43,7 @@
   border: 2px solid var(--alert-red);
   border-radius: 6px;
   margin-bottom: 16px;
-  animation: alertBlink 1s ease-in-out 3;
+  animation: alertFade 1.5s ease-in-out 2;
 }
 .drill-alert.mini {
   padding: 10px 14px;
@@ -61,9 +61,9 @@
   font-size: 14px;
   color: var(--alert-red);
 }
-@keyframes alertBlink {
-  0%, 100% { border-color: var(--alert-red); }
-  50% { border-color: transparent; }
+@keyframes alertFade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 /* Progress */
@@ -197,4 +197,15 @@ body.day-mode .drill-alert {
 }
 body.day-mode .drill-option-letter {
   background: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drill-container.shaking,
+  #drillContainer.shaking { animation: none; }
+  .drill-countdown { animation: none; }
+  .drill-countdown.pulse { animation: none; }
+  .drill-alert { animation: none; }
+  .drill-option { transition: none; }
+  .drill-option:hover:not(:disabled) { transform: none; }
+  .drill-next-btn:hover, .drill-retry-btn:hover { transform: none; }
 }
