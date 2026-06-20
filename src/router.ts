@@ -61,7 +61,11 @@ export function activateRoute(hash: string): void {
   document.body.dataset.route = routeName;
 
   document.querySelectorAll<HTMLAnchorElement>('[data-nav-route]').forEach(link => {
-    link.setAttribute('aria-current', link.dataset.navRoute === route ? 'page' : 'false');
+    if (link.dataset.navRoute === route) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
   });
 
   mountSectionNav(routeName);

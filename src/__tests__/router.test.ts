@@ -172,11 +172,13 @@ describe('activateRoute()', () => {
     expect(activeNavLink()).toBe('#/learn');
   });
 
-  it('sets aria-current="false" on all non-active nav links', () => {
+  it('removes aria-current from all non-active nav links', () => {
     activateRoute('#/shelter');
-    const inactive = document.querySelectorAll('[data-nav-route][aria-current="false"]');
-    // 5 links total, 1 active → 4 should be false
-    expect(inactive.length).toBe(5);
+    const withFalse = document.querySelectorAll('[data-nav-route][aria-current="false"]');
+    expect(withFalse.length).toBe(0);
+    const withCurrent = document.querySelectorAll('[data-nav-route][aria-current]');
+    // only the active link(s) should carry aria-current
+    withCurrent.forEach(el => expect(el.getAttribute('aria-current')).toBe('page'));
   });
 
   // --- data-route attribute ---
