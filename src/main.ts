@@ -3,27 +3,11 @@ import { buildSkyline } from './skyline';
 import { initTheme, toggleDayNight } from './theme';
 import { initLang, setLang } from './lang';
 import { initRouter } from './router';
-import { initEarthquakeScale } from './earthquake-scale';
-import { initVocab, switchTab, prevCard, nextCard } from './vocab';
-import { renderBagItems, updateBagStats, checkBag, resetBag } from './bag-game';
 import { initScrollReveal } from './scroll-reveal';
 import { initMobileNav } from './nav';
-import { initEmergencyPlan, savePlan, clearPlan, printPlan } from './emergency-plan';
-import { initContacts } from './contacts';
-import { initTyphoonScale } from './typhoon';
-import { initShowThis } from './show-this';
 import { initEmergencyFab } from './emergency-fab';
-import { initFirstAid } from './first-aid';
-import { initDrill } from './drill';
-import { initShelterFinder } from './shelter-finder';
-import { initQuiz } from './quiz';
 import { showToast } from './toast';
 import { initMascot } from './character/mascot';
-import { initEarthquakeScene } from './character/earthquake-scene';
-import { initFirstAidScene } from './character/firstaid-scene';
-import { initTyphoonScene } from './character/typhoon-scene';
-import { initBagScene } from './character/bag-scene';
-import { initBible } from './character/bible';
 
 // === SHARE ===
 async function shareGuide(): Promise<void> {
@@ -52,14 +36,6 @@ Object.assign(window, {
   setLang,
   toggleDayNight,
   shareGuide,
-  switchTab,
-  prevCard,
-  nextCard,
-  checkBag,
-  resetBag,
-  savePlan,
-  clearPlan,
-  printPlan,
   showToast,
 });
 
@@ -70,27 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initLang();
   initRouter();
-  initEarthquakeScale();
-  initVocab();
-  renderBagItems();
-  updateBagStats();
-  initTyphoonScale();
-  initShowThis();
-  initFirstAid();
-  initShelterFinder();
-  initDrill();
-  initQuiz();
-  initContacts();
   initScrollReveal();
   initMobileNav();
-  initEmergencyPlan();
   initEmergencyFab();
   initMascot();
-  initEarthquakeScene();
-  initFirstAidScene();
-  initTyphoonScene();
-  initBagScene();
-  initBible();
+
+  import('./earthquake-scale').then(m => m.initEarthquakeScale());
+  import('./vocab').then(m => { m.initVocab(); Object.assign(window, { switchTab: m.switchTab, prevCard: m.prevCard, nextCard: m.nextCard }); });
+  import('./bag-game').then(m => { m.renderBagItems(); m.updateBagStats(); Object.assign(window, { checkBag: m.checkBag, resetBag: m.resetBag }); });
+  import('./typhoon').then(m => m.initTyphoonScale());
+  import('./show-this').then(m => m.initShowThis());
+  import('./first-aid').then(m => m.initFirstAid());
+  import('./drill').then(m => m.initDrill());
+  import('./quiz').then(m => m.initQuiz());
+  import('./contacts').then(m => m.initContacts());
+  import('./shelter-finder').then(m => m.initShelterFinder());
+  import('./emergency-plan').then(m => { m.initEmergencyPlan(); Object.assign(window, { savePlan: m.savePlan, clearPlan: m.clearPlan, printPlan: m.printPlan }); });
+  import('./character/earthquake-scene').then(m => m.initEarthquakeScene());
+  import('./character/firstaid-scene').then(m => m.initFirstAidScene());
+  import('./character/typhoon-scene').then(m => m.initTyphoonScene());
+  import('./character/bag-scene').then(m => m.initBagScene());
+  import('./character/bible').then(m => m.initBible());
 });
 
 // === SERVICE WORKER ===
