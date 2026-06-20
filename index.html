@@ -60,11 +60,11 @@
     <span>MAMORU 守る</span>
   </a>
   <div class="nav-links">
-    <a href="#/emergency" data-nav-route="#/emergency" aria-current="false"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
-    <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false"><span data-i18n="nav.prepare">Prepare</span></a>
-    <a href="#/learn"     data-nav-route="#/learn"      aria-current="false"><span data-i18n="nav.learn">Learn</span></a>
-    <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false"><span data-i18n="nav.shelter">Shelter</span></a>
-    <a href="#/plan"      data-nav-route="#/plan"       aria-current="false"><span data-i18n="nav.plan">My Plan</span></a>
+    <a href="#/emergency" data-nav-route="#/emergency"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
+    <a href="#/prepare"   data-nav-route="#/prepare"  ><span data-i18n="nav.prepare">Prepare</span></a>
+    <a href="#/learn"     data-nav-route="#/learn"     ><span data-i18n="nav.learn">Learn</span></a>
+    <a href="#/shelter"   data-nav-route="#/shelter"   ><span data-i18n="nav.shelter">Shelter</span></a>
+    <a href="#/plan"      data-nav-route="#/plan"      ><span data-i18n="nav.plan">My Plan</span></a>
   </div>
   <div class="nav-right">
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -81,11 +81,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#/emergency" data-nav-route="#/emergency" aria-current="false"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
-  <a href="#/prepare"   data-nav-route="#/prepare"   aria-current="false"><span data-i18n="nav.prepare">Prepare</span></a>
-  <a href="#/learn"     data-nav-route="#/learn"      aria-current="false"><span data-i18n="nav.learn">Learn</span></a>
-  <a href="#/shelter"   data-nav-route="#/shelter"    aria-current="false"><span data-i18n="nav.shelter">Shelter</span></a>
-  <a href="#/plan"      data-nav-route="#/plan"       aria-current="false"><span data-i18n="nav.plan">My Plan</span></a>
+  <a href="#/emergency" data-nav-route="#/emergency"><span data-i18n="nav.emergency">🚨 Emergency</span></a>
+  <a href="#/prepare"   data-nav-route="#/prepare"  ><span data-i18n="nav.prepare">Prepare</span></a>
+  <a href="#/learn"     data-nav-route="#/learn"     ><span data-i18n="nav.learn">Learn</span></a>
+  <a href="#/shelter"   data-nav-route="#/shelter"   ><span data-i18n="nav.shelter">Shelter</span></a>
+  <a href="#/plan"      data-nav-route="#/plan"      ><span data-i18n="nav.plan">My Plan</span></a>
   <button id="mobileThemeToggle" onclick="toggleDayNight()" class="mobile-theme-btn">☀️ Day Mode</button>
   <button onclick="shareGuide()" class="mobile-theme-btn">📤 Share</button>
   <div class="mobile-lang-row">
@@ -586,7 +586,7 @@
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('danger')" aria-label="Previous">◀</button>
-        <span class="flashcard-counter" id="fcCounterDanger">1 / 8</span>
+        <span class="flashcard-counter" id="fcCounterDanger" aria-live="polite">1 / 8</span>
         <button class="bag-btn secondary" onclick="nextCard('danger')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardDanger"></div>
@@ -596,7 +596,7 @@
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('action')" aria-label="Previous">◀</button>
-        <span class="flashcard-counter" id="fcCounterAction">1 / 5</span>
+        <span class="flashcard-counter" id="fcCounterAction" aria-live="polite">1 / 5</span>
         <button class="bag-btn secondary" onclick="nextCard('action')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardAction"></div>
@@ -606,7 +606,7 @@
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('places')" aria-label="Previous">◀</button>
-        <span class="flashcard-counter" id="fcCounterPlaces">1 / 4</span>
+        <span class="flashcard-counter" id="fcCounterPlaces" aria-live="polite">1 / 4</span>
         <button class="bag-btn secondary" onclick="nextCard('places')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardPlaces"></div>
@@ -616,7 +616,7 @@
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('help')" aria-label="Previous">◀</button>
-        <span class="flashcard-counter" id="fcCounterHelp">1 / 6</span>
+        <span class="flashcard-counter" id="fcCounterHelp" aria-live="polite">1 / 6</span>
         <button class="bag-btn secondary" onclick="nextCard('help')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardHelp"></div>
