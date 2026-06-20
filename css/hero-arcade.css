@@ -714,3 +714,7 @@ body.day-mode .ks-quay,
   background-blend-mode: multiply;
   border-top: 1px solid #d8c8a0;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .kobe-scene * { animation: none !important; transition: none !important; }
+}

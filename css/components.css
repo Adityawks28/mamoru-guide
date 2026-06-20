@@ -515,3 +515,7 @@ body.day-mode .contact-card {
   background: var(--surface-soft);
   border-color: rgba(0,0,0,0.12);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-card { transition: none; }
+}

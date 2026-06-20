@@ -235,3 +235,8 @@ body.day-mode .bag-result {
   background: var(--surface-soft);
   border-color: rgba(0,0,0,0.12);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .bag-item { transition: none; }
+  .bag-item.rejected { animation: none; }
+}

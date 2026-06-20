@@ -101,3 +101,9 @@ body.day-mode .fab-item {
 body.day-mode .fab-item:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .emergency-fab { animation: none; }
+  .emergency-fab.active { animation: none; }
+  .emergency-fab-panel { animation: none; }
+}

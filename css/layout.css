@@ -499,3 +499,13 @@ body.day-mode .em-subtitle {
   color: var(--text-muted);
   opacity: 1;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .section { transition: none; opacity: 1; transform: none; }
+  .mode-card { transition: none; }
+  .mode-card:hover { transform: none; }
+  .mode-card-icon { transition: none; }
+  .mode-card:hover .mode-card-icon { transform: none; }
+  .mobile-menu { transition: none; }
+  .toast { transition: none; }
+}
