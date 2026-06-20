@@ -7,4 +7,5 @@ node_modules/
 dist/
 docs/*
 !docs/superpowers/
+!docs/hero.md
 CLAUDE.md
