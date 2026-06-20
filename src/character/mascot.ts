@@ -158,12 +158,12 @@ export function initMascot(): void {
     allowed = now;
     clearFactTimer();
     clearBlink();
+    window.removeEventListener('mousemove', onPointerMove);
     if (allowed) {
       scheduleFactTimer();
       scheduleBlink();
       window.addEventListener('mousemove', onPointerMove);
     } else {
-      window.removeEventListener('mousemove', onPointerMove);
       updateSprite(sprite, { pupil: { x: 0, y: 0 }, blink: false });
     }
   }
