@@ -69,6 +69,7 @@ export function initMascot(): void {
   charWrap.className = 'mascot';
   charWrap.setAttribute('role', 'button');
   charWrap.setAttribute('aria-label', 'Tap Moru for the next disaster fact');
+  charWrap.setAttribute('tabindex', '0');
   const sprite = createSprite({ pose: 'stand', gender: 'male' });
   sprite.classList.add('mascot-svg');
   charWrap.appendChild(sprite);
@@ -152,6 +153,14 @@ export function initMascot(): void {
     nextFact();
     const r = charWrap.getBoundingClientRect();
     spawnRipple(e.clientX - r.left, e.clientY - r.top);
+  });
+
+  charWrap.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      flashEmote();
+      nextFact();
+    }
   });
 
   function applyMotion(now: boolean): void {
