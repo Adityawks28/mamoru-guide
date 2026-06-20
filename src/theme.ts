@@ -17,7 +17,17 @@ export function toggleDayNight(): void {
 
 export function initTheme(): void {
   const saved = localStorage.getItem('mamoru-theme');
+  let shouldBeDay = false;
+
   if (saved === 'day') {
+    shouldBeDay = true;
+  } else if (saved === 'night') {
+    shouldBeDay = false;
+  } else if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    shouldBeDay = true;
+  }
+
+  if (shouldBeDay) {
     isDayMode = true;
     document.body.classList.add('day-mode');
     const hero = document.getElementById('hero');
