@@ -163,6 +163,7 @@ The three v1-fatal unknowns get validated here. **If a spike fails, the dependen
 - [ ] SW preserves `mamoru-hazard-data-v1` + `mamoru-basemap-v1` across a `CACHE_NAME` bump; `storage.persist()` requested; integrity re-fetch works; offline smoke passes.
 - [ ] No Press Start 2P on any critical string; no `hue-rotate` on tiles; label pills opaque; all markers/overlays pass AA non-text contrast in **both** themes; risk markers legible in day mode.
 - [ ] No `role="application"` trap; map-pan vs list-nav keys disjoint; list view is the primary SR path; colour-blind-safe shapes + patterns.
+- [ ] **Mobile-first, verified on a real device/emulator at 320 / 375 / 414 px:** no horizontal overflow; map fills the viewport with the bottom drawer reachable one-handed; all controls ≥ 44×44 px; layer-toggle row wraps (never scrolls off-screen); alert banner + disclaimer legible without zoom; pinch-zoom on the map does not zoom the page chrome (`touch-action` scoped). This is a release gate, not a nicety — a disaster app is used on a phone.
 - [ ] Privacy: only the region-wide alert fetch leaves the device (no location); all map `localStorage` keys are `mamoru-*`; documented honestly in-app.
 - [ ] Flag `=false` cleanly reverts to the old finder; no regression vs. today's nearest-shelter result.
 
