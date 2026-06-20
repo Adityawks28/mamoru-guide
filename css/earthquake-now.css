@@ -1,0 +1,111 @@
+.earthquake-now {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #1a0000;
+  color: #fff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  flex-direction: column;
+  padding: 0;
+}
+.earthquake-now.active {
+  display: flex;
+}
+
+.eq-now-header {
+  background: var(--alert-red, #e84040);
+  padding: 16px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.eq-now-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 3vw, 20px);
+  color: #fff;
+  letter-spacing: 1px;
+}
+.eq-now-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eq-now-steps {
+  flex: 1;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eq-now-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.eq-now-step-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--alert-red, #e84040);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.eq-now-step-text {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+.eq-now-step-detail {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.eq-now-numbers {
+  padding: 20px;
+  text-align: center;
+  background: rgba(232,64,64,0.15);
+  border-top: 2px solid var(--alert-red, #e84040);
+}
+.eq-now-numbers a {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 28px;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  margin: 8px;
+  border: 2px solid var(--alert-red, #e84040);
+  border-radius: 8px;
+}
+.eq-now-numbers a:active {
+  background: var(--alert-red, #e84040);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .earthquake-now * { animation: none !important; transition: none !important; }
+}

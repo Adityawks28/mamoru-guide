@@ -8,6 +8,7 @@ import { initMobileNav } from './nav';
 import { initEmergencyFab } from './emergency-fab';
 import { showToast } from './toast';
 import { initMascot } from './character/mascot';
+import { initEarthquakeNow, showEarthquakeNow } from './earthquake-now';
 
 // === SHARE ===
 async function shareGuide(): Promise<void> {
@@ -37,6 +38,7 @@ Object.assign(window, {
   toggleDayNight,
   shareGuide,
   showToast,
+  showEarthquakeNow,
 });
 
 // === MAIN INIT ===
@@ -50,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initEmergencyFab();
   initMascot();
+  initEarthquakeNow();
 
   import('./earthquake-scale').then(m => m.initEarthquakeScale());
   import('./vocab').then(m => { m.initVocab(); Object.assign(window, { switchTab: m.switchTab, prevCard: m.prevCard, nextCard: m.nextCard }); });
