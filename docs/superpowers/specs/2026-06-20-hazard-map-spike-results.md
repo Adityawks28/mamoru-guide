@@ -44,3 +44,35 @@ The v2 design already makes data prep **build-time → committed artifacts**, so
 - **(B) Build offline-of-this-env:** I build every component that doesn't need live data now (pipeline scripts, PMTiles render integration against a sample tileset, alert-feed code against a captured schema, all UI/SW/theming/tests), and the real data download + JMA-CORS check happen later in an open-egress context, dropping committed artifacts into the same pipeline.
 
 Either way, **no placeholder data ships** (constraint 2) and the feature flag stays OFF until real artifacts land.
+
+## Update — 2026-06-20 (re-probe + build scripts staged)
+
+**Re-probe (measured today):** the five data hosts are still blocked from this
+container — `curl` returns `HTTP 403` with `x-deny-reason: host_not_allowed` for
+`www.jma.go.jp`, `nlftp.mlit.go.jp`, `www.j-shis.bosai.go.jp`,
+`cyberjapandata.gsi.go.jp`, and `download.geofabrik.de`. Control hosts confirm the
+proxy is the gate, not the sites: `github.com` → 200, `example.com` → 403. A
+container's egress policy is fixed at launch, so opening these requires adding
+them to the environment allowlist **and starting a fresh session**.
+
+**Path (B) progress — pipeline code written, ready to run on egress:** the two
+build-time scripts are now staged so artifact generation is a single command away
+the moment egress (here, local, or CI) is available:
+
+- `scripts/build-basemap.mjs` (Phase 1.1) — downloads the source extract, renders
+  z0–14 with `tippecanoe`, emits `public/tiles/kobe.pmtiles`, and measures against
+  the < 8 MB target / 15 MB fallback gate.
+- `scripts/build-hazard-data.mjs` (Phase 2.1/2.2) — downloads MLIT/J-SHIS sources,
+  clips to the Kobe bbox, **reprojects to a metric CRS so the 20 m outward buffer
+  is true metres** (the refinement flagged above), buffers outward → simplifies
+  `keep-shapes` (never shrinks a hazard), stamps `source`/`asOf`, writes the four
+  `public/data/*.geojson`, and measures against the < 2.5 MB budget with the
+  Phase-0.3 scope-narrowing gate wired in.
+
+Both pass `node --check`. Each carries a **`CONFIRM:` guard** for the exact
+download URLs, dataset year codes, `asOf` dates, and licence strings — the values
+the spike could not verify without egress; the scripts **fail loud** (non-zero
+exit) rather than build from unverified config, so no placeholder/unattributed
+data can slip through. JMA CORS verification (Task 0.2) remains the highest
+residual unknown and is unaffected by these scripts — it must be checked from a
+browser/open-egress context before the live alert feed is built.
