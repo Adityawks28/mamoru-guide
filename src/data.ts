@@ -44,6 +44,16 @@ export const vocabData: VocabData = {
     {jp:'怪我をしました',rom:'Kega wo shimashita',en:'I am injured',id:'Saya terluka'},
     {jp:'下に埋まっています',rom:'Shita ni umatte imasu',en:'I am trapped under debris',id:'Saya terperangkap di bawah puing'},
     {jp:'外国人です',rom:'Gaikokujin desu',en:'I am a foreigner',id:'Saya orang asing'},
+  ],
+  medical: [
+    {jp:'アレルギーがあります',rom:'Arerugii ga arimasu',en:'I have allergies',id:'Saya punya alergi'},
+    {jp:'日本語がわかりません',rom:'Nihongo ga wakarimasen',en:'I cannot understand Japanese',id:'Saya tidak mengerti bahasa Jepang'},
+    {jp:'英語が話せますか？',rom:'Eigo ga hanasemasu ka?',en:'Do you speak English?',id:'Apakah Anda bisa bahasa Inggris?'},
+    {jp:'私の電話番号は...',rom:'Watashi no denwa bangou wa...',en:'My phone number is...',id:'Nomor telepon saya...'},
+    {jp:'糖尿病です',rom:'Tounyoubyou desu',en:'I am diabetic',id:'Saya penderita diabetes'},
+    {jp:'心臓病があります',rom:'Shinzoubyou ga arimasu',en:'I have a heart condition',id:'Saya punya penyakit jantung'},
+    {jp:'薬を飲んでいます',rom:'Kusuri wo nonde imasu',en:'I am taking medication',id:'Saya sedang minum obat'},
+    {jp:'妊娠中です',rom:'Ninshin-chuu desu',en:'I am pregnant',id:'Saya sedang hamil'},
   ]
 };
 
@@ -51,7 +61,7 @@ export const bagItems: BagItem[] = [
   {e:'💧',en:'Water (500ml × 6)',ja:'水（500ml × 6）',id:'Air (500ml × 6)',weight:3.0,priority:10,det_en:'3L minimum for 3 days',det_ja:'3日分で最低3L',det_id:'Minimal 3L untuk 3 hari'},
   {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:2.0,priority:9,det_en:'Canned food, crackers, energy bars',det_ja:'缶詰、クラッカー、栄養バー',det_id:'Makanan kaleng, kerupuk, bar energi'},
   {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.4,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
-  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.5,priority:7,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
+  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.5,priority:9,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
   {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.8,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
   {e:'💊',en:'Personal medications (5+ days)',ja:'常備薬（5日分以上）',id:'Obat pribadi (5+ hari)',weight:0.2,priority:10,det_en:'With prescription copy',det_ja:'処方箋のコピーがあれば',det_id:'Dengan salinan resep'},
   {e:'📄',en:'Important documents (copies)',ja:'重要書類（コピー）',id:'Dokumen penting (salinan)',weight:0.1,priority:8,det_en:'Passport, zairyu card, insurance',det_ja:'パスポート、在留カード、保険証',det_id:'Paspor, kartu zairyu, asuransi'},
@@ -66,6 +76,8 @@ export const bagItems: BagItem[] = [
   {e:'👟',en:'Sturdy shoes',ja:'丈夫な靴',id:'Sepatu kokoh',weight:1.0,priority:6,det_en:'Broken glass, debris on ground',det_ja:'ガラス片・がれきから足を守る',det_id:'Pecahan kaca, puing di tanah'},
   {e:'🔧',en:'Multi-tool knife',ja:'マルチツールナイフ',id:'Pisau multifungsi',weight:0.3,priority:4,det_en:'Cutting, opening cans, repairs',det_ja:'切断、缶開け、修理',det_id:'Memotong, membuka kaleng, perbaikan'},
   {e:'📢',en:'Emergency whistle',ja:'防災ホイッスル',id:'Peluit darurat',weight:0.05,priority:8,det_en:'Signal for help when trapped',det_ja:'閉じ込められた時の助け呼び',det_id:'Sinyal minta tolong saat terperangkap'},
+  {e:'🚽',en:'Portable toilet kit',ja:'簡易トイレ',id:'Kit toilet portabel',weight:0.3,priority:7,det_en:'Essential after Kobe \'95 and 2011',det_ja:'阪神・東日本大震災の教訓',det_id:'Penting setelah Kobe \'95 dan 2011'},
+  {e:'📋',en:'Laminated phrase card',ja:'ラミネート会話カード',id:'Kartu frasa laminasi',weight:0.05,priority:7,det_en:'Physical backup of Show This cards',det_ja:'「見せて」カードの物理バックアップ',det_id:'Cadangan fisik kartu Tunjukkan Ini'},
 ];
 
 export const MAX_BAG_WEIGHT = 8.0;
