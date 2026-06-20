@@ -133,6 +133,10 @@ function triggerShake(container: HTMLElement): void {
 }
 
 function startCountdown(): void {
+  if (countdownTimer) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
   const container = document.getElementById('drillContainer');
   const startBtn = document.getElementById('drillStartBtn');
   if (!container || !startBtn) return;
