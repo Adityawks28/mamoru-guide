@@ -18,7 +18,16 @@ export function toggleDayNight(): void {
 export function initTheme(): void {
   const saved = localStorage.getItem('mamoru-theme');
   if (saved === 'day') {
-    isDayMode = false;
-    toggleDayNight();
+    isDayMode = true;
+    document.body.classList.add('day-mode');
+    const hero = document.getElementById('hero');
+    if (hero) {
+      hero.classList.remove('night-sky');
+      hero.classList.add('day-sky');
+    }
+    const modeToggle = document.getElementById('modeToggle');
+    if (modeToggle) modeToggle.textContent = '🌙';
+    const mobileToggle = document.getElementById('mobileThemeToggle');
+    if (mobileToggle) mobileToggle.textContent = '🌙 Night Mode';
   }
 }
