@@ -1,0 +1,67 @@
+#bible .section-header { margin-bottom: 24px; }
+
+.bible-cast,
+.bible-anatomy,
+.bible-rules { margin: 32px 0; }
+
+.bible-cast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.bible-cast-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface, #1a1a2e);
+}
+.bible-cast-card .mamoru-sprite { width: 64px; height: 96px; }
+
+.bible-pose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.bible-pose-cell {
+  background: var(--surface, #1a1a2e);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+.bible-pose-cell .mamoru-sprite { width: 64px; height: 96px; margin: 0 auto; }
+.bible-pose-label { font-size: 11px; line-height: 1.35; margin-top: 6px; color: var(--text-muted, #a8a8b8); }
+.bible-pose-label strong { color: var(--text, #f6f4ef); }
+
+.bible-anatomy-figure {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.bible-anatomy table {
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.bible-anatomy th,
+.bible-anatomy td {
+  padding: 4px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+.bible-rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.bible-rules ul { margin: 0; padding-left: 18px; }
+.bible-rules li { margin: 6px 0; font-size: 13px; line-height: 1.45; }
+.bible-rules-dont h3 { color: #e87040; }
+
+@media (max-width: 600px) {
+  .bible-rules { grid-template-columns: 1fr; }
+}

@@ -7,7 +7,7 @@ const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/':          ['hero', 'mode-selector'],
   '#/emergency': ['emergency-mode'],
   '#/prepare':   ['earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts'],
-  '#/learn':     ['drill', 'quiz', 'about'],
+  '#/learn':     ['drill', 'quiz', 'about', 'bible'],
   '#/plan':      ['myplan'],
   '#/shelter':   ['shelter'],
   '#/show':      ['showthis'],
