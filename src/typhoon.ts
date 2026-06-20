@@ -37,5 +37,24 @@ export function initTyphoonScale(): void {
       <div class="typhoon-bar-wrap"><div class="typhoon-bar" style="width:${pct}%;background:${level.color}"></div></div>
     `;
     container.appendChild(row);
+
+    row.style.cursor = 'pointer';
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('role', 'button');
+    let active = false;
+    const toggle = () => {
+      active = !active;
+      container.querySelectorAll('.typhoon-row.active').forEach(el => {
+        if (el !== row) el.classList.remove('active');
+      });
+      row.classList.toggle('active', active);
+      document.dispatchEvent(new CustomEvent('mamoru:typhoon-level', {
+        detail: { level: active ? i : null },
+      }));
+    };
+    row.addEventListener('click', toggle);
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
   });
 }
