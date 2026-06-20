@@ -124,22 +124,6 @@ function renderCard(): void {
   document.getElementById('showThisNext')?.addEventListener('click', () => {
     if (currentIndex < list.length - 1) { currentIndex++; renderCard(); }
   });
-
-  // Swipe support
-  let touchStartX = 0;
-  const card = cardContainer.querySelector('.showthis-card');
-  if (card) {
-    card.addEventListener('touchstart', (e) => {
-      touchStartX = (e as TouchEvent).touches[0].clientX;
-    }, { passive: true });
-    card.addEventListener('touchend', (e) => {
-      const diff = touchStartX - (e as TouchEvent).changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0 && currentIndex < list.length - 1) { currentIndex++; renderCard(); }
-        else if (diff < 0 && currentIndex > 0) { currentIndex--; renderCard(); }
-      }
-    }, { passive: true });
-  }
 }
 
 export function initShowThis(): void {
@@ -154,4 +138,17 @@ export function initShowThis(): void {
   if (tabBar && cardEl) container.insertBefore(tabBar, cardEl);
 
   renderCard();
+
+  let touchStartX = 0;
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = (e as TouchEvent).touches[0].clientX;
+  }, { passive: true });
+  container.addEventListener('touchend', (e) => {
+    const diff = touchStartX - (e as TouchEvent).changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      const list = phrases[currentCat];
+      if (diff > 0 && currentIndex < list.length - 1) { currentIndex++; renderCard(); }
+      else if (diff < 0 && currentIndex > 0) { currentIndex--; renderCard(); }
+    }
+  }, { passive: true });
 }
