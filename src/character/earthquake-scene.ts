@@ -353,6 +353,7 @@ export function initEarthquakeScene(): void {
 
   function applyIntensity(i: number, lockUntilTimeout = true): void {
     intensity = i;
+    clearWalkTimers();
     applyHazards(i);
     applyDepth(i);
     applyShake(i);
