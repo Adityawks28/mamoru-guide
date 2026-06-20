@@ -36,11 +36,11 @@ export const MAP_TIPS: Tip[] = [
 // (bleeding / burns / fractures / crush / cpr / shock / smoke / psychological).
 export const FIRSTAID_TIPS: Tip[] = [
   { en: "Bleeding: firm direct pressure beats any fancy bandage.",        ja: "出血は直接圧迫が最強",    id: "Pendarahan: tekanan langsung yang kuat lebih ampuh dari perban mewah." },
-  { en: "Burn? Cool water for 20 minutes. Never ice, butter, or toothpaste.", ja: "やけどは流水20分",     id: "Luka bakar? Air sejuk 20 menit. Jangan es, mentega, atau pasta gigi." },
-  { en: "CPR: push hard, push fast — 100-120 per minute, 5-6cm deep.",     ja: "胸骨圧迫は強く速く",    id: "CPR: tekan keras, tekan cepat — 100-120/menit, dalam 5-6cm." },
+  { en: "Burn? Cool water 20 min, then cover loosely with clean cloth. Never ice, butter, or toothpaste.", ja: "やけどは流水20分、清潔な布で緩く覆う。氷・バター・歯磨き粉は禁止", id: "Luka bakar? Air sejuk 20 mnt, lalu tutup longgar dengan kain bersih. Jangan es/mentega/pasta gigi." },
+  { en: "CPR: push hard, push fast — 100-120/min. Adults: 5-6cm deep. Children: max 5cm. Take a CPR course.", ja: "胸骨圧迫: 成人5-6cm、小児は最大5cm。講習を受けよう", id: "CPR: tekan keras, cepat — 100-120/mnt. Dewasa: 5-6cm. Anak: maks 5cm. Ikuti pelatihan CPR." },
   { en: "AEDs in Japan: train stations, konbini, schools. Green heart sign.", ja: "AEDは緑のハート",     id: "AED di Jepang: stasiun, minimarket, sekolah. Tanda hati hijau." },
   { en: "Smoke: get low, cover mouth with wet cloth, follow green exit signs.", ja: "煙では低く濡れ布で", id: "Asap: merendah, tutup mulut dengan kain basah, ikuti tanda hijau." },
-  { en: "Shock: lay them flat, elevate legs, blanket on top, no food/drink.", ja: "ショック対応は寝かせて足上げ", id: "Syok: baringkan, angkat kaki, selimuti, jangan beri makan/minum." },
+  { en: "Shock from blood loss: lay flat, elevate legs. Breathing difficulty: keep semi-upright. Always call 119.", ja: "出血性ショック: 寝かせて足上げ。呼吸困難: 半座位。必ず119番", id: "Syok pendarahan: baringkan, angkat kaki. Sesak napas: semi-tegak. Selalu hubungi 119." },
   { en: "Crush injury > 15 min: DO NOT free them. Call 119 immediately.",   ja: "圧挫15分超は自力で救出しない", id: "Cedera himpitan > 15 menit: JANGAN bebaskan sendiri. Hubungi 119." },
   { en: "Panic? Try 4-4-4 breathing: in 4, hold 4, out 4.",                ja: "パニック時は4-4-4呼吸",  id: "Panik? Coba napas 4-4-4: tarik 4, tahan 4, buang 4." },
 ];
