@@ -166,7 +166,9 @@ function renderCategories(): void {
 
   container.querySelectorAll<HTMLButtonElement>('.firstaid-card').forEach(btn => {
     btn.addEventListener('click', () => {
-      currentCategory = parseInt(btn.dataset.idx!, 10);
+      const idx = btn.dataset.idx;
+      if (idx === undefined) return;
+      currentCategory = parseInt(idx, 10);
       currentStep = 0;
       renderSteps();
       document.dispatchEvent(new CustomEvent('mamoru:firstaid-step', {
@@ -291,6 +293,7 @@ function renderSteps(): void {
       timerBtn.innerHTML = `<span data-lang="en">⏸ Pause</span><span data-lang="ja">⏸ 一時停止</span><span data-lang="id">⏸ Jeda</span>`;
       reapplyLang();
 
+      stopTimer();
       timerInterval = setInterval(() => {
         timerRemaining--;
         display.textContent = formatTime(timerRemaining);
