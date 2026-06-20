@@ -73,7 +73,8 @@ function attachScrollSpy(nav: HTMLElement, route: string): void {
 
   const sectionToChip = new Map<string, HTMLElement>();
   nav.querySelectorAll<HTMLElement>('.section-chip').forEach(chip => {
-    sectionToChip.set(chip.dataset.target!, chip);
+    const target = chip.dataset.target;
+    if (target) sectionToChip.set(target, chip);
   });
 
   scrollSpy = new IntersectionObserver(
