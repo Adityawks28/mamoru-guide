@@ -284,6 +284,53 @@ body.day-mode .kobe-scene {
   100% { width: 80px; height: 80px; opacity: 0; transform: translate(-36px, -36px); }
 }
 
+/* ───── TAP REACTIONS ─────
+   mascot.ts sets data-emote on the sprite (wave/jump/spin/peace/burst/bow)
+   for ~600ms on every tap, then clears it. These give Moru a visible reaction
+   to the tap; the fact advances at the same time. Kept under 600ms so the
+   animation settles before the attribute is cleared. */
+.mascot-svg[data-emote] { transform-origin: 50% 92%; }
+.mascot-svg[data-emote="wave"]  { animation: mk-emote-wave  0.55s ease-in-out; }
+.mascot-svg[data-emote="jump"]  { animation: mk-emote-jump  0.55s ease-out; }
+.mascot-svg[data-emote="spin"]  { animation: mk-emote-spin  0.55s ease-in-out; }
+.mascot-svg[data-emote="peace"] { animation: mk-emote-peace 0.55s ease-in-out; }
+.mascot-svg[data-emote="burst"] { animation: mk-emote-burst 0.55s ease-out; transform-origin: 50% 50%; }
+.mascot-svg[data-emote="bow"]   { animation: mk-emote-bow   0.55s ease-in-out; }
+
+@keyframes mk-emote-wave {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-9deg); }
+  45% { transform: rotate(7deg); }
+  70% { transform: rotate(-5deg); }
+  85% { transform: rotate(3deg); }
+}
+@keyframes mk-emote-jump {
+  0%   { transform: translateY(0) scale(1, 1); }
+  20%  { transform: translateY(0) scale(1.08, 0.86); }   /* crouch */
+  55%  { transform: translateY(-26px) scale(0.96, 1.08); } /* launch */
+  80%  { transform: translateY(0) scale(1.05, 0.92); }    /* land squash */
+  100% { transform: translateY(0) scale(1, 1); }
+}
+@keyframes mk-emote-spin {
+  0%   { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes mk-emote-peace {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-10px) rotate(-4deg); }
+  60% { transform: translateY(0) rotate(4deg); }
+}
+@keyframes mk-emote-burst {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.22); }
+  60%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+@keyframes mk-emote-bow {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  40% { transform: translateY(6px) scaleY(0.82); } /* pixel nod/bow dip */
+}
+
 /* ───── MODE RAIL ─────
    Scoped to .mode-rail to avoid leaking into the pre-existing
    `<section id="mode-selector">` that also uses `.mode-card`. */
@@ -395,6 +442,7 @@ body.day-mode .kobe-scene {
   .mascot-hint { animation: none; }
   .ks-petal, .ks-shooter { animation: none; display: none; }
   .mascot-wrap > .mascot { transition: none; }
+  .mascot-svg[data-emote] { animation: none; }
 }
 
 /* ───── RESPONSIVE ───── */

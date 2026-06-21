@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mamoru-guide-v9';
+const CACHE_NAME = 'mamoru-guide-v10';
 const PRECACHE = [
   './',
   './index.html',
@@ -32,23 +32,52 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch: cache-first, fallback to network (caches new responses automatically)
+// Fetch strategy:
+//   - Navigations + CSS use stale-while-revalidate: serve the cached copy fast,
+//     but refresh it from the network in the background so a redeploy shows up on
+//     the NEXT load — without needing a manual CACHE_NAME bump every time. Falls
+//     back to cache (and index.html for navigations) when offline.
+//   - Everything else (content-hashed JS bundles, images, fonts) stays
+//     cache-first: a new build changes the hashed URL, so it's a cache miss → net.
 self.addEventListener('fetch', event => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+
+  const isNav = req.mode === 'navigate';
+  const isCss = req.destination === 'style' || new URL(req.url).pathname.endsWith('.css');
+
+  if (isNav || isCss) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(req).then(cached => {
+          const network = fetch(req)
+            .then(response => {
+              if (response.ok) cache.put(req, response.clone());
+              return response;
+            })
+            .catch(() => cached || (isNav ? cache.match('./index.html') : undefined));
+          // Cached first for speed; network refreshes the cache for next time.
+          return cached || network;
+        })
+      )
+    );
+    return;
+  }
+
+  // Cache-first for the rest.
   event.respondWith(
-    caches.match(event.request)
-      .then(cached => cached || fetch(event.request)
+    caches.match(req)
+      .then(cached => cached || fetch(req)
         .then(response => {
-          if (response.ok && event.request.method === 'GET') {
+          if (response.ok) {
             const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+            caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
           }
           return response;
         })
       )
       .catch(() => {
-        if (event.request.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
+        if (isNav) return caches.match('./index.html');
       })
   );
 });
