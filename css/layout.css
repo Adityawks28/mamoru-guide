@@ -424,11 +424,19 @@ body.day-mode .section-nav {
   align-items: center;
   gap: 0;
   transform: translateY(-100%);
-  transition: transform 0.3s ease;
+  /* When closed, the menu must not occupy a hit-test box over the navbar.
+     It is fixed/z-index:999 and translated up, but a transformed element still
+     captures taps in its box — without this it would swallow taps on the navbar
+     mode-toggle, hamburger and share buttons below it (z-index:100). */
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.3s ease, visibility 0.3s ease;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .mobile-menu.open {
   transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 .mobile-menu a {
   color: var(--text);
