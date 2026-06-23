@@ -98,3 +98,9 @@ body.day-mode .scale-row:hover,
 body.day-mode .scale-row:focus-visible {
   background: rgba(255,255,255,0.96);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .scale-row,
+  .scale-row .shake-demo,
+  .scale-row.s7 { animation: none !important; }
+}

@@ -159,3 +159,8 @@ body.day-mode .tab-btn.active {
   border-color: var(--alert-red);
   color: #fff;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-content,
+  .flashcard-card { animation: none; }
+}

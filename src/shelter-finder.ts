@@ -23,7 +23,19 @@ function reapplyLang(): void {
   document.body.classList.add('lang-' + currentLang);
 }
 
-function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+// Escape before interpolating shelter fields into innerHTML / Leaflet popups.
+// Static today, but this is the sink that becomes XSS once shelter/hazard data
+// is loaded from fetched JSON — escape now so that path is never unsafe.
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, c =>
+    c === '&' ? '&amp;' :
+    c === '<' ? '&lt;' :
+    c === '>' ? '&gt;' :
+    c === '"' ? '&quot;' : '&#39;',
+  );
+}
+
+export function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371; // km
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLng = (lng2 - lng1) * Math.PI / 180;
@@ -33,7 +45,7 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function findNearest(lat: number, lng: number, count: number): ShelterWithDistance[] {
+export function findNearest(lat: number, lng: number, count: number): ShelterWithDistance[] {
   return shelters
     .map(s => {
       const distance = haversineDistance(lat, lng, s.lat, s.lng);
@@ -43,7 +55,7 @@ function findNearest(lat: number, lng: number, count: number): ShelterWithDistan
     .slice(0, count);
 }
 
-function formatDistance(km: number): string {
+export function formatDistance(km: number): string {
   return km < 1 ? `${Math.round(km * 1000)}m` : `${km.toFixed(1)}km`;
 }
 
@@ -152,7 +164,7 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
   nearest.forEach(s => {
     L.marker([s.lat, s.lng])
       .addTo(map)
-      .bindPopup(`<strong>${s.name}</strong>${s.name_en ? `<br>${s.name_en}` : ''}<br>${formatDistance(s.distance)} · ~${s.walkMinutes} min`);
+      .bindPopup(`<strong>${escapeHtml(s.name)}</strong>${s.name_en ? `<br>${escapeHtml(s.name_en)}` : ''}<br>${formatDistance(s.distance)} · ~${s.walkMinutes} min`);
   });
 
   // Fit bounds
@@ -188,9 +200,9 @@ function renderShelterList(_lat: number, _lng: number, nearest: ShelterWithDista
   listEl.innerHTML = nearest.map(s => `
     <div class="shelter-card">
       <div class="shelter-card-main">
-        <div class="shelter-name">${s.name}</div>
-        ${s.name_en ? `<div class="shelter-name-en">${s.name_en}</div>` : ''}
-        <div class="shelter-address">${s.address}</div>
+        <div class="shelter-name">${escapeHtml(s.name)}</div>
+        ${s.name_en ? `<div class="shelter-name-en">${escapeHtml(s.name_en)}</div>` : ''}
+        <div class="shelter-address">${escapeHtml(s.address)}</div>
         <div class="shelter-types">
           ${s.types.map(t => `<span class="shelter-type-badge" title="${typeLabels[t]}">${typeIcons[t]} ${typeLabels[t]}</span>`).join('')}
         </div>

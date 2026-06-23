@@ -242,3 +242,7 @@ body.day-mode .firstaid-nav-btn.primary {
 body.day-mode .firstaid-dot {
   background: rgba(0, 0, 0, 0.15);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .firstaid-timer.running { animation: none; }
+}

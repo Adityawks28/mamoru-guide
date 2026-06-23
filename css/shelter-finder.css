@@ -242,3 +242,7 @@ body.day-mode .shelter-loading-spinner {
 body.day-mode .shelter-map-container.offline {
   background: rgba(0, 0, 0, 0.03);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .shelter-loading-spinner { animation: none; }
+}
