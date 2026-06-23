@@ -225,3 +225,8 @@ body.day-mode .em-card-show .em-card-title {
 body.day-mode .em-card-shelter .em-card-title {
   color: #23703c;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .em-title,
+  .em-card-primary { animation: none; }
+}

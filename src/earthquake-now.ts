@@ -68,10 +68,29 @@ const STEPS: NowStep[] = [
   },
 ];
 
+let keyHandler: ((e: KeyboardEvent) => void) | null = null;
+let lastFocused: HTMLElement | null = null;
+
+function focusableEls(overlay: HTMLElement): HTMLElement[] {
+  return Array.from(
+    overlay.querySelectorAll<HTMLElement>('button, [href], [tabindex]:not([tabindex="-1"])'),
+  ).filter(el => el.offsetParent !== null);
+}
+
+function closeEarthquakeNow(overlay: HTMLElement): void {
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
+  // Restore focus to whatever launched the dialog (the emergency FAB / button).
+  if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
+  lastFocused = null;
+}
+
 export function initEarthquakeNow(): void {
   const overlay = document.getElementById('earthquakeNow');
   if (!overlay) return;
 
+  overlay.setAttribute('aria-modal', 'true');
   overlay.innerHTML = `
     <div class="eq-now-header">
       <div class="eq-now-title">
@@ -110,15 +129,32 @@ export function initEarthquakeNow(): void {
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + currentLang);
 
-  document.getElementById('eqNowClose')?.addEventListener('click', () => {
-    overlay.classList.remove('active');
-  });
+  document.getElementById('eqNowClose')?.addEventListener('click', () => closeEarthquakeNow(overlay));
 }
 
 export function showEarthquakeNow(): void {
   const overlay = document.getElementById('earthquakeNow');
   if (!overlay) return;
+
+  lastFocused = document.activeElement as HTMLElement | null;
   overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + currentLang);
+
+  // Move focus into the dialog so keyboard/SR users land on the close control.
+  (overlay.querySelector('#eqNowClose') as HTMLElement | null)?.focus();
+
+  // Escape closes; Tab is trapped within the dialog.
+  keyHandler = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') { closeEarthquakeNow(overlay); return; }
+    if (e.key !== 'Tab') return;
+    const els = focusableEls(overlay);
+    if (els.length === 0) return;
+    const first = els[0];
+    const last = els[els.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+  document.addEventListener('keydown', keyHandler);
 }
