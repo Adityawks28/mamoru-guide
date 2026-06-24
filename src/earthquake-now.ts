@@ -1,4 +1,7 @@
 import { currentLang } from './lang';
+import { trapFocus, type TrapHandle } from './focus-trap';
+
+let trap: TrapHandle | null = null;
 
 interface NowStep {
   en: string;
@@ -110,9 +113,16 @@ export function initEarthquakeNow(): void {
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + currentLang);
 
-  document.getElementById('eqNowClose')?.addEventListener('click', () => {
-    overlay.classList.remove('active');
-  });
+  document.getElementById('eqNowClose')?.addEventListener('click', hideEarthquakeNow);
+}
+
+export function hideEarthquakeNow(): void {
+  const overlay = document.getElementById('earthquakeNow');
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  trap?.release();
+  trap = null;
 }
 
 export function showEarthquakeNow(): void {
@@ -121,4 +131,6 @@ export function showEarthquakeNow(): void {
   overlay.classList.add('active');
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + currentLang);
+  document.body.style.overflow = 'hidden';
+  trap = trapFocus(overlay, hideEarthquakeNow);
 }

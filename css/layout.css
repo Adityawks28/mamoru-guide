@@ -143,7 +143,7 @@ body.day-mode .section-nav {
   font-size: 9px;
   letter-spacing: 0.5px;
   padding: 8px 12px;
-  min-height: 36px;
+  min-height: 44px;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
@@ -161,7 +161,7 @@ body.day-mode .section-nav {
 
 @media (max-width: 640px) {
   .section-nav-inner { padding: 2px 12px; }
-  .section-chip { font-size: 8px; padding: 7px 10px; min-height: 34px; }
+  .section-chip { font-size: 8px; padding: 7px 10px; min-height: 44px; }
 }
 
 @media print {
@@ -240,7 +240,7 @@ body.day-mode .section-nav {
   color: var(--kitano-white);
   border: 2px solid var(--kitano-white);
   min-width: 44px;
-  min-height: 36px;
+  min-height: 44px;
   padding: 6px 10px;
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
@@ -375,6 +375,10 @@ body.day-mode .section-nav {
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 .toast.show { bottom: 20px; }
+.toast--success { background: var(--safe-green); }
+.toast--error { background: var(--alert-red); }
+.toast--warn { background: var(--meriken-amber); color: #1a1206; }
+.toast--info { background: var(--port-fog); }
 
 /* Hamburger */
 .hamburger {

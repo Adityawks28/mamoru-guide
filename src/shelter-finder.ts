@@ -1,5 +1,6 @@
 import { currentLang } from './lang';
 import { shelters, Shelter } from './shelter-data';
+import { showToast } from './toast';
 
 interface ShelterWithDistance extends Shelter {
   distance: number;
@@ -269,11 +270,53 @@ function showLoading(): void {
   reapplyLang();
 }
 
+function reportGeolocationError(err: unknown): void {
+  const code = (err as GeolocationPositionError | undefined)?.code;
+  let msg = getLangText(
+    'Couldn’t get your location. Pick your area below.',
+    '位置情報を取得できませんでした。下でエリアを選択してください。',
+    'Tidak bisa mendapatkan lokasi. Pilih area di bawah.',
+  );
+  if (code === 1) {
+    msg = getLangText(
+      'Location permission denied — pick your area below.',
+      '位置情報が拒否されました — 下でエリアを選択してください。',
+      'Izin lokasi ditolak — pilih area Anda di bawah.',
+    );
+  } else if (code === 3) {
+    msg = getLangText(
+      'Location timed out — pick your area below.',
+      '位置情報がタイムアウトしました — 下でエリアを選択してください。',
+      'Waktu lokasi habis — pilih area Anda di bawah.',
+    );
+  } else if (code === 2) {
+    msg = getLangText(
+      'Location unavailable — pick your area below.',
+      '位置情報が利用できません — 下でエリアを選択してください。',
+      'Lokasi tidak tersedia — pilih area Anda di bawah.',
+    );
+  }
+  showToast(msg, 'error');
+}
+
 async function findShelters(useCached?: CachedLocation): Promise<void> {
+  const findBtn = document.getElementById('shelterFindBtn') as HTMLButtonElement | null;
+  if (findBtn) {
+    findBtn.disabled = true;
+    findBtn.setAttribute('aria-busy', 'true');
+  }
   showLoading();
 
   try {
-    const { lat, lng } = useCached ?? await getUserLocation();
+    let coords: { lat: number; lng: number };
+    try {
+      coords = useCached ?? await getUserLocation();
+    } catch (geoErr) {
+      reportGeolocationError(geoErr);
+      showManualFallback();
+      return;
+    }
+    const { lat, lng } = coords;
     if (!useCached) writeCachedLocation(lat, lng);
     const nearest = findNearest(lat, lng, 5);
 
@@ -315,6 +358,11 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     }
   } catch {
     showManualFallback();
+  } finally {
+    if (findBtn) {
+      findBtn.disabled = false;
+      findBtn.removeAttribute('aria-busy');
+    }
   }
 }
 

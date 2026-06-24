@@ -1,7 +1,7 @@
 import { initStars } from './stars';
 import { buildSkyline } from './skyline';
 import { initTheme, toggleDayNight } from './theme';
-import { initLang, setLang } from './lang';
+import { initLang, setLang, currentLang } from './lang';
 import { initRouter } from './router';
 import { initScrollReveal } from './scroll-reveal';
 import { initMobileNav } from './nav';
@@ -10,6 +10,10 @@ import { showToast } from './toast';
 import { initMascot } from './character/mascot';
 import { initEarthquakeNow, showEarthquakeNow } from './earthquake-now';
 
+function lang3(en: string, ja: string, id: string): string {
+  return currentLang === 'ja' ? ja : currentLang === 'id' ? id : en;
+}
+
 // === SHARE ===
 async function shareGuide(): Promise<void> {
   const shareData = {
@@ -17,17 +21,19 @@ async function shareGuide(): Promise<void> {
     text: 'Disaster preparedness guide for international students in Japan',
     url: window.location.href
   };
+  const copied = (): void =>
+    showToast(lang3('Link copied!', 'リンクをコピーしました！', 'Tautan disalin!'), 'success');
   try {
     if (navigator.share) {
       await navigator.share(shareData);
     } else {
       await navigator.clipboard.writeText(window.location.href);
-      showToast('Link copied!');
+      copied();
     }
   } catch (err) {
     if (err instanceof Error && err.name !== 'AbortError') {
       await navigator.clipboard.writeText(window.location.href);
-      showToast('Link copied!');
+      copied();
     }
   }
 }
@@ -79,7 +85,11 @@ if ('serviceWorker' in navigator) {
   });
   navigator.serviceWorker.addEventListener('message', (e: MessageEvent) => {
     if (e.data && e.data.type === 'SW_UPDATED') {
-      showToast('New version available — refresh to update');
+      showToast(lang3(
+        'New version available — refresh to update',
+        '新しいバージョンがあります — 更新してください',
+        'Versi baru tersedia — segarkan untuk memperbarui',
+      ), 'info');
     }
   });
 }
