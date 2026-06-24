@@ -4,6 +4,10 @@ import { currentLang } from './lang';
 
 let packedItems = new Set<number>();
 
+function lang3(en: string, ja: string, id: string): string {
+  return currentLang === 'ja' ? ja : currentLang === 'id' ? id : en;
+}
+
 function getCurrentWeight(): number {
   let w = 0;
   packedItems.forEach(i => w += bagItems[i].weight);
@@ -17,18 +21,22 @@ function toggleBagItem(idx: number): void {
   if (packedItems.has(idx)) {
     packedItems.delete(idx);
     el.classList.remove('packed', 'rejected');
-    showToast('↩ Removed');
+    showToast(lang3('↩ Removed', '↩ 取り出しました', '↩ Dikeluarkan'), 'info');
   } else {
     const newWeight = getCurrentWeight() + bagItems[idx].weight;
     if (newWeight > MAX_BAG_WEIGHT) {
       el.classList.add('rejected');
       setTimeout(() => el.classList.remove('rejected'), 800);
-      showToast('⚠ Too heavy! Remove something first.');
+      showToast(lang3(
+        '⚠ Too heavy! Remove something first.',
+        '⚠ 重すぎます！まず何か取り出してください。',
+        '⚠ Terlalu berat! Keluarkan sesuatu dulu.',
+      ), 'warn');
       return;
     }
     packedItems.add(idx);
     el.classList.add('packed');
-    showToast('✓ Packed!');
+    showToast(lang3('✓ Packed!', '✓ 詰めました！', '✓ Dimasukkan!'), 'success');
   }
   updateBagStats();
   updatePackPanel();
@@ -171,5 +179,5 @@ export function resetBag(): void {
   renderBagItems();
   updateBagStats();
   updatePackPanel();
-  showToast('🔄 Bag reset!');
+  showToast(lang3('🔄 Bag reset!', '🔄 バッグをリセット！', '🔄 Tas direset!'), 'info');
 }

@@ -20,6 +20,12 @@
 }
 .panel.do-panel h3 { color: var(--safe-green); }
 .panel.dont-panel h3 { color: var(--alert-red); }
+.panel.panel-before { border-color: var(--portopia-blue); }
+.panel.panel-before h3 { color: var(--portopia-blue); }
+.panel.panel-during { border-color: var(--meriken-amber); }
+.panel.panel-during h3 { color: var(--meriken-amber); }
+.panel.panel-after { border-color: var(--safe-green); }
+.panel.panel-after h3 { color: var(--safe-green); }
 .panel li {
   list-style: none;
   padding: 4px 0;
@@ -336,8 +342,8 @@ body.day-mode .share-url-box {
   border: 2px solid var(--card-border);
   color: var(--text);
   padding: 6px 14px;
-  border-radius: 20px;
-  min-height: 40px;
+  border-radius: var(--radius-pill);
+  min-height: 44px;
   font-size: 12px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   cursor: pointer;
@@ -515,6 +521,15 @@ body.day-mode .contact-card {
   background: var(--surface-soft);
   border-color: rgba(0,0,0,0.12);
 }
+
+/* Day-mode contrast: accent text on light cards needs darker variants
+   (bright green/red/amber fail WCAG on near-white backgrounds). */
+body.day-mode .panel.do-panel h3,
+body.day-mode .do-panel li::before,
+body.day-mode .panel.panel-after h3 { color: #1f7a3d; }
+body.day-mode .panel.dont-panel h3,
+body.day-mode .dont-panel li::before { color: #c62828; }
+body.day-mode .panel.panel-during h3 { color: #8a4f08; }
 
 @media (prefers-reduced-motion: reduce) {
   .mode-card { transition: none; }

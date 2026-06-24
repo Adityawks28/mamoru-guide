@@ -13,6 +13,7 @@
 <meta property="og:title" content="MAMORU GUIDE 守る — Disaster Preparedness for Japan">
 <meta property="og:description" content="Interactive guide for international students: earthquake scale, emergency vocabulary, bag packing game, and evacuation tips.">
 <meta property="og:type" content="website">
+<!-- TODO: replace with a 1200×630 PNG/JPG — most social platforms don't render SVG previews. -->
 <meta property="og:image" content="img/favicon.svg">
 
 <!-- Twitter Card -->
@@ -53,8 +54,6 @@
 
 <a href="#main-content" class="skip-link">Skip to content</a>
 
-<div id="stars" aria-hidden="true"></div>
-
 <!-- Navbar -->
 <nav class="navbar" aria-label="Main navigation">
   <a href="#/" class="nav-logo" data-nav-route="#/" aria-label="Mamoru Guide home">
@@ -72,8 +71,8 @@
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <button class="mode-toggle" id="shareBtn" onclick="shareGuide()" title="Share">📤</button>
-    <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Toggle Day/Night">☀️</button>
+    <button class="mode-toggle" id="shareBtn" onclick="shareGuide()" title="Share" aria-label="Share this guide">📤</button>
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Toggle Day/Night" aria-label="Toggle day/night mode">☀️</button>
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('ja')">日本語</button>
@@ -126,7 +125,7 @@
     </div>
 
     <!-- atmosphere (night) -->
-    <div class="ks-stars" id="stars"></div>
+    <div class="ks-stars" id="stars" aria-hidden="true"></div>
     <div class="ks-shooters" aria-hidden="true">
       <span class="ks-shooter" style="top:8%;  left:14%; animation-delay:0s;"></span>
       <span class="ks-shooter" style="top:16%; left:48%; animation-delay:4s;"></span>
@@ -424,15 +423,15 @@
       <span data-lang="id">Panduan retro untuk hidup aman di Jepang — dibuat oleh PPI Kobe, kota yang bangkit setelah 1995.</span>
     </p>
     <div class="hero-actions">
-      <a class="arcade-btn btn-primary" href="#earthquake">▶ PRESS START</a>
-      <a class="arcade-btn btn-ghost" href="#myplan">⊞ MAKE PLAN</a>
+      <a class="arcade-btn btn-primary" href="#/prepare">▶ PRESS START</a>
+      <a class="arcade-btn btn-ghost" href="#/plan">⊞ MAKE PLAN</a>
     </div>
   </div>
 
   <div class="hero-side">
     <div id="mascot" aria-hidden="true"></div>
     <nav class="mode-rail" aria-label="Quick navigation">
-      <a class="mode-card urgent" href="#emergency-mode">
+      <a class="mode-card urgent" href="#/emergency">
         <div class="mode-glyph">急</div>
         <div class="mode-text">
           <div class="mode-title">Emergency</div>
@@ -440,7 +439,7 @@
         </div>
         <div class="mode-arrow">→</div>
       </a>
-      <a class="mode-card" href="#myplan">
+      <a class="mode-card" href="#/prepare">
         <div class="mode-glyph">備</div>
         <div class="mode-text">
           <div class="mode-title">Prepare</div>
@@ -448,7 +447,7 @@
         </div>
         <div class="mode-arrow">→</div>
       </a>
-      <a class="mode-card" href="#vocab">
+      <a class="mode-card" href="#/learn">
         <div class="mode-glyph">学</div>
         <div class="mode-text">
           <div class="mode-title">Learn</div>
@@ -523,11 +522,11 @@
 <!-- Section 02: Earthquake Scale (Vertical) -->
 <section class="section" id="earthquake">
   <div class="section-label">01 — EARTHQUAKE INTENSITY</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Japan's Seismic Intensity Scale (震度 Shindo)</span>
     <span data-lang="ja">日本の震度階級（震度 Shindo）</span>
     <span data-lang="id">Skala Intensitas Seismik Jepang (震度 Shindo)</span>
-  </div>
+  </h2>
   <div id="earthquake-scene" class="character-scene"></div>
   <p class="section-note">
     <span data-lang="en">Shindo measures what you <em>feel</em>, not the quake's energy. <strong>Tap any row</strong> to feel the shaking!</span>
@@ -571,21 +570,21 @@
 <!-- Section 03: Vocabulary -->
 <section class="section" id="vocab">
   <div class="section-label">02 — EMERGENCY VOCABULARY</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Important Kotoba (言葉) to Know</span>
     <span data-lang="ja">大切な言葉（ことば）</span>
     <span data-lang="id">Kotoba (言葉) Penting untuk Diketahui</span>
-  </div>
+  </h2>
 
   <div class="tab-bar" role="tablist" aria-label="Vocabulary categories">
-    <button class="tab-btn active" data-tab="danger" role="tab" aria-selected="true" aria-controls="vocabPanelDanger" onclick="switchTab('danger','vocab')">🚨 <span data-lang="en">Danger</span><span data-lang="ja">危険</span><span data-lang="id">Bahaya</span></button>
-    <button class="tab-btn" data-tab="action" role="tab" aria-selected="false" aria-controls="vocabPanelAction" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
-    <button class="tab-btn" data-tab="places" role="tab" aria-selected="false" aria-controls="vocabPanelPlaces" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
-    <button class="tab-btn" data-tab="help" role="tab" aria-selected="false" aria-controls="vocabPanelHelp" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
-    <button class="tab-btn" data-tab="medical" role="tab" aria-selected="false" aria-controls="vocabPanelMedical" onclick="switchTab('medical','vocab')">🏥 <span data-lang="en">Medical</span><span data-lang="ja">医療</span><span data-lang="id">Medis</span></button>
+    <button class="tab-btn active" id="vocabTabDanger" data-tab="danger" role="tab" aria-selected="true" aria-controls="vocabPanelDanger" onclick="switchTab('danger','vocab')">🚨 <span data-lang="en">Danger</span><span data-lang="ja">危険</span><span data-lang="id">Bahaya</span></button>
+    <button class="tab-btn" id="vocabTabAction" data-tab="action" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelAction" onclick="switchTab('action','vocab')">🏃 <span data-lang="en">Action</span><span data-lang="ja">行動</span><span data-lang="id">Tindakan</span></button>
+    <button class="tab-btn" id="vocabTabPlaces" data-tab="places" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelPlaces" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
+    <button class="tab-btn" id="vocabTabHelp" data-tab="help" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelHelp" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
+    <button class="tab-btn" id="vocabTabMedical" data-tab="medical" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelMedical" onclick="switchTab('medical','vocab')">🏥 <span data-lang="en">Medical</span><span data-lang="ja">医療</span><span data-lang="id">Medis</span></button>
   </div>
 
-  <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel">
+  <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabDanger" tabindex="0">
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('danger')" aria-label="Previous">◀</button>
@@ -595,7 +594,7 @@
       <div id="vocabFlashcardDanger"></div>
     </div>
   </div>
-  <div class="tab-content" id="vocabPanelAction" data-tab="action" data-group="vocab" role="tabpanel">
+  <div class="tab-content" id="vocabPanelAction" data-tab="action" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabAction" tabindex="0">
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('action')" aria-label="Previous">◀</button>
@@ -605,7 +604,7 @@
       <div id="vocabFlashcardAction"></div>
     </div>
   </div>
-  <div class="tab-content" id="vocabPanelPlaces" data-tab="places" data-group="vocab" role="tabpanel">
+  <div class="tab-content" id="vocabPanelPlaces" data-tab="places" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabPlaces" tabindex="0">
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('places')" aria-label="Previous">◀</button>
@@ -615,7 +614,7 @@
       <div id="vocabFlashcardPlaces"></div>
     </div>
   </div>
-  <div class="tab-content" id="vocabPanelHelp" data-tab="help" data-group="vocab" role="tabpanel">
+  <div class="tab-content" id="vocabPanelHelp" data-tab="help" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabHelp" tabindex="0">
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('help')" aria-label="Previous">◀</button>
@@ -625,7 +624,7 @@
       <div id="vocabFlashcardHelp"></div>
     </div>
   </div>
-  <div class="tab-content" id="vocabPanelMedical" data-tab="medical" data-group="vocab" role="tabpanel">
+  <div class="tab-content" id="vocabPanelMedical" data-tab="medical" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabMedical" tabindex="0">
     <div class="flashcard-stage">
       <div class="flashcard-nav">
         <button class="bag-btn secondary" onclick="prevCard('medical')" aria-label="Previous">◀</button>
@@ -638,11 +637,11 @@
 
   <!-- Yasashii Nihongo with furigana and romaji -->
   <div style="margin-top:40px;">
-    <div class="section-title" style="font-size:14px;">
+    <h3 class="section-title" style="font-size:14px;">
       <span data-lang="en">やさしい日本語 — Easy Japanese</span>
       <span data-lang="ja">やさしい日本語</span>
       <span data-lang="id">やさしい日本語 — Bahasa Jepang Mudah</span>
-    </div>
+    </h3>
     <p class="section-note">
       <span data-lang="en">Official announcements are hard to understand. Here's the simplified version with furigana and romaji:</span>
       <span data-lang="ja">公式な発表は難しいです。やさしい日本語版（ふりがな・ローマ字つき）：</span>
@@ -676,11 +675,11 @@
 <!-- Section 03: Show This Phrase Cards -->
 <section class="section" id="showthis">
   <div class="section-label">03 — SHOW THIS</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Show This Card 見せるカード</span>
     <span data-lang="ja">見せるカード Show This Card</span>
     <span data-lang="id">Kartu Tunjukkan 見せるカード</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Can't speak Japanese? Show these cards to people around you. The Japanese text is large so they can read it easily. Swipe or tap arrows to browse phrases.</span>
     <span data-lang="ja">日本語が話せない時に、周りの人にこのカードを見せましょう。日本語が大きく表示されているので、相手がすぐ読めます。</span>
@@ -692,11 +691,11 @@
 <!-- Section 04: Emergency Bag MINI GAME -->
 <section class="section" id="bag">
   <div class="section-label">04 — EMERGENCY BAG</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">🎒 非常袋 Hijou-bukuro — Pack Your Bag!</span>
     <span data-lang="ja">🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！</span>
     <span data-lang="id">🎒 非常袋 Hijou-bukuro — Isi Tas Darurat!</span>
-  </div>
+  </h2>
   <div id="bag-scene" class="character-scene"></div>
   <p class="section-note">
     <span data-lang="en">Your bag can hold <strong>8.0 kg max</strong>. Choose wisely based on priority and weight — you can't take everything! Tap items to pack or unpack them.</span>
@@ -761,11 +760,11 @@
 <!-- Section 05: Alert System -->
 <section class="section" id="alerts">
   <div class="section-label">05 — ALERT SYSTEM</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Japan's Emergency Alert System</span>
     <span data-lang="ja">日本の緊急警報システム</span>
     <span data-lang="id">Sistem Peringatan Darurat Jepang</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Your phone will make a loud alarm sound even on silent mode. Don't panic — here's what each one means.</span>
     <span data-lang="ja">サイレントモードでも大音量のアラームが鳴ります。パニックにならないで。</span>
@@ -799,11 +798,11 @@
     </div>
   </div>
 
-  <div class="section-title" style="font-size:13px; margin-top:24px;">
+  <h3 class="section-title" style="font-size:13px; margin-top:24px;">
     <span data-lang="en">📲 Apps to Download</span>
     <span data-lang="ja">📲 ダウンロードすべきアプリ</span>
     <span data-lang="id">📲 Aplikasi untuk Diunduh</span>
-  </div>
+  </h3>
   <div class="app-list">
     <div class="app-item"><div class="app-check rec">✓</div><span><strong>NHK World</strong> — <span data-lang="en">News & alerts in 17 languages</span><span data-lang="ja">17言語でニュースと警報</span><span data-lang="id">Berita & peringatan dalam 17 bahasa</span></span></div>
     <div class="app-item"><div class="app-check">✓</div><span><strong>Safety Tips</strong> — <span data-lang="en">Official multilingual disaster app</span><span data-lang="ja">多言語の公式防災アプリ</span><span data-lang="id">Aplikasi bencana multibahasa resmi</span></span></div>
@@ -815,11 +814,11 @@
 <!-- Section 06: Typhoon Preparedness -->
 <section class="section" id="typhoon">
   <div class="section-label">06 — TYPHOON</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Typhoon Preparedness</span>
     <span data-lang="ja">台風への備え</span>
     <span data-lang="id">Kesiapsiagaan Topan</span>
-  </div>
+  </h2>
   <div id="typhoon-scene" class="character-scene"></div>
   <p class="section-note">
     <span data-lang="en">Japan gets 15-25 typhoons per year, mostly July–October. Unlike earthquakes, you usually have days of warning — use that time wisely.</span>
@@ -828,17 +827,17 @@
   </p>
 
   <!-- Typhoon Scale -->
-  <div class="section-title" style="font-size:13px; margin-top:8px;">
+  <h3 class="section-title" style="font-size:13px; margin-top:8px;">
     <span data-lang="en">🌀 Typhoon Intensity Scale</span>
     <span data-lang="ja">🌀 台風の強さスケール</span>
     <span data-lang="id">🌀 Skala Intensitas Topan</span>
-  </div>
+  </h3>
   <div id="typhoonScale" class="typhoon-scale"></div>
 
   <!-- Before / During / After -->
   <div class="split-panel" style="grid-template-columns:1fr 1fr 1fr; margin-top:20px;">
-    <div class="panel" style="border-color:#4cc9f0;">
-      <h3 style="color:#4cc9f0;">
+    <div class="panel panel-before">
+      <h3>
         <span data-lang="en">⏰ BEFORE</span>
         <span data-lang="ja">⏰ 台風前</span>
         <span data-lang="id">⏰ SEBELUM</span>
@@ -852,8 +851,8 @@
         <li><span data-lang="en">Know your evacuation route</span><span data-lang="ja">避難ルートを確認</span><span data-lang="id">Ketahui rute evakuasi Anda</span></li>
       </ul>
     </div>
-    <div class="panel" style="border-color:#f5a623;">
-      <h3 style="color:#f5a623;">
+    <div class="panel panel-during">
+      <h3>
         <span data-lang="en">🌀 DURING</span>
         <span data-lang="ja">🌀 台風中</span>
         <span data-lang="id">🌀 SELAMA</span>
@@ -867,8 +866,8 @@
         <li><span data-lang="en">Beware the "eye" — calm ≠ over</span><span data-lang="ja">台風の目に注意 — 静か≠終わり</span><span data-lang="id">Waspadai "mata" — tenang ≠ selesai</span></li>
       </ul>
     </div>
-    <div class="panel" style="border-color:#4ecb71;">
-      <h3 style="color:#4ecb71;">
+    <div class="panel panel-after">
+      <h3>
         <span data-lang="en">✅ AFTER</span>
         <span data-lang="ja">✅ 台風後</span>
         <span data-lang="id">✅ SETELAH</span>
@@ -887,11 +886,11 @@
 <!-- Section 06: First Aid Guide -->
 <section class="section" id="firstaid">
   <div class="section-label">07 — FIRST AID</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">First Aid Guide</span>
     <span data-lang="ja">応急処置ガイド</span>
     <span data-lang="id">Panduan Pertolongan Pertama</span>
-  </div>
+  </h2>
   <div id="firstaid-scene" class="character-scene"></div>
   <p class="section-note">
     <span data-lang="en">Step-by-step first aid for common disaster injuries. Works offline — no internet needed.</span>
@@ -904,11 +903,11 @@
 <!-- Section 07: Shelter Finder -->
 <section class="section" id="shelter">
   <div class="section-label">08 — SHELTER FINDER</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Find Nearest Shelter</span>
     <span data-lang="ja">最寄りの避難所を探す</span>
     <span data-lang="id">Temukan Tempat Perlindungan Terdekat</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Find evacuation shelters near your current location. Shows distance, walking time, and disaster types covered.</span>
     <span data-lang="ja">現在地付近の避難所を検索。距離、徒歩時間、対応する災害の種類を表示。</span>
@@ -933,11 +932,11 @@
 <!-- Section 08: Earthquake Drill -->
 <section class="section" id="drill">
   <div class="section-label">09 — EARTHQUAKE DRILL</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Earthquake Drill</span>
     <span data-lang="ja">地震防災訓練</span>
     <span data-lang="id">Latihan Gempa</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Experience a simulated earthquake scenario. Make decisions under pressure and learn the correct responses step by step.</span>
     <span data-lang="ja">地震シナリオをシミュレーション体験。プレッシャーの中で判断し、正しい対応を段階的に学びます。</span>
@@ -954,11 +953,11 @@
 <!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
   <div class="section-label">10 — QUIZ</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
     <span data-lang="id">Kuis Latihan Bencana</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Test your disaster preparedness knowledge! 10 scenario-based questions covering earthquakes, typhoons, tsunamis, and emergency procedures.</span>
     <span data-lang="ja">防災知識をテスト！地震、台風、津波、緊急時の手順に関する10問のシナリオベースの問題。</span>
@@ -975,11 +974,11 @@
 <!-- Section 08: About -->
 <section class="section" id="about">
   <div class="section-label">11 — ABOUT</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
     <span data-lang="id">Tentang Panduan Ini</span>
-  </div>
+  </h2>
 
   <!-- Mission statement -->
   <p class="section-note">
@@ -1078,11 +1077,11 @@
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
   <div class="section-label">12 — CONTACTS</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">Emergency Contacts Directory</span>
     <span data-lang="ja">緊急連絡先ディレクトリ</span>
     <span data-lang="id">Direktori Kontak Darurat</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Tap any contact to call directly. Save these numbers before an emergency — phone networks get overloaded fast.</span>
     <span data-lang="ja">タップで直接電話できます。緊急時前にこれらの番号を保存しましょう。</span>
@@ -1114,11 +1113,11 @@
 <!-- Section 12: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
   <div class="section-label">13 — MY PLAN</div>
-  <div class="section-title">
+  <h2 class="section-title">
     <span data-lang="en">My Emergency Card & Preparation</span>
     <span data-lang="ja">緊急カード＆防災準備</span>
     <span data-lang="id">Kartu Darurat & Persiapan Saya</span>
-  </div>
+  </h2>
   <p class="section-note">
     <span data-lang="en">Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can't speak. Print it and keep a copy in your wallet, bag, and at home.</span>
     <span data-lang="ja">プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。</span>
@@ -1247,7 +1246,7 @@
 <!-- Emergency FAB -->
 <button class="emergency-fab" id="emergencyFab" aria-label="Emergency quick access" aria-expanded="false">🆘</button>
 <div class="emergency-fab-panel" id="emergencyFabPanel">
-  <button class="fab-item" onclick="showEarthquakeNow()">
+  <button class="fab-item" id="fabEarthquakeNow">
     <span class="fab-item-icon">🔴</span>
     <span data-lang="en">EARTHQUAKE NOW</span>
     <span data-lang="ja">地震！今すぐ</span>
@@ -1279,9 +1278,9 @@
   </a>
 </div>
 
-<div id="earthquakeNow" class="earthquake-now" role="dialog" aria-label="Earthquake emergency guide"></div>
+<div id="earthquakeNow" class="earthquake-now" role="dialog" aria-modal="true" aria-label="Earthquake emergency guide"></div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <script type="module" src="/src/main.ts"></script>
 
 <!-- Cloudflare Web Analytics — cookie-free, GDPR-compliant -->

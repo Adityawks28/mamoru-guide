@@ -59,6 +59,7 @@ export function switchTab(tabId: string, group: string): void {
       const isActive = btnTab === tabId;
       b.classList.toggle('active', isActive);
       b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      b.setAttribute('tabindex', isActive ? '0' : '-1');
     });
   }
 
@@ -72,6 +73,24 @@ export function switchTab(tabId: string, group: string): void {
 export function initVocab(): void {
   const cats: VocabCategory[] = ['danger', 'action', 'places', 'help', 'medical'];
   cats.forEach(cat => renderFlashcard(cat));
+
+  // Roving-tabindex arrow navigation between the vocab category tabs.
+  const tabBar = document.querySelector<HTMLElement>('#vocab .tab-bar');
+  tabBar?.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+    const tabs = Array.from(tabBar.querySelectorAll<HTMLElement>('.tab-btn'));
+    const current = tabs.findIndex(t => t === document.activeElement);
+    if (current === -1) return;
+    e.preventDefault();
+    e.stopPropagation();
+    let next = current;
+    if (e.key === 'ArrowRight') next = (current + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft') next = (current - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = tabs.length - 1;
+    const cat = tabs[next].getAttribute('data-tab');
+    if (cat) { switchTab(cat, 'vocab'); tabs[next].focus(); }
+  });
 
   // Keyboard navigation for flashcards
   document.addEventListener('keydown', (e: KeyboardEvent) => {

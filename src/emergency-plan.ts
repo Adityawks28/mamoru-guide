@@ -1,5 +1,6 @@
 import { showToast } from './toast';
 import { t } from './i18n';
+import { currentLang } from './lang';
 import { removeItem } from './storage';
 import { EmergencyPlan, emptyPlan } from './plan-model';
 import { loadPlanV2, savePlanV2, clearPlanV2, migrateV1ToV2 } from './plan-storage';
@@ -14,8 +15,13 @@ interface FieldDef {
   placeholder?: string;
   options?: FieldOption[];
   full?: boolean;
+  autocomplete?: string;
 }
 interface StepDef { icon: string; title: string; fields: FieldDef[] }
+
+function lang3(en: string, ja: string, id: string): string {
+  return currentLang === 'ja' ? ja : currentLang === 'id' ? id : en;
+}
 
 const BLOOD_TYPES: FieldOption[] = [
   { value: '',    label: '—' },
@@ -47,12 +53,12 @@ const STEPS: StepDef[] = [
   {
     icon: '👤', title: 'Identity ・ 身元',
     fields: [
-      { key: 'profile.name',         label: 'Full Name ・ 氏名',           type: 'text', placeholder: 'e.g. Aditya Wirayutha' },
+      { key: 'profile.name',         label: 'Full Name ・ 氏名',           type: 'text', placeholder: 'e.g. Aditya Wirayutha', autocomplete: 'name' },
       { key: 'profile.nameKana',     label: 'Name in Katakana ・ カタカナ', type: 'text', placeholder: 'e.g. アディティヤ' },
       { key: 'profile.nationality',  label: 'Nationality ・ 国籍',          type: 'text', placeholder: 'e.g. Indonesia / インドネシア' },
       { key: 'profile.languages',    label: 'Languages Spoken ・ 話せる言語', type: 'text', placeholder: 'e.g. English, Indonesian, basic Japanese' },
       { key: 'profile.bloodType',    label: 'Blood Type ・ 血液型',         type: 'select', options: BLOOD_TYPES },
-      { key: 'profile.dob',          label: 'Date of Birth ・ 生年月日',     type: 'text', placeholder: 'e.g. 1998/05/12' },
+      { key: 'profile.dob',          label: 'Date of Birth ・ 生年月日',     type: 'text', placeholder: 'e.g. 1998/05/12', autocomplete: 'bday' },
     ],
   },
   {
@@ -65,8 +71,8 @@ const STEPS: StepDef[] = [
   {
     icon: '📍', title: 'Location & ID ・ 住所・身分証',
     fields: [
-      { key: 'profile.address',       label: 'Address ・ 住所',                       type: 'text', placeholder: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true },
-      { key: 'profile.university',    label: 'School / University ・ 学校名',         type: 'text', placeholder: 'e.g. Kobe University / 神戸大学' },
+      { key: 'profile.address',       label: 'Address ・ 住所',                       type: 'text', placeholder: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
+      { key: 'profile.university',    label: 'School / University ・ 学校名',         type: 'text', placeholder: 'e.g. Kobe University / 神戸大学', autocomplete: 'organization' },
       { key: 'profile.residenceCard', label: 'Residence Card # ・ 在留カード番号',     type: 'text', placeholder: 'e.g. AB12345678CD' },
       { key: 'profile.insurance',     label: 'Insurance # ・ 保険証番号',              type: 'text', placeholder: 'e.g. National Health Insurance #', full: true },
     ],
@@ -173,6 +179,7 @@ function renderField(f: FieldDef): HTMLElement {
   if (f.placeholder && f.type !== 'select') {
     input.setAttribute('placeholder', f.placeholder);
   }
+  if (f.autocomplete) input.setAttribute('autocomplete', f.autocomplete);
   input.value = getVal(plan, f.key);
   wrap.appendChild(input);
   return wrap;
@@ -273,7 +280,7 @@ function handleInput(e: Event): void {
 export function savePlan(): void {
   if (saveTimer) clearTimeout(saveTimer);
   savePlanV2(plan);
-  showToast('Plan saved!');
+  showToast(lang3('Plan saved!', '計画を保存しました！', 'Rencana disimpan!'), 'success');
 }
 
 export function clearPlan(): void {
@@ -281,7 +288,7 @@ export function clearPlan(): void {
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
-  showToast('Plan cleared');
+  showToast(lang3('Plan cleared', '計画を消去しました', 'Rencana dihapus'), 'success');
 }
 
 export function printPlan(): void {
@@ -301,7 +308,7 @@ export function initEmergencyPlan(): void {
     plan = migrated;
     savePlanV2(plan);
     removeItem('mamoru-emergency-plan');
-    showToast('Plan upgraded ✓');
+    showToast(lang3('Plan upgraded ✓', '計画を更新しました ✓', 'Rencana diperbarui ✓'), 'success');
   } else {
     plan = loadPlanV2();
   }

@@ -295,7 +295,7 @@ function showResults(): void {
     currentQuestion = 0;
     score = 0;
     renderQuestion();
-    showToast('🔄 Quiz reset!');
+    showToast(getLangText('🔄 Quiz reset!', '🔄 クイズをリセット！', '🔄 Kuis direset!'), 'info');
   });
 }
 
