@@ -448,7 +448,6 @@ body.day-mode .share-url-box {
 .plan-field input:focus,
 .plan-field select:focus,
 .plan-field textarea:focus {
-  outline: none;
   border-color: var(--accent);
 }
 .plan-field input::placeholder,
