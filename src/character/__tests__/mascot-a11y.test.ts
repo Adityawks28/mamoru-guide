@@ -21,6 +21,22 @@ describe('mascot accessibility', () => {
     expect(tag![0]).not.toMatch(/aria-hidden\s*=\s*"true"/);
   });
 
+  it('has no ancestor of #mascot marked aria-hidden in index.html', () => {
+    const html = readFileSync(resolve(__dirname, '../../../index.html'), 'utf8');
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const mascot = doc.getElementById('mascot');
+    expect(mascot).not.toBeNull();
+    const hiddenAncestors: string[] = [];
+    let node = mascot!.parentElement;
+    while (node) {
+      if (node.getAttribute('aria-hidden') === 'true') {
+        hiddenAncestors.push(node.tagName.toLowerCase() + (node.id ? `#${node.id}` : '') + (node.className ? `.${node.className.toString().replace(/\s+/g, '.')}` : ''));
+      }
+      node = node.parentElement;
+    }
+    expect(hiddenAncestors).toEqual([]);
+  });
+
   it('exposes the fact control as a labelled, focusable button', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
