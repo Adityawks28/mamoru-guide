@@ -180,7 +180,6 @@
   transition: border-color 0.2s;
 }
 .shelter-city-select:focus {
-  outline: none;
   border-color: var(--accent);
 }
 .shelter-city-select option {
