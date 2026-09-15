@@ -4,6 +4,15 @@ import { resolve } from 'node:path';
 
 type RGB = [number, number, number];
 
+function hexToRgb(hex: string): RGB {
+  const cleaned = hex.replace(/^#/, '');
+  expect(cleaned).toMatch(/^[0-9a-fA-F]{6}$/);
+  const r = parseInt(cleaned.slice(0, 2), 16);
+  const g = parseInt(cleaned.slice(2, 4), 16);
+  const b = parseInt(cleaned.slice(4, 6), 16);
+  return [r, g, b];
+}
+
 function channel(c: number): number {
   const s = c / 255;
   return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
@@ -33,11 +42,20 @@ function alphaOf(name: string, occurrence: number): number {
   return Number(all[occurrence][1]);
 }
 
+/** Reads `--name: #hexvalue` and returns its RGB. Fails loudly if not found or invalid. */
+function colorOf(name: string, occurrence: number): RGB {
+  const all = [...vars.matchAll(
+    new RegExp(`--${name}\\s*:\\s*(#[0-9a-fA-F]{6})`, 'g'),
+  )];
+  expect(all.length).toBeGreaterThan(occurrence);
+  return hexToRgb(all[occurrence][1]);
+}
+
 const AA_NORMAL = 4.5;
-const DAY_BG: RGB = [212, 230, 244];   // --bg-main in body.day-mode
-const DAY_FG: RGB = [26, 42, 58];      // --text-main in body.day-mode
-const NIGHT_BG: RGB = [15, 31, 61];    // --harbor-navy
-const NIGHT_FG: RGB = [248, 244, 237]; // --kitano-white
+const NIGHT_BG = colorOf('harbor-navy', 0);   // :root occurrence 0 (#0f1f3d)
+const NIGHT_FG = colorOf('kitano-white', 0);  // :root occurrence 0 (#f8f4ed)
+const DAY_BG = colorOf('bg-main', 0);         // body.day-mode hex match (#d4e6f4)
+const DAY_FG = colorOf('text-main', 0);       // body.day-mode hex match (#1a2a3a)
 
 describe('WCAG AA contrast for text tokens', () => {
   // Occurrence 0 = night block (:root), occurrence 1 = day block (body.day-mode).
