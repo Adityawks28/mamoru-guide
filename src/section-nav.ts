@@ -5,14 +5,16 @@ interface ChipDef {
   i18n: string;
 }
 
-const ROUTE_CHIPS: Record<string, ChipDef[]> = {
+export const ROUTE_CHIPS: Record<string, ChipDef[]> = {
+  // Same order as the sections in index.html, which is also the order their
+  // 01/02/03 labels read on screen.
   prepare: [
     { section: 'earthquake', i18n: 'chip.earthquake' },
-    { section: 'alerts',     i18n: 'chip.alerts' },
-    { section: 'typhoon',    i18n: 'chip.typhoon' },
     { section: 'vocab',      i18n: 'chip.vocab' },
     { section: 'showthis',   i18n: 'chip.showthis' },
     { section: 'bag',        i18n: 'chip.bag' },
+    { section: 'alerts',     i18n: 'chip.alerts' },
+    { section: 'typhoon',    i18n: 'chip.typhoon' },
     { section: 'firstaid',   i18n: 'chip.firstaid' },
     { section: 'contacts',   i18n: 'chip.contacts' },
   ],
@@ -77,11 +79,38 @@ function attachScrollSpy(nav: HTMLElement, route: string): void {
     if (target) sectionToChip.set(target, chip);
   });
 
+  // Ties resolve by page order so scrolling up and scrolling down agree.
+  const rank = new Map(chips.map((c, i) => [c.section, i]));
+
+  // The observer reports only the sections whose visibility changed, so keep
+  // the last reading of each one and judge them all together.
+  const seen = new Map<string, { height: number; visible: boolean }>();
+
   scrollSpy = new IntersectionObserver(
     entries => {
-      const visible = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (visible.length === 0) return;
-      const chip = sectionToChip.get(visible[0].target.id);
+      entries.forEach(e => {
+        seen.set(e.target.id, { height: e.intersectionRect.height, visible: e.isIntersecting });
+      });
+
+      // Compare how much of the band each section covers in pixels. A ratio
+      // would favour short sections: they sit fully inside the band and score
+      // 1.0, while a long one only ever crosses part of it.
+      let winner: string | null = null;
+      let winnerHeight = 0;
+      let winnerRank = Number.POSITIVE_INFINITY;
+
+      seen.forEach((state, id) => {
+        if (!state.visible || state.height <= 0) return;
+        const r = rank.get(id) ?? Number.POSITIVE_INFINITY;
+        if (state.height > winnerHeight || (state.height === winnerHeight && r < winnerRank)) {
+          winner = id;
+          winnerHeight = state.height;
+          winnerRank = r;
+        }
+      });
+
+      if (winner === null) return;
+      const chip = sectionToChip.get(winner);
       if (chip && !chip.classList.contains('active')) {
         nav.querySelectorAll('.section-chip.active').forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
