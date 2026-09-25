@@ -256,7 +256,7 @@ body.day-mode .kobe-scene {
   letter-spacing: 0.1em;
   line-height: 1.5;
 }
-.pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
+body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 .pb-cta {
   margin-top: 8px;
   font-size: 8px;
