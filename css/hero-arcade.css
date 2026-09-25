@@ -115,6 +115,7 @@ body.day-mode .kobe-scene {
   max-width: 50ch;
   margin: 0 0 28px;
 }
+body.day-mode .arcade-hero .hero-sub,
 [data-theme="day"] .arcade-hero .hero-sub {
   color: #1a1a2e;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -395,7 +396,6 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
   font-size: 16px;
   color: #c8d4e6;
 }
-[data-theme="day"] .mode-rail .mode-card .mode-desc { color: #1a1a2e; }
 .mode-rail .mode-card .mode-arrow {
   font-size: 18px;
   color: var(--amber);
@@ -405,6 +405,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 /* Cherry blossom petals — day only */
 .ks-blossoms { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; }
 .ks-petal { display: none; }
+body.day-mode .ks-petal,
 [data-theme="day"] .ks-petal {
   display: block;
   position: absolute;
@@ -433,6 +434,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
   animation: ks-shoot 14s ease-in infinite;
   filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
 }
+body.day-mode .ks-shooter,
 [data-theme="day"] .ks-shooter { display: none; }
 @keyframes ks-shoot {
   0%   { opacity: 0; transform: rotate(-25deg) translate(0, 0); }
