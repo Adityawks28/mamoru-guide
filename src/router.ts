@@ -3,7 +3,7 @@
 
 import { mountSectionNav } from './section-nav';
 
-const ROUTE_SECTIONS: Record<string, string[]> = {
+export const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/':          ['hero', 'mode-selector'],
   '#/emergency': ['emergency-mode'],
   '#/prepare':   ['earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts'],
