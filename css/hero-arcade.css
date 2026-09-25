@@ -12,6 +12,7 @@
   --crt-red: #e84040;
   --harbor-deep: #060d1f;
   --paper: #f6f4ef;
+  --hero-max-width: 1600px;
 }
 
 /* ───── KOBE SCENE WRAPPER ───── */
@@ -21,7 +22,8 @@
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-  margin: -14px -100vw 0;
+  /* Exactly one screen wide, so every % inside the scene is a % of the screen. */
+  margin: -14px calc(50% - 50vw) 0;
   background: linear-gradient(180deg, var(--harbor-deep) 0%, var(--harbor-navy) 50%, var(--harbor-mid) 100%);
 }
 [data-theme="day"] .kobe-scene,
@@ -31,7 +33,9 @@ body.day-mode .kobe-scene {
 }
 .ks-foreground {
   position: absolute;
-  inset: 0 100vw 0 100vw;
+  inset: 0;
+  max-width: var(--hero-max-width);
+  margin: 0 auto;
   pointer-events: none;
 }
 
@@ -46,7 +50,7 @@ body.day-mode .kobe-scene {
   padding: 60px 48px 200px;
   min-height: 100vh;
   width: 100%;
-  max-width: 1600px;
+  max-width: var(--hero-max-width);
   margin: 0 auto;
   background: transparent;
   overflow: visible;
@@ -642,15 +646,15 @@ body.day-mode .ks-museum,
   left: -180px;
   width: 160px;
   height: 70px;
-  z-index: 5;
+  z-index: 7;
   animation: boat-drift 38s linear infinite;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 .ks-boat svg { width: 100%; height: 100%; overflow: visible; }
 @keyframes boat-drift {
   0%   { transform: translateX(0)     translateY(0); }
-  50%  { transform: translateX(60vw)  translateY(-3px); }
-  100% { transform: translateX(120vw) translateY(0); }
+  50%  { transform: translateX(calc(50vw + 90px))  translateY(-3px); }
+  100% { transform: translateX(calc(100vw + 180px)) translateY(0); }
 }
 .boat-wake { animation: wake-pulse 1.4s ease-in-out infinite alternate; }
 @keyframes wake-pulse {
@@ -718,7 +722,7 @@ body.day-mode .ks-tower,
   .ks-crystal  { left: 60%; transform: scale(0.55); transform-origin: bottom left; }
   .ks-ferris   { left: 4%;  transform: scale(0.7);  transform-origin: bottom left; }
   .ks-museum   { left: 22%; transform: scale(0.7);  transform-origin: bottom left; }
-  .ks-boat     { transform: scale(0.7); }
+  .ks-boat     { width: 112px; height: 49px; }
   .ks-cityhall { right: 8%; transform: scale(0.65); transform-origin: bottom right; }
   .ks-bridge   { width: 50%; }
 }
