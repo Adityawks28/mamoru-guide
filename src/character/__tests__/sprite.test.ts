@@ -55,6 +55,27 @@ describe('sprite', () => {
     expect(rectCount).toBeGreaterThan(10);
   });
 
+  it('a partial update keeps the running emote, arms and face', () => {
+    // The hero mascot sends { pupil } on every mousemove; that used to wipe
+    // data-emote and cut the tap animation off mid-way.
+    const svg = createSprite({ pose: 'stand', gender: 'male' });
+    updateSprite(svg, { emote: 'jump', arms: [150, -150], face: 'happy' });
+    const before = svg.innerHTML;
+    updateSprite(svg, { pupil: { x: 0, y: 0 } });
+    expect(svg.dataset.emote).toBe('jump');
+    expect(svg.innerHTML).toBe(before);
+  });
+
+  it('moves the eyes one pixel toward the pointer', () => {
+    const eyeXs = (svg: SVGSVGElement) => Array.from(svg.querySelectorAll('rect'))
+      .filter(r => r.getAttribute('fill') === '#1a1a1a' && r.getAttribute('width') === '2' && r.getAttribute('height') === '2')
+      .map(r => Number(r.getAttribute('x')));
+    const svg = createSprite({ pose: 'stand', gender: 'male' });
+    expect(eyeXs(svg)).toEqual([27, 35]);
+    updateSprite(svg, { pupil: { x: 1.4, y: 0 } });
+    expect(eyeXs(svg)).toEqual([28, 36]);
+  });
+
   it('persimmon (#f5a623) appears as the only saturated accent on casual male', () => {
     const svg = createSprite({ pose: 'stand', gender: 'male' });
     const fills = new Set(
