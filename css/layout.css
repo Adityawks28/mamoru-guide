@@ -105,17 +105,7 @@ body.day-mode .section-nav {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none;
 }
-.nav-logo .shield {
-  width: 32px; height: 36px;
-  background: var(--meriken-amber);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex; align-items: center; justify-content: center;
-}
-.shield-inner {
-  width: 22px; height: 26px;
-  background: var(--harbor-navy);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-}
+.nav-logo-mark { flex-shrink: 0; font-family: 'M PLUS Rounded 1c', sans-serif; }
 .nav-logo span {
   font-family: 'Press Start 2P', monospace;
   color: var(--meriken-amber);
@@ -129,6 +119,7 @@ body.day-mode .section-nav {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   letter-spacing: 1px;
+  padding: 6px 0;
   opacity: 0.75;
   transition: opacity 0.2s, color 0.2s;
   white-space: nowrap;
@@ -297,10 +288,10 @@ body.day-mode .section-nav {
 }
 .hamburger span {
   display: block;
+  flex-shrink: 0;
   width: 24px;
   height: 2px;
   background: var(--text);
-  margin: 5px 0;
   transition: transform 0.3s, opacity 0.3s;
   border-radius: 2px;
 }
