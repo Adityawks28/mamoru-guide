@@ -22,90 +22,90 @@ interface FirstAidCategory {
 const categories: FirstAidCategory[] = [
   {
     id: 'bleeding', icon: '🩸',
-    title_en: 'Bleeding Control', title_ja: '止血', title_id: 'Pengendalian Pendarahan',
+    title_en: 'Bleeding Control', title_ja: '血を止める', title_id: 'Menghentikan Pendarahan',
     steps: [
-      { instruction_en: 'Put on gloves or use a clean cloth as a barrier.', instruction_ja: '手袋をするか、清潔な布をバリアとして使う。', instruction_id: 'Gunakan sarung tangan atau kain bersih sebagai pelindung.' },
-      { instruction_en: 'Apply firm, direct pressure to the wound with a clean cloth or bandage.', instruction_ja: '清潔な布や包帯で傷口を強く直接押さえる。', instruction_id: 'Tekan langsung pada luka dengan kain bersih atau perban.', timer_seconds: 600 },
-      { instruction_en: 'Do NOT remove the cloth if it soaks through — add more layers on top.', instruction_ja: '布が血で浸みても外さない — 上に重ねる。', instruction_id: 'JANGAN lepas kain jika sudah basah — tambahkan lapisan di atasnya.', warning_en: 'Removing pressure restarts bleeding.', warning_ja: '圧迫を外すと出血が再開します。', warning_id: 'Melepas tekanan memulai ulang pendarahan.' },
-      { instruction_en: 'If possible, elevate the injured area above the heart.', instruction_ja: '可能であれば、負傷部位を心臓より高く上げる。', instruction_id: 'Jika memungkinkan, angkat area yang terluka di atas jantung.' },
-      { instruction_en: 'For severe limb bleeding that won\'t stop: apply a tourniquet 5-7cm above the wound. Note the time.', instruction_ja: '止まらない四肢の重度出血：傷口の5〜7cm上にターニケットを巻く。時間を記録。', instruction_id: 'Untuk pendarahan parah di anggota tubuh: pasang torniket 5-7cm di atas luka. Catat waktunya.', warning_en: 'Only use tourniquet as last resort. Never loosen once applied.', warning_ja: 'ターニケットは最後の手段。一度巻いたら緩めない。', warning_id: 'Gunakan torniket hanya sebagai pilihan terakhir. Jangan longgarkan setelah dipasang.' },
+      { instruction_en: 'Put on gloves, or use a clean cloth between your hand and the blood.', instruction_ja: '手袋をしてください。または、きれいな布を手と血の間に入れてください。', instruction_id: 'Pakai sarung tangan, atau pakai kain bersih di antara tangan Anda dan darah.' },
+      { instruction_en: 'Press firmly and directly on the wound with a clean cloth or a bandage.', instruction_ja: 'きれいな布や包帯で、傷口を直接、強く押さえてください。', instruction_id: 'Tekan luka secara langsung dan kuat dengan kain bersih atau perban.', timer_seconds: 600 },
+      { instruction_en: 'If blood comes through the cloth, do NOT remove the cloth. Put more cloth on top.', instruction_ja: '布に血がしみても、布を外さないでください。上に布を重ねてください。', instruction_id: 'Jika darah tembus ke kain, JANGAN lepas kainnya. Tambahkan kain lagi di atasnya.', warning_en: 'If you stop the pressure, the bleeding starts again.', warning_ja: '押さえるのをやめると、また血が出ます。', warning_id: 'Jika tekanan dilepas, darah akan keluar lagi.' },
+      { instruction_en: 'If possible, raise the injured area above the heart.', instruction_ja: 'できれば、けがをした所を心臓より高く上げてください。', instruction_id: 'Jika bisa, angkat bagian yang terluka lebih tinggi dari jantung.' },
+      { instruction_en: 'If an arm or leg bleeds severely and the bleeding does not stop, use a tourniquet (a tight band). Put it 5 to 7 cm above the wound. Write down the time.', instruction_ja: '腕や足から血がたくさん出て止まらないときは、ターニケット（止血帯）を使ってください。傷口から5〜7cm上に巻いてください。時間を書いておいてください。', instruction_id: 'Jika lengan atau kaki berdarah parah dan darah tidak berhenti, pakai torniket (ikatan kencang). Pasang 5 sampai 7 cm di atas luka. Catat waktunya.', warning_en: 'Use a tourniquet only when nothing else stops the bleeding. Never loosen it after you put it on.', warning_ja: 'ターニケットは、ほかの方法で血が止まらないときだけ使ってください。一度巻いたら、緩めないでください。', warning_id: 'Pakai torniket hanya jika cara lain tidak bisa menghentikan darah. Jangan longgarkan setelah dipasang.' },
     ],
   },
   {
     id: 'burns', icon: '🔥',
     title_en: 'Burns', title_ja: 'やけど', title_id: 'Luka Bakar',
     steps: [
-      { instruction_en: 'Cool the burn under cool (not cold) running water immediately.', instruction_ja: 'すぐに流水（冷水ではなく涼しい水）でやけどを冷やす。', instruction_id: 'Dinginkan luka bakar di bawah air mengalir yang sejuk (bukan dingin).', timer_seconds: 600 },
-      { instruction_en: 'Remove jewelry, watches, or tight clothing near the burn before swelling starts.', instruction_ja: '腫れる前に、やけどの近くのアクセサリーや時計、きつい衣服を外す。', instruction_id: 'Lepaskan perhiasan, jam tangan, atau pakaian ketat di dekat luka sebelum bengkak.' },
-      { instruction_en: 'Do NOT remove clothing stuck to the burn. Do NOT pop blisters.', instruction_ja: 'やけどに張り付いた衣服を剥がさない。水ぶくれを潰さない。', instruction_id: 'JANGAN lepas pakaian yang menempel di luka. JANGAN pecahkan lepuh.', warning_en: 'Never use ice, butter, or toothpaste on burns.', warning_ja: '氷、バター、歯磨き粉をやけどに使わない。', warning_id: 'Jangan gunakan es, mentega, atau pasta gigi pada luka bakar.' },
-      { instruction_en: 'Cover loosely with a clean, non-fluffy material (cling film works well).', instruction_ja: '清潔で毛羽立ちのない素材で緩く覆う（ラップが効果的）。', instruction_id: 'Tutup longgar dengan bahan bersih yang tidak berbulu (plastik wrap efektif).' },
-      { instruction_en: 'For large burns or burns on face/hands/joints: seek medical help immediately.', instruction_ja: '広範囲のやけど、顔・手・関節のやけどは直ちに医療機関へ。', instruction_id: 'Untuk luka bakar besar atau di wajah/tangan/sendi: segera cari bantuan medis.' },
+      { instruction_en: 'Cool the burn immediately under cool running water (not cold water).', instruction_ja: 'すぐに、流れる水でやけどを冷やしてください。冷たすぎる水は使わないでください。', instruction_id: 'Segera dinginkan luka bakar dengan air mengalir yang sejuk (bukan air dingin).', timer_seconds: 600 },
+      { instruction_en: 'Remove jewelry, watches, or tight clothing near the burn before swelling starts.', instruction_ja: '腫れる前に、やけどの近くのアクセサリー、時計、きつい服を外してください。', instruction_id: 'Lepaskan perhiasan, jam tangan, atau pakaian ketat di dekat luka sebelum mulai bengkak.' },
+      { instruction_en: 'Do NOT remove clothing that is stuck to the burn. Do NOT break blisters.', instruction_ja: 'やけどにくっついた服は、はがさないでください。水ぶくれは、つぶさないでください。', instruction_id: 'JANGAN lepas pakaian yang menempel di luka. JANGAN pecahkan lepuh.', warning_en: 'Never use ice, butter, or toothpaste on a burn.', warning_ja: '氷、バター、歯みがき粉を、やけどに使わないでください。', warning_id: 'Jangan pakai es, mentega, atau pasta gigi pada luka bakar.' },
+      { instruction_en: 'Cover the burn loosely with a clean material that does not leave fibers. Plastic food wrap (cling film) works well.', instruction_ja: 'きれいで、糸くずが出ない物で、やけどをゆるく覆ってください。食品用のラップがよいです。', instruction_id: 'Tutup luka dengan longgar memakai bahan bersih yang tidak berbulu. Plastik pembungkus makanan cocok untuk ini.' },
+      { instruction_en: 'Get medical help immediately if the burn is large, or if it is on the face, hands, or joints.', instruction_ja: 'やけどが大きいときや、顔・手・関節のやけどは、すぐに医療機関（病院など）に行ってください。', instruction_id: 'Segera cari bantuan medis jika luka bakar besar, atau ada di wajah, tangan, atau sendi.' },
     ],
   },
   {
     id: 'fractures', icon: '🦴',
     title_en: 'Fractures & Sprains', title_ja: '骨折・捻挫', title_id: 'Patah Tulang & Keseleo',
     steps: [
-      { instruction_en: 'Do NOT move the injured limb. Keep the person still.', instruction_ja: '負傷した手足を動かさない。患者を安静にする。', instruction_id: 'JANGAN gerakkan anggota tubuh yang cedera. Biarkan orang tersebut diam.' },
-      { instruction_en: 'Immobilize the area using a splint — use magazines, cardboard, or stiff material.', instruction_ja: '副木で固定する — 雑誌、段ボール、硬い素材を使う。', instruction_id: 'Imobilisasi area menggunakan bidai — gunakan majalah, kardus, atau bahan kaku.' },
-      { instruction_en: 'Pad the splint with cloth and tie it above and below the injury (not on it).', instruction_ja: '副木を布で包み、負傷箇所の上下で固定する（負傷箇所の上には縛らない）。', instruction_id: 'Lapisi bidai dengan kain dan ikat di atas dan bawah cedera (bukan di atasnya).' },
-      { instruction_en: 'Apply ice wrapped in cloth to reduce swelling. 20 minutes on, 20 minutes off.', instruction_ja: '布に包んだ氷で冷やして腫れを抑える。20分冷やし、20分休む。', instruction_id: 'Tempelkan es yang dibungkus kain untuk mengurangi bengkak. 20 menit tempel, 20 menit lepas.' },
-      { instruction_en: 'Check circulation below the injury — fingers/toes should be warm and have color.', instruction_ja: '負傷部位より先の血流を確認 — 指先は温かく色があるか。', instruction_id: 'Periksa sirkulasi di bawah cedera — jari harus hangat dan berwarna.' },
+      { instruction_en: 'Do NOT move the injured arm or leg. Keep the person still.', instruction_ja: 'けがをした手や足を動かさないでください。けがをした人が動かないようにしてください。', instruction_id: 'JANGAN gerakkan lengan atau kaki yang cedera. Jaga agar orang itu tetap diam.' },
+      { instruction_en: 'Use a splint (a stiff support) to hold the injured area still. Make it from magazines, cardboard, or other stiff material.', instruction_ja: '副木（そえぎ：かたい支え）で、けがをした所を固定してください。雑誌、段ボール、かたい物で作れます。', instruction_id: 'Pakai bidai (penyangga kaku) agar bagian yang cedera tidak bergerak. Buat bidai dari majalah, kardus, atau bahan kaku lain.' },
+      { instruction_en: 'Put cloth on the splint as padding. Tie the splint above and below the injury, not on the injury.', instruction_ja: '副木を布で包んでください。けがをした所より上と下で結んでください。けがをした所では結ばないでください。', instruction_id: 'Lapisi bidai dengan kain. Ikat bidai di atas dan di bawah bagian yang cedera, bukan tepat di bagian yang cedera.' },
+      { instruction_en: 'Put ice wrapped in cloth on the injury to reduce swelling. Keep it on for 20 minutes, then remove it for 20 minutes.', instruction_ja: '布で包んだ氷で冷やして、腫れをおさえてください。20分冷やしたら、20分休みます。', instruction_id: 'Tempelkan es yang dibungkus kain untuk mengurangi bengkak. Tempelkan 20 menit, lalu lepas 20 menit.' },
+      { instruction_en: 'Check the blood flow below the injury. The fingers or toes should be warm and not pale.', instruction_ja: 'けがをした所より先の血の流れを確認してください。指先が温かく、色が悪くないかを見ます。', instruction_id: 'Periksa aliran darah di bawah cedera. Jari tangan atau kaki harus hangat dan tidak pucat.' },
     ],
   },
   {
     id: 'crush', icon: '⚠️',
     title_en: 'Crush Injury', title_ja: '圧挫症候群', title_id: 'Cedera Himpitan',
     steps: [
-      { instruction_en: 'If someone is trapped under debris for more than 15 minutes: DO NOT free them yourself.', instruction_ja: '15分以上がれきの下に挟まれている場合：自分で助け出さない。', instruction_id: 'Jika seseorang terjebak di bawah puing lebih dari 15 menit: JANGAN bebaskan sendiri.', warning_en: 'Releasing a crushed limb can release toxins into the bloodstream, causing sudden cardiac arrest.', warning_ja: '圧挫された四肢を解放すると毒素が血流に入り、突然の心停止を引き起こす可能性があります。', warning_id: 'Membebaskan anggota tubuh yang terhimpit bisa melepaskan racun ke aliran darah, menyebabkan henti jantung mendadak.' },
-      { instruction_en: 'Call 119 immediately. Tell them it\'s a crush injury (圧挫 / あつざ).', instruction_ja: 'すぐに119に電話。圧挫傷（あつざしょう）と伝える。', instruction_id: 'Hubungi 119 segera. Katakan ini cedera himpitan (圧挫 / atsuza).' },
-      { instruction_en: 'Keep the person calm. Give water if conscious and able to swallow.', instruction_ja: '患者を落ち着かせる。意識があり飲み込めるなら水を与える。', instruction_id: 'Tenangkan korban. Beri air jika sadar dan bisa menelan.' },
-      { instruction_en: 'Keep the person warm with blankets. Monitor for confusion or drowsiness.', instruction_ja: '毛布で保温する。混乱や眠気がないか観察する。', instruction_id: 'Jaga korban tetap hangat dengan selimut. Awasi kebingungan atau kantuk.' },
-      { instruction_en: 'Mark the time they were trapped. This information is critical for paramedics.', instruction_ja: '挟まれていた時間を記録。救急隊にとって重要な情報。', instruction_id: 'Catat waktu mereka terjebak. Informasi ini penting untuk paramedis.' },
+      { instruction_en: 'If a person is trapped under debris for more than 15 minutes, DO NOT free them yourself.', instruction_ja: 'がれきの下に15分以上はさまれている人を、自分で助け出さないでください。', instruction_id: 'Jika seseorang terjebak di bawah puing lebih dari 15 menit, JANGAN keluarkan dia sendiri.', warning_en: 'If you free a crushed arm or leg, toxins (harmful substances) can go into the blood. This can suddenly stop the heart.', warning_ja: 'はさまれた手や足を出すと、毒（体に悪い物）が血に入ることがあります。急に心臓が止まるかもしれません。', warning_id: 'Jika lengan atau kaki yang terhimpit dibebaskan, racun bisa masuk ke darah. Ini bisa membuat jantung tiba-tiba berhenti.' },
+      { instruction_en: 'Call 119 immediately. Tell them it is a crush injury (圧挫 / あつざ).', instruction_ja: 'すぐに119に電話してください。「圧挫傷（あつざしょう）です」と伝えてください。', instruction_id: 'Segera hubungi 119. Katakan bahwa ini cedera himpitan (圧挫 / atsuza).' },
+      { instruction_en: 'Keep the person calm. If the person is conscious and can swallow, give them water.', instruction_ja: 'けがをした人を落ち着かせてください。意識があって、飲みこめるなら、水をあげてください。', instruction_id: 'Tenangkan korban. Jika korban sadar dan bisa menelan, beri dia air.' },
+      { instruction_en: 'Keep the person warm with blankets. Watch for confusion or sleepiness.', instruction_ja: '毛布で体を温めてください。混乱していないか、眠そうでないか、よく見てください。', instruction_id: 'Jaga korban tetap hangat dengan selimut. Perhatikan apakah korban bingung atau mengantuk.' },
+      { instruction_en: 'Write down the time they were trapped. This information is important for paramedics.', instruction_ja: 'はさまれていた時間をメモしてください。救急隊にとって大切な情報です。', instruction_id: 'Catat waktu korban terjebak. Informasi ini penting untuk paramedis.' },
     ],
   },
   {
     id: 'cpr', icon: '💓',
     title_en: 'CPR Basics', title_ja: '心肺蘇生法', title_id: 'Dasar CPR',
     steps: [
-      { instruction_en: 'Check if the person is responsive: tap their shoulders and shout "Are you OK?"', instruction_ja: '反応を確認：肩を叩いて「大丈夫ですか？」と呼びかける。', instruction_id: 'Periksa respons: tepuk bahu mereka dan teriak "Apakah Anda baik-baik saja?"' },
-      { instruction_en: 'Call 119 (or ask someone nearby). Ask someone to bring an AED.', instruction_ja: '119に電話（または近くの人に頼む）。AEDを持ってきてもらう。', instruction_id: 'Hubungi 119 (atau minta orang di sekitar). Minta seseorang membawa AED.' },
-      { instruction_en: 'Place the heel of one hand on the center of the chest. Put your other hand on top.', instruction_ja: '片手のかかとを胸の中央に置く。もう一方の手を重ねる。', instruction_id: 'Letakkan pangkal telapak tangan di tengah dada. Letakkan tangan lainnya di atas.' },
-      { instruction_en: 'Push hard and fast: 100-120 pushes per minute. Adults: 5-6cm deep. Children: max 5cm. Infants: 4cm (two fingers). Let the chest fully recoil.', instruction_ja: '強く速く押す：1分間に100〜120回。成人: 5〜6cm。小児: 最大5cm。乳児: 4cm（指2本）。胸を完全に戻す。', instruction_id: 'Tekan keras dan cepat: 100-120 tekanan per menit. Dewasa: 5-6cm. Anak: maks 5cm. Bayi: 4cm (dua jari). Biarkan dada kembali sepenuhnya.' },
-      { instruction_en: 'Do NOT stop compressions until paramedics arrive or an AED is ready.', instruction_ja: '救急隊が到着するかAEDが準備できるまで圧迫を止めない。', instruction_id: 'JANGAN hentikan kompresi sampai paramedis tiba atau AED siap.', warning_en: 'AEDs are common in Japan: train stations, convenience stores, schools. Look for the green heart sign.', warning_ja: 'AEDは日本では一般的：駅、コンビニ、学校。緑のハートマークを探す。', warning_id: 'AED umum di Jepang: stasiun kereta, minimarket, sekolah. Cari tanda hati hijau.' },
+      { instruction_en: 'Check if the person responds. Tap their shoulders and shout "Are you OK?"', instruction_ja: '反応があるか確認してください。肩をたたいて「大丈夫ですか？」と大きな声で呼びかけます。', instruction_id: 'Periksa apakah orang itu merespons. Tepuk bahunya dan teriakkan "Apakah Anda baik-baik saja?"' },
+      { instruction_en: 'Call 119, or ask a person near you to call. Ask someone to bring an AED (a machine that gives the heart an electric shock).', instruction_ja: '119に電話してください。または、近くの人に電話をたのんでください。AED（心臓に電気ショックをあたえる機械）を持ってきてもらってください。', instruction_id: 'Hubungi 119, atau minta orang di dekat Anda untuk menelepon. Minta seseorang membawa AED (alat kejut jantung).' },
+      { instruction_en: 'Put the heel of one hand (the base of your palm) on the center of the chest. Put your other hand on top.', instruction_ja: '片方の手のひらの付け根を、胸の真ん中に置いてください。もう片方の手を上に重ねてください。', instruction_id: 'Letakkan pangkal telapak tangan di tengah dada. Letakkan tangan lainnya di atasnya.' },
+      { instruction_en: 'Push hard and fast: 100 to 120 pushes per minute. Adults: 5 to 6 cm deep. Children: about 1/3 of the chest depth (about 5 cm). Infants: about 1/3 of the chest depth (about 4 cm, use two fingers). Let the chest come fully back up after each push.', instruction_ja: '強く、速く押してください。1分間に100〜120回です。大人：5〜6cmの深さ。子ども：胸の厚さの約3分の1（約5cm）。赤ちゃん：胸の厚さの約3分の1（約4cm、指2本で押す）。押したあと、胸を完全に元にもどしてください。', instruction_id: 'Tekan dengan kuat dan cepat: 100 sampai 120 kali per menit. Dewasa: sedalam 5 sampai 6 cm. Anak: sekitar 1/3 tebal dada (sekitar 5 cm). Bayi: sekitar 1/3 tebal dada (sekitar 4 cm, pakai dua jari). Biarkan dada kembali naik sepenuhnya setiap kali.' },
+      { instruction_en: 'Do NOT stop the chest pushes until paramedics arrive or an AED is ready.', instruction_ja: '救急隊が来るまで、またはAEDの準備ができるまで、胸を押すのをやめないでください。', instruction_id: 'JANGAN berhenti menekan dada sampai paramedis tiba atau AED siap.', warning_en: 'Japan has many AEDs, for example in train stations, convenience stores, and schools. Look for the green heart sign.', warning_ja: '日本には、駅、コンビニ、学校などに、たくさんAEDがあります。緑のハートのマークをさがしてください。', warning_id: 'Di Jepang, banyak AED di stasiun kereta, minimarket, dan sekolah. Cari tanda hati berwarna hijau.' },
     ],
   },
   {
     id: 'shock', icon: '😰',
-    title_en: 'Shock Management', title_ja: 'ショック対応', title_id: 'Penanganan Syok',
+    title_en: 'Shock Management', title_ja: 'ショックへの対応', title_id: 'Penanganan Syok',
     steps: [
-      { instruction_en: 'Look for signs: pale/cold/clammy skin, rapid breathing, confusion, weakness.', instruction_ja: '症状を確認：青白く冷たい湿った肌、速い呼吸、混乱、脱力。', instruction_id: 'Cari tanda: kulit pucat/dingin/berkeringat, napas cepat, bingung, lemas.' },
-      { instruction_en: 'For blood-loss shock: lay flat, elevate legs 20-30cm. For breathing difficulty or chest injury: keep them semi-upright. Never lay flat if they are vomiting.', instruction_ja: '出血性ショック: 仰向けに寝かせ足を20〜30cm上げる。呼吸困難・胸部外傷: 半座位にする。嘔吐時は横向きに。', instruction_id: 'Syok pendarahan: baringkan, angkat kaki 20-30cm. Sesak napas atau cedera dada: posisi semi-tegak. Jangan telentangkan jika muntah.' },
-      { instruction_en: 'Cover them with a blanket or jacket to keep warm. Prevent heat loss from the ground.', instruction_ja: '毛布やジャケットで保温する。地面からの熱の喪失を防ぐ。', instruction_id: 'Selimuti dengan selimut atau jaket agar tetap hangat. Cegah kehilangan panas dari tanah.' },
-      { instruction_en: 'Do NOT give food or drink. Moisten their lips with water if requested.', instruction_ja: '飲食物を与えない。求められたら唇を水で湿らせる。', instruction_id: 'JANGAN beri makanan atau minuman. Basahi bibir dengan air jika diminta.' },
-      { instruction_en: 'Stay with them, talk calmly, and monitor breathing until help arrives.', instruction_ja: 'そばにいて、落ち着いて話しかけ、助けが来るまで呼吸を監視する。', instruction_id: 'Tetap bersama mereka, bicara dengan tenang, dan pantau pernapasan sampai bantuan tiba.' },
+      { instruction_en: 'Look for these signs: pale, cold, or damp skin; fast breathing; confusion; weakness.', instruction_ja: '次のような様子がないか見てください：青白く、冷たく、しめった肌。速い呼吸。混乱。力が入らない。', instruction_id: 'Cari tanda-tanda ini: kulit pucat, dingin, atau berkeringat; napas cepat; bingung; lemas.' },
+      { instruction_en: 'Shock from blood loss: lay the person flat on their back. Raise their legs 20 to 30 cm. Breathing difficulty or chest injury: keep them half sitting up. If they are vomiting, never lay them flat on their back. Turn them on their side.', instruction_ja: '出血によるショック：あおむけに寝かせて、足を20〜30cm上げてください。息が苦しいとき、胸にけががあるとき：上半身を起こして、半分すわった姿勢にしてください。吐いているときは、あおむけにしないで、横向きにしてください。', instruction_id: 'Syok karena kehilangan darah: baringkan telentang. Angkat kaki 20 sampai 30 cm. Sesak napas atau cedera dada: posisikan setengah duduk. Jika muntah, jangan baringkan telentang. Miringkan badannya ke samping.' },
+      { instruction_en: 'Cover the person with a blanket or jacket to keep them warm. Do not let the cold ground take their body heat.', instruction_ja: '毛布やジャケットをかけて、体を温めてください。冷たい地面で体が冷えないようにしてください。', instruction_id: 'Selimuti dengan selimut atau jaket agar tetap hangat. Jangan biarkan tanah yang dingin menyerap panas tubuhnya.' },
+      { instruction_en: 'Do NOT give food or drink. If they ask, wet their lips with water.', instruction_ja: '食べ物や飲み物をあげないでください。ほしいと言われたら、水でくちびるをぬらしてください。', instruction_id: 'JANGAN beri makanan atau minuman. Jika diminta, basahi bibirnya dengan air.' },
+      { instruction_en: 'Stay with the person. Talk to them calmly. Watch their breathing until help arrives.', instruction_ja: 'そばにいてください。落ち着いて話しかけてください。助けが来るまで、呼吸をよく見ていてください。', instruction_id: 'Tetap di dekatnya. Bicara dengan tenang. Perhatikan napasnya sampai bantuan datang.' },
     ],
   },
   {
     id: 'smoke', icon: '💨',
-    title_en: 'Smoke Inhalation', title_ja: '煙の吸入', title_id: 'Menghirup Asap',
+    title_en: 'Breathing Smoke', title_ja: '煙を吸ったとき', title_id: 'Menghirup Asap',
     steps: [
-      { instruction_en: 'Get low — crawl on your hands and knees. Smoke rises, cleaner air is near the floor.', instruction_ja: '低い姿勢で — 四つん這いで移動。煙は上昇し、床近くの空気がきれい。', instruction_id: 'Merendahlah — merangkak. Asap naik, udara bersih ada di dekat lantai.' },
-      { instruction_en: 'Cover your nose and mouth with a wet cloth if available. Breathe through it.', instruction_ja: '可能であれば濡れた布で鼻と口を覆い、その布を通して呼吸する。', instruction_id: 'Tutup hidung dan mulut dengan kain basah jika tersedia. Bernapas melaluinya.' },
-      { instruction_en: 'Before opening doors: touch the handle with the back of your hand. Hot = fire behind it.', instruction_ja: 'ドアを開ける前：手の甲でハンドルに触れる。熱い＝向こうに火がある。', instruction_id: 'Sebelum membuka pintu: sentuh gagang dengan punggung tangan. Panas = ada api di baliknya.', warning_en: 'Never open a hot door. Find another exit route.', warning_ja: '熱いドアは絶対に開けない。別の出口を探す。', warning_id: 'Jangan pernah buka pintu yang panas. Cari rute keluar lain.' },
-      { instruction_en: 'Move toward the nearest exit. Follow emergency exit signs (green in Japan).', instruction_ja: '最寄りの出口に向かう。非常口のサインに従う（日本では緑色）。', instruction_id: 'Bergerak menuju pintu keluar terdekat. Ikuti tanda exit darurat (hijau di Jepang).' },
-      { instruction_en: 'Once outside, if someone inhaled smoke: sit them upright, loosen clothing, call 119.', instruction_ja: '外に出たら、煙を吸った人は：座らせ、衣服を緩め、119に電話。', instruction_id: 'Setelah di luar, jika seseorang menghirup asap: dudukkan tegak, longgarkan pakaian, hubungi 119.' },
+      { instruction_en: 'Keep your body low. Crawl on your hands and knees. Smoke goes up, so the air near the floor is cleaner.', instruction_ja: '体を低くしてください。手とひざをついて進んでください。煙は上に行くので、床の近くの空気のほうがきれいです。', instruction_id: 'Rendahkan badan. Merangkak dengan tangan dan lutut. Asap naik ke atas, jadi udara di dekat lantai lebih bersih.' },
+      { instruction_en: 'If you have a wet cloth, cover your nose and mouth with it. Breathe through the cloth.', instruction_ja: 'ぬれた布があれば、それで鼻と口を覆ってください。布を通して息をしてください。', instruction_id: 'Jika ada kain basah, tutup hidung dan mulut dengan kain itu. Bernapas melalui kain.' },
+      { instruction_en: 'Before you open a door, touch the handle with the back of your hand. If it is hot, there is fire behind the door.', instruction_ja: 'ドアを開ける前に、手の甲でドアノブにさわってください。熱いときは、ドアの向こうに火があります。', instruction_id: 'Sebelum membuka pintu, sentuh gagangnya dengan punggung tangan. Jika panas, ada api di balik pintu.', warning_en: 'Never open a hot door. Find another way out.', warning_ja: '熱いドアは、絶対に開けないでください。ほかの出口をさがしてください。', warning_id: 'Jangan pernah buka pintu yang panas. Cari jalan keluar lain.' },
+      { instruction_en: 'Go to the nearest exit. Follow the emergency exit signs (they are green in Japan).', instruction_ja: 'いちばん近い出口に向かってください。非常口のマーク（日本では緑色）に従ってください。', instruction_id: 'Pergi ke pintu keluar terdekat. Ikuti tanda pintu darurat (warnanya hijau di Jepang).' },
+      { instruction_en: 'Outside, if a person breathed in smoke: sit them upright, loosen their clothes, and call 119.', instruction_ja: '外に出たら、煙を吸った人は、体を起こしてすわらせてください。服をゆるめて、119に電話してください。', instruction_id: 'Setelah di luar, jika ada yang menghirup asap: dudukkan dia dengan tegak, longgarkan pakaiannya, dan hubungi 119.' },
     ],
   },
   {
     id: 'psychological', icon: '🧠',
     title_en: 'Psychological First Aid', title_ja: '心のケア', title_id: 'Pertolongan Psikologis',
     steps: [
-      { instruction_en: 'Approach calmly. Say: "You are safe now. I\'m here to help."', instruction_ja: '落ち着いて近づく。「もう安全です。助けに来ました。」と言う。', instruction_id: 'Dekati dengan tenang. Katakan: "Anda aman sekarang. Saya di sini untuk membantu."' },
-      { instruction_en: 'For panic/hyperventilation: guide them to breathe slowly. In for 4, hold for 4, out for 4.', instruction_ja: 'パニック・過呼吸の場合：ゆっくり呼吸するよう導く。4秒吸い、4秒止め、4秒吐く。', instruction_id: 'Untuk panik/hiperventilasi: arahkan bernapas perlahan. Tarik 4 detik, tahan 4 detik, buang 4 detik.' },
-      { instruction_en: 'Grounding technique: ask them to name 5 things they can see, 4 they can touch, 3 they can hear.', instruction_ja: 'グラウンディング：見えるもの5つ、触れるもの4つ、聞こえるもの3つを挙げてもらう。', instruction_id: 'Teknik grounding: minta mereka sebutkan 5 hal yang dilihat, 4 yang disentuh, 3 yang didengar.' },
-      { instruction_en: 'Listen without judging. Let them talk or cry. Don\'t say "calm down" — say "I understand."', instruction_ja: '批判せず聞く。話したり泣いたりさせる。「落ち着いて」ではなく「わかります」と言う。', instruction_id: 'Dengarkan tanpa menghakimi. Biarkan mereka bicara atau menangis. Jangan bilang "tenang" — katakan "Saya mengerti."' },
-      { instruction_en: 'Help with practical needs: water, a blanket, contacting family. Small actions build safety.', instruction_ja: '実際的なニーズを手伝う：水、毛布、家族への連絡。小さな行動が安心感を作る。', instruction_id: 'Bantu kebutuhan praktis: air, selimut, menghubungi keluarga. Tindakan kecil membangun rasa aman.' },
+      { instruction_en: 'Go to the person calmly. Say: "You are safe now. I am here to help."', instruction_ja: '落ち着いて近づいてください。「もう安全です。助けに来ました」と言ってください。', instruction_id: 'Dekati dengan tenang. Katakan: "Anda aman sekarang. Saya di sini untuk membantu."' },
+      { instruction_en: 'If the person panics or breathes too fast, help them breathe slowly. Breathe in for 4 seconds, hold for 4 seconds, and breathe out for 4 seconds.', instruction_ja: 'パニックや過呼吸（息が速くなりすぎること）のときは、ゆっくり息をするように手伝ってください。4秒吸って、4秒止めて、4秒はきます。', instruction_id: 'Jika dia panik atau napasnya terlalu cepat (hiperventilasi), bantu dia bernapas pelan. Tarik napas 4 detik, tahan 4 detik, buang 4 detik.' },
+      { instruction_en: 'Use grounding to help them focus on the present. Ask them to name 5 things they can see, 4 they can touch, and 3 they can hear.', instruction_ja: 'グラウンディング（今、ここに気持ちを向ける方法）：見えるものを5つ、さわれるものを4つ、聞こえるものを3つ、言ってもらってください。', instruction_id: 'Pakai teknik grounding (cara memusatkan pikiran pada saat ini). Minta dia menyebutkan 5 hal yang bisa dilihat, 4 yang bisa disentuh, dan 3 yang bisa didengar.' },
+      { instruction_en: 'Listen without judging. Let them talk or cry. Do not say "Calm down." Say "I understand."', instruction_ja: '相手を否定しないで、話を聞いてください。話したり泣いたりさせてあげてください。「落ち着いて」とは言わないでください。「わかります」と言ってください。', instruction_id: 'Dengarkan tanpa menghakimi. Biarkan dia bicara atau menangis. Jangan bilang "Tenang." Katakan "Saya mengerti."' },
+      { instruction_en: 'Help with practical needs, like water, a blanket, or contacting their family. Small actions help them feel safe.', instruction_ja: '水、毛布、家族への連絡など、すぐに必要なことを手伝ってください。小さな手助けで、人は安心できます。', instruction_id: 'Bantu kebutuhan praktis, seperti air, selimut, atau menghubungi keluarga. Bantuan kecil membuat orang merasa aman.' },
     ],
   },
 ];
@@ -301,7 +301,7 @@ function renderSteps(): void {
           stopTimer();
           timer.classList.remove('running');
           timer.classList.add('done');
-          display.textContent = getLangText('Time\'s up!', '時間です！', 'Waktu habis!');
+          display.textContent = getLangText('Time is up', '時間です', 'Waktu habis');
           timerBtn.innerHTML = `<span data-lang="en">✓ Complete</span><span data-lang="ja">✓ 完了</span><span data-lang="id">✓ Selesai</span>`;
           (timerBtn as HTMLButtonElement).disabled = true;
           reapplyLang();

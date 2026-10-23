@@ -14,67 +14,67 @@ interface QuizQuestion {
 
 const questions: QuizQuestion[] = [
   {
-    q_en: 'You feel strong shaking while on the 5th floor. What do you do first?',
+    q_en: 'You feel strong shaking on the 5th floor. What do you do first?',
     q_ja: '5階で強い揺れを感じました。最初に何をしますか？',
-    q_id: 'Anda merasakan guncangan kuat di lantai 5. Apa yang Anda lakukan pertama?',
+    q_id: 'Anda merasakan guncangan kuat di lantai 5. Apa yang Anda lakukan pertama kali?',
     options: [
-      {en:'Run to the elevator',ja:'エレベーターに走る',id:'Lari ke elevator'},
-      {en:'Drop, Cover, Hold on under a desk',ja:'机の下で身を守る',id:'Merunduk, berlindung di bawah meja'},
+      {en:'Run to the elevator',ja:'エレベーターまで走る',id:'Lari ke elevator'},
+      {en:'Drop, Cover, Hold On under a desk',ja:'机の下で身を低くし、頭を守る',id:'Merunduk, berlindung, bertahan di bawah meja'},
       {en:'Jump out the window',ja:'窓から飛び降りる',id:'Melompat dari jendela'},
-      {en:'Stand in a doorway',ja:'ドアの前に立つ',id:'Berdiri di pintu'},
+      {en:'Stand in a doorway',ja:'ドアの所に立つ',id:'Berdiri di ambang pintu'},
     ],
     correct: 1,
-    explain_en: 'Drop, Cover, and Hold On is the recommended action. Never use elevators during earthquakes.',
-    explain_ja: '机の下で身を守るのが推奨行動です。地震中にエレベーターは使わないで。',
-    explain_id: 'Merunduk, berlindung, dan bertahan adalah tindakan yang direkomendasikan. Jangan gunakan elevator saat gempa.',
+    explain_en: 'Drop, Cover, and Hold On is the recommended action. Never use an elevator during an earthquake.',
+    explain_ja: '机の下で身を低くし、頭を守るのが、すすめられている行動です。地震のときは、エレベーターを使わないでください。',
+    explain_id: 'Merunduk, berlindung, dan bertahan adalah tindakan yang dianjurkan. Jangan pakai elevator saat gempa.',
   },
   {
-    q_en: 'Your phone shows a tsunami warning. You are near the coast. What should you do?',
-    q_ja: 'スマホに津波警報が表示。海岸近くにいます。どうすべき？',
-    q_id: 'Ponsel Anda menunjukkan peringatan tsunami. Anda dekat pantai. Apa yang harus dilakukan?',
+    q_en: 'Your phone shows a tsunami warning. You are near the coast. What do you do?',
+    q_ja: 'スマホに津波警報が出ました。あなたは海の近くにいます。どうしますか？',
+    q_id: 'Ponsel Anda menampilkan peringatan tsunami. Anda dekat pantai. Apa yang Anda lakukan?',
     options: [
       {en:'Go to the beach to watch',ja:'海を見に行く',id:'Pergi ke pantai untuk melihat'},
-      {en:'Wait for more information',ja:'追加情報を待つ',id:'Tunggu informasi lebih lanjut'},
-      {en:'Immediately move to high ground',ja:'すぐに高台へ移動',id:'Segera pindah ke tempat tinggi'},
+      {en:'Wait for more information',ja:'もっと情報が出るまで待つ',id:'Tunggu informasi lebih lanjut'},
+      {en:'Go to high ground immediately',ja:'すぐに高い所へ逃げる',id:'Segera pergi ke tempat tinggi'},
       {en:'Go to the basement',ja:'地下に行く',id:'Pergi ke ruang bawah tanah'},
     ],
     correct: 2,
-    explain_en: 'Move to high ground immediately. Tsunamis can arrive within minutes. Never go toward the water.',
-    explain_ja: 'すぐに高台へ。津波は数分で到達することがあります。絶対に海に近づかないで。',
-    explain_id: 'Segera pindah ke tempat tinggi. Tsunami bisa tiba dalam hitungan menit. Jangan mendekati air.',
+    explain_en: 'Go to high ground immediately. A tsunami can arrive in minutes. Never go toward the water.',
+    explain_ja: 'すぐに高い所へ逃げてください。津波は数分で来ることがあります。絶対に海に近づかないでください。',
+    explain_id: 'Segera pergi ke tempat tinggi. Tsunami bisa tiba dalam hitungan menit. Jangan pernah mendekati air.',
   },
   {
     q_en: 'During a typhoon, the wind suddenly stops and the sky clears. What does this mean?',
-    q_ja: '台風中、急に風が止み空が晴れました。これは何を意味しますか？',
-    q_id: 'Selama topan, angin tiba-tiba berhenti dan langit cerah. Apa artinya?',
+    q_ja: '台風のとき、急に風が止まって、空が晴れました。これはどういう意味ですか？',
+    q_id: 'Saat topan, angin tiba-tiba berhenti dan langit cerah. Apa artinya?',
     options: [
-      {en:'The typhoon is over — safe to go out',ja:'台風は終わった — 外出OK',id:'Topan sudah selesai — aman keluar'},
-      {en:'You are in the eye — more wind is coming',ja:'台風の目にいる — さらに風が来る',id:'Anda di mata topan — angin lebih kuat akan datang'},
-      {en:'It was a false alarm',ja:'誤報だった',id:'Itu alarm palsu'},
+      {en:'The typhoon is over. It is safe to go out.',ja:'台風が終わった。外に出ても大丈夫',id:'Topan sudah selesai. Aman untuk keluar.'},
+      {en:'You are in the eye of the typhoon. More wind is coming.',ja:'台風の目の中にいる。また風が来る',id:'Anda di mata topan. Angin akan datang lagi.'},
+      {en:'It was a false alarm',ja:'まちがいの警報だった',id:'Itu peringatan palsu'},
     ],
     correct: 1,
-    explain_en: 'The eye of a typhoon is calm, but the other side of the storm will hit soon with equal or greater force. Stay indoors!',
-    explain_ja: '台風の目は穏やかですが、反対側の暴風がすぐに来ます。屋内にいてください！',
-    explain_id: 'Mata topan tenang, tetapi sisi lain badai akan segera menerjang dengan kekuatan yang sama atau lebih besar. Tetap di dalam!',
+    explain_en: 'The eye of a typhoon is calm. Soon the other side of the storm hits with the same or more force. Stay indoors.',
+    explain_ja: '台風の目の中は静かです。でも、すぐに反対側の風が、同じか、もっと強い力で来ます。建物の中にいてください。',
+    explain_id: 'Mata topan itu tenang. Sebentar lagi sisi lain badai datang dengan kekuatan yang sama atau lebih besar. Tetap di dalam.',
   },
   {
-    q_en: 'You smell gas after an earthquake. What should you do?',
-    q_ja: '地震後にガスの匂いがします。どうすべき？',
-    q_id: 'Anda mencium bau gas setelah gempa. Apa yang harus dilakukan?',
+    q_en: 'You smell gas after an earthquake. What do you do?',
+    q_ja: '地震のあと、ガスのにおいがします。どうしますか？',
+    q_id: 'Anda mencium bau gas setelah gempa. Apa yang Anda lakukan?',
     options: [
-      {en:'Light a match to check',ja:'マッチを点けて確認する',id:'Nyalakan korek api untuk memeriksa'},
-      {en:'Open windows and leave immediately',ja:'窓を開けてすぐに避難する',id:'Buka jendela dan segera keluar'},
-      {en:'Turn on the fan to ventilate',ja:'換気扇をつける',id:'Nyalakan kipas untuk ventilasi'},
-      {en:'Ignore it — it will pass',ja:'無視する — そのうち消える',id:'Abaikan — akan hilang sendiri'},
+      {en:'Light a match to check',ja:'マッチをつけて確かめる',id:'Nyalakan korek api untuk memeriksa'},
+      {en:'Open the windows and leave immediately',ja:'窓を開けて、すぐに外に出る',id:'Buka jendela dan segera keluar'},
+      {en:'Turn on the fan to let air in',ja:'換気扇をつける',id:'Nyalakan kipas agar udara mengalir'},
+      {en:'Ignore it. The smell will go away.',ja:'気にしない。そのうち消える',id:'Abaikan. Baunya akan hilang sendiri.'},
     ],
     correct: 1,
-    explain_en: 'Open windows for ventilation and evacuate. Never use flames, electrical switches, or fans — they can ignite gas.',
-    explain_ja: '窓を開けて換気し、避難してください。火気、電気スイッチ、換気扇は使わないで — ガスに引火します。',
-    explain_id: 'Buka jendela untuk ventilasi dan evakuasi. Jangan gunakan api, saklar listrik, atau kipas — bisa menyalakan gas.',
+    explain_en: 'Open the windows to let air in, then leave. Do not use flames, electric switches, or fans. They can set the gas on fire.',
+    explain_ja: '窓を開けて空気を入れかえ、外に出てください。火、電気のスイッチ、換気扇は使わないでください。ガスに火がつくことがあります。',
+    explain_id: 'Buka jendela agar udara masuk, lalu keluar. Jangan pakai api, saklar listrik, atau kipas. Semua itu bisa membuat gas terbakar.',
   },
   {
     q_en: 'What number do you call for an ambulance in Japan?',
-    q_ja: '日本で救急車を呼ぶ番号は？',
+    q_ja: '日本で救急車を呼ぶ番号は何番ですか？',
     q_id: 'Nomor berapa yang Anda hubungi untuk ambulans di Jepang?',
     options: [
       {en:'110',ja:'110',id:'110'},
@@ -83,28 +83,28 @@ const questions: QuizQuestion[] = [
       {en:'118',ja:'118',id:'118'},
     ],
     correct: 2,
-    explain_en: '119 is for fire and ambulance. 110 is police. 118 is coast guard. 911 does NOT work in Japan.',
-    explain_ja: '119は消防・救急。110は警察。118は海上保安庁。911は日本では使えません。',
-    explain_id: '119 untuk pemadam dan ambulans. 110 untuk polisi. 118 untuk penjaga pantai. 911 TIDAK berfungsi di Jepang.',
+    explain_en: '119 is for fire and ambulance. 110 is for police. 118 is for the coast guard. 911 does NOT work in Japan.',
+    explain_ja: '119は消防と救急車です。110は警察です。118は海上保安庁です。911は日本では使えません。',
+    explain_id: '119 untuk pemadam kebakaran dan ambulans. 110 untuk polisi. 118 untuk penjaga pantai. 911 TIDAK berfungsi di Jepang.',
   },
   {
-    q_en: 'You receive a Level 4 evacuation order. What should you do?',
-    q_ja: 'レベル4の避難指示を受けました。どうすべき？',
-    q_id: 'Anda menerima perintah evakuasi Level 4. Apa yang harus dilakukan?',
+    q_en: 'You get a Level 4 evacuation order. What do you do?',
+    q_ja: 'レベル4の避難指示が出ました。どうしますか？',
+    q_id: 'Anda menerima perintah evakuasi Level 4. Apa yang Anda lakukan?',
     options: [
       {en:'Start preparing to leave',ja:'避難の準備を始める',id:'Mulai bersiap untuk pergi'},
-      {en:'Evacuate immediately to a shelter',ja:'すぐに避難所へ避難する',id:'Segera evakuasi ke tempat perlindungan'},
+      {en:'Go to a shelter immediately',ja:'すぐに避難所へ行く',id:'Segera mengungsi ke tempat pengungsian'},
       {en:'Wait until Level 5',ja:'レベル5まで待つ',id:'Tunggu sampai Level 5'},
-      {en:'Only elderly need to evacuate',ja:'高齢者のみ避難が必要',id:'Hanya lansia yang perlu evakuasi'},
+      {en:'Only elderly people must evacuate',ja:'高齢者だけが避難する',id:'Hanya lansia yang perlu mengungsi'},
     ],
     correct: 1,
-    explain_en: 'Level 4 means EVERYONE must evacuate immediately. Level 5 means disaster is already happening — it may be too late.',
-    explain_ja: 'レベル4は全員がすぐに避難。レベル5は災害がすでに発生中 — 手遅れの可能性があります。',
-    explain_id: 'Level 4 berarti SEMUA ORANG harus segera evakuasi. Level 5 berarti bencana sudah terjadi — mungkin sudah terlambat.',
+    explain_en: 'Level 4 means EVERYONE must evacuate now. Level 5 means the disaster is already happening. It may be too late.',
+    explain_ja: 'レベル4では、全員がすぐに避難します。レベル5は、災害がもう起きています。もう間に合わないかもしれません。',
+    explain_id: 'Level 4 berarti SEMUA ORANG harus segera mengungsi. Level 5 berarti bencana sudah terjadi. Mungkin sudah terlambat.',
   },
   {
-    q_en: 'What is the most critical item to have in your emergency bag?',
-    q_ja: '非常持ち出し袋で最も重要なアイテムは？',
+    q_en: 'What is the most important item in your emergency bag?',
+    q_ja: '非常持ち出し袋で、一番大事な物は何ですか？',
     q_id: 'Barang apa yang paling penting dalam tas darurat Anda?',
     options: [
       {en:'Laptop',ja:'ノートパソコン',id:'Laptop'},
@@ -113,51 +113,51 @@ const questions: QuizQuestion[] = [
       {en:'Umbrella',ja:'傘',id:'Payung'},
     ],
     correct: 1,
-    explain_en: 'Water is the #1 priority. You can survive weeks without food but only 3 days without water.',
-    explain_ja: '水が最優先。食料なしでも数週間生きられますが、水なしでは3日しか持ちません。',
-    explain_id: 'Air adalah prioritas #1. Anda bisa bertahan berminggu-minggu tanpa makanan tapi hanya 3 hari tanpa air.',
+    explain_en: 'Water comes first. You can live for weeks without food, but only 3 days without water.',
+    explain_ja: '水が一番大事です。食べ物がなくても何週間か生きられますが、水がないと3日しか生きられません。',
+    explain_id: 'Air adalah prioritas utama. Anda bisa bertahan berminggu-minggu tanpa makanan, tetapi hanya 3 hari tanpa air.',
   },
   {
-    q_en: 'You are in an elevator when an earthquake hits. What should you do?',
-    q_ja: '地震発生時にエレベーター内にいます。どうすべき？',
-    q_id: 'Anda di dalam elevator saat gempa terjadi. Apa yang harus dilakukan?',
+    q_en: 'You are in an elevator when an earthquake starts. What do you do?',
+    q_ja: '地震が起きたとき、エレベーターの中にいます。どうしますか？',
+    q_id: 'Anda di dalam elevator saat gempa terjadi. Apa yang Anda lakukan?',
     options: [
-      {en:'Press all floor buttons and exit at the first stop',ja:'全階のボタンを押し、最初に止まった階で降りる',id:'Tekan semua tombol lantai dan keluar di pemberhentian pertama'},
-      {en:'Force the doors open',ja:'ドアを無理にこじ開ける',id:'Paksa buka pintu'},
-      {en:'Do nothing and wait',ja:'何もせず待つ',id:'Tidak melakukan apa-apa dan menunggu'},
+      {en:'Press all the floor buttons and get out at the first stop',ja:'すべての階のボタンを押して、最初に止まった階で降りる',id:'Tekan semua tombol lantai dan keluar di lantai pertama tempat elevator berhenti'},
+      {en:'Force the doors open',ja:'ドアを無理に開ける',id:'Buka pintu secara paksa'},
+      {en:'Do nothing and wait',ja:'何もしないで待つ',id:'Diam saja dan menunggu'},
     ],
     correct: 0,
-    explain_en: 'Press all buttons so the elevator stops at the nearest floor. Exit immediately. Modern elevators have earthquake sensors that do this automatically.',
-    explain_ja: '全階のボタンを押して最寄りの階で停止させ、すぐに降りてください。最新のエレベーターには地震感知器があります。',
-    explain_id: 'Tekan semua tombol agar elevator berhenti di lantai terdekat. Segera keluar. Elevator modern memiliki sensor gempa.',
+    explain_en: 'Press all the buttons. The elevator then stops at the nearest floor. Get out immediately. New elevators have earthquake sensors that do this automatically.',
+    explain_ja: 'すべてのボタンを押すと、近い階で止まります。すぐに降りてください。新しいエレベーターには地震のセンサーがあり、自動で近い階に止まります。',
+    explain_id: 'Tekan semua tombol agar elevator berhenti di lantai terdekat. Segera keluar. Elevator baru punya sensor gempa yang melakukannya secara otomatis.',
   },
   {
     q_en: 'After a disaster, how can you leave a voice message for your family in Japan?',
-    q_ja: '災害後、日本で家族に伝言を残す方法は？',
+    q_ja: '災害のあと、日本で家族に声の伝言を残すには、どうしますか？',
     q_id: 'Setelah bencana, bagaimana Anda meninggalkan pesan suara untuk keluarga di Jepang?',
     options: [
-      {en:'Call 171 (Disaster Message Dial)',ja:'171にかける（災害用伝言ダイヤル）',id:'Hubungi 171 (Pesan Bencana)'},
+      {en:'Call 171 (Disaster Message Dial)',ja:'171に電話する（災害用伝言ダイヤル）',id:'Hubungi 171 (Layanan Pesan Suara Bencana)'},
       {en:'Send a fax',ja:'FAXを送る',id:'Kirim faks'},
-      {en:'Call 110',ja:'110にかける',id:'Hubungi 110'},
+      {en:'Call 110',ja:'110に電話する',id:'Hubungi 110'},
     ],
     correct: 0,
-    explain_en: '171 is Japan\'s disaster voice message service. Dial 171 → press 1 to record, 2 to listen. Free during disasters.',
-    explain_ja: '171は災害用伝言ダイヤル。171 → 1で録音、2で再生。災害時は無料。',
-    explain_id: '171 adalah layanan pesan suara bencana Jepang. Tekan 171 → 1 untuk merekam, 2 untuk mendengar. Gratis saat bencana.',
+    explain_en: '171 is the disaster voice message service in Japan. Call 171. Press 1 to record and 2 to listen. It is free from NTT landlines. Other phones may pay a call charge.',
+    explain_ja: '171は災害用伝言ダイヤルです。171に電話して、1を押すと録音、2を押すと再生です。NTTの固定電話からは無料です。ほかの電話からは、通話料がかかることがあります。',
+    explain_id: '171 adalah layanan pesan suara bencana di Jepang. Hubungi 171. Tekan 1 untuk merekam dan 2 untuk mendengar. Gratis dari telepon rumah NTT. Dari telepon lain, mungkin ada biaya panggilan.',
   },
   {
     q_en: 'What does the J-Alert siren mean?',
-    q_ja: 'Jアラートのサイレンは何を意味しますか？',
+    q_ja: 'Jアラートのサイレンは、何のお知らせですか？',
     q_id: 'Apa arti sirene J-Alert?',
     options: [
       {en:'Lunch break',ja:'昼休み',id:'Istirahat makan siang'},
-      {en:'National emergency: missile, major earthquake, or tsunami',ja:'国家緊急事態：ミサイル、大地震、津波',id:'Darurat nasional: rudal, gempa besar, atau tsunami'},
-      {en:'Monthly test — ignore it',ja:'月例テスト — 無視して良い',id:'Tes bulanan — abaikan saja'},
+      {en:'National emergency: missile, major earthquake, or tsunami',ja:'国の緊急事態：ミサイル、大きな地震、津波',id:'Darurat nasional: rudal, gempa besar, atau tsunami'},
+      {en:'Monthly test. Ignore it.',ja:'毎月のテスト。気にしなくてよい',id:'Tes bulanan. Abaikan saja.'},
     ],
     correct: 1,
-    explain_en: 'J-Alert is a national emergency warning for imminent threats: missiles, major earthquakes, tsunamis. Take it seriously every time.',
-    explain_ja: 'Jアラートはミサイル、大地震、津波などの差し迫った脅威に対する国家緊急警報です。毎回真剣に対応してください。',
-    explain_id: 'J-Alert adalah peringatan darurat nasional untuk ancaman yang akan segera terjadi. Tanggapi dengan serius setiap saat.',
+    explain_en: 'J-Alert is a national emergency warning for threats that will come soon: missiles, major earthquakes, and tsunamis. Take it seriously every time.',
+    explain_ja: 'Jアラートは、ミサイル、大きな地震、津波など、すぐに来る危険を知らせる国の緊急警報です。毎回、本気で行動してください。',
+    explain_id: 'J-Alert adalah peringatan darurat nasional untuk ancaman yang segera datang: rudal, gempa besar, dan tsunami. Tanggapi dengan serius setiap kali.',
   },
 ];
 
@@ -258,10 +258,10 @@ function showResults(): void {
 
   const pct = score / questions.length;
   let title: string, msg: string;
-  if (pct >= 0.9) { title = '🏆'; msg = getLangText('Disaster Ready Expert!', '防災エキスパート！', 'Ahli Kesiapsiagaan!'); }
+  if (pct >= 0.9) { title = '🏆'; msg = getLangText('You Are Disaster Ready!', '防災の準備はばっちりです！', 'Anda Siap Hadapi Bencana!'); }
   else if (pct >= 0.7) { title = '👍'; msg = getLangText('Well Prepared!', 'よく準備できています！', 'Persiapan Baik!'); }
-  else if (pct >= 0.5) { title = '🤔'; msg = getLangText('Review the guide again', 'ガイドをもう一度確認', 'Tinjau panduan lagi'); }
-  else { title = '📚'; msg = getLangText('Study the guide carefully', 'ガイドをしっかり学びましょう', 'Pelajari panduan dengan seksama'); }
+  else if (pct >= 0.5) { title = '🤔'; msg = getLangText('Read the guide again', 'ガイドをもう一度読んでください', 'Baca panduan lagi'); }
+  else { title = '📚'; msg = getLangText('Study the guide carefully', 'ガイドをよく読んで、学んでください', 'Pelajari panduan dengan teliti'); }
 
   // Best score tracking
   let best = parseInt(localStorage.getItem('mamoru-quiz-best') || '0', 10);
@@ -295,7 +295,7 @@ function showResults(): void {
     currentQuestion = 0;
     score = 0;
     renderQuestion();
-    showToast(getLangText('🔄 Quiz reset!', '🔄 クイズをリセット！', '🔄 Kuis direset!'), 'info');
+    showToast(getLangText('🔄 Quiz restarted', '🔄 クイズをやり直します', '🔄 Kuis dimulai ulang'), 'info');
   });
 }
 

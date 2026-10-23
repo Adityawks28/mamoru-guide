@@ -15,59 +15,59 @@ interface NowStep {
 const STEPS: NowStep[] = [
   {
     en: 'DROP to the ground',
-    ja: '地面に伏せる (DROP)',
-    id: 'MERUNDUK ke tanah',
-    detail_en: 'Get on your hands and knees. This prevents you from being knocked down.',
-    detail_ja: '四つん這いになる。転倒を防ぎます。',
-    detail_id: 'Berlutut dengan tangan dan lutut. Ini mencegah Anda terjatuh.',
+    ja: '体を低くしてください (DROP)',
+    id: 'MERUNDUK ke lantai',
+    detail_en: 'Get on your hands and knees. Then the shaking cannot knock you down.',
+    detail_ja: '手とひざを床につけてください。揺れでたおれないようにするためです。',
+    detail_id: 'Bertumpu pada tangan dan lutut. Ini mencegah Anda terjatuh.',
   },
   {
-    en: 'Take COVER under a sturdy table',
-    ja: '丈夫な机の下に隠れる (COVER)',
-    id: 'BERLINDUNG di bawah meja kokoh',
-    detail_en: 'Protect your head and neck. If no table: crouch against an interior wall, cover your head.',
-    detail_ja: '頭と首を守る。机がなければ内壁に寄り、頭を覆う。',
-    detail_id: 'Lindungi kepala dan leher. Jika tidak ada meja: berjongkok di dinding dalam, lindungi kepala.',
+    en: 'Take COVER under a strong table',
+    ja: 'じょうぶな机の下に入ってください (COVER)',
+    id: 'BERLINDUNG di bawah meja yang kuat',
+    detail_en: 'Protect your head and neck. If there is no table, crouch next to an inside wall and cover your head.',
+    detail_ja: '頭と首を守ってください。机がないときは、内側の壁の近くでしゃがんで、頭を守ってください。',
+    detail_id: 'Lindungi kepala dan leher. Jika tidak ada meja, jongkok di dekat dinding dalam dan lindungi kepala.',
   },
   {
-    en: 'HOLD ON until shaking stops',
-    ja: '揺れがおさまるまで待機 (HOLD ON)',
+    en: 'HOLD ON until the shaking stops',
+    ja: '揺れが止まるまで動かないでください (HOLD ON)',
     id: 'BERTAHAN sampai guncangan berhenti',
-    detail_en: 'Stay under cover. Be ready to move with it if the table shifts.',
-    detail_ja: 'その場を動かない。机が動いたら一緒に移動する。',
-    detail_id: 'Tetap berlindung. Bersiap bergerak bersama meja jika bergeser.',
+    detail_en: 'Stay under cover. If the table moves, move with it.',
+    detail_ja: 'その場にいてください。机が動いたら、一緒に動いてください。',
+    detail_id: 'Tetap berlindung. Jika meja bergeser, ikut bergerak bersamanya.',
   },
   {
-    en: 'When shaking stops: OPEN THE DOOR',
-    ja: '揺れが止まったら: ドアを開ける',
+    en: 'When the shaking stops: OPEN THE DOOR',
+    ja: '揺れが止まったら：ドアを開けてください',
     id: 'Saat guncangan berhenti: BUKA PINTU',
-    detail_en: 'Door frames warp shut after earthquakes. Open it now while you can.',
-    detail_ja: 'ドア枠が歪んで開かなくなることがある。今開ける。',
-    detail_id: 'Kusen pintu bisa macet setelah gempa. Buka sekarang selagi bisa.',
+    detail_en: 'After an earthquake, the door frame can bend and lock the door. Open it now, while you can.',
+    detail_ja: '地震のあと、ドアの枠がゆがんで、開かなくなることがあります。開けられるうちに、今開けてください。',
+    detail_id: 'Setelah gempa, kusen pintu bisa bengkok dan pintu macet. Buka sekarang selagi bisa.',
   },
   {
-    en: 'Turn off GAS at the meter',
-    ja: 'ガスメーターを止める',
-    id: 'Matikan GAS di meteran',
-    detail_en: 'Gas leaks cause fires. Kobe 1995: 7,000 homes burned from gas fires.',
-    detail_ja: 'ガス漏れは火災の原因。阪神大震災では7,000戸が全焼。',
-    detail_id: 'Kebocoran gas menyebabkan kebakaran. Kobe 1995: 7.000 rumah terbakar.',
+    en: 'Switch off the BREAKER and the gas before you leave',
+    ja: '家を出る前に、ブレーカーを切って、ガスを止めてください',
+    id: 'Matikan BREAKER listrik dan gas sebelum keluar',
+    detail_en: 'Many fires start when the power comes back on. Kobe 1995: fire burned about 7,000 buildings.',
+    detail_ja: '電気がもどったときに、火事が起きることがあります（通電火災）。1995年の神戸では、火事で約7,000棟が焼けました。',
+    detail_id: 'Banyak kebakaran terjadi saat listrik menyala lagi. Kobe 1995: api membakar sekitar 7.000 bangunan.',
   },
   {
-    en: 'Put on SHOES before moving',
-    ja: '靴を履いてから移動',
+    en: 'Put on SHOES before you move',
+    ja: '動く前に、靴をはいてください',
     id: 'Pakai SEPATU sebelum bergerak',
-    detail_en: 'Broken glass everywhere. Do not walk barefoot.',
-    detail_ja: 'ガラスの破片が散乱。素足で歩かない。',
-    detail_id: 'Pecahan kaca di mana-mana. Jangan berjalan tanpa alas kaki.',
+    detail_en: 'There is broken glass everywhere. Do not walk barefoot.',
+    detail_ja: 'ガラスの破片がたくさん落ちています。はだしで歩かないでください。',
+    detail_id: 'Ada pecahan kaca di mana-mana. Jangan berjalan tanpa alas kaki.',
   },
   {
-    en: 'Check for TSUNAMI warning',
-    ja: '津波警報を確認',
-    id: 'Periksa peringatan TSUNAMI',
-    detail_en: 'If near coast: move to high ground IMMEDIATELY. Do not wait for sirens.',
-    detail_ja: '海岸近くなら今すぐ高台へ。サイレンを待たない。',
-    detail_id: 'Jika dekat pantai: segera naik ke tempat tinggi. Jangan tunggu sirine.',
+    en: 'Check for a TSUNAMI warning',
+    ja: '津波警報が出ていないか確認してください',
+    id: 'Cek peringatan TSUNAMI',
+    detail_en: 'If you are near the coast, go to high ground IMMEDIATELY. Do not wait for sirens.',
+    detail_ja: '海の近くにいたら、すぐに高い所へ逃げてください。サイレンを待たないでください。',
+    detail_id: 'Jika dekat pantai, SEGERA naik ke tempat tinggi. Jangan tunggu sirene.',
   },
 ];
 
@@ -78,9 +78,9 @@ export function initEarthquakeNow(): void {
   overlay.innerHTML = `
     <div class="eq-now-header">
       <div class="eq-now-title">
-        <span data-lang="en">EARTHQUAKE - WHAT TO DO NOW</span>
-        <span data-lang="ja">地震 - 今すぐやること</span>
-        <span data-lang="id">GEMPA - APA YANG HARUS DILAKUKAN SEKARANG</span>
+        <span data-lang="en">EARTHQUAKE: WHAT TO DO NOW</span>
+        <span data-lang="ja">地震：今すぐすること</span>
+        <span data-lang="id">GEMPA: YANG HARUS DILAKUKAN SEKARANG</span>
       </div>
       <button class="eq-now-close" id="eqNowClose" aria-label="Close">X</button>
     </div>

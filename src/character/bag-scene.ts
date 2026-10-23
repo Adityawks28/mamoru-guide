@@ -25,11 +25,11 @@ const LOOK: Record<Load, Partial<SpriteOptions>> = {
 
 const REMARK: Record<Load, Tip | null> = {
   empty:  null,
-  light:  { en: 'Light as a feather! Room for more essentials.', ja: 'まだ軽い！必需品をもっと入れられる。', id: 'Masih ringan! Masih muat barang penting.' },
-  ok:     { en: 'Still easy to walk with. Nice.', ja: 'まだ楽に歩ける。いい感じ。', id: 'Masih nyaman dibawa jalan. Bagus.' },
-  heavy:  { en: 'Getting heavy… you may walk an hour to the shelter.', ja: '重くなってきた…避難所まで1時間歩くかも。', id: 'Mulai berat… mungkin jalan 1 jam ke pengungsian.' },
-  strain: { en: 'Hah… hah… too heavy to run! Take something out?', ja: 'はぁ…はぁ…重くて走れない！何か出そう。', id: 'Hah… hah… terlalu berat untuk lari! Keluarkan sesuatu?' },
-  reject: { en: "Whoa! That won't fit — over 10 kg!", ja: 'うわっ！10kgを超えちゃう！', id: 'Waduh! Tidak muat — lebih dari 10 kg!' },
+  light:  { en: 'Still light. You can add more important items.', ja: 'まだ軽いです。大事な物をもっと入れられます。', id: 'Masih ringan. Masih muat barang penting.' },
+  ok:     { en: 'It is still easy to walk with this bag. Good.', ja: 'まだ楽に歩けます。いいですね。', id: 'Masih nyaman dibawa berjalan. Bagus.' },
+  heavy:  { en: 'It is getting heavy. You may walk for an hour to the shelter.', ja: '重くなってきました。避難所まで1時間歩くかもしれません。', id: 'Mulai berat. Anda mungkin berjalan 1 jam ke tempat pengungsian.' },
+  strain: { en: 'Hah… hah… Too heavy to run. Take something out.', ja: 'はぁ…はぁ…重くて走れません。何か出してください。', id: 'Hah… hah… Terlalu berat untuk lari. Keluarkan sesuatu.' },
+  reject: { en: 'Whoa! That puts the bag over 10 kg. It does not fit.', ja: 'うわっ！10kgを超えるので、入りません。', id: 'Waduh! Tas jadi lebih dari 10 kg. Tidak muat.' },
 };
 
 export function initBagScene(): void {
