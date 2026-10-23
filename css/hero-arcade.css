@@ -447,23 +447,26 @@ body.day-mode .ks-petal,
 
 /* Shooting stars — night only */
 .ks-shooters { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+/* A meteor: bright head on the right, tail behind it, moving along its own
+   axis (rotate first, then translateX), fast, then gone (stars.ts spawns
+   one every 7-16 s and removes it on animationend). */
 .ks-shooter {
   position: absolute;
-  width: 80px;
+  width: 90px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #fff, #fff);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5) 60%, #fff);
+  transform-origin: 100% 50%;
   opacity: 0;
-  transform: rotate(-25deg);
-  animation: ks-shoot 14s ease-in infinite;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  animation: ks-shoot 0.9s cubic-bezier(0.3, 0, 0.8, 1) forwards;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
 }
 body.day-mode .ks-shooter,
 [data-theme="day"] .ks-shooter { display: none; }
 @keyframes ks-shoot {
-  0%   { opacity: 0; transform: rotate(-25deg) translate(0, 0); }
-  3%   { opacity: 1; }
-  10%  { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
-  100% { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
+  0%   { opacity: 0; transform: rotate(28deg) translateX(0) scaleX(0.2); }
+  15%  { opacity: 1; }
+  60%  { opacity: 1; transform: rotate(28deg) translateX(200px) scaleX(1); }
+  100% { opacity: 0; transform: rotate(28deg) translateX(320px) scaleX(0.4); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -529,19 +532,22 @@ body.day-mode .ks-cloud.c3,
 }
 body.day-mode .ks-stars,
 [data-theme="day"] .ks-stars { display: none; }
+/* Stars hold steady at their own brightness; the .blink few dip off for a
+   beat now and then, like an old console sky. */
 .ks-star {
   position: absolute;
   background: #fff;
-  animation: ks-twinkle var(--dur, 3s) ease-in-out infinite alternate;
-  opacity: 0;
+  opacity: var(--glow, 0.8);
 }
-@keyframes ks-twinkle {
-  0%   { opacity: 0.15; }
-  100% { opacity: 0.9; }
+.ks-star.blink { animation: ks-blink var(--dur, 4s) steps(1, end) infinite; }
+@keyframes ks-blink {
+  0%   { opacity: var(--glow, 0.8); }
+  88%  { opacity: 0.15; }
+  94%  { opacity: var(--glow, 0.8); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ks-star { animation: none; opacity: 0.6; }
+  .ks-star.blink { animation: none; }
 }
 
 /* ───── KOBE CITY HALL ───── */
