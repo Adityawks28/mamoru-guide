@@ -176,28 +176,83 @@
     opacity: 1 !important;
   }
 
-  /* === PLAN-ONLY PRINT (triggered by Print Worksheet button) === */
-  body.print-plan-only .hero,
-  body.print-plan-only #earthquake,
-  body.print-plan-only #vocab,
-  body.print-plan-only #showthis,
-  body.print-plan-only #bag,
-  body.print-plan-only #alerts,
-  body.print-plan-only #typhoon,
-  body.print-plan-only #firstaid,
-  body.print-plan-only #shelter,
-  body.print-plan-only #drill,
-  body.print-plan-only #quiz,
-  body.print-plan-only #about,
-  body.print-plan-only #contacts,
-  body.print-plan-only .footer-links,
-  body.print-plan-only .footer-logo,
-  body.print-plan-only .footer-copy,
-  body.print-plan-only .emergency-fab,
-  body.print-plan-only .emergency-fab-panel {
-    display: none !important;
+  /* === PLAN WORKSHEET (emergency-plan.ts builds #plan-print) ===
+     Black on white with system fonts, so it prints on any printer and needs
+     no web fonts offline. Empty fields keep their underline to write on. */
+  body.print-plan-only > :not(#plan-print) { display: none !important; }
+  #plan-print { display: block !important; }
+
+  .ws {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', Meiryo, system-ui, sans-serif;
+    color: #000;
+    font-size: 10.5pt;
+    line-height: 1.35;
   }
-  body.print-plan-only #myplan {
-    page-break-before: avoid;
+  .ws-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 6mm;
+    padding-bottom: 2.5mm;
+    border-bottom: 2pt solid #000;
+  }
+  .ws-head > div { flex: 1; }
+  .ws-kicker { font-size: 8pt; font-weight: 700; color: #444; }
+  .ws-head h1 { font-size: 22pt; font-weight: 800; line-height: 1.15; margin: 0.5mm 0 0; }
+  .ws-head h1.ws-blank { height: 10mm; border-bottom: 1pt solid #000; }
+  .ws-ask { margin: 0; font-size: 8.5pt; text-align: right; white-space: pre-line; max-width: 78mm; }
+
+  .ws-numbers {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1fr 1.25fr;
+    gap: 2mm;
+    margin: 3mm 0 1mm;
+    padding: 0;
+  }
+  .ws-numbers li {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    padding: 1.5mm 2.5mm;
+    border: 1pt solid #000;
+    border-radius: 1.5mm;
+    font-size: 7.5pt;
+    line-height: 1.25;
+  }
+  .ws-numbers strong { font-size: 16pt; font-weight: 800; }
+  .ws-numbers span span { display: block; }
+
+  .ws-sec { margin-top: 2.5mm; break-inside: avoid; }
+  .ws-sec h2 {
+    margin: 0;
+    padding-bottom: 0.8mm;
+    border-bottom: 1.5pt solid #000;
+    font-size: 10.5pt;
+    font-weight: 800;
+  }
+  .ws-medical { padding: 1.5mm 3mm 0; border: 2pt solid #000; }
+  .ws-sec dl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5mm;
+    margin: 0;
+  }
+  .ws-field { padding: 1mm 0; border-bottom: 0.5pt solid #999; break-inside: avoid; }
+  .ws-medical .ws-field:last-child { border-bottom: 0; }
+  .ws-field.full { grid-column: 1 / -1; }
+  .ws-field dt { font-size: 8pt; font-weight: 700; color: #444; }
+  .ws-field dd { margin: 0.3mm 0 0; font-size: 10.5pt; line-height: 1.3; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ws-field dd.ws-blank { height: 5mm; }
+  .ws-field dd.ws-blank.tall { height: 7.5mm; }
+
+  .ws-foot {
+    margin-top: 4mm;
+    padding-top: 1.5mm;
+    border-top: 0.5pt solid #999;
+    font-size: 7.5pt;
+    color: #333;
   }
 }
+
+@page { margin: 12mm; }

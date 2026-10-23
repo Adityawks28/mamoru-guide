@@ -87,6 +87,7 @@ export const id: Record<string, string> = {
   'plan.subtitle': 'Isi profil dan rencana Anda. Label dwibahasa (Inggris + Jepang) agar penolong, dokter, dan polisi bisa membaca informasi Anda. Cetak dan simpan di dompet, tas, dan rumah.',
   'plan.btn.save':  '💾 Simpan',
   'plan.btn.print': '🖨️ Cetak Lembar Kerja',
+  'plan.print.fullIds': 'Cetak nomor ID lengkap (kartu izin tinggal, asuransi). Mati: hanya 4 karakter terakhir.',
   'plan.btn.show':  '🆘 Tunjukkan Rencana',
   'plan.btn.clear': '🗑️ Hapus',
   'plan.btn.next':  'Berikutnya →',

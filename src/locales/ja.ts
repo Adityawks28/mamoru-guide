@@ -87,6 +87,7 @@ export const ja: Record<string, string> = {
   'plan.subtitle': 'プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。',
   'plan.btn.save':  '💾 保存',
   'plan.btn.print': '🖨️ ワークシート印刷',
+  'plan.print.fullIds': '在留カード・保険証の番号をすべて印刷する（オフ：末尾4文字のみ）',
   'plan.btn.show':  '🆘 プランを見せる',
   'plan.btn.clear': '🗑️ 消去',
   'plan.btn.next':  '次へ →',

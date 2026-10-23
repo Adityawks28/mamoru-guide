@@ -87,6 +87,7 @@ export const en: Record<string, string> = {
   'plan.subtitle': 'Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can\'t speak. Print it and keep a copy in your wallet, bag, and at home.',
   'plan.btn.save':  '💾 Save Plan',
   'plan.btn.print': '🖨️ Print Worksheet',
+  'plan.print.fullIds': 'Print full ID numbers (residence card, insurance). Off: last 4 characters only.',
   'plan.btn.show':  '🆘 Show My Plan',
   'plan.btn.clear': '🗑️ Clear',
   'plan.btn.next':  'Next →',
