@@ -17,9 +17,10 @@
 
 /* ───── KOBE SCENE WRAPPER ───── */
 .kobe-scene {
-  /* Ground line: the water fills the band below it; every building,
-     landmark and the mountains stand on it (scene-depth.test.ts). */
+  /* --ks-shore: top of the water. --ks-ground: top of the quay above it,
+     where every building's lowest pixel sits (scene-depth.test.ts). */
   --ks-shore: 80px;
+  --ks-ground: 94px;
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -446,23 +447,26 @@ body.day-mode .ks-petal,
 
 /* Shooting stars — night only */
 .ks-shooters { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+/* A meteor: bright head on the right, tail behind it, moving along its own
+   axis (rotate first, then translateX), fast, then gone (stars.ts spawns
+   one every 7-16 s and removes it after its 0.9 s flight). */
 .ks-shooter {
   position: absolute;
-  width: 80px;
+  width: 90px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #fff, #fff);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5) 60%, #fff);
+  transform-origin: 100% 50%;
   opacity: 0;
-  transform: rotate(-25deg);
-  animation: ks-shoot 14s ease-in infinite;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  animation: ks-shoot 0.9s cubic-bezier(0.3, 0, 0.8, 1) forwards;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
 }
 body.day-mode .ks-shooter,
 [data-theme="day"] .ks-shooter { display: none; }
 @keyframes ks-shoot {
-  0%   { opacity: 0; transform: rotate(-25deg) translate(0, 0); }
-  3%   { opacity: 1; }
-  10%  { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
-  100% { opacity: 0; transform: rotate(-25deg) translate(280px, 130px); }
+  0%   { opacity: 0; transform: rotate(28deg) translateX(0) scaleX(0.2); }
+  15%  { opacity: 1; }
+  60%  { opacity: 1; transform: rotate(28deg) translateX(200px) scaleX(1); }
+  100% { opacity: 0; transform: rotate(28deg) translateX(320px) scaleX(0.4); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -528,28 +532,30 @@ body.day-mode .ks-cloud.c3,
 }
 body.day-mode .ks-stars,
 [data-theme="day"] .ks-stars { display: none; }
+/* Stars hold steady at their own brightness; the .blink few dip off for a
+   beat now and then, like an old console sky. */
 .ks-star {
   position: absolute;
   background: #fff;
-  animation: ks-twinkle var(--dur, 3s) ease-in-out infinite alternate;
-  opacity: 0;
+  opacity: var(--glow, 0.8);
 }
-@keyframes ks-twinkle {
-  0%   { opacity: 0.15; }
-  100% { opacity: 0.9; }
+.ks-star.blink { animation: ks-blink var(--dur, 4s) steps(1, end) infinite; }
+@keyframes ks-blink {
+  0%   { opacity: var(--glow, 0.8); }
+  88%  { opacity: 0.15; }
+  94%  { opacity: var(--glow, 0.8); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ks-star { animation: none; opacity: 0.6; }
+  .ks-star.blink { animation: none; }
 }
 
 /* ───── KOBE CITY HALL ───── */
 .ks-cityhall {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   right: 24%;
   width: 38px;
-  height: 200px;
   z-index: 3;
 }
 .ch-body {
@@ -575,13 +581,13 @@ body.day-mode .ch-top,
 
 /* ───── AKASHI-KAIKYO BRIDGE ───── */
 /* Distant bridge on the open west coast (the skyline starts where it ends):
-   behind the city (z 2, after the mountains in HTML), towers on the shore. */
+   behind the city (z 2, after the mountains in HTML), towers on the quay. */
 .ks-bridge {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 0;
   width: 30%;
-  height: 120px;
+  height: 102px;
   z-index: 2;
   opacity: 0.85;
   filter: drop-shadow(0 0 6px rgba(232,64,64,0.4));
@@ -594,10 +600,10 @@ body.day-mode .ks-bridge,
    wheel, Port Tower, Maritime Museum. */
 .ks-crystal {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 27%;
   width: 70px;
-  height: 240px;
+  height: 228px;
   z-index: 4;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
@@ -606,10 +612,10 @@ body.day-mode .ks-bridge,
 /* ───── MOSAIC FERRIS WHEEL ───── */
 .ks-ferris {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 35%;
   width: 110px;
-  height: 130px;
+  height: 120px;
   z-index: 5;
   filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));
 }
@@ -631,7 +637,7 @@ body.day-mode .ks-ferris,
 /* ───── MARITIME MUSEUM ───── */
 .ks-museum {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 53%;
   width: 130px;
   height: 64px;
@@ -672,7 +678,7 @@ body.day-mode .ks-museum,
 /* ───── KOBE PORT TOWER ───── */
 .ks-tower {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 45%;
   width: 96px;
   height: 280px;
@@ -737,7 +743,7 @@ body.day-mode .ks-tower,
   bottom: var(--ks-shore);
   left: 0;
   right: 0;
-  height: 14px;
+  height: calc(var(--ks-ground) - var(--ks-shore));
   z-index: 5;
   background:
     linear-gradient(180deg,

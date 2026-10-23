@@ -5,7 +5,7 @@ export type Pose =
 export type Gender = 'male' | 'female';
 export type Emote =
   | 'idle' | 'wave' | 'jump' | 'peace' | 'burst' | 'bow';
-export type Face = 'happy' | 'wink' | 'wow';
+export type Face = 'happy' | 'wink' | 'wow' | 'gasp';
 
 export const POSES: Pose[] = [
   'stand', 'brace', 'cover', 'hide', 'headcover',
@@ -24,6 +24,8 @@ export interface SpriteOptions {
   /** Overrides the pose's arm angles [left, right]; 0 hangs down, ±150 raised. */
   arms?: [number, number];
   face?: Face;
+  /** Sweat drops on the head, 0-3. */
+  sweat?: number;
 }
 
 const PALETTE = {
@@ -41,6 +43,7 @@ const PALETTE = {
   persimmon: '#f5a623',
   eyeWhite: '#ffffff',
   blush: '#f0a8a0',
+  sweat: '#8fd3ff',
 } as const;
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -204,7 +207,16 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
     );
   }
 
-  if (pose === 'hide' || pose === 'cower' || isTired) {
+  // Right temple, left temple, forehead.
+  const drops: [number, number][] = [[43, 27], [19, 30], [38, 21]];
+  for (const [x, y] of drops.slice(0, opts.sweat ?? 0)) {
+    parent.append(rect(x, y, 2, 3, PALETTE.sweat), rect(x, y, 1, 1, PALETTE.eyeWhite));
+  }
+
+  if (opts.face) {
+    buildFace(parent, opts.face);
+    return;
+  } else if (pose === 'hide' || pose === 'cower' || isTired) {
     parent.append(
       rect(26, 32, 4, 1, PALETTE.ink),
       rect(34, 32, 4, 1, PALETTE.ink),
@@ -216,9 +228,6 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
       rect(27, 31, 2, 2, PALETTE.ink),
       rect(35, 31, 2, 2, PALETTE.ink),
     );
-  } else if (opts.face) {
-    buildFace(parent, opts.face);
-    return;
   } else if (opts.blink) {
     parent.append(
       rect(26, 32, 4, 1, PALETTE.ink),
@@ -249,6 +258,14 @@ function arch(x: number): SVGRectElement[] {
 }
 
 function buildFace(parent: SVGGElement, face: Face): void {
+  if (face === 'gasp') {
+    // > < squeezed eyes, mouth open for air.
+    for (const [dx, dy] of [[0, 0], [1, 1], [2, 2], [1, 3], [0, 4]]) {
+      parent.append(rect(26 + dx, 30 + dy, 1, 1, PALETTE.ink), rect(37 - dx, 30 + dy, 1, 1, PALETTE.ink));
+    }
+    parent.append(rect(30, 37, 4, 3, PALETTE.ink));
+    return;
+  }
   if (face === 'wow') {
     parent.append(
       rect(26, 30, 4, 4, PALETTE.eyeWhite),

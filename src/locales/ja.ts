@@ -64,7 +64,7 @@ export const ja: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！',
-  'bag.subtitle': 'バッグの容量は<strong>最大8.0kg</strong>。優先度と重さを考えて選ぼう！全部は入りません。タップで詰める・戻す。',
+  'bag.subtitle': 'バッグは<strong>最大10kg</strong>。自治体の目安は女性約10kg・男性約15kg、走って逃げられる重さです。重さは実際の一般的な重さで、マモルにも重さが伝わります。全部は入りません。タップで詰める・戻す。',
   'bag.stat.items':  'アイテム',
   'bag.stat.score':  'スコア',
   'bag.stat.weight': '重さ',
@@ -87,6 +87,7 @@ export const ja: Record<string, string> = {
   'plan.subtitle': 'プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。',
   'plan.btn.save':  '💾 保存',
   'plan.btn.print': '🖨️ ワークシート印刷',
+  'plan.print.fullIds': '在留カード・保険証の番号をすべて印刷する（オフ：末尾4文字のみ）',
   'plan.btn.show':  '🆘 プランを見せる',
   'plan.btn.clear': '🗑️ 消去',
   'plan.btn.next':  '次へ →',

@@ -76,6 +76,19 @@ describe('sprite', () => {
     expect(eyeXs(svg)).toEqual([28, 36]);
   });
 
+  it('draws one pixel-art sweat drop per level of effort', () => {
+    const drops = (svg: SVGSVGElement) => svg.querySelectorAll('rect[fill="#8fd3ff"]').length;
+    expect(drops(createSprite({ pose: 'stand', gender: 'male' }))).toBe(0);
+    expect(drops(createSprite({ pose: 'tired', gender: 'male', sweat: 2 }))).toBe(2);
+  });
+
+  it('can gasp (open mouth) even in the tired pose', () => {
+    const svg = createSprite({ pose: 'tired', gender: 'male', face: 'gasp' });
+    const mouth = Array.from(svg.querySelectorAll('rect')).filter(r =>
+      r.getAttribute('fill') === '#1a1a1a' && r.getAttribute('y') === '37' && r.getAttribute('height') === '3');
+    expect(mouth.length).toBe(1);
+  });
+
   it('persimmon (#f5a623) appears as the only saturated accent on casual male', () => {
     const svg = createSprite({ pose: 'stand', gender: 'male' });
     const fills = new Set(
