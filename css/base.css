@@ -6,11 +6,13 @@ body.day-mode .navbar {
 body.day-mode .nav-logo span,
 body.day-mode .section-title { color: var(--accent); }
 body.day-mode .nav-links a { color: #2a4060; }
-body.day-mode .section-label { color: #2080a0; }
+body.day-mode .section-label { color: var(--portopia-blue); }
 body.day-mode .section-note { color: var(--text-muted); }
 body.day-mode .footer { background: rgba(200,220,240,0.95); }
 body.day-mode .footer-copy,
 body.day-mode .footer-emergency { color: #2a4060; }
+body.day-mode .emergency-title { color: var(--accent); }
+body.day-mode .emergency-number { color: #c62828; }
 body.day-mode .ks-bld { background: #2a3a5a; }
 body.day-mode .ks-win.off { background: #6a7a9a; opacity: 0.4; }
 body.day-mode .ks-win:not(.off) { background: rgba(255,224,64,0.4); box-shadow: none; }

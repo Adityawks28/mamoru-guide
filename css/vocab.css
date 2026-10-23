@@ -128,6 +128,8 @@
 }
 .yasashii-card.hard .yasashii-label { color: var(--alert-red); }
 .yasashii-card.easy .yasashii-label { color: var(--safe-green); }
+body.day-mode .yasashii-card.hard .yasashii-label { color: #c62828; }
+body.day-mode .yasashii-card.easy .yasashii-label { color: #1f7a3d; }
 .yasashii-text {
   font-size: 18px; line-height: 2.2; font-weight: 700;
 }

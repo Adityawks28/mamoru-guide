@@ -56,7 +56,8 @@ body.day-mode .em-back {
   margin: 0;
 }
 
-.em-card-primary {
+/* Doubled class so the generic .em-card rule further down can't reset the row layout. */
+.em-card.em-card-primary {
   width: 100%;
   max-width: 760px;
   display: flex;
@@ -210,7 +211,10 @@ body.day-mode .em-back {
   .em-card { min-height: 130px; padding: 20px; flex-direction: row; gap: 16px; text-align: left; justify-content: flex-start; }
   .em-card-icon { font-size: 38px; }
   .em-card-title { font-size: 11px; }
-  .em-card-primary { padding: 22px 20px; gap: 16px; min-height: 120px; }
+  /* Icon left, title stacked over description — secondary cards have no text wrapper. */
+  .em-grid-secondary .em-card { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; row-gap: 6px; align-content: center; }
+  .em-grid-secondary .em-card-icon { grid-row: span 2; }
+  .em-card.em-card-primary { padding: 22px 20px; gap: 16px; min-height: 120px; }
   .em-card-primary .em-card-icon { font-size: 52px; }
   .em-card-primary .em-card-title { font-size: 18px; }
   .em-card-primary .em-card-desc { font-size: 0.9rem; }
