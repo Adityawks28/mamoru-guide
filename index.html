@@ -44,7 +44,6 @@
 <link rel="stylesheet" href="css/plan-wizard.css">
 <link rel="stylesheet" href="css/print.css" media="print">
 <link rel="stylesheet" href="css/character.css">
-<link rel="stylesheet" href="css/character-bible.css">
 <link rel="stylesheet" href="css/earthquake-room.css">
 <link rel="stylesheet" href="css/hero-arcade.css">
 <link rel="stylesheet" href="css/earthquake-now.css">
@@ -435,54 +434,30 @@
       <a class="mode-card urgent" href="#/emergency">
         <div class="mode-glyph">急</div>
         <div class="mode-text">
-          <div class="mode-title">Emergency</div>
-          <div class="mode-desc"><span data-lang="en">I need help right now</span><span data-lang="ja">今すぐ助けが必要</span><span data-lang="id">Saya butuh bantuan sekarang</span></div>
+          <div class="mode-title" data-i18n="mode.emergency.title">Emergency</div>
+          <div class="mode-desc" data-i18n="mode.emergency.desc">I need help right now</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
       <a class="mode-card" href="#/prepare">
         <div class="mode-glyph">備</div>
         <div class="mode-text">
-          <div class="mode-title">Prepare</div>
-          <div class="mode-desc"><span data-lang="en">Make a plan, find shelter</span><span data-lang="ja">計画を立て、避難所を探す</span><span data-lang="id">Buat rencana, cari tempat berlindung</span></div>
+          <div class="mode-title" data-i18n="mode.prepare.title">Prepare</div>
+          <div class="mode-desc" data-i18n="mode.prepare.desc">Make a plan, find shelter</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
       <a class="mode-card" href="#/learn">
         <div class="mode-glyph">学</div>
         <div class="mode-text">
-          <div class="mode-title">Learn</div>
-          <div class="mode-desc"><span data-lang="en">Drills, vocab, quizzes</span><span data-lang="ja">訓練・語彙・クイズ</span><span data-lang="id">Latihan, kosakata, kuis</span></div>
+          <div class="mode-title" data-i18n="mode.learn.title">Learn</div>
+          <div class="mode-desc" data-i18n="mode.learn.desc">Drills, vocabulary, quizzes</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
     </nav>
   </div>
 
-</section>
-
-<!-- MODE SELECTOR — shown on landing (#/) -->
-<section id="mode-selector" class="mode-selector route-hidden" aria-label="Choose a mode">
-  <div class="mode-selector-inner">
-    <p class="mode-selector-label" data-i18n="mode.prompt">What do you need right now?</p>
-    <div class="mode-cards">
-      <a href="#/emergency" class="mode-card mode-card--emergency" data-nav-route="#/emergency">
-        <span class="mode-card-icon" aria-hidden="true">🚨</span>
-        <span class="mode-card-title" data-i18n="mode.emergency.title">Emergency</span>
-        <span class="mode-card-desc"  data-i18n="mode.emergency.desc">I need help right now</span>
-      </a>
-      <a href="#/prepare" class="mode-card mode-card--prepare" data-nav-route="#/prepare">
-        <span class="mode-card-icon" aria-hidden="true">📋</span>
-        <span class="mode-card-title" data-i18n="mode.prepare.title">Prepare</span>
-        <span class="mode-card-desc"  data-i18n="mode.prepare.desc">Make a plan, find shelter</span>
-      </a>
-      <a href="#/learn" class="mode-card mode-card--learn" data-nav-route="#/learn">
-        <span class="mode-card-icon" aria-hidden="true">📚</span>
-        <span class="mode-card-title" data-i18n="mode.learn.title">Learn</span>
-        <span class="mode-card-desc"  data-i18n="mode.learn.desc">Drills, vocabulary, quizzes</span>
-      </a>
-    </div>
-  </div>
 </section>
 
 <!-- EMERGENCY MODE — 4-action layout (#/emergency) -->
@@ -903,7 +878,7 @@
 
 <!-- Section 07: Shelter Finder -->
 <section class="section" id="shelter">
-  <div class="section-label">08 — SHELTER FINDER</div>
+  <div class="section-label">SHELTER FINDER</div>
   <h2 class="section-title">
     <span data-lang="en">Find Nearest Shelter</span>
     <span data-lang="ja">最寄りの避難所を探す</span>
@@ -932,7 +907,7 @@
 
 <!-- Section 08: Earthquake Drill -->
 <section class="section" id="drill">
-  <div class="section-label">09 — EARTHQUAKE DRILL</div>
+  <div class="section-label">01 — EARTHQUAKE DRILL</div>
   <h2 class="section-title">
     <span data-lang="en">Earthquake Drill</span>
     <span data-lang="ja">地震防災訓練</span>
@@ -953,7 +928,7 @@
 
 <!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
-  <div class="section-label">10 — QUIZ</div>
+  <div class="section-label">02 — QUIZ</div>
   <h2 class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
@@ -974,7 +949,7 @@
 
 <!-- Section 08: About -->
 <section class="section" id="about">
-  <div class="section-label">11 — ABOUT</div>
+  <div class="section-label">03 — ABOUT</div>
   <h2 class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
@@ -1077,7 +1052,7 @@
 
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
-  <div class="section-label">12 — CONTACTS</div>
+  <div class="section-label">08 — CONTACTS</div>
   <h2 class="section-title">
     <span data-lang="en">Emergency Contacts Directory</span>
     <span data-lang="ja">緊急連絡先ディレクトリ</span>
@@ -1113,7 +1088,7 @@
 
 <!-- Section 12: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
-  <div class="section-label">13 — MY PLAN</div>
+  <div class="section-label">MY PLAN</div>
   <h2 class="section-title">
     <span data-lang="en">My Emergency Card & Preparation</span>
     <span data-lang="ja">緊急カード＆防災準備</span>
@@ -1127,8 +1102,6 @@
 
   <div id="plan-wizard"></div>
 </section>
-
-<section class="section" id="bible" aria-label="Character bible"></section>
 
 </main>
 

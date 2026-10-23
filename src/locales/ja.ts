@@ -12,7 +12,6 @@ export const ja: Record<string, string> = {
   'hero.subtitle': '日本の留学生のための防災ガイド',
 
   // Mode selector
-  'mode.prompt':            '今、何が必要ですか？',
   'mode.emergency.title':   '緊急',
   'mode.emergency.desc':    '今すぐ助けが必要',
   'mode.prepare.title':     '準備する',

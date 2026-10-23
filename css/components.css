@@ -530,6 +530,3 @@ body.day-mode .panel.dont-panel h3,
 body.day-mode .dont-panel li::before { color: #c62828; }
 body.day-mode .panel.panel-during h3 { color: #8a4f08; }
 
-@media (prefers-reduced-motion: reduce) {
-  .mode-card { transition: none; }
-}
