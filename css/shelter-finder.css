@@ -115,11 +115,6 @@
   font-size: 14px;
   margin-bottom: 2px;
 }
-.shelter-name-en {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 2px;
-}
 .shelter-address {
   font-size: 11px;
   color: var(--text-soft);
@@ -156,6 +151,28 @@
 .shelter-walk {
   font-size: 11px;
   color: var(--text-muted);
+}
+
+/* Data source line under the list */
+.shelter-source {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 8px;
+}
+
+/* Outside the area the list covers */
+.shelter-out-of-area {
+  padding: 16px;
+  border: 2px dashed var(--card-border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.shelter-out-of-area a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* Manual fallback */

@@ -1,5 +1,5 @@
 import { currentLang } from './lang';
-import { shelters, Shelter } from './shelter-data';
+import { loadShelters, type Hazard, type Shelter } from './shelter-data';
 import { showToast } from './toast';
 
 interface ShelterWithDistance extends Shelter {
@@ -34,8 +34,13 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function findNearest(lat: number, lng: number, count: number): ShelterWithDistance[] {
-  return shelters
+// Past this distance the nearest site in our list is not useful: the user is
+// outside the cities the list covers.
+const OUT_OF_AREA_KM = 10;
+
+async function findNearest(lat: number, lng: number, count: number): Promise<ShelterWithDistance[]> {
+  const { sites } = await loadShelters();
+  return sites
     .map(s => {
       const distance = haversineDistance(lat, lng, s.lat, s.lng);
       return { ...s, distance, walkMinutes: Math.ceil(distance / (4 / 60)) };
@@ -48,21 +53,47 @@ function formatDistance(km: number): string {
   return km < 1 ? `${Math.round(km * 1000)}m` : `${km.toFixed(1)}km`;
 }
 
-const typeIcons: Record<string, string> = {
-  earthquake: '🏚️',
-  flood: '🌊',
-  tsunami: '🌊',
-  fire: '🔥',
-  landslide: '⛰️',
-};
+// Site names and addresses come from GSI data, so escape them for innerHTML.
+function esc(text: string): string {
+  return text.replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
+}
 
-const typeLabels: Record<string, string> = {
-  earthquake: 'Earthquake',
-  flood: 'Flood',
-  tsunami: 'Tsunami',
-  fire: 'Fire',
-  landslide: 'Landslide',
+// GSI hazard names: icon, English, Japanese, Indonesian.
+const HAZARD_LABELS: Record<Hazard, [string, string, string, string]> = {
+  earthquake: ['🏚️', 'Earthquake', '地震', 'Gempa'],
+  tsunami: ['🌊', 'Tsunami', '津波', 'Tsunami'],
+  fire: ['🔥', 'Large fire', '大きな火事', 'Kebakaran besar'],
+  flood: ['💧', 'Flood', '洪水', 'Banjir'],
+  inland: ['🌧️', 'Heavy rain flooding', '内水氾濫', 'Banjir hujan deras'],
+  surge: ['🌀', 'Storm surge', '高潮', 'Gelombang badai'],
+  landslide: ['⛰️', 'Landslide', '土砂災害', 'Tanah longsor'],
+  volcano: ['🌋', 'Volcano', '火山', 'Gunung api'],
 };
+const HAZARD_ORDER = Object.keys(HAZARD_LABELS) as Hazard[];
+
+function hazardBadge(h: Hazard): string {
+  const [icon, en, ja, id] = HAZARD_LABELS[h];
+  return `<span class="shelter-type-badge">${icon} <span data-lang="en">${en}</span><span data-lang="ja">${ja}</span><span data-lang="id">${id}</span></span>`;
+}
+
+function sourceNote(asOf: string): string {
+  return `
+    <p class="shelter-source">
+      <span data-lang="en">Source: 国土地理院 (GSI) designated emergency evacuation sites, data from ${asOf}. Sites can change. Check the hazard map of your city too.</span>
+      <span data-lang="ja">出典：国土地理院「指定緊急避難場所データ」（${asOf}のデータ）。避難場所は変わることがあります。住んでいる市のハザードマップも見てください。</span>
+      <span data-lang="id">Sumber: 国土地理院 (GSI), data tempat evakuasi darurat resmi per ${asOf}. Tempat evakuasi bisa berubah. Periksa juga peta bahaya kota Anda.</span>
+    </p>`;
+}
+
+const OUT_OF_AREA_HTML = `
+  <div class="shelter-out-of-area">
+    <p>
+      <span data-lang="en">📍 You are outside the area of our list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
+      <span data-lang="ja">📍 今いる場所は、このリストの範囲の外です。リストにあるのは、神戸市、芦屋市、西宮市、尼崎市、伊丹市、宝塚市、明石市、大阪市です。近くの避難場所は、国土地理院のハザードマップで探してください：</span>
+      <span data-lang="id">📍 Anda berada di luar area daftar kami. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekat Anda di peta bahaya resmi GSI:</span>
+    </p>
+    <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
+  </div>`;
 
 // Hashes as published for Leaflet 1.9.4: the browser refuses a CDN copy that
 // does not match, and CORS mode lets the service worker cache it.
@@ -139,7 +170,7 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
   const map = L.map('shelterMap').setView([lat, lng], 14);
   mapInstance = map;
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 18,
   }).addTo(map);
@@ -151,13 +182,13 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
     color: '#fff',
     weight: 2,
     fillOpacity: 0.9,
-  }).addTo(map).bindPopup(getLangText('You are here', 'あなたの位置', 'Posisi Anda'));
+  }).addTo(map).bindPopup(getLangText('You are here', '今いる場所', 'Posisi Anda'));
 
   // Shelter markers (red)
   nearest.forEach(s => {
     L.marker([s.lat, s.lng])
       .addTo(map)
-      .bindPopup(`<strong>${s.name}</strong>${s.name_en ? `<br>${s.name_en}` : ''}<br>${formatDistance(s.distance)} · ~${s.walkMinutes} min`);
+      .bindPopup(`<strong>${esc(s.name)}</strong><br>${formatDistance(s.distance)} · ~${s.walkMinutes} min`);
   });
 
   // Fit bounds
@@ -172,32 +203,32 @@ function renderStatsBar(nearest: ShelterWithDistance[]): void {
   const avgWalk = Math.round(nearest.reduce((s, n) => s + n.walkMinutes, 0) / nearest.length);
   bar.innerHTML = `
     <div class="shelter-stat-chip">
-      <div class="shelter-stat-chip-label"><span data-lang="en">FOUND</span><span data-lang="ja">件数</span><span data-lang="id">DITEMUKAN</span></div>
+      <div class="shelter-stat-chip-label"><span data-lang="en">FOUND</span><span data-lang="ja">見つかった数</span><span data-lang="id">DITEMUKAN</span></div>
       <div class="shelter-stat-chip-value">${nearest.length}</div>
     </div>
     <div class="shelter-stat-chip">
-      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">最寄り</span><span data-lang="id">TERDEKAT</span></div>
+      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">一番近い</span><span data-lang="id">TERDEKAT</span></div>
       <div class="shelter-stat-chip-value">${formatDistance(nearest1.distance)}</div>
     </div>
     <div class="shelter-stat-chip">
-      <div class="shelter-stat-chip-label"><span data-lang="en">AVG WALK</span><span data-lang="ja">平均徒歩</span><span data-lang="id">RATA JALAN</span></div>
+      <div class="shelter-stat-chip-label"><span data-lang="en">AVERAGE WALK</span><span data-lang="ja">歩く時間（平均）</span><span data-lang="id">RATA-RATA JALAN KAKI</span></div>
       <div class="shelter-stat-chip-value">~${avgWalk}min</div>
     </div>`;
   reapplyLang();
 }
 
-function renderShelterList(_lat: number, _lng: number, nearest: ShelterWithDistance[]): void {
+async function renderShelterList(nearest: ShelterWithDistance[]): Promise<void> {
   const listEl = document.getElementById('shelterList');
   if (!listEl) return;
+  const { asOf } = await loadShelters();
 
   listEl.innerHTML = nearest.map(s => `
     <div class="shelter-card">
       <div class="shelter-card-main">
-        <div class="shelter-name">${s.name}</div>
-        ${s.name_en ? `<div class="shelter-name-en">${s.name_en}</div>` : ''}
-        <div class="shelter-address">${s.address}</div>
+        <div class="shelter-name">${esc(s.name)}</div>
+        <div class="shelter-address">${esc(s.address)}</div>
         <div class="shelter-types">
-          ${s.types.map(t => `<span class="shelter-type-badge" title="${typeLabels[t]}">${typeIcons[t]} ${typeLabels[t]}</span>`).join('')}
+          ${HAZARD_ORDER.filter(h => s.types.includes(h)).map(hazardBadge).join('')}
         </div>
       </div>
       <div class="shelter-distance-info">
@@ -205,7 +236,8 @@ function renderShelterList(_lat: number, _lng: number, nearest: ShelterWithDista
         <div class="shelter-walk">~${s.walkMinutes} min 🚶</div>
       </div>
     </div>
-  `).join('');
+  `).join('') + sourceNote(asOf);
+  reapplyLang();
 }
 
 function showManualFallback(): void {
@@ -213,25 +245,25 @@ function showManualFallback(): void {
   if (!container) return;
 
   const cities = [
-    { name: 'Kobe - Sannomiya', lat: 34.6901, lng: 135.1956 },
-    { name: 'Kobe - Nada/Rokko', lat: 34.7140, lng: 135.2350 },
-    { name: 'Kobe - Higashinada', lat: 34.7184, lng: 135.2620 },
+    { name: 'Kobe · Sannomiya', lat: 34.6901, lng: 135.1956 },
+    { name: 'Kobe · Nada/Rokko', lat: 34.7140, lng: 135.2350 },
+    { name: 'Kobe · Higashinada', lat: 34.7184, lng: 135.2620 },
     { name: 'Nishinomiya', lat: 34.7367, lng: 135.3410 },
     { name: 'Ashiya', lat: 34.7267, lng: 135.3050 },
     { name: 'Akashi', lat: 34.6430, lng: 134.9970 },
-    { name: 'Osaka - Central', lat: 34.6873, lng: 135.5262 },
+    { name: 'Osaka · Central', lat: 34.6873, lng: 135.5262 },
     { name: 'Amagasaki', lat: 34.7332, lng: 135.4080 },
   ];
 
   container.innerHTML = `
     <div class="shelter-fallback">
       <p class="shelter-fallback-msg">
-        <span data-lang="en">📍 Location access denied. Select your area manually:</span>
-        <span data-lang="ja">📍 位置情報が拒否されました。手動でエリアを選択：</span>
-        <span data-lang="id">📍 Akses lokasi ditolak. Pilih area Anda secara manual:</span>
+        <span data-lang="en">📍 Location access denied. Choose your area from the list:</span>
+        <span data-lang="ja">📍 位置情報の利用が拒否されました。リストからエリアを選んでください：</span>
+        <span data-lang="id">📍 Akses lokasi ditolak. Pilih area Anda dari daftar:</span>
       </p>
       <select class="shelter-city-select" id="shelterCitySelect">
-        <option value="">-- ${getLangText('Select area', 'エリアを選択', 'Pilih area')} --</option>
+        <option value="">${getLangText('Choose your area', 'エリアを選んでください', 'Pilih area Anda')}</option>
         ${cities.map((c, i) => `<option value="${i}">${c.name}</option>`).join('')}
       </select>
     </div>
@@ -245,8 +277,8 @@ function showManualFallback(): void {
     const idx = parseInt((e.target as HTMLSelectElement).value, 10);
     if (isNaN(idx)) return;
     const city = cities[idx];
-    const nearest = findNearest(city.lat, city.lng, 5);
-    renderShelterList(city.lat, city.lng, nearest);
+    const nearest = await findNearest(city.lat, city.lng, 5);
+    await renderShelterList(nearest);
     renderStatsBar(nearest);
 
     try {
@@ -267,7 +299,7 @@ function showLoading(): void {
     <div class="shelter-loading">
       <div class="shelter-loading-spinner"></div>
       <span data-lang="en">Finding your location...</span>
-      <span data-lang="ja">位置を検索中...</span>
+      <span data-lang="ja">今いる場所を探しています...</span>
       <span data-lang="id">Mencari lokasi Anda...</span>
     </div>
   `;
@@ -277,27 +309,27 @@ function showLoading(): void {
 function reportGeolocationError(err: unknown): void {
   const code = (err as GeolocationPositionError | undefined)?.code;
   let msg = getLangText(
-    'Couldn’t get your location. Pick your area below.',
-    '位置情報を取得できませんでした。下でエリアを選択してください。',
-    'Tidak bisa mendapatkan lokasi. Pilih area di bawah.',
+    'Could not get your location. Choose your area below.',
+    '位置情報を取得できませんでした。下でエリアを選んでください。',
+    'Lokasi Anda tidak bisa didapat. Pilih area di bawah.',
   );
   if (code === 1) {
     msg = getLangText(
-      'Location permission denied — pick your area below.',
-      '位置情報が拒否されました — 下でエリアを選択してください。',
-      'Izin lokasi ditolak — pilih area Anda di bawah.',
+      'Location permission denied. Choose your area below.',
+      '位置情報の利用が拒否されました。下でエリアを選んでください。',
+      'Izin lokasi ditolak. Pilih area Anda di bawah.',
     );
   } else if (code === 3) {
     msg = getLangText(
-      'Location timed out — pick your area below.',
-      '位置情報がタイムアウトしました — 下でエリアを選択してください。',
-      'Waktu lokasi habis — pilih area Anda di bawah.',
+      'Finding your location took too long. Choose your area below.',
+      '位置情報の取得に時間がかかりすぎました。下でエリアを選んでください。',
+      'Waktu mencari lokasi habis. Pilih area Anda di bawah.',
     );
   } else if (code === 2) {
     msg = getLangText(
-      'Location unavailable — pick your area below.',
-      '位置情報が利用できません — 下でエリアを選択してください。',
-      'Lokasi tidak tersedia — pilih area Anda di bawah.',
+      'Your location is not available. Choose your area below.',
+      '位置情報が使えません。下でエリアを選んでください。',
+      'Lokasi Anda tidak tersedia. Pilih area Anda di bawah.',
     );
   }
   showToast(msg, 'error');
@@ -322,16 +354,21 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     }
     const { lat, lng } = coords;
     if (!useCached) writeCachedLocation(lat, lng);
-    const nearest = findNearest(lat, lng, 5);
+    const nearest = await findNearest(lat, lng, 5);
 
     const container = document.getElementById('shelterContainer');
     if (!container) return;
+    if (!nearest.length || nearest[0].distance > OUT_OF_AREA_KM) {
+      container.innerHTML = OUT_OF_AREA_HTML;
+      reapplyLang();
+      return;
+    }
 
     container.innerHTML = `
       <div id="shelterMap" class="shelter-map-container"></div>
       <div class="shelter-result-header">
         <span data-lang="en">📍 ${nearest.length} nearest shelters</span>
-        <span data-lang="ja">📍 最寄りの避難所 ${nearest.length}件</span>
+        <span data-lang="ja">📍 近くの避難場所 ${nearest.length}か所</span>
         <span data-lang="id">📍 ${nearest.length} tempat perlindungan terdekat</span>
       </div>
       <div id="shelterList" class="shelter-list"></div>
@@ -339,7 +376,7 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     `;
     reapplyLang();
 
-    renderShelterList(lat, lng, nearest);
+    await renderShelterList(nearest);
     renderStatsBar(nearest);
 
     // Load map (non-blocking)
@@ -352,9 +389,9 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
         mapEl.classList.add('offline');
         mapEl.innerHTML = `
           <div class="shelter-map-offline">
-            <span data-lang="en">🗺️ Map unavailable — check your connection</span>
-            <span data-lang="ja">🗺️ 地図が利用できません — 接続を確認</span>
-            <span data-lang="id">🗺️ Peta tidak tersedia — periksa koneksi</span>
+            <span data-lang="en">🗺️ The map is not available. Check your internet connection.</span>
+            <span data-lang="ja">🗺️ 地図を表示できません。インターネットの接続を確認してください。</span>
+            <span data-lang="id">🗺️ Peta tidak tersedia. Periksa koneksi internet.</span>
           </div>
         `;
         reapplyLang();
@@ -381,9 +418,9 @@ function renderCachedHint(): void {
   const minsAgo = Math.max(1, Math.round((Date.now() - cached.ts) / 60000));
   hint.innerHTML = `
     <button type="button" class="shelter-cached-btn" id="shelterCachedBtn">
-      <span data-lang="en">📍 Use last location (saved ${minsAgo}m ago)</span>
-      <span data-lang="ja">📍 前回の位置を使用 (${minsAgo}分前)</span>
-      <span data-lang="id">📍 Gunakan lokasi terakhir (${minsAgo}m lalu)</span>
+      <span data-lang="en">📍 Use last location (saved ${minsAgo} min ago)</span>
+      <span data-lang="ja">📍 前回の位置を使う（${minsAgo}分前に保存）</span>
+      <span data-lang="id">📍 Pakai lokasi terakhir (disimpan ${minsAgo} menit lalu)</span>
     </button>
   `;
   reapplyLang();
