@@ -12,7 +12,6 @@ export const id: Record<string, string> = {
   'hero.subtitle': 'Panduan kesiapsiagaan bencana untuk mahasiswa internasional di Jepang',
 
   // Mode selector
-  'mode.prompt':            'Apa yang Anda butuhkan sekarang?',
   'mode.emergency.title':   'Darurat',
   'mode.emergency.desc':    'Saya butuh bantuan sekarang',
   'mode.prepare.title':     'Bersiap',

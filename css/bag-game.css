@@ -77,7 +77,7 @@
 .bag-pack-weight .bag-stat-label { margin-bottom: 6px; }
 
 @media (max-width: 700px) {
-  .bag-layout { flex-direction: column; }
+  .bag-layout { flex-direction: column; align-items: stretch; }
   .bag-pack-panel { width: 100%; position: static; }
 }
 .bag-stats {
@@ -224,10 +224,18 @@
   background: transparent;
 }
 .bag-btn.primary { border-color: var(--safe-green); color: var(--safe-green); }
-.bag-btn.primary:hover { background: var(--safe-green); color: #fff; }
+.bag-btn.primary:hover { background: var(--safe-green); color: #0f1f3d; }
 .bag-btn.secondary { border-color: var(--accent); color: var(--accent); }
 .bag-btn.secondary:hover { background: var(--accent); color: var(--accent-contrast); }
 
+body.day-mode .bag-stat-value,
+body.day-mode .bag-pack-header { color: var(--accent); }
+body.day-mode .bag-btn.primary { border-color: #1f7a3d; color: #1f7a3d; }
+body.day-mode .bag-btn.primary:hover { background: #1f7a3d; color: #fff; }
+body.day-mode .weight-bar-text { color: var(--text); text-shadow: none; }
+body.day-mode .bag-meta-tag.priority-high { color: #c62828; }
+body.day-mode .bag-meta-tag.priority-med { color: var(--accent); }
+body.day-mode .bag-meta-tag.priority-low { color: #1f7a3d; }
 body.day-mode .bag-pack-panel,
 body.day-mode .bag-stats,
 body.day-mode .bag-item,

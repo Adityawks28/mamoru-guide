@@ -1,5 +1,5 @@
 // i18n.ts — locale dictionary system
-// Keys use dot-notation: 'nav.emergency', 'mode.prompt', etc.
+// Keys use dot-notation: 'nav.emergency', 'mode.learn.title', etc.
 // Coexists with the old [data-lang] CSS approach during migration.
 
 import type { Language } from './types';

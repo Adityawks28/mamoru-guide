@@ -25,12 +25,12 @@ describe('t()', () => {
 
   it('uses internal language state when no lang argument is given', () => {
     setI18nLang('ja');
-    expect(t('mode.prompt')).toBe('今、何が必要ですか？');
+    expect(t('mode.emergency.title')).toBe('緊急');
   });
 
   it('explicit lang argument overrides internal state', () => {
     setI18nLang('ja');
-    expect(t('mode.prompt', 'en')).toBe('What do you need right now?');
+    expect(t('mode.emergency.title', 'en')).toBe('Emergency');
   });
 
   // --- Fallback ---

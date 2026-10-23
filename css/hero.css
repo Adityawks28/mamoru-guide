@@ -59,10 +59,10 @@
 /* Mountains */
 .ks-mountains {
   position: absolute;
-  bottom: 240px;
+  bottom: var(--ks-shore);
   left: 0;
   width: 100%;
-  height: 280px;
+  height: 440px;
   z-index: 2;
 }
 body.day-mode .ks-mountains path:nth-child(1) { fill: #8aaab0; }
@@ -72,8 +72,8 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 /* Skyline */
 .ks-skyline {
   position: absolute;
-  bottom: 40px;
-  left: 0;
+  bottom: var(--ks-shore);
+  left: 26%; /* west of here is open coast under the bridge */
   right: 0;
   display: flex;
   align-items: flex-end;
@@ -100,7 +100,7 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 /* Water */
 .ks-water {
   position: absolute; bottom:0; left:0; right:0;
-  height: 56px;
+  height: var(--ks-shore);
   background: repeating-linear-gradient(0deg,
     var(--water-dark) 0px, var(--water-dark) 4px,
     var(--water-shimmer) 4px, var(--water-shimmer) 6px);
@@ -110,26 +110,32 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 }
 @keyframes waves { from{background-position:0 0} to{background-position:40px 0} }
 
-/* Sun / Moon */
+/* Sun / Moon — 32×32 pixel art, drawn at whole-pixel scales (4× desktop, 2× stacked) */
 .celestial-body {
   position: absolute;
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  top: 15%;
-  left: 18%;
+  width: 128px; height: 128px;
+  top: 10%;
+  left: 17%;
   z-index: 1;
-  transition: all 0.6s;
 }
-.night-sky .celestial-body {
-  background: #f0e8c0;
-  box-shadow: 0 0 30px rgba(240,232,192,0.4), 0 0 60px rgba(240,232,192,0.15);
+.celestial-body svg { display: block; width: 100%; height: 100%; }
+.night-sky .sky-sun,
+.day-sky .sky-moon { display: none; }
+/* Two-frame sprite swap: rays (and the moon's twinkle) alternate instead of tweening. */
+.px-blink-a { animation: px-blink 1.2s infinite; }
+.px-blink-b { animation: px-blink 1.2s -0.6s infinite; }
+@keyframes px-blink {
+  0%, 49.9% { visibility: visible; }
+  50%, 100% { visibility: hidden; }
 }
-.day-sky .celestial-body {
-  background: #ffe040;
-  box-shadow: 0 0 40px rgba(255,224,64,0.5), 0 0 80px rgba(255,200,0,0.3);
+@media (max-width: 900px) {
+  /* Stacked layout: sit in the gutter beside the shorter GUIDE line (title font floors at 36px). */
+  .celestial-body { width: 64px; height: 64px; top: 150px; left: auto; right: 2%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-title, .hero-kanji, .hero-subtitle { animation: none; opacity: 1; transform: none; }
+  .px-blink-a { animation: none; }
+  .px-blink-b { animation: none; visibility: hidden; }
   .mascot-char { animation: none; }
 }
