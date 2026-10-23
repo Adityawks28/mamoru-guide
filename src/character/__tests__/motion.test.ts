@@ -68,3 +68,41 @@ describe('motion', () => {
     expect(cb).toHaveBeenCalledWith(false);
   });
 });
+
+describe('quakeFrames', () => {
+  it('is whole-pixel offsets that start and end at rest', async () => {
+    const { quakeFrames } = await import('../motion');
+    const frames = quakeFrames(9);
+    expect(frames.length).toBeGreaterThan(12);
+    for (const f of frames) {
+      expect(Number.isInteger(f.x) && Number.isInteger(f.y)).toBe(true);
+    }
+    expect(frames[0]).toEqual({ x: 0, y: 0 });
+    expect(frames[frames.length - 1]).toEqual({ x: 0, y: 0 });
+  });
+
+  it('shakes harder and longer at a higher shindo', async () => {
+    const { quakeFrames } = await import('../motion');
+    const peak = (n: number) => Math.max(...quakeFrames(n).map(f => Math.abs(f.x)));
+    expect(peak(9)).toBeGreaterThan(peak(4));
+    expect(peak(4)).toBeGreaterThan(peak(1));
+    expect(quakeFrames(9).length).toBeGreaterThan(quakeFrames(1).length);
+  });
+
+  it('builds up and dies down instead of shaking at one strength', async () => {
+    const { quakeFrames } = await import('../motion');
+    const xs = quakeFrames(9).map(f => Math.abs(f.x));
+    const third = Math.floor(xs.length / 3);
+    const mean = (a: number[]) => a.reduce((s, v) => s + v, 0) / a.length;
+    const start = mean(xs.slice(0, third / 2));
+    const middle = mean(xs.slice(third, 2 * third));
+    const end = mean(xs.slice(-third / 2));
+    expect(middle).toBeGreaterThan(start * 2);
+    expect(middle).toBeGreaterThan(end * 2);
+  });
+
+  it('does not shake at shindo 0', async () => {
+    const { quakeFrames } = await import('../motion');
+    expect(quakeFrames(0)).toEqual([]);
+  });
+});
