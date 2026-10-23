@@ -194,6 +194,19 @@ body.day-mode .wizard-btn-prev {
   font-size: 0.9rem;
   word-break: break-word;
 }
+.wizard-print-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.wizard-print-option input { margin-top: 0.2em; accent-color: var(--meriken-amber); }
+
+/* Only exists while printing (emergency-plan.ts); print.css lays it out. */
+#plan-print { display: none; }
+
 .wizard-review-actions {
   display: flex;
   gap: 0.75rem;
