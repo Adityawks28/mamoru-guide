@@ -120,6 +120,10 @@ body.day-mode .arcade-hero .hero-sub,
   color: #1a1a2e;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
+/* Neon yellow/cyan disappear on the day sky. */
+body.day-mode .arcade-hero .hero-eyebrow { color: #6a3d05; text-shadow: none; }
+body.day-mode .arcade-hero .kanji-large { color: var(--portopia-blue); text-shadow: none; }
+body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color: var(--portopia-blue); }
 .arcade-hero .hero-actions {
   display: flex;
   gap: 16px;
@@ -219,7 +223,8 @@ body.day-mode .arcade-hero .hero-sub,
 .pixel-bubble {
   position: absolute;
   top: -40px;
-  right: -200px;
+  /* Full 200px overhang only on wide screens; shrinks so the bubble never leaves the viewport down to the 900px stacked layout. */
+  right: max(-200px, calc(170px - 25vw));
   background: var(--paper);
   color: var(--amber);
   padding: 10px 14px;
@@ -245,7 +250,7 @@ body.day-mode .arcade-hero .hero-sub,
 }
 .pb-tag {
   font-size: 8px;
-  color: var(--crt-red);
+  color: #c62828; /* --crt-red is 3.6:1 on the paper bubble */
   letter-spacing: 0.12em;
   margin-bottom: 4px;
 }
@@ -265,7 +270,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 .pb-cta {
   margin-top: 8px;
   font-size: 8px;
-  color: var(--crt-red);
+  color: #c62828;
   letter-spacing: 0.12em;
 }
 @keyframes bubble-pop {

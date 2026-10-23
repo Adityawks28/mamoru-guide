@@ -12,7 +12,7 @@ export function initEarthquakeScale(): void {
     row.setAttribute('role', 'button');
     row.setAttribute('aria-label', s.jp + ' - ' + s.en);
     row.innerHTML = `
-      <div class="num" style="color:${s.colors[0]}">${s.n}</div>
+      <div class="num" style="--lvl:${s.colors[0]}">${s.n}</div>
       <div class="jp-name">${s.jp}</div>
       <div class="desc"><span data-lang="en">${s.en}</span><span data-lang="ja">${s.ja}</span><span data-lang="id">${s.id}</span></div>
       <div class="shake-demo">${s.icon}</div>
