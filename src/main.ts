@@ -75,11 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
   import('./character/firstaid-scene').then(m => m.initFirstAidScene());
   import('./character/typhoon-scene').then(m => m.initTyphoonScene());
   import('./character/bag-scene').then(m => m.initBagScene());
-  import('./character/bible').then(m => m.initBible());
 });
 
 // === SERVICE WORKER ===
-if ('serviceWorker' in navigator) {
+// Production only: in dev, Vite's module URLs aren't content-hashed, so the
+// worker's cache-first JS would keep serving the first copy it saw.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js');
   });

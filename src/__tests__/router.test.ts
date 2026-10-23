@@ -7,7 +7,7 @@ beforeAll(() => { window.scrollTo = () => {}; });
 
 // all section IDs the router manages
 const ALL_IDS = [
-  'hero', 'mode-selector',
+  'hero',
   'emergency-mode',
   'earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts',
   'drill', 'quiz', 'about',
@@ -61,9 +61,9 @@ describe('activateRoute()', () => {
 
   // --- Landing page ---
 
-  it('shows hero and mode-selector on #/', () => {
+  it('shows only the hero on #/', () => {
     activateRoute('#/');
-    expect(visibleSections()).toEqual(['hero', 'mode-selector']);
+    expect(visibleSections()).toEqual(['hero']);
   });
 
   it('sets body data-route to "home" on #/', () => {
@@ -129,12 +129,12 @@ describe('activateRoute()', () => {
 
   it('falls back to landing for an unknown hash', () => {
     activateRoute('#/unknown-route');
-    expect(visibleSections()).toEqual(['hero', 'mode-selector']);
+    expect(visibleSections()).toEqual(['hero']);
   });
 
   it('falls back to landing for an empty hash', () => {
     activateRoute('');
-    expect(visibleSections()).toEqual(['hero', 'mode-selector']);
+    expect(visibleSections()).toEqual(['hero']);
   });
 
   // --- Section isolation ---

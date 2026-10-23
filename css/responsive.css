@@ -1,6 +1,6 @@
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  .hamburger { display: flex; flex-direction: column; }
+  .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .mobile-menu { display: flex; }
   #shareBtn, .lang-switcher { display: none; }
 

@@ -1,4 +1,4 @@
-import { createSprite, updateSprite, type Emote } from './sprite';
+import { createSprite, updateSprite, type Emote, type SpriteOptions } from './sprite';
 import { DISASTER_FACTS } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
 
@@ -16,7 +16,41 @@ import { motionAllowed, onMotionChange } from './motion';
 //     <div class="mascot-hint">▼ TAP FOR NEXT FACT ▼</div>
 //   </#mascot.mascot-wrap>
 
-const EMOTE_CYCLE: Emote[] = ['wave', 'jump', 'spin', 'peace', 'burst', 'bow'];
+type Particle = 'star' | 'note' | 'bang' | 'heart' | 'sparkle';
+interface Frame extends Partial<SpriteOptions> { ms: number }
+interface Reaction { emote: Emote; particle: Particle; frames: Frame[] }
+
+// Each tap plays the next reaction: pose/face frames here, body motion from
+// the matching data-emote keyframes in hero-arcade.css.
+const UP: [number, number] = [150, -150];
+const OUT: [number, number] = [20, -20];
+const REACTIONS: Reaction[] = [
+  { emote: 'jump', particle: 'star', frames: [
+    { arms: OUT, face: 'happy', ms: 100 }, { arms: UP, face: 'happy', ms: 380 }, { arms: OUT, face: 'happy', ms: 140 }] },
+  { emote: 'wave', particle: 'note', frames: [
+    { arms: [0, -150], face: 'wink', ms: 140 }, { arms: [0, -110], face: 'wink', ms: 140 },
+    { arms: [0, -150], face: 'wink', ms: 140 }, { arms: [0, -110], face: 'wink', ms: 140 }, { arms: [0, -150], face: 'wink', ms: 160 }] },
+  { emote: 'burst', particle: 'bang', frames: [{ arms: [90, -90], face: 'wow', ms: 620 }] },
+  { emote: 'peace', particle: 'heart', frames: [{ arms: [-40, 40], face: 'happy', ms: 680 }] },
+  { emote: 'bow', particle: 'sparkle', frames: [
+    { arms: [-20, 20], face: undefined, blink: true, ms: 320 }, { arms: UP, face: 'happy', blink: false, ms: 360 }] },
+];
+
+// 1 = lit pixel. Drawn 4px per pixel.
+const PARTICLES: Record<Particle, { color: string; rows: string[] }> = {
+  star:    { color: '#ffe040', rows: ['00100', '01110', '11111', '01010', '10001'] },
+  note:    { color: '#4cc9f0', rows: ['00111', '00101', '00100', '01100', '11100', '01000'] },
+  bang:    { color: '#e84040', rows: ['11', '11', '11', '11', '00', '11'] },
+  heart:   { color: '#f0a0b8', rows: ['0110110', '1111111', '1111111', '0111110', '0011100', '0001000'] },
+  sparkle: { color: '#fff6c0', rows: ['00100', '00100', '11011', '00100', '00100'] },
+};
+const PARTICLE_X = [-46, -16, 14, 44];
+
+function particleSvg(kind: Particle): string {
+  const { color, rows } = PARTICLES[kind];
+  const cells = rows.flatMap((row, y) => [...row].map((c, x) => c === '1' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ''));
+  return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" width="${rows[0].length * 4}" height="${rows.length * 4}" shape-rendering="crispEdges" fill="${color}">${cells.join('')}</svg>`;
+}
 const FACT_INTERVAL_MS = 8000;
 const BLINK_MIN_MS = 2400;
 const BLINK_MAX_MS = 6000;
@@ -27,7 +61,9 @@ export function initMascot(): void {
   if (!host) return;
 
   let factIdx = 0;
-  let emoteIdx = -1;
+  let reactionIdx = -1;
+  let reactionTimers: number[] = [];
+  let lastPupil = '';
   let factTimer: number | null = null;
   let blinkTimer: number | null = null;
   let allowed = motionAllowed();
@@ -126,16 +162,44 @@ export function initMascot(): void {
     const dy = e.clientY - cy;
     const ang = Math.atan2(dy, dx);
     const dist = Math.min(1, Math.hypot(dx, dy) / 220);
-    const px = Math.cos(ang) * dist * 1.5;
-    const py = Math.sin(ang) * dist * 1.0;
+    const px = Math.round(Math.cos(ang) * dist * 1.5);
+    const py = Math.round(Math.sin(ang) * dist * 1.0);
+    // The eyes only move in whole pixels, so skip rebuilding the SVG until they would.
+    const key = `${px},${py}`;
+    if (key === lastPupil) return;
+    lastPupil = key;
     updateSprite(sprite, { pupil: { x: px, y: py } });
   }
 
-  function flashEmote(): void {
-    emoteIdx = (emoteIdx + 1) % EMOTE_CYCLE.length;
-    const emote = EMOTE_CYCLE[emoteIdx];
-    updateSprite(sprite, { emote });
-    window.setTimeout(() => updateSprite(sprite, { emote: 'idle' }), 600);
+  function spawnParticles(kind: Particle): void {
+    if (!allowed) return;
+    PARTICLE_X.forEach((dx, i) => {
+      const p = document.createElement('span');
+      p.className = 'mk-particle';
+      p.innerHTML = particleSvg(kind);
+      p.style.left = `calc(50% + ${dx}px)`;
+      p.style.setProperty('--dx', `${(i - 1.5) * 12}px`);
+      p.style.animationDelay = `${i * 70}ms`;
+      charWrap.appendChild(p);
+      window.setTimeout(() => p.remove(), 1200);
+    });
+  }
+
+  function react(): void {
+    reactionTimers.forEach(t => window.clearTimeout(t));
+    reactionTimers = [];
+    reactionIdx = (reactionIdx + 1) % REACTIONS.length;
+    const { emote, particle, frames } = REACTIONS[reactionIdx];
+    let at = 0;
+    frames.forEach(({ ms, ...pose }, i) => {
+      const apply = () => updateSprite(sprite, i === 0 ? { ...pose, emote } : pose);
+      if (i === 0) apply();
+      else reactionTimers.push(window.setTimeout(apply, at));
+      at += ms;
+    });
+    reactionTimers.push(window.setTimeout(
+      () => updateSprite(sprite, { emote: 'idle', arms: undefined, face: undefined, blink: false }), at));
+    spawnParticles(particle);
   }
 
   function spawnRipple(x: number, y: number): void {
@@ -149,7 +213,7 @@ export function initMascot(): void {
   }
 
   charWrap.addEventListener('click', (e) => {
-    flashEmote();
+    react();
     nextFact();
     const r = charWrap.getBoundingClientRect();
     spawnRipple(e.clientX - r.left, e.clientY - r.top);
@@ -158,7 +222,7 @@ export function initMascot(): void {
   charWrap.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      flashEmote();
+      react();
       nextFact();
     }
   });

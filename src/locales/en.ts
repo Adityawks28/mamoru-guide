@@ -12,7 +12,6 @@ export const en: Record<string, string> = {
   'hero.subtitle': 'Disaster preparedness for international students in Japan',
 
   // Mode selector
-  'mode.prompt':            'What do you need right now?',
   'mode.emergency.title':   'Emergency',
   'mode.emergency.desc':    'I need help right now',
   'mode.prepare.title':     'Prepare',

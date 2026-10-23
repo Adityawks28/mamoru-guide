@@ -26,11 +26,12 @@
 }
 .mr-procedure {
   background: #060d1f;
-  color: var(--accent, #f5a623);
+  /* Panel stays dark in day mode, so keep the night amber rather than --accent. */
+  color: var(--amber, #f5a623);
   font-family: var(--arcade, 'Press Start 2P', monospace);
   font-size: 10px;
   padding: 12px 16px;
-  border-top: 3px solid var(--accent, #f5a623);
+  border-top: 3px solid var(--amber, #f5a623);
   letter-spacing: 0.05em;
   text-shadow: 0 0 4px rgba(245, 166, 35, 0.5);
 }

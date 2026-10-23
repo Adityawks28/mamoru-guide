@@ -1,7 +1,7 @@
 import type { ScaleEntry, VocabData, BagItem } from './types';
 
 export const scaleData: ScaleEntry[] = [
-  {n:'0',jp:'震度0',colors:['#667','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
+  {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
   {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',shakeClass:'shaking-1',icon:'🏠',pct:5},
   {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',shakeClass:'shaking-2',icon:'🏠',pct:10},
   {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',shakeClass:'shaking-3',icon:'🍽️',pct:20},

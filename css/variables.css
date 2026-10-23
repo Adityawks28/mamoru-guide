@@ -21,6 +21,7 @@
   --accent-contrast: #0f1f3d;
   --text-muted: rgba(248,244,237,0.78);
   --text-soft: rgba(248,244,237,0.68);
+  --surface: #1a1a2e;
   --surface-soft: rgba(255,255,255,0.06);
   --surface-hover: rgba(255,255,255,0.1);
   --focus-ring: #ffe28a;
@@ -65,6 +66,7 @@ body.day-mode {
   --accent-contrast: #ffffff;
   --text-muted: rgba(26,42,58,0.76);
   --text-soft: rgba(26,42,58,0.70);
+  --surface: #ffffff;
   --surface-soft: rgba(0,0,0,0.045);
   --surface-hover: rgba(0,0,0,0.075);
   --focus-ring: #6a3d05;

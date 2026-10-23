@@ -17,6 +17,9 @@
 
 /* ───── KOBE SCENE WRAPPER ───── */
 .kobe-scene {
+  /* Ground line: the water fills the band below it; every building,
+     landmark and the mountains stand on it (scene-depth.test.ts). */
+  --ks-shore: 80px;
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -47,7 +50,8 @@ body.day-mode .kobe-scene {
   grid-template-columns: 1.3fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 60px 48px 200px;
+  /* top: 56px navbar + the fact bubble's 40px overhang; bottom: the 300px harbor scene */
+  padding: 116px 48px 320px;
   min-height: 100vh;
   width: 100%;
   max-width: var(--hero-max-width);
@@ -120,6 +124,10 @@ body.day-mode .arcade-hero .hero-sub,
   color: #1a1a2e;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
+/* Neon yellow/cyan disappear on the day sky. */
+body.day-mode .arcade-hero .hero-eyebrow { color: #6a3d05; text-shadow: none; }
+body.day-mode .arcade-hero .kanji-large { color: var(--portopia-blue); text-shadow: none; }
+body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color: var(--portopia-blue); }
 .arcade-hero .hero-actions {
   display: flex;
   gap: 16px;
@@ -219,7 +227,8 @@ body.day-mode .arcade-hero .hero-sub,
 .pixel-bubble {
   position: absolute;
   top: -40px;
-  right: -200px;
+  /* Full 200px overhang only on wide screens; shrinks so the bubble never leaves the viewport down to the 900px stacked layout. */
+  right: max(-200px, calc(170px - 25vw));
   background: var(--paper);
   color: var(--amber);
   padding: 10px 14px;
@@ -245,7 +254,7 @@ body.day-mode .arcade-hero .hero-sub,
 }
 .pb-tag {
   font-size: 8px;
-  color: var(--crt-red);
+  color: #c62828; /* --crt-red is 3.6:1 on the paper bubble */
   letter-spacing: 0.12em;
   margin-bottom: 4px;
 }
@@ -265,7 +274,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 .pb-cta {
   margin-top: 8px;
   font-size: 8px;
-  color: var(--crt-red);
+  color: #c62828;
   letter-spacing: 0.12em;
 }
 @keyframes bubble-pop {
@@ -290,55 +299,68 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 }
 
 /* ───── TAP REACTIONS ─────
-   mascot.ts sets data-emote on the sprite (wave/jump/spin/peace/burst/bow)
-   for ~600ms on every tap, then clears it. These give Moru a visible reaction
-   to the tap; the fact advances at the same time. Kept under 600ms so the
-   animation settles before the attribute is cleared. */
-.mascot-svg[data-emote] { transform-origin: 50% 92%; }
-.mascot-svg[data-emote="wave"]  { animation: mk-emote-wave  0.55s ease-in-out; }
-.mascot-svg[data-emote="jump"]  { animation: mk-emote-jump  0.55s ease-out; }
-.mascot-svg[data-emote="spin"]  { animation: mk-emote-spin  0.55s ease-in-out; }
-.mascot-svg[data-emote="peace"] { animation: mk-emote-peace 0.55s ease-in-out; }
-.mascot-svg[data-emote="burst"] { animation: mk-emote-burst 0.55s ease-out; transform-origin: 50% 50%; }
-.mascot-svg[data-emote="bow"]   { animation: mk-emote-bow   0.55s ease-in-out; }
+   mascot.ts swaps arms/face frame by frame and sets data-emote for the body
+   motion. steps(1, end) holds each keyframe like a sprite frame; offsets are
+   multiples of 3px — one sprite pixel at the hero's 3× scale. */
+.mascot-svg[data-emote] { transform-origin: 50% 100%; }
+.mascot-svg[data-emote="jump"]  { animation: mk-hop   0.62s steps(1, end); }
+.mascot-svg[data-emote="wave"]  { animation: mk-bob   0.72s steps(1, end); }
+.mascot-svg[data-emote="burst"] { animation: mk-shake 0.62s steps(1, end); }
+.mascot-svg[data-emote="peace"] { animation: mk-sway  0.68s steps(1, end); }
+.mascot-svg[data-emote="bow"]   { animation: mk-bow   0.68s steps(1, end); }
 
-@keyframes mk-emote-wave {
-  0%, 100% { transform: rotate(0); }
-  20% { transform: rotate(-9deg); }
-  45% { transform: rotate(7deg); }
-  70% { transform: rotate(-5deg); }
-  85% { transform: rotate(3deg); }
+@keyframes mk-hop {
+  0%   { transform: translateY(6px) scaleY(0.94); }  /* crouch */
+  16%  { transform: translateY(-18px); }
+  32%  { transform: translateY(-33px); }
+  50%  { transform: translateY(-39px); }             /* peak */
+  66%  { transform: translateY(-27px); }
+  80%  { transform: translateY(-9px); }
+  90%  { transform: translateY(3px) scaleY(0.96); }  /* land */
+  100% { transform: none; }
 }
-@keyframes mk-emote-jump {
-  0%   { transform: translateY(0) scale(1, 1); }
-  20%  { transform: translateY(0) scale(1.08, 0.86); }   /* crouch */
-  55%  { transform: translateY(-26px) scale(0.96, 1.08); } /* launch */
-  80%  { transform: translateY(0) scale(1.05, 0.92); }    /* land squash */
-  100% { transform: translateY(0) scale(1, 1); }
+@keyframes mk-bob {
+  0%, 50%, 100% { transform: none; }
+  25%, 75%      { transform: translateY(-6px); }
 }
-@keyframes mk-emote-spin {
-  0%   { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+@keyframes mk-shake {
+  0%   { transform: translateY(-12px); }
+  20%  { transform: translate(-6px, -12px); }
+  40%  { transform: translate(6px, -9px); }
+  60%  { transform: translate(-6px, -3px); }
+  80%  { transform: translate(3px, 0); }
+  100% { transform: none; }
 }
-@keyframes mk-emote-peace {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  30% { transform: translateY(-10px) rotate(-4deg); }
-  60% { transform: translateY(0) rotate(4deg); }
+@keyframes mk-sway {
+  0%   { transform: translateX(-6px); }
+  25%  { transform: translateY(-6px); }
+  50%  { transform: translateX(6px); }
+  75%  { transform: translateY(-6px); }
+  100% { transform: none; }
 }
-@keyframes mk-emote-burst {
-  0%   { transform: scale(1); }
-  35%  { transform: scale(1.22); }
-  60%  { transform: scale(0.94); }
-  100% { transform: scale(1); }
-}
-@keyframes mk-emote-bow {
-  0%, 100% { transform: translateY(0) scaleY(1); }
-  40% { transform: translateY(6px) scaleY(0.82); } /* pixel nod/bow dip */
+@keyframes mk-bow {
+  0%   { transform: translateY(6px) scaleY(0.95); }
+  20%  { transform: translateY(12px) scaleY(0.9); }  /* bow */
+  47%  { transform: translateY(-15px); }             /* pop back up */
+  70%  { transform: translateY(-21px); }
+  85%  { transform: translateY(-6px); }
+  100% { transform: none; }
 }
 
-/* ───── MODE RAIL ─────
-   Scoped to .mode-rail to avoid leaking into the pre-existing
-   `<section id="mode-selector">` that also uses `.mode-card`. */
+.mk-particle {
+  position: absolute;
+  top: 24px;
+  pointer-events: none;
+  opacity: 0;
+  animation: mk-float 0.9s steps(6, end) forwards;
+}
+.mk-particle svg { display: block; }
+@keyframes mk-float {
+  0%   { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), -72px); }
+}
+
+/* ───── MODE RAIL ───── */
 .mode-rail {
   display: flex;
   flex-direction: column;
@@ -449,6 +471,7 @@ body.day-mode .ks-shooter,
   .ks-petal, .ks-shooter { animation: none; display: none; }
   .mascot-wrap > .mascot { transition: none; }
   .mascot-svg[data-emote] { animation: none; }
+  .mk-particle { display: none; }
 }
 
 /* ───── RESPONSIVE ───── */
@@ -456,7 +479,7 @@ body.day-mode .ks-shooter,
   .hero.arcade-hero {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding: 60px 20px 160px;
+    padding: 60px 20px 320px;
   }
   .arcade-hero .hero-text { text-align: center; }
   .arcade-hero .hero-actions { justify-content: center; }
@@ -466,31 +489,6 @@ body.day-mode .ks-shooter,
 }
 
 /* ───── ATMOSPHERE (day-only) ───── */
-.ks-sun-rays { display: none; }
-body.day-mode .ks-sun-rays,
-[data-theme="day"] .ks-sun-rays {
-  display: block;
-  position: absolute;
-  top: 8%; left: 12%;
-  width: 280px; height: 280px;
-  background: conic-gradient(from 0deg,
-    rgba(255,224,64,0.25) 0deg, transparent 12deg,
-    rgba(255,224,64,0.25) 30deg, transparent 42deg,
-    rgba(255,224,64,0.25) 60deg, transparent 72deg,
-    rgba(255,224,64,0.25) 90deg, transparent 102deg,
-    rgba(255,224,64,0.25) 120deg, transparent 132deg,
-    rgba(255,224,64,0.25) 150deg, transparent 162deg,
-    rgba(255,224,64,0.25) 180deg, transparent 192deg,
-    rgba(255,224,64,0.25) 210deg, transparent 222deg,
-    rgba(255,224,64,0.25) 240deg, transparent 252deg,
-    rgba(255,224,64,0.25) 270deg, transparent 282deg,
-    rgba(255,224,64,0.25) 300deg, transparent 312deg,
-    rgba(255,224,64,0.25) 330deg, transparent 342deg);
-  transform: translate(-50%, -50%);
-  animation: ks-sun-spin 80s linear infinite;
-  z-index: 0;
-}
-@keyframes ks-sun-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 .ks-clouds { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .ks-cloud { display: none; position: absolute; }
@@ -514,7 +512,6 @@ body.day-mode .ks-cloud.c3,
 @keyframes ks-drift { from { left: -10%; } to { left: 110%; } }
 
 @media (prefers-reduced-motion: reduce) {
-  body.day-mode .ks-sun-rays, [data-theme="day"] .ks-sun-rays,
   body.day-mode .ks-cloud, [data-theme="day"] .ks-cloud {
     animation: none;
   }
@@ -549,8 +546,8 @@ body.day-mode .ks-stars,
 /* ───── KOBE CITY HALL ───── */
 .ks-cityhall {
   position: absolute;
-  bottom: 40px;
-  right: 32%;
+  bottom: var(--ks-shore);
+  right: 24%;
   width: 38px;
   height: 200px;
   z-index: 3;
@@ -577,13 +574,15 @@ body.day-mode .ch-top,
 [data-theme="day"] .ch-top { background: #6a7a9a; }
 
 /* ───── AKASHI-KAIKYO BRIDGE ───── */
+/* Distant bridge on the open west coast (the skyline starts where it ends):
+   behind the city (z 2, after the mountains in HTML), towers on the shore. */
 .ks-bridge {
   position: absolute;
-  bottom: 220px;
+  bottom: var(--ks-shore);
   left: 0;
-  width: 36%;
-  height: 80px;
-  z-index: 3;
+  width: 30%;
+  height: 120px;
+  z-index: 2;
   opacity: 0.85;
   filter: drop-shadow(0 0 6px rgba(232,64,64,0.4));
 }
@@ -591,12 +590,14 @@ body.day-mode .ks-bridge,
 [data-theme="day"] .ks-bridge { opacity: 0.7; filter: none; }
 
 /* ───── KOBE CRYSTAL TOWER ───── */
+/* West → east like the real waterfront: Crystal Tower, Harborland ferris
+   wheel, Port Tower, Maritime Museum. */
 .ks-crystal {
   position: absolute;
-  bottom: 56px;
-  left: 60%;
-  width: 90px;
-  height: 320px;
+  bottom: var(--ks-shore);
+  left: 27%;
+  width: 70px;
+  height: 240px;
   z-index: 4;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
@@ -605,8 +606,8 @@ body.day-mode .ks-bridge,
 /* ───── MOSAIC FERRIS WHEEL ───── */
 .ks-ferris {
   position: absolute;
-  bottom: 56px;
-  left: 38%;
+  bottom: var(--ks-shore);
+  left: 35%;
   width: 110px;
   height: 130px;
   z-index: 5;
@@ -630,8 +631,8 @@ body.day-mode .ks-ferris,
 /* ───── MARITIME MUSEUM ───── */
 .ks-museum {
   position: absolute;
-  bottom: 56px;
-  left: 47%;
+  bottom: var(--ks-shore);
+  left: 53%;
   width: 130px;
   height: 64px;
   z-index: 5;
@@ -644,7 +645,7 @@ body.day-mode .ks-museum,
 /* ───── HARBOR BOAT ───── */
 .ks-boat {
   position: absolute;
-  bottom: 18px;
+  bottom: 24px; /* hull waterline mid-band; the boat is nearer than the quay, so it overlaps it */
   left: -180px;
   width: 160px;
   height: 70px;
@@ -671,8 +672,8 @@ body.day-mode .ks-museum,
 /* ───── KOBE PORT TOWER ───── */
 .ks-tower {
   position: absolute;
-  bottom: 56px;
-  left: 56%;
+  bottom: var(--ks-shore);
+  left: 45%;
   width: 96px;
   height: 280px;
   z-index: 6;
@@ -720,19 +721,20 @@ body.day-mode .ks-tower,
 
 /* ───── MOBILE — scale harbor cluster down ───── */
 @media (max-width: 900px) {
-  .ks-tower    { left: 50%; transform: scale(0.55); transform-origin: bottom left; }
-  .ks-crystal  { left: 60%; transform: scale(0.55); transform-origin: bottom left; }
-  .ks-ferris   { left: 4%;  transform: scale(0.7);  transform-origin: bottom left; }
-  .ks-museum   { left: 22%; transform: scale(0.7);  transform-origin: bottom left; }
-  .ks-boat     { width: 112px; height: 49px; }
-  .ks-cityhall { right: 8%; transform: scale(0.65); transform-origin: bottom right; }
-  .ks-bridge   { width: 50%; }
+  .ks-crystal  { left: 3%;  transform: scale(0.55); transform-origin: bottom left; }
+  .ks-ferris   { left: 15%; transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-tower    { left: 43%; transform: scale(0.55); transform-origin: bottom left; }
+  .ks-museum   { left: 58%; transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-boat     { width: 112px; height: 49px; bottom: 28px; }
+  .ks-cityhall { right: 6%; transform: scale(0.65); transform-origin: bottom right; }
+  .ks-bridge   { display: none; } /* too small to read behind the city */
+  .ks-skyline  { left: 0; }
 }
 
 /* ───── HARBOR QUAY — concrete strip between water and buildings ───── */
 .ks-quay {
   position: absolute;
-  bottom: 56px;
+  bottom: var(--ks-shore);
   left: 0;
   right: 0;
   height: 14px;

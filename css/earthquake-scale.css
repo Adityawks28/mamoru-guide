@@ -27,7 +27,10 @@
   font-size: 20px;
   min-width: 50px;
   text-align: center;
+  color: var(--lvl);
 }
+/* Level colours are tuned for navy; darken them for the light day rows. */
+body.day-mode .scale-row .num { color: color-mix(in srgb, var(--lvl) 55%, #000); }
 .scale-row .jp-name {
   font-size: 13px;
   font-weight: 700;

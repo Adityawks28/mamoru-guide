@@ -44,7 +44,6 @@
 <link rel="stylesheet" href="css/plan-wizard.css">
 <link rel="stylesheet" href="css/print.css" media="print">
 <link rel="stylesheet" href="css/character.css">
-<link rel="stylesheet" href="css/character-bible.css">
 <link rel="stylesheet" href="css/earthquake-room.css">
 <link rel="stylesheet" href="css/hero-arcade.css">
 <link rel="stylesheet" href="css/earthquake-now.css">
@@ -57,7 +56,12 @@
 <!-- Navbar -->
 <nav class="navbar" aria-label="Main navigation">
   <a href="#/" class="nav-logo" data-nav-route="#/" aria-label="Mamoru Guide home">
-    <div class="shield"><div class="shield-inner"></div></div>
+    <!-- same badge as img/favicon.svg -->
+    <svg class="nav-logo-mark" viewBox="0 0 32 36" width="32" height="36" aria-hidden="true">
+      <polygon points="16,0 32,9 32,27 16,36 0,27 0,9" fill="#f5a623"/>
+      <polygon points="16,4 28,11 28,25 16,32 4,25 4,11" fill="#0f1f3d"/>
+      <text x="16" y="24" text-anchor="middle" font-size="14" font-weight="800" fill="#f5a623">守</text>
+    </svg>
     <span>MAMORU 守る</span>
   </a>
   <div class="nav-links">
@@ -98,10 +102,12 @@
 <!-- Hero -->
 <section class="hero arcade-hero night-sky" id="hero">
   <div class="kobe-scene" aria-hidden="true">
-    <div class="celestial-body" id="celestialBody"></div>
+    <div class="celestial-body" id="celestialBody" aria-hidden="true">
+      <svg class="sky-sun" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="#ffe040" opacity=".28"><rect x="13" y="7" width="6" height="1"/><rect x="11" y="8" width="10" height="1"/><rect x="10" y="9" width="12" height="1"/><rect x="9" y="10" width="14" height="1"/><rect x="8" y="11" width="16" height="1"/><rect x="8" y="12" width="16" height="1"/><rect x="7" y="13" width="18" height="1"/><rect x="7" y="14" width="18" height="1"/><rect x="7" y="15" width="18" height="1"/><rect x="7" y="16" width="18" height="1"/><rect x="7" y="17" width="18" height="1"/><rect x="7" y="18" width="18" height="1"/><rect x="8" y="19" width="16" height="1"/><rect x="8" y="20" width="16" height="1"/><rect x="9" y="21" width="14" height="1"/><rect x="10" y="22" width="12" height="1"/><rect x="11" y="23" width="10" height="1"/><rect x="13" y="24" width="6" height="1"/></g><g class="px-blink-a" fill="#f5a623"><rect x="15" y="1" width="2" height="4"/><rect x="15" y="27" width="2" height="4"/><rect x="1" y="15" width="4" height="2"/><rect x="27" y="15" width="4" height="2"/><rect x="6" y="6" width="2" height="2"/><rect x="24" y="6" width="2" height="2"/><rect x="6" y="24" width="2" height="2"/><rect x="24" y="24" width="2" height="2"/></g><g class="px-blink-b" fill="#f5a623"><rect x="15" y="3" width="2" height="2"/><rect x="15" y="27" width="2" height="2"/><rect x="3" y="15" width="2" height="2"/><rect x="27" y="15" width="2" height="2"/><rect x="6" y="6" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/><rect x="24" y="6" width="2" height="2"/><rect x="26" y="4" width="2" height="2"/><rect x="6" y="24" width="2" height="2"/><rect x="4" y="26" width="2" height="2"/><rect x="24" y="24" width="2" height="2"/><rect x="26" y="26" width="2" height="2"/></g><g fill="#f5a623"><rect x="13" y="9" width="6" height="1"/><rect x="11" y="10" width="10" height="1"/><rect x="10" y="11" width="12" height="1"/><rect x="10" y="12" width="12" height="1"/><rect x="9" y="13" width="14" height="1"/><rect x="9" y="14" width="14" height="1"/><rect x="9" y="15" width="14" height="1"/><rect x="9" y="16" width="14" height="1"/><rect x="9" y="17" width="14" height="1"/><rect x="9" y="18" width="14" height="1"/><rect x="10" y="19" width="12" height="1"/><rect x="10" y="20" width="12" height="1"/><rect x="11" y="21" width="10" height="1"/><rect x="13" y="22" width="6" height="1"/></g><g fill="#ffe040"><rect x="14" y="10" width="4" height="1"/><rect x="12" y="11" width="8" height="1"/><rect x="11" y="12" width="10" height="1"/><rect x="11" y="13" width="10" height="1"/><rect x="10" y="14" width="12" height="1"/><rect x="10" y="15" width="12" height="1"/><rect x="10" y="16" width="12" height="1"/><rect x="10" y="17" width="12" height="1"/><rect x="11" y="18" width="10" height="1"/><rect x="11" y="19" width="10" height="1"/><rect x="12" y="20" width="8" height="1"/><rect x="14" y="21" width="4" height="1"/></g><g fill="#fff6c0"><rect x="12" y="12" width="3" height="1"/><rect x="12" y="13" width="1" height="2"/></g><g fill="#8a4f08"><rect x="13" y="15" width="1" height="2"/><rect x="18" y="15" width="1" height="2"/><rect x="13" y="18" width="1" height="1"/><rect x="14" y="19" width="4" height="1"/><rect x="18" y="18" width="1" height="1"/></g><g fill="#f0a0b8"><rect x="11" y="17" width="2" height="1"/><rect x="19" y="17" width="2" height="1"/></g></svg>
+      <svg class="sky-moon" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="#f0e8c0" opacity=".12"><rect x="12" y="5" width="8" height="1"/><rect x="10" y="6" width="12" height="1"/><rect x="9" y="7" width="14" height="1"/><rect x="8" y="8" width="16" height="1"/><rect x="7" y="9" width="18" height="1"/><rect x="7" y="10" width="18" height="1"/><rect x="6" y="11" width="20" height="1"/><rect x="6" y="12" width="20" height="1"/><rect x="5" y="13" width="22" height="1"/><rect x="5" y="14" width="22" height="1"/><rect x="5" y="15" width="22" height="1"/><rect x="5" y="16" width="22" height="1"/><rect x="5" y="17" width="22" height="1"/><rect x="5" y="18" width="22" height="1"/><rect x="6" y="19" width="20" height="1"/><rect x="6" y="20" width="20" height="1"/><rect x="7" y="21" width="18" height="1"/><rect x="7" y="22" width="18" height="1"/><rect x="8" y="23" width="16" height="1"/><rect x="9" y="24" width="14" height="1"/><rect x="10" y="25" width="12" height="1"/><rect x="12" y="26" width="8" height="1"/></g><g fill="#f0e8c0"><rect x="13" y="8" width="6" height="1"/><rect x="11" y="9" width="10" height="1"/><rect x="10" y="10" width="12" height="1"/><rect x="9" y="11" width="14" height="1"/><rect x="9" y="12" width="14" height="1"/><rect x="8" y="13" width="16" height="1"/><rect x="8" y="14" width="16" height="1"/><rect x="8" y="15" width="16" height="1"/><rect x="8" y="16" width="16" height="1"/><rect x="8" y="17" width="16" height="1"/><rect x="8" y="18" width="16" height="1"/><rect x="9" y="19" width="14" height="1"/><rect x="9" y="20" width="14" height="1"/><rect x="10" y="21" width="12" height="1"/><rect x="11" y="22" width="10" height="1"/><rect x="13" y="23" width="6" height="1"/></g><g fill="#d8cf9e"><rect x="17" y="8" width="2" height="1"/><rect x="19" y="9" width="2" height="1"/><rect x="19" y="10" width="3" height="1"/><rect x="20" y="11" width="3" height="1"/><rect x="20" y="12" width="3" height="1"/><rect x="21" y="13" width="3" height="1"/><rect x="21" y="14" width="3" height="1"/><rect x="21" y="15" width="3" height="1"/><rect x="21" y="16" width="3" height="1"/><rect x="21" y="17" width="3" height="1"/><rect x="21" y="18" width="3" height="1"/><rect x="20" y="19" width="3" height="1"/><rect x="20" y="20" width="3" height="1"/><rect x="19" y="21" width="3" height="1"/><rect x="19" y="22" width="2" height="1"/><rect x="17" y="23" width="2" height="1"/></g><g fill="#cfc48c"><rect x="11" y="12" width="3" height="3"/><rect x="18" y="18" width="4" height="3"/><rect x="14" y="20" width="2" height="2"/><rect x="19" y="11" width="2" height="2"/></g><g fill="#fffbe6"><rect x="11" y="9" width="3" height="1"/><rect x="10" y="10" width="1" height="2"/></g><g class="px-blink-a" fill="#ffffff"><rect x="27" y="3" width="1" height="3"/><rect x="26" y="4" width="3" height="1"/></g><g class="px-blink-b" fill="#ffffff"><rect x="4" y="25" width="1" height="1"/></g></svg>
+    </div>
 
-    <!-- atmosphere (day) — empty placeholder slots, populated in Task 5 -->
-    <div class="ks-sun-rays"></div>
+    <!-- atmosphere (day) -->
     <div class="ks-clouds">
       <div class="ks-cloud c1"></div>
       <div class="ks-cloud c2"></div>
@@ -134,13 +140,13 @@
     </div>
 
     <!-- Mountains -->
-    <svg class="ks-mountains" viewBox="0 0 1400 300" preserveAspectRatio="none">
+    <svg class="ks-mountains" viewBox="0 0 1400 440" preserveAspectRatio="none">
       <!-- Rokko Mountains - far -->
-      <path d="M0,300 L0,180 Q100,100 200,140 Q280,80 360,120 Q420,60 500,100 Q560,50 640,90 Q700,40 800,80 Q860,50 940,70 Q1020,30 1100,80 Q1160,50 1240,100 Q1320,70 1400,120 L1400,300Z" fill="var(--mt-far)" opacity="0.7"/>
+      <path d="M0,440 L0,180 Q100,100 200,140 Q280,80 360,120 Q420,60 500,100 Q560,50 640,90 Q700,40 800,80 Q860,50 940,70 Q1020,30 1100,80 Q1160,50 1240,100 Q1320,70 1400,120 L1400,440Z" fill="var(--mt-far)" opacity="0.7"/>
       <!-- Mid mountains -->
-      <path d="M0,300 L0,200 Q120,140 240,170 Q340,120 440,160 Q520,100 620,150 Q700,110 800,140 Q880,100 980,130 Q1060,90 1140,140 Q1240,110 1340,160 L1400,180 L1400,300Z" fill="var(--mt-mid)" opacity="0.8"/>
+      <path d="M0,440 L0,200 Q120,140 240,170 Q340,120 440,160 Q520,100 620,150 Q700,110 800,140 Q880,100 980,130 Q1060,90 1140,140 Q1240,110 1340,160 L1400,180 L1400,440Z" fill="var(--mt-mid)" opacity="0.8"/>
       <!-- Near hills -->
-      <path d="M0,300 L0,230 Q150,190 300,210 Q450,180 600,200 Q750,170 900,200 Q1050,180 1200,210 Q1350,190 1400,220 L1400,300Z" fill="var(--mt-near)" opacity="0.9"/>
+      <path d="M0,440 L0,230 Q150,190 300,210 Q450,180 600,200 Q750,170 900,200 Q1050,180 1200,210 Q1350,190 1400,220 L1400,440Z" fill="var(--mt-near)" opacity="0.9"/>
     </svg>
 
     <!-- Skyline — bare div, no container -->
@@ -435,54 +441,30 @@
       <a class="mode-card urgent" href="#/emergency">
         <div class="mode-glyph">急</div>
         <div class="mode-text">
-          <div class="mode-title">Emergency</div>
-          <div class="mode-desc"><span data-lang="en">I need help right now</span><span data-lang="ja">今すぐ助けが必要</span><span data-lang="id">Saya butuh bantuan sekarang</span></div>
+          <div class="mode-title" data-i18n="mode.emergency.title">Emergency</div>
+          <div class="mode-desc" data-i18n="mode.emergency.desc">I need help right now</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
       <a class="mode-card" href="#/prepare">
         <div class="mode-glyph">備</div>
         <div class="mode-text">
-          <div class="mode-title">Prepare</div>
-          <div class="mode-desc"><span data-lang="en">Make a plan, find shelter</span><span data-lang="ja">計画を立て、避難所を探す</span><span data-lang="id">Buat rencana, cari tempat berlindung</span></div>
+          <div class="mode-title" data-i18n="mode.prepare.title">Prepare</div>
+          <div class="mode-desc" data-i18n="mode.prepare.desc">Make a plan, find shelter</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
       <a class="mode-card" href="#/learn">
         <div class="mode-glyph">学</div>
         <div class="mode-text">
-          <div class="mode-title">Learn</div>
-          <div class="mode-desc"><span data-lang="en">Drills, vocab, quizzes</span><span data-lang="ja">訓練・語彙・クイズ</span><span data-lang="id">Latihan, kosakata, kuis</span></div>
+          <div class="mode-title" data-i18n="mode.learn.title">Learn</div>
+          <div class="mode-desc" data-i18n="mode.learn.desc">Drills, vocabulary, quizzes</div>
         </div>
         <div class="mode-arrow">→</div>
       </a>
     </nav>
   </div>
 
-</section>
-
-<!-- MODE SELECTOR — shown on landing (#/) -->
-<section id="mode-selector" class="mode-selector route-hidden" aria-label="Choose a mode">
-  <div class="mode-selector-inner">
-    <p class="mode-selector-label" data-i18n="mode.prompt">What do you need right now?</p>
-    <div class="mode-cards">
-      <a href="#/emergency" class="mode-card mode-card--emergency" data-nav-route="#/emergency">
-        <span class="mode-card-icon" aria-hidden="true">🚨</span>
-        <span class="mode-card-title" data-i18n="mode.emergency.title">Emergency</span>
-        <span class="mode-card-desc"  data-i18n="mode.emergency.desc">I need help right now</span>
-      </a>
-      <a href="#/prepare" class="mode-card mode-card--prepare" data-nav-route="#/prepare">
-        <span class="mode-card-icon" aria-hidden="true">📋</span>
-        <span class="mode-card-title" data-i18n="mode.prepare.title">Prepare</span>
-        <span class="mode-card-desc"  data-i18n="mode.prepare.desc">Make a plan, find shelter</span>
-      </a>
-      <a href="#/learn" class="mode-card mode-card--learn" data-nav-route="#/learn">
-        <span class="mode-card-icon" aria-hidden="true">📚</span>
-        <span class="mode-card-title" data-i18n="mode.learn.title">Learn</span>
-        <span class="mode-card-desc"  data-i18n="mode.learn.desc">Drills, vocabulary, quizzes</span>
-      </a>
-    </div>
-  </div>
 </section>
 
 <!-- EMERGENCY MODE — 4-action layout (#/emergency) -->
@@ -903,7 +885,7 @@
 
 <!-- Section 07: Shelter Finder -->
 <section class="section" id="shelter">
-  <div class="section-label">08 — SHELTER FINDER</div>
+  <div class="section-label">SHELTER FINDER</div>
   <h2 class="section-title">
     <span data-lang="en">Find Nearest Shelter</span>
     <span data-lang="ja">最寄りの避難所を探す</span>
@@ -932,7 +914,7 @@
 
 <!-- Section 08: Earthquake Drill -->
 <section class="section" id="drill">
-  <div class="section-label">09 — EARTHQUAKE DRILL</div>
+  <div class="section-label">01 — EARTHQUAKE DRILL</div>
   <h2 class="section-title">
     <span data-lang="en">Earthquake Drill</span>
     <span data-lang="ja">地震防災訓練</span>
@@ -953,7 +935,7 @@
 
 <!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
-  <div class="section-label">10 — QUIZ</div>
+  <div class="section-label">02 — QUIZ</div>
   <h2 class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
@@ -974,7 +956,7 @@
 
 <!-- Section 08: About -->
 <section class="section" id="about">
-  <div class="section-label">11 — ABOUT</div>
+  <div class="section-label">03 — ABOUT</div>
   <h2 class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
@@ -1077,7 +1059,7 @@
 
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
-  <div class="section-label">12 — CONTACTS</div>
+  <div class="section-label">08 — CONTACTS</div>
   <h2 class="section-title">
     <span data-lang="en">Emergency Contacts Directory</span>
     <span data-lang="ja">緊急連絡先ディレクトリ</span>
@@ -1113,7 +1095,7 @@
 
 <!-- Section 12: My Emergency Preparation Worksheet -->
 <section class="section" id="myplan">
-  <div class="section-label">13 — MY PLAN</div>
+  <div class="section-label">MY PLAN</div>
   <h2 class="section-title">
     <span data-lang="en">My Emergency Card & Preparation</span>
     <span data-lang="ja">緊急カード＆防災準備</span>
@@ -1127,8 +1109,6 @@
 
   <div id="plan-wizard"></div>
 </section>
-
-<section class="section" id="bible" aria-label="Character bible"></section>
 
 </main>
 
