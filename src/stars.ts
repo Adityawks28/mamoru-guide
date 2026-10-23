@@ -24,8 +24,9 @@ function scheduleShootingStar(sky: HTMLElement): void {
       s.className = 'ks-shooter';
       s.style.left = `${5 + Math.random() * 60}%`;
       s.style.top = `${Math.random() * 30}%`;
-      s.addEventListener('animationend', () => s.remove());
       sky.appendChild(s);
+      // A timer, not animationend: a hidden sky never plays the animation.
+      window.setTimeout(() => s.remove(), 1000);
     }
     scheduleShootingStar(sky);
   }, 7000 + Math.random() * 9000);
