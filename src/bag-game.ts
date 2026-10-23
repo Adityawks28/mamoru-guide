@@ -39,15 +39,15 @@ function toggleBagItem(idx: number): void {
       setTimeout(() => el.classList.remove('rejected'), 800);
       sendWeight(true);
       showToast(lang3(
-        '⚠ Too heavy! Remove something first.',
-        '⚠ 重すぎます！まず何か取り出してください。',
-        '⚠ Terlalu berat! Keluarkan sesuatu dulu.',
+        '⚠ Too heavy. Take something out first.',
+        '⚠ 重すぎます。先に何か出してください。',
+        '⚠ Terlalu berat. Keluarkan sesuatu dulu.',
       ), 'warn');
       return;
     }
     packedItems.add(idx);
     el.classList.add('packed');
-    showToast(lang3('✓ Packed!', '✓ 詰めました！', '✓ Dimasukkan!'), 'success');
+    showToast(lang3('✓ Packed', '✓ 入れました', '✓ Dimasukkan'), 'success');
   }
   updateBagStats();
   updatePackPanel();
@@ -92,7 +92,7 @@ function updatePackPanel(): void {
   if (!list) return;
 
   if (packedItems.size === 0) {
-    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty — start packing!</span><span data-lang="ja">空 — 詰め始めよう！</span><span data-lang="id">Kosong — mulai isi!</span></div>`;
+    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty. Start packing.</span><span data-lang="ja">空です。物を入れてください。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>`;
     document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
     document.body.classList.add('lang-' + currentLang);
   } else {
@@ -168,10 +168,10 @@ export function checkBag(): void {
 
   let title: string, msg: string;
   const pctScore = score / maxScore;
-  if (pctScore >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You prioritized perfectly — ready for any emergency!'; }
-  else if (pctScore >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices! Consider swapping low-priority items for essentials you missed.'; }
-  else if (pctScore >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basics, but missing critical items. Focus on water, food, and medical supplies.'; }
-  else { title = '⚠ Underprepared'; msg = 'Your bag is missing essential survival items. Prioritize: water, food, first aid, medications, and documents.'; }
+  if (pctScore >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You chose the most important items. Your bag is ready for an emergency.'; }
+  else if (pctScore >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices. Replace low priority items with the important items you missed.'; }
+  else if (pctScore >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basic items, but important items are missing. Pack water, food, and medical supplies first.'; }
+  else { title = '⚠ Not Ready'; msg = 'Your bag does not have the items you need to survive. Pack these first: water, food, first aid kit, medicines, and documents.'; }
 
   const titleEl = document.getElementById('bagResultTitle');
   if (titleEl) titleEl.textContent = title;
@@ -186,5 +186,5 @@ export function resetBag(): void {
   renderBagItems();
   updateBagStats();
   updatePackPanel();
-  showToast(lang3('🔄 Bag reset!', '🔄 バッグをリセット！', '🔄 Tas direset!'), 'info');
+  showToast(lang3('🔄 Bag emptied', '🔄 バッグを空にしました', '🔄 Tas dikosongkan'), 'info');
 }

@@ -174,15 +174,15 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
 }
 
-const CALM = { en: '→ stay calm, observe', ja: '→ 落ち着いて様子を見る', id: '→ tenang, amati situasi' };
-const DROP = { en: '→ drop, cover, hold on', ja: '→ 落ちて・隠れて・待機', id: '→ tiarap, lindungi, tahan' };
-const HIDE = { en: '→ hide under sturdy table', ja: '→ 頑丈な机の下に隠れる', id: '→ sembunyi di bawah meja kokoh' };
+const CALM = { en: '→ stay calm and watch', ja: '→ 落ち着いて、まわりを見てください', id: '→ tetap tenang, amati sekitar' };
+const DROP = { en: '→ drop, cover, hold on', ja: '→ 身を低くして、頭を守り、動かないでください', id: '→ merunduk, berlindung, bertahan' };
+const HIDE = { en: '→ get under a strong table', ja: '→ じょうぶな机の下に入ってください', id: '→ masuk ke bawah meja yang kuat' };
 const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
   CALM, CALM, CALM,
-  { en: '→ move from windows', ja: '→ 窓から離れる', id: '→ menjauh dari jendela' },
-  { en: '→ brace · open the door', ja: '→ 構え・ドアを開ける', id: '→ siaga · buka pintu' },
+  { en: '→ move away from windows', ja: '→ 窓から離れてください', id: '→ menjauh dari jendela' },
+  { en: '→ steady yourself · open the door', ja: '→ 体を支えて、ドアを開けてください', id: '→ jaga keseimbangan · buka pintu' },
   DROP, DROP, HIDE, HIDE,
-  { en: '→ hide · protect head · stay until still', ja: '→ 隠れて・頭を守って・揺れがおさまるまで', id: '→ sembunyi · lindungi kepala · tunggu hingga reda' },
+  { en: '→ hide · protect your head · wait until the shaking stops', ja: '→ 隠れて、頭を守り、揺れが止まるまで待ってください', id: '→ sembunyi · lindungi kepala · tunggu sampai guncangan berhenti' },
 ];
 
 export function initEarthquakeScene(): void {

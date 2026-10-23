@@ -11,7 +11,7 @@ export function initEarthquakeScale(): void {
     row.setAttribute('tabindex', '0');
     row.setAttribute('role', 'button');
     row.setAttribute('aria-pressed', 'false');
-    row.setAttribute('aria-label', s.jp + ' - ' + s.en);
+    row.setAttribute('aria-label', s.jp + ', ' + s.en);
     row.innerHTML = `
       <div class="num" style="--lvl:${s.colors[0]}">${s.n}</div>
       <div class="jp-name">${s.jp}</div>

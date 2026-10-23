@@ -9,7 +9,7 @@ export const en: Record<string, string> = {
   'nav.plan':      'My Plan',
 
   // Hero
-  'hero.subtitle': 'Disaster preparedness for international students in Japan',
+  'hero.subtitle': 'A disaster preparedness guide for international students in Japan',
 
   // Mode selector
   'mode.emergency.title':   'Emergency',
@@ -21,7 +21,7 @@ export const en: Record<string, string> = {
 
   // Emergency mode (4-action layout)
   'em.title':       '🚨 EMERGENCY',
-  'em.subtitle':    'Tap an action — keep calm, breathe, act',
+  'em.subtitle':    'Stay calm. Breathe slowly. Tap an action.',
   'em.back':        '← Back',
   'em.call.title':  'Call 119',
   'em.call.desc':   'Fire / Ambulance',
@@ -33,10 +33,10 @@ export const en: Record<string, string> = {
   'em.alerts.desc':   'What the warnings mean',
 
   // Section chip-nav (Prepare / Learn jump-nav)
-  'chip.earthquake': '🏚 Quake',
+  'chip.earthquake': '🏚 Earthquake',
   'chip.alerts':     '📡 Alerts',
   'chip.typhoon':    '🌀 Typhoon',
-  'chip.vocab':      '🗣 Vocab',
+  'chip.vocab':      '🗣 Words',
   'chip.showthis':   '💬 Card',
   'chip.bag':        '🎒 Bag',
   'chip.firstaid':   '🩹 First Aid',
@@ -47,12 +47,12 @@ export const en: Record<string, string> = {
 
   // Earthquake section
   'eq.title':    "Japan's Seismic Intensity Scale (震度 Shindo)",
-  'eq.subtitle': 'Shindo measures what you feel, not the quake\'s energy. Tap any row to feel the shaking!',
+  'eq.subtitle': 'Shindo measures the shaking that you feel, not the energy of the earthquake. Tap a row to feel the shaking.',
   'eq.do':       '✓ DO',
   'eq.dont':     '✗ DON\'T',
 
   // Vocab section
-  'vocab.title': 'Important Kotoba (言葉) to Know',
+  'vocab.title': 'Important Words (言葉 Kotoba)',
   'vocab.tab.danger': 'Danger',
   'vocab.tab.action': 'Action',
   'vocab.tab.places': 'Places',
@@ -60,11 +60,11 @@ export const en: Record<string, string> = {
 
   // Show This section
   'showthis.title':    'Show This Card 見せるカード',
-  'showthis.subtitle': "Can't speak Japanese? Show these cards to people around you. The Japanese text is large so they can read it easily. Swipe or tap arrows to browse phrases.",
+  'showthis.subtitle': 'If you cannot speak Japanese, show these cards to people near you. The Japanese text is large, so people can read it easily. Swipe or tap the arrows to see more phrases.',
 
   // Bag game section
-  'bag.title':    '🎒 非常袋 Hijou-bukuro — Pack Your Bag!',
-  'bag.subtitle': 'Your bag can hold <strong>10 kg max</strong>: Japanese city guides say about 10 kg for women and 15 kg for men, light enough to run with. Items show their typical real weight, and Mamoru feels every kilo. You can\'t take everything! Tap items to pack or unpack them.',
+  'bag.title':    '🎒 非常袋 Hijou-bukuro · Pack Your Bag',
+  'bag.subtitle': 'Your bag can hold <strong>10 kg maximum</strong>. Japanese city guides say about 10 kg for women and 15 kg for men. At this weight, you can still run. Each item has a typical real weight. Mamoru feels every kilogram. You cannot take everything. Tap an item to put it in the bag or take it out.',
   'bag.stat.items':  'ITEMS',
   'bag.stat.score':  'SCORE',
   'bag.stat.weight': 'WEIGHT',
@@ -73,8 +73,8 @@ export const en: Record<string, string> = {
   'bag.btn.check':   '📋 Check Score',
 
   // Contacts section
-  'contacts.title':    'Emergency Contacts Directory',
-  'contacts.subtitle': 'Tap any contact to call directly. Save these numbers before an emergency — phone networks get overloaded fast.',
+  'contacts.title':    'Emergency Contacts',
+  'contacts.subtitle': 'Tap a contact to call the number. Save these numbers before an emergency. In an emergency, phone networks quickly become overloaded.',
   'contacts.filter.all':     'All',
   'contacts.filter.emerg':   'Emergency',
   'contacts.filter.medical': 'Medical',
@@ -84,34 +84,34 @@ export const en: Record<string, string> = {
 
   // Plan section
   'plan.title':    'My Emergency Card & Preparation',
-  'plan.subtitle': 'Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can\'t speak. Print it and keep a copy in your wallet, bag, and at home.',
+  'plan.subtitle': 'Fill in your profile and your plan. The labels are in English and Japanese. Rescuers, doctors, and police can read your information, even if you cannot speak. Print it. Keep a copy in your wallet, in your bag, and at home.',
   'plan.btn.save':  '💾 Save Plan',
   'plan.btn.print': '🖨️ Print Worksheet',
-  'plan.print.fullIds': 'Print full ID numbers (residence card, insurance). Off: last 4 characters only.',
+  'plan.print.fullIds': 'Print the full ID numbers (residence card, insurance). If this is off, only the last 4 characters print.',
   'plan.btn.show':  '🆘 Show My Plan',
   'plan.btn.clear': '🗑️ Clear',
   'plan.btn.next':  'Next →',
   'plan.btn.prev':  '← Back',
-  'plan.show.title':    '🆘 Emergency Info — 緊急情報',
+  'plan.show.title':    '🆘 Emergency Info · 緊急情報',
   'plan.show.subtitle': 'Please help / 助けてください',
   'plan.show.close':    'Close',
-  'plan.show.empty':    'Plan is empty. Fill in the wizard first to show your information here.',
+  'plan.show.empty':    'Your plan is empty. First, fill in the plan form. Then your information shows here.',
 
   // About section
   'about.title': 'About This Guide',
 
   // Drill section
   'drill.title':    'Earthquake Drill',
-  'drill.subtitle': 'Experience a simulated earthquake scenario. Make decisions under pressure and learn the correct responses step by step.',
+  'drill.subtitle': 'Try a simulated earthquake. Make decisions quickly. Learn the correct actions step by step.',
   'drill.btn.start': '🚨 Start Drill',
 
   // Quiz section
   'quiz.title':    'Disaster Drill Quiz',
-  'quiz.subtitle': 'Test your disaster preparedness knowledge! 10 scenario-based questions covering earthquakes, typhoons, tsunamis, and emergency procedures.',
+  'quiz.subtitle': 'Test what you know about disaster preparedness. The quiz has 10 questions based on scenarios. They are about earthquakes, typhoons, tsunamis, and what to do in an emergency.',
   'quiz.btn.start': '🎯 Start Quiz',
 
   // Footer
-  'footer.copy': 'Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.',
+  'footer.copy': 'Mamoru Guide 守る · Inspired by the resilience of Kobe. Made together with PPI Kobe.',
 
   // FAB labels
   'fab.firstaid': 'First Aid Guide',

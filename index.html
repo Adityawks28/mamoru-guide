@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAMORU GUIDE 守る</title>
-<meta name="description" content="Disaster preparedness guide for international students in Japan. Learn earthquake safety, emergency vocabulary, and evacuation procedures in English, Japanese, and Indonesian.">
+<meta name="description" content="A disaster preparedness guide for international students in Japan. Learn earthquake safety, emergency words, and how to evacuate. The guide is in English, Japanese, and Indonesian.">
 <meta name="keywords" content="disaster preparedness, earthquake, Japan, international students, emergency guide, 防災, 地震, tsunami">
 <meta name="author" content="PPI Kobe">
 <meta name="theme-color" content="#0f1f3d">
 
 <!-- Open Graph -->
-<meta property="og:title" content="MAMORU GUIDE 守る — Disaster Preparedness for Japan">
-<meta property="og:description" content="Interactive guide for international students: earthquake scale, emergency vocabulary, bag packing game, and evacuation tips.">
+<meta property="og:title" content="MAMORU GUIDE 守る · Disaster Preparedness for Japan">
+<meta property="og:description" content="An interactive guide for international students in Japan. It has an earthquake scale, emergency words, a bag packing game, and evacuation tips.">
 <meta property="og:type" content="website">
 <!-- TODO: replace with a 1200×630 PNG/JPG — most social platforms don't render SVG previews. -->
 <meta property="og:image" content="img/favicon.svg">
@@ -77,7 +77,7 @@
       <span></span><span></span><span></span>
     </button>
     <button class="mode-toggle" id="shareBtn" onclick="shareGuide()" title="Share" aria-label="Share this guide">📤</button>
-    <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Toggle Day/Night" aria-label="Toggle day/night mode">☀️</button>
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDayNight()" title="Day/Night" aria-label="Switch between day and night mode">☀️</button>
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('ja')">日本語</button>
@@ -421,9 +421,9 @@
       <span class="kanji-large">守る · まもる · to protect</span>
     </h1>
     <p class="hero-sub" data-i18n="hero.subtitle">
-      <span data-lang="en">A retro field-guide to staying safe in Japan — built by PPI Kobe in the city that rebuilt itself after 1995.</span>
-      <span data-lang="ja">日本で安全に暮らすためのレトロガイド — 1995年に立ち直った街、PPI神戸が制作。</span>
-      <span data-lang="id">Panduan retro untuk hidup aman di Jepang — dibuat oleh PPI Kobe, kota yang bangkit setelah 1995.</span>
+      <span data-lang="en">A retro field guide to staying safe in Japan. PPI Kobe made it in Kobe, the city that rebuilt itself after 1995.</span>
+      <span data-lang="ja">日本で安全に暮らすための、レトロなガイドです。1995年のあとに立ち直った街、神戸で、PPI Kobeが作りました。</span>
+      <span data-lang="id">Panduan retro untuk hidup aman di Jepang. PPI Kobe membuatnya di Kobe, kota yang bangkit kembali setelah 1995.</span>
     </p>
     <div class="hero-actions">
       <a class="arcade-btn btn-primary" href="#/prepare">▶ PRESS START</a>
@@ -468,7 +468,7 @@
   <header class="em-header">
     <a href="#/" class="em-back" data-i18n="em.back">← Back</a>
     <h1 class="em-title" data-i18n="em.title">🚨 EMERGENCY</h1>
-    <p class="em-subtitle" data-i18n="em.subtitle">Tap an action — keep calm, breathe, act</p>
+    <p class="em-subtitle" data-i18n="em.subtitle">Stay calm. Breathe slowly. Tap an action.</p>
   </header>
   <a class="em-card em-card-call em-card-primary" href="tel:119">
     <span class="em-card-icon">📞</span>
@@ -500,16 +500,16 @@
 
 <!-- Section 02: Earthquake Scale (Vertical) -->
 <section class="section" id="earthquake">
-  <div class="section-label">01 — EARTHQUAKE INTENSITY</div>
+  <div class="section-label">01 · EARTHQUAKE INTENSITY</div>
   <h2 class="section-title">
     <span data-lang="en">Japan's Seismic Intensity Scale (震度 Shindo)</span>
-    <span data-lang="ja">日本の震度階級（震度 Shindo）</span>
-    <span data-lang="id">Skala Intensitas Seismik Jepang (震度 Shindo)</span>
+    <span data-lang="ja">日本の震度（しんど）</span>
+    <span data-lang="id">Skala Intensitas Gempa Jepang (震度 Shindo)</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Shindo measures what you <em>feel</em>, not the quake's energy. <strong>Tap any row</strong> to feel the shaking!</span>
-    <span data-lang="ja">震度はあなたが<em>感じる</em>揺れの強さ。<strong>各行をタップ</strong>して揺れを体験！</span>
-    <span data-lang="id">Shindo mengukur apa yang Anda <em>rasakan</em>. <strong>Ketuk baris</strong> untuk merasakan guncangan!</span>
+    <span data-lang="en">Shindo measures the shaking that you <em>feel</em>. It does not measure the energy of the earthquake. <strong>Tap a row</strong> to feel the shaking.</span>
+    <span data-lang="ja">震度は、あなたが<em>感じる</em>揺れの強さです。地震のエネルギーの大きさではありません。<strong>行をタップ</strong>すると、揺れを体験できます。</span>
+    <span data-lang="id">Shindo mengukur guncangan yang Anda <em>rasakan</em>. Shindo tidak mengukur energi gempa. <strong>Ketuk satu baris</strong> untuk merasakan guncangannya.</span>
   </p>
   <div class="quake-demo">
     <div id="earthquake-scene" class="character-scene"></div>
@@ -520,29 +520,29 @@
     <div class="panel do-panel">
       <h3>
         <span data-lang="en">✓ DO</span>
-        <span data-lang="ja">✓ やるべきこと</span>
+        <span data-lang="ja">✓ すること</span>
         <span data-lang="id">✓ LAKUKAN</span>
       </h3>
       <ul>
-        <li><span data-lang="en">Drop, cover, hold on</span><span data-lang="ja">身を低くし、頭を守り、動かない</span><span data-lang="id">Merunduk, berlindung, bertahan</span></li>
-        <li><span data-lang="en">Open a door for an exit route</span><span data-lang="ja">出口確保のためにドアを開ける</span><span data-lang="id">Buka pintu untuk jalur keluar</span></li>
-        <li><span data-lang="en">Stay calm — most buildings survive</span><span data-lang="ja">落ち着いて — ほとんどの建物は耐えます</span><span data-lang="id">Tetap tenang — kebanyakan bangunan tahan</span></li>
-        <li><span data-lang="en">Turn on NHK for updates</span><span data-lang="ja">NHKをつけて情報を確認</span><span data-lang="id">Nyalakan NHK untuk informasi terbaru</span></li>
-        <li><span data-lang="en">If coastal: run to high ground</span><span data-lang="ja">沿岸部なら：高台へ走る</span><span data-lang="id">Jika di pesisir: lari ke tempat tinggi</span></li>
+        <li><span data-lang="en">Drop, cover, and hold on</span><span data-lang="ja">低い姿勢になり、頭を守り、動かない</span><span data-lang="id">Merunduk, berlindung, dan bertahan</span></li>
+        <li><span data-lang="en">Open a door to keep a way out</span><span data-lang="ja">ドアを開けて、にげる道を作る</span><span data-lang="id">Buka pintu agar ada jalan keluar</span></li>
+        <li><span data-lang="en">Stay calm: most buildings stay standing</span><span data-lang="ja">落ち着く：ほとんどの建物は倒れません</span><span data-lang="id">Tetap tenang: kebanyakan bangunan tidak roboh</span></li>
+        <li><span data-lang="en">Turn on NHK for news</span><span data-lang="ja">NHKをつけて、情報を見る</span><span data-lang="id">Nyalakan NHK untuk informasi terbaru</span></li>
+        <li><span data-lang="en">Near the coast: run to high ground</span><span data-lang="ja">海の近くなら：高い所（高台）へ走る</span><span data-lang="id">Jika dekat pantai: lari ke tempat tinggi</span></li>
       </ul>
     </div>
     <div class="panel dont-panel">
       <h3>
         <span data-lang="en">✗ DON'T</span>
-        <span data-lang="ja">✗ やってはいけないこと</span>
+        <span data-lang="ja">✗ してはいけないこと</span>
         <span data-lang="id">✗ JANGAN</span>
       </h3>
       <ul>
-        <li><span data-lang="en">Rush outside during shaking</span><span data-lang="ja">揺れている間に外に出る</span><span data-lang="id">Berlari keluar saat gempa</span></li>
-        <li><span data-lang="en">Use fire or gas appliances</span><span data-lang="ja">火やガス器具を使う</span><span data-lang="id">Menggunakan api atau kompor gas</span></li>
-        <li><span data-lang="en">Use elevators</span><span data-lang="ja">エレベーターを使う</span><span data-lang="id">Menggunakan lift</span></li>
-        <li><span data-lang="en">Flood phone lines with calls</span><span data-lang="ja">電話回線をパンクさせる</span><span data-lang="id">Membanjiri saluran telepon</span></li>
-        <li><span data-lang="en">Drive unless absolutely necessary</span><span data-lang="ja">必要がなければ車を運転する</span><span data-lang="id">Mengemudi kecuali benar-benar perlu</span></li>
+        <li><span data-lang="en">Run outside during the shaking</span><span data-lang="ja">揺れている時に、外へ出る</span><span data-lang="id">Lari keluar saat guncangan</span></li>
+        <li><span data-lang="en">Use fire or gas appliances</span><span data-lang="ja">火やガスの器具を使う</span><span data-lang="id">Memakai api atau kompor gas</span></li>
+        <li><span data-lang="en">Use elevators</span><span data-lang="ja">エレベーターを使う</span><span data-lang="id">Memakai lift</span></li>
+        <li><span data-lang="en">Make calls that are not urgent (phone lines get full)</span><span data-lang="ja">急ぎでない電話をかける（電話がつながりにくくなる）</span><span data-lang="id">Menelepon untuk hal yang tidak mendesak (jaringan jadi penuh)</span></li>
+        <li><span data-lang="en">Drive a car if you do not have to</span><span data-lang="ja">必要がないのに、車を運転する</span><span data-lang="id">Menyetir mobil kalau tidak benar-benar perlu</span></li>
       </ul>
     </div>
   </div>
@@ -550,7 +550,7 @@
 
 <!-- Section 03: Vocabulary -->
 <section class="section" id="vocab">
-  <div class="section-label">02 — EMERGENCY VOCABULARY</div>
+  <div class="section-label">02 · EMERGENCY VOCABULARY</div>
   <h2 class="section-title">
     <span data-lang="en">Important Kotoba (言葉) to Know</span>
     <span data-lang="ja">大切な言葉（ことば）</span>
@@ -619,14 +619,14 @@
   <!-- Yasashii Nihongo with furigana and romaji -->
   <div style="margin-top:40px;">
     <h3 class="section-title" style="font-size:14px;">
-      <span data-lang="en">やさしい日本語 — Easy Japanese</span>
+      <span data-lang="en">やさしい日本語 (Easy Japanese)</span>
       <span data-lang="ja">やさしい日本語</span>
-      <span data-lang="id">やさしい日本語 — Bahasa Jepang Mudah</span>
+      <span data-lang="id">やさしい日本語 (Bahasa Jepang Mudah)</span>
     </h3>
     <p class="section-note">
-      <span data-lang="en">Official announcements are hard to understand. Here's the simplified version with furigana and romaji:</span>
-      <span data-lang="ja">公式な発表は難しいです。やさしい日本語版（ふりがな・ローマ字つき）：</span>
-      <span data-lang="id">Pengumuman resmi sulit dipahami. Ini versi sederhana dengan furigana dan romaji:</span>
+      <span data-lang="en">Official announcements are hard to understand. Here is a simple version with furigana and romaji:</span>
+      <span data-lang="ja">公式のお知らせは難しいです。下は、やさしい日本語の例です（ふりがな・ローマ字つき）。</span>
+      <span data-lang="id">Pengumuman resmi sulit dipahami. Berikut versi sederhananya, dengan furigana dan romaji:</span>
     </p>
     <div class="yasashii-grid">
       <div class="yasashii-card hard">
@@ -655,33 +655,33 @@
 
 <!-- Section 03: Show This Phrase Cards -->
 <section class="section" id="showthis">
-  <div class="section-label">03 — SHOW THIS</div>
+  <div class="section-label">03 · SHOW THIS</div>
   <h2 class="section-title">
     <span data-lang="en">Show This Card 見せるカード</span>
     <span data-lang="ja">見せるカード Show This Card</span>
     <span data-lang="id">Kartu Tunjukkan 見せるカード</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Can't speak Japanese? Show these cards to people around you. The Japanese text is large so they can read it easily. Swipe or tap arrows to browse phrases.</span>
-    <span data-lang="ja">日本語が話せない時に、周りの人にこのカードを見せましょう。日本語が大きく表示されているので、相手がすぐ読めます。</span>
-    <span data-lang="id">Tidak bisa berbicara bahasa Jepang? Tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepang ditampilkan besar agar mudah dibaca. Geser atau ketuk panah untuk menelusuri frasa.</span>
+    <span data-lang="en">If you cannot speak Japanese, show these cards to people near you. The Japanese text is large, so they can read it easily. Swipe or tap the arrows to see more phrases.</span>
+    <span data-lang="ja">日本語が話せないときは、近くの人にこのカードを見せてください。日本語の文字が大きいので、相手はすぐに読めます。スワイプするか、矢印をタップすると、ほかのフレーズが見られます。</span>
+    <span data-lang="id">Jika Anda tidak bisa berbahasa Jepang, tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepangnya besar, jadi mudah dibaca. Geser atau ketuk panah untuk melihat frasa lain.</span>
   </p>
   <div id="showThisContainer"></div>
 </section>
 
 <!-- Section 04: Emergency Bag MINI GAME -->
 <section class="section" id="bag">
-  <div class="section-label">04 — EMERGENCY BAG</div>
+  <div class="section-label">04 · EMERGENCY BAG</div>
   <h2 class="section-title">
-    <span data-lang="en">🎒 非常袋 Hijou-bukuro — Pack Your Bag!</span>
-    <span data-lang="ja">🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！</span>
-    <span data-lang="id">🎒 非常袋 Hijou-bukuro — Isi Tas Darurat!</span>
+    <span data-lang="en">🎒 非常袋 Hijou-bukuro: Pack Your Bag</span>
+    <span data-lang="ja">🎒 非常袋（ひじょうぶくろ）：バッグに物を入れましょう</span>
+    <span data-lang="id">🎒 非常袋 Hijou-bukuro: Isi Tas Darurat Anda</span>
   </h2>
   <div id="bag-scene" class="character-scene"></div>
   <p class="section-note">
-    <span data-lang="en">Your bag can hold <strong>10 kg max</strong>: Japanese city guides say about 10 kg for women and 15 kg for men, light enough to run with. Items show their typical real weight, and Mamoru feels every kilo. You can't take everything! Tap items to pack or unpack them.</span>
-    <span data-lang="ja">バッグは<strong>最大10kg</strong>。自治体の目安は女性約10kg・男性約15kg、走って逃げられる重さです。重さは実際の一般的な重さで、マモルにも重さが伝わります。全部は入りません。タップで詰める・戻す。</span>
-    <span data-lang="id">Tas Anda maksimal <strong>10 kg</strong>: panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki, cukup ringan untuk berlari. Berat barang sesuai berat aslinya, dan Mamoru merasakan setiap kilonya. Tidak bisa bawa semua! Ketuk untuk memasukkan atau mengeluarkan.</span>
+    <span data-lang="en">Your bag can hold <strong>a maximum of 10 kg</strong>. Japanese city guides say about 10 kg for women and 15 kg for men. With this weight, you can still run. Each item shows its usual real weight, and Mamoru feels every kilo. You cannot take everything. Tap an item to put it in or take it out.</span>
+    <span data-lang="ja">バッグに入れられるのは<strong>最大10kg</strong>です。市や町の目安は、女性は約10kg、男性は約15kgです。走って逃げられる重さです。物の重さは、実際の重さとだいたい同じです。マモルも重さを感じます。全部は入りません。物をタップすると、入れたり出したりできます。</span>
+    <span data-lang="id">Tas Anda bisa memuat <strong>maksimal 10 kg</strong>. Panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki. Dengan berat ini, Anda masih bisa berlari. Setiap barang menunjukkan berat aslinya, dan Mamoru merasakan setiap kilonya. Anda tidak bisa membawa semuanya. Ketuk barang untuk memasukkan atau mengeluarkannya.</span>
   </p>
 
   <div class="bag-game">
@@ -713,7 +713,7 @@
           <span data-lang="en">YOUR BAG</span><span data-lang="ja">あなたのバッグ</span><span data-lang="id">TAS ANDA</span>
         </div>
         <div class="bag-pack-list" id="bagPackList">
-          <div class="bag-pack-empty"><span data-lang="en">Empty — start packing!</span><span data-lang="ja">空 — 詰め始めよう！</span><span data-lang="id">Kosong — mulai isi!</span></div>
+          <div class="bag-pack-empty"><span data-lang="en">Empty. Start packing.</span><span data-lang="ja">空です。物を入れましょう。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>
         </div>
         <div class="bag-pack-weight" id="bagPackWeight">
           <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
@@ -740,16 +740,16 @@
 
 <!-- Section 05: Alert System -->
 <section class="section" id="alerts">
-  <div class="section-label">05 — ALERT SYSTEM</div>
+  <div class="section-label">05 · ALERT SYSTEM</div>
   <h2 class="section-title">
     <span data-lang="en">Japan's Emergency Alert System</span>
     <span data-lang="ja">日本の緊急警報システム</span>
     <span data-lang="id">Sistem Peringatan Darurat Jepang</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Your phone will make a loud alarm sound even on silent mode. Don't panic — here's what each one means.</span>
-    <span data-lang="ja">サイレントモードでも大音量のアラームが鳴ります。パニックにならないで。</span>
-    <span data-lang="id">Ponsel Anda akan berbunyi keras bahkan dalam mode senyap. Jangan panik.</span>
+    <span data-lang="en">Your phone makes a loud alarm sound, even in silent mode. Do not panic. Here is what each alert means.</span>
+    <span data-lang="ja">マナーモードでも、スマホから大きなアラームが鳴ります。あわてないでください。下に、それぞれの警報の意味があります。</span>
+    <span data-lang="id">Ponsel Anda akan berbunyi keras, bahkan dalam mode senyap. Jangan panik. Berikut arti setiap peringatan.</span>
   </p>
 
   <div class="alert-grid">
@@ -757,44 +757,44 @@
       <div class="alert-icon">📱</div>
       <h3>J-Alert</h3>
       <div class="jp-sub">全国瞬時警報システム</div>
-      <p><span data-lang="en">National instant alert for missiles, major earthquakes, and tsunamis. ALL phones receive it.</span><span data-lang="ja">ミサイル、大地震、津波の全国瞬時警報。すべての携帯電話に届きます。</span><span data-lang="id">Peringatan instan nasional untuk rudal, gempa besar, dan tsunami. SEMUA ponsel menerimanya.</span></p>
+      <p><span data-lang="en">A national instant alert for missiles, large earthquakes, and tsunamis. Phones in the affected area get it. Some older phones cannot get it.</span><span data-lang="ja">ミサイル、大きな地震、津波のときに、国からすぐに届く警報です。その地域の携帯電話に届きます。届かない古い機種もあります。</span><span data-lang="id">Peringatan nasional yang langsung dikirim saat ada rudal, gempa besar, dan tsunami. Ponsel di wilayah terdampak menerimanya. Beberapa ponsel lama tidak bisa menerimanya.</span></p>
     </div>
     <div class="alert-card type-eew">
       <div class="alert-icon">🌍</div>
       <h3>EEW</h3>
       <div class="jp-sub">緊急地震速報</div>
-      <p><span data-lang="en">Earthquake early warning. Gives you seconds before shaking. Drop and cover IMMEDIATELY.</span><span data-lang="ja">緊急地震速報。揺れの数秒前に届きます。すぐに身を守って。</span><span data-lang="id">Peringatan dini gempa. Memberi Anda beberapa detik sebelum guncangan.</span></p>
+      <p><span data-lang="en">An earthquake early warning. It comes a few seconds before the shaking. Near the epicenter, it can come after the shaking starts. Drop and cover IMMEDIATELY.</span><span data-lang="ja">緊急地震速報です。揺れの数秒前に届きます。震源の近くでは、揺れが始まってから届くこともあります。すぐに身を守ってください。</span><span data-lang="id">Peringatan dini gempa. Peringatan ini datang beberapa detik sebelum guncangan. Di dekat pusat gempa, peringatan bisa datang setelah guncangan mulai. SEGERA merunduk dan berlindung.</span></p>
     </div>
     <div class="alert-card type-tsunami">
       <div class="alert-icon">🌊</div>
       <h3><span data-lang="en">Tsunami Warning</span><span data-lang="ja">津波警報</span><span data-lang="id">Peringatan Tsunami</span></h3>
       <div class="jp-sub">津波警報</div>
-      <p><span data-lang="en">3 levels: Advisory, Warning, Major. Run to high ground immediately.</span><span data-lang="ja">3段階：注意報、警報、大津波警報。すぐに高台へ。</span><span data-lang="id">3 tingkat: Peringatan, Siaga, Besar. Segera lari ke tempat tinggi.</span></p>
+      <p><span data-lang="en">3 levels: Advisory, Warning, and Major Warning. Run to high ground immediately.</span><span data-lang="ja">3つのレベルがあります：注意報、警報、大津波警報。すぐに高い所（高台）へ逃げてください。</span><span data-lang="id">3 tingkat: Waspada, Peringatan, dan Peringatan Besar. Segera lari ke tempat tinggi.</span></p>
     </div>
     <div class="alert-card type-evac">
       <div class="alert-icon">🌧️</div>
       <h3><span data-lang="en">Evacuation Order</span><span data-lang="ja">避難指示</span><span data-lang="id">Perintah Evakuasi</span></h3>
       <div class="jp-sub">避難指示</div>
-      <p><span data-lang="en">5-level system. Level 4 = evacuate NOW. Level 5 = disaster already occurring.</span><span data-lang="ja">5段階。レベル4=今すぐ避難。レベル5=災害発生中。</span><span data-lang="id">Sistem 5 tingkat. Level 4 = evakuasi SEKARANG. Level 5 = bencana sudah terjadi.</span></p>
+      <p><span data-lang="en">There are 5 levels. Level 4: evacuate NOW. Level 5: a disaster is happening or is about to happen.</span><span data-lang="ja">5つのレベルがあります。レベル4：今すぐ避難してください。レベル5：災害が起きているか、すぐに起きそうです。</span><span data-lang="id">Ada 5 tingkat. Level 4: evakuasi SEKARANG. Level 5: bencana sedang atau akan segera terjadi.</span></p>
     </div>
   </div>
 
   <h3 class="section-title" style="font-size:13px; margin-top:24px;">
     <span data-lang="en">📲 Apps to Download</span>
-    <span data-lang="ja">📲 ダウンロードすべきアプリ</span>
+    <span data-lang="ja">📲 ダウンロードするアプリ</span>
     <span data-lang="id">📲 Aplikasi untuk Diunduh</span>
   </h3>
   <div class="app-list">
-    <div class="app-item"><div class="app-check rec">✓</div><span><strong>NHK World</strong> — <span data-lang="en">News & alerts in 17 languages</span><span data-lang="ja">17言語でニュースと警報</span><span data-lang="id">Berita & peringatan dalam 17 bahasa</span></span></div>
-    <div class="app-item"><div class="app-check">✓</div><span><strong>Safety Tips</strong> — <span data-lang="en">Official multilingual disaster app</span><span data-lang="ja">多言語の公式防災アプリ</span><span data-lang="id">Aplikasi bencana multibahasa resmi</span></span></div>
-    <div class="app-item"><div class="app-check">✓</div><span><strong>Yahoo! 防災速報</strong> — <span data-lang="en">Real-time alerts by location</span><span data-lang="ja">位置情報リアルタイム警報</span><span data-lang="id">Peringatan real-time berdasarkan lokasi</span></span></div>
-    <div class="app-item"><div class="app-check">✓</div><span><strong>171</strong> — <span data-lang="en">Disaster voice message board</span><span data-lang="ja">災害用伝言ダイヤル</span><span data-lang="id">Papan pesan suara bencana</span></span></div>
+    <div class="app-item"><div class="app-check rec">✓</div><span><strong>NHK World</strong>: <span data-lang="en">News and alerts in 19 languages</span><span data-lang="ja">19の言語で、ニュースと警報</span><span data-lang="id">Berita dan peringatan dalam 19 bahasa</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>Safety Tips</strong>: <span data-lang="en">Official disaster app in many languages</span><span data-lang="ja">多言語の公式防災アプリ</span><span data-lang="id">Aplikasi bencana resmi dalam banyak bahasa</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>Yahoo! 防災速報</strong>: <span data-lang="en">Live alerts for your location</span><span data-lang="ja">今いる場所の警報がすぐに届く</span><span data-lang="id">Peringatan langsung sesuai lokasi Anda</span></span></div>
+    <div class="app-item"><div class="app-check">✓</div><span><strong>171</strong>: <span data-lang="en">Voice message board for disasters</span><span data-lang="ja">災害用伝言ダイヤル</span><span data-lang="id">Papan pesan suara untuk bencana</span></span></div>
   </div>
 </section>
 
 <!-- Section 06: Typhoon Preparedness -->
 <section class="section" id="typhoon">
-  <div class="section-label">06 — TYPHOON</div>
+  <div class="section-label">06 · TYPHOON</div>
   <h2 class="section-title">
     <span data-lang="en">Typhoon Preparedness</span>
     <span data-lang="ja">台風への備え</span>
@@ -802,15 +802,15 @@
   </h2>
   <div id="typhoon-scene" class="character-scene"></div>
   <p class="section-note">
-    <span data-lang="en">Japan gets 15-25 typhoons per year, mostly July–October. Unlike earthquakes, you usually have days of warning — use that time wisely.</span>
-    <span data-lang="ja">日本には毎年15〜25の台風が来ます（主に7〜10月）。地震と違い、数日前に予報があります。</span>
-    <span data-lang="id">Jepang mengalami 15-25 topan per tahun, terutama Juli–Oktober. Berbeda dengan gempa, Anda biasanya punya waktu beberapa hari untuk bersiap.</span>
+    <span data-lang="en">About 25 typhoons form each year. About 12 come near Japan, and about 3 hit land. Most come from July to October. A typhoon usually gives you some days of warning. An earthquake does not. Use this time to prepare.</span>
+    <span data-lang="ja">台風は1年に約25個できます。日本に近づくのは約12個、上陸するのは約3個です。多いのは7月から10月です。地震とちがって、台風はふつう数日前に予報が出ます。その間に準備してください。</span>
+    <span data-lang="id">Setiap tahun terbentuk sekitar 25 topan. Sekitar 12 mendekati Jepang, dan sekitar 3 mendarat. Kebanyakan datang pada bulan Juli sampai Oktober. Berbeda dengan gempa, topan biasanya diumumkan beberapa hari sebelumnya. Gunakan waktu itu untuk bersiap.</span>
   </p>
 
   <!-- Typhoon Scale -->
   <h3 class="section-title" style="font-size:13px; margin-top:8px;">
     <span data-lang="en">🌀 Typhoon Intensity Scale</span>
-    <span data-lang="ja">🌀 台風の強さスケール</span>
+    <span data-lang="ja">🌀 台風の強さ</span>
     <span data-lang="id">🌀 Skala Intensitas Topan</span>
   </h3>
   <div id="typhoonScale" class="typhoon-scale"></div>
@@ -824,12 +824,12 @@
         <span data-lang="id">⏰ SEBELUM</span>
       </h3>
       <ul>
-        <li><span data-lang="en">Stock 3+ days of water & food</span><span data-lang="ja">3日分以上の水と食料を備蓄</span><span data-lang="id">Stok air & makanan 3+ hari</span></li>
-        <li><span data-lang="en">Charge all devices & batteries</span><span data-lang="ja">全デバイスとバッテリーを充電</span><span data-lang="id">Isi daya semua perangkat</span></li>
-        <li><span data-lang="en">Secure outdoor items (bikes, laundry)</span><span data-lang="ja">屋外の物を固定（自転車、洗濯物）</span><span data-lang="id">Amankan barang di luar</span></li>
-        <li><span data-lang="en">Close all storm shutters (雨戸)</span><span data-lang="ja">雨戸をすべて閉める</span><span data-lang="id">Tutup semua perisai badai</span></li>
-        <li><span data-lang="en">Fill bathtub with water for flushing</span><span data-lang="ja">浴槽に水を溜める（トイレ用）</span><span data-lang="id">Isi bak mandi untuk siram toilet</span></li>
-        <li><span data-lang="en">Know your evacuation route</span><span data-lang="ja">避難ルートを確認</span><span data-lang="id">Ketahui rute evakuasi Anda</span></li>
+        <li><span data-lang="en">Store water and food for 3 days or more</span><span data-lang="ja">3日分以上の水と食べ物を用意する</span><span data-lang="id">Simpan air dan makanan untuk 3 hari atau lebih</span></li>
+        <li><span data-lang="en">Charge all devices and batteries</span><span data-lang="ja">すべての機器とバッテリーを充電する</span><span data-lang="id">Isi daya semua perangkat dan baterai</span></li>
+        <li><span data-lang="en">Bring in or tie down outdoor items (bikes, laundry)</span><span data-lang="ja">外にある物（自転車、洗濯物）を中に入れるか、固定する</span><span data-lang="id">Masukkan atau ikat barang di luar (sepeda, jemuran)</span></li>
+        <li><span data-lang="en">Close all storm shutters (雨戸)</span><span data-lang="ja">雨戸をすべて閉める</span><span data-lang="id">Tutup semua penutup jendela (雨戸)</span></li>
+        <li><span data-lang="en">Fill the bathtub with water to flush the toilet</span><span data-lang="ja">おふろに水をためる（トイレを流すため）</span><span data-lang="id">Isi bak mandi dengan air untuk menyiram toilet</span></li>
+        <li><span data-lang="en">Know your evacuation route</span><span data-lang="ja">避難する道を確認する</span><span data-lang="id">Ketahui rute evakuasi Anda</span></li>
       </ul>
     </div>
     <div class="panel panel-during">
@@ -839,12 +839,12 @@
         <span data-lang="id">🌀 SELAMA</span>
       </h3>
       <ul>
-        <li><span data-lang="en">Stay indoors — away from windows</span><span data-lang="ja">屋内にいる — 窓から離れる</span><span data-lang="id">Tetap di dalam — jauh dari jendela</span></li>
+        <li><span data-lang="en">Stay indoors, away from windows</span><span data-lang="ja">家の中にいて、窓から離れる</span><span data-lang="id">Tetap di dalam, jauh dari jendela</span></li>
         <li><span data-lang="en">Never go outside "to check"</span><span data-lang="ja">「確認」のために外に出ない</span><span data-lang="id">Jangan keluar untuk "memeriksa"</span></li>
-        <li><span data-lang="en">Avoid rivers, canals, and underpasses</span><span data-lang="ja">川、用水路、地下道を避ける</span><span data-lang="id">Hindari sungai dan terowongan</span></li>
-        <li><span data-lang="en">Monitor NHK / Yahoo! 防災速報</span><span data-lang="ja">NHK / Yahoo!防災速報を確認</span><span data-lang="id">Pantau NHK / Yahoo! 防災速報</span></li>
-        <li><span data-lang="en">If flooding: move to upper floors</span><span data-lang="ja">浸水時：上階へ移動</span><span data-lang="id">Jika banjir: pindah ke lantai atas</span></li>
-        <li><span data-lang="en">Beware the "eye" — calm ≠ over</span><span data-lang="ja">台風の目に注意 — 静か≠終わり</span><span data-lang="id">Waspadai "mata" — tenang ≠ selesai</span></li>
+        <li><span data-lang="en">Stay away from rivers, canals, and underpasses</span><span data-lang="ja">川、用水路、地下道に近づかない</span><span data-lang="id">Jauhi sungai, kanal, dan terowongan bawah jalan</span></li>
+        <li><span data-lang="en">Check NHK / Yahoo! 防災速報</span><span data-lang="ja">NHK / Yahoo!防災速報を確認する</span><span data-lang="id">Pantau NHK / Yahoo! 防災速報</span></li>
+        <li><span data-lang="en">If there is flooding: go to an upper floor</span><span data-lang="ja">水が入ってきたら：上の階へ行く</span><span data-lang="id">Jika banjir: pindah ke lantai atas</span></li>
+        <li><span data-lang="en">Be careful of the "eye": calm does not mean over</span><span data-lang="ja">台風の目に注意：静かになっても、終わりではない</span><span data-lang="id">Waspadai "mata" topan: tenang bukan berarti selesai</span></li>
       </ul>
     </div>
     <div class="panel panel-after">
@@ -854,11 +854,11 @@
         <span data-lang="id">✅ SETELAH</span>
       </h3>
       <ul>
-        <li><span data-lang="en">Watch for landslides — risk stays high</span><span data-lang="ja">土砂崩れに注意 — リスクは続く</span><span data-lang="id">Waspadai tanah longsor</span></li>
-        <li><span data-lang="en">Avoid flooded roads & downed power lines</span><span data-lang="ja">浸水した道路と切れた電線を避ける</span><span data-lang="id">Hindari jalan banjir & kabel listrik</span></li>
-        <li><span data-lang="en">Check train/bus status before going out</span><span data-lang="ja">外出前に電車・バスの運行状況を確認</span><span data-lang="id">Cek status kereta/bus sebelum keluar</span></li>
-        <li><span data-lang="en">Report damage to landlord/university</span><span data-lang="ja">被害を大家・大学に報告</span><span data-lang="id">Laporkan kerusakan ke pemilik/universitas</span></li>
-        <li><span data-lang="en">Document damage with photos for insurance</span><span data-lang="ja">保険のために写真で被害を記録</span><span data-lang="id">Dokumentasikan kerusakan dengan foto</span></li>
+        <li><span data-lang="en">Watch for landslides: the risk stays high</span><span data-lang="ja">土砂崩れに注意：まだ危険です</span><span data-lang="id">Waspadai tanah longsor: risikonya masih tinggi</span></li>
+        <li><span data-lang="en">Stay away from flooded roads and fallen power lines</span><span data-lang="ja">水につかった道路と、切れた電線に近づかない</span><span data-lang="id">Jauhi jalan yang banjir dan kabel listrik yang jatuh</span></li>
+        <li><span data-lang="en">Check if trains and buses run before you go out</span><span data-lang="ja">出かける前に、電車とバスが動いているか確認する</span><span data-lang="id">Cek apakah kereta dan bus berjalan sebelum keluar</span></li>
+        <li><span data-lang="en">Tell your landlord or university about damage</span><span data-lang="ja">被害を大家さんや大学に知らせる</span><span data-lang="id">Laporkan kerusakan ke pemilik tempat tinggal atau kampus</span></li>
+        <li><span data-lang="en">Take photos of the damage for insurance</span><span data-lang="ja">保険のために、被害の写真をとる</span><span data-lang="id">Foto kerusakan untuk asuransi</span></li>
       </ul>
     </div>
   </div>
@@ -866,7 +866,7 @@
 
 <!-- Section 06: First Aid Guide -->
 <section class="section" id="firstaid">
-  <div class="section-label">07 — FIRST AID</div>
+  <div class="section-label">07 · FIRST AID</div>
   <h2 class="section-title">
     <span data-lang="en">First Aid Guide</span>
     <span data-lang="ja">応急処置ガイド</span>
@@ -874,9 +874,9 @@
   </h2>
   <div id="firstaid-scene" class="character-scene"></div>
   <p class="section-note">
-    <span data-lang="en">Step-by-step first aid for common disaster injuries. Works offline — no internet needed.</span>
-    <span data-lang="ja">災害時の一般的な怪我に対する応急処置ガイド。オフラインで使用可能。</span>
-    <span data-lang="id">Pertolongan pertama langkah demi langkah untuk cedera bencana. Berfungsi offline.</span>
+    <span data-lang="en">Step by step first aid for common disaster injuries. It works offline, with no internet.</span>
+    <span data-lang="ja">災害のときに多いけがの応急処置を、1つずつ説明します。インターネットがなくても使えます。</span>
+    <span data-lang="id">Pertolongan pertama langkah demi langkah untuk cedera yang sering terjadi saat bencana. Bisa dipakai tanpa internet.</span>
   </p>
   <div id="firstAidContainer"></div>
 </section>
@@ -886,42 +886,42 @@
   <div class="section-label">SHELTER FINDER</div>
   <h2 class="section-title">
     <span data-lang="en">Find Nearest Shelter</span>
-    <span data-lang="ja">最寄りの避難所を探す</span>
+    <span data-lang="ja">近くの避難場所を探す</span>
     <span data-lang="id">Temukan Tempat Perlindungan Terdekat</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Find evacuation shelters near your current location. Shows distance, walking time, and disaster types covered.</span>
-    <span data-lang="ja">現在地付近の避難所を検索。距離、徒歩時間、対応する災害の種類を表示。</span>
-    <span data-lang="id">Temukan tempat perlindungan evakuasi di dekat lokasi Anda. Menampilkan jarak, waktu jalan kaki, dan jenis bencana.</span>
+    <span data-lang="en">Find official evacuation sites near you. The list shows the distance, the walking time, and the types of disaster each site is for.</span>
+    <span data-lang="ja">今いる場所の近くの、市が決めた避難場所を探します。距離、歩く時間、どの災害に使えるかを表示します。</span>
+    <span data-lang="id">Cari tempat evakuasi resmi di dekat lokasi Anda. Daftar ini menunjukkan jarak, waktu jalan kaki, dan jenis bencana untuk setiap tempat.</span>
   </p>
   <div class="shelter-actions">
     <button class="bag-btn primary" id="shelterFindBtn">
       <span data-lang="en">📍 Find Shelters Near Me</span>
-      <span data-lang="ja">📍 近くの避難所を探す</span>
+      <span data-lang="ja">📍 近くの避難場所を探す</span>
       <span data-lang="id">📍 Cari Tempat Perlindungan</span>
     </button>
     <div id="shelterCachedHint" class="shelter-cached-hint"></div>
   </div>
   <p class="shelter-privacy-hint">
-    <span data-lang="en">🔒 Your location is used locally only — never sent to a server.</span>
-    <span data-lang="ja">🔒 位置情報は端末内でのみ使用 — サーバーに送信されません。</span>
-    <span data-lang="id">🔒 Lokasi Anda hanya digunakan secara lokal — tidak dikirim ke server.</span>
+    <span data-lang="en">🔒 We never send your location to a server. The map images come from OpenStreetMap, so OpenStreetMap can see which map area you look at.</span>
+    <span data-lang="ja">🔒 位置情報をサーバーに送ることはありません。地図の画像はOpenStreetMapから読みこむので、OpenStreetMapには、どの地域の地図を見ているかがわかります。</span>
+    <span data-lang="id">🔒 Kami tidak pernah mengirim lokasi Anda ke server. Gambar peta dimuat dari OpenStreetMap, jadi OpenStreetMap bisa melihat area peta yang Anda buka.</span>
   </p>
   <div id="shelterContainer"></div>
 </section>
 
 <!-- Section 08: Earthquake Drill -->
 <section class="section" id="drill">
-  <div class="section-label">01 — EARTHQUAKE DRILL</div>
+  <div class="section-label">01 · EARTHQUAKE DRILL</div>
   <h2 class="section-title">
     <span data-lang="en">Earthquake Drill</span>
-    <span data-lang="ja">地震防災訓練</span>
+    <span data-lang="ja">地震の訓練</span>
     <span data-lang="id">Latihan Gempa</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Experience a simulated earthquake scenario. Make decisions under pressure and learn the correct responses step by step.</span>
-    <span data-lang="ja">地震シナリオをシミュレーション体験。プレッシャーの中で判断し、正しい対応を段階的に学びます。</span>
-    <span data-lang="id">Alami skenario gempa simulasi. Buat keputusan di bawah tekanan dan pelajari respons yang benar langkah demi langkah.</span>
+    <span data-lang="en">Try a practice earthquake. Make decisions with little time, and learn the correct actions step by step.</span>
+    <span data-lang="ja">地震の練習をします。短い時間で判断して、正しい行動を1つずつ学びます。</span>
+    <span data-lang="id">Coba latihan gempa. Ambil keputusan dalam waktu singkat, lalu pelajari tindakan yang benar langkah demi langkah.</span>
   </p>
   <button class="bag-btn primary" id="drillStartBtn" style="margin-bottom:16px;">
     <span data-lang="en">🚨 Start Drill</span>
@@ -933,16 +933,16 @@
 
 <!-- Section 09: Disaster Drill Quiz -->
 <section class="section" id="quiz">
-  <div class="section-label">02 — QUIZ</div>
+  <div class="section-label">02 · QUIZ</div>
   <h2 class="section-title">
     <span data-lang="en">Disaster Drill Quiz</span>
     <span data-lang="ja">防災クイズ</span>
     <span data-lang="id">Kuis Latihan Bencana</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Test your disaster preparedness knowledge! 10 scenario-based questions covering earthquakes, typhoons, tsunamis, and emergency procedures.</span>
-    <span data-lang="ja">防災知識をテスト！地震、台風、津波、緊急時の手順に関する10問のシナリオベースの問題。</span>
-    <span data-lang="id">Uji pengetahuan kesiapsiagaan bencana Anda! 10 pertanyaan berbasis skenario tentang gempa, topan, tsunami, dan prosedur darurat.</span>
+    <span data-lang="en">Test what you know about disaster preparedness. Answer 10 questions about disaster situations. They cover earthquakes, typhoons, tsunamis, and emergency steps.</span>
+    <span data-lang="ja">防災の知識をテストします。災害の場面についての問題が10問あります。地震、台風、津波、緊急のときの行動について答えます。</span>
+    <span data-lang="id">Uji pengetahuan Anda tentang kesiapsiagaan bencana. Jawab 10 pertanyaan tentang situasi bencana: gempa, topan, tsunami, dan langkah darurat.</span>
   </p>
   <button class="bag-btn primary" id="quizStartBtn" style="margin-bottom:16px;">
     <span data-lang="en">🎯 Start Quiz</span>
@@ -954,7 +954,7 @@
 
 <!-- Section 08: About -->
 <section class="section" id="about">
-  <div class="section-label">03 — ABOUT</div>
+  <div class="section-label">03 · ABOUT</div>
   <h2 class="section-title">
     <span data-lang="en">About This Guide</span>
     <span data-lang="ja">このガイドについて</span>
@@ -963,9 +963,9 @@
 
   <!-- Mission statement -->
   <p class="section-note">
-    <span data-lang="en">MAMORU GUIDE was created to help international students in Japan prepare for natural disasters. "Mamoru" (守る) means "to protect" — because preparedness protects lives.</span>
-    <span data-lang="ja">守るガイドは、日本に住む留学生が自然災害に備えるために作られました。「守る」— 備えることが命を守ります。</span>
-    <span data-lang="id">MAMORU GUIDE dibuat untuk membantu mahasiswa internasional di Jepang mempersiapkan diri menghadapi bencana alam. "Mamoru" (守る) berarti "melindungi" — karena kesiapsiagaan melindungi nyawa.</span>
+    <span data-lang="en">MAMORU GUIDE helps international students in Japan prepare for natural disasters. "Mamoru" (守る) means "to protect". Being prepared protects lives.</span>
+    <span data-lang="ja">守るガイドは、日本に住む留学生が自然災害に備えるためのガイドです。名前の「守る」のとおり、備えることで命を守れます。</span>
+    <span data-lang="id">MAMORU GUIDE membantu mahasiswa internasional di Jepang bersiap menghadapi bencana alam. "Mamoru" (守る) berarti "melindungi". Kesiapsiagaan melindungi nyawa.</span>
   </p>
 
   <!-- About cards grid using step-card pattern -->
@@ -980,9 +980,9 @@
         <span data-lang="id">PPI Kobe</span>
       </h3>
       <p>
-        <span data-lang="en">Perhimpunan Pelajar Indonesia (PPI) Kobe is an Indonesian student association in Kobe, Japan. Kobe experienced the devastating Great Hanshin Earthquake in 1995 — this history drives our mission to prepare the next generation of international students.</span>
-        <span data-lang="ja">PPI Kobeは神戸のインドネシア留学生協会です。1995年の阪神・淡路大震災の経験から、次世代の留学生の防災意識向上に取り組んでいます。</span>
-        <span data-lang="id">Perhimpunan Pelajar Indonesia (PPI) Kobe adalah organisasi mahasiswa Indonesia di Kobe, Jepang. Kobe mengalami Gempa Besar Hanshin 1995 — sejarah ini mendorong misi kami untuk mempersiapkan generasi berikutnya.</span>
+        <span data-lang="en">Perhimpunan Pelajar Indonesia (PPI) Kobe is an association of Indonesian students in Kobe, Japan. In 1995, the Great Hanshin Earthquake caused great damage in Kobe. Because of this history, we help the next generation of international students prepare.</span>
+        <span data-lang="ja">PPI Kobeは、神戸にあるインドネシア人留学生の会です。1995年、阪神・淡路大震災で、神戸は大きな被害を受けました。この経験から、次の世代の留学生が災害に備えられるように活動しています。</span>
+        <span data-lang="id">Perhimpunan Pelajar Indonesia (PPI) Kobe adalah organisasi mahasiswa Indonesia di Kobe, Jepang. Pada tahun 1995, Gempa Besar Hanshin menyebabkan kerusakan besar di Kobe. Karena sejarah ini, kami membantu generasi mahasiswa internasional berikutnya untuk bersiap.</span>
       </p>
     </div>
 
@@ -990,14 +990,14 @@
     <div class="about-card">
       <div class="about-icon">💡</div>
       <h3>
-        <span data-lang="en">Why This Guide?</span>
-        <span data-lang="ja">なぜこのガイド？</span>
-        <span data-lang="id">Mengapa Panduan Ini?</span>
+        <span data-lang="en">Why We Made This Guide</span>
+        <span data-lang="ja">このガイドを作った理由</span>
+        <span data-lang="id">Alasan Kami Membuat Panduan Ini</span>
       </h3>
       <p>
-        <span data-lang="en">Most disaster resources in Japan are in Japanese only. International students often miss critical safety information due to language barriers. This guide bridges that gap with interactive, multilingual content designed to be remembered when it matters most.</span>
-        <span data-lang="ja">日本の防災情報の多くは日本語のみです。留学生は言語の壁により重要な安全情報を見逃しがちです。このガイドは、インタラクティブで多言語のコンテンツでそのギャップを埋めます。</span>
-        <span data-lang="id">Sebagian besar sumber daya bencana di Jepang hanya dalam bahasa Jepang. Mahasiswa internasional sering melewatkan informasi keselamatan penting karena hambatan bahasa. Panduan ini menjembatani kesenjangan itu dengan konten interaktif dan multibahasa.</span>
+        <span data-lang="en">Most disaster information in Japan is only in Japanese. Because of the language barrier, international students often miss important safety information. This guide gives that information in three languages, with interactive content that is easy to remember.</span>
+        <span data-lang="ja">日本の防災情報は、ほとんどが日本語だけです。ことばの壁のため、留学生は大切な安全情報を見のがすことがよくあります。このガイドは、その情報を3つの言語で伝えます。さわって学べるので、覚えやすいです。</span>
+        <span data-lang="id">Sebagian besar informasi bencana di Jepang hanya dalam bahasa Jepang. Karena kendala bahasa, mahasiswa internasional sering melewatkan informasi keselamatan yang penting. Panduan ini memberikan informasi itu dalam tiga bahasa, dengan konten interaktif yang mudah diingat.</span>
       </p>
     </div>
 
@@ -1010,9 +1010,9 @@
         <span data-lang="id">Sumber &amp; Referensi</span>
       </h3>
       <p>
-        <span data-lang="en">Information in this guide is based on official sources: Japan Meteorological Agency (JMA), Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, and NHK World safety guidelines.</span>
-        <span data-lang="ja">このガイドの情報は、気象庁（JMA）、消防庁（FDMA）、内閣府防災、NHK Worldの公式資料に基づいています。</span>
-        <span data-lang="id">Informasi dalam panduan ini berdasarkan sumber resmi: Japan Meteorological Agency (JMA), Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, dan panduan keselamatan NHK World.</span>
+        <span data-lang="en">The information in this guide comes from official sources: the Japan Meteorological Agency (JMA), the Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, and NHK World safety guidelines.</span>
+        <span data-lang="ja">このガイドの情報は、気象庁（JMA）、消防庁（FDMA）、内閣府防災、NHK Worldの公式の資料をもとにしています。</span>
+        <span data-lang="id">Informasi dalam panduan ini berasal dari sumber resmi: Japan Meteorological Agency (JMA), Fire and Disaster Management Agency (FDMA), Cabinet Office Disaster Prevention, dan panduan keselamatan NHK World.</span>
       </p>
     </div>
 
@@ -1025,9 +1025,9 @@
         <span data-lang="id">Terakhir Diperbarui</span>
       </h3>
       <p>
-        <span data-lang="en"><time datetime="2026-03">March 2026</time> — This guide is maintained and updated regularly. Content is reviewed against the latest official guidelines.</span>
-        <span data-lang="ja"><time datetime="2026-03">2026年3月</time> — このガイドは定期的に更新されています。最新の公式ガイドラインに基づいて内容を確認しています。</span>
-        <span data-lang="id"><time datetime="2026-03">Maret 2026</time> — Panduan ini dipelihara dan diperbarui secara berkala. Konten ditinjau berdasarkan pedoman resmi terbaru.</span>
+        <span data-lang="en"><time datetime="2026-03">March 2026</time>. We update this guide regularly. We check the content against the latest official guidelines.</span>
+        <span data-lang="ja"><time datetime="2026-03">2026年3月</time>。このガイドは定期的に更新しています。最新の公式ガイドラインで内容を確認しています。</span>
+        <span data-lang="id"><time datetime="2026-03">Maret 2026</time>. Kami memperbarui panduan ini secara berkala. Kami memeriksa isinya dengan pedoman resmi terbaru.</span>
       </p>
     </div>
     <div class="about-card about-card-share">
@@ -1038,9 +1038,9 @@
         <span data-lang="id">Bagikan Panduan Ini</span>
       </h3>
       <p>
-        <span data-lang="en">Share with friends, classmates, or at university events. Every prepared student helps the whole community.</span>
-        <span data-lang="ja">友人やクラスメートと共有しましょう。備えた一人が、コミュニティ全体を助けます。</span>
-        <span data-lang="id">Bagikan dengan teman, teman sekelas, atau di acara kampus. Setiap mahasiswa yang siap membantu seluruh komunitas.</span>
+        <span data-lang="en">Share this guide with friends and classmates, or at university events. Each prepared student helps the whole community.</span>
+        <span data-lang="ja">友だちやクラスメートと共有してください。大学のイベントでも紹介してください。備えた一人が、みんなを助けます。</span>
+        <span data-lang="id">Bagikan kepada teman dan teman sekelas, atau di acara kampus. Setiap mahasiswa yang siap akan membantu seluruh komunitas.</span>
       </p>
       <div class="share-url-box">
         <code>adityawks28.github.io/mamoru-guide</code>
@@ -1057,16 +1057,16 @@
 
 <!-- Section 08: Emergency Contacts Directory -->
 <section class="section" id="contacts">
-  <div class="section-label">08 — CONTACTS</div>
+  <div class="section-label">08 · CONTACTS</div>
   <h2 class="section-title">
-    <span data-lang="en">Emergency Contacts Directory</span>
-    <span data-lang="ja">緊急連絡先ディレクトリ</span>
-    <span data-lang="id">Direktori Kontak Darurat</span>
+    <span data-lang="en">Emergency Contacts</span>
+    <span data-lang="ja">緊急連絡先</span>
+    <span data-lang="id">Kontak Darurat</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Tap any contact to call directly. Save these numbers before an emergency — phone networks get overloaded fast.</span>
-    <span data-lang="ja">タップで直接電話できます。緊急時前にこれらの番号を保存しましょう。</span>
-    <span data-lang="id">Ketuk kontak mana saja untuk menelepon langsung. Simpan nomor ini sebelum darurat.</span>
+    <span data-lang="en">Tap a contact to call it. Save these numbers now, before an emergency. In an emergency, phone networks quickly become too busy.</span>
+    <span data-lang="ja">タップすると、すぐに電話できます。今のうちに、この番号を保存してください。緊急のときは、電話がすぐにつながりにくくなります。</span>
+    <span data-lang="id">Ketuk kontak untuk langsung menelepon. Simpan nomor-nomor ini sekarang, sebelum keadaan darurat. Saat darurat, jaringan telepon cepat penuh.</span>
   </p>
   <div class="contact-filters" role="toolbar" aria-label="Filter contacts">
     <button class="contact-filter-btn active" data-filter="all" aria-pressed="true">
@@ -1095,14 +1095,14 @@
 <section class="section" id="myplan">
   <div class="section-label">MY PLAN</div>
   <h2 class="section-title">
-    <span data-lang="en">My Emergency Card & Preparation</span>
-    <span data-lang="ja">緊急カード＆防災準備</span>
-    <span data-lang="id">Kartu Darurat & Persiapan Saya</span>
+    <span data-lang="en">My Emergency Card and Preparation</span>
+    <span data-lang="ja">緊急カードと防災の準備</span>
+    <span data-lang="id">Kartu Darurat dan Persiapan Saya</span>
   </h2>
   <p class="section-note">
-    <span data-lang="en">Fill in your profile and plan. Labels are bilingual (English + Japanese) so rescuers, doctors, and police can read your information even if you can't speak. Print it and keep a copy in your wallet, bag, and at home.</span>
-    <span data-lang="ja">プロフィールと計画を記入。ラベルは二言語（英語＋日本語）で、救助者・医師・警察があなたの情報を読めます。印刷して財布、カバン、自宅に保管。</span>
-    <span data-lang="id">Isi profil dan rencana Anda. Label dwibahasa (Inggris + Jepang) agar penolong, dokter, dan polisi bisa membaca informasi Anda. Cetak dan simpan di dompet, tas, dan rumah.</span>
+    <span data-lang="en">Fill in your profile and plan. The labels are in English and Japanese. This way, rescuers, doctors, and police can read your information, even if you cannot speak. Print it. Keep a copy in your wallet, in your bag, and at home.</span>
+    <span data-lang="ja">プロフィールと計画を書いてください。項目の名前は、英語と日本語の両方で書いてあります。あなたが話せないときも、救助する人、医者、警察が、あなたの情報を読めます。印刷して、財布とカバンと家に、1枚ずつ置いてください。</span>
+    <span data-lang="id">Isi profil dan rencana Anda. Label ditulis dalam bahasa Inggris dan Jepang. Dengan begitu, penolong, dokter, dan polisi bisa membaca informasi Anda, walaupun Anda tidak bisa berbicara. Cetak, lalu simpan satu salinan di dompet, di tas, dan di rumah.</span>
   </p>
 
   <div id="plan-wizard"></div>
@@ -1217,9 +1217,9 @@
     <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener noreferrer">Hazard Map Portal</a>
     <a href="https://www3.nhk.or.jp/nhkworld/" target="_blank" rel="noopener noreferrer">NHK World</a>
     <a href="https://www.fdma.go.jp/en/" target="_blank" rel="noopener noreferrer">FDMA</a>
-    <a href="https://www.bousai.go.jp/en/" target="_blank" rel="noopener noreferrer">Cabinet Office 防災</a>
+    <a href="https://www.bousai.go.jp/kokusai/web/index_en.html" target="_blank" rel="noopener noreferrer">Cabinet Office 防災</a>
   </div>
-  <div class="footer-copy" data-i18n="footer.copy">Mamoru Guide 守る — Built with resilience, inspired by Kobe. In collaboration with PPI Kobe.</div>
+  <div class="footer-copy" data-i18n="footer.copy">Mamoru Guide 守る · Inspired by the resilience of Kobe. Made together with PPI Kobe.</div>
 </footer>
 
 <!-- Emergency FAB -->
@@ -1228,7 +1228,7 @@
   <button class="fab-item" id="fabEarthquakeNow">
     <span class="fab-item-icon">🔴</span>
     <span data-lang="en">EARTHQUAKE NOW</span>
-    <span data-lang="ja">地震！今すぐ</span>
+    <span data-lang="ja">今、地震</span>
     <span data-lang="id">GEMPA SEKARANG</span>
   </button>
   <div class="fab-divider"></div>

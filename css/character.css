@@ -9,6 +9,7 @@
 
 .character-scene {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   gap: 12px;
   margin: 16px 0;
@@ -17,6 +18,9 @@
   transition: opacity 400ms ease, transform 400ms ease;
 }
 .section.visible .character-scene { opacity: 1; transform: none; }
+
+/* Typhoon and first aid stages (actor.ts): 128×96 pixel art at 2x. */
+.actor-stage { display: block; width: 256px; height: 192px; flex-shrink: 0; }
 
 .tip-bubble {
   position: relative;
