@@ -74,7 +74,7 @@ const STEPS: StepDef[] = [
       { key: 'profile.address',       label: 'Address ・ 住所',                       type: 'text', placeholder: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
       { key: 'profile.university',    label: 'School / University ・ 学校名',         type: 'text', placeholder: 'e.g. Kobe University / 神戸大学', autocomplete: 'organization' },
       { key: 'profile.residenceCard', label: 'Residence Card # ・ 在留カード番号',     type: 'text', placeholder: 'e.g. AB12345678CD' },
-      { key: 'profile.insurance',     label: 'Insurance # ・ 保険証番号',              type: 'text', placeholder: 'e.g. National Health Insurance #', full: true },
+      { key: 'profile.insurance',     label: 'Insurance # ・ 保険証番号',              type: 'text', placeholder: 'e.g. National Health Insurance #' },
     ],
   },
   {
@@ -113,9 +113,26 @@ const STEPS: StepDef[] = [
 const REVIEW_STEP = STEPS.length; // index 6
 const TOTAL_STEPS = STEPS.length + 1;
 
+// Printed worksheet: medical right after identity, since that is what a
+// rescuer reads first. ID numbers print as their last 4 characters unless the
+// user ticks the box: a lost sheet should not hand out a full card number.
+const MEDICAL_STEP = 1;
+const WORKSHEET_ORDER = [0, MEDICAL_STEP, 4, 2, 3, 5];
+const MASKED_IDS = new Set(['profile.residenceCard', 'profile.insurance']);
+const EMERGENCY_NUMBERS: [string, string, string][] = [
+  ['119', 'Fire · Ambulance', '消防・救急'],
+  ['110', 'Police', '警察'],
+  ['118', 'Sea emergency', '海上保安庁'],
+  ['171', 'Disaster message dial', '災害用伝言ダイヤル'],
+];
+// Browsers use the title as the PDF file name and page header.
+const PRINT_TITLE = 'Mamoru emergency worksheet';
+
 let plan: EmergencyPlan = emptyPlan();
 let currentStep = 0;
 let saveTimer: ReturnType<typeof setTimeout> | undefined;
+let printFullIds = false;
+let titleBeforePrint = '';
 
 function getVal(p: EmergencyPlan, path: string): string {
   const [section, field] = path.split('.') as [keyof EmergencyPlan, string];
@@ -132,6 +149,17 @@ function setVal(p: EmergencyPlan, path: string, value: string): void {
   if (sub && typeof sub === 'object') {
     (sub as Record<string, string>)[field] = value;
   }
+}
+
+function shownValue(f: FieldDef): string {
+  const value = getVal(plan, f.key).trim();
+  if (!value) return '';
+  return f.options?.find(o => o.value === value)?.label ?? value;
+}
+
+function lastFour(value: string): string {
+  const s = value.replace(/\s/g, '');
+  return '•'.repeat(Math.max(0, s.length - 4)) + s.slice(-4);
 }
 
 function el<K extends keyof HTMLElementTagNameMap>(
@@ -200,20 +228,15 @@ function renderReview(): HTMLElement {
 
   const review = el('div', { class: 'wizard-review' });
   STEPS.forEach(step => {
-    const filled = step.fields.filter(f => getVal(plan, f.key).trim() !== '');
+    const filled = step.fields.filter(f => shownValue(f) !== '');
     if (filled.length === 0) return;
 
     const group = el('div', { class: 'wizard-review-group' });
     group.appendChild(el('div', { class: 'wizard-review-group-title' }, `${step.icon}  ${step.title}`));
     const dl = el('dl', { class: 'wizard-review-dl' });
     filled.forEach(f => {
-      let value = getVal(plan, f.key);
-      if (f.options) {
-        const match = f.options.find(o => o.value === value);
-        if (match) value = match.label;
-      }
       dl.appendChild(el('dt', {}, f.label));
-      dl.appendChild(el('dd', {}, value));
+      dl.appendChild(el('dd', {}, shownValue(f)));
     });
     group.appendChild(dl);
     review.appendChild(group);
@@ -223,6 +246,13 @@ function renderReview(): HTMLElement {
     review.appendChild(el('p', { class: 'wizard-review-empty' }, 'No information filled yet. Use the back button to add details.'));
   }
   card.appendChild(review);
+
+  const idsOption = el('label', { class: 'wizard-print-option' });
+  const idsBox = el('input', { type: 'checkbox', name: 'print-full-ids' });
+  idsBox.checked = printFullIds;
+  idsBox.addEventListener('change', () => { printFullIds = idsBox.checked; });
+  idsOption.append(idsBox, t('plan.print.fullIds'));
+  card.appendChild(idsOption);
 
   const actions = el('div', { class: 'wizard-review-actions' });
   const saveBtn  = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-next' }, t('plan.btn.save'));
@@ -291,12 +321,81 @@ export function clearPlan(): void {
   showToast(lang3('Plan cleared', '計画を消去しました', 'Rencana dihapus'), 'success');
 }
 
-export function printPlan(): void {
+// A clean, ink-light sheet built from the plan with textContent only; empty
+// fields become write-in lines so a blank print works as a paper form.
+function buildWorksheet(): HTMLElement {
+  const ws = el('article', { id: 'plan-print', class: 'ws' });
+
+  const head = el('header', { class: 'ws-head' });
+  const who = el('div');
+  const name = getVal(plan, 'profile.name').trim();
+  who.append(
+    el('div', { class: 'ws-kicker' }, 'Full Name ・ 氏名'),
+    el('h1', name ? {} : { class: 'ws-blank' }, name),
+  );
+  head.append(who, el('p', { class: 'ws-ask' }, '救助・医療関係者の方へ：私の緊急時の情報です。\nTo rescuers and medical staff: this is my emergency information.'));
+  ws.append(head);
+
+  const numbers = el('ul', { class: 'ws-numbers' });
+  for (const [n, en, ja] of EMERGENCY_NUMBERS) {
+    const li = el('li');
+    const what = el('span');
+    what.append(el('span', {}, en), el('span', {}, ja));
+    li.append(el('strong', {}, n), what);
+    numbers.append(li);
+  }
+  ws.append(numbers);
+
+  let masked = false;
+  for (const i of WORKSHEET_ORDER) {
+    const step = STEPS[i];
+    const sec = el('section', { class: 'ws-sec' + (i === MEDICAL_STEP ? ' ws-medical' : '') });
+    const dl = el('dl');
+    for (const f of step.fields) {
+      if (f.key === 'profile.name') continue;
+      let value = shownValue(f);
+      if (value && MASKED_IDS.has(f.key) && !printFullIds) { value = lastFour(value); masked = true; }
+      // Medical notes and the address get a whole row; lists share one, so the sheet fits a page.
+      const wide = f.full && (f.type !== 'textarea' || i === MEDICAL_STEP);
+      const row = el('div', { class: 'ws-field' + (wide ? ' full' : '') });
+      const blank = 'ws-blank' + (f.type === 'textarea' ? ' tall' : '');
+      row.append(el('dt', {}, f.label), el('dd', value ? {} : { class: blank }, value));
+      dl.append(row);
+    }
+    sec.append(el('h2', {}, step.title), dl);
+    ws.append(sec);
+  }
+
+  ws.append(el('footer', { class: 'ws-foot' }, [
+    `Printed ${new Date().toLocaleDateString('en-CA')}.`,
+    'Contains personal information: keep it safe and shred old copies. 個人情報を含みます。大切に保管し、古いものは破棄してください。',
+    masked ? 'ID numbers show the last 4 characters only. 番号は末尾4文字のみ表示。' : '',
+    'Made on this device with Mamoru Guide; nothing was uploaded.',
+  ].filter(Boolean).join(' ')));
+  return ws;
+}
+
+function preparePrint(): void {
+  document.getElementById('plan-print')?.remove();
+  document.body.append(buildWorksheet());
   document.body.classList.add('print-plan-only');
+  if (document.title !== PRINT_TITLE) {
+    titleBeforePrint = document.title;
+    document.title = PRINT_TITLE;
+  }
+}
+
+function endPrint(): void {
+  const ws = document.getElementById('plan-print');
+  if (!ws) return;
+  ws.remove();
+  document.body.classList.remove('print-plan-only');
+  document.title = titleBeforePrint;
+}
+
+export function printPlan(): void {
+  preparePrint();
   window.print();
-  window.addEventListener('afterprint', () => {
-    document.body.classList.remove('print-plan-only');
-  }, { once: true });
 }
 
 export function initEmergencyPlan(): void {
@@ -315,5 +414,11 @@ export function initEmergencyPlan(): void {
 
   wizard.addEventListener('input', handleInput);
   wizard.addEventListener('change', handleInput);
+  printFullIds = false;
+  // Ctrl+P / the browser menu on the plan page prints the worksheet too.
+  window.addEventListener('beforeprint', () => {
+    if (document.body.dataset.route === 'plan') preparePrint();
+  });
+  window.addEventListener('afterprint', endPrint);
   goToStep(0);
 }

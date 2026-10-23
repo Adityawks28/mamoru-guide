@@ -53,72 +53,112 @@ describe('earthquake-scene', () => {
     expect(actor.getAttribute('data-pose')).toBe('stand');
   });
 
-  it('shindo 4 → eventually brace pose after walk sequence', async () => {
+  // `shindo` is the row index on the 10-step scale: 0 1 2 3 4 5- 5+ 6- 6+ 7.
+  const shindo = (i: number) =>
+    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: i } }));
+  const actorX = () => Number(document.querySelector('#earthquake-scene .mr-actor')!
+    .getAttribute('transform')!.match(/translate\((-?\d+)/)![1]);
+
+  it('shindo 4 → braces once she gets there', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 4 } }));
-    vi.advanceTimersByTime(800);
+    shindo(4);
+    vi.advanceTimersByTime(1500);
     expect(actorPose()).toBe('brace');
   });
 
-  it('shindo 7 → final cower pose at 2200ms (tucked under table)', async () => {
+  it('walks to the table in whole steps instead of sliding', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 7 } }));
-    vi.advanceTimersByTime(2300);
+    shindo(7);
+    const seen = new Set<number>();
+    for (let t = 0; t < 2000; t += 30) { vi.advanceTimersByTime(30); seen.add(actorX()); }
+    expect(seen.size).toBeGreaterThan(4);
+    expect([...seen].every(Number.isInteger)).toBe(true);
+    expect(actorX()).toBe(210);
     expect(actorPose()).toBe('cower');
   });
 
-  it('shindo 6 → actor renders BEFORE table (depth: actor under tabletop)', async () => {
+  it('6- and up → hides under the table (actor drawn before it)', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
+    shindo(7);
+    vi.advanceTimersByTime(3000);
     const actor = document.querySelector('#earthquake-scene .mr-actor') as SVGGElement;
     const table = document.querySelector('#earthquake-scene .mr-table') as SVGGElement;
     expect(actor.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
-  it('shindo 0 → actor renders AFTER table (depth: actor in front)', async () => {
+  it('shindo 0 calms the room back down', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
+    shindo(9);
+    vi.advanceTimersByTime(8000);
+    shindo(0);
+    vi.advanceTimersByTime(3000);
+    expect(actorPose()).toBe('stand');
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeFalsy();
     const actor = document.querySelector('#earthquake-scene .mr-actor') as SVGGElement;
     const table = document.querySelector('#earthquake-scene .mr-table') as SVGGElement;
     expect(actor.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
   });
 
-  it('shindo 7 → shelf becomes fallen', async () => {
+  it('furniture falls at the height of the shaking, not on the first jolt', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 7 } }));
+    shindo(9);
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeFalsy();
+    vi.advanceTimersByTime(3000);
     expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeTruthy();
   });
 
-  it('shindo 5 → door glow visible', async () => {
+  it('5+ (hard to stand) can topple the shelf; 5- only drops small things', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 5 } }));
-    const glow = document.querySelector('#earthquake-scene .mr-door-glow') as SVGGElement;
-    expect(glow.style.display).toBe('');
-  });
-
-  it('null shindo → resets to intensity 0 (stand)', async () => {
-    const { initEarthquakeScene } = await import('../earthquake-scene');
-    initEarthquakeScene();
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 6 } }));
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
-    vi.advanceTimersByTime(800);
-    expect(actorPose()).toBe('stand');
+    shindo(5);
+    vi.advanceTimersByTime(5000);
     expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeFalsy();
+    expect((document.querySelector('#earthquake-scene .mr-vase-fall') as SVGGElement).style.display).toBe('');
+    shindo(6);
+    vi.advanceTimersByTime(5000);
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeTruthy();
   });
 
-  it('procedure text updates per intensity', async () => {
+  it('the lamp only swings while the room shakes, then settles', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const room = document.getElementById('earthquake-scene')!;
+    expect(room.classList.contains('quaking')).toBe(false);
+    shindo(4);
+    expect(room.classList.contains('quaking')).toBe(true);
+    vi.advanceTimersByTime(10000);
+    expect(room.classList.contains('quaking')).toBe(false);
+  });
+
+  it('every row gets its own advice, up to shindo 7', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
     expect(procEn()).toContain('stay calm');
-    document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: 5 } }));
+    shindo(5);
     expect(procEn()).toContain('drop, cover');
+    shindo(8);
+    expect(procEn()).toContain('sturdy table');
+    shindo(9);
+    expect(procEn()).toContain('protect head');
+  });
+
+  it('with reduced motion the room still shows the result, without moving', async () => {
+    (globalThis as any).window.matchMedia = () => ({
+      matches: true, addEventListener: () => {}, removeEventListener: () => {},
+      onchange: null, addListener: () => {}, removeListener: () => {},
+      media: '', dispatchEvent: () => false,
+    });
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    shindo(9);
+    expect(document.querySelector('#earthquake-scene .mr-shelf.fallen')).toBeTruthy();
+    expect(actorPose()).toBe('cower');
+    expect(document.getElementById('earthquake-scene')!.classList.contains('quaking')).toBe(false);
   });
 });

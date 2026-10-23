@@ -1,16 +1,16 @@
 import type { ScaleEntry, VocabData, BagItem } from './types';
 
 export const scaleData: ScaleEntry[] = [
-  {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
-  {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',shakeClass:'shaking-1',icon:'🏠',pct:5},
-  {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',shakeClass:'shaking-2',icon:'🏠',pct:10},
-  {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',shakeClass:'shaking-3',icon:'🍽️',pct:20},
-  {n:'4',jp:'震度4',colors:['#4ecb71','#3ba'],en:'Strong shaking, objects fall',ja:'強い揺れ、物が落ちる',id:'Guncangan kuat, benda jatuh',shakeClass:'shaking-4',icon:'📦',pct:35},
-  {n:'5-',jp:'震度5弱',colors:['#f5a623','#d89'],en:'Very strong — furniture moves',ja:'非常に強い — 家具が動く',id:'Sangat kuat — furnitur bergerak',shakeClass:'shaking-5m',icon:'🪑',pct:50},
-  {n:'5+',jp:'震度5強',colors:['#e87','#d76'],en:'Hard to stand, walls crack',ja:'立っていられない、壁にひび',id:'Sulit berdiri, dinding retak',shakeClass:'shaking-5p',icon:'🧱',pct:60},
-  {n:'6-',jp:'震度6弱',colors:['#e65','#d54'],en:'Impossible to stand, buildings damaged',ja:'立てない、建物損壊',id:'Tidak bisa berdiri, bangunan rusak',shakeClass:'shaking-6m',icon:'🏚️',pct:75},
-  {n:'6+',jp:'震度6強',colors:['#d43','#c32'],en:'Widespread collapse possible',ja:'広範囲で倒壊の可能性',id:'Keruntuhan luas mungkin',shakeClass:'shaking-6p',icon:'💥',pct:88},
-  {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,shakeClass:'shaking-7',icon:'🔴',pct:100},
+  {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',icon:'🏠',pct:0},
+  {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',icon:'🏠',pct:5},
+  {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',icon:'🏠',pct:10},
+  {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',icon:'🍽️',pct:20},
+  {n:'4',jp:'震度4',colors:['#4ecb71','#3ba'],en:'Strong shaking, objects fall',ja:'強い揺れ、物が落ちる',id:'Guncangan kuat, benda jatuh',icon:'📦',pct:35},
+  {n:'5-',jp:'震度5弱',colors:['#f5a623','#d89'],en:'Very strong — furniture moves',ja:'非常に強い — 家具が動く',id:'Sangat kuat — furnitur bergerak',icon:'🪑',pct:50},
+  {n:'5+',jp:'震度5強',colors:['#e87','#d76'],en:'Hard to stand, walls crack',ja:'立っていられない、壁にひび',id:'Sulit berdiri, dinding retak',icon:'🧱',pct:60},
+  {n:'6-',jp:'震度6弱',colors:['#e65','#d54'],en:'Impossible to stand, buildings damaged',ja:'立てない、建物損壊',id:'Tidak bisa berdiri, bangunan rusak',icon:'🏚️',pct:75},
+  {n:'6+',jp:'震度6強',colors:['#d43','#c32'],en:'Widespread collapse possible',ja:'広範囲で倒壊の可能性',id:'Keruntuhan luas mungkin',icon:'💥',pct:88},
+  {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,icon:'🔴',pct:100},
 ];
 
 export const vocabData: VocabData = {
@@ -58,26 +58,31 @@ export const vocabData: VocabData = {
 };
 
 export const bagItems: BagItem[] = [
-  {e:'💧',en:'Water (500ml × 6)',ja:'水（500ml × 6）',id:'Air (500ml × 6)',weight:3.0,priority:10,det_en:'3L minimum for 3 days',det_ja:'3日分で最低3L',det_id:'Minimal 3L untuk 3 hari'},
-  {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:2.0,priority:9,det_en:'Canned food, crackers, energy bars',det_ja:'缶詰、クラッカー、栄養バー',det_id:'Makanan kaleng, kerupuk, bar energi'},
-  {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.4,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
-  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.5,priority:9,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
-  {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.8,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
-  {e:'💊',en:'Personal medications (5+ days)',ja:'常備薬（5日分以上）',id:'Obat pribadi (5+ hari)',weight:0.2,priority:10,det_en:'With prescription copy',det_ja:'処方箋のコピーがあれば',det_id:'Dengan salinan resep'},
-  {e:'📄',en:'Important documents (copies)',ja:'重要書類（コピー）',id:'Dokumen penting (salinan)',weight:0.1,priority:8,det_en:'Passport, zairyu card, insurance',det_ja:'パスポート、在留カード、保険証',det_id:'Paspor, kartu zairyu, asuransi'},
-  {e:'💴',en:'Cash (coins + small bills)',ja:'現金（小銭 + 千円札）',id:'Uang tunai (koin + uang kecil)',weight:0.2,priority:8,det_en:'ATMs may not work',det_ja:'ATMが使えない場合',det_id:'ATM mungkin tidak berfungsi'},
-  {e:'🔋',en:'Portable phone charger',ja:'モバイルバッテリー',id:'Pengisi daya portabel',weight:0.4,priority:7,det_en:'Keep it charged!',det_ja:'充電を忘れずに！',det_id:'Tetap terisi!'},
-  {e:'🧤',en:'Work gloves + dust mask',ja:'軍手 + 防塵マスク',id:'Sarung tangan + masker',weight:0.3,priority:6,det_en:'For moving debris safely',det_ja:'がれき撤去時の安全',det_id:'Untuk memindahkan puing'},
-  {e:'🧥',en:'Warm clothes + rain poncho',ja:'防寒着 + レインポンチョ',id:'Pakaian hangat + jas hujan',weight:1.8,priority:5,det_en:'Especially for winter',det_ja:'特に冬の緊急時に',det_id:'Terutama musim dingin'},
-  {e:'🗺️',en:'Printed hazard map',ja:'印刷したハザードマップ',id:'Peta bahaya cetak',weight:0.1,priority:6,det_en:'Mark evacuation route!',det_ja:'避難ルートを記入！',det_id:'Tandai rute evakuasi!'},
-  {e:'📞',en:'Emergency contacts (paper)',ja:'緊急連絡先（紙）',id:'Kontak darurat (kertas)',weight:0.05,priority:7,det_en:'Phone may die',det_ja:'スマホが使えない時',det_id:'Ponsel bisa mati'},
-  {e:'🧴',en:'Hygiene essentials',ja:'衛生用品',id:'Kebutuhan kebersihan',weight:1.0,priority:4,det_en:'Wet wipes, toilet paper, sanitizer',det_ja:'ウェットティッシュ、トイレットペーパー',det_id:'Tisu basah, kertas toilet'},
-  {e:'🛏️',en:'Emergency blanket',ja:'防災ブランケット',id:'Selimut darurat',weight:1.5,priority:5,det_en:'Mylar or compact sleeping bag',det_ja:'アルミブランケット又は寝袋',det_id:'Mylar atau kantong tidur kompak'},
-  {e:'👟',en:'Sturdy shoes',ja:'丈夫な靴',id:'Sepatu kokoh',weight:1.0,priority:6,det_en:'Broken glass, debris on ground',det_ja:'ガラス片・がれきから足を守る',det_id:'Pecahan kaca, puing di tanah'},
-  {e:'🔧',en:'Multi-tool knife',ja:'マルチツールナイフ',id:'Pisau multifungsi',weight:0.3,priority:4,det_en:'Cutting, opening cans, repairs',det_ja:'切断、缶開け、修理',det_id:'Memotong, membuka kaleng, perbaikan'},
-  {e:'📢',en:'Emergency whistle',ja:'防災ホイッスル',id:'Peluit darurat',weight:0.05,priority:8,det_en:'Signal for help when trapped',det_ja:'閉じ込められた時の助け呼び',det_id:'Sinyal minta tolong saat terperangkap'},
-  {e:'🚽',en:'Portable toilet kit',ja:'簡易トイレ',id:'Kit toilet portabel',weight:0.3,priority:7,det_en:'Essential after Kobe \'95 and 2011',det_ja:'阪神・東日本大震災の教訓',det_id:'Penting setelah Kobe \'95 dan 2011'},
-  {e:'📋',en:'Laminated phrase card',ja:'ラミネート会話カード',id:'Kartu frasa laminasi',weight:0.05,priority:7,det_en:'Physical backup of Show This cards',det_ja:'「見せて」カードの物理バックアップ',det_id:'Cadangan fisik kartu Tunjukkan Ini'},
+  {e:'💧',en:'Water (500ml × 6)',ja:'水（500ml × 6）',id:'Air (500ml × 6)',weight:3.1,priority:10,det_en:'3L is one day of drinking water',det_ja:'飲み水は1人1日3Lが目安',det_id:'3L = air minum untuk 1 hari'},
+  {e:'🍙',en:'Emergency food (3 days)',ja:'非常食（3日分）',id:'Makanan darurat (3 hari)',weight:1.2,priority:9,det_en:'Alpha rice, crackers, energy bars',det_ja:'アルファ米、クラッカー、栄養バー',det_id:'Nasi instan, kerupuk, bar energi'},
+  {e:'🔦',en:'Flashlight + batteries',ja:'懐中電灯 + 電池',id:'Senter + baterai',weight:0.3,priority:8,det_en:'Or hand-crank/solar',det_ja:'手回し/ソーラーも可',det_id:'Atau engkol tangan/surya'},
+  {e:'📻',en:'Emergency radio',ja:'防災ラジオ',id:'Radio darurat',weight:0.3,priority:9,det_en:'NHK broadcasts in multiple languages',det_ja:'NHKは多言語で放送',det_id:'NHK dalam berbagai bahasa'},
+  {e:'🩹',en:'First aid kit',ja:'救急箱',id:'Kotak P3K',weight:0.5,priority:9,det_en:'Bandages, antiseptic, pain relief',det_ja:'包帯、消毒液、鎮痛剤',det_id:'Perban, antiseptik, pereda nyeri'},
+  {e:'💊',en:'Personal medications (5+ days)',ja:'常備薬（5日分以上）',id:'Obat pribadi (5+ hari)',weight:0.1,priority:10,det_en:'With prescription copy',det_ja:'処方箋のコピーがあれば',det_id:'Dengan salinan resep'},
+  {e:'📄',en:'Important documents (copies)',ja:'重要書類（コピー）',id:'Dokumen penting (salinan)',weight:0.05,priority:8,det_en:'Passport, zairyu card, insurance',det_ja:'パスポート、在留カード、保険証',det_id:'Paspor, kartu zairyu, asuransi'},
+  {e:'💴',en:'Cash (coins + small bills)',ja:'現金（小銭 + 千円札）',id:'Uang tunai (koin + uang kecil)',weight:0.15,priority:8,det_en:'ATMs may not work',det_ja:'ATMが使えない場合',det_id:'ATM mungkin tidak berfungsi'},
+  {e:'🔋',en:'Portable phone charger',ja:'モバイルバッテリー',id:'Pengisi daya portabel',weight:0.25,priority:7,det_en:'Keep it charged!',det_ja:'充電を忘れずに！',det_id:'Tetap terisi!'},
+  {e:'🧤',en:'Work gloves + dust mask',ja:'軍手 + 防塵マスク',id:'Sarung tangan + masker',weight:0.15,priority:6,det_en:'For moving debris safely',det_ja:'がれき撤去時の安全',det_id:'Untuk memindahkan puing'},
+  {e:'🧥',en:'Warm clothes + rain poncho',ja:'防寒着 + レインポンチョ',id:'Pakaian hangat + jas hujan',weight:1.0,priority:5,det_en:'Especially for winter',det_ja:'特に冬の緊急時に',det_id:'Terutama musim dingin'},
+  {e:'🗺️',en:'Printed hazard map',ja:'印刷したハザードマップ',id:'Peta bahaya cetak',weight:0.02,priority:6,det_en:'Mark evacuation route!',det_ja:'避難ルートを記入！',det_id:'Tandai rute evakuasi!'},
+  {e:'📞',en:'Emergency contacts (paper)',ja:'緊急連絡先（紙）',id:'Kontak darurat (kertas)',weight:0.01,priority:7,det_en:'Phone may die',det_ja:'スマホが使えない時',det_id:'Ponsel bisa mati'},
+  {e:'🧴',en:'Hygiene essentials',ja:'衛生用品',id:'Kebutuhan kebersihan',weight:0.5,priority:4,det_en:'Wet wipes, toilet paper, sanitizer',det_ja:'ウェットティッシュ、トイレットペーパー',det_id:'Tisu basah, kertas toilet'},
+  {e:'🛏️',en:'Foil emergency blanket',ja:'アルミブランケット',id:'Selimut darurat foil',weight:0.06,priority:5,det_en:'Folds to palm size, keeps body heat in',det_ja:'手のひらサイズで体温を逃がさない',det_id:'Seukuran telapak tangan, menahan panas tubuh'},
+  {e:'👟',en:'Sturdy shoes',ja:'丈夫な靴',id:'Sepatu kokoh',weight:0.9,priority:6,det_en:'Broken glass, debris on ground',det_ja:'ガラス片・がれきから足を守る',det_id:'Pecahan kaca, puing di tanah'},
+  {e:'🔧',en:'Multi-tool knife',ja:'マルチツールナイフ',id:'Pisau multifungsi',weight:0.2,priority:4,det_en:'Cutting, opening cans, repairs',det_ja:'切断、缶開け、修理',det_id:'Memotong, membuka kaleng, perbaikan'},
+  {e:'📢',en:'Emergency whistle',ja:'防災ホイッスル',id:'Peluit darurat',weight:0.01,priority:8,det_en:'Signal for help when trapped',det_ja:'閉じ込められた時の助け呼び',det_id:'Sinyal minta tolong saat terperangkap'},
+  {e:'🚽',en:'Portable toilet kit',ja:'簡易トイレ',id:'Kit toilet portabel',weight:0.4,priority:7,det_en:'Essential after Kobe \'95 and 2011',det_ja:'阪神・東日本大震災の教訓',det_id:'Penting setelah Kobe \'95 dan 2011'},
+  {e:'📋',en:'Laminated phrase card',ja:'ラミネート会話カード',id:'Kartu frasa laminasi',weight:0.01,priority:7,det_en:'Physical backup of Show This cards',det_ja:'「見せて」カードの物理バックアップ',det_id:'Cadangan fisik kartu Tunjukkan Ini'},
+  {e:'🚰',en:'Extra water (2L bottle)',ja:'追加の水（2Lボトル）',id:'Air tambahan (botol 2L)',weight:2.1,priority:6,det_en:"Day 2's water: heavy, but hard to replace",det_ja:'2日目の水。重いが代わりがない',det_id:'Air hari ke-2: berat, tapi sulit diganti'},
+  {e:'🥫',en:'Canned food (×4)',ja:'缶詰（4缶）',id:'Makanan kaleng (×4)',weight:1.6,priority:3,det_en:'Heavy. Light alpha rice does the same job',det_ja:'重い。軽いアルファ米で代用できる',det_id:'Berat. Nasi instan yang ringan sama gunanya'},
+  {e:'💻',en:'Laptop + charger',ja:'ノートPC + 充電器',id:'Laptop + pengisi daya',weight:1.8,priority:2,det_en:'Your phone covers news and maps',det_ja:'情報はスマホで十分',det_id:'Ponsel sudah cukup untuk berita dan peta'},
 ];
 
-export const MAX_BAG_WEIGHT = 8.0;
+// Japanese city guides put a grab bag at about 10 kg (women) to 15 kg (men),
+// light enough to run with; Mamoru packs to the lower figure.
+export const MAX_BAG_WEIGHT = 10.0;

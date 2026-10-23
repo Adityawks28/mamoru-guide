@@ -8,6 +8,16 @@ function lang3(en: string, ja: string, id: string): string {
   return currentLang === 'ja' ? ja : currentLang === 'id' ? id : en;
 }
 
+export function formatWeight(kg: number): string {
+  return kg < 1 ? `${Math.round(kg * 1000)} g` : `${kg.toFixed(1)} kg`;
+}
+
+function sendWeight(rejected = false): void {
+  document.dispatchEvent(new CustomEvent('mamoru:bag-weight', {
+    detail: { weight: getCurrentWeight(), max: MAX_BAG_WEIGHT, rejected },
+  }));
+}
+
 function getCurrentWeight(): number {
   let w = 0;
   packedItems.forEach(i => w += bagItems[i].weight);
@@ -27,6 +37,7 @@ function toggleBagItem(idx: number): void {
     if (newWeight > MAX_BAG_WEIGHT) {
       el.classList.add('rejected');
       setTimeout(() => el.classList.remove('rejected'), 800);
+      sendWeight(true);
       showToast(lang3(
         '⚠ Too heavy! Remove something first.',
         '⚠ 重すぎます！まず何か取り出してください。',
@@ -60,7 +71,7 @@ export function renderBagItems(): void {
         <div class="bag-item-name"><span data-lang="en">${item.en}</span><span data-lang="ja">${item.ja}</span><span data-lang="id">${item.id}</span></div>
         <div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>
         <div class="bag-item-meta">
-          <span class="bag-meta-tag weight">⚖ ${item.weight}kg</span>
+          <span class="bag-meta-tag weight">⚖ ${formatWeight(item.weight)}</span>
           <span class="bag-meta-tag ${prClass}">${prLabel}</span>
         </div>
       </div>`;
@@ -91,7 +102,7 @@ function updatePackPanel(): void {
       return `<div class="bag-pack-item">
         <span class="bag-pack-item-emoji">${item.e}</span>
         <span class="bag-pack-item-name">${name}</span>
-        <span class="bag-pack-item-weight">${item.weight}kg</span>
+        <span class="bag-pack-item-weight">${formatWeight(item.weight)}</span>
       </div>`;
     }).join('');
   }
@@ -129,11 +140,7 @@ export function updateBagStats(): void {
   const scoreEl = document.getElementById('bagScore');
   if (scoreEl) scoreEl.textContent = String(score);
 
-  const w = getCurrentWeight();
-  let status: 'ok' | 'over' | 'perfect' = 'ok';
-  if (w > MAX_BAG_WEIGHT) status = 'over';
-  else if (w >= MAX_BAG_WEIGHT * 0.85 && w <= MAX_BAG_WEIGHT) status = 'perfect';
-  document.dispatchEvent(new CustomEvent('mamoru:bag-weight', { detail: { weight: w, status } }));
+  sendWeight();
 }
 
 function loadBestScore(): number {

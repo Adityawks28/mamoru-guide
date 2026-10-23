@@ -25,7 +25,8 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="apple-touch-icon" href="img/icons/icon-192.svg">
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<!-- crossorigin: a CORS response is one the service worker can cache for offline use. -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
@@ -132,12 +133,7 @@
 
     <!-- atmosphere (night) -->
     <div class="ks-stars" id="stars" aria-hidden="true"></div>
-    <div class="ks-shooters" aria-hidden="true">
-      <span class="ks-shooter" style="top:8%;  left:14%; animation-delay:0s;"></span>
-      <span class="ks-shooter" style="top:16%; left:48%; animation-delay:4s;"></span>
-      <span class="ks-shooter" style="top:12%; left:72%; animation-delay:8s;"></span>
-      <span class="ks-shooter" style="top:24%; left:32%; animation-delay:12s;"></span>
-    </div>
+    <div class="ks-shooters" aria-hidden="true"></div>
 
     <!-- Mountains -->
     <svg class="ks-mountains" viewBox="0 0 1400 440" preserveAspectRatio="none">
@@ -157,7 +153,7 @@
       <div class="ch-body"></div>
     </div>
 
-    <svg class="ks-bridge" viewBox="0 0 480 100" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="ks-bridge" viewBox="0 0 480 85" preserveAspectRatio="none" aria-hidden="true">
       <line x1="0" y1="60" x2="480" y2="60" stroke="#3a4a6a" stroke-width="2"/>
       <path d="M0,60 Q120,15 240,60 Q360,15 480,60" fill="none" stroke="var(--bridge-cable)" stroke-width="1.5"/>
       <rect x="118" y="5" width="4" height="80" fill="var(--bridge-tower)"/>
@@ -180,7 +176,7 @@
       <!-- Task 8 adds .ks-bridge here -->
       <!-- Task 9 adds .ks-crystal here -->
       <div class="ks-crystal" title="Kobe Crystal Tower" aria-hidden="true">
-        <svg viewBox="0 0 70 240" shape-rendering="crispEdges">
+        <svg viewBox="0 -8 70 228" preserveAspectRatio="xMidYMax meet" shape-rendering="crispEdges">
           <rect x="6" y="20" width="58" height="200" fill="var(--crystal-body)"/>
           <rect x="10" y="8" width="50" height="14" fill="var(--crystal-crown)"/>
           <rect x="14" y="0" width="42" height="10" fill="var(--crystal-crown)"/>
@@ -209,11 +205,11 @@
           <rect x="6" y="206" width="58" height="1" fill="var(--crystal-line)"/>
           <rect x="6" y="215" width="58" height="1" fill="var(--crystal-line)"/>
           <!-- vertical mullions -->
-          <rect x="14" y="22" width="1" height="200" fill="var(--crystal-line)"/>
-          <rect x="24" y="22" width="1" height="200" fill="var(--crystal-line)"/>
-          <rect x="34" y="22" width="1" height="200" fill="var(--crystal-line)"/>
-          <rect x="44" y="22" width="1" height="200" fill="var(--crystal-line)"/>
-          <rect x="54" y="22" width="1" height="200" fill="var(--crystal-line)"/>
+          <rect x="14" y="22" width="1" height="198" fill="var(--crystal-line)"/>
+          <rect x="24" y="22" width="1" height="198" fill="var(--crystal-line)"/>
+          <rect x="34" y="22" width="1" height="198" fill="var(--crystal-line)"/>
+          <rect x="44" y="22" width="1" height="198" fill="var(--crystal-line)"/>
+          <rect x="54" y="22" width="1" height="198" fill="var(--crystal-line)"/>
           <!-- lit window scatter (deterministic — 30 panes; ~50% lit) -->
           <rect x="9"  y="28"  width="4" height="6" fill="#f5a623" opacity="0.85"/>
           <rect x="29" y="28"  width="4" height="6" fill="var(--crystal-pane)" opacity="0.5"/>
@@ -249,7 +245,7 @@
       </div>
       <!-- Task 10 adds .ks-ferris here -->
       <div class="ks-ferris" title="Mosaic Ferris Wheel" aria-hidden="true">
-        <svg viewBox="0 0 80 90" shape-rendering="crispEdges">
+        <svg viewBox="0 0 80 87" preserveAspectRatio="xMidYMax meet" shape-rendering="crispEdges">
           <circle cx="40" cy="40" r="32" fill="none" stroke="var(--ferris-frame)" stroke-width="2"/>
           <circle cx="40" cy="40" r="3" fill="var(--ferris-frame)"/>
           <g class="ferris-spin" style="transform-origin: 40px 40px;">
@@ -276,7 +272,7 @@
       </div>
       <!-- Task 11 adds .ks-museum here -->
       <div class="ks-museum" title="Kobe Maritime Museum" aria-hidden="true">
-        <svg viewBox="0 0 120 60" shape-rendering="crispEdges">
+        <svg viewBox="0 0 120 60" preserveAspectRatio="xMidYMax meet" shape-rendering="crispEdges">
           <path d="M0,60 L20,30 L40,40 L60,15 L80,38 L100,28 L120,60 Z"
                 fill="var(--museum-white)" stroke="var(--museum-line)" stroke-width="1"/>
           <path d="M0,60 L20,30 L40,40 L60,15 L80,38 L100,28 L120,60"
@@ -284,7 +280,7 @@
         </svg>
       </div>
       <div class="ks-tower" title="Kobe Port Tower 神戸ポートタワー">
-        <svg viewBox="0 0 72 200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+        <svg viewBox="0 0 72 200" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
           <ellipse cx="36" cy="160" rx="28" ry="12" fill="#c03020" opacity="0.18"/>
           <rect x="16" y="190" width="40" height="10" fill="#3a1a10"/>
           <rect x="20" y="188" width="32" height="4" fill="#5a2a18"/>
@@ -510,13 +506,15 @@
     <span data-lang="ja">日本の震度階級（震度 Shindo）</span>
     <span data-lang="id">Skala Intensitas Seismik Jepang (震度 Shindo)</span>
   </h2>
-  <div id="earthquake-scene" class="character-scene"></div>
   <p class="section-note">
     <span data-lang="en">Shindo measures what you <em>feel</em>, not the quake's energy. <strong>Tap any row</strong> to feel the shaking!</span>
     <span data-lang="ja">震度はあなたが<em>感じる</em>揺れの強さ。<strong>各行をタップ</strong>して揺れを体験！</span>
     <span data-lang="id">Shindo mengukur apa yang Anda <em>rasakan</em>. <strong>Ketuk baris</strong> untuk merasakan guncangan!</span>
   </p>
-  <div class="scale-vertical" id="scaleVertical"></div>
+  <div class="quake-demo">
+    <div id="earthquake-scene" class="character-scene"></div>
+    <div class="scale-vertical" id="scaleVertical"></div>
+  </div>
 
   <div class="split-panel">
     <div class="panel do-panel">
@@ -681,16 +679,16 @@
   </h2>
   <div id="bag-scene" class="character-scene"></div>
   <p class="section-note">
-    <span data-lang="en">Your bag can hold <strong>8.0 kg max</strong>. Choose wisely based on priority and weight — you can't take everything! Tap items to pack or unpack them.</span>
-    <span data-lang="ja">バッグの容量は<strong>最大8.0kg</strong>。優先度と重さを考えて選ぼう！全部は入りません。タップで詰める・戻す。</span>
-    <span data-lang="id">Tas Anda hanya bisa menampung <strong>maks 8.0 kg</strong>. Pilih dengan bijak berdasarkan prioritas dan berat — tidak bisa bawa semua! Ketuk untuk memasukkan atau mengeluarkan.</span>
+    <span data-lang="en">Your bag can hold <strong>10 kg max</strong>: Japanese city guides say about 10 kg for women and 15 kg for men, light enough to run with. Items show their typical real weight, and Mamoru feels every kilo. You can't take everything! Tap items to pack or unpack them.</span>
+    <span data-lang="ja">バッグは<strong>最大10kg</strong>。自治体の目安は女性約10kg・男性約15kg、走って逃げられる重さです。重さは実際の一般的な重さで、マモルにも重さが伝わります。全部は入りません。タップで詰める・戻す。</span>
+    <span data-lang="id">Tas Anda maksimal <strong>10 kg</strong>: panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki, cukup ringan untuk berlari. Berat barang sesuai berat aslinya, dan Mamoru merasakan setiap kilonya. Tidak bisa bawa semua! Ketuk untuk memasukkan atau mengeluarkan.</span>
   </p>
 
   <div class="bag-game">
     <div class="bag-stats">
       <div class="bag-stat">
         <div class="bag-stat-label"><span data-lang="en">ITEMS</span><span data-lang="ja">アイテム</span><span data-lang="id">ITEM</span></div>
-        <div class="bag-stat-value" id="bagItemCount">0 / 18</div>
+        <div class="bag-stat-value" id="bagItemCount">0 / 23</div>
       </div>
       <div class="bag-stat">
         <div class="bag-stat-label"><span data-lang="en">SCORE</span><span data-lang="ja">スコア</span><span data-lang="id">SKOR</span></div>
@@ -700,7 +698,7 @@
         <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
         <div class="weight-bar-outer">
           <div class="weight-bar-fill" id="weightBarFill"></div>
-          <div class="weight-bar-text" id="weightBarText">0.0 / 8.0 kg</div>
+          <div class="weight-bar-text" id="weightBarText">0.0 / 10.0 kg</div>
         </div>
       </div>
     </div>
@@ -721,7 +719,7 @@
           <div class="bag-stat-label"><span data-lang="en">WEIGHT</span><span data-lang="ja">重さ</span><span data-lang="id">BERAT</span></div>
           <div class="weight-bar-outer">
             <div class="weight-bar-fill" style="width:0%"></div>
-            <div class="weight-bar-text">0.0 / 8.0 kg</div>
+            <div class="weight-bar-text">0.0 / 10.0 kg</div>
           </div>
         </div>
       </div>

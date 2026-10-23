@@ -244,7 +244,25 @@ body.day-mode .bag-result {
   border-color: rgba(0,0,0,0.12);
 }
 
+/* Mamoru carries the bag (bag-scene.ts sets data-load). Whole-pixel moves
+   held per frame: a hop when light, a slow sag when heavy, a wobble near
+   the limit, a stagger when an item won't fit. */
+#bag-scene .mamoru-sprite { width: 128px; height: 192px; flex-shrink: 0; } /* 2x, whole pixels */
+#bag-scene[data-load="light"] .mamoru-sprite { animation: bag-hop 0.8s steps(1, end) infinite; }
+#bag-scene[data-load="heavy"] .mamoru-sprite { animation: bag-sag 1.6s steps(1, end) infinite; }
+#bag-scene[data-load="strain"] .mamoru-sprite { animation: bag-wobble 0.5s steps(1, end) infinite; }
+#bag-scene[data-load="reject"] .mamoru-sprite { animation: bag-stagger 0.3s steps(1, end) 3; }
+@keyframes bag-hop { 0% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes bag-sag { 0% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+@keyframes bag-wobble { 0% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }
+@keyframes bag-stagger {
+  0%  { transform: translateX(-4px); }
+  33% { transform: translateX(4px); }
+  66% { transform: translateX(-2px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bag-item { transition: none; }
   .bag-item.rejected { animation: none; }
+  #bag-scene .mamoru-sprite { animation: none; }
 }

@@ -64,19 +64,23 @@ const typeLabels: Record<string, string> = {
   landslide: 'Landslide',
 };
 
-function loadLeaflet(): Promise<void> {
+// Hashes as published for Leaflet 1.9.4: the browser refuses a CDN copy that
+// does not match, and CORS mode lets the service worker cache it.
+export function loadLeaflet(): Promise<void> {
   if (leafletLoaded) return Promise.resolve();
 
   return new Promise((resolve, reject) => {
-    // Load CSS
     const css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+    css.crossOrigin = 'anonymous';
     document.head.appendChild(css);
 
-    // Load JS
     const script = document.createElement('script');
     script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+    script.crossOrigin = 'anonymous';
     script.onload = () => { leafletLoaded = true; resolve(); };
     script.onerror = () => reject(new Error('Failed to load Leaflet'));
     document.head.appendChild(script);
