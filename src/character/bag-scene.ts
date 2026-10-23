@@ -1,20 +1,46 @@
-import { createSprite, updateSprite, type Pose } from './sprite';
-import { BAG_TIPS } from './tips';
+import { createSprite, updateSprite, type SpriteOptions } from './sprite';
+import { BAG_TIPS, type Tip } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
 
-const PEACE_HOLD_MS = 700;
 const TIP_INTERVAL_MS = 4500;
+const REJECT_MS = 900;
+const REMARK_MS = 6000;
 
-type Status = 'ok' | 'over' | 'perfect';
+export type Load = 'empty' | 'light' | 'ok' | 'heavy' | 'strain' | 'reject';
+
+export function loadFor(weight: number, max: number): Load {
+  const r = weight / max;
+  return r <= 0 ? 'empty' : r < 0.4 ? 'light' : r < 0.7 ? 'ok' : r < 0.9 ? 'heavy' : 'strain';
+}
+
+// How Mamoru carries each load; the bob/stagger lives in bag-game.css.
+const LOOK: Record<Load, Partial<SpriteOptions>> = {
+  empty:  { pose: 'stand', face: undefined, sweat: 0 },
+  light:  { pose: 'stand', face: 'happy',   sweat: 0 },
+  ok:     { pose: 'stand', face: undefined, sweat: 0 },
+  heavy:  { pose: 'tired', face: undefined, sweat: 1 },
+  strain: { pose: 'tired', face: 'gasp',    sweat: 3 },
+  reject: { pose: 'tired', face: 'wow',     sweat: 3 },
+};
+
+const REMARK: Record<Load, Tip | null> = {
+  empty:  null,
+  light:  { en: 'Light as a feather! Room for more essentials.', ja: 'まだ軽い！必需品をもっと入れられる。', id: 'Masih ringan! Masih muat barang penting.' },
+  ok:     { en: 'Still easy to walk with. Nice.', ja: 'まだ楽に歩ける。いい感じ。', id: 'Masih nyaman dibawa jalan. Bagus.' },
+  heavy:  { en: 'Getting heavy… you may walk an hour to the shelter.', ja: '重くなってきた…避難所まで1時間歩くかも。', id: 'Mulai berat… mungkin jalan 1 jam ke pengungsian.' },
+  strain: { en: 'Hah… hah… too heavy to run! Take something out?', ja: 'はぁ…はぁ…重くて走れない！何か出そう。', id: 'Hah… hah… terlalu berat untuk lari! Keluarkan sesuatu?' },
+  reject: { en: "Whoa! That won't fit — over 10 kg!", ja: 'うわっ！10kgを超えちゃう！', id: 'Waduh! Tidak muat — lebih dari 10 kg!' },
+};
 
 export function initBagScene(): void {
   const host = document.getElementById('bag-scene');
   if (!host) return;
 
-  let allowed = motionAllowed();
-  let peaceTimer: number | null = null;
   let tipIdx = 0;
   let tipTimer: number | null = null;
+  let rejectTimer: number | null = null;
+  let remarkUntil = 0;
+  let load: Load = 'empty';
 
   const sprite = createSprite({ pose: 'stand', gender: 'male' });
   host.innerHTML = '';
@@ -28,49 +54,46 @@ export function initBagScene(): void {
   bubble.append(en, ja, id);
   host.appendChild(bubble);
 
-  function showTip(i: number): void {
-    const t = BAG_TIPS[i % BAG_TIPS.length];
+  function say(t: Tip): void {
     en.textContent = t.en;
     ja.textContent = t.ja;
     id.textContent = t.id;
   }
-  showTip(0);
+  say(BAG_TIPS[0]);
 
-  function statusToPose(status: Status): Pose {
-    if (status === 'over') return 'tired';
-    return 'stand';
+  function show(next: Load): void {
+    host!.dataset.load = next;
+    updateSprite(sprite, LOOK[next]);
+    const remark = REMARK[next];
+    if (remark) { say(remark); remarkUntil = Date.now() + REMARK_MS; }
   }
+  show('empty');
 
   function onWeight(e: Event): void {
-    const ev = e as CustomEvent<{ weight: number; status: Status }>;
-    if (peaceTimer !== null) window.clearTimeout(peaceTimer);
-    if (ev.detail.status === 'perfect') {
-      updateSprite(sprite, { pose: 'stand', emote: 'peace' });
-      peaceTimer = window.setTimeout(() => {
-        updateSprite(sprite, { pose: 'stand', emote: 'idle' });
-      }, PEACE_HOLD_MS);
-    } else {
-      updateSprite(sprite, { pose: statusToPose(ev.detail.status), emote: 'idle' });
+    const { weight, max, rejected } = (e as CustomEvent<{ weight: number; max: number; rejected?: boolean }>).detail;
+    const next = loadFor(weight, max);
+    if (rejectTimer !== null) { window.clearTimeout(rejectTimer); rejectTimer = null; }
+    if (rejected) {
+      show('reject');
+      rejectTimer = window.setTimeout(() => { rejectTimer = null; show(load); }, REJECT_MS);
+      return;
     }
+    if (next !== load) show(next);
+    load = next;
   }
+  document.addEventListener('mamoru:bag-weight', onWeight);
 
   function rotateTip(): void {
+    if (Date.now() < remarkUntil) return;
     tipIdx = (tipIdx + 1) % BAG_TIPS.length;
-    showTip(tipIdx);
+    say(BAG_TIPS[tipIdx]);
   }
 
-  function applyMotion(now: boolean): void {
-    allowed = now;
+  function applyMotion(allowed: boolean): void {
     if (tipTimer !== null) { window.clearInterval(tipTimer); tipTimer = null; }
-    document.removeEventListener('mamoru:bag-weight', onWeight);
-    if (allowed) {
-      tipTimer = window.setInterval(rotateTip, TIP_INTERVAL_MS);
-      document.addEventListener('mamoru:bag-weight', onWeight);
-    } else {
-      updateSprite(sprite, { pose: 'stand' });
-    }
+    if (allowed) tipTimer = window.setInterval(rotateTip, TIP_INTERVAL_MS);
   }
 
-  applyMotion(allowed);
+  applyMotion(motionAllowed());
   onMotionChange(applyMotion);
 }
