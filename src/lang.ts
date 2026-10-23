@@ -8,8 +8,8 @@ export function setLang(lang: Language): void {
   document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
   document.body.classList.add('lang-' + lang);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  const activeBtn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
-  if (activeBtn) activeBtn.classList.add('active');
+  // Desktop switcher and mobile menu each have a button per language.
+  document.querySelectorAll(`.lang-btn[onclick="setLang('${lang}')"]`).forEach(b => b.classList.add('active'));
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.setAttribute('aria-pressed', b.classList.contains('active') ? 'true' : 'false');
   });
