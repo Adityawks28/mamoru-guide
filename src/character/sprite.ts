@@ -5,7 +5,8 @@ export type Pose =
 export type Gender = 'male' | 'female';
 export type Emote =
   | 'idle' | 'wave' | 'jump' | 'peace' | 'burst' | 'bow';
-export type Face = 'happy' | 'wink' | 'wow' | 'gasp';
+export type Face = 'happy' | 'wink' | 'wow' | 'gasp' | 'talk';
+export type Hold = 'phone' | 'phone-front' | 'torch';
 
 export const POSES: Pose[] = [
   'stand', 'brace', 'cover', 'hide', 'headcover',
@@ -26,6 +27,8 @@ export interface SpriteOptions {
   face?: Face;
   /** Sweat drops on the head, 0-3. */
   sweat?: number;
+  /** Something in the hand, drawn where that pose puts the hand. */
+  hold?: Hold;
 }
 
 const PALETTE = {
@@ -78,7 +81,7 @@ function armRotations(pose: Pose): [number, number] {
     pose === 'cower' ? -150 :
     pose === 'crouch' ? -40 :
     pose === 'choke'  ? -140 :
-    pose === 'phone'  ? -150 :
+    pose === 'phone'  ?  150 :
     pose === 'reach'  ? -60 :
     pose === 'kneel'  ? -30 :
     pose === 'thrust' ? -100 :
@@ -117,7 +120,6 @@ function crouchTransform(pose: Pose): { y: number; scale: number } {
 
 function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
   const { pose, gender } = opts;
-  const isTired = pose === 'tired';
   const [armL, armR] = opts.arms ?? armRotations(pose);
 
   if (pose === 'hide' || pose === 'crouch' || pose === 'cower') {
@@ -142,13 +144,16 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
       rect(32, 80, 16, 4, PALETTE.ink),
     );
   } else {
+    // Walk cycle: 'walk' lifts the left foot, 'run' the right one.
+    const liftL = pose === 'walk' ? 2 : 0;
+    const liftR = pose === 'run' ? 2 : 0;
     parent.append(
-      rect(22, 68, 8, 18, PALETTE.pants),
-      rect(34, 68, 8, 18, PALETTE.pants),
-      rect(22, 68, 2, 18, PALETTE.pantsShadow),
-      rect(34, 68, 2, 18, PALETTE.pantsShadow),
-      rect(20, 84, 12, 4, PALETTE.ink),
-      rect(32, 84, 12, 4, PALETTE.ink),
+      rect(22, 68, 8, 18 - liftL, PALETTE.pants),
+      rect(34, 68, 8, 18 - liftR, PALETTE.pants),
+      rect(22, 68, 2, 18 - liftL, PALETTE.pantsShadow),
+      rect(34, 68, 2, 18 - liftR, PALETTE.pantsShadow),
+      rect(20, 84 - liftL, 12, 4, PALETTE.ink),
+      rect(32, 84 - liftR, 12, 4, PALETTE.ink),
     );
   }
 
@@ -166,15 +171,16 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
     rect(14, 46, 2, 16, PALETTE.teeShadow),
     rect(13, 60, 8, 6, PALETTE.hands),
   );
-  parent.appendChild(lArm);
-
   const rArm = el('g', { transform: `rotate(${armR} 44 48)` });
   rArm.append(
     rect(44, 46, 6, 16, PALETTE.tee),
     rect(48, 46, 2, 16, PALETTE.teeShadow),
     rect(43, 60, 8, 6, PALETTE.hands),
   );
-  parent.appendChild(rArm);
+  // Hands that go to the mouth or over the head sit in front of the face,
+  // not hidden behind it.
+  const armsInFront = pose === 'choke' || pose === 'headcover' || (opts.arms !== undefined && (armL <= -120 || armR >= 120));
+  if (!armsInFront) parent.append(lArm, rArm);
 
   parent.append(
     rect(22, 22, 20, 22, PALETTE.skin),
@@ -215,8 +221,17 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
 
   if (opts.face) {
     buildFace(parent, opts.face);
-    return;
-  } else if (pose === 'hide' || pose === 'cower' || isTired) {
+  } else {
+    buildEyesAndMouth(parent, opts);
+  }
+  if (armsInFront) parent.append(lArm, rArm);
+  if (opts.hold) parent.appendChild(buildHold(opts.hold));
+}
+
+function buildEyesAndMouth(parent: SVGGElement, opts: SpriteOptions): void {
+  const { pose } = opts;
+  const isTired = pose === 'tired';
+  if (pose === 'hide' || pose === 'cower' || isTired) {
     parent.append(
       rect(26, 32, 4, 1, PALETTE.ink),
       rect(34, 32, 4, 1, PALETTE.ink),
@@ -252,6 +267,21 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
   }
 }
 
+// Hand positions come from armRotations: 'phone' puts the left hand by the
+// ear, a right arm at 110 brings the hand to the chest, at -40 out to the side.
+function buildHold(hold: Hold): SVGGElement {
+  const g = el('g');
+  g.dataset.prop = hold === 'torch' ? 'torch' : 'phone';
+  if (hold === 'phone') {
+    g.append(rect(13, 30, 5, 9, PALETTE.ink), rect(14, 31, 3, 6, '#5a6a80'));
+  } else if (hold === 'phone-front') {
+    g.append(rect(26, 44, 7, 10, PALETTE.ink), rect(27, 45, 5, 7, '#5a6a80'));
+  } else {
+    g.append(rect(52, 54, 8, 4, '#7a7a8a'), rect(52, 54, 8, 1, '#a0a0b0'), rect(60, 53, 3, 6, '#ffe08a'));
+  }
+  return g;
+}
+
 // ^ ^ eye: a 4px arch whose top row sits on the open eye's row.
 function arch(x: number): SVGRectElement[] {
   return [rect(x, 32, 1, 1, PALETTE.ink), rect(x + 1, 31, 2, 1, PALETTE.ink), rect(x + 3, 32, 1, 1, PALETTE.ink)];
@@ -264,6 +294,14 @@ function buildFace(parent: SVGGElement, face: Face): void {
       parent.append(rect(26 + dx, 30 + dy, 1, 1, PALETTE.ink), rect(37 - dx, 30 + dy, 1, 1, PALETTE.ink));
     }
     parent.append(rect(30, 37, 4, 3, PALETTE.ink));
+    return;
+  }
+  if (face === 'talk') {
+    parent.append(
+      rect(27, 31, 2, 2, PALETTE.ink),
+      rect(35, 31, 2, 2, PALETTE.ink),
+      rect(30, 37, 4, 2, PALETTE.ink),
+    );
     return;
   }
   if (face === 'wow') {
