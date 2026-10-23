@@ -5,7 +5,7 @@ export const id: Record<string, string> = {
   'nav.emergency': '🚨 Darurat',
   'nav.prepare':   'Bersiap',
   'nav.learn':     'Belajar',
-  'nav.shelter':   'Shelter',
+  'nav.shelter':   'Pengungsian',
   'nav.plan':      'Rencana',
 
   // Hero
@@ -21,7 +21,7 @@ export const id: Record<string, string> = {
 
   // Emergency mode
   'em.title':       '🚨 DARURAT',
-  'em.subtitle':    'Ketuk tindakan — tetap tenang, ambil napas, bertindak',
+  'em.subtitle':    'Tetap tenang. Bernapas pelan-pelan. Ketuk salah satu tindakan.',
   'em.back':        '← Kembali',
   'em.call.title':  'Telepon 119',
   'em.call.desc':   'Pemadam / Ambulans',
@@ -34,7 +34,7 @@ export const id: Record<string, string> = {
 
   // Section chip-nav
   'chip.earthquake': '🏚 Gempa',
-  'chip.alerts':     '📡 Alarm',
+  'chip.alerts':     '📡 Peringatan',
   'chip.typhoon':    '🌀 Topan',
   'chip.vocab':      '🗣 Kosakata',
   'chip.showthis':   '💬 Kartu',
@@ -47,24 +47,24 @@ export const id: Record<string, string> = {
 
   // Earthquake section
   'eq.title':    'Skala Intensitas Seismik Jepang (震度 Shindo)',
-  'eq.subtitle': 'Shindo mengukur apa yang Anda rasakan. Ketuk baris untuk merasakan guncangan!',
+  'eq.subtitle': 'Shindo mengukur guncangan yang Anda rasakan, bukan energi gempanya. Ketuk satu baris untuk merasakan guncangannya.',
   'eq.do':       '✓ LAKUKAN',
   'eq.dont':     '✗ JANGAN',
 
   // Vocab section
-  'vocab.title': 'Kotoba (言葉) Penting untuk Diketahui',
+  'vocab.title': 'Kata Penting (言葉 Kotoba)',
   'vocab.tab.danger': 'Bahaya',
   'vocab.tab.action': 'Tindakan',
   'vocab.tab.places': 'Tempat',
   'vocab.tab.help':   'Bantuan',
 
   // Show This section
-  'showthis.title':    'Kartu Tunjukkan 見せるカード',
-  'showthis.subtitle': 'Tidak bisa berbicara bahasa Jepang? Tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepang ditampilkan besar agar mudah dibaca. Geser atau ketuk panah untuk menelusuri frasa.',
+  'showthis.title':    'Tunjukkan Kartu Ini 見せるカード',
+  'showthis.subtitle': 'Jika Anda tidak bisa berbahasa Jepang, tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepangnya besar, jadi orang mudah membacanya. Geser atau ketuk tanda panah untuk melihat frasa lain.',
 
   // Bag game section
-  'bag.title':    '🎒 非常袋 Hijou-bukuro — Isi Tas Darurat!',
-  'bag.subtitle': 'Tas Anda maksimal <strong>10 kg</strong>: panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki, cukup ringan untuk berlari. Berat barang sesuai berat aslinya, dan Mamoru merasakan setiap kilonya. Tidak bisa bawa semua! Ketuk untuk memasukkan atau mengeluarkan.',
+  'bag.title':    '🎒 非常袋 Hijou-bukuro · Isi Tas Darurat',
+  'bag.subtitle': 'Tas Anda bisa memuat <strong>maksimal 10 kg</strong>. Panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki. Dengan berat ini, Anda masih bisa berlari. Berat setiap barang sesuai dengan berat aslinya pada umumnya. Mamoru merasakan setiap kilogramnya. Anda tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
   'bag.stat.items':  'ITEM',
   'bag.stat.score':  'SKOR',
   'bag.stat.weight': 'BERAT',
@@ -73,50 +73,50 @@ export const id: Record<string, string> = {
   'bag.btn.check':   '📋 Cek Skor',
 
   // Contacts section
-  'contacts.title':    'Direktori Kontak Darurat',
-  'contacts.subtitle': 'Ketuk kontak mana saja untuk menelepon langsung. Simpan nomor ini sebelum darurat.',
+  'contacts.title':    'Kontak Darurat',
+  'contacts.subtitle': 'Ketuk kontak untuk langsung menelepon. Simpan nomor-nomor ini sebelum terjadi keadaan darurat. Saat darurat, jaringan telepon cepat padat.',
   'contacts.filter.all':     'Semua',
   'contacts.filter.emerg':   'Darurat',
   'contacts.filter.medical': 'Medis',
   'contacts.filter.support': 'Dukungan',
   'contacts.filter.embassy': 'Kedutaan',
-  'contacts.filter.mental':  'Mental',
+  'contacts.filter.mental':  'Kesehatan Mental',
 
   // Plan section
   'plan.title':    'Kartu Darurat & Persiapan Saya',
-  'plan.subtitle': 'Isi profil dan rencana Anda. Label dwibahasa (Inggris + Jepang) agar penolong, dokter, dan polisi bisa membaca informasi Anda. Cetak dan simpan di dompet, tas, dan rumah.',
+  'plan.subtitle': 'Isi profil dan rencana Anda. Labelnya dalam bahasa Inggris dan Jepang. Penolong, dokter, dan polisi bisa membaca informasi Anda, walaupun Anda tidak bisa berbicara. Cetak, lalu simpan salinannya di dompet, tas, dan rumah.',
   'plan.btn.save':  '💾 Simpan',
   'plan.btn.print': '🖨️ Cetak Lembar Kerja',
-  'plan.print.fullIds': 'Cetak nomor ID lengkap (kartu izin tinggal, asuransi). Mati: hanya 4 karakter terakhir.',
+  'plan.print.fullIds': 'Cetak nomor ID lengkap (kartu izin tinggal, asuransi). Jika dimatikan, hanya 4 karakter terakhir yang dicetak.',
   'plan.btn.show':  '🆘 Tunjukkan Rencana',
   'plan.btn.clear': '🗑️ Hapus',
   'plan.btn.next':  'Berikutnya →',
   'plan.btn.prev':  '← Kembali',
-  'plan.show.title':    '🆘 Info Darurat — 緊急情報',
+  'plan.show.title':    '🆘 Info Darurat · 緊急情報',
   'plan.show.subtitle': 'Tolong saya / 助けてください',
   'plan.show.close':    'Tutup',
-  'plan.show.empty':    'Rencana kosong. Isi wizard terlebih dahulu untuk menampilkan info di sini.',
+  'plan.show.empty':    'Rencana Anda masih kosong. Isi formulir rencana terlebih dahulu. Setelah itu, informasi Anda muncul di sini.',
 
   // About section
   'about.title': 'Tentang Panduan Ini',
 
   // Drill section
   'drill.title':    'Latihan Gempa',
-  'drill.subtitle': 'Alami skenario gempa simulasi. Buat keputusan di bawah tekanan dan pelajari respons yang benar langkah demi langkah.',
+  'drill.subtitle': 'Coba simulasi gempa. Buat keputusan dengan cepat. Pelajari tindakan yang benar langkah demi langkah.',
   'drill.btn.start': '🚨 Mulai Latihan',
 
   // Quiz section
   'quiz.title':    'Kuis Latihan Bencana',
-  'quiz.subtitle': 'Uji pengetahuan kesiapsiagaan bencana Anda! 10 pertanyaan berbasis skenario tentang gempa, topan, tsunami, dan prosedur darurat.',
+  'quiz.subtitle': 'Uji pengetahuan Anda tentang kesiapsiagaan bencana. Ada 10 pertanyaan berdasarkan skenario. Topiknya gempa, topan, tsunami, dan apa yang harus dilakukan saat darurat.',
   'quiz.btn.start': '🎯 Mulai Kuis',
 
   // Footer
-  'footer.copy': 'Mamoru Guide 守る — Dibangun dengan ketahanan, terinspirasi Kobe. Kolaborasi dengan PPI Kobe.',
+  'footer.copy': 'Mamoru Guide 守る · Terinspirasi oleh ketangguhan Kobe. Dibuat bersama PPI Kobe.',
 
   // FAB labels
   'fab.firstaid': 'Pertolongan Pertama',
-  'fab.shelter':  'Cari Shelter',
-  'fab.showthis': 'Kartu Tunjukkan',
+  'fab.shelter':  'Cari Tempat Berlindung',
+  'fab.showthis': 'Tunjukkan Kartu Ini',
 
   // Common
   'common.copy': '📋 Salin',

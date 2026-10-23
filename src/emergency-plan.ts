@@ -24,7 +24,7 @@ function lang3(en: string, ja: string, id: string): string {
 }
 
 const BLOOD_TYPES: FieldOption[] = [
-  { value: '',    label: '—' },
+  { value: '',    label: 'Select ・ 選択' },
   { value: 'A+',  label: 'A+'  }, { value: 'A-',  label: 'A−'  },
   { value: 'B+',  label: 'B+'  }, { value: 'B-',  label: 'B−'  },
   { value: 'AB+', label: 'AB+' }, { value: 'AB-', label: 'AB−' },
@@ -32,8 +32,8 @@ const BLOOD_TYPES: FieldOption[] = [
 ];
 
 const SUPPLY_DAYS: FieldOption[] = [
-  { value: '',  label: '—' },
-  { value: '0', label: 'Not prepared yet' },
+  { value: '',  label: 'Select ・ 選択' },
+  { value: '0', label: 'None yet' },
   { value: '1', label: '1 day' },
   { value: '2', label: '2 days' },
   { value: '3', label: '3 days (minimum)' },
@@ -42,11 +42,11 @@ const SUPPLY_DAYS: FieldOption[] = [
 ];
 
 const DOC_OPTIONS: FieldOption[] = [
-  { value: '',         label: '—' },
+  { value: '',         label: 'Select ・ 選択' },
   { value: 'none',     label: 'Not yet' },
-  { value: 'physical', label: 'Physical copies in bag' },
-  { value: 'digital',  label: 'Digital copies (phone/cloud)' },
-  { value: 'both',     label: 'Both physical & digital' },
+  { value: 'physical', label: 'Paper copies in the bag' },
+  { value: 'digital',  label: 'Digital copies (phone or cloud)' },
+  { value: 'both',     label: 'Paper and digital copies' },
 ];
 
 const STEPS: StepDef[] = [
@@ -54,7 +54,7 @@ const STEPS: StepDef[] = [
     icon: '👤', title: 'Identity ・ 身元',
     fields: [
       { key: 'profile.name',         label: 'Full Name ・ 氏名',           type: 'text', placeholder: 'e.g. Aditya Wirayutha', autocomplete: 'name' },
-      { key: 'profile.nameKana',     label: 'Name in Katakana ・ カタカナ', type: 'text', placeholder: 'e.g. アディティヤ' },
+      { key: 'profile.nameKana',     label: 'Name in Katakana ・ 氏名（カタカナ）', type: 'text', placeholder: 'e.g. アディティヤ' },
       { key: 'profile.nationality',  label: 'Nationality ・ 国籍',          type: 'text', placeholder: 'e.g. Indonesia / インドネシア' },
       { key: 'profile.languages',    label: 'Languages Spoken ・ 話せる言語', type: 'text', placeholder: 'e.g. English, Indonesian, basic Japanese' },
       { key: 'profile.bloodType',    label: 'Blood Type ・ 血液型',         type: 'select', options: BLOOD_TYPES },
@@ -74,7 +74,7 @@ const STEPS: StepDef[] = [
       { key: 'profile.address',       label: 'Address ・ 住所',                       type: 'text', placeholder: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
       { key: 'profile.university',    label: 'School / University ・ 学校名',         type: 'text', placeholder: 'e.g. Kobe University / 神戸大学', autocomplete: 'organization' },
       { key: 'profile.residenceCard', label: 'Residence Card # ・ 在留カード番号',     type: 'text', placeholder: 'e.g. AB12345678CD' },
-      { key: 'profile.insurance',     label: 'Insurance # ・ 保険証番号',              type: 'text', placeholder: 'e.g. National Health Insurance #' },
+      { key: 'profile.insurance',     label: 'Insurance # ・ 保険証番号',              type: 'text', placeholder: 'e.g. National Health Insurance number' },
     ],
   },
   {
@@ -82,19 +82,19 @@ const STEPS: StepDef[] = [
     fields: [
       { key: 'shelters.primary',      label: 'Primary Shelter ・ 第1避難場所',  type: 'text', placeholder: 'e.g. Higashi Yuenchi Park (500m)' },
       { key: 'shelters.backup',       label: 'Secondary Shelter ・ 第2避難場所', type: 'text', placeholder: 'e.g. Ward Community Center (1.2km)' },
-      { key: 'shelters.highGround',   label: 'High Ground (Tsunami) ・ 高台',   type: 'text', placeholder: 'e.g. Kitano-cho hillside (800m)' },
+      { key: 'shelters.highGround',   label: 'High Ground (Tsunami) ・ 高台（津波）', type: 'text', placeholder: 'e.g. Kitano-cho hillside (800m)' },
       { key: 'shelters.meetingPoint', label: 'Meeting Point ・ 集合場所',       type: 'text', placeholder: 'e.g. Front gate of Kobe University' },
-      { key: 'shelters.walkTime',     label: 'Walking Time ・ 徒歩時間',        type: 'text', placeholder: 'e.g. 10 minutes on foot' },
-      { key: 'shelters.routeNotes',   label: 'Evacuation Route Notes ・ 避難ルート', type: 'textarea', placeholder: 'e.g. Go north on Flower Road → right at City Hall', full: true },
+      { key: 'shelters.walkTime',     label: 'Walking Time ・ 徒歩時間',        type: 'text', placeholder: 'e.g. 10 minute walk' },
+      { key: 'shelters.routeNotes',   label: 'Evacuation Route Notes ・ 避難ルート', type: 'textarea', placeholder: 'e.g. Go north on Flower Road. Turn right at City Hall.', full: true },
     ],
   },
   {
     icon: '📞', title: 'Contacts ・ 緊急連絡先',
     fields: [
-      { key: 'contacts.contact1',     label: 'Contact 1 ・ 連絡先1',              type: 'text', placeholder: 'e.g. Budi — 080-1234-5678' },
-      { key: 'contacts.contact2',     label: 'Contact 2 ・ 連絡先2',              type: 'text', placeholder: 'e.g. University Office — 078-XXX-XXXX' },
-      { key: 'contacts.familyAbroad', label: 'Family Back Home ・ 母国の家族',    type: 'text', placeholder: 'e.g. Mom — +62-812-XXX-XXXX' },
-      { key: 'contacts.embassy',      label: 'Embassy / Consulate ・ 大使館',     type: 'text', placeholder: 'e.g. KJRI Osaka — 06-6449-9898' },
+      { key: 'contacts.contact1',     label: 'Contact 1 ・ 連絡先1',              type: 'text', placeholder: 'e.g. Budi, 080-1234-5678' },
+      { key: 'contacts.contact2',     label: 'Contact 2 ・ 連絡先2',              type: 'text', placeholder: 'e.g. University office, 078-XXX-XXXX' },
+      { key: 'contacts.familyAbroad', label: 'Family Back Home ・ 母国の家族',    type: 'text', placeholder: 'e.g. Mom, +62-812-XXX-XXXX' },
+      { key: 'contacts.embassy',      label: 'Embassy / Consulate ・ 大使館・領事館', type: 'text', placeholder: 'e.g. KJRI Osaka, 06-6449-9898' },
     ],
   },
   {
@@ -103,9 +103,9 @@ const STEPS: StepDef[] = [
       { key: 'supplies.supplyDays',   label: 'Days Prepared ・ 備蓄日数',  type: 'select', options: SUPPLY_DAYS },
       { key: 'supplies.waterLiters',  label: 'Water Stored ・ 水の備蓄量', type: 'text', placeholder: 'e.g. 6L (2L/day × 3 days)' },
       { key: 'supplies.foodList',     label: 'Food List ・ 非常食リスト',  type: 'textarea', placeholder: 'e.g. Canned tuna × 4, instant rice × 6', full: true },
-      { key: 'supplies.toolsList',    label: 'Equipment List ・ 装備リスト', type: 'textarea', placeholder: 'e.g. Flashlight, Radio, First aid kit, Whistle', full: true },
-      { key: 'supplies.bagLocation',  label: 'Bag Location ・ 非常袋の場所', type: 'text', placeholder: 'e.g. Genkan, next to shoes' },
-      { key: 'documents.copiedDocs',  label: 'Document Copies ・ 書類コピー', type: 'select', options: DOC_OPTIONS },
+      { key: 'supplies.toolsList',    label: 'Equipment List ・ 装備リスト', type: 'textarea', placeholder: 'e.g. Flashlight, radio, first aid kit, whistle', full: true },
+      { key: 'supplies.bagLocation',  label: 'Bag Location ・ 非常持ち出し袋の場所', type: 'text', placeholder: 'e.g. Genkan (entrance), next to the shoes' },
+      { key: 'documents.copiedDocs',  label: 'Document Copies ・ 書類のコピー', type: 'select', options: DOC_OPTIONS },
     ],
   },
 ];
@@ -243,7 +243,7 @@ function renderReview(): HTMLElement {
   });
 
   if (review.children.length === 0) {
-    review.appendChild(el('p', { class: 'wizard-review-empty' }, 'No information filled yet. Use the back button to add details.'));
+    review.appendChild(el('p', { class: 'wizard-review-empty' }, 'You have not added any information yet. Use the Back button to add it.'));
   }
   card.appendChild(review);
 
@@ -310,15 +310,15 @@ function handleInput(e: Event): void {
 export function savePlan(): void {
   if (saveTimer) clearTimeout(saveTimer);
   savePlanV2(plan);
-  showToast(lang3('Plan saved!', '計画を保存しました！', 'Rencana disimpan!'), 'success');
+  showToast(lang3('Plan saved', '計画を保存しました', 'Rencana disimpan'), 'success');
 }
 
 export function clearPlan(): void {
-  if (!confirm('Clear your emergency plan? This cannot be undone.\n避難計画を消去しますか？\nHapus rencana darurat Anda?')) return;
+  if (!confirm('Clear your emergency plan? You cannot undo this.\n避難計画を消しますか？元に戻せません。\nHapus rencana darurat Anda? Ini tidak bisa dibatalkan.')) return;
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
-  showToast(lang3('Plan cleared', '計画を消去しました', 'Rencana dihapus'), 'success');
+  showToast(lang3('Plan cleared', '計画を消しました', 'Rencana dihapus'), 'success');
 }
 
 // A clean, ink-light sheet built from the plan with textContent only; empty
@@ -368,9 +368,9 @@ function buildWorksheet(): HTMLElement {
 
   ws.append(el('footer', { class: 'ws-foot' }, [
     `Printed ${new Date().toLocaleDateString('en-CA')}.`,
-    'Contains personal information: keep it safe and shred old copies. 個人情報を含みます。大切に保管し、古いものは破棄してください。',
-    masked ? 'ID numbers show the last 4 characters only. 番号は末尾4文字のみ表示。' : '',
-    'Made on this device with Mamoru Guide; nothing was uploaded.',
+    'This sheet has personal information. Keep it in a safe place. Shred old copies. 個人情報が書いてあります。安全な場所に保管してください。古い紙は細かく破って捨ててください。',
+    masked ? 'ID numbers show only the last 4 characters. 番号は最後の4文字だけを表示しています。' : '',
+    'Made on this device with Mamoru Guide. Nothing was uploaded.',
   ].filter(Boolean).join(' ')));
   return ws;
 }
@@ -407,7 +407,7 @@ export function initEmergencyPlan(): void {
     plan = migrated;
     savePlanV2(plan);
     removeItem('mamoru-emergency-plan');
-    showToast(lang3('Plan upgraded ✓', '計画を更新しました ✓', 'Rencana diperbarui ✓'), 'success');
+    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形式に更新しました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
   } else {
     plan = loadPlanV2();
   }

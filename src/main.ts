@@ -22,7 +22,7 @@ async function shareGuide(): Promise<void> {
     url: window.location.href
   };
   const copied = (): void =>
-    showToast(lang3('Link copied!', 'リンクをコピーしました！', 'Tautan disalin!'), 'success');
+    showToast(lang3('Link copied', 'リンクをコピーしました', 'Tautan disalin'), 'success');
   try {
     if (navigator.share) {
       await navigator.share(shareData);
@@ -87,9 +87,9 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   navigator.serviceWorker.addEventListener('message', (e: MessageEvent) => {
     if (e.data && e.data.type === 'SW_UPDATED') {
       showToast(lang3(
-        'New version available — refresh to update',
-        '新しいバージョンがあります — 更新してください',
-        'Versi baru tersedia — segarkan untuk memperbarui',
+        'A new version is available. Reload the page to update.',
+        '新しいバージョンがあります。ページを再読み込みしてください。',
+        'Versi baru tersedia. Muat ulang halaman untuk memperbarui.',
       ), 'info');
     }
   });

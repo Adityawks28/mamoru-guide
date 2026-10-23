@@ -143,9 +143,9 @@ describe('earthquake-scene', () => {
     shindo(5);
     expect(procEn()).toContain('drop, cover');
     shindo(8);
-    expect(procEn()).toContain('sturdy table');
+    expect(procEn()).toContain('strong table');
     shindo(9);
-    expect(procEn()).toContain('protect head');
+    expect(procEn()).toContain('protect your head');
   });
 
   it('with reduced motion the room still shows the result, without moving', async () => {

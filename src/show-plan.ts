@@ -15,7 +15,7 @@ function pickFields(plan: EmergencyPlan): ShowField[] {
   };
 
   push('Name ・ 氏名', plan.profile.name, true);
-  if (plan.profile.nameKana) push('カタカナ', plan.profile.nameKana);
+  if (plan.profile.nameKana) push('Katakana ・ 氏名（カタカナ）', plan.profile.nameKana);
   push('Nationality ・ 国籍', plan.profile.nationality);
   push('Languages ・ 話せる言語', plan.profile.languages);
   push('Blood Type ・ 血液型', plan.profile.bloodType, true);
