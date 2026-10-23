@@ -1,17 +1,24 @@
-const CACHE_NAME = 'mamoru-guide-v10';
+const CACHE_NAME = 'mamoru-guide-v11';
 const PRECACHE = [
   './',
   './index.html',
   './404.html',
   './manifest.json',
   './img/favicon.svg',
+  './img/icons/icon-192.svg',
+  './img/icons/icon-512.svg',
 ];
 
-// Install: pre-cache core assets; JS/CSS get cached on first fetch
+// Install: cache the whole app on the first visit, so it works offline from
+// then on (a disaster may cut the network before a second visit). The build
+// lists its hashed JS/CSS in asset-manifest.json (scripts/vite-sw-manifest.ts).
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(PRECACHE))
+    fetch('./asset-manifest.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(m => [...m.js, ...m.css].map(f => './' + f))
+      .catch(() => [])
+      .then(assets => caches.open(CACHE_NAME).then(cache => cache.addAll([...PRECACHE, ...assets])))
       .then(() => self.skipWaiting())
   );
 });
@@ -39,6 +46,10 @@ self.addEventListener('activate', event => {
 //     back to cache (and index.html for navigations) when offline.
 //   - Everything else (content-hashed JS bundles, images, fonts) stays
 //     cache-first: a new build changes the hashed URL, so it's a cache miss → net.
+// ignoreVary: a host that sends `Vary: Origin` would otherwise make the
+// precached copies (fetched without Origin) miss for module scripts and
+// crossorigin styles, which do send it.
+const MATCH = { ignoreVary: true };
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -49,13 +60,13 @@ self.addEventListener('fetch', event => {
   if (isNav || isCss) {
     event.respondWith(
       caches.open(CACHE_NAME).then(cache =>
-        cache.match(req).then(cached => {
+        cache.match(req, MATCH).then(cached => {
           const network = fetch(req)
             .then(response => {
               if (response.ok) cache.put(req, response.clone());
               return response;
             })
-            .catch(() => cached || (isNav ? cache.match('./index.html') : undefined));
+            .catch(() => cached || (isNav ? cache.match('./index.html', MATCH) : undefined));
           // Cached first for speed; network refreshes the cache for next time.
           return cached || network;
         })
@@ -66,7 +77,7 @@ self.addEventListener('fetch', event => {
 
   // Cache-first for the rest.
   event.respondWith(
-    caches.match(req)
+    caches.match(req, MATCH)
       .then(cached => cached || fetch(req)
         .then(response => {
           if (response.ok) {
@@ -77,7 +88,7 @@ self.addEventListener('fetch', event => {
         })
       )
       .catch(() => {
-        if (isNav) return caches.match('./index.html');
+        if (isNav) return caches.match('./index.html', MATCH);
       })
   );
 });
