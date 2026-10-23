@@ -4,10 +4,10 @@
 import { mountSectionNav } from './section-nav';
 
 export const ROUTE_SECTIONS: Record<string, string[]> = {
-  '#/':          ['hero', 'mode-selector'],
+  '#/':          ['hero'],
   '#/emergency': ['emergency-mode'],
   '#/prepare':   ['earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts'],
-  '#/learn':     ['drill', 'quiz', 'about', 'bible'],
+  '#/learn':     ['drill', 'quiz', 'about'],
   '#/plan':      ['myplan'],
   '#/shelter':   ['shelter'],
   '#/show':      ['showthis'],

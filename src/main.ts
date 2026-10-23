@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
   import('./character/firstaid-scene').then(m => m.initFirstAidScene());
   import('./character/typhoon-scene').then(m => m.initTyphoonScene());
   import('./character/bag-scene').then(m => m.initBagScene());
-  import('./character/bible').then(m => m.initBible());
 });
 
 // === SERVICE WORKER ===
