@@ -72,7 +72,7 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 /* Skyline */
 .ks-skyline {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 26%; /* west of here is open coast under the bridge */
   right: 0;
   display: flex;
