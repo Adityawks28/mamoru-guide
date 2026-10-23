@@ -25,13 +25,17 @@ describe('night sky', () => {
   });
 
   it('a shooting star shows up now and then, and is gone once it burns out', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.5);
     initStars();
     const shooters = () => document.querySelectorAll('.ks-shooters .ks-shooter');
     expect(shooters().length).toBe(0);
-    vi.advanceTimersByTime(20000);
-    expect(shooters().length).toBeGreaterThan(0);
-    shooters().forEach(s => s.dispatchEvent(new Event('animationend')));
+    vi.advanceTimersByTime(12000);
+    expect(shooters().length).toBe(1);
+    // Removed on a timer, not animationend: a hidden sky (day mode, other
+    // routes) never runs the animation, so the event would never come.
+    vi.advanceTimersByTime(1500);
     expect(shooters().length).toBe(0);
+    vi.mocked(Math.random).mockRestore();
   });
 
   it('no shooting stars with reduced motion', () => {

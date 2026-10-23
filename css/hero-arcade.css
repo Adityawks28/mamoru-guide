@@ -449,7 +449,7 @@ body.day-mode .ks-petal,
 .ks-shooters { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
 /* A meteor: bright head on the right, tail behind it, moving along its own
    axis (rotate first, then translateX), fast, then gone (stars.ts spawns
-   one every 7-16 s and removes it on animationend). */
+   one every 7-16 s and removes it after its 0.9 s flight). */
 .ks-shooter {
   position: absolute;
   width: 90px;
