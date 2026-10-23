@@ -17,9 +17,10 @@
 
 /* ───── KOBE SCENE WRAPPER ───── */
 .kobe-scene {
-  /* Ground line: the water fills the band below it; every building,
-     landmark and the mountains stand on it (scene-depth.test.ts). */
+  /* --ks-shore: top of the water. --ks-ground: top of the quay above it,
+     where every building's lowest pixel sits (scene-depth.test.ts). */
   --ks-shore: 80px;
+  --ks-ground: 94px;
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -546,10 +547,9 @@ body.day-mode .ks-stars,
 /* ───── KOBE CITY HALL ───── */
 .ks-cityhall {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   right: 24%;
   width: 38px;
-  height: 200px;
   z-index: 3;
 }
 .ch-body {
@@ -575,13 +575,13 @@ body.day-mode .ch-top,
 
 /* ───── AKASHI-KAIKYO BRIDGE ───── */
 /* Distant bridge on the open west coast (the skyline starts where it ends):
-   behind the city (z 2, after the mountains in HTML), towers on the shore. */
+   behind the city (z 2, after the mountains in HTML), towers on the quay. */
 .ks-bridge {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 0;
   width: 30%;
-  height: 120px;
+  height: 102px;
   z-index: 2;
   opacity: 0.85;
   filter: drop-shadow(0 0 6px rgba(232,64,64,0.4));
@@ -594,10 +594,10 @@ body.day-mode .ks-bridge,
    wheel, Port Tower, Maritime Museum. */
 .ks-crystal {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 27%;
   width: 70px;
-  height: 240px;
+  height: 228px;
   z-index: 4;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
@@ -606,10 +606,10 @@ body.day-mode .ks-bridge,
 /* ───── MOSAIC FERRIS WHEEL ───── */
 .ks-ferris {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 35%;
   width: 110px;
-  height: 130px;
+  height: 120px;
   z-index: 5;
   filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));
 }
@@ -631,7 +631,7 @@ body.day-mode .ks-ferris,
 /* ───── MARITIME MUSEUM ───── */
 .ks-museum {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 53%;
   width: 130px;
   height: 64px;
@@ -672,7 +672,7 @@ body.day-mode .ks-museum,
 /* ───── KOBE PORT TOWER ───── */
 .ks-tower {
   position: absolute;
-  bottom: var(--ks-shore);
+  bottom: var(--ks-ground);
   left: 45%;
   width: 96px;
   height: 280px;
@@ -737,7 +737,7 @@ body.day-mode .ks-tower,
   bottom: var(--ks-shore);
   left: 0;
   right: 0;
-  height: 14px;
+  height: calc(var(--ks-ground) - var(--ks-shore));
   z-index: 5;
   background:
     linear-gradient(180deg,
