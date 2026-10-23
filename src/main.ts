@@ -78,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // === SERVICE WORKER ===
-if ('serviceWorker' in navigator) {
+// Production only: in dev, Vite's module URLs aren't content-hashed, so the
+// worker's cache-first JS would keep serving the first copy it saw.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js');
   });

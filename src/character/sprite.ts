@@ -4,7 +4,8 @@ export type Pose =
   | 'phone' | 'reach' | 'thrust' | 'choke' | 'cower';
 export type Gender = 'male' | 'female';
 export type Emote =
-  | 'idle' | 'wave' | 'jump' | 'spin' | 'peace' | 'burst' | 'bow';
+  | 'idle' | 'wave' | 'jump' | 'peace' | 'burst' | 'bow';
+export type Face = 'happy' | 'wink' | 'wow';
 
 export const POSES: Pose[] = [
   'stand', 'brace', 'cover', 'hide', 'headcover',
@@ -20,6 +21,9 @@ export interface SpriteOptions {
   tilt?: number;
   blink?: boolean;
   pupil?: { x: number; y: number };
+  /** Overrides the pose's arm angles [left, right]; 0 hangs down, ±150 raised. */
+  arms?: [number, number];
+  face?: Face;
 }
 
 const PALETTE = {
@@ -36,9 +40,14 @@ const PALETTE = {
   pantsShadow: '#0a0a1a',
   persimmon: '#f5a623',
   eyeWhite: '#ffffff',
+  blush: '#f0a8a0',
 } as const;
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
+
+// Last options per sprite, so a partial update (e.g. pupil on every mousemove)
+// keeps the running emote, arms and face instead of wiping them.
+const state = new WeakMap<SVGSVGElement, SpriteOptions>();
 
 function el<K extends keyof SVGElementTagNameMap>(
   tag: K,
@@ -106,7 +115,7 @@ function crouchTransform(pose: Pose): { y: number; scale: number } {
 function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
   const { pose, gender } = opts;
   const isTired = pose === 'tired';
-  const [armL, armR] = armRotations(pose);
+  const [armL, armR] = opts.arms ?? armRotations(pose);
 
   if (pose === 'hide' || pose === 'crouch' || pose === 'cower') {
     parent.append(
@@ -207,10 +216,21 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
       rect(27, 31, 2, 2, PALETTE.ink),
       rect(35, 31, 2, 2, PALETTE.ink),
     );
-  } else {
+  } else if (opts.face) {
+    buildFace(parent, opts.face);
+    return;
+  } else if (opts.blink) {
     parent.append(
-      rect(27, 31, 2, 2, PALETTE.ink),
-      rect(35, 31, 2, 2, PALETTE.ink),
+      rect(26, 32, 4, 1, PALETTE.ink),
+      rect(34, 32, 4, 1, PALETTE.ink),
+    );
+  } else {
+    // Eyes follow the pointer by one whole pixel at most.
+    const dx = Math.max(-1, Math.min(1, Math.round(opts.pupil?.x ?? 0)));
+    const dy = Math.max(-1, Math.min(1, Math.round(opts.pupil?.y ?? 0)));
+    parent.append(
+      rect(27 + dx, 31 + dy, 2, 2, PALETTE.ink),
+      rect(35 + dx, 31 + dy, 2, 2, PALETTE.ink),
     );
   }
 
@@ -223,7 +243,36 @@ function buildBody(parent: SVGGElement, opts: SpriteOptions): void {
   }
 }
 
+// ^ ^ eye: a 4px arch whose top row sits on the open eye's row.
+function arch(x: number): SVGRectElement[] {
+  return [rect(x, 32, 1, 1, PALETTE.ink), rect(x + 1, 31, 2, 1, PALETTE.ink), rect(x + 3, 32, 1, 1, PALETTE.ink)];
+}
+
+function buildFace(parent: SVGGElement, face: Face): void {
+  if (face === 'wow') {
+    parent.append(
+      rect(26, 30, 4, 4, PALETTE.eyeWhite),
+      rect(34, 30, 4, 4, PALETTE.eyeWhite),
+      rect(27, 31, 2, 2, PALETTE.ink),
+      rect(35, 31, 2, 2, PALETTE.ink),
+      rect(30, 37, 4, 3, PALETTE.ink),
+    );
+    return;
+  }
+  parent.append(...arch(26));
+  if (face === 'wink') parent.append(rect(35, 31, 2, 2, PALETTE.ink));
+  else parent.append(...arch(34));
+  parent.append(
+    rect(24, 35, 3, 1, PALETTE.blush),
+    rect(37, 35, 3, 1, PALETTE.blush),
+    rect(29, 37, 1, 1, PALETTE.ink),
+    rect(30, 38, 4, 1, PALETTE.ink),
+    rect(34, 37, 1, 1, PALETTE.ink),
+  );
+}
+
 function fillSvg(svg: SVGSVGElement, opts: SpriteOptions): void {
+  state.set(svg, opts);
   while (svg.firstChild) svg.removeChild(svg.firstChild);
   svg.dataset.pose = opts.pose;
   svg.dataset.gender = opts.gender;
@@ -260,6 +309,7 @@ export function updateSprite(svg: SVGSVGElement, partial: Partial<SpriteOptions>
   const next: SpriteOptions = {
     pose: (svg.dataset.pose as Pose) ?? 'stand',
     gender: (svg.dataset.gender as Gender) ?? 'male',
+    ...state.get(svg),
     ...partial,
   };
   fillSvg(svg, next);
