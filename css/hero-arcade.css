@@ -17,6 +17,9 @@
 
 /* ───── KOBE SCENE WRAPPER ───── */
 .kobe-scene {
+  /* Ground line: the water fills the band below it; every building,
+     landmark and the mountains stand on it (scene-depth.test.ts). */
+  --ks-shore: 80px;
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -47,7 +50,8 @@ body.day-mode .kobe-scene {
   grid-template-columns: 1.3fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 60px 48px 200px;
+  /* top: 56px navbar + the fact bubble's 40px overhang; bottom: the 300px harbor scene */
+  padding: 116px 48px 320px;
   min-height: 100vh;
   width: 100%;
   max-width: var(--hero-max-width);
@@ -475,7 +479,7 @@ body.day-mode .ks-shooter,
   .hero.arcade-hero {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding: 60px 20px 160px;
+    padding: 60px 20px 320px;
   }
   .arcade-hero .hero-text { text-align: center; }
   .arcade-hero .hero-actions { justify-content: center; }
@@ -542,8 +546,8 @@ body.day-mode .ks-stars,
 /* ───── KOBE CITY HALL ───── */
 .ks-cityhall {
   position: absolute;
-  bottom: 40px;
-  right: 32%;
+  bottom: var(--ks-shore);
+  right: 24%;
   width: 38px;
   height: 200px;
   z-index: 3;
@@ -570,13 +574,15 @@ body.day-mode .ch-top,
 [data-theme="day"] .ch-top { background: #6a7a9a; }
 
 /* ───── AKASHI-KAIKYO BRIDGE ───── */
+/* Distant bridge on the open west coast (the skyline starts where it ends):
+   behind the city (z 2, after the mountains in HTML), towers on the shore. */
 .ks-bridge {
   position: absolute;
-  bottom: 220px;
+  bottom: var(--ks-shore);
   left: 0;
-  width: 36%;
-  height: 80px;
-  z-index: 3;
+  width: 30%;
+  height: 120px;
+  z-index: 2;
   opacity: 0.85;
   filter: drop-shadow(0 0 6px rgba(232,64,64,0.4));
 }
@@ -584,12 +590,14 @@ body.day-mode .ks-bridge,
 [data-theme="day"] .ks-bridge { opacity: 0.7; filter: none; }
 
 /* ───── KOBE CRYSTAL TOWER ───── */
+/* West → east like the real waterfront: Crystal Tower, Harborland ferris
+   wheel, Port Tower, Maritime Museum. */
 .ks-crystal {
   position: absolute;
-  bottom: 56px;
-  left: 60%;
-  width: 90px;
-  height: 320px;
+  bottom: var(--ks-shore);
+  left: 27%;
+  width: 70px;
+  height: 240px;
   z-index: 4;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
@@ -598,8 +606,8 @@ body.day-mode .ks-bridge,
 /* ───── MOSAIC FERRIS WHEEL ───── */
 .ks-ferris {
   position: absolute;
-  bottom: 56px;
-  left: 38%;
+  bottom: var(--ks-shore);
+  left: 35%;
   width: 110px;
   height: 130px;
   z-index: 5;
@@ -623,8 +631,8 @@ body.day-mode .ks-ferris,
 /* ───── MARITIME MUSEUM ───── */
 .ks-museum {
   position: absolute;
-  bottom: 56px;
-  left: 47%;
+  bottom: var(--ks-shore);
+  left: 53%;
   width: 130px;
   height: 64px;
   z-index: 5;
@@ -637,7 +645,7 @@ body.day-mode .ks-museum,
 /* ───── HARBOR BOAT ───── */
 .ks-boat {
   position: absolute;
-  bottom: 18px;
+  bottom: 24px; /* hull waterline mid-band; the boat is nearer than the quay, so it overlaps it */
   left: -180px;
   width: 160px;
   height: 70px;
@@ -664,8 +672,8 @@ body.day-mode .ks-museum,
 /* ───── KOBE PORT TOWER ───── */
 .ks-tower {
   position: absolute;
-  bottom: 56px;
-  left: 56%;
+  bottom: var(--ks-shore);
+  left: 45%;
   width: 96px;
   height: 280px;
   z-index: 6;
@@ -713,19 +721,20 @@ body.day-mode .ks-tower,
 
 /* ───── MOBILE — scale harbor cluster down ───── */
 @media (max-width: 900px) {
-  .ks-tower    { left: 50%; transform: scale(0.55); transform-origin: bottom left; }
-  .ks-crystal  { left: 60%; transform: scale(0.55); transform-origin: bottom left; }
-  .ks-ferris   { left: 4%;  transform: scale(0.7);  transform-origin: bottom left; }
-  .ks-museum   { left: 22%; transform: scale(0.7);  transform-origin: bottom left; }
-  .ks-boat     { width: 112px; height: 49px; }
-  .ks-cityhall { right: 8%; transform: scale(0.65); transform-origin: bottom right; }
-  .ks-bridge   { width: 50%; }
+  .ks-crystal  { left: 3%;  transform: scale(0.55); transform-origin: bottom left; }
+  .ks-ferris   { left: 15%; transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-tower    { left: 43%; transform: scale(0.55); transform-origin: bottom left; }
+  .ks-museum   { left: 58%; transform: scale(0.7);  transform-origin: bottom left; }
+  .ks-boat     { width: 112px; height: 49px; bottom: 28px; }
+  .ks-cityhall { right: 6%; transform: scale(0.65); transform-origin: bottom right; }
+  .ks-bridge   { display: none; } /* too small to read behind the city */
+  .ks-skyline  { left: 0; }
 }
 
 /* ───── HARBOR QUAY — concrete strip between water and buildings ───── */
 .ks-quay {
   position: absolute;
-  bottom: 56px;
+  bottom: var(--ks-shore);
   left: 0;
   right: 0;
   height: 14px;

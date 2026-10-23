@@ -11,14 +11,20 @@ const css = ['hero.css', 'hero-arcade.css']
 // Matches a CSS rule: everything up to `{`, then the body up to the closing `}`.
 const RULE = /([^{}]+)\{([^{}]*)\}/g;
 
-function zIndexOf(selector: string): number | undefined {
-  let z: number | undefined;
+// Last value of `prop` in any rule (media blocks included) for exactly `selector`.
+function propOf(selector: string, prop: string): string | undefined {
+  let v: string | undefined;
   for (const [, selectors, body] of css.matchAll(RULE)) {
     if (!selectors.split(',').some(s => s.trim() === selector)) continue;
-    const m = body.match(/z-index\s*:\s*(-?\d+)/);
-    if (m) z = Number(m[1]);
+    const m = body.match(new RegExp(`(?:^|[;\\s])${prop}\\s*:\\s*([^;]+)`));
+    if (m) v = m[1].trim();
   }
-  return z;
+  return v;
+}
+
+function zIndexOf(selector: string): number | undefined {
+  const v = propOf(selector, 'z-index');
+  return v === undefined ? undefined : Number(v);
 }
 
 describe('harbor scene depth', () => {
@@ -40,3 +46,24 @@ describe('harbor scene depth', () => {
     });
   });
 });
+
+describe('harbor scene ground line', () => {
+  // Everything that stands in the city stands on the shore line, so nothing
+  // sinks into the water band below it and the mountains reach down behind
+  // the city instead of ending mid-sky.
+  const grounded = [
+    '.ks-mountains', '.ks-bridge', '.ks-skyline', '.ks-cityhall',
+    '.ks-crystal', '.ks-ferris', '.ks-museum', '.ks-tower', '.ks-quay',
+  ];
+
+  grounded.forEach(layer => {
+    it(`${layer} stands on the shore`, () => {
+      expect(propOf(layer, 'bottom')).toBe('var(--ks-shore)');
+    });
+  });
+
+  it('the water fills exactly the band below the shore', () => {
+    expect(propOf('.ks-water', 'height')).toBe('var(--ks-shore)');
+  });
+});
+

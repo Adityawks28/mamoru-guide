@@ -59,10 +59,10 @@
 /* Mountains */
 .ks-mountains {
   position: absolute;
-  bottom: 240px;
+  bottom: var(--ks-shore);
   left: 0;
   width: 100%;
-  height: 280px;
+  height: 440px;
   z-index: 2;
 }
 body.day-mode .ks-mountains path:nth-child(1) { fill: #8aaab0; }
@@ -72,8 +72,8 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 /* Skyline */
 .ks-skyline {
   position: absolute;
-  bottom: 40px;
-  left: 0;
+  bottom: var(--ks-shore);
+  left: 26%; /* west of here is open coast under the bridge */
   right: 0;
   display: flex;
   align-items: flex-end;
@@ -100,7 +100,7 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 /* Water */
 .ks-water {
   position: absolute; bottom:0; left:0; right:0;
-  height: 56px;
+  height: var(--ks-shore);
   background: repeating-linear-gradient(0deg,
     var(--water-dark) 0px, var(--water-dark) 4px,
     var(--water-shimmer) 4px, var(--water-shimmer) 6px);
