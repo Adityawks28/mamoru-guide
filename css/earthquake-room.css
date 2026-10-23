@@ -1,6 +1,7 @@
 /* Mamoru earthquake room scene — ported from prototype scenarios.css. */
 
 .mamoru-room {
+  display: block; /* not .character-scene's flex row: the procedure strip goes under the stage */
   position: relative;
   width: 100%;
   max-width: 640px;
@@ -36,37 +37,41 @@
   text-shadow: 0 0 4px rgba(245, 166, 35, 0.5);
 }
 
-/* lamp swing — intensity drives swing amplitude + frequency */
-.mr-lamp {
-  transform-origin: 160px 0;
-  animation: mr-lamp-sway calc(2.4s / max(var(--swing, 1), 1)) ease-in-out infinite alternate;
-}
+/* Retro motion: every move below holds whole frames (steps) instead of
+   tweening, to match the stepped screen shake in motion.ts. */
+
+/* lamp: a three-position pendulum, only while the room shakes */
+.mr-lamp { transform-origin: 160px 0; }
+.mamoru-room.quaking .mr-lamp { animation: mr-lamp-sway 0.6s steps(1, end) infinite; }
 @keyframes mr-lamp-sway {
-  from { transform: rotate(calc(-3deg * var(--swing, 1))); }
-  to   { transform: rotate(calc(3deg  * var(--swing, 1))); }
+  0%   { transform: rotate(calc(-3deg * var(--swing, 1))); }
+  25%  { transform: rotate(0deg); }
+  50%  { transform: rotate(calc(3deg * var(--swing, 1))); }
+  75%  { transform: rotate(0deg); }
 }
 
-/* shelf — falls at intensity 7 */
-.mr-shelf {
-  transform-origin: 6px 160px;
-  transition: transform 0.6s cubic-bezier(.6, .1, .4, 1.6);
+/* shelf topples in four frames; standing it back up is instant */
+.mr-shelf { transform-origin: 6px 160px; }
+.mr-shelf.fallen {
+  transform: rotate(-72deg);
+  transition: transform 0.4s steps(4, end);
 }
-.mr-shelf.fallen { transform: rotate(-72deg); }
 
-/* falling vase + book */
+/* falling vase + book: drop with gravity, frame by frame */
 .mr-vase-fall,
-.mr-book-fall {
-  animation: mr-object-tumble 0.8s ease-in;
-  transform-origin: center;
-}
-@keyframes mr-object-tumble {
-  from { transform: translateY(-90px) rotate(0deg); opacity: 0; }
-  60%  { opacity: 1; }
-  to   { transform: translateY(0) rotate(45deg); opacity: 1; }
+.mr-book-fall { animation: mr-object-fall 0.5s steps(1, end) both; }
+@keyframes mr-object-fall {
+  0%   { transform: translateY(-90px); }
+  20%  { transform: translateY(-84px); }
+  40%  { transform: translateY(-66px); }
+  60%  { transform: translateY(-36px); }
+  80%  { transform: translateY(-4px); }
+  90%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
 }
 
 /* door glow — at high intensity */
-.mr-door-glow { animation: mr-door-pulse 1s ease-in-out infinite alternate; }
+.mr-door-glow { animation: mr-door-pulse 1s steps(2, jump-none) infinite alternate; }
 @keyframes mr-door-pulse {
   from { opacity: 0.4; }
   to   { opacity: 0.9; }
@@ -77,11 +82,6 @@
 @keyframes mr-warn-flash {
   from { opacity: 1; }
   to   { opacity: 0.3; }
-}
-
-/* character walks to a safe spot */
-.mr-actor {
-  transition: transform 0.75s cubic-bezier(.4, .1, .4, 1);
 }
 
 /* tip bubble inside the room — pinned top-right */
@@ -104,11 +104,10 @@
 
 /* reduced motion: freeze all room animations + skip the slide */
 @media (prefers-reduced-motion: reduce) {
-  .mr-lamp,
-  .mr-shelf,
+  .mamoru-room.quaking .mr-lamp,
+  .mr-shelf.fallen,
   .mr-vase-fall,
   .mr-book-fall,
   .mr-door-glow,
-  .mr-warning,
-  .mr-actor { animation: none; transition: none; }
+  .mr-warning { animation: none; transition: none; }
 }

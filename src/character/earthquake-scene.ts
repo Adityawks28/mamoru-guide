@@ -1,26 +1,29 @@
 import { createSprite, updateSprite, type Pose } from './sprite';
 import { QUAKE_TIPS } from './tips';
-import { motionAllowed, onMotionChange } from './motion';
+import { motionAllowed, onMotionChange, playQuake, quakeMs } from './motion';
 
 const STATE_LOCK_MS = 4000;
 const TIP_INTERVAL_MS = 4500;
+const STEP_MS = 90;
+const STEP_UNITS = 6;
+const SETTLE_MS = 1200;
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 interface IntensityTarget { pose: Pose; x: number; y: number; flip: boolean; }
 
-const TARGETS: Record<number, IntensityTarget> = {
-  0: { pose: 'stand', x: 140, y: 92, flip: false },
-  1: { pose: 'stand', x: 140, y: 92, flip: false },
-  2: { pose: 'stand', x: 138, y: 92, flip: false },
-  3: { pose: 'stand', x: 165, y: 92, flip: true },
-  4: { pose: 'brace', x: 158, y: 92, flip: true },
-  5: { pose: 'cover', x: 175, y: 100, flip: false },
-  // Shindo 6/7: 'cower' pose (scale 0.5 + crouchY 42) packs the body into
-  // a tucked huddle so she fits under the table cavity (room y 126-160).
-  // y=77 anchors her so the head crowns at room y~126 and feet land at ~163.
-  6: { pose: 'cower', x: 210, y: 77, flip: true },
-  7: { pose: 'cower', x: 210, y: 77, flip: true },
-};
+// Indexed by row on the 10-step scale: 0 1 2 3 4 5- 5+ 6- 6+ 7.
+const STAND: IntensityTarget = { pose: 'stand', x: 140, y: 92, flip: false };
+// 'cower' (scale 0.5 + crouchY 42) tucks her under the table cavity (room
+// y 126-160); y=77 crowns her head at ~126 with her feet at ~163.
+const UNDER_TABLE: IntensityTarget = { pose: 'cower', x: 210, y: 77, flip: true };
+const COVER: IntensityTarget = { pose: 'cover', x: 175, y: 100, flip: false };
+const TARGETS: IntensityTarget[] = [
+  STAND, STAND, { ...STAND, x: 138 },
+  { pose: 'stand', x: 165, y: 92, flip: true },
+  { pose: 'brace', x: 158, y: 92, flip: true },
+  COVER, COVER,
+  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
+];
 
 interface Hazards {
   lampSwing: number;
@@ -30,45 +33,21 @@ interface Hazards {
   shelfFall: boolean;
   doorGlow: boolean;
   warning: boolean;
-  sweat: number;
 }
 
+// What falls at each level follows JMA's shindo descriptions: 4 topples
+// unstable ornaments, 5- drops dishes and books, 5+ can topple unsecured
+// furniture, 6- breaks window glass.
 function hazardsForIntensity(i: number): Hazards {
-  if (i >= 7) return { lampSwing: 5, bookFall: true,  vaseFall: true,  windowCrack: true,  shelfFall: true,  doorGlow: true,  warning: true,  sweat: 3 };
-  if (i === 6) return { lampSwing: 5, bookFall: true,  vaseFall: true,  windowCrack: true,  shelfFall: false, doorGlow: true,  warning: true,  sweat: 3 };
-  if (i === 5) return { lampSwing: 4, bookFall: true,  vaseFall: true,  windowCrack: false, shelfFall: false, doorGlow: true,  warning: true,  sweat: 3 };
-  if (i === 4) return { lampSwing: 3, bookFall: true,  vaseFall: false, windowCrack: false, shelfFall: false, doorGlow: false, warning: false, sweat: 2 };
-  if (i === 3) return { lampSwing: 2, bookFall: false, vaseFall: false, windowCrack: false, shelfFall: false, doorGlow: false, warning: false, sweat: 1 };
-  if (i >= 1)  return { lampSwing: 1, bookFall: false, vaseFall: false, windowCrack: false, shelfFall: false, doorGlow: false, warning: false, sweat: 0 };
-  return       { lampSwing: 1, bookFall: false, vaseFall: false, windowCrack: false, shelfFall: false, doorGlow: false, warning: false, sweat: 0 };
-}
-
-interface PoseStep { pose: Pose; delay: number; }
-
-function sequenceForIntensity(i: number, t: IntensityTarget): PoseStep[] {
-  if (i >= 7) return [
-    { pose: 'run',   delay: 0    },
-    { pose: 'cover', delay: 850  },
-    { pose: 'hide',  delay: 1500 },
-    { pose: 'cower', delay: 2200 }, // final tucked-under-table position
-  ];
-  if (i === 6) return [
-    { pose: 'run',   delay: 0    },
-    { pose: 'cover', delay: 850  },
-    { pose: 'cower', delay: 1500 },
-  ];
-  if (i === 5) return [
-    { pose: 'run',   delay: 0   },
-    { pose: 'cover', delay: 800 },
-  ];
-  if (i === 4) return [
-    { pose: 'run',   delay: 0   },
-    { pose: 'brace', delay: 750 },
-  ];
-  return [
-    { pose: 'run',     delay: 0   },
-    { pose: t.pose,    delay: 700 },
-  ];
+  return {
+    lampSwing: Math.min(5, Math.ceil(i / 2)),
+    bookFall: i >= 4,
+    vaseFall: i >= 5,
+    shelfFall: i >= 6,
+    windowCrack: i >= 7,
+    doorGlow: i >= 4,
+    warning: i >= 5,
+  };
 }
 
 function svgEl<K extends keyof SVGElementTagNameMap>(
@@ -195,16 +174,16 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
 }
 
-const PROCEDURE_TEXT: Record<number, { en: string; ja: string; id: string }> = {
-  0: { en: '→ stay calm, observe',                 ja: '→ 落ち着いて様子を見る',     id: '→ tenang, amati situasi' },
-  1: { en: '→ stay calm, observe',                 ja: '→ 落ち着いて様子を見る',     id: '→ tenang, amati situasi' },
-  2: { en: '→ stay calm, observe',                 ja: '→ 落ち着いて様子を見る',     id: '→ tenang, amati situasi' },
-  3: { en: '→ move from windows',                   ja: '→ 窓から離れる',            id: '→ menjauh dari jendela' },
-  4: { en: '→ brace · open the door',               ja: '→ 構え・ドアを開ける',      id: '→ siaga · buka pintu' },
-  5: { en: '→ drop, cover, hold on',                ja: '→ 落ちて・隠れて・待機',    id: '→ tiarap, lindungi, tahan' },
-  6: { en: '→ hide under sturdy table',             ja: '→ 頑丈な机の下に隠れる',    id: '→ sembunyi di bawah meja kokoh' },
-  7: { en: '→ hide · protect head · stay until still', ja: '→ 隠れて・頭を守って・揺れがおさまるまで', id: '→ sembunyi · lindungi kepala · tunggu hingga reda' },
-};
+const CALM = { en: '→ stay calm, observe', ja: '→ 落ち着いて様子を見る', id: '→ tenang, amati situasi' };
+const DROP = { en: '→ drop, cover, hold on', ja: '→ 落ちて・隠れて・待機', id: '→ tiarap, lindungi, tahan' };
+const HIDE = { en: '→ hide under sturdy table', ja: '→ 頑丈な机の下に隠れる', id: '→ sembunyi di bawah meja kokoh' };
+const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
+  CALM, CALM, CALM,
+  { en: '→ move from windows', ja: '→ 窓から離れる', id: '→ menjauh dari jendela' },
+  { en: '→ brace · open the door', ja: '→ 構え・ドアを開ける', id: '→ siaga · buka pintu' },
+  DROP, DROP, HIDE, HIDE,
+  { en: '→ hide · protect head · stay until still', ja: '→ 隠れて・頭を守って・揺れがおさまるまで', id: '→ sembunyi · lindungi kepala · tunggu hingga reda' },
+];
 
 export function initEarthquakeScene(): void {
   const host = document.getElementById('earthquake-scene');
@@ -212,11 +191,12 @@ export function initEarthquakeScene(): void {
 
   let allowed = motionAllowed();
   let intensity = 0;
-  let walkTimers: number[] = [];
+  let timers: number[] = [];
   let lockTimer: number | null = null;
   let tipIdx = 0;
   let tipTimer: number | null = null;
   let stateLocked = false;
+  let actorX = STAND.x;
 
   host.classList.add('mamoru-room');
   host.innerHTML = '';
@@ -239,15 +219,11 @@ export function initEarthquakeScene(): void {
 
   // Actor — nested character SVG anchored top-left at the actor group's translate
   // (matches prototype: target.y is the SPRITE TOP, not its center).
-  const actorGroup = svgEl('g', { class: 'mr-actor', transform: `translate(${TARGETS[0].x},${TARGETS[0].y})` }, shakeGroup);
+  const actorGroup = svgEl('g', { class: 'mr-actor', transform: `translate(${STAND.x},${STAND.y})` }, shakeGroup);
   const actorSvg = createSprite({ pose: 'stand', gender: 'female' });
   actorSvg.setAttribute('width', '64');
   actorSvg.setAttribute('height', '96');
   actorGroup.appendChild(actorSvg);
-
-  // <style> tag for dynamic shake keyframes.
-  const styleTag = document.createElement('style');
-  host.appendChild(styleTag);
 
   // Tip bubble (CSS pins it top-right inside .mamoru-room).
   const bubble = document.createElement('div');
@@ -282,17 +258,19 @@ export function initEarthquakeScene(): void {
   showTip(0);
   showProcedure(0);
 
-  function clearWalkTimers(): void {
-    walkTimers.forEach(t => window.clearTimeout(t));
-    walkTimers = [];
+  function later(ms: number, fn: () => void): void {
+    timers.push(window.setTimeout(fn, ms));
+  }
+  function clearTimers(): void {
+    timers.forEach(t => window.clearTimeout(t));
+    timers = [];
   }
 
-  function applyDepth(i: number): void {
-    // At shindo 6/7 the actor is hiding under the table — table draws ON TOP of actor.
-    // Otherwise the actor stands in front of furniture — actor draws ON TOP of table.
+  // Hiding under the table: the table draws on top of her. Otherwise she
+  // stands in front of the furniture.
+  function applyDepth(hiding: boolean): void {
     const parent = parts.tableGroup.parentNode;
     if (!parent) return;
-    const hiding = i >= 6;
     const actorIsBeforeTable = !!(actorGroup.compareDocumentPosition(parts.tableGroup) & Node.DOCUMENT_POSITION_FOLLOWING);
     if (hiding && !actorIsBeforeTable) {
       parent.insertBefore(actorGroup, parts.tableGroup);
@@ -312,72 +290,57 @@ export function initEarthquakeScene(): void {
     parts.bookFalling.style.display = h.bookFall    ? '' : 'none';
     parts.shelfGroup.classList.toggle('fallen', h.shelfFall);
     parts.pictureFrame.setAttribute('transform', `translate(220 30) rotate(${i >= 4 ? -8 : 0})`);
-    parts.lamp.style.setProperty('--swing', String(h.lampSwing));
   }
 
-  function applyShake(i: number): void {
-    if (!allowed || i <= 0) {
-      styleTag.textContent = '';
-      shakeGroup.style.animation = '';
-      return;
-    }
-    const amp = Math.max(1, i * 1.6);
-    const dur = Math.max(0.05, 0.25 - i * 0.025);
-    const animId = `mr-shake-${i}`;
-    styleTag.textContent = `@keyframes ${animId}{
-      0%,100%{transform:translate(0,0);}
-      25%{transform:translate(${-amp}px,${amp/3}px);}
-      50%{transform:translate(${amp}px,${-amp/4}px);}
-      75%{transform:translate(${-amp/2}px,${amp/3}px);}
-    }`;
-    shakeGroup.style.animation = `${animId} ${dur}s linear infinite`;
-  }
-
-  function walkTo(i: number): void {
-    clearWalkTimers();
-    const t = TARGETS[Math.max(0, Math.min(7, i))];
+  function place(t: IntensityTarget): void {
+    actorX = t.x;
     actorGroup.setAttribute('transform', `translate(${t.x},${t.y})`);
-    // Flip is handled inside createSprite via opts.flip — no CSS transform.
-    if (!allowed) {
-      updateSprite(actorSvg, { pose: t.pose, gender: 'female', flip: t.flip });
-      return;
-    }
-    const seq = sequenceForIntensity(i, t);
-    for (const step of seq) {
-      const id = window.setTimeout(() => {
-        updateSprite(actorSvg, { pose: step.pose, gender: 'female', flip: t.flip });
-      }, step.delay);
-      walkTimers.push(id);
-    }
+    updateSprite(actorSvg, { pose: t.pose, flip: t.flip });
+    applyDepth(t.pose === 'cower');
   }
 
-  function applyIntensity(i: number, lockUntilTimeout = true): void {
+  // Two-frame walk cycle: a few room pixels per step, bobbing one pixel.
+  function walkTo(t: IntensityTarget): void {
+    const dir = Math.sign(t.x - actorX);
+    if (!allowed || dir === 0) { place(t); return; }
+    applyDepth(false);
+    let frame = 0;
+    const step = (): void => {
+      actorX = dir > 0 ? Math.min(t.x, actorX + STEP_UNITS) : Math.max(t.x, actorX - STEP_UNITS);
+      frame++;
+      if (actorX === t.x) { place(t); return; }
+      actorGroup.setAttribute('transform', `translate(${actorX},${STAND.y - frame % 2})`);
+      updateSprite(actorSvg, { pose: frame % 2 ? 'walk' : 'run', flip: dir > 0 });
+      later(STEP_MS, step);
+    };
+    step();
+  }
+
+  // Each tap replays that level's quake from a calm room.
+  function quake(i: number): void {
     intensity = i;
-    clearWalkTimers();
-    applyHazards(i);
-    applyDepth(i);
-    applyShake(i);
-    walkTo(i);
+    clearTimers();
     showProcedure(i);
     showTip(Math.min(i, QUAKE_TIPS.length - 1));
     if (lockTimer !== null) window.clearTimeout(lockTimer);
-    if (lockUntilTimeout) {
-      stateLocked = true;
-      lockTimer = window.setTimeout(() => {
-        stateLocked = false;
-      }, STATE_LOCK_MS);
-    }
+    stateLocked = true;
+    lockTimer = window.setTimeout(() => { stateLocked = false; }, STATE_LOCK_MS);
+    walkTo(TARGETS[i]);
+    if (!allowed) { applyHazards(i); return; }
+    applyHazards(0);
+    host!.classList.toggle('quaking', i > 0);
+    if (i === 0) return;
+    const ms = quakeMs(i);
+    playQuake(shakeGroup, i);
+    parts.lamp.style.setProperty('--swing', String(hazardsForIntensity(i).lampSwing));
+    later(ms * 0.3, () => applyHazards(i)); // things fall at the S-wave's peak
+    later(ms, () => parts.lamp.style.setProperty('--swing', '1'));
+    later(ms + SETTLE_MS, () => host!.classList.remove('quaking'));
   }
 
   function onShindo(e: Event): void {
-    const ev = e as CustomEvent<{ shindo: number | null }>;
-    if (ev.detail.shindo === null) {
-      if (lockTimer !== null) window.clearTimeout(lockTimer);
-      stateLocked = false;
-      applyIntensity(0, false);
-      return;
-    }
-    applyIntensity(ev.detail.shindo);
+    const n = (e as CustomEvent<{ shindo: number }>).detail.shindo;
+    quake(Math.max(0, Math.min(TARGETS.length - 1, n)));
   }
 
   function rotateTip(): void {
@@ -388,22 +351,21 @@ export function initEarthquakeScene(): void {
 
   function applyMotion(now: boolean): void {
     allowed = now;
-    clearWalkTimers();
     if (tipTimer !== null) { window.clearInterval(tipTimer); tipTimer = null; }
-    document.removeEventListener('mamoru:shindo', onShindo);
     if (allowed) {
       tipTimer = window.setInterval(rotateTip, TIP_INTERVAL_MS);
-      document.addEventListener('mamoru:shindo', onShindo);
-      applyIntensity(intensity, false);
-    } else {
-      styleTag.textContent = '';
-      shakeGroup.style.animation = '';
-      applyHazards(0);
-      walkTo(0);
+      return;
     }
+    clearTimers();
+    shakeGroup.getAnimations?.().forEach(a => a.cancel());
+    host!.classList.remove('quaking');
+    applyHazards(intensity);
+    place(TARGETS[intensity]);
   }
 
-  applyIntensity(0, false);
+  applyHazards(0);
+  place(STAND);
+  document.addEventListener('mamoru:shindo', onShindo);
   applyMotion(allowed);
   onMotionChange(applyMotion);
 }

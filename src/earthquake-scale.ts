@@ -1,15 +1,16 @@
 import { scaleData } from './data';
+import { motionAllowed, playQuake } from './character/motion';
 
 export function initEarthquakeScale(): void {
   const sv = document.getElementById('scaleVertical');
   if (!sv) return;
-  let activeShake: number | null = null;
   scaleData.forEach((s, i) => {
     const row = document.createElement('div');
     row.className = 'scale-row' + (s.s7 ? ' s7' : '');
     row.style.borderLeftColor = s.colors[0];
     row.setAttribute('tabindex', '0');
     row.setAttribute('role', 'button');
+    row.setAttribute('aria-pressed', 'false');
     row.setAttribute('aria-label', s.jp + ' - ' + s.en);
     row.innerHTML = `
       <div class="num" style="--lvl:${s.colors[0]}">${s.n}</div>
@@ -18,24 +19,15 @@ export function initEarthquakeScale(): void {
       <div class="shake-demo">${s.icon}</div>
       <div class="intensity-bar" style="width:${s.pct}%;background:${s.colors[0]}"></div>
     `;
-    function toggleShake() {
-      if (activeShake === i) {
-        row.classList.remove(s.shakeClass);
-        activeShake = null;
-        document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: null } }));
-        return;
-      }
-      if (activeShake !== null) {
-        const prev = sv!.children[activeShake] as HTMLElement;
-        prev.classList.remove(scaleData[activeShake].shakeClass);
-      }
-      row.classList.add(s.shakeClass);
-      activeShake = i;
+    // Every tap plays this level's quake once; the room scene follows the event.
+    function feel() {
+      sv!.querySelectorAll('.scale-row').forEach(r => r.setAttribute('aria-pressed', String(r === row)));
+      if (motionAllowed()) playQuake(row.querySelector('.shake-demo')!, i);
       document.dispatchEvent(new CustomEvent('mamoru:shindo', { detail: { shindo: i } }));
     }
-    row.addEventListener('click', toggleShake);
+    row.addEventListener('click', feel);
     row.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleShake(); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); feel(); }
     });
     sv.appendChild(row);
   });

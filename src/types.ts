@@ -5,7 +5,6 @@ export interface ScaleEntry {
   en: string;
   ja: string;
   id: string;
-  shakeClass: string;
   icon: string;
   pct: number;
   s7?: boolean;

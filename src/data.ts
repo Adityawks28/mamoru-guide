@@ -1,16 +1,16 @@
 import type { ScaleEntry, VocabData, BagItem } from './types';
 
 export const scaleData: ScaleEntry[] = [
-  {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',shakeClass:'shaking-0',icon:'🏠',pct:0},
-  {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',shakeClass:'shaking-1',icon:'🏠',pct:5},
-  {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',shakeClass:'shaking-2',icon:'🏠',pct:10},
-  {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',shakeClass:'shaking-3',icon:'🍽️',pct:20},
-  {n:'4',jp:'震度4',colors:['#4ecb71','#3ba'],en:'Strong shaking, objects fall',ja:'強い揺れ、物が落ちる',id:'Guncangan kuat, benda jatuh',shakeClass:'shaking-4',icon:'📦',pct:35},
-  {n:'5-',jp:'震度5弱',colors:['#f5a623','#d89'],en:'Very strong — furniture moves',ja:'非常に強い — 家具が動く',id:'Sangat kuat — furnitur bergerak',shakeClass:'shaking-5m',icon:'🪑',pct:50},
-  {n:'5+',jp:'震度5強',colors:['#e87','#d76'],en:'Hard to stand, walls crack',ja:'立っていられない、壁にひび',id:'Sulit berdiri, dinding retak',shakeClass:'shaking-5p',icon:'🧱',pct:60},
-  {n:'6-',jp:'震度6弱',colors:['#e65','#d54'],en:'Impossible to stand, buildings damaged',ja:'立てない、建物損壊',id:'Tidak bisa berdiri, bangunan rusak',shakeClass:'shaking-6m',icon:'🏚️',pct:75},
-  {n:'6+',jp:'震度6強',colors:['#d43','#c32'],en:'Widespread collapse possible',ja:'広範囲で倒壊の可能性',id:'Keruntuhan luas mungkin',shakeClass:'shaking-6p',icon:'💥',pct:88},
-  {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,shakeClass:'shaking-7',icon:'🔴',pct:100},
+  {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'Imperceptible',ja:'無感',id:'Tidak terasa',icon:'🏠',pct:0},
+  {n:'1',jp:'震度1',colors:['#88a','#779'],en:'Slight tremor felt indoors',ja:'屋内で僅かに感じる',id:'Getaran ringan di dalam',icon:'🏠',pct:5},
+  {n:'2',jp:'震度2',colors:['#8ab','#7a9'],en:'Felt by most indoors',ja:'屋内の多くの人が感じる',id:'Dirasakan kebanyakan orang',icon:'🏠',pct:10},
+  {n:'3',jp:'震度3',colors:['#4cc9f0','#3ab'],en:'Felt by most, dishes rattle',ja:'ほとんどの人が感じる',id:'Dirasakan semua, piring bergetar',icon:'🍽️',pct:20},
+  {n:'4',jp:'震度4',colors:['#4ecb71','#3ba'],en:'Strong shaking, objects fall',ja:'強い揺れ、物が落ちる',id:'Guncangan kuat, benda jatuh',icon:'📦',pct:35},
+  {n:'5-',jp:'震度5弱',colors:['#f5a623','#d89'],en:'Very strong — furniture moves',ja:'非常に強い — 家具が動く',id:'Sangat kuat — furnitur bergerak',icon:'🪑',pct:50},
+  {n:'5+',jp:'震度5強',colors:['#e87','#d76'],en:'Hard to stand, walls crack',ja:'立っていられない、壁にひび',id:'Sulit berdiri, dinding retak',icon:'🧱',pct:60},
+  {n:'6-',jp:'震度6弱',colors:['#e65','#d54'],en:'Impossible to stand, buildings damaged',ja:'立てない、建物損壊',id:'Tidak bisa berdiri, bangunan rusak',icon:'🏚️',pct:75},
+  {n:'6+',jp:'震度6強',colors:['#d43','#c32'],en:'Widespread collapse possible',ja:'広範囲で倒壊の可能性',id:'Keruntuhan luas mungkin',icon:'💥',pct:88},
+  {n:'7',jp:'震度7',colors:['#e84040','#c22'],en:'Catastrophic — maximum',ja:'壊滅的 — 最大震度',id:'Bencana — intensitas max',s7:true,icon:'🔴',pct:100},
 ];
 
 export const vocabData: VocabData = {
