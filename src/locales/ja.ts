@@ -64,7 +64,7 @@ export const ja: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋（ひじょうぶくろ）— バッグを詰めよう！',
-  'bag.subtitle': 'バッグの容量は<strong>最大8.0kg</strong>。優先度と重さを考えて選ぼう！全部は入りません。タップで詰める・戻す。',
+  'bag.subtitle': 'バッグは<strong>最大10kg</strong>。自治体の目安は女性約10kg・男性約15kg、走って逃げられる重さです。重さは実際の一般的な重さで、マモルにも重さが伝わります。全部は入りません。タップで詰める・戻す。',
   'bag.stat.items':  'アイテム',
   'bag.stat.score':  'スコア',
   'bag.stat.weight': '重さ',

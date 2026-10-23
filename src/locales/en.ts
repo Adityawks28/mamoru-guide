@@ -64,7 +64,7 @@ export const en: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋 Hijou-bukuro — Pack Your Bag!',
-  'bag.subtitle': 'Your bag can hold <strong>8.0 kg max</strong>. Choose wisely based on priority and weight — you can\'t take everything! Tap items to pack or unpack them.',
+  'bag.subtitle': 'Your bag can hold <strong>10 kg max</strong>: Japanese city guides say about 10 kg for women and 15 kg for men, light enough to run with. Items show their typical real weight, and Mamoru feels every kilo. You can\'t take everything! Tap items to pack or unpack them.',
   'bag.stat.items':  'ITEMS',
   'bag.stat.score':  'SCORE',
   'bag.stat.weight': 'WEIGHT',
