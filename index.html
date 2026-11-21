@@ -25,8 +25,7 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="apple-touch-icon" href="img/icons/icon-192.svg">
 
-<!-- crossorigin: a CORS response is one the service worker can cache for offline use. -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
@@ -53,6 +52,19 @@
 <body class="lang-en">
 
 <a href="#main-content" class="skip-link">Skip to content</a>
+
+<noscript>
+  <div class="noscript-note">
+    <p><span data-lang="en">This guide needs JavaScript. Turn on JavaScript in your browser settings.</span><span data-lang="ja" lang="ja">このガイドは、JavaScriptが必要です。ブラウザの設定で、JavaScriptをオンにしてください。</span><span data-lang="id" lang="id">Panduan ini butuh JavaScript. Aktifkan JavaScript di pengaturan browser.</span></p>
+    <p><span data-lang="en">In an emergency, call these numbers:</span><span data-lang="ja" lang="ja">緊急（きんきゅう）のときは、この番号に電話してください：</span><span data-lang="id" lang="id">Saat darurat, telepon nomor ini:</span></p>
+    <ul>
+    <li><a href="tel:110">110</a> <span data-lang="en">Crimes and accidents that need the police now</span><span data-lang="ja" lang="ja">すぐに警察が必要な事件や事故</span><span data-lang="id" lang="id">Kejahatan dan kecelakaan yang perlu segera ditangani polisi</span></li>
+    <li><a href="tel:119">119</a> <span data-lang="en">Fire and ambulance</span><span data-lang="ja" lang="ja">火事、救急</span><span data-lang="id" lang="id">Kebakaran dan ambulans</span></li>
+    <li><a href="tel:118">118</a> <span data-lang="en">Accidents and emergencies at sea</span><span data-lang="ja" lang="ja">海での事故や緊急のとき</span><span data-lang="id" lang="id">Kecelakaan dan keadaan darurat di laut</span></li>
+    <li><a href="tel:171">171</a> <span data-lang="en">Disaster Emergency Message Dial</span><span data-lang="ja" lang="ja">災害用伝言ダイヤル（さいがいようでんごんダイヤル）</span><span data-lang="id" lang="id">Layanan Pesan Darurat Bencana</span></li>
+    </ul>
+  </div>
+</noscript>
 
 <!-- Navbar -->
 <nav class="navbar" aria-label="Main navigation">
@@ -1182,15 +1194,15 @@
     <span>Police</span>
   </a>
   <div class="fab-divider"></div>
-  <a href="#firstaid" class="fab-item">
+  <a href="#/firstaid" class="fab-item">
     <span class="fab-item-icon">🏥</span>
     <span data-i18n="fab.firstaid">First Aid Guide</span>
   </a>
-  <a href="#shelter" class="fab-item">
+  <a href="#/shelter" class="fab-item">
     <span class="fab-item-icon">📍</span>
     <span data-i18n="fab.shelter">Find an Evacuation Site</span>
   </a>
-  <a href="#showthis" class="fab-item">
+  <a href="#/show" class="fab-item">
     <span class="fab-item-icon">💬</span>
     <span data-i18n="fab.showthis">Show This Card</span>
   </a>

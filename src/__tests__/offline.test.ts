@@ -1,21 +1,59 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { loadLeaflet } from '../shelter-finder';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join, resolve } from 'node:path';
+import { loadLeaflet, LEAFLET_SRI } from '../shelter-finder';
+import { contacts } from '../contacts';
 
 const read = (f: string) => readFileSync(resolve(process.cwd(), f), 'utf8');
 
-// Runs public/sw.js against a fake worker scope and returns what install cached.
-async function install(manifest: () => Promise<unknown>): Promise<string[]> {
+// Files under public/<dir>, as './'-prefixed paths like the PRECACHE list.
+export function publicFiles(dir: string, skip: RegExp): string[] {
+  const walk = (d: string): string[] => readdirSync(resolve(process.cwd(), 'public', d), { withFileTypes: true })
+    .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);
+  return walk(dir).filter(f => !skip.test(f)).map(f => './' + f);
+}
+
+// Stands in for the worker's Request: Node's Request rejects relative URLs.
+class FakeRequest {
+  constructor(public url: string, public init: RequestInit = {}) {}
+}
+
+// Runs public/sw.js against a fake worker scope with the given caches.
+function runWorker(caches: unknown, fetch: unknown = async () => ({ ok: true, json: async () => ({ js: [], css: [] }) })) {
   const handlers: Record<string, (e: unknown) => void> = {};
-  const added: string[] = [];
-  const scope = { addEventListener: (t: string, h: (e: unknown) => void) => { handlers[t] = h; }, skipWaiting: async () => {} };
-  const caches = { open: async () => ({ addAll: async (urls: string[]) => { added.push(...urls); } }) };
-  const fetch = async () => ({ ok: true, json: manifest });
-  new Function('self', 'caches', 'fetch', read('public/sw.js'))(scope, caches, fetch);
-  let done: Promise<unknown> = Promise.resolve();
-  handlers.install({ waitUntil: (p: Promise<unknown>) => { done = p; } });
-  await done;
+  const posted: unknown[] = [];
+  const scope = {
+    addEventListener: (t: string, h: (e: unknown) => void) => { handlers[t] = h; },
+    skipWaiting: async () => {},
+    clients: { claim: async () => {}, matchAll: async () => [{ postMessage: (m: unknown) => posted.push(m) }] },
+  };
+  new Function('self', 'caches', 'fetch', 'Request', read('public/sw.js'))(scope, caches, fetch, FakeRequest);
+  const fire = async (type: string) => {
+    let done: Promise<unknown> = Promise.resolve();
+    handlers[type]({ waitUntil: (p: Promise<unknown>) => { done = p; } });
+    await done;
+  };
+  // Runs the fetch handler for one GET request and returns its response.
+  const respond = async (url: string, destination = 'font') => {
+    let res: Promise<unknown> | undefined;
+    handlers.fetch({ request: { method: 'GET', mode: 'no-cors', destination, url }, respondWith: (p: Promise<unknown>) => { res = p; } });
+    return res;
+  };
+  return { fire, posted, respond };
+}
+
+const CACHE_NAME = read('public/sw.js').match(/const CACHE_NAME = '([^']+)'/)![1];
+
+// Runs the install step and returns the requests it cached.
+async function installRequests(manifest: () => Promise<unknown>, ok = true): Promise<FakeRequest[]> {
+  const added: FakeRequest[] = [];
+  const caches = { open: async () => ({ addAll: async (reqs: FakeRequest[]) => { added.push(...reqs); } }) };
+  await runWorker(caches, async () => ({ ok, json: manifest })).fire('install');
   return added;
+}
+
+async function install(manifest: () => Promise<unknown>): Promise<string[]> {
+  return (await installRequests(manifest)).map(r => r.url);
 }
 
 describe('offline', () => {
@@ -26,25 +64,157 @@ describe('offline', () => {
     ]));
   });
 
-  it('still caches the shell when the asset list cannot be read', async () => {
-    const added = await install(async () => { throw new Error('offline'); });
-    expect(added).toContain('./index.html');
+  it('fails the install when the asset list cannot be read, so the old worker stays', async () => {
+    await expect(install(async () => { throw new Error('offline'); })).rejects.toThrow();
+    await expect(installRequests(async () => ({ js: [], css: [] }), false)).rejects.toThrow();
   });
 
-  it('Google Fonts load with CORS so the service worker can keep a copy', () => {
-    const doc = new DOMParser().parseFromString(read('index.html'), 'text/html');
-    const link = doc.querySelector('link[href^="https://fonts.googleapis.com"]')!;
-    expect(link.getAttribute('crossorigin')).toBe('anonymous');
+  it('precaches fresh copies, not the HTTP cache, so the shell and the assets match', async () => {
+    const reqs = await installRequests(async () => ({ js: ['assets/index-a.js'], css: [] }));
+    expect(reqs.length).toBeGreaterThan(0);
+    for (const r of reqs) expect(r.init.cache, r.url).toBe('no-cache');
   });
 
-  it('Leaflet from the CDN is pinned by hash, so a tampered copy will not run', () => {
+  it('keeps the previous cache on activate, so an open page still loads its lazy chunks', async () => {
+    const deleted: string[] = [];
+    const caches = {
+      keys: async () => ['mamoru-guide-a', 'mamoru-guide-b', CACHE_NAME],
+      delete: async (k: string) => { deleted.push(k); return true; },
+    };
+    const { fire, posted } = runWorker(caches);
+    await fire('activate');
+    expect(deleted).toEqual(['mamoru-guide-a']);
+    await vi.waitFor(() => expect(posted).toEqual([{ type: 'SW_UPDATED' }]));
+  });
+
+  it('leaves the caches of other apps on the same origin alone', async () => {
+    const deleted: string[] = [];
+    const caches = {
+      keys: async () => ['mamoru-guide-a', 'mamoru-guide-b', 'other-x', CACHE_NAME, 'other-y'],
+      delete: async (k: string) => { deleted.push(k); return true; },
+    };
+    await runWorker(caches).fire('activate');
+    expect(deleted).toEqual(['mamoru-guide-a']);
+  });
+
+  it('does not announce an update when only other apps have caches', async () => {
+    const deleted: string[] = [];
+    const caches = { keys: async () => ['other-x', CACHE_NAME], delete: async (k: string) => { deleted.push(k); return true; } };
+    const { fire, posted } = runWorker(caches);
+    await fire('activate');
+    expect(deleted).toEqual([]);
+    expect(posted).toEqual([]);
+  });
+
+  it('serves a fixed-name file from the current cache before the previous one', async () => {
+    const url = 'https://example.test/mamoru-guide/fonts/DotGothic16-Regular.woff2';
+    const current = { match: async () => 'new font' };
+    const caches = { open: async (name: string) => (name === CACHE_NAME ? current : { match: async () => 'old font' }), match: async () => 'old font' };
+    const net = async () => { throw new Error('offline'); };
+    expect(await runWorker(caches, net).respond(url)).toBe('new font');
+  });
+
+  it('falls back to the previous cache for a chunk the current one lacks', async () => {
+    const url = 'https://example.test/mamoru-guide/assets/shelters-old.js';
+    const caches = { open: async () => ({ match: async () => undefined }), match: async () => 'old chunk' };
+    const net = async () => { throw new Error('offline'); };
+    expect(await runWorker(caches, net).respond(url, 'script')).toBe('old chunk');
+  });
+
+  it('deletes nothing on the first activate', async () => {
+    const deleted: string[] = [];
+    const caches = { keys: async () => [CACHE_NAME], delete: async (k: string) => { deleted.push(k); return true; } };
+    const { fire, posted } = runWorker(caches);
+    await fire('activate');
+    expect(deleted).toEqual([]);
+    expect(posted).toEqual([]);
+  });
+
+  it('precaches every font', async () => {
+    const files = publicFiles('fonts', /\.txt$/);
+    expect(files).toHaveLength(5);
+    const added = await install(async () => ({ js: [], css: [] }));
+    expect(added).toEqual(expect.arrayContaining(files));
+  });
+
+  it('loads Leaflet from the vendored copy, pinned by hash', () => {
     document.head.innerHTML = '';
     void loadLeaflet().catch(() => {});
     const css = document.head.querySelector<HTMLLinkElement>('link[href*="leaflet"]')!;
     const js = document.head.querySelector<HTMLScriptElement>('script[src*="leaflet"]')!;
-    for (const el of [css, js]) {
-      expect(el.integrity).toMatch(/^sha256-[A-Za-z0-9+/]{43}=$/);
-      expect(el.crossOrigin).toBe('anonymous');
+    expect(css.getAttribute('href')).toMatch(/vendor\/leaflet\/leaflet\.css$/);
+    expect(js.getAttribute('src')).toMatch(/vendor\/leaflet\/leaflet\.js$/);
+    expect(css.href).not.toContain('unpkg');
+    expect(js.src).not.toContain('unpkg');
+    expect(css.integrity).toBe(LEAFLET_SRI.css);
+    expect(js.integrity).toBe(LEAFLET_SRI.js);
+  });
+
+  it('the vendored files are the published Leaflet 1.9.4', () => {
+    const hash = (f: string) => 'sha256-' + createHash('sha256').update(readFileSync(resolve(process.cwd(), f))).digest('base64');
+    expect(hash('public/vendor/leaflet/leaflet.js')).toBe(LEAFLET_SRI.js);
+    expect(hash('public/vendor/leaflet/leaflet.css')).toBe(LEAFLET_SRI.css);
+  });
+
+  it('precaches every vendored Leaflet file', async () => {
+    const files = publicFiles('vendor/leaflet', /LICENSE$/);
+    expect(files).toHaveLength(7);
+    const added = await install(async () => ({ js: [], css: [] }));
+    expect(added).toEqual(expect.arrayContaining(files));
+  });
+
+  it('every precached path exists, so one missing file cannot break the install', async () => {
+    const added = await install(async () => ({ js: [], css: [] }));
+    for (const url of added) {
+      if (url === './') continue;
+      const file = url === './index.html' ? 'index.html' : 'public/' + url.slice(2);
+      expect(existsSync(resolve(process.cwd(), file)), url).toBe(true);
     }
+  });
+
+  it('no source file requests unpkg.com', () => {
+    const walk = (d: string): string[] => readdirSync(d, { withFileTypes: true })
+      .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);
+    const offenders = walk(resolve(process.cwd(), 'src'))
+      .filter(f => !f.endsWith('offline.test.ts'))
+      .filter(f => readFileSync(f, 'utf8').includes('unpkg.com'));
+    expect(offenders).toEqual([]);
+  });
+});
+
+describe('without JavaScript', () => {
+  const html = read('index.html');
+  const blocks = html.match(/<noscript>[\s\S]*?<\/noscript>/g) ?? [];
+  const inner = (blocks[0] ?? '').replace(/<\/?noscript>/g, '');
+  const tpl = document.createElement('template');
+  tpl.innerHTML = inner;
+  const text = tpl.content.textContent ?? '';
+
+  it('index.html has one noscript block, before the navbar', () => {
+    expect(blocks).toHaveLength(1);
+    const at = html.indexOf('<noscript>');
+    expect(at).toBeGreaterThan(html.indexOf('<body'));
+    expect(at).toBeLessThan(html.indexOf('<nav class="navbar"'));
+  });
+
+  it('gives 110, 119, 118 and 171 as tap-to-call links', () => {
+    for (const n of ['110', '119', '118', '171']) expect(tpl.content.querySelector(`a[href="tel:${n}"]`)).not.toBeNull();
+  });
+
+  it('uses the certified contact text in all three languages', () => {
+    for (const n of ['110', '119', '118']) {
+      const c = contacts.find(x => x.number === n)!;
+      expect(text).toContain(c.desc_en);
+      expect(text).toContain(c.desc_ja);
+      expect(text).toContain(c.desc_id);
+    }
+    const c = contacts.find(x => x.number === '171')!;
+    expect(text).toContain(c.name_ja);
+    expect(text).toContain(c.name.replace(' (171)', ''));
+    expect(text).toContain(c.name_id.replace(' (171)', ''));
+  });
+
+  it('shows all three languages, because no script sets the language', () => {
+    expect(read('css/base.css')).toMatch(/\.noscript-note \[data-lang\]\s*\{[^}]*display:\s*block/);
   });
 });

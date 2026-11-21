@@ -1,0 +1,38 @@
+/* Self-hosted fonts (public/fonts/, made by `npm run fonts`). The service worker
+   precaches them, so text looks the same offline. DotGothic16 and M PLUS Rounded 1c
+   are subsets of the app text; a character outside a subset uses the system font. */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/PressStart2P-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DotGothic16';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/DotGothic16-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/MPLUSRounded1c-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/MPLUSRounded1c-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/MPLUSRounded1c-ExtraBold.woff2') format('woff2');
+}

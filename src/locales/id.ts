@@ -106,4 +106,14 @@ export const id: Record<string, string> = {
   'fab.firstaid': 'Pertolongan Pertama',
   'fab.shelter':  'Cari Tempat Evakuasi',
   'fab.showthis': 'Tunjukkan Kartu Ini',
+
+  // Shelter finder problems
+  'shelter.problem.data': 'Daftar tempat evakuasi tidak bisa dimuat. Sambungkan ke internet, lalu coba lagi.',
+  'shelter.problem.map': '🗺️ Peta butuh internet. Daftar tempat evakuasi tetap bisa dipakai.',
+  'shelter.problem.locationDenied': 'Kamu tidak mengizinkan akses lokasi. Pilih areamu di bawah.',
+  'shelter.problem.locationTimeout': 'Waktu mencari lokasi habis. Pilih areamu di bawah.',
+  'shelter.problem.locationUnavailable': 'Lokasimu tidak tersedia. Pilih areamu di bawah.',
+  'shelter.problem.locationFailed': 'Aplikasi tidak mendapat lokasimu. Pilih areamu di bawah.',
+  'shelter.retry': 'Coba lagi',
+  'shelter.reload': 'Muat ulang halaman',
 };

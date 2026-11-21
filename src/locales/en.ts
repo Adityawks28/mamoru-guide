@@ -106,4 +106,14 @@ export const en: Record<string, string> = {
   'fab.firstaid': 'First Aid Guide',
   'fab.shelter':  'Find an Evacuation Site',
   'fab.showthis': 'Show This Card',
+
+  // Shelter finder problems
+  'shelter.problem.data': 'The list of evacuation sites did not load. Connect to the internet. Then try again.',
+  'shelter.problem.map': '🗺️ The map needs the internet. The list of evacuation sites still works.',
+  'shelter.problem.locationDenied': 'You did not allow location access. Choose your area below.',
+  'shelter.problem.locationTimeout': 'The app did not get your location in time. Choose your area below.',
+  'shelter.problem.locationUnavailable': 'Your location is not available. Choose your area below.',
+  'shelter.problem.locationFailed': 'The app did not get your location. Choose your area below.',
+  'shelter.retry': 'Try again',
+  'shelter.reload': 'Reload the page',
 };

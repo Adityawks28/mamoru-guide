@@ -16,7 +16,7 @@ export interface Contact {
 
 export type ContactCategory = 'emergency' | 'medical' | 'support' | 'embassy' | 'mental';
 
-const contacts: Contact[] = [
+export const contacts: Contact[] = [
   // Emergency
   {icon:'🚒',name:'Fire / Ambulance',name_ja:'消防・救急',name_id:'Pemadam / Ambulans',number:'119',desc_en:'Fire and ambulance',desc_ja:'火事、救急',desc_id:'Kebakaran dan ambulans',category:'emergency'},
   {icon:'👮',name:'Police',name_ja:'警察',name_id:'Polisi',number:'110',desc_en:'Crimes and accidents that need the police now',desc_ja:'すぐに警察が必要な事件や事故',desc_id:'Kejahatan dan kecelakaan yang perlu segera ditangani polisi',category:'emergency'},

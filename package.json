@@ -8,15 +8,19 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && tsc -p scripts --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "fonts": "vite-node scripts/build-fonts.ts"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
     "@vitest/ui": "^2.0.0",
+    "fontverter": "^2.1.0",
+    "harfbuzzjs": "^1.6.4",
     "jsdom": "^25.0.0",
+    "subset-font": "^2.9.0",
     "typescript": "^5.7.0",
     "vite": "^6.0.0",
     "vitest": "^2.0.0"

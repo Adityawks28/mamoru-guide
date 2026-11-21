@@ -10,6 +10,7 @@ export const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/learn':     ['drill', 'quiz', 'about'],
   '#/plan':      ['myplan'],
   '#/shelter':   ['shelter'],
+  '#/firstaid':  ['firstaid'],
   '#/show':      ['showthis'],
   '#/alerts':    ['alerts'],
 };
@@ -18,10 +19,10 @@ export const ROUTE_SECTIONS: Record<string, string[]> = {
 const REDIRECTS: Record<string, string> = {
   '#earthquake': '#/prepare',
   '#vocab':      '#/prepare',
-  '#showthis':   '#/prepare',
+  '#showthis':   '#/show',
   '#bag':        '#/prepare',
   '#alerts':     '#/prepare',
-  '#firstaid':   '#/prepare',
+  '#firstaid':   '#/firstaid',
   '#contacts':   '#/prepare',
   '#typhoon':    '#/prepare',
   '#shelter':    '#/shelter',
