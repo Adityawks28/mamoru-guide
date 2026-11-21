@@ -1,6 +1,5 @@
 import { currentLang } from './lang';
 import { loadShelters, type Hazard, type Shelter } from './shelter-data';
-import { showToast } from './toast';
 import { t } from './i18n';
 
 export type ShelterProblem =
@@ -132,7 +131,11 @@ export function loadLeaflet(): Promise<void> {
     script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
     script.crossOrigin = 'anonymous';
     script.onload = () => { leafletLoaded = true; resolve(); };
-    script.onerror = () => reject(new Error('Failed to load Leaflet'));
+    script.onerror = () => {
+      css.remove();
+      script.remove();
+      reject(new Error('Failed to load Leaflet'));
+    };
     document.head.appendChild(script);
   });
 }
@@ -319,10 +322,6 @@ function showLoading(): void {
   reapplyLang();
 }
 
-function reportGeolocationError(problem: ShelterProblem): void {
-  showToast(t(`shelter.problem.${problem}`), 'error');
-}
-
 function showProblem(problem: ShelterProblem, retry: () => void): void {
   const target = document.getElementById('shelterList') ?? document.getElementById('shelterContainer');
   if (!target) return;
@@ -334,8 +333,10 @@ async function showMap(lat: number, lng: number, nearest: ShelterWithDistance[])
   const mapEl = document.getElementById('shelterMap');
   if (!mapEl) return;
   mapEl.style.display = 'block';
+  const oldNote = mapEl.previousElementSibling;
+  if (oldNote?.matches('.shelter-problem[data-problem="map"]')) oldNote.remove();
   if (mapInstance) {
-    (mapInstance as { remove(): void }).remove();
+    try { (mapInstance as { remove(): void }).remove(); } catch { /* map already gone */ }
     mapInstance = null;
   }
   mapEl.innerHTML = '';
@@ -401,7 +402,6 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
       coords = useCached ?? await getUserLocation();
     } catch (geoErr) {
       const problem = problemFromGeolocation(geoErr);
-      reportGeolocationError(problem);
       showManualFallback(problem);
       return;
     }

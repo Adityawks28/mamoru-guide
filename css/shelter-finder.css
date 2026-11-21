@@ -180,11 +180,6 @@
 .shelter-fallback {
   margin-bottom: 16px;
 }
-.shelter-fallback-msg {
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: var(--text-muted);
-}
 .shelter-city-select {
   width: 100%;
   padding: 10px 14px;

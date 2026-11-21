@@ -199,6 +199,18 @@ describe('shelter finder problems', () => {
     setI18nLang('en');
   });
 
+  it('leaves no Leaflet tags in the head after failed loads', async () => {
+    mountAt(SANNOMIYA); await start(); await find('.shelter-card');
+    for (let i = 0; i < 2; i++) {
+      await vi.waitFor(() => { if (!document.head.querySelector('script[src*="leaflet"]')) throw new Error('no script'); });
+      document.head.querySelector('script[src*="leaflet"]')!.dispatchEvent(new Event('error'));
+      await see('#shelterMap .shelter-problem[data-problem="map"]');
+      expect(document.head.querySelectorAll('script[src*="leaflet"]')).toHaveLength(0);
+      expect(document.head.querySelectorAll('link[href*="leaflet"]')).toHaveLength(0);
+      if (i === 0) document.getElementById('shelterFindBtn')!.click();
+    }
+  });
+
   it('maps geolocation codes to problems', async () => {
     const { problemFromGeolocation } = await start();
     expect([1, 2, 3, 9].map(c => problemFromGeolocation({ code: c }))).toEqual(
