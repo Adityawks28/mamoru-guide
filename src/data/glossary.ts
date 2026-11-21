@@ -24,6 +24,10 @@ export const GLOSSARY: ReadonlyArray<GlossaryTerm> = [
   // JMA's term row adds "skala kecil"; its sentence rows drop it, which keeps this a substring of 大津波警報.
   { ja: '津波警報', reading: 'つなみけいほう', en: 'Tsunami Warning', id: 'peringatan bahaya tsunami', source: 'jma-multilingual' },
   { ja: '大津波警報', reading: 'おおつなみけいほう', en: 'Major Tsunami Warning', id: 'peringatan bahaya tsunami skala besar', source: 'jma-multilingual' },
+  { ja: '津波注意報', reading: 'つなみちゅういほう', en: 'Tsunami Advisory', id: 'pemberitahuan tsunami', source: 'jma-multilingual' },
+  // Level 4 class of JMA weather warnings from 2026-05-29, e.g. レベル４大雨危険警報 "Level 4 Urgent Warning (Heavy Rain)".
+  // en: JMA 警戒レベル相当情報の英語表記について; id: JMA dictionary rows "Peringatan Darurat <phenomenon> Tingkat 4".
+  { ja: '危険警報', reading: 'きけんけいほう', en: 'Urgent Warning', id: 'Peringatan Darurat', source: 'jma-warning-2026-english' },
   { ja: '緊急地震速報', reading: 'きんきゅうじしんそくほう', en: 'Earthquake Early Warning', id: 'peringatan dini gempa bumi', source: 'jma-multilingual' },
   // JMA lists "skala intensitas gempa bumi / skala intensitas seismik"; the second matches en word for word.
   { ja: '震度', reading: 'しんど', en: 'seismic intensity', id: 'skala intensitas seismik', source: 'jma-multilingual' },

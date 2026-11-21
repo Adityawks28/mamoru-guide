@@ -12,7 +12,7 @@ const ACTIONS: Action[] = [
     { sprite: { arms: [0, 110], hold: 'phone-front', pupil: { x: 0, y: 1 } } },
     { sprite: { arms: [0, 110], hold: 'phone-front', blink: true } },
   ] },
-  // Severe tropical storm: tape an X on the window, one strip at a time.
+  // Severe tropical storm: tape the window, one strip at a time.
   { frameMs: 700, props: ['window'], frames: [
     { sprite: { arms: [0, -130] } },
     { sprite: { arms: [0, -130] }, props: ['tapeA'] },

@@ -44,9 +44,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'Light a candle to see better', ja: 'ろうそくをつけて、よく見る', id: 'Nyalakan lilin agar lebih jelas' },
     ],
     correct: 1,
-    explain_en: 'Open the windows to let air in. Leave by the stairs. After an earthquake, NEVER use elevators, electric switches, or open flames. A gas leak can cause an explosion.',
-    explain_ja: '窓を開けて空気を入れかえ、階段で避難してください。地震のあとは、エレベーター、電気のスイッチ、火を絶対に使わないでください。ガス漏れで爆発することがあります。',
-    explain_id: 'Buka jendela agar udara masuk. Keluar lewat tangga. Setelah gempa, JANGAN pakai elevator, saklar listrik, atau api terbuka. Kebocoran gas bisa menyebabkan ledakan.',
+    explain_en: 'Open the windows. Do not use fire or electric switches. Close the gas valve. Use the stairs: an elevator can stop and trap you. Call the gas company.',
+    explain_ja: '窓を開けてください。火や、電気のスイッチを使わないでください。ガスの元栓（もとせん）を閉めてください。階段を使ってください。エレベーターは止まって、中に閉じこめられることがあります。ガス会社に連絡してください。',
+    explain_id: 'Buka jendela. Jangan pakai api atau saklar listrik. Tutup katup gas. Pakai tangga: elevator bisa berhenti dan kamu bisa terjebak di dalamnya. Hubungi perusahaan gas.',
   },
   {
     claimId: 'drill-step-3',
@@ -92,9 +92,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'It is only an aftershock. Ignore it.', ja: '余震だから気にしない', id: 'Itu hanya gempa susulan. Abaikan.' },
     ],
     correct: 1,
-    explain_en: 'After a big earthquake, another earthquake of the same size can come. JMA asks people to stay alert for about 1 week. Always do the same thing: Drop, Cover, Hold On. The doorway idea is out of date. Inside walls give no special protection.',
-    explain_ja: '大きな地震のあと、同じくらいの大きさの地震が来ることがあります。気象庁（きしょうちょう）は、約1週間、注意するように呼びかけています。いつも同じように、身を低くし、頭を守り、動かないでください。ドアの所や内側の壁の近くが、特に安全ということはありません。',
-    explain_id: 'Setelah gempa besar, gempa lain yang sama kuatnya bisa terjadi. JMA meminta orang waspada sekitar 1 minggu. Selalu lakukan hal yang sama: merunduk, berlindung, bertahan. Mitos berdiri di ambang pintu sudah usang. Dinding dalam tidak memberi perlindungan khusus.',
+    explain_en: 'After a big earthquake, another earthquake of the same size can come. JMA asks people to stay alert for about 1 week. Do the same as in the first earthquake: drop, cover and hold on. Go where nothing can fall, tip over or move.',
+    explain_ja: '大きな地震のあと、同じくらいの大きさの地震が来ることがあります。気象庁（きしょうちょう）は、約1週間、注意するように呼びかけています。最初の地震と同じように、身を低くし、頭を守り、動かないでください。物が「落ちてこない」「倒れてこない」「移動してこない」場所へ行ってください。',
+    explain_id: 'Setelah gempa besar, gempa lain yang sama kuatnya bisa terjadi. JMA meminta orang waspada sekitar 1 minggu. Lakukan hal yang sama seperti saat gempa pertama: merunduk, berlindung, bertahan. Pergilah ke tempat tanpa benda yang bisa jatuh, roboh, atau bergeser.',
     shake: true,
   },
   {
@@ -109,9 +109,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'Wait 1 hour, then go back', ja: '1時間待ってから戻る', id: 'Tunggu 1 jam, lalu kembali' },
     ],
     correct: 1,
-    explain_en: 'Go back only when the authorities say it is safe. A building can have damage that you cannot see. Before you leave, check NHK or city announcements, or ask the shelter staff.',
-    explain_ja: '市や国が安全だと言うまで、戻らないでください。建物には、見えないこわれた所があるかもしれません。出る前に、NHKや市のお知らせを確認するか、避難所のスタッフに聞いてください。',
-    explain_id: 'Kembali hanya jika pihak berwenang menyatakan aman. Bangunan mungkin punya kerusakan yang tidak terlihat. Sebelum pergi, cek NHK atau pengumuman kota, atau tanya petugas pengungsian.',
+    explain_en: 'Go back only when the authorities say it is safe. Do not go back while a warning is in effect. A building can have damage that you cannot see. Before you leave, check NHK or city announcements, or ask the evacuation shelter staff.',
+    explain_ja: '市や国が安全だと言うまで、戻らないでください。警報が出ている間は、戻らないでください。建物には、見えないこわれた所があるかもしれません。出る前に、NHKや市のお知らせを確認するか、避難所のスタッフに聞いてください。',
+    explain_id: 'Kembali hanya jika pihak berwenang menyatakan aman. Jangan kembali selama peringatan masih berlaku. Bangunan mungkin punya kerusakan yang tidak terlihat. Sebelum pergi, cek NHK atau pengumuman kota, atau tanya petugas tempat pengungsian.',
   },
 ];
 

@@ -62,6 +62,7 @@
   margin-bottom: 8px;
 }
 .alert-card p { font-size: 13px; line-height: 1.6; color: var(--text-muted); }
+.alert-card p + p { margin-top: 6px; }
 .alert-card .jp-sub { font-size: 12px; color: var(--portopia-blue); margin-bottom: 6px; }
 
 /* App list */

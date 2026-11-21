@@ -55,5 +55,5 @@ International students and residents in Japan who find it hard to get disaster i
 ## Open decisions (from PR #23)
 
 - Crush injury advice ("do not free them after 15 minutes") and two finger CPR for babies. Both need a medical reviewer.
-- The alert section still uses the JMA warning names from before May 2026 (for example レベル3大雨警報 and the new 危険警報).
+- ~~The alert section still uses the JMA warning names from before May 2026.~~ Done 2026-11-21: it uses the JMA level names from 2026-05-29 and the official evacuation names (docs/superpowers/specs/2026-11-21-safety-verification.md).
 - The About page says "Last updated March 2026, reviewed against the latest guidelines". Keep or change it.

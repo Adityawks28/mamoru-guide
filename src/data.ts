@@ -22,7 +22,7 @@ export const vocabData: VocabData = {
     {jp:'洪水',rom:'Kouzui',en:'Flood',id:'Banjir'},
     {jp:'土砂崩れ',rom:'Dosha kuzure',en:'Landslide',id:'Tanah longsor'},
     {jp:'火事',rom:'Kaji',en:'Fire',id:'Kebakaran'},
-    {jp:'大雨警報',rom:'Ooame keihou',en:'Heavy rain warning',id:'Peringatan hujan lebat'},
+    {jp:'レベル４大雨危険警報',rom:'Reberu yon ooame kiken keihou',en:'Level 4 Urgent Warning (Heavy Rain)',id:'Peringatan Darurat Hujan Lebat Tingkat 4'},
   ],
   action: [
     {jp:'逃げて！',rom:'Nigete!',en:'Run away! Evacuate!',id:'Lari! Mengungsi!'},

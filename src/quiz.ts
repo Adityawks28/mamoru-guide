@@ -88,9 +88,9 @@ const questions: QuizQuestion[] = [
     explain_id: '119 untuk pemadam kebakaran dan ambulans. 110 untuk polisi. 118 untuk penjaga pantai. 911 TIDAK berfungsi di Jepang.',
   },
   {
-    q_en: 'You get a Level 4 evacuation order. What do you do?',
+    q_en: 'You get a Level 4 Evacuation Instruction. What do you do?',
     q_ja: 'レベル4の避難指示が出ました。どうしますか？',
-    q_id: 'Anda menerima perintah evakuasi Level 4. Apa yang Anda lakukan?',
+    q_id: 'Kamu menerima perintah evakuasi Level 4. Apa yang kamu lakukan?',
     options: [
       {en:'Start preparing to leave',ja:'避難の準備を始める',id:'Mulai bersiap untuk pergi'},
       {en:'Go to a shelter immediately',ja:'すぐに避難所へ行く',id:'Segera mengungsi ke tempat pengungsian'},
@@ -98,9 +98,9 @@ const questions: QuizQuestion[] = [
       {en:'Only elderly people must evacuate',ja:'高齢者だけが避難する',id:'Hanya lansia yang perlu mengungsi'},
     ],
     correct: 1,
-    explain_en: 'Level 4 means EVERYONE must evacuate now. Level 5 means the disaster is already happening. It may be too late.',
-    explain_ja: 'レベル4では、全員がすぐに避難します。レベル5は、災害がもう起きています。もう間に合わないかもしれません。',
-    explain_id: 'Level 4 berarti SEMUA ORANG harus segera mengungsi. Level 5 berarti bencana sudah terjadi. Mungkin sudah terlambat.',
+    explain_en: 'At Level 4, everyone in a danger area must leave now. At Level 5, a disaster is happening or is about to happen. It may be too late to leave safely.',
+    explain_ja: 'レベル4では、危ない場所にいる人は、全員すぐに避難します。レベル5は、災害が起きているか、すぐに起きそうです。安全に避難するのは、もうむずかしいかもしれません。',
+    explain_id: 'Pada Level 4, semua orang di daerah berbahaya harus segera mengungsi. Pada Level 5, bencana sedang atau akan segera terjadi. Mungkin sudah terlambat untuk mengungsi dengan aman.',
   },
   {
     q_en: 'What is the most important item in your emergency bag?',

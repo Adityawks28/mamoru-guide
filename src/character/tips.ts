@@ -11,7 +11,7 @@ export const QUAKE_TIPS: Tip[] = [
   { en: "In 1995, buildings from 1981 or earlier had the worst damage. Then Japan made a law to make them stronger.", ja: "1995年の地震では、1981年以前の建物の被害が、特に大きかったです。そのあと、古い建物を強くするための法律（ほうりつ）ができました。", id: "Pada 1995, bangunan tahun 1981 dan sebelumnya paling rusak. Lalu dibuat undang-undang untuk memperkuatnya.", claimId: "tip-building-law" },
   { en: "If you are outside, crouch in an open area. Stay away from walls and vending machines.", ja: "外にいるときは、広い場所でしゃがんでください。壁や自動販売機から離れてください。", id: "Jika di luar, jongkok di tempat terbuka. Jauhi tembok dan mesin penjual otomatis." },
   { en: "Switch off the breaker when you leave. Electrical fires can start when the power comes back on.", ja: "家を出るときは、ブレーカーを切ってください。電気がもどったときに、火事が起きることがあります（通電火災）。", id: "Matikan breaker listrik saat keluar. Kebakaran listrik bisa terjadi saat listrik menyala lagi.", claimId: "tip-breaker-fire" },
-  { en: "Wear shoes. After a big earthquake, there is broken glass everywhere.", ja: "靴をはいてください。大きな地震のあとは、ガラスの破片がたくさん落ちています。", id: "Pakai sepatu. Setelah gempa besar, ada pecahan kaca di mana-mana." },
+  { en: "Wear shoes. After a big earthquake, there can be broken glass on the floor.", ja: "靴をはいてください。大きな地震のあとは、床にガラスの破片（はへん）が落ちていることがあります。", id: "Pakai sepatu. Setelah gempa besar, bisa ada pecahan kaca di lantai.", claimId: "tip-shoes-glass" },
   { en: "A tsunami can come after the earthquake. Go to high ground. Do not wait for sirens.", ja: "地震のあと、津波が来ることがあります。高い所へ逃げてください。サイレンを待たないでください。", id: "Tsunami bisa datang setelah gempa. Naik ke tempat tinggi. Jangan tunggu sirene." },
   { en: "Charge your phone now. In 1995, some areas of Kobe had no power for up to 6 days.", ja: "今、スマホを充電してください。1995年の神戸では、長い所で6日間、電気が止まりました。", id: "Isi daya ponsel sekarang. Pada 1995, sebagian wilayah Kobe tanpa listrik sampai 6 hari.", claimId: "tip-kobe-power" },
 ];
@@ -29,7 +29,7 @@ export const BAG_TIPS: Tip[] = [
 export const MAP_TIPS: Tip[] = [
   { en: "Schools are often evacuation sites and evacuation shelters. Find your 避難場所 and 避難所 on the city map.", ja: "学校は、避難場所（ひなんばしょ）にも避難所（ひなんじょ）にもなることが多いです。市の地図で、近くの避難場所と避難所を確かめてください。", id: "Sekolah sering jadi tempat evakuasi dan tempat pengungsian. Cari 避難場所 dan 避難所 di peta kota.", claimId: "tip-shelter-types" },
   { en: "Walk. Do not drive. In 1995, traffic jams in Kobe blocked fire engines and ambulances.", ja: "車ではなく、歩いて避難してください。1995年の神戸では、渋滞（じゅうたい）が、消防車や救急車のじゃまになりました。", id: "Jalan kaki, jangan naik mobil. Pada 1995, macet di Kobe menghambat mobil pemadam kebakaran dan ambulans.", claimId: "tip-kobe-traffic" },
-  { en: "Use the route you practiced. On a new route, you can get lost.", ja: "練習した道を使ってください。知らない道では、迷うことがあります。", id: "Pakai rute yang sudah Anda latih. Di jalan baru, Anda bisa tersesat." },
+  { en: "Use a route you practiced. Know more than one route.", ja: "練習した道を使ってください。避難する道を、2つ以上知っておいてください。", id: "Pakai rute yang sudah kamu latih. Ketahui lebih dari satu rute.", claimId: "tip-routes" },
 ];
 
 // New pool: calibrated to category IDs in src/first-aid.ts
@@ -49,8 +49,8 @@ export const FIRSTAID_TIPS: Tip[] = [
 // The scale on screen shows the English level names in every language.
 export const TYPHOON_TIPS: Tip[] = [
   { en: "Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast.", ja: "Tropical Storm：ベランダの物を片づけてください。スマホなどを充電してください。天気予報を見てください。", id: "Badai tropis: amankan barang di balkon. Isi daya gawai. Cek prakiraan cuaca.", claimId: "typhoon-prep-1" },
-  { en: "Severe Tropical Storm: tape an X on the windows. Fill the bathtub. Store more water.", ja: "Severe Tropical Storm：窓にテープをXの形にはってください。浴そうに水をためてください。水を多めに用意してください。", id: "Badai tropis kuat: lakban jendela bentuk X. Isi bak mandi. Tambah persediaan air.", claimId: "typhoon-prep-2" },
-  { en: "Typhoon: stay home if you can. Evacuate before the wind is at its strongest.", ja: "Typhoon：できれば家にいてください。避難するときは、風が一番強くなる前に避難してください。", id: "Topan: tetap di rumah jika bisa. Mengungsilah sebelum angin paling kencang.", claimId: "typhoon-prep-3" },
+  { en: "Severe Tropical Storm: put film or tape on the windows. Close the curtains. Fill the bathtub.", ja: "Severe Tropical Storm：窓に、フィルムかテープをはってください。カーテンを閉めてください。浴そうに水をためてください。", id: "Badai tropis kuat: pasang film atau lakban di jendela. Tutup tirai. Isi bak mandi.", claimId: "typhoon-prep-2" },
+  { en: "Typhoon: check the hazard map. If you live in a danger area, leave before the wind and rain get strong.", ja: "Typhoon：ハザードマップを見てください。危ない場所に住んでいたら、風と雨が強くなる前に避難してください。", id: "Topan: cek peta bahaya. Jika kamu tinggal di daerah berbahaya, mengungsilah sebelum angin dan hujan kuat.", claimId: "typhoon-prep-3" },
   { en: "Very Strong Typhoon: the power can be off for days. Prepare cash, food, and batteries.", ja: "Very Strong Typhoon：何日も停電することがあります。現金、食べ物、電池を用意してください。", id: "Topan sangat kuat: listrik bisa padam berhari-hari. Siapkan uang tunai, makanan, baterai.", claimId: "typhoon-prep-4" },
   { en: "Violent Typhoon: stay indoors. Do not go out, not even for a short time.", ja: "Violent Typhoon：外に出ないでください。少しの用事でも、出ないでください。", id: "Topan dahsyat: tetap di dalam. Jangan keluar, walau hanya sebentar.", claimId: "typhoon-prep-5" },
 ];
@@ -69,5 +69,5 @@ export const DISASTER_FACTS: Tip[] = [
   { en: "In 2011, later tsunami waves were often bigger than the first. Stay high until the warning ends.", ja: "2011年の津波では、あとの波のほうが、最初の波より大きいことが多くありました。警報が終わるまで、高い所にいてください。", id: "Tsunami 2011: gelombang berikutnya sering lebih besar dari yang pertama. Tetap di atas sampai peringatan usai.", claimId: "tip-tohoku-later-waves" },
   { en: "If you are trapped, blow a whistle to call for help. A whistle needs only a little breath.", ja: "閉じこめられたら、笛をふいて助けを呼んでください。笛は、少しの息で鳴らせます。", id: "Jika kamu terjebak, tiup peluit untuk minta tolong. Peluit hanya butuh sedikit napas.", claimId: "tip-whistle" },
   { en: "In 1995, up to 450 bank branches in Hyogo closed. All opened again by 1 February. Always keep some cash.", ja: "1995年の兵庫県では、最大450の銀行の店が休みました。2月1日までに、すべての店がまた開きました。いつも現金を少し持っていてください。", id: "Selalu bawa tunai. Pada 1995, sampai 450 cabang bank di Hyogo tutup. Semua buka lagi paling lambat 1 Februari.", claimId: "tip-kobe-banks" },
-  { en: "In a typhoon, tape an X on your windows. This stops glass from flying into the room.", ja: "台風のときは、窓にテープをXの形にはってください。ガラスが部屋の中に飛び散るのを防ぎます。", id: "Saat topan, lakban jendela bentuk X. Ini mencegah kaca terlempar ke dalam ruangan." },
+  { en: "Before a typhoon, put film or tape on the windows. Close the curtains. This helps stop glass from flying in.", ja: "台風の前に、窓にフィルムかテープをはってください。カーテンを閉めてください。ガラスが部屋に飛びこむのを、防ぐのに役立ちます。", id: "Sebelum topan, pasang film atau lakban di jendela. Tutup tirai. Ini membantu mencegah kaca terlempar masuk.", claimId: "tip-window-film" },
 ];
