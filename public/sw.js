@@ -24,23 +24,33 @@ const PRECACHE = [
 // Install: cache the whole app on the first visit, so it works offline from
 // then on (a disaster may cut the network before a second visit). The build
 // lists its hashed JS/CSS in asset-manifest.json (scripts/vite-sw-manifest.ts).
+// A missing list fails the install: the old worker and its cache stay in use.
+// cache: 'no-cache' asks the server, so a stale HTTP copy of ./ cannot mix
+// with the new assets.
 self.addEventListener('install', event => {
   event.waitUntil(
     fetch('./asset-manifest.json', { cache: 'no-store' })
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error('asset-manifest.json: HTTP ' + r.status);
+        return r.json();
+      })
       .then(m => [...m.js, ...m.css].map(f => './' + f))
-      .catch(() => [])
-      .then(assets => caches.open(CACHE_NAME).then(cache => cache.addAll([...PRECACHE, ...assets])))
+      .then(assets => caches.open(CACHE_NAME).then(cache =>
+        cache.addAll([...PRECACHE, ...assets].map(u => new Request(u, { cache: 'no-cache' })))))
       .then(() => self.skipWaiting())
   );
 });
 
-// Activate: clean old caches + notify clients of update
+// Activate: keep this cache and the one before it, delete older ones, and tell
+// the open pages. A page from the previous deploy can still import its lazy
+// chunks (the cache-first branch below searches every cache). caches.keys()
+// lists caches in creation order, so the last old key is the previous deploy.
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
       const old = keys.filter(k => k !== CACHE_NAME);
-      return Promise.all(old.map(k => caches.delete(k))).then(() => {
+      const drop = old.slice(0, -1);
+      return Promise.all(drop.map(k => caches.delete(k))).then(() => {
         if (old.length > 0) {
           self.clients.matchAll().then(clients => {
             clients.forEach(c => c.postMessage({ type: 'SW_UPDATED' }));
@@ -59,8 +69,8 @@ self.addEventListener('activate', event => {
 //   - Everything else (content-hashed JS bundles, images, fonts) stays
 //     cache-first: a new build changes the hashed URL, so it's a cache miss → net.
 // ignoreVary: a host that sends `Vary: Origin` would otherwise make the
-// precached copies (fetched without Origin) miss for module scripts and
-// crossorigin styles, which do send it.
+// precached copies (fetched without Origin) miss for module scripts, which
+// do send it.
 const MATCH = { ignoreVary: true };
 self.addEventListener('fetch', event => {
   const req = event.request;
