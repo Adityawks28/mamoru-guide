@@ -353,6 +353,7 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
   transition: all 0.2s;
 }
 .contact-filter-btn.active,
+.contact-filter-btn[aria-pressed="true"],
 .contact-filter-btn:hover {
   background: var(--accent);
   color: var(--accent-contrast);
@@ -369,17 +370,29 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
   font-family: var(--pixel-text);
   font-size: 14px;
 }
-.sources-group-title {
+.sources-group-title,
+.sources-how-title {
   font-family: var(--pixel-font);
   font-size: 12px;
   color: var(--accent);
 }
 /* DotGothic16 at 12px is hard to read in kanji. */
-body.lang-ja .sources-group-title {
+body.lang-ja .sources-group-title,
+body.lang-ja .sources-how-title {
   font-size: 14px;
 }
 .source-item {
   overflow-wrap: anywhere;
+  margin: 0 0 var(--space-md);
+}
+.source-publisher,
+.source-title,
+.source-checked {
+  display: block;
+}
+.sources-how time {
+  font: inherit;
+  color: inherit;
 }
 .source-title {
   color: var(--text);
