@@ -168,17 +168,16 @@ export function checkBag(): void {
   const bestEl = document.getElementById('bagBestScore');
   if (bestEl) bestEl.textContent = best + ' / ' + maxScore;
 
-  let title: string, msg: string;
   const pctScore = score / maxScore;
-  if (pctScore >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You chose the most important items. Your bag is ready for an emergency.'; }
-  else if (pctScore >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices. Replace low priority items with the important items you missed.'; }
-  else if (pctScore >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basic items, but important items are missing. Pack water, food, and medical supplies first.'; }
-  else { title = '⚠ Not Ready'; msg = 'Your bag does not have the items you need to survive. Pack these first: water, food, first aid kit, medicines, and documents.'; }
-
+  const level = pctScore >= 0.85 ? 'expert' : pctScore >= 0.65 ? 'good' : pctScore >= 0.4 ? 'improve' : 'notReady';
   const titleEl = document.getElementById('bagResultTitle');
-  if (titleEl) titleEl.textContent = title;
   const msgEl = document.getElementById('bagResultMsg');
-  if (msgEl) msgEl.textContent = msg;
+  // data-i18n lets applyTranslations() rewrite the result when the language changes.
+  for (const [el, part] of [[titleEl, 'title'], [msgEl, 'msg']] as const) {
+    if (!el) continue;
+    el.dataset.i18n = `bag.result.${level}.${part}`;
+    el.textContent = t(el.dataset.i18n);
+  }
 }
 
 export function resetBag(): void {

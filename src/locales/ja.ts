@@ -39,6 +39,16 @@ export const ja: Record<string, string> = {
   'bag.packed':  '✓ 入れた',
   'scene.avoid': 'はなれて',
 
+  // Bag game score (game feedback only)
+  'bag.result.expert.title': '🏆 準備の名人！',
+  'bag.result.expert.msg': 'いちばん大切な物を選びました。非常時のためのバッグができました。',
+  'bag.result.good.title': '👍 よくできました！',
+  'bag.result.good.msg': 'よい選び方です。大切ではない物を出して、入れなかった大切な物を入れてください。',
+  'bag.result.improve.title': '🤔 もう少しです',
+  'bag.result.improve.msg': '基本の物はありますが、大切な物が足りません。まず、水と食べ物と薬などを入れてください。',
+  'bag.result.notReady.title': '⚠ まだ準備ができていません',
+  'bag.result.notReady.msg': 'このバッグには、生きるために必要な物が入っていません。まず、水、食べ物、救急箱（きゅうきゅうばこ）、薬、書類を入れてください。',
+
   // Mode selector
   'mode.emergency.title':   '緊急',
   'mode.emergency.desc':    '今すぐ助けが必要です',

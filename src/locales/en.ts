@@ -39,6 +39,16 @@ export const en: Record<string, string> = {
   'bag.packed':  '✓ PACKED',
   'scene.avoid': 'AVOID',
 
+  // Bag game score (game feedback only)
+  'bag.result.expert.title': '🏆 Expert Packer!',
+  'bag.result.expert.msg': 'You chose the most important items. Your bag is ready for an emergency.',
+  'bag.result.good.title': '👍 Well Prepared!',
+  'bag.result.good.msg': 'Good choices. Replace low priority items with the important items you missed.',
+  'bag.result.improve.title': '🤔 Needs Improvement',
+  'bag.result.improve.msg': 'You have some basic items, but important items are missing. Pack water, food, and medical supplies first.',
+  'bag.result.notReady.title': '⚠ Not Ready',
+  'bag.result.notReady.msg': 'Your bag does not have the items you need to survive. Pack these first: water, food, first aid kit, medicines, and documents.',
+
   // Mode selector
   'mode.emergency.title':   'Emergency',
   'mode.emergency.desc':    'I need help right now',

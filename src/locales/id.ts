@@ -39,6 +39,16 @@ export const id: Record<string, string> = {
   'bag.packed':  '✓ MASUK',
   'scene.avoid': 'JAUHI',
 
+  // Bag game score (game feedback only)
+  'bag.result.expert.title': '🏆 Jago Berkemas!',
+  'bag.result.expert.msg': 'Kamu memilih barang yang paling penting. Tasmu siap untuk keadaan darurat.',
+  'bag.result.good.title': '👍 Persiapan Bagus!',
+  'bag.result.good.msg': 'Pilihan bagus. Ganti barang yang kurang penting dengan barang penting yang belum kamu masukkan.',
+  'bag.result.improve.title': '🤔 Masih Bisa Lebih Baik',
+  'bag.result.improve.msg': 'Kamu sudah punya beberapa barang dasar, tapi barang penting masih kurang. Masukkan air, makanan, dan perlengkapan medis dulu.',
+  'bag.result.notReady.title': '⚠ Belum Siap',
+  'bag.result.notReady.msg': 'Tasmu belum berisi barang yang kamu butuhkan untuk bertahan hidup. Masukkan ini dulu: air, makanan, kotak P3K, obat-obatan, dan dokumen.',
+
   // Mode selector
   'mode.emergency.title':   'Darurat',
   'mode.emergency.desc':    'Saya butuh bantuan sekarang',
