@@ -115,4 +115,5 @@ export const id: Record<string, string> = {
   'shelter.problem.locationUnavailable': 'Lokasimu tidak tersedia. Pilih areamu di bawah.',
   'shelter.problem.locationFailed': 'Aplikasi tidak mendapat lokasimu. Pilih areamu di bawah.',
   'shelter.retry': 'Coba lagi',
+  'shelter.reload': 'Muat ulang halaman',
 };
