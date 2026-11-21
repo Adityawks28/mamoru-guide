@@ -186,7 +186,7 @@ body.day-mode .section-nav {
 .footer-logo {
   margin-bottom: 16px;
 }
-.footer-logo .ppi-logo-svg {
+.footer-logo .footer-mascot {
   image-rendering: pixelated;
   filter: drop-shadow(0 0 8px rgba(200,50,50,0.3));
 }

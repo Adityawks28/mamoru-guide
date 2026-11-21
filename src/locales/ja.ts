@@ -111,7 +111,7 @@ export const ja: Record<string, string> = {
   'quiz.btn.start': '🎯 クイズ開始',
 
   // Footer
-  'footer.copy': '守るガイド · 神戸の立ち直る力から学びました。PPI Kobeといっしょに作りました。',
+  'footer.copy': '守るガイド · Adityaが作りました。',
 
   // FAB labels
   'fab.firstaid': '応急手当',

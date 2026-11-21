@@ -31,7 +31,7 @@ const contacts: Contact[] = [
   {icon:'📞',name:'Immigration Info',name_ja:'入管インフォメーション',name_id:'Info Imigrasi',number:'0570-013904',desc_en:'Questions about visas, residence status, and the zairyu card (residence card)',desc_ja:'ビザ、在留資格、在留カードについて質問できます',desc_id:'Pertanyaan tentang visa, status tinggal, dan kartu zairyu (kartu izin tinggal)',category:'support'},
   {icon:'🏢',name:'Disaster Voice Board (171)',name_ja:'災害用伝言ダイヤル',name_id:'Papan Pesan Bencana',number:'171',desc_en:'After a disaster, leave or listen to voice messages for your family',desc_ja:'災害のあと、家族への伝言を録音したり、聞いたりできます',desc_id:'Setelah bencana, tinggalkan atau dengarkan pesan suara untuk keluarga',category:'support'},
 
-  // Embassy (Indonesian: since PPI Kobe)
+  // Embassy and consulate for Indonesian citizens
   {icon:'🇮🇩',name:'Indonesian Embassy Tokyo',name_ja:'インドネシア大使館',name_id:'KBRI Tokyo',number:'03-3441-4201',desc_en:'Consular help for Indonesian citizens',desc_ja:'インドネシア国民のための領事支援です',desc_id:'Bantuan konsuler untuk WNI',category:'embassy',url:'https://kemlu.go.id/tokyo/'},
   {icon:'🇮🇩',name:'Indonesian Consulate Osaka',name_ja:'在大阪インドネシア総領事館',name_id:'KJRI Osaka',number:'06-6449-9898',desc_en:'Serves the Kansai region (Kobe, Osaka, Kyoto)',desc_ja:'関西（神戸、大阪、京都）を担当しています',desc_id:'Melayani wilayah Kansai (Kobe, Osaka, Kyoto)',category:'embassy'},
 

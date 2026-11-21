@@ -8,6 +8,7 @@ import { initMobileNav } from './nav';
 import { initEmergencyFab } from './emergency-fab';
 import { showToast } from './toast';
 import { initMascot } from './character/mascot';
+import { initFooterMascot } from './character/footer-mascot';
 import { initEarthquakeNow, showEarthquakeNow } from './earthquake-now';
 import { renderBuildDate } from './build-date';
 
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initEmergencyFab();
   initMascot();
+  initFooterMascot();
   initEarthquakeNow();
   renderBuildDate(document, typeof __BUILD_DATE__ === 'string' ? __BUILD_DATE__ : undefined);
 

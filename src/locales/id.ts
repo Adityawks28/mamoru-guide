@@ -111,7 +111,7 @@ export const id: Record<string, string> = {
   'quiz.btn.start': '🎯 Mulai Kuis',
 
   // Footer
-  'footer.copy': 'Mamoru Guide 守る · Terinspirasi oleh ketangguhan Kobe. Dibuat bersama PPI Kobe.',
+  'footer.copy': 'Mamoru Guide 守る · Dibuat oleh Aditya.',
 
   // FAB labels
   'fab.firstaid': 'Pertolongan Pertama',

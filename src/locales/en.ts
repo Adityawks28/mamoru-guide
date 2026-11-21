@@ -111,7 +111,7 @@ export const en: Record<string, string> = {
   'quiz.btn.start': '🎯 Start Quiz',
 
   // Footer
-  'footer.copy': 'Mamoru Guide 守る · Inspired by the resilience of Kobe. Made together with PPI Kobe.',
+  'footer.copy': 'Mamoru Guide 守る · Made by Aditya.',
 
   // FAB labels
   'fab.firstaid': 'First Aid Guide',
