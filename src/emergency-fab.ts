@@ -1,5 +1,6 @@
 import { trapFocus, type TrapHandle } from './focus-trap';
 import { showEarthquakeNow } from './earthquake-now';
+import { activateRoute } from './router';
 
 let trap: TrapHandle | null = null;
 
@@ -39,7 +40,11 @@ export function initEmergencyFab(): void {
 
   // Navigation links/dial actions close the panel after activation.
   panel.querySelectorAll('a[href]').forEach(item => {
-    item.addEventListener('click', close);
+    item.addEventListener('click', () => {
+      // Same hash: no hashchange fires, so scroll to the section again by hand.
+      if (item.getAttribute('href') === window.location.hash) activateRoute(window.location.hash);
+      close();
+    });
   });
 
   // The EARTHQUAKE NOW button opens a full-screen overlay, close the FAB

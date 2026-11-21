@@ -1,6 +1,10 @@
 // router.test.ts
 
-import { activateRoute } from '../router';
+import { readFileSync } from 'node:fs';
+import { activateRoute, ROUTE_SECTIONS } from '../router';
+import { initEmergencyFab } from '../emergency-fab';
+
+const read = (f: string): string => readFileSync(f, 'utf8');
 
 // jsdom doesn't implement window.scrollTo, silence the warning
 beforeAll(() => { window.scrollTo = () => {}; });
@@ -231,8 +235,35 @@ describe('legacy redirects', () => {
     expect(window.location.hash).toBe('#/prepare');
   });
 
-  it('redirects #firstaid to #/prepare', () => {
+  it('redirects #firstaid to #/firstaid', () => {
     activateRoute('#firstaid');
-    expect(window.location.hash).toBe('#/prepare');
+    expect(window.location.hash).toBe('#/firstaid');
+  });
+
+  it('redirects #showthis to #/show', () => {
+    activateRoute('#showthis');
+    expect(window.location.hash).toBe('#/show');
+  });
+});
+
+
+describe('emergency buttons', () => {
+  const TARGET: Record<string, string> = { '#/firstaid': 'firstaid', '#/shelter': 'shelter', '#/show': 'showthis' };
+  beforeEach(() => { document.body.innerHTML = new DOMParser().parseFromString(read('index.html'), 'text/html').body.innerHTML; });
+  it('link only to routes, never to legacy anchors', () => {
+    const hrefs = [...document.querySelectorAll('#emergencyFabPanel a[href^="#"]')].map(a => a.getAttribute('href')!);
+    expect(hrefs).toEqual(Object.keys(TARGET));
+    hrefs.forEach(h => expect(Object.keys(ROUTE_SECTIONS)).toContain(h));
+  });
+  it.each(Object.entries(TARGET))('%s shows section #%s and only that section', (href, id) => {
+    activateRoute(href);
+    expect(document.getElementById(id)!.classList.contains('route-hidden')).toBe(false);
+    expect(ROUTE_SECTIONS[href]).toEqual([id]);
+  });
+  it('a tap on the button for the route already open scrolls to the section again', () => {
+    window.location.hash = '#/firstaid'; activateRoute('#/firstaid');
+    const scroll = vi.spyOn(window, 'scrollTo'); initEmergencyFab();
+    document.querySelector<HTMLAnchorElement>('#emergencyFabPanel a[href="#/firstaid"]')!.click();
+    expect(scroll).toHaveBeenCalled();
   });
 });
