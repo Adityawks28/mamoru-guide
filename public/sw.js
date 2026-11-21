@@ -14,6 +14,11 @@ const PRECACHE = [
   './vendor/leaflet/images/marker-icon.png',
   './vendor/leaflet/images/marker-icon-2x.png',
   './vendor/leaflet/images/marker-shadow.png',
+  './fonts/PressStart2P-Regular.woff2',
+  './fonts/DotGothic16-Regular.woff2',
+  './fonts/MPLUSRounded1c-Regular.woff2',
+  './fonts/MPLUSRounded1c-Bold.woff2',
+  './fonts/MPLUSRounded1c-ExtraBold.woff2',
 ];
 
 // Install: cache the whole app on the first visit, so it works offline from
