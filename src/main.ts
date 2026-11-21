@@ -8,7 +8,9 @@ import { initMobileNav } from './nav';
 import { initEmergencyFab } from './emergency-fab';
 import { showToast } from './toast';
 import { initMascot } from './character/mascot';
+import { initFooterMascot } from './character/footer-mascot';
 import { initEarthquakeNow, showEarthquakeNow } from './earthquake-now';
+import { renderBuildDate } from './build-date';
 
 function lang3(en: string, ja: string, id: string): string {
   return currentLang === 'ja' ? ja : currentLang === 'id' ? id : en;
@@ -58,7 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initEmergencyFab();
   initMascot();
+  initFooterMascot();
   initEarthquakeNow();
+  renderBuildDate(document, typeof __BUILD_DATE__ === 'string' ? __BUILD_DATE__ : undefined);
 
   import('./earthquake-scale').then(m => m.initEarthquakeScale());
   import('./vocab').then(m => { m.initVocab(); Object.assign(window, { switchTab: m.switchTab, prevCard: m.prevCard, nextCard: m.nextCard }); });
@@ -88,7 +92,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     if (e.data && e.data.type === 'SW_UPDATED') {
       showToast(lang3(
         'A new version is available. Reload the page to update.',
-        '新しいバージョンがあります。ページを再読み込みしてください。',
+        '新しいバージョンがあります。ページを、もう一度読みこんでください。',
         'Versi baru tersedia. Muat ulang halaman untuk memperbarui.',
       ), 'info');
     }

@@ -63,10 +63,10 @@ const HAZARD_LABELS: Record<Hazard, [string, string, string, string]> = {
   earthquake: ['🏚️', 'Earthquake', '地震', 'Gempa'],
   tsunami: ['🌊', 'Tsunami', '津波', 'Tsunami'],
   fire: ['🔥', 'Large fire', '大きな火事', 'Kebakaran besar'],
-  flood: ['💧', 'Flood', '洪水', 'Banjir'],
-  inland: ['🌧️', 'Heavy rain flooding', '内水氾濫', 'Banjir hujan deras'],
-  surge: ['🌀', 'Storm surge', '高潮', 'Gelombang badai'],
-  landslide: ['⛰️', 'Landslide', '土砂災害', 'Tanah longsor'],
+  flood: ['💧', 'Flood', '洪水（こうずい）', 'Banjir'],
+  inland: ['🌧️', 'Heavy rain flooding', '内水氾濫（ないすいはんらん）', 'Banjir hujan deras'],
+  surge: ['🌀', 'Storm surge', '高潮（たかしお）', 'Gelombang pasang'],
+  landslide: ['⛰️', 'Landslide', '土砂災害（どしゃさいがい）', 'Tanah longsor'],
   volcano: ['🌋', 'Volcano', '火山', 'Gunung api'],
 };
 const HAZARD_ORDER = Object.keys(HAZARD_LABELS) as Hazard[];
@@ -80,17 +80,17 @@ function sourceNote(asOf: string): string {
   return `
     <p class="shelter-source">
       <span data-lang="en">Source: 国土地理院 (GSI) designated emergency evacuation sites, data from ${asOf}. Sites can change. Check the hazard map of your city too.</span>
-      <span data-lang="ja">出典：国土地理院「指定緊急避難場所データ」（${asOf}のデータ）。避難場所は変わることがあります。住んでいる市のハザードマップも見てください。</span>
-      <span data-lang="id">Sumber: 国土地理院 (GSI), data tempat evakuasi darurat resmi per ${asOf}. Tempat evakuasi bisa berubah. Periksa juga peta bahaya kota Anda.</span>
+      <span data-lang="ja">出典（しゅってん）は、国土地理院（こくどちりいん）です。「指定緊急避難場所データ」の、${asOf}のデータです。避難場所（ひなんばしょ）は、変わることがあります。住んでいる市のハザードマップも見てください。</span>
+      <span data-lang="id">Sumber: 国土地理院 (GSI), data tempat evakuasi darurat resmi per ${asOf}. Tempat evakuasi bisa berubah. Periksa juga peta bahaya kotamu.</span>
     </p>`;
 }
 
 const OUT_OF_AREA_HTML = `
   <div class="shelter-out-of-area">
     <p>
-      <span data-lang="en">📍 You are outside the area of our list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
-      <span data-lang="ja">📍 今いる場所は、このリストの範囲の外です。リストにあるのは、神戸市、芦屋市、西宮市、尼崎市、伊丹市、宝塚市、明石市、大阪市です。近くの避難場所は、国土地理院のハザードマップで探してください：</span>
-      <span data-lang="id">📍 Anda berada di luar area daftar kami. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekat Anda di peta bahaya resmi GSI:</span>
+      <span data-lang="en">📍 You are outside the area of this list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
+      <span data-lang="ja">📍 今いる場所は、このリストの地域の外です。このリストには、神戸市、芦屋市（あしやし）、西宮市（にしのみやし）があります。尼崎市（あまがさきし）、伊丹市（いたみし）、宝塚市（たからづかし）もあります。明石市（あかしし）と大阪市もあります。近くの避難場所（ひなんばしょ）を探してください。国土地理院（こくどちりいん）のハザードマップで探せます：</span>
+      <span data-lang="id">📍 Kamu berada di luar area daftar ini. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekatmu di peta bahaya resmi GSI:</span>
     </p>
     <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
   </div>`;
@@ -182,7 +182,7 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
     color: '#fff',
     weight: 2,
     fillOpacity: 0.9,
-  }).addTo(map).bindPopup(getLangText('You are here', '今いる場所', 'Posisi Anda'));
+  }).addTo(map).bindPopup(getLangText('You are here', '今いる場所', 'Kamu di sini'));
 
   // Shelter markers (red)
   nearest.forEach(s => {
@@ -207,7 +207,7 @@ function renderStatsBar(nearest: ShelterWithDistance[]): void {
       <div class="shelter-stat-chip-value">${nearest.length}</div>
     </div>
     <div class="shelter-stat-chip">
-      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">一番近い</span><span data-lang="id">TERDEKAT</span></div>
+      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">いちばん近い</span><span data-lang="id">TERDEKAT</span></div>
       <div class="shelter-stat-chip-value">${formatDistance(nearest1.distance)}</div>
     </div>
     <div class="shelter-stat-chip">
@@ -258,12 +258,12 @@ function showManualFallback(): void {
   container.innerHTML = `
     <div class="shelter-fallback">
       <p class="shelter-fallback-msg">
-        <span data-lang="en">📍 Location access denied. Choose your area from the list:</span>
-        <span data-lang="ja">📍 位置情報の利用が拒否されました。リストからエリアを選んでください：</span>
-        <span data-lang="id">📍 Akses lokasi ditolak. Pilih area Anda dari daftar:</span>
+        <span data-lang="en">📍 You did not allow location access. Choose your area from the list:</span>
+        <span data-lang="ja">📍 位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。リストからエリアを選んでください：</span>
+        <span data-lang="id">📍 Kamu tidak mengizinkan akses lokasi. Pilih areamu dari daftar:</span>
       </p>
       <select class="shelter-city-select" id="shelterCitySelect">
-        <option value="">${getLangText('Choose your area', 'エリアを選んでください', 'Pilih area Anda')}</option>
+        <option value="">${getLangText('Choose your area', 'エリアを選んでください', 'Pilih areamu')}</option>
         ${cities.map((c, i) => `<option value="${i}">${c.name}</option>`).join('')}
       </select>
     </div>
@@ -298,9 +298,9 @@ function showLoading(): void {
   container.innerHTML = `
     <div class="shelter-loading">
       <div class="shelter-loading-spinner"></div>
-      <span data-lang="en">Finding your location...</span>
+      <span data-lang="en">Please wait. The app looks for your location.</span>
       <span data-lang="ja">今いる場所を探しています...</span>
-      <span data-lang="id">Mencari lokasi Anda...</span>
+      <span data-lang="id">Tunggu sebentar. Aplikasi sedang mencari lokasimu.</span>
     </div>
   `;
   reapplyLang();
@@ -309,27 +309,27 @@ function showLoading(): void {
 function reportGeolocationError(err: unknown): void {
   const code = (err as GeolocationPositionError | undefined)?.code;
   let msg = getLangText(
-    'Could not get your location. Choose your area below.',
-    '位置情報を取得できませんでした。下でエリアを選んでください。',
-    'Lokasi Anda tidak bisa didapat. Pilih area di bawah.',
+    'The app did not get your location. Choose your area below.',
+    '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
+    'Aplikasi tidak mendapat lokasimu. Pilih areamu di bawah.',
   );
   if (code === 1) {
     msg = getLangText(
-      'Location permission denied. Choose your area below.',
-      '位置情報の利用が拒否されました。下でエリアを選んでください。',
-      'Izin lokasi ditolak. Pilih area Anda di bawah.',
+      'You did not allow location access. Choose your area below.',
+      '位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。下でエリアを選んでください。',
+      'Kamu tidak mengizinkan akses lokasi. Pilih areamu di bawah.',
     );
   } else if (code === 3) {
     msg = getLangText(
-      'Finding your location took too long. Choose your area below.',
-      '位置情報の取得に時間がかかりすぎました。下でエリアを選んでください。',
-      'Waktu mencari lokasi habis. Pilih area Anda di bawah.',
+      'The app did not get your location in time. Choose your area below.',
+      '位置情報（いちじょうほう）を調べるのに、時間がかかりすぎました。下でエリアを選んでください。',
+      'Waktu mencari lokasi habis. Pilih areamu di bawah.',
     );
   } else if (code === 2) {
     msg = getLangText(
       'Your location is not available. Choose your area below.',
-      '位置情報が使えません。下でエリアを選んでください。',
-      'Lokasi Anda tidak tersedia. Pilih area Anda di bawah.',
+      '位置情報（いちじょうほう）が使えません。下でエリアを選んでください。',
+      'Lokasimu tidak tersedia. Pilih areamu di bawah.',
     );
   }
   showToast(msg, 'error');
@@ -367,9 +367,9 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     container.innerHTML = `
       <div id="shelterMap" class="shelter-map-container"></div>
       <div class="shelter-result-header">
-        <span data-lang="en">📍 ${nearest.length} nearest shelters</span>
+        <span data-lang="en">📍 ${nearest.length} nearest evacuation sites</span>
         <span data-lang="ja">📍 近くの避難場所 ${nearest.length}か所</span>
-        <span data-lang="id">📍 ${nearest.length} tempat perlindungan terdekat</span>
+        <span data-lang="id">📍 ${nearest.length} tempat evakuasi terdekat</span>
       </div>
       <div id="shelterList" class="shelter-list"></div>
       <div class="shelter-stats-bar" id="shelterStatsBar"></div>

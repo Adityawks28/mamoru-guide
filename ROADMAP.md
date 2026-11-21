@@ -54,6 +54,7 @@ International students and residents in Japan who find it hard to get disaster i
 
 ## Open decisions (from PR #23)
 
-- Crush injury advice ("do not free them after 15 minutes") and two finger CPR for babies. Both need a medical reviewer.
-- The alert section still uses the JMA warning names from before May 2026 (for example レベル3大雨警報 and the new 危険警報).
-- The About page says "Last updated March 2026, reviewed against the latest guidelines". Keep or change it.
+- ~~Crush injury advice ("do not free them after 15 minutes").~~ Done 2026-11-21: the 15 minute rule is removed; check that the place is safe, then free the person slowly and carefully (fa-crush-1, tip-crush; docs/superpowers/specs/2026-11-21-medical-verification.md).
+- ~~Two finger CPR for babies.~~ Done 2026-11-21: babies get the heel of one hand, about 1/3 of the chest depth, as FDMA 消防救第385号 says (fa-cpr-4; docs/superpowers/specs/2026-11-21-medical-verification.md).
+- ~~The alert section still uses the JMA warning names from before May 2026.~~ Done 2026-11-21: it uses the JMA level names from 2026-05-29 and the official evacuation names (docs/superpowers/specs/2026-11-21-safety-verification.md).
+- ~~The About page says "Last updated March 2026, reviewed against the latest guidelines".~~ Done 2026-11-21: the About page shows the build date, with no promise (row A32 in docs/superpowers/specs/2026-11-21-history-verification.md).

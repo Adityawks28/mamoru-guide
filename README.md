@@ -2,7 +2,7 @@
 
 Disaster preparedness guide for international students in Japan. Interactive PWA with earthquake scale, emergency vocabulary, bag packing game, and evacuation planning — in English, Japanese, and Indonesian.
 
-Built by me, inspired by the 防災リーダー program by KICC (https://github.com/adityawks28).
+Built by Aditya, inspired by the 防災リーダー program by KICC (https://github.com/Adityawks28)
 
 ## Getting Started
 
@@ -37,6 +37,8 @@ npx tsc --noEmit
 ## Deployment
 
 Automatically deployed to GitHub Pages on every push to `main` via GitHub Actions.
+
+Change CACHE_NAME in public/sw.js on every release.
 
 **Setup:** Go to repo Settings → Pages → Source → select **GitHub Actions**.
 

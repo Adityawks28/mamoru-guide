@@ -1,6 +1,7 @@
 import { createSprite, updateSprite, type Pose } from './sprite';
 import { QUAKE_TIPS } from './tips';
 import { motionAllowed, onMotionChange, playQuake, quakeMs } from './motion';
+import { t } from '../i18n';
 
 const STATE_LOCK_MS = 4000;
 const TIP_INTERVAL_MS = 4500;
@@ -16,13 +17,12 @@ const STAND: IntensityTarget = { pose: 'stand', x: 140, y: 92, flip: false };
 // 'cower' (scale 0.5 + crouchY 42) tucks her under the table cavity (room
 // y 126-160); y=77 crowns her head at ~126 with her feet at ~163.
 const UNDER_TABLE: IntensityTarget = { pose: 'cower', x: 210, y: 77, flip: true };
-const COVER: IntensityTarget = { pose: 'cover', x: 175, y: 100, flip: false };
+// The pose follows the caption: at shindo 0 nobody feels it; at every felt
+// level the caption says to get under a strong table (FDMA white paper R5).
 const TARGETS: IntensityTarget[] = [
-  STAND, STAND, { ...STAND, x: 138 },
-  { pose: 'stand', x: 165, y: 92, flip: true },
-  { pose: 'brace', x: 158, y: 92, flip: true },
-  COVER, COVER,
-  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
+  STAND,
+  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
+  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
 ];
 
 interface Hazards {
@@ -37,7 +37,8 @@ interface Hazards {
 
 // What falls at each level follows JMA's shindo descriptions: 4 topples
 // unstable ornaments, 5- drops dishes and books, 5+ can topple unsecured
-// furniture, 6- breaks window glass.
+// furniture, 6- breaks window glass. The door glow (open a door to keep a way
+// out) shows only after the shaking stops (TFD 10 points, point 4).
 function hazardsForIntensity(i: number): Hazards {
   return {
     lampSwing: Math.min(5, Math.ceil(i / 2)),
@@ -167,22 +168,23 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   // Warning near window.
   const warningGroup = svgEl('g', { class: 'mr-warning' }, shakeGroup);
   svgEl('path', { d: 'M 28 70 Q 30 78 26 84', stroke: '#e84040', 'stroke-width': 1.5, fill: 'none', 'stroke-dasharray': '2 2' }, warningGroup);
-  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, 'font-family': "'Press Start 2P', monospace" }, warningGroup);
-  warningText.textContent = 'AVOID';
+  // A presentation attribute cannot read var(), so the font comes in through style.
+  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, style: 'font-family: var(--pixel-font)', 'data-i18n': 'scene.avoid' }, warningGroup);
+  warningText.textContent = t('scene.avoid');
   warningGroup.style.display = 'none';
 
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
 }
 
-const CALM = { en: '→ stay calm and watch', ja: '→ 落ち着いて、まわりを見てください', id: '→ tetap tenang, amati sekitar' };
-const DROP = { en: '→ drop, cover, hold on', ja: '→ 身を低くして、頭を守り、動かないでください', id: '→ merunduk, berlindung, bertahan' };
-const HIDE = { en: '→ get under a strong table', ja: '→ じょうぶな机の下に入ってください', id: '→ masuk ke bawah meja yang kuat' };
+// No official source ties an action to each shindo level. JMA: at shindo 0 people do not feel the shaking.
+// When you feel shaking, every level gets the same rule (FDMA white paper R5; TFD 10 points, point 1).
+const NOT_FELT = { en: '→ People do not feel it.', ja: '→ 人はゆれを感じません', id: '→ Orang tidak merasakannya.' };
+const PROTECT = { en: '→ Protect yourself. Get under a strong table. Wait until the shaking stops.', ja: '→ 身を守ってください。じょうぶな机の下に入ってください。ゆれがおさまるまで待ってください', id: '→ Lindungi dirimu. Masuk ke bawah meja yang kuat. Tunggu sampai guncangan berhenti.' };
+// After a tap on shindo 0 the bubble must not ask people to protect themselves. JMA (jma-shindo-table): 人は揺れを感じない.
+const NOT_FELT_TIP = { en: 'People do not feel this shaking.', ja: '人は、このゆれを感じません。', id: 'Orang tidak merasakan guncangan ini.' };
 const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
-  CALM, CALM, CALM,
-  { en: '→ move away from windows', ja: '→ 窓から離れてください', id: '→ menjauh dari jendela' },
-  { en: '→ steady yourself · open the door', ja: '→ 体を支えて、ドアを開けてください', id: '→ jaga keseimbangan · buka pintu' },
-  DROP, DROP, HIDE, HIDE,
-  { en: '→ hide · protect your head · wait until the shaking stops', ja: '→ 隠れて、頭を守り、揺れが止まるまで待ってください', id: '→ sembunyi · lindungi kepala · tunggu sampai guncangan berhenti' },
+  NOT_FELT,
+  PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT,
 ];
 
 export function initEarthquakeScene(): void {
@@ -196,6 +198,8 @@ export function initEarthquakeScene(): void {
   let tipIdx = 0;
   let tipTimer: number | null = null;
   let stateLocked = false;
+  // True while the caption says shindo 0 is not felt: the bubble then says the same.
+  let notFelt = false;
   let actorX = STAND.x;
 
   host.classList.add('mamoru-room');
@@ -244,7 +248,7 @@ export function initEarthquakeScene(): void {
   host.appendChild(procedure);
 
   function showTip(i: number): void {
-    const t = QUAKE_TIPS[i % QUAKE_TIPS.length];
+    const t = notFelt ? NOT_FELT_TIP : QUAKE_TIPS[i % QUAKE_TIPS.length];
     en.textContent = t.en;
     ja.textContent = t.ja;
     id.textContent = t.id;
@@ -256,7 +260,10 @@ export function initEarthquakeScene(): void {
     procId.textContent = p.id;
   }
   showTip(0);
-  showProcedure(0);
+  // No caption before any shaking.
+  procEn.textContent = '';
+  procJa.textContent = '';
+  procId.textContent = '';
 
   function later(ms: number, fn: () => void): void {
     timers.push(window.setTimeout(fn, ms));
@@ -279,10 +286,10 @@ export function initEarthquakeScene(): void {
     }
   }
 
-  function applyHazards(i: number): void {
+  function applyHazards(i: number, settled = true): void {
     const h = hazardsForIntensity(i);
     parts.windowCrack.style.display = h.windowCrack ? '' : 'none';
-    parts.doorGlow.style.display    = h.doorGlow    ? '' : 'none';
+    parts.doorGlow.style.display    = h.doorGlow && settled ? '' : 'none';
     parts.warningGroup.style.display = h.warning    ? '' : 'none';
     parts.vaseStill.style.display   = h.vaseFall    ? 'none' : '';
     parts.vaseFalling.style.display = h.vaseFall    ? '' : 'none';
@@ -319,12 +326,14 @@ export function initEarthquakeScene(): void {
   // Each tap replays that level's quake from a calm room.
   function quake(i: number): void {
     intensity = i;
+    notFelt = i === 0;
     clearTimers();
     showProcedure(i);
-    showTip(Math.min(i, QUAKE_TIPS.length - 1));
     if (lockTimer !== null) window.clearTimeout(lockTimer);
     stateLocked = true;
     lockTimer = window.setTimeout(() => { stateLocked = false; }, STATE_LOCK_MS);
+    tipIdx = Math.min(i, QUAKE_TIPS.length - 1);
+    showTip(tipIdx);
     walkTo(TARGETS[i]);
     if (!allowed) { applyHazards(i); return; }
     applyHazards(0);
@@ -333,9 +342,12 @@ export function initEarthquakeScene(): void {
     const ms = quakeMs(i);
     playQuake(shakeGroup, i);
     parts.lamp.style.setProperty('--swing', String(hazardsForIntensity(i).lampSwing));
-    later(ms * 0.3, () => applyHazards(i)); // things fall at the S-wave's peak
+    later(ms * 0.3, () => applyHazards(i, false)); // things fall at the S-wave's peak
     later(ms, () => parts.lamp.style.setProperty('--swing', '1'));
-    later(ms + SETTLE_MS, () => host!.classList.remove('quaking'));
+    later(ms + SETTLE_MS, () => {
+      host!.classList.remove('quaking');
+      applyHazards(i); // the shaking has stopped: now the door can open
+    });
   }
 
   function onShindo(e: Event): void {

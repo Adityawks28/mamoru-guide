@@ -13,13 +13,15 @@ function renderFlashcard(cat: VocabCategory): void {
   const items = vocabData[cat];
   const idx = cardIndex[cat];
   const v = items[idx];
-  const container = document.getElementById('vocabFlashcard' + cap(cat));
+  const old = document.getElementById('vocabFlashcard' + cap(cat));
   const counter   = document.getElementById('fcCounter' + cap(cat));
-  if (!container || !v) return;
+  if (!old || !v) return;
 
   if (counter) counter.textContent = `${idx + 1} / ${items.length}`;
 
-  // Re-trigger animation by swapping class
+  // A new card box, so the browser plays the slide-in again for each card.
+  const container = old.cloneNode(false) as HTMLElement;
+  old.replaceWith(container);
   container.className = `flashcard-card cat-${cat}`;
   container.innerHTML = `
     <div class="flashcard-jp">${v.jp}</div>

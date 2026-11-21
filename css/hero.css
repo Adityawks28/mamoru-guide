@@ -12,7 +12,7 @@
 }
 .hero-content { position:relative; z-index:4; }
 .hero-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: clamp(28px, 6vw, 56px);
   color: var(--meriken-amber);
   text-shadow: 0 0 30px rgba(245,166,35,0.4), 0 4px 0 #8a5a00;
@@ -49,7 +49,7 @@
 
 /* Scroll hint */
 .scroll-hint {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 14px;
   color: var(--meriken-amber);
   animation: fadeUp 1s 1s both, bob 2s 1.5s ease-in-out infinite;
@@ -137,5 +137,5 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
   .hero-title, .hero-kanji, .hero-subtitle { animation: none; opacity: 1; transform: none; }
   .px-blink-a { animation: none; }
   .px-blink-b { animation: none; visibility: hidden; }
-  .mascot-char { animation: none; }
+  .mascot-char, .scroll-hint { animation: none; }
 }

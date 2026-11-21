@@ -14,7 +14,7 @@
 .panel.do-panel { border-color: var(--safe-green); }
 .panel.dont-panel { border-color: var(--alert-red); }
 .panel h3 {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   margin-bottom: 12px;
 }
@@ -57,11 +57,12 @@
 .alert-card.type-evac { border-top-color: #f0c040; }
 .alert-card .alert-icon { font-size: 24px; margin-bottom: 8px; }
 .alert-card h3 {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   margin-bottom: 8px;
 }
 .alert-card p { font-size: 13px; line-height: 1.6; color: var(--text-muted); }
+.alert-card p + p { margin-top: 6px; }
 .alert-card .jp-sub { font-size: 12px; color: var(--portopia-blue); margin-bottom: 6px; }
 
 /* App list */
@@ -84,7 +85,7 @@
   background: var(--safe-green);
   border-radius: 3px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; color: #0f1f3d; flex-shrink: 0;
+  font-size: 12px; color: #0f1f3d; flex-shrink: 0;
 }
 .app-check.rec { background: var(--alert-red); color: #fff; }
 
@@ -102,8 +103,8 @@
 }
 .step-card .step-icon { font-size: 24px; margin-bottom: 8px; }
 .step-card h3 {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   margin-bottom: 8px;
   color: var(--meriken-amber);
 }
@@ -187,8 +188,8 @@ body.day-mode .share-url-box {
 
 /* Quiz */
 .quiz-progress {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   margin-bottom: 12px;
 }
@@ -247,8 +248,8 @@ body.day-mode .share-url-box {
   justify-content: center;
   background: rgba(255,255,255,0.08);
   border-radius: 50%;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   flex-shrink: 0;
 }
 .quiz-explain {
@@ -283,7 +284,7 @@ body.day-mode .share-url-box {
 }
 .quiz-result-icon { font-size: 48px; margin-bottom: 12px; }
 .quiz-result-score {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 24px;
   color: var(--accent);
   margin-bottom: 8px;
@@ -311,8 +312,8 @@ body.day-mode .share-url-box {
 .typhoon-icon { font-size: 22px; flex-shrink: 0; }
 .typhoon-info { flex: 1; min-width: 0; }
 .typhoon-name {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--lvl);
   margin-bottom: 3px;
 }
@@ -363,8 +364,8 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
   gap: 8px;
 }
 .contact-category-header {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   padding: 12px 0 4px;
   text-transform: uppercase;
@@ -390,7 +391,7 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
 .contact-info { flex: 1; min-width: 0; }
 .contact-name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
 .contact-number {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   color: var(--portopia-blue);
   margin-bottom: 4px;
@@ -406,8 +407,8 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
 
 /* Emergency Plan Form */
 .plan-section-header {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   padding: 20px 0 8px;
   border-bottom: 2px solid rgba(245,166,35,0.2);
@@ -532,3 +533,9 @@ body.day-mode .panel.dont-panel h3,
 body.day-mode .dont-panel li::before { color: #c62828; }
 body.day-mode .panel.panel-during h3 { color: #8a4f08; }
 
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .panel h3,
+body.lang-ja .alert-card h3,
+body.lang-ja .step-card h3,
+body.lang-ja .contact-category-header,
+body.lang-ja .plan-section-header { font-size: 14px; }

@@ -50,24 +50,22 @@ describe('typhoon-scene', () => {
     expect(sprite().querySelector('[data-prop="phone"]')).not.toBeNull();
   });
 
-  it('severe storm: tapes an X on the window, one strip at a time', async () => {
+  it('severe storm: stands at the window with no tape drawn', async () => {
     const { initTyphoonScene } = await import('../typhoon-scene');
     initTyphoonScene();
     level(1);
     expect(prop('window')).not.toBeNull();
-    const strips = new Set<number>();
     for (let t = 0; t < 4000; t += 50) {
       vi.advanceTimersByTime(50);
-      strips.add(document.querySelectorAll('#typhoon-scene [data-prop="tape"]').length);
+      expect(document.querySelectorAll('#typhoon-scene [data-prop="tape"]').length).toBe(0);
     }
-    expect([...strips].sort()).toEqual([0, 1, 2]);
   });
 
-  it('typhoon: walks to the shelter leaning into the wind', async () => {
+  it('typhoon: walks to the shelter before the wind gets strong', async () => {
     const { initTyphoonScene } = await import('../typhoon-scene');
     initTyphoonScene();
     level(2);
-    expect(prop('wind')).not.toBeNull();
+    expect(prop('wind')).toBeNull();
     const poses = new Set<string>();
     for (let t = 0; t < 2000; t += 50) { vi.advanceTimersByTime(50); poses.add(sprite().dataset.pose!); }
     expect([...poses].sort()).toEqual(['run', 'walk']);
@@ -96,5 +94,19 @@ describe('typhoon-scene', () => {
     level(null);
     expect(sprite().dataset.pose).toBe('stand');
     expect(prop('wind')).toBeNull();
+  });
+
+  it('reduced motion: the tip bubble does not change by itself', async () => {
+    (globalThis as any).window.matchMedia = () => ({
+      matches: true, addEventListener: () => {}, removeEventListener: () => {},
+      onchange: null, addListener: () => {}, removeListener: () => {},
+      media: '', dispatchEvent: () => false,
+    });
+    const { initTyphoonScene } = await import('../typhoon-scene');
+    initTyphoonScene();
+    const tip = () => document.querySelector('#typhoon-scene .tip-bubble [data-lang="en"]')!.textContent;
+    const before = tip();
+    vi.advanceTimersByTime(20000);
+    expect(tip()).toBe(before);
   });
 });

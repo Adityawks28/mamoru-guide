@@ -79,7 +79,7 @@
   flex-shrink: 0;
 }
 .fab-item-number {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   color: var(--alert-red);
 }

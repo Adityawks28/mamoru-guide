@@ -28,8 +28,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--meriken-amber);
   border-bottom: 1px solid var(--card-border);
   padding-bottom: 10px;
@@ -57,10 +57,11 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 .bag-pack-item-emoji { font-size: 16px; flex-shrink: 0; }
-.bag-pack-item-name { flex: 1; font-size: 11px; line-height: 1.3; opacity: 0.9; }
+.bag-pack-item-name { flex: 1; font-size: 12px; line-height: 1.3; opacity: 0.9; }
 .bag-pack-item-weight {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--portopia-blue);
   flex-shrink: 0;
 }
@@ -95,13 +96,13 @@
   text-align: center;
 }
 .bag-stat-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
 .bag-stat-value {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 16px;
   color: var(--meriken-amber);
 }
@@ -128,8 +129,8 @@
 .weight-bar-text {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: #fff;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
@@ -156,12 +157,15 @@
   border-color: var(--safe-green);
   background: rgba(78,203,113,0.1);
 }
-.bag-item.packed::after {
-  content: '\2713 PACKED';
+.bag-item-packed { display: none; }
+.bag-item.packed .bag-item-packed {
+  display: block;
   position: absolute;
   top: 4px; right: 8px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  /* At 12px the pixel label is about 100px wide and covers the item name, so the badge uses the rounded font. */
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
   color: var(--safe-green);
 }
 .bag-item.rejected {
@@ -171,13 +175,13 @@
 .bag-item-emoji { font-size: 22px; flex-shrink: 0; }
 .bag-item-info { flex: 1; }
 .bag-item-name { font-size: 13px; font-weight: 700; }
-.bag-item-detail { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.bag-item-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 .bag-item-meta {
   display: flex; gap: 8px; margin-top: 4px;
 }
 .bag-meta-tag {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   padding: 2px 6px;
   border-radius: 3px;
   background: rgba(255,255,255,0.08);
@@ -198,13 +202,13 @@
 }
 .bag-result.show { display: block; animation: tabIn 0.3s ease; }
 .bag-result h3 {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 14px;
   margin-bottom: 8px;
 }
 .bag-result p { font-size: 13px; color: var(--text-muted); }
 .bag-result .score {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 28px;
   color: var(--meriken-amber);
   margin: 12px 0;
@@ -213,8 +217,8 @@
   display: flex; gap: 10px; justify-content: center; margin-top: 16px;
 }
 .bag-btn {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   padding: 10px 20px;
   border: 2px solid;
   border-radius: 4px;
@@ -264,5 +268,15 @@ body.day-mode .bag-result {
 @media (prefers-reduced-motion: reduce) {
   .bag-item { transition: none; }
   .bag-item.rejected { animation: none; }
-  #bag-scene .mamoru-sprite { animation: none; }
+  .bag-stat-value.over { animation: none; }
+  /* Same selectors as above: a shorter one loses to [data-load] on specificity. */
+  #bag-scene[data-load="light"] .mamoru-sprite,
+  #bag-scene[data-load="heavy"] .mamoru-sprite,
+  #bag-scene[data-load="strain"] .mamoru-sprite,
+  #bag-scene[data-load="reject"] .mamoru-sprite { animation: none; }
 }
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .bag-pack-header,
+body.lang-ja .bag-stat-label,
+body.lang-ja .bag-btn { font-size: 14px; }

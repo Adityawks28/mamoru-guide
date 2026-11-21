@@ -37,7 +37,7 @@ body.day-mode .em-back {
 }
 
 .em-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: clamp(20px, 5vw, 32px);
   color: var(--alert-red);
   letter-spacing: 2px;
@@ -94,7 +94,7 @@ body.day-mode .em-back {
   text-align: left;
 }
 .em-card-primary .em-card-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: clamp(18px, 4.2vw, 26px);
   letter-spacing: 2px;
   color: var(--alert-red);
@@ -149,7 +149,7 @@ body.day-mode .em-back {
   line-height: 1;
 }
 .em-card-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   letter-spacing: 1px;
 }
@@ -210,7 +210,6 @@ body.day-mode .em-back {
   .em-grid-secondary { grid-template-columns: 1fr; gap: 12px; }
   .em-card { min-height: 130px; padding: 20px; flex-direction: row; gap: 16px; text-align: left; justify-content: flex-start; }
   .em-card-icon { font-size: 38px; }
-  .em-card-title { font-size: 11px; }
   /* Icon left, title stacked over description, secondary cards have no text wrapper. */
   .em-grid-secondary .em-card { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; row-gap: 6px; align-content: center; }
   .em-grid-secondary .em-card-icon { grid-row: span 2; }
@@ -226,4 +225,12 @@ body.day-mode .em-card-show .em-card-title {
 
 body.day-mode .em-card-shelter .em-card-title {
   color: #23703c;
+}
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .em-card:not(.em-card-primary) .em-card-title { font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .em-title,
+  .em-card.em-card-primary { animation: none; }
 }
