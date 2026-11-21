@@ -10,10 +10,12 @@ interface NowStep {
   detail_en: string;
   detail_ja: string;
   detail_id: string;
+  claimId: string;
 }
 
-const STEPS: NowStep[] = [
+export const STEPS: NowStep[] = [
   {
+    claimId: 'eqnow-1',
     en: 'DROP to the ground',
     ja: '体を低くしてください (DROP)',
     id: 'MERUNDUK ke lantai',
@@ -22,6 +24,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Bertumpu pada tangan dan lutut. Ini mencegah Anda terjatuh.',
   },
   {
+    claimId: 'eqnow-2',
     en: 'Take COVER under a strong table',
     ja: 'じょうぶな机の下に入ってください (COVER)',
     id: 'BERLINDUNG di bawah meja yang kuat',
@@ -30,6 +33,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Lindungi kepala dan leher. Jika tidak ada meja, jongkok di dekat dinding dalam dan lindungi kepala.',
   },
   {
+    claimId: 'eqnow-3',
     en: 'HOLD ON until the shaking stops',
     ja: '揺れが止まるまで動かないでください (HOLD ON)',
     id: 'BERTAHAN sampai guncangan berhenti',
@@ -38,6 +42,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Tetap berlindung. Jika meja bergeser, ikut bergerak bersamanya.',
   },
   {
+    claimId: 'eqnow-4',
     en: 'When the shaking stops: OPEN THE DOOR',
     ja: '揺れが止まったら：ドアを開けてください',
     id: 'Saat guncangan berhenti: BUKA PINTU',
@@ -46,6 +51,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Setelah gempa, kusen pintu bisa bengkok dan pintu macet. Buka sekarang selagi bisa.',
   },
   {
+    claimId: 'eqnow-5',
     en: 'Switch off the BREAKER and the gas before you leave',
     ja: '家を出る前に、ブレーカーを切って、ガスを止めてください',
     id: 'Matikan BREAKER listrik dan gas sebelum keluar',
@@ -54,6 +60,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Banyak kebakaran terjadi saat listrik menyala lagi. Kobe 1995: api membakar sekitar 7.000 bangunan.',
   },
   {
+    claimId: 'eqnow-6',
     en: 'Put on SHOES before you move',
     ja: '動く前に、靴をはいてください',
     id: 'Pakai SEPATU sebelum bergerak',
@@ -62,6 +69,7 @@ const STEPS: NowStep[] = [
     detail_id: 'Ada pecahan kaca di mana-mana. Jangan berjalan tanpa alas kaki.',
   },
   {
+    claimId: 'eqnow-7',
     en: 'Check for a TSUNAMI warning',
     ja: '津波警報が出ていないか確認してください',
     id: 'Cek peringatan TSUNAMI',

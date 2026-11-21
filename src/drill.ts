@@ -11,10 +11,12 @@ interface DrillScenario {
   explain_ja: string;
   explain_id: string;
   shake?: boolean;
+  claimId: string;
 }
 
-const scenarios: DrillScenario[] = [
+export const scenarios: DrillScenario[] = [
   {
+    claimId: 'drill-step-1',
     situation_en: 'Strong shaking! You are at your desk in a classroom on the 4th floor. What do you do?',
     situation_ja: '強い揺れです！あなたは4階の教室で、机の所にいます。どうしますか？',
     situation_id: 'Guncangan kuat! Anda di meja di kelas lantai 4. Apa yang Anda lakukan?',
@@ -31,6 +33,7 @@ const scenarios: DrillScenario[] = [
     shake: true,
   },
   {
+    claimId: 'drill-step-2',
     situation_en: 'The shaking has stopped. The building looks OK, but you smell something strange. What do you do next?',
     situation_ja: '揺れが止まりました。建物はこわれていないようですが、変なにおいがします。次に何をしますか？',
     situation_id: 'Guncangan sudah berhenti. Bangunan tampak utuh, tetapi Anda mencium bau aneh. Apa yang Anda lakukan berikutnya?',
@@ -46,6 +49,7 @@ const scenarios: DrillScenario[] = [
     explain_id: 'Buka jendela agar udara masuk. Keluar lewat tangga. Setelah gempa, JANGAN pakai elevator, saklar listrik, atau api terbuka. Kebocoran gas bisa menyebabkan ledakan.',
   },
   {
+    claimId: 'drill-step-3',
     situation_en: 'You are outside now. A person near you is bleeding from a head wound. What do you do?',
     situation_ja: '外に出ました。近くに、頭から血が出ている人がいます。どうしますか？',
     situation_id: 'Anda sudah di luar. Orang di dekat Anda berdarah dari luka di kepala. Apa yang Anda lakukan?',
@@ -61,6 +65,7 @@ const scenarios: DrillScenario[] = [
     explain_id: 'Tekan luka dengan kuat menggunakan kain paling bersih yang ada. Hubungi 119. Jangan pindahkan orang yang terluka, kecuali ia dalam bahaya langsung.',
   },
   {
+    claimId: 'drill-step-4',
     situation_en: 'Your phone buzzes with a tsunami warning. You are 500 m from the coast. What do you do?',
     situation_ja: 'スマホに津波警報が出ました。海から500mの所にいます。どうしますか？',
     situation_id: 'Ponsel Anda berbunyi: peringatan tsunami. Anda 500 m dari pantai. Apa yang Anda lakukan?',
@@ -76,6 +81,7 @@ const scenarios: DrillScenario[] = [
     explain_id: 'SEGERA pergi ke tempat tinggi. Tsunami bisa tiba dalam hitungan menit. Naik minimal 3 lantai, atau ke tempat tertinggi di dekat Anda. JANGAN mendekati air atau masuk ke ruang bawah tanah.',
   },
   {
+    claimId: 'drill-step-5',
     situation_en: 'You are at the evacuation shelter. An aftershock starts. The ground shakes again.',
     situation_ja: '避難所にいます。余震（あとから来る地震）です。また地面が揺れ始めました。',
     situation_id: 'Anda di tempat pengungsian. Terjadi gempa susulan. Tanah berguncang lagi.',
@@ -92,6 +98,7 @@ const scenarios: DrillScenario[] = [
     shake: true,
   },
   {
+    claimId: 'drill-step-6',
     situation_en: 'The disaster is over. When do you go back to your apartment?',
     situation_ja: '災害が終わりました。いつアパートに戻りますか？',
     situation_id: 'Bencana sudah berakhir. Kapan Anda kembali ke apartemen?',
