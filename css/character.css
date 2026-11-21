@@ -29,8 +29,9 @@
   border-radius: 12px;
   background: var(--surface, #1a1a2e);
   color: var(--text, #f6f4ef);
-  font-size: 13px;
-  line-height: 1.4;
+  font-family: var(--pixel-text);
+  font-size: 14px;
+  line-height: 1.5;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 .tip-bubble::before {

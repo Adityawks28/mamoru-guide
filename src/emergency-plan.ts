@@ -69,7 +69,7 @@ const STEPS: StepDef[] = [
     ],
   },
   {
-    icon: '📍', title: 'Location & ID ・ 住所・身分証',
+    icon: '📍', title: 'Address and ID ・ 住所・身分証',
     fields: [
       { key: 'profile.address',       label: 'Address ・ 住所',                       type: 'text', placeholder: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
       { key: 'profile.university',    label: 'School / University ・ 学校名',         type: 'text', placeholder: 'e.g. Kobe University / 神戸大学', autocomplete: 'organization' },
@@ -78,11 +78,11 @@ const STEPS: StepDef[] = [
     ],
   },
   {
-    icon: '🏃', title: 'Shelters ・ 避難場所',
+    icon: '🏃', title: 'Evacuation Sites ・ 避難場所',
     fields: [
-      { key: 'shelters.primary',      label: 'Primary Shelter ・ 第1避難場所',  type: 'text', placeholder: 'e.g. Higashi Yuenchi Park (500m)' },
-      { key: 'shelters.backup',       label: 'Secondary Shelter ・ 第2避難場所', type: 'text', placeholder: 'e.g. Ward Community Center (1.2km)' },
-      { key: 'shelters.highGround',   label: 'High Ground (Tsunami) ・ 高台（津波）', type: 'text', placeholder: 'e.g. Kitano-cho hillside (800m)' },
+      { key: 'shelters.primary',      label: 'First Evacuation Site ・ 第1避難場所',  type: 'text', placeholder: 'e.g. Higashi Yuenchi Park (500 m)' },
+      { key: 'shelters.backup',       label: 'Second Evacuation Site ・ 第2避難場所', type: 'text', placeholder: 'e.g. Ward Community Center (1.2 km)' },
+      { key: 'shelters.highGround',   label: 'High Ground (Tsunami) ・ 高台（津波）', type: 'text', placeholder: 'e.g. Kitano-cho hillside (800 m)' },
       { key: 'shelters.meetingPoint', label: 'Meeting Point ・ 集合場所',       type: 'text', placeholder: 'e.g. Front gate of Kobe University' },
       { key: 'shelters.walkTime',     label: 'Walking Time ・ 徒歩時間',        type: 'text', placeholder: 'e.g. 10 minute walk' },
       { key: 'shelters.routeNotes',   label: 'Evacuation Route Notes ・ 避難ルート', type: 'textarea', placeholder: 'e.g. Go north on Flower Road. Turn right at City Hall.', full: true },
@@ -93,15 +93,15 @@ const STEPS: StepDef[] = [
     fields: [
       { key: 'contacts.contact1',     label: 'Contact 1 ・ 連絡先1',              type: 'text', placeholder: 'e.g. Budi, 080-1234-5678' },
       { key: 'contacts.contact2',     label: 'Contact 2 ・ 連絡先2',              type: 'text', placeholder: 'e.g. University office, 078-XXX-XXXX' },
-      { key: 'contacts.familyAbroad', label: 'Family Back Home ・ 母国の家族',    type: 'text', placeholder: 'e.g. Mom, +62-812-XXX-XXXX' },
+      { key: 'contacts.familyAbroad', label: 'Family in Your Home Country ・ 母国の家族',    type: 'text', placeholder: 'e.g. Mom, +62-812-XXX-XXXX' },
       { key: 'contacts.embassy',      label: 'Embassy / Consulate ・ 大使館・領事館', type: 'text', placeholder: 'e.g. KJRI Osaka, 06-6449-9898' },
     ],
   },
   {
-    icon: '🎒', title: 'Supplies & Bag ・ 備蓄・防災袋',
+    icon: '🎒', title: 'Supplies and Bag ・ 備蓄・防災袋',
     fields: [
-      { key: 'supplies.supplyDays',   label: 'Days Prepared ・ 備蓄日数',  type: 'select', options: SUPPLY_DAYS },
-      { key: 'supplies.waterLiters',  label: 'Water Stored ・ 水の備蓄量', type: 'text', placeholder: 'e.g. 6L (2L/day × 3 days)' },
+      { key: 'supplies.supplyDays',   label: 'Days of Supplies ・ 備蓄日数',  type: 'select', options: SUPPLY_DAYS },
+      { key: 'supplies.waterLiters',  label: 'Stored Water ・ 水の備蓄量', type: 'text', placeholder: 'e.g. 9 L (3 L/day × 3 days)' },
       { key: 'supplies.foodList',     label: 'Food List ・ 非常食リスト',  type: 'textarea', placeholder: 'e.g. Canned tuna × 4, instant rice × 6', full: true },
       { key: 'supplies.toolsList',    label: 'Equipment List ・ 装備リスト', type: 'textarea', placeholder: 'e.g. Flashlight, radio, first aid kit, whistle', full: true },
       { key: 'supplies.bagLocation',  label: 'Bag Location ・ 非常持ち出し袋の場所', type: 'text', placeholder: 'e.g. Genkan (entrance), next to the shoes' },
@@ -120,10 +120,10 @@ const MEDICAL_STEP = 1;
 const WORKSHEET_ORDER = [0, MEDICAL_STEP, 4, 2, 3, 5];
 const MASKED_IDS = new Set(['profile.residenceCard', 'profile.insurance']);
 const EMERGENCY_NUMBERS: [string, string, string][] = [
-  ['119', 'Fire · Ambulance', '消防・救急'],
+  ['119', 'Fire / Ambulance', '消防・救急'],
   ['110', 'Police', '警察'],
-  ['118', 'Sea emergency', '海上保安庁'],
-  ['171', 'Disaster message dial', '災害用伝言ダイヤル'],
+  ['118', 'Coast Guard', '海上保安庁'],
+  ['171', 'Disaster Emergency Message Dial', '災害用伝言ダイヤル'],
 ];
 // Browsers use the title as the PDF file name and page header.
 const PRINT_TITLE = 'Mamoru emergency worksheet';
@@ -243,7 +243,7 @@ function renderReview(): HTMLElement {
   });
 
   if (review.children.length === 0) {
-    review.appendChild(el('p', { class: 'wizard-review-empty' }, 'You have not added any information yet. Use the Back button to add it.'));
+    review.appendChild(el('p', { class: 'wizard-review-empty' }, 'There is no information yet. Use the Back button to add it.'));
   }
   card.appendChild(review);
 
@@ -314,7 +314,7 @@ export function savePlan(): void {
 }
 
 export function clearPlan(): void {
-  if (!confirm('Clear your emergency plan? You cannot undo this.\n避難計画を消しますか？元に戻せません。\nHapus rencana darurat Anda? Ini tidak bisa dibatalkan.')) return;
+  if (!confirm('Clear your emergency plan? You cannot undo this.\nあなたの計画を消しますか？元に戻せません。\nHapus rencana daruratmu? Ini tidak bisa dibatalkan.')) return;
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
@@ -368,9 +368,9 @@ function buildWorksheet(): HTMLElement {
 
   ws.append(el('footer', { class: 'ws-foot' }, [
     `Printed ${new Date().toLocaleDateString('en-CA')}.`,
-    'This sheet has personal information. Keep it in a safe place. Shred old copies. 個人情報が書いてあります。安全な場所に保管してください。古い紙は細かく破って捨ててください。',
+    'This sheet has personal information. Keep it in a safe place. Shred old copies. 個人情報が書いてあります。安全な場所に置いてください。古い紙は細かく破って捨ててください。',
     masked ? 'ID numbers show only the last 4 characters. 番号は最後の4文字だけを表示しています。' : '',
-    'Made on this device with Mamoru Guide. Nothing was uploaded.',
+    'Mamoru Guide made this sheet on this device. It did not send your data to a server.',
   ].filter(Boolean).join(' ')));
   return ws;
 }
@@ -407,7 +407,7 @@ export function initEmergencyPlan(): void {
     plan = migrated;
     savePlanV2(plan);
     removeItem('mamoru-emergency-plan');
-    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形式に更新しました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
+    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形にしました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
   } else {
     plan = loadPlanV2();
   }

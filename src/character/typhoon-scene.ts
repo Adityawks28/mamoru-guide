@@ -1,6 +1,6 @@
 import { createActor, type Action } from './actor';
 import { TYPHOON_TIPS } from './tips';
-import { onMotionChange } from './motion';
+import { motionAllowed, onMotionChange } from './motion';
 
 const TIP_INTERVAL_MS = 4500;
 
@@ -12,19 +12,18 @@ const ACTIONS: Action[] = [
     { sprite: { arms: [0, 110], hold: 'phone-front', pupil: { x: 0, y: 1 } } },
     { sprite: { arms: [0, 110], hold: 'phone-front', blink: true } },
   ] },
-  // Severe tropical storm: tape an X on the window, one strip at a time.
+  // Severe tropical storm: she stands at the window (no tape is drawn).
   { frameMs: 700, props: ['window'], frames: [
     { sprite: { arms: [0, -130] } },
-    { sprite: { arms: [0, -130] }, props: ['tapeA'] },
-    { sprite: { arms: [0, -120] }, props: ['tapeA', 'tapeB'] },
-    { sprite: { arms: [0, -120], face: 'happy' }, props: ['tapeA', 'tapeB'] },
+    { sprite: { arms: [0, -120] } },
+    { sprite: { arms: [0, -120], face: 'happy' } },
   ] },
-  // Typhoon: walk to the shelter early. Feet step in turn ('walk' lifts the
-  // left, 'run' the right) and the opposite arm swings out a little.
-  { frameMs: 250, props: ['wind'], frames: [{ sprite: { pose: 'walk', arms: [0, -8] } }, { sprite: { pose: 'run', arms: [8, 0] } }] },
+  // Typhoon: walk to the shelter early, before the wind gets strong. Feet step
+  // in turn ('walk' lifts the left, 'run' the right) and the opposite arm swings out a little.
+  { frameMs: 250, props: [], frames: [{ sprite: { pose: 'walk', arms: [0, -8] } }, { sprite: { pose: 'run', arms: [8, 0] } }] },
   // Very strong: the power is out, the torch is ready.
   { frameMs: 300, props: ['dark', 'beam'], frames: [{ sprite: { arms: [0, -40], hold: 'torch' } }] },
-  // Violent: stay inside, away from the storm.
+  // Violent: do not go out unless you need to.
   { frameMs: 200, props: ['house', 'rain'], frames: [
     { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: { blink: true } },
   ] },
@@ -72,6 +71,6 @@ export function initTyphoonScene(): void {
     if (allowed) tipTimer = window.setInterval(() => { if (current === null) showTip(tipIdx + 1); }, TIP_INTERVAL_MS);
     act(current);
   }
-  applyMotion(true);
+  applyMotion(motionAllowed());
   onMotionChange(applyMotion);
 }

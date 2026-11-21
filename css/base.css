@@ -68,7 +68,7 @@ body.lang-en [data-block-lang="en"],
 body.lang-ja [data-block-lang="ja"],
 body.lang-id [data-block-lang="id"] { display: block; }
 
-.pixel-font { font-family: 'Press Start 2P', monospace; }
+.pixel-font { font-family: var(--pixel-font); }
 
 .skip-link {
   position: absolute;

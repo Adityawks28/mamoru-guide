@@ -41,7 +41,7 @@
 .scale-row[aria-pressed="true"] { background: rgba(15,31,61,0.95); }
 .scale-row[aria-pressed="true"] { border-left-width: 8px; }
 .scale-row .num {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 20px;
   min-width: 50px;
   text-align: center;
@@ -85,4 +85,9 @@ body.day-mode .scale-row:hover,
 body.day-mode .scale-row:focus-visible,
 body.day-mode .scale-row[aria-pressed="true"] {
   background: rgba(255,255,255,0.96);
+}
+
+/* reduced motion: the level 7 row keeps a still glow instead of the pulse */
+@media (prefers-reduced-motion: reduce) {
+  .scale-row.s7 { animation: none; box-shadow: inset 0 0 8px rgba(232,64,64,0.2); }
 }
