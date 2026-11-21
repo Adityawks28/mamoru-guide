@@ -1,18 +1,19 @@
 import { createSprite, updateSprite, type Emote, type SpriteOptions } from './sprite';
 import { DISASTER_FACTS } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
+import { t } from '../i18n';
 
 // Faithful port of prototype mascot.jsx, structure:
 //   <#mascot.mascot-wrap>
 //     <div class="pixel-bubble fact-bubble">
-//       <div class="pb-tag">DID YOU KNOW?</div>
+//       <div class="pb-tag" data-i18n="mascot.tag">DID YOU KNOW?</div>
 //       <div class="pb-t"><span data-lang="en">…</span><span data-lang="ja">…</span><span data-lang="id">…</span></div>
-//       <div class="pb-cta">→ TAP FOR NEXT</div>
+//       <div class="pb-cta" data-i18n="mascot.cta">→ TAP FOR NEXT</div>
 //     </div>
 //     <div class="mascot" role="button"> <!-- the clickable sprite -->
 //       <svg class="mascot-svg"...> Moru SVG </svg>
 //     </div>
-//     <div class="mascot-hint">▼ TAP FOR NEXT FACT ▼</div>
+//     <div class="mascot-hint" data-i18n="mascot.hint">▼ TAP FOR NEXT FACT ▼</div>
 //   </#mascot.mascot-wrap>
 
 type Particle = 'star' | 'note' | 'bang' | 'heart' | 'sparkle';
@@ -50,6 +51,12 @@ function particleSvg(kind: Particle): string {
   const cells = rows.flatMap((row, y) => [...row].map((c, x) => c === '1' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ''));
   return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" width="${rows[0].length * 4}" height="${rows.length * 4}" shape-rendering="crispEdges" fill="${color}">${cells.join('')}</svg>`;
 }
+// data-i18n lets applyTranslations() relabel it when the language changes.
+function label(el: HTMLElement, key: string): void {
+  el.dataset.i18n = key;
+  el.textContent = t(key);
+}
+
 const FACT_INTERVAL_MS = 8000;
 const BLINK_MIN_MS = 2400;
 const BLINK_MAX_MS = 6000;
@@ -76,7 +83,7 @@ export function initMascot(): void {
 
   const tag = document.createElement('div');
   tag.className = 'pb-tag';
-  tag.textContent = 'DID YOU KNOW?';
+  label(tag, 'mascot.tag');
   bubble.appendChild(tag);
 
   // The fact is the main text in every language, so all three share .pb-t.
@@ -90,7 +97,7 @@ export function initMascot(): void {
 
   const cta = document.createElement('div');
   cta.className = 'pb-cta';
-  cta.textContent = '→ TAP FOR NEXT';
+  label(cta, 'mascot.cta');
   bubble.appendChild(cta);
 
   host.appendChild(bubble);
@@ -109,7 +116,7 @@ export function initMascot(): void {
   // 3) Below-character hint.
   const hint = document.createElement('div');
   hint.className = 'mascot-hint';
-  hint.textContent = '▼ TAP FOR NEXT FACT ▼';
+  label(hint, 'mascot.hint');
   host.appendChild(hint);
 
   function renderFact(): void {

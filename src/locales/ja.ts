@@ -11,6 +11,11 @@ export const ja: Record<string, string> = {
   // Hero
   'hero.subtitle': '日本にいる留学生のための、防災（ぼうさい）ガイド',
 
+  // Mascot fact bubble
+  'mascot.tag':  '知っていますか？',
+  'mascot.cta':  '→ タップして次へ',
+  'mascot.hint': '▼ タップして次の話へ ▼',
+
   // Mode selector
   'mode.emergency.title':   '緊急',
   'mode.emergency.desc':    '今すぐ助けが必要です',

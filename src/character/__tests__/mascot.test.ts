@@ -38,12 +38,42 @@ describe('mascot', () => {
     const { initMascot } = await import('../mascot');
     initMascot();
     const bubble = document.querySelector('#mascot .pixel-bubble')!;
-    expect(bubble.querySelector('.pb-tag')!.textContent).toBe('DID YOU KNOW?');
+    expect(bubble.querySelector('.pb-tag')).toBeTruthy();
     for (const lang of ['en', 'ja', 'id']) {
       expect(bubble.querySelector(`.pb-t [data-lang="${lang}"]`)!.textContent, lang).not.toBe('');
     }
     expect(bubble.querySelector('.pb-sub')).toBeNull();
-    expect(bubble.querySelector('.pb-cta')!.textContent).toContain('TAP FOR NEXT');
+    expect(bubble.querySelector('.pb-cta')).toBeTruthy();
+  });
+
+  const LABELS = {
+    en: { tag: 'DID YOU KNOW?', cta: '→ TAP FOR NEXT', hint: '▼ TAP FOR NEXT FACT ▼' },
+    ja: { tag: '知っていますか？', cta: '→ タップして次へ', hint: '▼ タップして次の話へ ▼' },
+    id: { tag: 'TAHUKAH KAMU?', cta: '→ KETUK UNTUK LANJUT', hint: '▼ KETUK UNTUK FAKTA LAIN ▼' },
+  } as const;
+  const labels = () => ({
+    tag: document.querySelector('#mascot .pb-tag')!.textContent,
+    cta: document.querySelector('#mascot .pb-cta')!.textContent,
+    hint: document.querySelector('#mascot .mascot-hint')!.textContent,
+  });
+
+  it.each(['en', 'ja', 'id'] as const)('labels the bubble and hint in %s when the page starts in that language', async (lang) => {
+    const { setLang } = await import('../../lang');
+    setLang(lang);
+    const { initMascot } = await import('../mascot');
+    initMascot();
+    expect(labels()).toEqual(LABELS[lang]);
+  });
+
+  it('relabels the bubble and hint when the language changes', async () => {
+    const { setLang } = await import('../../lang');
+    setLang('en');
+    const { initMascot } = await import('../mascot');
+    initMascot();
+    for (const lang of ['ja', 'id', 'en'] as const) {
+      setLang(lang);
+      expect(labels(), lang).toEqual(LABELS[lang]);
+    }
   });
 
   it('clicking the mascot character advances the fact', async () => {

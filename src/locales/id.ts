@@ -11,6 +11,11 @@ export const id: Record<string, string> = {
   // Hero
   'hero.subtitle': 'Panduan kesiapsiagaan bencana untuk mahasiswa internasional di Jepang',
 
+  // Mascot fact bubble
+  'mascot.tag':  'TAHUKAH KAMU?',
+  'mascot.cta':  '→ KETUK UNTUK LANJUT',
+  'mascot.hint': '▼ KETUK UNTUK FAKTA LAIN ▼',
+
   // Mode selector
   'mode.emergency.title':   'Darurat',
   'mode.emergency.desc':    'Saya butuh bantuan sekarang',

@@ -11,6 +11,11 @@ export const en: Record<string, string> = {
   // Hero
   'hero.subtitle': 'A disaster preparedness guide for international students in Japan',
 
+  // Mascot fact bubble
+  'mascot.tag':  'DID YOU KNOW?',
+  'mascot.cta':  '→ TAP FOR NEXT',
+  'mascot.hint': '▼ TAP FOR NEXT FACT ▼',
+
   // Mode selector
   'mode.emergency.title':   'Emergency',
   'mode.emergency.desc':    'I need help right now',
