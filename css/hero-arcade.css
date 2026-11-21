@@ -49,8 +49,8 @@ body.day-mode .kobe-scene {
   grid-template-columns: 1.3fr 1fr;
   gap: 60px;
   align-items: center;
-  /* top: 56px navbar + the fact bubble's 40px overhang; bottom: the 300px harbor scene */
-  padding: 116px 48px 320px;
+  /* top: 56px navbar + 40px; bottom: the 300px harbor scene */
+  padding: 96px 48px 320px;
   min-height: 100vh;
   width: 100%;
   max-width: var(--hero-max-width);
@@ -226,12 +226,12 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   margin: 0;
 }
 
-/* Pixel speech bubble: pokes out to the upper-right of the mascot frame */
+/* Pixel speech bubble: the first item in the mascot frame, above the sprite, so it
+   never covers the sprite's head or the MASCOT.EXE label. */
 .pixel-bubble {
-  position: absolute;
-  top: -40px;
-  /* Full 200px overhang only on wide screens; shrinks so the bubble never leaves the viewport down to the 900px stacked layout. */
-  right: max(-200px, calc(170px - 25vw));
+  position: relative;
+  width: 260px;
+  max-width: 100%;
   background: var(--paper);
   color: var(--amber);
   padding: 10px 14px;
@@ -242,14 +242,13 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   letter-spacing: 0.05em;
   line-height: 1.5;
   z-index: 20;
-  max-width: 260px;
   animation: bubble-pop 0.15s steps(2);
 }
 .pixel-bubble::before {
   content: '';
   position: absolute;
   bottom: -8px;
-  left: 20px;
+  left: calc(50% - 8px);
   width: 0;
   height: 0;
   border: 8px solid transparent;
@@ -279,6 +278,13 @@ body.lang-ja .pb-cta,
 body.lang-ja .mascot-hint,
 body.lang-ja .mode-rail .mode-card .mode-title { font-size: 14px; }
 body.lang-ja .pb-t { line-height: 1.6; }
+/* Room for the longest fact at 260px (8 lines en, 9 id, 6 ja), so the sprite
+   below does not jump each time the fact changes. */
+@media (min-width: 901px) {
+  .pb-t { min-height: calc(8 * 1.5em); }
+  body.lang-id .pb-t { min-height: calc(9 * 1.5em); }
+  body.lang-ja .pb-t { min-height: calc(6 * 1.6em); }
+}
 @keyframes bubble-pop {
   0%   { transform: scale(0); }
   50%  { transform: scale(1.1); }
@@ -489,7 +495,7 @@ body.day-mode .ks-shooter,
   .arcade-hero .hero-text { text-align: center; }
   .arcade-hero .hero-actions { justify-content: center; }
   .mode-rail { max-width: 360px; margin: 24px auto 0; }
-  .pixel-bubble { position: static; max-width: 100%; margin-bottom: 16px; }
+  .pixel-bubble { position: static; width: auto; max-width: 100%; margin-bottom: 16px; }
   .pixel-bubble::before { display: none; }
 }
 

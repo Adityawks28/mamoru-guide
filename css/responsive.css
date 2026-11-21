@@ -1,9 +1,13 @@
-@media (max-width: 768px) {
+/* The full navbar is 1075px wide in en and id (layout-fit.test.ts); below that
+   the links, share and language buttons move into the hamburger menu. */
+@media (max-width: 1120px) {
   .nav-links { display: none; }
   .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .mobile-menu { display: flex; }
   #shareBtn, .lang-switcher { display: none; }
+}
 
+@media (max-width: 768px) {
   .navbar { padding: 0 12px; }
 
   .section { padding: 60px 1rem 40px; }
