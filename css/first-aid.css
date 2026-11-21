@@ -32,7 +32,7 @@
   font-size: 13px;
 }
 .firstaid-card-count {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -59,15 +59,15 @@
 }
 .firstaid-header-icon { font-size: 28px; }
 .firstaid-header-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   color: var(--accent);
 }
 
 /* Progress */
 .firstaid-progress {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   margin-bottom: 16px;
   opacity: 0.8;
@@ -93,7 +93,7 @@
   background: var(--accent);
   color: var(--accent-contrast);
   border-radius: 50%;
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 14px;
   flex-shrink: 0;
   font-weight: 700;
@@ -141,7 +141,7 @@
   50% { box-shadow: 0 0 0 6px rgba(245, 166, 35, 0); }
 }
 .firstaid-timer-display {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 20px;
   color: var(--accent);
   min-width: 80px;
@@ -249,4 +249,12 @@ body.day-mode .firstaid-dot {
   line-height: 1.5;
   color: var(--text-muted);
   margin: 12px 0;
+}
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .firstaid-header-title,
+body.lang-ja .firstaid-progress { font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .firstaid-timer.running { animation: none; }
 }

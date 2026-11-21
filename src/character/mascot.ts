@@ -1,19 +1,19 @@
 import { createSprite, updateSprite, type Emote, type SpriteOptions } from './sprite';
 import { DISASTER_FACTS } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
+import { t } from '../i18n';
 
 // Faithful port of prototype mascot.jsx, structure:
 //   <#mascot.mascot-wrap>
 //     <div class="pixel-bubble fact-bubble">
-//       <div class="pb-tag">DID YOU KNOW?</div>
-//       <div class="pb-t"><span data-lang="en">…</span></div>
-//       <div class="pb-sub"><span data-lang="ja">…</span><span data-lang="id">…</span></div>
-//       <div class="pb-cta">→ TAP FOR NEXT</div>
+//       <div class="pb-tag" data-i18n="mascot.tag">DID YOU KNOW?</div>
+//       <div class="pb-t"><span data-lang="en">…</span><span data-lang="ja">…</span><span data-lang="id">…</span></div>
+//       <div class="pb-cta" data-i18n="mascot.cta">→ TAP FOR NEXT</div>
 //     </div>
 //     <div class="mascot" role="button"> <!-- the clickable sprite -->
 //       <svg class="mascot-svg"...> Moru SVG </svg>
 //     </div>
-//     <div class="mascot-hint">▼ TAP FOR NEXT FACT ▼</div>
+//     <div class="mascot-hint" data-i18n="mascot.hint">▼ TAP FOR NEXT FACT ▼</div>
 //   </#mascot.mascot-wrap>
 
 type Particle = 'star' | 'note' | 'bang' | 'heart' | 'sparkle';
@@ -51,6 +51,12 @@ function particleSvg(kind: Particle): string {
   const cells = rows.flatMap((row, y) => [...row].map((c, x) => c === '1' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ''));
   return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" width="${rows[0].length * 4}" height="${rows.length * 4}" shape-rendering="crispEdges" fill="${color}">${cells.join('')}</svg>`;
 }
+// data-i18n lets applyTranslations() relabel it when the language changes.
+function label(el: HTMLElement, key: string): void {
+  el.dataset.i18n = key;
+  el.textContent = t(key);
+}
+
 const FACT_INTERVAL_MS = 8000;
 const BLINK_MIN_MS = 2400;
 const BLINK_MAX_MS = 6000;
@@ -71,31 +77,27 @@ export function initMascot(): void {
   host.classList.add('mascot-wrap');
   host.innerHTML = '';
 
-  // 1) Fact bubble: pixel-bubble with pb-tag/pb-t/pb-sub/pb-cta.
+  // 1) Fact bubble: pixel-bubble with pb-tag/pb-t/pb-cta.
   const bubble = document.createElement('div');
   bubble.className = 'pixel-bubble fact-bubble';
 
   const tag = document.createElement('div');
   tag.className = 'pb-tag';
-  tag.textContent = 'DID YOU KNOW?';
+  label(tag, 'mascot.tag');
   bubble.appendChild(tag);
 
-  const tEn = document.createElement('div');
-  tEn.className = 'pb-t';
+  // The fact is the main text in every language, so all three share .pb-t.
+  const fact = document.createElement('div');
+  fact.className = 'pb-t';
   const enSpan = document.createElement('span'); enSpan.dataset.lang = 'en';
-  tEn.appendChild(enSpan);
-  bubble.appendChild(tEn);
-
-  const sub = document.createElement('div');
-  sub.className = 'pb-sub';
   const jaSpan = document.createElement('span'); jaSpan.dataset.lang = 'ja';
   const idSpan = document.createElement('span'); idSpan.dataset.lang = 'id';
-  sub.append(jaSpan, idSpan);
-  bubble.appendChild(sub);
+  fact.append(enSpan, jaSpan, idSpan);
+  bubble.appendChild(fact);
 
   const cta = document.createElement('div');
   cta.className = 'pb-cta';
-  cta.textContent = '→ TAP FOR NEXT';
+  label(cta, 'mascot.cta');
   bubble.appendChild(cta);
 
   host.appendChild(bubble);
@@ -104,7 +106,8 @@ export function initMascot(): void {
   const charWrap = document.createElement('div');
   charWrap.className = 'mascot';
   charWrap.setAttribute('role', 'button');
-  charWrap.setAttribute('aria-label', 'Tap Moru for the next disaster fact');
+  charWrap.dataset.i18nAria = 'mascot.aria';
+  charWrap.setAttribute('aria-label', t('mascot.aria'));
   charWrap.setAttribute('tabindex', '0');
   const sprite = createSprite({ pose: 'stand', gender: 'male' });
   sprite.classList.add('mascot-svg');
@@ -114,7 +117,7 @@ export function initMascot(): void {
   // 3) Below-character hint.
   const hint = document.createElement('div');
   hint.className = 'mascot-hint';
-  hint.textContent = '▼ TAP FOR NEXT FACT ▼';
+  label(hint, 'mascot.hint');
   host.appendChild(hint);
 
   function renderFact(): void {
@@ -130,8 +133,11 @@ export function initMascot(): void {
     renderFact();
   }
 
+  // The idle timers run only while motion is allowed and the tab is visible.
+  const running = (): boolean => allowed && !document.hidden;
+
   function scheduleFactTimer(): void {
-    if (!allowed) return;
+    if (!running()) return;
     factTimer = window.setInterval(nextFact, FACT_INTERVAL_MS);
   }
   function clearFactTimer(): void {
@@ -139,18 +145,20 @@ export function initMascot(): void {
   }
 
   function scheduleBlink(): void {
-    if (!allowed) return;
+    if (!running()) return;
     const delay = BLINK_MIN_MS + Math.random() * (BLINK_MAX_MS - BLINK_MIN_MS);
     blinkTimer = window.setTimeout(() => {
       updateSprite(sprite, { blink: true });
-      window.setTimeout(() => {
+      blinkTimer = window.setTimeout(() => {
         updateSprite(sprite, { blink: false });
         scheduleBlink();
       }, BLINK_DURATION_MS);
     }, delay);
   }
+  // Also opens the eyes, in case the timer stops in the middle of a blink.
   function clearBlink(): void {
     if (blinkTimer !== null) { window.clearTimeout(blinkTimer); blinkTimer = null; }
+    if (sprite.dataset.blink) updateSprite(sprite, { blink: false });
   }
 
   function onPointerMove(e: MouseEvent): void {
@@ -241,6 +249,14 @@ export function initMascot(): void {
     }
   }
 
+  function onVisibility(): void {
+    clearFactTimer();
+    clearBlink();
+    scheduleFactTimer();
+    scheduleBlink();
+  }
+
   applyMotion(allowed);
   onMotionChange(applyMotion);
+  document.addEventListener('visibilitychange', onVisibility);
 }

@@ -37,6 +37,21 @@ describe('earthquake-scene', () => {
     expect(document.querySelector('#earthquake-scene .mr-procedure')).toBeTruthy();
   });
 
+  it('labels the window warning in the pixel font, in the current language', async () => {
+    const { setLang } = await import('../../lang');
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    const words: string[] = [];
+    for (const lang of ['en', 'ja', 'id'] as const) {
+      setLang(lang);
+      initEarthquakeScene();
+      const label = document.querySelector('#earthquake-scene .mr-warning text') as SVGTextElement;
+      expect(label.style.fontFamily, lang).toBe('var(--pixel-font)');
+      words.push(label.textContent!);
+    }
+    expect(words).toEqual(['AVOID', 'はなれて', 'JAUHI']);
+    setLang('en');
+  });
+
   it('builds room hazards: lamp, shelf, doorGlow', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
@@ -66,7 +81,7 @@ describe('earthquake-scene', () => {
     for (let i = 1; i <= 9; i++) {
       shindo(i);
       vi.advanceTimersByTime(3000);
-      expect(procEn(), `row ${i}`).toContain('get under a strong table');
+      expect(procEn(), `row ${i}`).toContain('Get under a strong table');
       expect(actorPose(), `row ${i}`).toBe('cower');
     }
     shindo(0);
@@ -163,12 +178,28 @@ describe('earthquake-scene', () => {
     const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
     expect(procEn()).toBe('');
     shindo(0);
-    expect(procEn()).toContain('people do not feel it');
+    expect(procEn()).toContain('People do not feel it');
     for (const i of [1, 4, 5, 9]) {
       shindo(i);
-      expect(procEn(), `row ${i}`).toContain('protect yourself');
-      expect(procEn(), `row ${i}`).toContain('wait until the shaking stops');
+      expect(procEn(), `row ${i}`).toContain('Protect yourself');
+      expect(procEn(), `row ${i}`).toContain('Wait until the shaking stops');
     }
+  });
+
+  it('shindo 0: the bubble says people do not feel it and gives no protect instruction', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const bubbleText = () => [...document.querySelectorAll('#earthquake-scene .tip-bubble span')].map(e => e.textContent).join(' ');
+    shindo(9);
+    vi.advanceTimersByTime(8000);
+    shindo(0);
+    for (const ms of [0, 3000, 5000, 60000]) {
+      vi.advanceTimersByTime(ms);
+      expect(bubbleText(), `after ${ms} ms`).toContain('People do not feel this shaking.');
+      expect(bubbleText(), `after ${ms} ms`).not.toMatch(/table|Drop|Merunduk|机/);
+    }
+    shindo(1);
+    expect(bubbleText()).not.toContain('People do not feel this shaking.');
   });
 
   it('with reduced motion the room still shows the result, without moving', async () => {

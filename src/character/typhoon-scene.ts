@@ -1,6 +1,6 @@
 import { createActor, type Action } from './actor';
 import { TYPHOON_TIPS } from './tips';
-import { onMotionChange } from './motion';
+import { motionAllowed, onMotionChange } from './motion';
 
 const TIP_INTERVAL_MS = 4500;
 
@@ -71,6 +71,6 @@ export function initTyphoonScene(): void {
     if (allowed) tipTimer = window.setInterval(() => { if (current === null) showTip(tipIdx + 1); }, TIP_INTERVAL_MS);
     act(current);
   }
-  applyMotion(true);
+  applyMotion(motionAllowed());
   onMotionChange(applyMotion);
 }

@@ -708,6 +708,19 @@ export const SOURCES: Record<SourceId, Source> = {
     url: 'https://emg.yahoo.co.jp/',
     checked: '2026-11-21',
   },
+  // Checked in a real browser on 2026-11-21 (verification rows R70 and R76).
+  'jhelp-home': {
+    publisher: 'The World Helpline',
+    title: 'TheWorldHelpline.org',
+    url: 'https://jhelp.com/',
+    checked: '2026-11-21',
+  },
+  'yorisoi-n2': {
+    publisher: '一般社団法人 社会的包摂サポートセンター',
+    title: 'よりそいホットライン 外国語による相談',
+    url: 'https://www.since2011.net/yorisoi/n2/',
+    checked: '2026-11-21',
+  },
 };
 
 export type ClaimStatus = 'verified' | 'changed' | 'removed' | 'needs-medical-review' | 'pending';
@@ -764,7 +777,7 @@ export const CLAIMS: Record<string, Claim> = {
   'fa-psychological-5': { sources: ['who-pfa-ja'], status: 'verified', note: 'Help with basic needs, connect with family. WHO PFA (JA) p.34' },
   'tip-kobe-deaths': { sources: ['fdma-hanshin-final', 'kobe-city-damage', 'cao-kyokun-1-1-2'], status: 'verified', note: '6,434 deaths (FDMA 確定報 2006-05-19; CAO 教訓情報 1-1-2); 4,571 in Kobe City as of 2005-12-22 (Kobe City); shindo 7 in parts of Kobe (FDMA 確定報 §1 注). Wording and the name Great Hanshin-Awaji Earthquake aligned (used by two tips)' },
   'tip-breaker-fire': { sources: ['cao-kyokun-1-9-2', 'tfd-quake-10-points'], status: 'changed', note: 'Was "Switch off the breaker... In Kobe in 1995, fire burned about 7,000 buildings" (claim tip-kobe-fire). The number was right (全焼 7,036 in all areas, FDMA 確定報 §2; 6,965 in Kobe City), but next to the breaker it suggested that returning power caused the 7,000; no source gives that share. The number stays in eqnow-5. Now: electrical fires can start when the power comes back on (CAO 教訓情報 1-9-2; TFD 10のポイント 9)' },
-  'tip-kobe-power': { sources: ['cao-kyokun-1-9-2'], status: 'changed', note: 'Was "power can be off for 3 days or more" (claim tip-power-3days). Now: some areas of Kobe had no power for up to 6 days. CAO 教訓情報 1-9-2: 応急送電の完了は、地震発生後6日後の1月23日' },
+  'tip-kobe-power': { sources: ['cao-kyokun-1-9-2', 'cao-checklist-sonae'], status: 'changed', note: 'Was "power can be off for 3 days or more" (claim tip-power-3days). Now: some areas of Kobe had no power for up to 6 days. CAO 教訓情報 1-9-2: 応急送電の完了は、地震発生後6日後の1月23日. The action was "Charge your phone now", which no source certifies; now "Keep spare batteries and a phone charger ready", exactly the CAO checklist item 予備電池・携帯充電器 (same wording as typhoon-prep-1 and the typhoon BEFORE panel)' },
   'tip-bag-weight': { sources: ['osaka-pref-bag'], status: 'changed', note: 'Was "under 10 kg" (claim tip-bag-10kg). Now only the guide: about 15 kg for men, 10 kg for women (重さの目安は男性で15Kg、女性で10kg程度。※あくまで目安です。). The bag game keeps 10 kg as its own game rule and says so' },
   'tip-water-3l': { sources: ['gov-online-bousai-8072', 'kantei-sonae'], status: 'verified', note: '3 L per person per day, for 3 days. 政府広報オンライン 8072; 首相官邸 防災の手引き 備え' },
   'tip-whistle': { sources: ['gov-online-bousai-8072'], status: 'changed', note: 'Was "three blasts mean SOS" (claim tip-whistle-sos): removed, no Japanese official source. Now: a whistle needs little breath; blow it to call for help when trapped. 政府広報オンライン 8072 (used by two tips)' },
@@ -789,7 +802,7 @@ export const CLAIMS: Record<string, Claim> = {
   'tip-shelter-types': { sources: ['kantei-hinan'], status: 'changed', note: 'Was "Schools are the main shelters". 避難場所 (evacuation site) and 避難所 (evacuation shelter) are different; schools are often both. 首相官邸 避難場所' },
   'tip-hazard-maps': { sources: ['kantei-taifu'], status: 'verified', note: 'Free hazard maps online: 首相官邸 防災の手引き links ハザードマップポータルサイト (国土交通省)' },
   'tip-safety-message': { sources: ['gov-online-bousai-8072', 'kantei-jishin'], status: 'changed', note: 'Was "SMS gets through when calls do not" (no source). Now: calls may not connect; use 171 or the carrier 災害用伝言板. 政府広報オンライン 8072; 首相官邸 地震' },
-  'tip-run-outside': { sources: ['tfd-quake-10-points', 'tfd-furniture'], status: 'changed', note: 'Was "Most earthquake injuries happen to people who run outside" (no source). Now: do not run outside; roof tiles, glass and signs can fall. TFD 10のポイント 3' },
+  'tip-run-outside': { sources: ['tfd-quake-10-points', 'tfd-furniture'], status: 'changed', note: 'Was "Most earthquake injuries happen to people who run outside" (no source). Now: do not run outside; roof tiles, glass and signs can fall. TFD 10のポイント 3. Used by two tips: this fact and the quake tip "Roof tiles can fall on you" (was "can fall and kill you": the source says only that tiles fall)' },
   'tip-rokko-granite': { sources: [], status: 'removed', note: 'Mt. Rokko granite makes Kobe earthquakes feel sharper than Tokyo: removed. No official source compares the shaking by rock type (two tips deleted)' },
   'tip-school-drills': { sources: [], status: 'removed', note: 'Japanese schools drill every month: removed. MEXT R6 survey gives 72.3% monthly building safety checks, no drill frequency (tip deleted)' },
   'tip-shoes-glass': { sources: ['gov-online-bousai-8072', 'tfd-quake-10-points'], status: 'changed', note: 'Was "there is broken glass everywhere". Now: there can be broken glass on the floor (same as eqnow-6). 政府広報オンライン 8072 (スリッパ); TFD 10のポイント 3' },
@@ -811,10 +824,10 @@ export const CLAIMS: Record<string, Claim> = {
   'eqnow-4': { sources: ['kantei-jishin', 'tfd-quake-10-points', 'tfd-mansion-quake'], status: 'verified', note: 'Open the door after the shaking: 扉を開けて避難路を確保する (首相官邸 地震); 揺れがおさまった時に…出口を確保する (TFD 10のポイント 4). A bent door can trap people: ドアがゆがんだり…閉じ込められた (TFD マンションの地震対策). Quotes re-fetched 2026-11-21' },
   'eqnow-5': { sources: ['cao-kyokun-1-9-2', 'tfd-quake-10-points', 'fdma-hanshin-final'], status: 'changed', note: 'Breaker before leaving: TFD 10のポイント 9. Detail: "many fires" and the link to the 7,000 removed (no source gives the share); electrical fires can start when power returns (CAO 教訓情報 1-9-2); about 7,000 buildings burned down (FDMA 確定報)' },
   'eqnow-6': { sources: ['gov-online-bousai-8072', 'tfd-quake-10-points'], status: 'changed', note: 'Was "There is broken glass everywhere". Now: there can be broken glass on the floor; do not walk barefoot. スリッパは割れたガラスなどの破片で足をけがをするのを防ぎます (政府広報オンライン 8072); ガラスの破片などに注意する (TFD 10のポイント 3). Quotes re-fetched 2026-11-21' },
-  'eqnow-7': { sources: ['kantei-tsunami', 'jma-tsunami-info'], status: 'changed', note: 'Was "go to high ground IMMEDIATELY. Do not wait for sirens". Now: near the coast, strong or long shaking means go to high ground now, do not wait for a warning (強い揺れや弱くても長い揺れを感じたときは、すぐに避難を開始). 首相官邸 津波; JMA 津波警報' },
-  'drill-step-1': { sources: ['tfd-furniture', 'tfd-quake-10-points', 'kantei-jishin'], status: 'changed', note: 'Explanation: "falling objects injure more people than collapsing buildings" removed (no source); now 30 to 50% of injured people were hurt by furniture (TFD 家具転倒対策). Do not run outside: TFD 10のポイント 3' },
+  'eqnow-7': { sources: ['kantei-tsunami', 'jma-tsunami-info'], status: 'changed', note: 'Was "go to high ground IMMEDIATELY. Do not wait for sirens". Now: near the coast, strong or long shaking means go to high ground now, do not wait for a warning (強い揺れや弱くても長い揺れを感じたときは、すぐに避難を開始). 首相官邸 津波; JMA 津波警報. Used by two items: Earthquake Now step 7 and the tsunami tip (was "Do not wait for sirens"; sirens are not in the source)' },
+  'drill-step-1': { sources: ['tfd-furniture', 'tfd-quake-10-points', 'kantei-jishin'], status: 'changed', note: 'Explanation: "falling objects injure more people than collapsing buildings" removed (no source); now 30 to 50% of injured people were hurt by furniture (TFD 家具転倒対策). Do not run outside: TFD 10のポイント 3. COVER: under a strong table (was strong furniture; one word for one meaning, as eqnow-2)' },
   'drill-step-2': { sources: ['meti-gas-smell', 'tfd-mansion-quake'], status: 'changed', note: 'Gas smell: open the windows, no fire or electric switches, close the gas valve, call the gas company (火気を使用したり換気扇や電気のスイッチには絶対に触らない…窓を開けて換気をし…元栓を閉め、すぐにガス事業者へ連絡, METI). Stairs: at about shindo 4 or more an elevator can stop and trap people (震度４程度以上…エレベーターが停止し、閉じ込められる, TFD マンションの地震対策). Quotes re-fetched 2026-11-21' },
-  'drill-step-3': { sources: ['shishin-2020-citizen'], status: 'needs-medical-review', note: 'Head wound: direct pressure and call 119 (指針2020 VI-10); do not move the person unless the place is dangerous (VI-1). Wrong option "Pour water on the wound" removed: VI-9 says to wash cuts and scrapes with clean running water' },
+  'drill-step-3': { sources: ['shishin-2020-citizen'], status: 'changed', note: 'Status per Ruling R17 (source agreement, not medical sign-off); the drill shows the first-aid review note under this step. Remaining verification R52, R53 (match), R54 (option removed). Head wound: direct pressure and call 119 (指針2020 VI-10); do not move the person unless the place is dangerous (VI-1). Wrong option "Pour water on the wound" removed: VI-9 says to wash cuts and scrapes with clean running water' },
   'drill-step-4': { sources: ['kantei-tsunami', 'jma-tsunami-info', 'cao-tsunami-building-advice'], status: 'changed', note: '"3rd floor or higher" removed: the old CAO 3-storey guideline was abolished (H29.7.5). Now: high ground or a tsunami evacuation building, as high as you can; a tsunami can be higher than the forecast. 首相官邸 津波; JMA 津波警報' },
   'drill-step-5': { sources: ['jma-aftershock-ja', 'tfd-quake-10-points', 'jma-kumagaya-edu'], status: 'changed', note: 'Fact (Task 5): an earthquake of the same size can come; JMA asks for caution for about 1 week (JMA 大地震後の地震活動). Action: "The doorway idea is out of date. Inside walls give no special protection" removed (no Japanese source on doorways or inside walls). Now: drop, cover and hold on, as in the first earthquake; go where nothing can fall, tip over or move (TFD 10のポイント 1; JMA Kumagaya Ver.5). Same rule as eqnow-2' },
   'drill-step-6': { sources: ['kantei-tsunami'], status: 'changed', note: 'Go back only when it is safe; do not go back while a warning is in effect (警報・注意報が解除され安全が確認されるまでは決して被災地域には立ち入らない, 首相官邸 津波). Removed: hidden building damage and "check NHK or city announcements" (no official quote)' },

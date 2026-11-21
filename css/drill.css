@@ -13,7 +13,7 @@
 
 /* Countdown */
 .drill-countdown {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 72px;
   color: var(--alert-red);
   text-align: center;
@@ -68,8 +68,8 @@
 
 /* Progress */
 .drill-progress {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   margin-bottom: 12px;
 }
@@ -132,8 +132,8 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   flex-shrink: 0;
 }
 
@@ -174,7 +174,7 @@
 }
 .drill-result-icon { font-size: 48px; margin-bottom: 12px; }
 .drill-result-score {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 24px;
   color: var(--accent);
   margin-bottom: 8px;

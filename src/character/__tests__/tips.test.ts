@@ -26,6 +26,16 @@ describe('tips', () => {
     }
   });
 
+  it('the power fact asks only for what the Cabinet Office checklist lists (spare batteries, a phone charger)', async () => {
+    const { CLAIMS } = await import('../../data/sources');
+    const tip = DISASTER_FACTS.concat(QUAKE_TIPS).find(t => t.claimId === 'tip-kobe-power')!;
+    expect(tip.en).toMatch(/^Keep spare batteries and a phone charger ready\. /);
+    expect(tip.ja).toMatch(/^予備（よび）の電池と、スマホの充電器を用意してください。/);
+    expect(tip.id).toMatch(/^Siapkan baterai cadangan dan pengisi daya ponsel\. /);
+    for (const t of [tip.en, tip.ja, tip.id]) expect(t).toMatch(/6/);
+    expect(CLAIMS['tip-kobe-power'].sources).toEqual(expect.arrayContaining(['cao-kyokun-1-9-2', 'cao-checklist-sonae']));
+  });
+
   it('strings stay under 110 characters (bubble fits one line)', () => {
     for (const [name, pool] of Object.entries(ALL_POOLS)) {
       pool.forEach((t, i) => {

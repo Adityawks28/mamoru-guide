@@ -25,9 +25,9 @@ const LOOK: Record<Load, Partial<SpriteOptions>> = {
 
 const REMARK: Record<Load, Tip | null> = {
   empty:  null,
-  light:  { en: 'Still light. You can add more important items.', ja: 'まだ軽いです。大事な物をもっと入れられます。', id: 'Masih ringan. Masih muat barang penting.' },
-  ok:     { en: 'It is still easy to walk with this bag. Good.', ja: 'まだ楽に歩けます。いいですね。', id: 'Masih nyaman dibawa berjalan. Bagus.' },
-  heavy:  { en: 'It is getting heavy.', ja: '重くなってきました。', id: 'Mulai berat.' },
+  light:  { en: 'The bag is still light. You can add more important items.', ja: 'まだ軽いです。大事な物をもっと入れられます。', id: 'Tasnya masih ringan. Kamu masih bisa menambah barang penting.' },
+  ok:     { en: 'It is still easy to walk with this bag. Good.', ja: 'まだ楽に歩けます。いいですね。', id: 'Tas ini masih nyaman dibawa berjalan. Bagus.' },
+  heavy:  { en: 'The bag is heavy now.', ja: '重くなってきました。', id: 'Sekarang tasnya sudah berat.' },
   strain: { en: 'Hah… hah… Too heavy. Take something out.', ja: 'はぁ…はぁ…重すぎます。何か出してください。', id: 'Hah… hah… Terlalu berat. Keluarkan sesuatu.' },
   reject: { en: 'Whoa! That puts the bag over 10 kg. It does not fit.', ja: 'うわっ！10kgを超えるので、入りません。', id: 'Waduh! Tas jadi lebih dari 10 kg. Tidak muat.' },
 };

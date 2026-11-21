@@ -1,14 +1,17 @@
-@media (max-width: 768px) {
+/* The full navbar is 1075px wide in en and id (layout-fit.test.ts); below that
+   the links, share and language buttons move into the hamburger menu. */
+@media (max-width: 1120px) {
   .nav-links { display: none; }
   .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .mobile-menu { display: flex; }
   #shareBtn, .lang-switcher { display: none; }
+}
 
+@media (max-width: 768px) {
   .navbar { padding: 0 12px; }
 
   .section { padding: 60px 1rem 40px; }
   .section-title { font-size: 1.3rem; }
-  .section-label { font-size: 0.6rem; }
 
   .split-panel { grid-template-columns: 1fr !important; }
   .alert-grid { grid-template-columns: 1fr; }
@@ -23,7 +26,7 @@
   .bag-stats { flex-direction: column; align-items: stretch; }
   .bag-weight-bar { min-width: 0; }
   .bag-items-grid { grid-template-columns: 1fr; }
-  .scale-row .desc { font-size: 11px; }
+  .scale-row .desc { font-size: 12px; }
   .scale-row .num { font-size: 16px; min-width: 40px; }
 
   .hero .hero-content { padding: 0 1rem; }
@@ -45,13 +48,13 @@
 
   .nav-right { gap: 0.25rem; }
   .lang-switcher { flex-wrap: wrap; }
-  .lang-btn { font-size: 0.58rem; padding: 4px 6px; }
+  .lang-btn { padding: 4px 6px; }
 
-  .section-label { font-size: 0.6rem; }
   .section-title { font-size: 1.1rem; }
 
   .tab-bar { display: grid; grid-template-columns: 1fr 1fr; }
-  .tab-btn { min-height: 44px; white-space: normal; line-height: 1.4; }
+  /* Two tab columns are too narrow for long pixel words ("Communication", "Pengungsian"). */
+  .tab-btn { min-height: 44px; white-space: normal; line-height: 1.4; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 13px; font-weight: 700; }
   .vocab-grid { grid-template-columns: 1fr; }
 
   .about-card { padding: 1rem; }

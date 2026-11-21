@@ -1,6 +1,7 @@
 import { bagItems, MAX_BAG_WEIGHT } from './data';
 import { showToast } from './toast';
 import { currentLang } from './lang';
+import { t } from './i18n';
 
 let packedItems = new Set<number>();
 
@@ -74,7 +75,8 @@ export function renderBagItems(): void {
           <span class="bag-meta-tag weight">⚖ ${formatWeight(item.weight)}</span>
           <span class="bag-meta-tag ${prClass}">${prLabel}</span>
         </div>
-      </div>`;
+      </div>
+      <span class="bag-item-packed" data-i18n="bag.packed">${t('bag.packed')}</span>`;
     d.onclick = () => toggleBagItem(i);
     d.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBagItem(i); }
@@ -92,7 +94,7 @@ function updatePackPanel(): void {
   if (!list) return;
 
   if (packedItems.size === 0) {
-    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty. Start packing.</span><span data-lang="ja">空です。物を入れてください。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>`;
+    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty. Add items.</span><span data-lang="ja">空です。物を入れてください。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>`;
     document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
     document.body.classList.add('lang-' + currentLang);
   } else {
@@ -166,17 +168,16 @@ export function checkBag(): void {
   const bestEl = document.getElementById('bagBestScore');
   if (bestEl) bestEl.textContent = best + ' / ' + maxScore;
 
-  let title: string, msg: string;
   const pctScore = score / maxScore;
-  if (pctScore >= 0.85) { title = '🏆 Expert Packer!'; msg = 'You chose the most important items. Your bag is ready for an emergency.'; }
-  else if (pctScore >= 0.65) { title = '👍 Well Prepared!'; msg = 'Good choices. Replace low priority items with the important items you missed.'; }
-  else if (pctScore >= 0.4) { title = '🤔 Needs Improvement'; msg = 'You have some basic items, but important items are missing. Pack water, food, and medical supplies first.'; }
-  else { title = '⚠ Not Ready'; msg = 'Your bag does not have the items you need to survive. Pack these first: water, food, first aid kit, medicines, and documents.'; }
-
+  const level = pctScore >= 0.85 ? 'expert' : pctScore >= 0.65 ? 'good' : pctScore >= 0.4 ? 'improve' : 'notReady';
   const titleEl = document.getElementById('bagResultTitle');
-  if (titleEl) titleEl.textContent = title;
   const msgEl = document.getElementById('bagResultMsg');
-  if (msgEl) msgEl.textContent = msg;
+  // data-i18n lets applyTranslations() rewrite the result when the language changes.
+  for (const [el, part] of [[titleEl, 'title'], [msgEl, 'msg']] as const) {
+    if (!el) continue;
+    el.dataset.i18n = `bag.result.${level}.${part}`;
+    el.textContent = t(el.dataset.i18n);
+  }
 }
 
 export function resetBag(): void {
