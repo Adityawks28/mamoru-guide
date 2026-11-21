@@ -133,4 +133,14 @@ describe('firstaid-scene', () => {
     expect(sprite().dataset.pose).toBe('kneel');
     expect(sprite().getAttribute('y')).toBe(y);
   });
+
+  it('reduced motion: the tip bubble does not change by itself', async () => {
+    mockMotion(true);
+    const { initFirstAidScene } = await import('../firstaid-scene');
+    initFirstAidScene();
+    const tip = () => document.querySelector('#firstaid-scene .tip-bubble [data-lang="en"]')!.textContent;
+    const before = tip();
+    vi.advanceTimersByTime(20000);
+    expect(tip()).toBe(before);
+  });
 });

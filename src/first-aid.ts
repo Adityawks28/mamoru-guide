@@ -112,7 +112,8 @@ export const categories: FirstAidCategory[] = [
 ];
 
 // Decision D-4: no medical professional has reviewed these steps, so every card says so.
-const REVIEW_NOTE = `
+// The drill shows the same note under its first-aid step.
+export const REVIEW_NOTE = `
   <p class="firstaid-review-note">
     <span data-lang="en">No medical professional checked these steps. The steps come from official guidance.</span>
     <span data-lang="ja">医師（いし）などの専門家（せんもんか）は、このステップをまだ確認していません。ステップは、公式の情報をもとにしています。</span>

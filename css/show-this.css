@@ -55,6 +55,7 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+  flex-wrap: wrap;
   margin-top: 8px;
 }
 
@@ -63,8 +64,8 @@
   color: var(--kitano-white);
   border: 2px solid var(--card-border);
   padding: 8px 16px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
@@ -80,15 +81,14 @@
 }
 
 .showthis-counter {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--accent);
   min-width: 60px;
 }
 
 /* Tab overrides for show-this */
 .showthis-tab {
-  font-size: 8px;
   padding: 6px 10px;
 }
 
@@ -113,10 +113,11 @@ body.day-mode .showthis-context {
   }
   .showthis-nav-btn {
     padding: 6px 10px;
-    font-size: 8px;
   }
   .showthis-tab {
-    font-size: 7px;
     padding: 5px 8px;
   }
 }
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .showthis-nav-btn { font-size: 14px; }

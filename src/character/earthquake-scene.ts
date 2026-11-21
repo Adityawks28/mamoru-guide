@@ -1,6 +1,7 @@
 import { createSprite, updateSprite, type Pose } from './sprite';
 import { QUAKE_TIPS } from './tips';
 import { motionAllowed, onMotionChange, playQuake, quakeMs } from './motion';
+import { t } from '../i18n';
 
 const STATE_LOCK_MS = 4000;
 const TIP_INTERVAL_MS = 4500;
@@ -167,8 +168,9 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   // Warning near window.
   const warningGroup = svgEl('g', { class: 'mr-warning' }, shakeGroup);
   svgEl('path', { d: 'M 28 70 Q 30 78 26 84', stroke: '#e84040', 'stroke-width': 1.5, fill: 'none', 'stroke-dasharray': '2 2' }, warningGroup);
-  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, 'font-family': "'Press Start 2P', monospace" }, warningGroup);
-  warningText.textContent = 'AVOID';
+  // A presentation attribute cannot read var(), so the font comes in through style.
+  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, style: 'font-family: var(--pixel-font)', 'data-i18n': 'scene.avoid' }, warningGroup);
+  warningText.textContent = t('scene.avoid');
   warningGroup.style.display = 'none';
 
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
@@ -178,6 +180,8 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
 // When you feel shaking, every level gets the same rule (FDMA white paper R5; TFD 10 points, point 1).
 const NOT_FELT = { en: '→ People do not feel it.', ja: '→ 人はゆれを感じません', id: '→ Orang tidak merasakannya.' };
 const PROTECT = { en: '→ Protect yourself. Get under a strong table. Wait until the shaking stops.', ja: '→ 身を守ってください。じょうぶな机の下に入ってください。ゆれがおさまるまで待ってください', id: '→ Lindungi dirimu. Masuk ke bawah meja yang kuat. Tunggu sampai guncangan berhenti.' };
+// After a tap on shindo 0 the bubble must not ask people to protect themselves. JMA (jma-shindo-table): 人は揺れを感じない.
+const NOT_FELT_TIP = { en: 'People do not feel this shaking.', ja: '人は、このゆれを感じません。', id: 'Orang tidak merasakan guncangan ini.' };
 const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
   NOT_FELT,
   PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT,
@@ -194,6 +198,8 @@ export function initEarthquakeScene(): void {
   let tipIdx = 0;
   let tipTimer: number | null = null;
   let stateLocked = false;
+  // True while the caption says shindo 0 is not felt: the bubble then says the same.
+  let notFelt = false;
   let actorX = STAND.x;
 
   host.classList.add('mamoru-room');
@@ -242,7 +248,7 @@ export function initEarthquakeScene(): void {
   host.appendChild(procedure);
 
   function showTip(i: number): void {
-    const t = QUAKE_TIPS[i % QUAKE_TIPS.length];
+    const t = notFelt ? NOT_FELT_TIP : QUAKE_TIPS[i % QUAKE_TIPS.length];
     en.textContent = t.en;
     ja.textContent = t.ja;
     id.textContent = t.id;
@@ -320,12 +326,14 @@ export function initEarthquakeScene(): void {
   // Each tap replays that level's quake from a calm room.
   function quake(i: number): void {
     intensity = i;
+    notFelt = i === 0;
     clearTimers();
     showProcedure(i);
-    showTip(Math.min(i, QUAKE_TIPS.length - 1));
     if (lockTimer !== null) window.clearTimeout(lockTimer);
     stateLocked = true;
     lockTimer = window.setTimeout(() => { stateLocked = false; }, STATE_LOCK_MS);
+    tipIdx = Math.min(i, QUAKE_TIPS.length - 1);
+    showTip(tipIdx);
     walkTo(TARGETS[i]);
     if (!allowed) { applyHazards(i); return; }
     applyHazards(0);

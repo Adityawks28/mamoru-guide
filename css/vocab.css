@@ -7,8 +7,8 @@
   color: var(--kitano-white);
   border: 2px solid var(--card-border);
   padding: 8px 14px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
@@ -33,8 +33,8 @@
   gap: 16px;
 }
 .flashcard-counter {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--portopia-blue);
   min-width: 64px;
   text-align: center;
@@ -122,8 +122,8 @@
 .yasashii-card.hard { border-top: 3px solid var(--alert-red); }
 .yasashii-card.easy { border-top: 3px solid var(--safe-green); }
 .yasashii-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 14px;
   margin-bottom: 8px;
 }
 .yasashii-card.hard .yasashii-label { color: var(--alert-red); }
@@ -135,7 +135,7 @@ body.day-mode .yasashii-card.easy .yasashii-label { color: #1f7a3d; }
 }
 ruby { ruby-position: over; }
 ruby rt {
-  font-size: 0.5em;
+  font-size: 12px;
   font-weight: 400;
   color: var(--portopia-blue);
 }
@@ -161,3 +161,6 @@ body.day-mode .tab-btn.active {
   border-color: var(--alert-red);
   color: #fff;
 }
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .tab-btn { font-size: 14px; }

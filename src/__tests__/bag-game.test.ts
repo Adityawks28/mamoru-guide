@@ -30,3 +30,27 @@ describe('formatWeight', () => {
     expect(formatWeight(2)).toBe('2.0 kg');
   });
 });
+
+describe('bag score', () => {
+  const RESULT = '<div id="bagResult"><div id="bagFinalScore"></div><div id="bagBestScore"></div><h3 id="bagResultTitle"></h3><p id="bagResultMsg"></p></div>';
+
+  it.each([
+    ['en', '⚠ Not Ready'],
+    ['ja', '⚠ まだ準備ができていません'],
+    ['id', '⚠ Belum Siap'],
+  ] as const)('shows the score title and message in %s, and they follow a language change', async (lang, title) => {
+    localStorage.clear();
+    document.body.innerHTML = RESULT;
+    const { setLang } = await import('../lang');
+    const { checkBag, resetBag } = await import('../bag-game');
+    const { t } = await import('../i18n');
+    resetBag();
+    setLang(lang);
+    checkBag();
+    expect(document.getElementById('bagResultTitle')!.textContent).toBe(title);
+    expect(document.getElementById('bagResultMsg')!.textContent).toBe(t('bag.result.notReady.msg', lang));
+    setLang(lang === 'en' ? 'ja' : 'en');
+    expect(document.getElementById('bagResultTitle')!.textContent).toBe(t('bag.result.notReady.title', lang === 'en' ? 'ja' : 'en'));
+    setLang('en');
+  });
+});
