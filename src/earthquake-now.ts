@@ -30,7 +30,7 @@ export const STEPS: NowStep[] = [
     id: 'BERLINDUNG di bawah meja yang kuat',
     detail_en: 'Protect your head and neck. If there is no table, go where nothing can fall, tip over or move.',
     detail_ja: '頭と首を守ってください。机がないときは、安全な場所へ行ってください。物が「落ちてこない」「倒れてこない」「移動してこない」場所です。',
-    detail_id: 'Lindungi kepala dan leher. Jika tidak ada meja, pergilah ke tempat tanpa benda yang bisa jatuh, roboh, atau bergeser.',
+    detail_id: 'Lindungi kepala dan lehermu. Jika tidak ada meja, pergilah ke tempat tanpa benda yang bisa jatuh, roboh, atau bergeser.',
   },
   {
     claimId: 'eqnow-3',

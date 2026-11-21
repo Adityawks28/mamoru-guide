@@ -1,6 +1,9 @@
 // i18n.test.ts
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { t, applyTranslations, setI18nLang } from '../i18n';
+import type { Language } from '../types';
 
 beforeEach(() => {
   // reset to English before each test
@@ -48,6 +51,37 @@ describe('t()', () => {
     expect(t('totally.missing', 'ja')).toBe('totally.missing');
   });
 
+  // --- Arcade labels ---
+
+  it('resolves the arcade labels in all 3 languages', () => {
+    expect(['hero.start', 'hero.makePlan', 'label.intensity'].map(k => [t(k, 'en'), t(k, 'ja'), t(k, 'id')])).toEqual([
+      ['▶ PRESS START', '▶ スタート', '▶ MULAI'],
+      ['⊞ MAKE PLAN', '⊞ 計画をつくる', '⊞ BUAT RENCANA'],
+      ['SEISMIC INTENSITY', '震度（しんど）', 'SKALA INTENSITAS SEISMIK'],
+    ]);
+  });
+
+  it('every eyebrow, arcade button and section label in index.html has a key in all 3 languages', () => {
+    const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const labels = [...doc.querySelectorAll<HTMLElement>('.hero-eyebrow, .arcade-btn, .section-label')];
+    expect(labels.length).toBeGreaterThanOrEqual(16);
+    const missing = labels.filter(el => {
+      const key = el.dataset.i18n;
+      return !key || ['en', 'ja', 'id'].some(l => t(key, l as Language) === key) || t(key, 'ja') === t(key, 'en');
+    }).map(el => el.textContent!.trim());
+    expect(missing).toEqual([]);
+  });
+
+  it('section labels carry no number, like the section chips (a number repeats across routes)', () => {
+    const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const numbered = [...doc.querySelectorAll<HTMLElement>('.section-label')].flatMap(el =>
+      (['en', 'ja', 'id'] as Language[]).map(l => t(el.dataset.i18n!, l)).concat(el.textContent!.trim()))
+      .filter(text => /^\d/.test(text));
+    expect(numbered).toEqual([]);
+  });
+
   // --- Mode selector keys ---
 
   it('resolves mode.emergency.title in all 3 languages', () => {
@@ -59,7 +93,7 @@ describe('t()', () => {
   it('resolves mode.prepare.desc in all 3 languages', () => {
     expect(t('mode.prepare.desc', 'en')).toBe('Make a plan. Find an evacuation site.');
     expect(t('mode.prepare.desc', 'ja')).toBe('計画を立てます。避難場所（ひなんばしょ）を探します。');
-    expect(t('mode.prepare.desc', 'id')).toBe('Buat rencana, cari tempat evakuasi');
+    expect(t('mode.prepare.desc', 'id')).toBe('Buat rencana. Cari tempat evakuasi.');
   });
 });
 
@@ -113,6 +147,14 @@ describe('applyTranslations()', () => {
     const root = buildDOM('<span data-i18n="nav.shelter">?</span>');
     applyTranslations(root);
     expect(root.querySelector('span')!.textContent).toBe('避難場所');
+  });
+
+  it('sets aria-label on [data-i18n-aria] elements', () => {
+    setI18nLang('id');
+    const root = buildDOM('<div role="button" data-i18n-aria="mascot.aria" aria-label="old">x</div>');
+    applyTranslations(root);
+    expect(root.querySelector('div')!.getAttribute('aria-label')).toBe(t('mascot.aria', 'id'));
+    expect(root.querySelector('div')!.textContent).toBe('x');
   });
 
   it('sets innerHTML on [data-i18n-html] elements', () => {

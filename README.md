@@ -38,6 +38,8 @@ npx tsc --noEmit
 
 Automatically deployed to GitHub Pages on every push to `main` via GitHub Actions.
 
+Change CACHE_NAME in public/sw.js on every release.
+
 **Setup:** Go to repo Settings → Pages → Source → select **GitHub Actions**.
 
 Live at: `https://<username>.github.io/mamoru-guide/`

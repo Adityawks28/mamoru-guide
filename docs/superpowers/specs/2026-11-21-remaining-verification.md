@@ -2,7 +2,7 @@
 
 - Date: 2026-11-21
 - Scope: the factual lines that the medical, history and safety verifications do not cover. These are the quiz (`src/quiz.ts`), the shindo scale, the bag items (`src/data.ts`), drill step 3 (`src/drill.ts`), the earthquake and bag scene captions (`src/character/`), the Show This card (`src/show-this.ts`), the contacts (`src/contacts.ts`), the locale fact keys (`src/locales/*.ts`) and the remaining page text in `index.html`. The check has 98 rows (R1 to R98) and 1 extra row (X1).
-- Evidence: two independent AI research passes on 2026-11-21. The first pass compared each line with official sources and quoted them. The second pass (the audit) loaded the sources again, checked the quotes and corrected some rows. When the two passes disagreed, the audit decided. The owner checked one page in a browser (R73).
+- Evidence: two independent AI research passes on 2026-11-21. The first pass compared each line with official sources and quoted them. The second pass (the audit) loaded the sources again, checked the quotes and corrected some rows. When the two passes disagreed, the audit decided. The owner checked one page in a browser (R73). The controller checked two more pages in a real browser on 2026-11-21 (R70, R76).
 - Source rule: Lines that no official source certifies are removed. A line stays only when an official page, or the service's own page for its own service, says the same thing.
 - Line numbers are for this commit (after the change). A removed line shows the line where it was.
 
@@ -11,15 +11,19 @@
 - Verdict: `match` = the source says the same thing. `partial` = the source says part of it, or says it with a smaller scope. `wrong` = the source says something different. `not found` = no checked official source says it.
 - Final English: the new English text, or "removed". Japanese and Indonesian have the same meaning.
 - Source IDs are the keys in `SOURCES` (`src/data/sources.ts`). The Sources section at the end gives the publisher, title and URL of each.
-- Claims: only `drill-step-3` is in `CLAIMS`. It stays `needs-medical-review`; this change adds `shishin-2020-citizen` to its sources. The quiz, the scale, the bag items, the captions and the contacts have no claim IDs; this table is their record.
+- Claims: only `drill-step-3` is in `CLAIMS`. This change adds `shishin-2020-citizen` to its sources. The fix wave after the final review sets it to `changed` (Ruling R17: the status records source agreement, not medical sign-off; see R55). The quiz, the scale, the bag items, the captions and the contacts have no claim IDs; this table is their record.
 
 ## Results
 
 | Outcome | Rows |
 |---|---|
-| Kept, no text change | 38 (R1, R3, R4, R5, R6, R8, R11, R13, R17, R27, R28, R29, R35, R42, R51, R52, R53, R55, R60, R61, R64, R67, R69, R70, R72, R73, R75, R76, R78, R79, R80, R85, R88, R91, R92, R93, R95, R98) |
+| Kept, no text change | 37 (R1, R3, R4, R5, R6, R8, R11, R13, R17, R27, R28, R29, R35, R42, R51, R52, R53, R60, R61, R64, R67, R69, R70, R72, R73, R75, R76, R78, R79, R80, R85, R88, R91, R92, R93, R95, R98) |
 | Cut to a sourced text | 54 (53 rows and X1) |
 | Removed (whole line, option or detail) | 7 (R38, R39, R43, R47, R48, R54, R82) |
+
+R55 (the `drill-step-3` status) changed in the fix wave after the final review. The step text is the same; the drill now shows the review note under it.
+
+高潮 (storm surge) in Indonesian: the JMA multilingual dictionary (jma-multilingual, xlsx updated 2026-11-12, row No. 92) gives "Gelombang pasang". The app keeps this term (src/shelter-finder.ts:68, index.html:783), and the glossary now has the row.
 
 R51 needed no change: an earlier commit already gave the code comment the Osaka wording. R60 is kept, and its text now also replaces R57 to R59.
 
@@ -92,6 +96,7 @@ Sources: osaka-pref-bag (大阪府 非常持ち出し品リスト例 and 備蓄�
 | ID | File:line | Claim (old English) | Source | Source says (JA quote / EN gist) | Verdict | Final English |
 |---|---|---|---|---|---|---|
 | R54 | drill.ts:58 (was 59) | Wrong option: "Pour water on the wound to clean it" | shishin-2020-citizen VI-9 | 「可能であれば、すみやかに傷口を水道水など清潔な流水で十分に洗ってください。」 / For cuts and scrapes, washing is the official advice, so this is not a clearly wrong option. | wrong | removed (3 options stay; `correct` stays 0; no new option) |
+| R55 | drill.ts:53 claim status | `drill-step-3` was `needs-medical-review`, with no note on screen | shishin-2020-citizen VI-1, VI-9, VI-10 (R52 to R54) | R52 and R53 match; R54 removed one option. Ruling R17: the status records source agreement. | match | `changed`. The drill now shows the first-aid review note under this step: "No medical professional checked these steps. The steps come from official guidance." (fix wave after the final review) |
 
 ### Earthquake scene captions (`src/character/earthquake-scene.ts:179-184`)
 
@@ -105,6 +110,8 @@ No source ties an action to each shindo level. The caption list keeps 10 entries
 | R59 | earthquake-scene.ts:180 (index 4) | "→ steady yourself · open the door" during shaking | tfd-quake-10-points point 4 | 「揺れがおさまった時に、避難ができるよう出口を確保する。」 / Open the door after the shaking stops. | wrong | → protect yourself · get under a strong table · wait until the shaking stops |
 
 R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブルなどの下にもぐり…」「頭を座布団などで保護し、揺れが収まるのを待つ。」
+
+Fix wave after the final review: after a tap on shindo 0, the tip bubble showed QUAKE_TIPS[0] ("Get under a strong table quickly") next to the R56 caption. Now the bubble says the R56 meaning until another level is tapped: "People do not feel this shaking." (jma-shindo-table, 「人は揺れを感じない」).
 
 ### Show This card (`src/show-this.ts`)
 
@@ -120,9 +127,11 @@ R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブ
 | R65 | contacts.ts:21 | 119: "Fire, medical emergencies, rescue" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / "rescue" is not on the checked pages. | partial | Fire and ambulance |
 | R66 | contacts.ts:22 | 110: "Crime, accidents, lost property" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / About 33万件 non-urgent calls are a problem. Lost property is not an emergency. | wrong | Crimes and accidents that need the police now |
 | R68 | contacts.ts:26 | AMDA: "Medical advice for foreigners in many languages" | amda-activities; amda-indonesia | "We help you to find medical institutions … provide information on healthcare and welfare systems"; "10:00～16:00" / Not medical advice. | partial | Help to find a hospital, and information on the health and welfare systems, in many languages. 10:00 to 16:00 |
+| R70 | contacts.ts:30 | The World Helpline, 050-6879-9956: "Help with any question, from small questions to emergencies. Open 24 hours, every day" | jhelp-home | Checked in a real browser on 2026-11-21: "Call 24 hours a day, from anywhere about anything, anytime from a simple question to emergency assistance." "… call 050-6879-9956 …" "24 Hours / 7 Days a Week". | match | kept (no text change) |
 | R71 | contacts.ts:31 | Immigration Info: "Questions about visas, residence status, and the zairyu card" | isa-info-center | 「出入国手続、在留手続等に関する一般的なご案内」; 「午前8:30~午後5:15(土日・祝日・年末年始(12/29~1/3)を除く)」. The number 0570-013904 is confirmed (ナビダイヤル). | partial | General questions about entry and residence procedures. Weekdays 8:30 to 17:15 |
 | R73 | contacts.ts:35 | Indonesian Embassy Tokyo, 03-3441-4201 | mofa-emblist-asia | The MOFA page blocks automated access, so the owner opened it in a browser on 2026-11-21. It lists the Embassy of the Republic of Indonesia: 「東京都品川区東五反田5-2-9」(移転 2023-12-01)「電話：03-3441-4201」. | match | kept (no text change) |
 | R74 | contacts.ts:36 | Indonesian Consulate Osaka, 06-6449-9898: "Serves the Kansai region (Kobe, Osaka, Kyoto)" | osaka-pref-consulates; hyogo-pref-consulates | 「在大阪インドネシア共和国総領事館」「06-6449-9898」 on both prefecture lists. Neither list gives the consulate's area. | partial | Number kept. Consular help for Indonesian citizens (area text removed) |
+| R76 | contacts.ts:40 | Yorisoi Hotline, 0120-279-338: "Free help in many languages. Press 2 for foreign languages, every day from 10:00 to 22:00" | yorisoi-n2 | Checked in a real browser on 2026-11-21: "For consultation in foreign languages, please press 2 after the guidance." "The consultation hours for the Foreign Language Line are available from 10:00 a.m. to 10:00 p.m. everyday." 「全国ライン 0120-279-338」. | match | kept (no text change) |
 
 ### Locales and page text (`src/locales/*.ts`, `index.html`)
 
@@ -145,12 +154,11 @@ R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブ
 
 - R92, index.html:796, Yahoo! 防災速報 "Live alerts for your location": kept. The service's own page (yahoo-bousai) says 「さまざまな防災情報を迅速にプッシュ通知」 and 「現在地と国内3地点まで 設定可能」. It is the primary source for its own service.
 - R73, the Tokyo embassy card: kept after the owner's browser check (see the Contacts table).
+- R70 (The World Helpline) and R76 (Yorisoi Hotline): verified in a real browser on 2026-11-21 and kept (see the Contacts table).
 - Q1 option "Stand in a doorway": kept as a wrong option, as the safety verification decided. It states no fact.
 
 ## Open points
 
-- R76: Yorisoi changed its phone guidance on 2026-04-01. The English and Indonesian pages still say "press 2". A test call or a browser check is advised.
-- R70: The World Helpline's site news stops in 2020. A test call is advised.
 - R71: 0570-013904 is a ナビダイヤル (charged call). The card does not say this.
 - Bag item names with no list entry stay as game choices: "Printed hazard map", "Strong shoes", "Emergency contacts (paper)", "Laminated phrase card". The owner decides if they stay.
 
@@ -182,5 +190,7 @@ New in `SOURCES` with this change:
 | npa-quake-driver | 警察庁 | 大地震が発生したときに運転者がとるべき措置 | https://www.npa.go.jp/bureau/traffic/seibi2/saigaiji/daizisinnunntennsya.html | 2026-11-21 |
 | kankocho-safety-tips | 観光庁 | 訪日外国人旅行者の安全確保: ツール (Safety tips) | https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html | 2026-11-21 |
 | yahoo-bousai | LINEヤフー | Yahoo!防災速報 | https://emg.yahoo.co.jp/ | 2026-11-21 |
+| jhelp-home | The World Helpline | TheWorldHelpline.org | https://jhelp.com/ | 2026-11-21 (in a real browser) |
+| yorisoi-n2 | 一般社団法人 社会的包摂サポートセンター | よりそいホットライン 外国語による相談 | https://www.since2011.net/yorisoi/n2/ | 2026-11-21 (in a real browser) |
 
 cao-ichinitimae-battery stays in `SOURCES`: no app line uses it, but the safety verification cites it as evidence for B18 and B30.

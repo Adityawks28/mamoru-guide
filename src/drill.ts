@@ -1,5 +1,7 @@
 import { showToast } from './toast';
 import { currentLang } from './lang';
+import { motionAllowed } from './character/motion';
+import { REVIEW_NOTE } from './first-aid';
 
 interface DrillScenario {
   situation_en: string;
@@ -11,6 +13,8 @@ interface DrillScenario {
   explain_ja: string;
   explain_id: string;
   shake?: boolean;
+  /** First-aid content: show the medical review note (Decision D-4). */
+  firstAid?: boolean;
   claimId: string;
 }
 
@@ -19,7 +23,7 @@ export const scenarios: DrillScenario[] = [
     claimId: 'drill-step-1',
     situation_en: 'Strong shaking! You are at your desk in a classroom on the 4th floor. What do you do?',
     situation_ja: '強いゆれです！あなたは4階の教室で、机の所にいます。どうしますか？',
-    situation_id: 'Guncangan kuat! Anda di meja di kelas lantai 4. Apa yang Anda lakukan?',
+    situation_id: 'Guncangan kuat! Kamu sedang duduk di mejamu, di kelas lantai 4. Apa yang kamu lakukan?',
     options: [
       { en: 'Run to the exit immediately', ja: 'すぐに出口へ走る', id: 'Segera lari ke pintu keluar' },
       { en: 'Drop, Cover, Hold On under the desk', ja: '机の下で身を低くし、頭を守り、動かない（DROP・COVER・HOLD ON）', id: 'Merunduk, berlindung, bertahan di bawah meja' },
@@ -27,47 +31,48 @@ export const scenarios: DrillScenario[] = [
       { en: 'Call a friend to ask what to do', ja: '友達に電話して、どうすればいいか聞く', id: 'Telepon teman untuk bertanya apa yang harus dilakukan' },
     ],
     correct: 1,
-    explain_en: 'DROP to the ground. Take COVER under strong furniture. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
-    explain_ja: '床に体を低くしてください（DROP）。じょうぶな家具の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
-    explain_id: 'MERUNDUK ke lantai, BERLINDUNG di bawah perabot yang kuat, dan BERTAHAN. Berlari saat guncangan itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
+    explain_en: 'DROP to the ground. Take COVER under a strong table. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
+    explain_ja: '床に体を低くしてください（DROP）。じょうぶな机の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
+    explain_id: 'MERUNDUK ke lantai. BERLINDUNG di bawah meja yang kuat. BERTAHAN. Jangan berlari saat guncangan. Itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
     shake: true,
   },
   {
     claimId: 'drill-step-2',
     situation_en: 'The shaking stopped. The building looks OK, but you smell something strange. What do you do next?',
     situation_ja: 'ゆれが止まりました。建物はこわれていないようですが、変なにおいがします。次に何をしますか？',
-    situation_id: 'Guncangan sudah berhenti. Bangunan tampak utuh, tetapi Anda mencium bau aneh. Apa yang Anda lakukan berikutnya?',
+    situation_id: 'Guncangan sudah berhenti. Bangunan tampak utuh, tetapi kamu mencium bau aneh. Apa yang kamu lakukan berikutnya?',
     options: [
       { en: 'Turn on the lights to check the room', ja: '電気をつけて、部屋を確かめる', id: 'Nyalakan lampu untuk memeriksa ruangan' },
-      { en: 'Open the windows. Leave carefully. The smell can come from gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela dan keluar dengan hati-hati. Mungkin itu gas.' },
-      { en: 'Take the elevator to get out fast', ja: 'エレベーターで早く外に出る', id: 'Naik elevator agar cepat keluar' },
+      { en: 'Open the windows. Leave carefully. The smell can come from gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela. Keluar dengan hati-hati. Bau itu bisa berasal dari gas.' },
+      { en: 'Take the elevator to get out fast', ja: 'エレベーターで早く外に出る', id: 'Naik lift agar cepat keluar' },
       { en: 'Light a candle to see better', ja: 'ろうそくをつけて、よく見る', id: 'Nyalakan lilin agar lebih jelas' },
     ],
     correct: 1,
     explain_en: 'Open the windows. Do not use fire or electric switches. Close the gas valve. Use the stairs: an elevator can stop and trap you. Call the gas company.',
     explain_ja: '窓を開けてください。火や、電気のスイッチを使わないでください。ガスの元栓（もとせん）を閉めてください。階段を使ってください。エレベーターは止まって、中に閉じこめられることがあります。ガス会社に連絡してください。',
-    explain_id: 'Buka jendela. Jangan pakai api atau saklar listrik. Tutup katup gas. Pakai tangga: elevator bisa berhenti dan kamu bisa terjebak di dalamnya. Hubungi perusahaan gas.',
+    explain_id: 'Buka jendela. Jangan pakai api atau sakelar listrik. Tutup katup gas. Pakai tangga: lift bisa berhenti dan kamu bisa terjebak di dalamnya. Hubungi perusahaan gas.',
   },
   {
     claimId: 'drill-step-3',
     situation_en: 'You are outside now. A person near you has a head wound that bleeds. What do you do?',
     situation_ja: '外に出ました。近くに、頭から血が出ている人がいます。どうしますか？',
-    situation_id: 'Anda sudah di luar. Orang di dekat Anda berdarah dari luka di kepala. Apa yang Anda lakukan?',
+    situation_id: 'Kamu sudah di luar. Orang di dekatmu berdarah dari luka di kepala. Apa yang kamu lakukan?',
     options: [
-      { en: 'Press a clean cloth directly on the wound. Call 119.', ja: 'きれいな布で傷口（きずぐち）を直接押さえて、119番に電話する', id: 'Tekan luka langsung dengan kain bersih dan hubungi 119' },
+      { en: 'Press a clean cloth directly on the wound. Call 119.', ja: 'きれいな布で傷口（きずぐち）を直接押さえて、119番に電話する', id: 'Tekan luka langsung dengan kain bersih. Hubungi 119.' },
       { en: 'Move the person to a different place first', ja: 'まず別の場所に動かす', id: 'Pindahkan orang itu ke tempat lain dulu' },
-      { en: 'Leave the person. Professionals will come.', ja: '何もしない。救急隊（きゅうきゅうたい）が来るから', id: 'Tinggalkan saja. Petugas akan datang.' },
+      { en: 'Leave the person. Professionals will come.', ja: '何もしない。救急隊（きゅうきゅうたい）が来るから', id: 'Tinggalkan orang itu. Petugas akan datang.' },
     ],
     correct: 0,
     explain_en: 'Press firmly and directly on the wound with the cleanest cloth you have. Call 119 for help. Do not move an injured person unless they are in immediate danger.',
     explain_ja: 'いちばんきれいな布で、傷口（きずぐち）を強く直接押さえてください。119番に電話してください。けがをした人は、動かさないでください。動かすのは、その場所がすぐに危険なときだけです。',
-    explain_id: 'Tekan luka dengan kuat menggunakan kain paling bersih yang ada. Hubungi 119. Jangan pindahkan orang yang terluka, kecuali ia dalam bahaya langsung.',
+    explain_id: 'Tekan luka dengan kuat menggunakan kain paling bersih yang ada. Hubungi 119 untuk minta bantuan. Jangan pindahkan orang yang terluka, kecuali dia dalam bahaya langsung.',
+    firstAid: true,
   },
   {
     claimId: 'drill-step-4',
     situation_en: 'Your phone buzzes with a tsunami warning. You are 500 m from the coast. What do you do?',
     situation_ja: 'スマホに津波警報（つなみけいほう）が出ました。海から500mの所にいます。どうしますか？',
-    situation_id: 'Ponsel Anda berbunyi: peringatan tsunami. Anda 500 m dari pantai. Apa yang Anda lakukan?',
+    situation_id: 'Ponselmu berbunyi: peringatan bahaya tsunami. Kamu berada 500 m dari pantai. Apa yang kamu lakukan?',
     options: [
       { en: 'Go to the beach to look for a wave', ja: '波が来るか、海を見に行く', id: 'Pergi ke pantai untuk melihat apakah ombak datang' },
       { en: 'Wait for more details before you decide', ja: 'もっと情報が出るまで待ってから決める', id: 'Tunggu informasi lebih lanjut sebelum memutuskan' },
@@ -83,7 +88,7 @@ export const scenarios: DrillScenario[] = [
     claimId: 'drill-step-5',
     situation_en: 'You are at the evacuation shelter. An aftershock starts. The ground shakes again.',
     situation_ja: '避難所（ひなんじょ）にいます。余震（よしん：あとから来る地震）が来ました。また地面がゆれ始めました。',
-    situation_id: 'Anda di tempat pengungsian. Terjadi gempa susulan. Tanah berguncang lagi.',
+    situation_id: 'Kamu ada di tempat pengungsian. Gempa susulan mulai. Tanah berguncang lagi.',
     options: [
       { en: 'Panic and run out of the building', ja: 'あわてて建物の外へ走る', id: 'Panik dan lari keluar gedung' },
       { en: 'Drop, Cover, Hold On, the same as in the first earthquake', ja: '身を低くし、頭を守る。最初の地震と同じ', id: 'Merunduk, berlindung, bertahan, sama seperti gempa pertama' },
@@ -100,9 +105,9 @@ export const scenarios: DrillScenario[] = [
     claimId: 'drill-step-6',
     situation_en: 'The disaster is over. When do you go back to your apartment?',
     situation_ja: '災害が終わりました。いつアパートに戻りますか？',
-    situation_id: 'Bencana sudah berakhir. Kapan Anda kembali ke apartemen?',
+    situation_id: 'Bencana sudah berakhir. Kapan kamu kembali ke apartemenmu?',
     options: [
-      { en: 'Go back immediately to check your things', ja: 'すぐに戻って、荷物を確かめる', id: 'Segera kembali untuk memeriksa barang-barang' },
+      { en: 'Go back immediately to check your things', ja: 'すぐに戻って、荷物を確かめる', id: 'Segera kembali untuk memeriksa barang-barangmu' },
       { en: 'Wait until the authorities say it is safe to go back', ja: '市や国が「安全です」と発表（はっぴょう）するまで待つ', id: 'Tunggu sampai pihak berwenang mengumumkan aman untuk kembali' },
       { en: 'Go back when the shaking stops completely', ja: 'ゆれが完全に止まったら戻る', id: 'Kembali saat guncangan benar-benar berhenti' },
       { en: 'Wait 1 hour, then go back', ja: '1時間待ってから戻る', id: 'Tunggu 1 jam, lalu kembali' },
@@ -131,6 +136,7 @@ function reapplyLang(): void {
 }
 
 function triggerShake(container: HTMLElement): void {
+  if (!motionAllowed()) return;
   container.classList.add('shaking');
   if (navigator.vibrate) {
     navigator.vibrate([100, 50, 100, 50, 200]);
@@ -259,6 +265,7 @@ function handleDrillAnswer(idx: number): void {
         <span data-lang="ja">${s.explain_ja}</span>
         <span data-lang="id">${s.explain_id}</span>
       </div>
+      ${s.firstAid ? REVIEW_NOTE : ''}
       <button class="drill-next-btn" id="drillNextBtn">
         ${currentScenario < scenarios.length - 1
           ? getLangText('Next Scenario →', '次のシナリオ →', 'Skenario Berikutnya →')
@@ -285,7 +292,7 @@ function showDrillResults(): void {
   const pct = drillScore / scenarios.length;
   let title: string, msg: string;
   if (pct >= 0.9) { title = '🏆'; msg = getLangText('Survival Expert!', 'サバイバルエキスパート！', 'Ahli Bertahan Hidup!'); }
-  else if (pct >= 0.7) { title = '🛡️'; msg = getLangText('Well Prepared!', 'よく準備できています！', 'Persiapan Baik!'); }
+  else if (pct >= 0.7) { title = '🛡️'; msg = getLangText('Well Prepared!', 'よく準備できています！', 'Persiapanmu Bagus!'); }
   else if (pct >= 0.5) { title = '📖'; msg = getLangText('Read the guide sections again', 'ガイドをもう一度読んでください', 'Baca lagi bagian panduan'); }
   else { title = '🔄'; msg = getLangText('Practice more. Try again.', 'もっと練習しましょう。もう一度やってみてください。', 'Latihan lagi. Coba sekali lagi.'); }
 
