@@ -6,8 +6,7 @@ interface ChipDef {
 }
 
 export const ROUTE_CHIPS: Record<string, ChipDef[]> = {
-  // Same order as the sections in index.html, which is also the order their
-  // 01/02/03 labels read on screen.
+  // Same order as the sections in index.html.
   prepare: [
     { section: 'earthquake', i18n: 'chip.earthquake' },
     { section: 'vocab',      i18n: 'chip.vocab' },

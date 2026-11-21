@@ -57,7 +57,7 @@ describe('t()', () => {
     expect(['hero.start', 'hero.makePlan', 'label.intensity'].map(k => [t(k, 'en'), t(k, 'ja'), t(k, 'id')])).toEqual([
       ['▶ PRESS START', '▶ スタート', '▶ MULAI'],
       ['⊞ MAKE PLAN', '⊞ 計画をつくる', '⊞ BUAT RENCANA'],
-      ['01 · SEISMIC INTENSITY', '01・震度（しんど）', '01 · SKALA INTENSITAS SEISMIK'],
+      ['SEISMIC INTENSITY', '震度（しんど）', 'SKALA INTENSITAS SEISMIK'],
     ]);
   });
 
@@ -71,6 +71,15 @@ describe('t()', () => {
       return !key || ['en', 'ja', 'id'].some(l => t(key, l as Language) === key) || t(key, 'ja') === t(key, 'en');
     }).map(el => el.textContent!.trim());
     expect(missing).toEqual([]);
+  });
+
+  it('section labels carry no number, like the section chips (a number repeats across routes)', () => {
+    const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const numbered = [...doc.querySelectorAll<HTMLElement>('.section-label')].flatMap(el =>
+      (['en', 'ja', 'id'] as Language[]).map(l => t(el.dataset.i18n!, l)).concat(el.textContent!.trim()))
+      .filter(text => /^\d/.test(text));
+    expect(numbered).toEqual([]);
   });
 
   // --- Mode selector keys ---
