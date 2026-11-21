@@ -5,7 +5,7 @@ export const en: Record<string, string> = {
   'nav.emergency': '🚨 Emergency',
   'nav.prepare':   'Prepare',
   'nav.learn':     'Learn',
-  'nav.shelter':   'Evacuation Shelter',
+  'nav.shelter':   'Evacuation Site',
   'nav.plan':      'My Plan',
 
   // Hero
@@ -15,7 +15,7 @@ export const en: Record<string, string> = {
   'mode.emergency.title':   'Emergency',
   'mode.emergency.desc':    'I need help right now',
   'mode.prepare.title':     'Prepare',
-  'mode.prepare.desc':      'Make a plan. Find an evacuation shelter.',
+  'mode.prepare.desc':      'Make a plan. Find an evacuation site.',
   'mode.learn.title':       'Learn',
   'mode.learn.desc':        'Drills, words, quizzes',
 
@@ -27,7 +27,7 @@ export const en: Record<string, string> = {
   'em.call.desc':   'Fire / Ambulance',
   'em.show.title':  'Show This Card',
   'em.show.desc':   'Japanese phrases for helpers',
-  'em.shelter.title': 'Find an Evacuation Shelter',
+  'em.shelter.title': 'Find an Evacuation Site',
   'em.shelter.desc':  'Nearest evacuation site',
   'em.alerts.title':  'Alert Info',
   'em.alerts.desc':   'What the warnings mean',
@@ -115,7 +115,7 @@ export const en: Record<string, string> = {
 
   // FAB labels
   'fab.firstaid': 'First Aid Guide',
-  'fab.shelter':  'Find an Evacuation Shelter',
+  'fab.shelter':  'Find an Evacuation Site',
   'fab.showthis': 'Show This Card',
 
   // Common

@@ -57,9 +57,9 @@ describe('t()', () => {
   });
 
   it('resolves mode.prepare.desc in all 3 languages', () => {
-    expect(t('mode.prepare.desc', 'en')).toBe('Make a plan. Find an evacuation shelter.');
-    expect(t('mode.prepare.desc', 'ja')).toBe('計画を立て、避難所を探す');
-    expect(t('mode.prepare.desc', 'id')).toBe('Buat rencana, cari tempat berlindung');
+    expect(t('mode.prepare.desc', 'en')).toBe('Make a plan. Find an evacuation site.');
+    expect(t('mode.prepare.desc', 'ja')).toBe('計画を立てます。避難場所（ひなんばしょ）を探します。');
+    expect(t('mode.prepare.desc', 'id')).toBe('Buat rencana, cari tempat evakuasi');
   });
 });
 
@@ -112,7 +112,7 @@ describe('applyTranslations()', () => {
     setI18nLang('ja');
     const root = buildDOM('<span data-i18n="nav.shelter">?</span>');
     applyTranslations(root);
-    expect(root.querySelector('span')!.textContent).toBe('避難所');
+    expect(root.querySelector('span')!.textContent).toBe('避難場所');
   });
 
   it('sets innerHTML on [data-i18n-html] elements', () => {

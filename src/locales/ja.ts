@@ -5,7 +5,7 @@ export const ja: Record<string, string> = {
   'nav.emergency': '🚨 緊急',
   'nav.prepare':   '準備',
   'nav.learn':     '学ぶ',
-  'nav.shelter':   '避難所',
+  'nav.shelter':   '避難場所',
   'nav.plan':      'マイプラン',
 
   // Hero
@@ -15,7 +15,7 @@ export const ja: Record<string, string> = {
   'mode.emergency.title':   '緊急',
   'mode.emergency.desc':    '今すぐ助けが必要です',
   'mode.prepare.title':     '準備する',
-  'mode.prepare.desc':      '計画を立て、避難所を探す',
+  'mode.prepare.desc':      '計画を立てます。避難場所（ひなんばしょ）を探します。',
   'mode.learn.title':       '学ぶ',
   'mode.learn.desc':        '訓練・ことば・クイズ',
 
@@ -27,7 +27,7 @@ export const ja: Record<string, string> = {
   'em.call.desc':   '消防・救急',
   'em.show.title':  'カードを見せる',
   'em.show.desc':   '助けてくれる人に見せる日本語',
-  'em.shelter.title': '避難所を探す',
+  'em.shelter.title': '避難場所を探す',
   'em.shelter.desc':  'いちばん近い避難場所',
   'em.alerts.title':  '警報情報',
   'em.alerts.desc':   '警報の意味',
@@ -115,7 +115,7 @@ export const ja: Record<string, string> = {
 
   // FAB labels
   'fab.firstaid': '応急手当',
-  'fab.shelter':  '避難所を探す',
+  'fab.shelter':  '避難場所を探す',
   'fab.showthis': '見せるカード',
 
   // Common

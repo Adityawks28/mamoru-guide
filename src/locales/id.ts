@@ -5,7 +5,7 @@ export const id: Record<string, string> = {
   'nav.emergency': '🚨 Darurat',
   'nav.prepare':   'Bersiap',
   'nav.learn':     'Belajar',
-  'nav.shelter':   'Pengungsian',
+  'nav.shelter':   'Tempat Evakuasi',
   'nav.plan':      'Rencana',
 
   // Hero
@@ -15,7 +15,7 @@ export const id: Record<string, string> = {
   'mode.emergency.title':   'Darurat',
   'mode.emergency.desc':    'Saya butuh bantuan sekarang',
   'mode.prepare.title':     'Bersiap',
-  'mode.prepare.desc':      'Buat rencana, cari tempat berlindung',
+  'mode.prepare.desc':      'Buat rencana, cari tempat evakuasi',
   'mode.learn.title':       'Belajar',
   'mode.learn.desc':        'Latihan, kosakata, kuis',
 
@@ -27,7 +27,7 @@ export const id: Record<string, string> = {
   'em.call.desc':   'Pemadam / Ambulans',
   'em.show.title':  'Tunjukkan Kartu',
   'em.show.desc':   'Frasa Jepang untuk penolong',
-  'em.shelter.title': 'Cari Tempat Berlindung',
+  'em.shelter.title': 'Cari Tempat Evakuasi',
   'em.shelter.desc':  'Titik evakuasi terdekat',
   'em.alerts.title':  'Info Peringatan',
   'em.alerts.desc':   'Arti peringatan',
@@ -115,7 +115,7 @@ export const id: Record<string, string> = {
 
   // FAB labels
   'fab.firstaid': 'Pertolongan Pertama',
-  'fab.shelter':  'Cari Tempat Berlindung',
+  'fab.shelter':  'Cari Tempat Evakuasi',
   'fab.showthis': 'Tunjukkan Kartu Ini',
 
   // Common
