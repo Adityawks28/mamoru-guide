@@ -19,9 +19,9 @@ const ACTIONS: Action[] = [
     { sprite: { arms: [0, -120] }, props: ['tapeA', 'tapeB'] },
     { sprite: { arms: [0, -120], face: 'happy' }, props: ['tapeA', 'tapeB'] },
   ] },
-  // Typhoon: walk to the shelter early. Feet step in turn ('walk' lifts the
-  // left, 'run' the right) and the opposite arm swings out a little.
-  { frameMs: 250, props: ['wind'], frames: [{ sprite: { pose: 'walk', arms: [0, -8] } }, { sprite: { pose: 'run', arms: [8, 0] } }] },
+  // Typhoon: walk to the shelter early, before the wind gets strong. Feet step
+  // in turn ('walk' lifts the left, 'run' the right) and the opposite arm swings out a little.
+  { frameMs: 250, props: [], frames: [{ sprite: { pose: 'walk', arms: [0, -8] } }, { sprite: { pose: 'run', arms: [8, 0] } }] },
   // Very strong: the power is out, the torch is ready.
   { frameMs: 300, props: ['dark', 'beam'], frames: [{ sprite: { arms: [0, -40], hold: 'torch' } }] },
   // Violent: stay inside, away from the storm.

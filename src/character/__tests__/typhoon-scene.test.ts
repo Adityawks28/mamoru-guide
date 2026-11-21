@@ -50,7 +50,7 @@ describe('typhoon-scene', () => {
     expect(sprite().querySelector('[data-prop="phone"]')).not.toBeNull();
   });
 
-  it('severe storm: tapes an X on the window, one strip at a time', async () => {
+  it('severe storm: tapes the window, one strip at a time', async () => {
     const { initTyphoonScene } = await import('../typhoon-scene');
     initTyphoonScene();
     level(1);
@@ -63,11 +63,11 @@ describe('typhoon-scene', () => {
     expect([...strips].sort()).toEqual([0, 1, 2]);
   });
 
-  it('typhoon: walks to the shelter leaning into the wind', async () => {
+  it('typhoon: walks to the shelter before the wind gets strong', async () => {
     const { initTyphoonScene } = await import('../typhoon-scene');
     initTyphoonScene();
     level(2);
-    expect(prop('wind')).not.toBeNull();
+    expect(prop('wind')).toBeNull();
     const poses = new Set<string>();
     for (let t = 0; t < 2000; t += 50) { vi.advanceTimersByTime(50); poses.add(sprite().dataset.pose!); }
     expect([...poses].sort()).toEqual(['run', 'walk']);

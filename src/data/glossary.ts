@@ -18,7 +18,8 @@ export const GLOSSARY: ReadonlyArray<GlossaryTerm> = [
   // id: JMA dictionary sentences and the ISA Indonesian guidebook (isa-guidebook-id) both use "perintah evakuasi".
   // Keep it: the JMA Nagasaki level sheet (jma-nagasaki-levels-id) says "Instruksi Evakuasi", but the national sources agree.
   { ja: '避難指示', reading: 'ひなんしじ', en: 'Evacuation Instruction', id: 'perintah evakuasi', source: 'cao-countermeasures' },
-  { ja: '高齢者等避難', reading: 'こうれいしゃとうひなん', en: 'Evacuation of the Elderly, etc.', id: 'Proses Evakuasi Lansia, dll.', source: 'jma-multilingual' },
+  // en: JMA Nagasaki level sheet. The JMA dictionary rows with this term are in the volcanic warning section.
+  { ja: '高齢者等避難', reading: 'こうれいしゃとうひなん', en: 'Evacuation of the Elderly, etc.', id: 'Proses Evakuasi Lansia, dll.', source: 'jma-nagasaki-levels-en' },
   // id: not in the JMA dictionary; Level 5 name on the JMA Nagasaki Indonesian level sheet (jma-nagasaki-levels-id).
   { ja: '緊急安全確保', reading: 'きんきゅうあんぜんかくほ', en: 'Emergency Safety Measures', id: 'tindakan keselamatan darurat', source: 'cao-countermeasures' },
   // JMA's term row adds "skala kecil"; its sentence rows drop it, which keeps this a substring of 大津波警報.
