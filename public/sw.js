@@ -43,12 +43,13 @@ self.addEventListener('install', event => {
 
 // Activate: keep this cache and the one before it, delete older ones, and tell
 // the open pages. A page from the previous deploy can still import its lazy
-// chunks (the cache-first branch below searches every cache). caches.keys()
+// chunks (the cache-first branch below falls back to every cache). caches.keys()
 // lists caches in creation order, so the last old key is the previous deploy.
+// Other apps on the same GitHub Pages origin share the cache list: touch only ours.
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
-      const old = keys.filter(k => k !== CACHE_NAME);
+      const old = keys.filter(k => k.startsWith('mamoru-guide-') && k !== CACHE_NAME);
       const drop = old.slice(0, -1);
       return Promise.all(drop.map(k => caches.delete(k))).then(() => {
         if (old.length > 0) {
@@ -97,9 +98,12 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Cache-first for the rest.
+  // Cache-first for the rest. The current cache wins, so fixed-name files
+  // (fonts, vendor, img) come from this deploy, not the kept previous one.
   event.respondWith(
-    caches.match(req, MATCH)
+    caches.open(CACHE_NAME)
+      .then(cache => cache.match(req, MATCH))
+      .then(cached => cached || caches.match(req, MATCH))
       .then(cached => cached || fetch(req)
         .then(response => {
           if (response.ok) {

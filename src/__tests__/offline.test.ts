@@ -33,7 +33,13 @@ function runWorker(caches: unknown, fetch: unknown = async () => ({ ok: true, js
     handlers[type]({ waitUntil: (p: Promise<unknown>) => { done = p; } });
     await done;
   };
-  return { fire, posted };
+  // Runs the fetch handler for one GET request and returns its response.
+  const respond = async (url: string, destination = 'font') => {
+    let res: Promise<unknown> | undefined;
+    handlers.fetch({ request: { method: 'GET', mode: 'no-cors', destination, url }, respondWith: (p: Promise<unknown>) => { res = p; } });
+    return res;
+  };
+  return { fire, posted, respond };
 }
 
 const CACHE_NAME = read('public/sw.js').match(/const CACHE_NAME = '([^']+)'/)![1];
@@ -72,13 +78,47 @@ describe('offline', () => {
   it('keeps the previous cache on activate, so an open page still loads its lazy chunks', async () => {
     const deleted: string[] = [];
     const caches = {
-      keys: async () => ['a', 'b', CACHE_NAME],
+      keys: async () => ['mamoru-guide-a', 'mamoru-guide-b', CACHE_NAME],
       delete: async (k: string) => { deleted.push(k); return true; },
     };
     const { fire, posted } = runWorker(caches);
     await fire('activate');
-    expect(deleted).toEqual(['a']);
+    expect(deleted).toEqual(['mamoru-guide-a']);
     await vi.waitFor(() => expect(posted).toEqual([{ type: 'SW_UPDATED' }]));
+  });
+
+  it('leaves the caches of other apps on the same origin alone', async () => {
+    const deleted: string[] = [];
+    const caches = {
+      keys: async () => ['mamoru-guide-a', 'mamoru-guide-b', 'other-x', CACHE_NAME, 'other-y'],
+      delete: async (k: string) => { deleted.push(k); return true; },
+    };
+    await runWorker(caches).fire('activate');
+    expect(deleted).toEqual(['mamoru-guide-a']);
+  });
+
+  it('does not announce an update when only other apps have caches', async () => {
+    const deleted: string[] = [];
+    const caches = { keys: async () => ['other-x', CACHE_NAME], delete: async (k: string) => { deleted.push(k); return true; } };
+    const { fire, posted } = runWorker(caches);
+    await fire('activate');
+    expect(deleted).toEqual([]);
+    expect(posted).toEqual([]);
+  });
+
+  it('serves a fixed-name file from the current cache before the previous one', async () => {
+    const url = 'https://example.test/mamoru-guide/fonts/DotGothic16-Regular.woff2';
+    const current = { match: async () => 'new font' };
+    const caches = { open: async (name: string) => (name === CACHE_NAME ? current : { match: async () => 'old font' }), match: async () => 'old font' };
+    const net = async () => { throw new Error('offline'); };
+    expect(await runWorker(caches, net).respond(url)).toBe('new font');
+  });
+
+  it('falls back to the previous cache for a chunk the current one lacks', async () => {
+    const url = 'https://example.test/mamoru-guide/assets/shelters-old.js';
+    const caches = { open: async () => ({ match: async () => undefined }), match: async () => 'old chunk' };
+    const net = async () => { throw new Error('offline'); };
+    expect(await runWorker(caches, net).respond(url, 'script')).toBe('old chunk');
   });
 
   it('deletes nothing on the first activate', async () => {
