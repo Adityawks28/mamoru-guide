@@ -31,9 +31,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'Call a friend to ask what to do', ja: '友達に電話して、どうすればいいか聞く', id: 'Telepon teman untuk bertanya apa yang harus dilakukan' },
     ],
     correct: 1,
-    explain_en: 'DROP to the ground. Take COVER under strong furniture. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
-    explain_ja: '床に体を低くしてください（DROP）。じょうぶな家具の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
-    explain_id: 'MERUNDUK ke lantai. BERLINDUNG di bawah perabot yang kuat. BERTAHAN. Jangan berlari saat guncangan. Itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
+    explain_en: 'DROP to the ground. Take COVER under a strong table. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
+    explain_ja: '床に体を低くしてください（DROP）。じょうぶな机の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
+    explain_id: 'MERUNDUK ke lantai. BERLINDUNG di bawah meja yang kuat. BERTAHAN. Jangan berlari saat guncangan. Itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
     shake: true,
   },
   {

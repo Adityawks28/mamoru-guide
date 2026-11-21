@@ -186,6 +186,22 @@ describe('earthquake-scene', () => {
     }
   });
 
+  it('shindo 0: the bubble says people do not feel it and gives no protect instruction', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const bubbleText = () => [...document.querySelectorAll('#earthquake-scene .tip-bubble span')].map(e => e.textContent).join(' ');
+    shindo(9);
+    vi.advanceTimersByTime(8000);
+    shindo(0);
+    for (const ms of [0, 3000, 5000, 60000]) {
+      vi.advanceTimersByTime(ms);
+      expect(bubbleText(), `after ${ms} ms`).toContain('People do not feel this shaking.');
+      expect(bubbleText(), `after ${ms} ms`).not.toMatch(/table|Drop|Merunduk|机/);
+    }
+    shindo(1);
+    expect(bubbleText()).not.toContain('People do not feel this shaking.');
+  });
+
   it('with reduced motion the room still shows the result, without moving', async () => {
     (globalThis as any).window.matchMedia = () => ({
       matches: true, addEventListener: () => {}, removeEventListener: () => {},

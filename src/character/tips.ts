@@ -5,7 +5,7 @@ export interface Tip { en: string; ja: string; id: string; claimId?: string; }
 export const QUAKE_TIPS: Tip[] = [
   { en: "Drop, Cover, Hold On. Get under a strong table quickly.", ja: "身を低くして、頭を守り、動かないでください。すぐにじょうぶな机の下に入ってください。", id: "Merunduk, berlindung, bertahan. Segera masuk ke bawah meja yang kuat." },
   { en: "Stay away from windows. Broken glass can cut you badly.", ja: "窓から離れてください。割れたガラスで、大きなけがをすることがあります。", id: "Jauhi jendela. Pecahan kaca bisa melukaimu dengan parah." },
-  { en: "Do not run outside during the shaking. Roof tiles can fall and kill you.", ja: "ゆれている間は、外に走って出ないでください。落ちてくる屋根の瓦（かわら）で、死ぬことがあります。", id: "Jangan lari keluar saat guncangan. Genteng bisa jatuh dan membunuhmu." },
+  { en: "Do not run outside during the shaking. Roof tiles can fall on you.", ja: "ゆれている間は、外に走って出ないでください。屋根の瓦（かわら）が落ちてくることがあります。", id: "Jangan lari keluar saat guncangan. Genteng bisa jatuh menimpamu.", claimId: "tip-run-outside" },
   { en: "When the shaking stops, open the door. The door frame can bend and lock the door.", ja: "ゆれが止まったら、ドアを開けてください。ドアの枠（わく）がゆがんで、開かなくなることがあります。", id: "Setelah guncangan berhenti, buka pintu. Kusen pintu bisa bengkok dan pintu macet." },
   { en: "The 1995 earthquake killed 6,434 people. In Kobe City, 4,571 people died.", ja: "1995年の地震では、6,434人が亡くなりました。神戸市では、4,571人が亡くなりました。", id: "Gempa 1995 menewaskan 6.434 orang. Di Kota Kobe, 4.571 orang meninggal.", claimId: "tip-kobe-deaths" },
   { en: "In 1995, buildings from 1981 or earlier had the worst damage. Then Japan made a law to make them stronger.", ja: "1981年以前の建物は、1995年の地震で被害（ひがい）が特に大きかったです。そのあと、古い建物を強くするための法律（ほうりつ）ができました。", id: "Pada 1995, bangunan tahun 1981 dan sebelumnya paling rusak. Lalu dibuat undang-undang untuk memperkuatnya.", claimId: "tip-building-law" },

@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { loadCopy, sentences, wordCount, sourceFiles, readSource, locOf, type CopyEntry } from './helpers/copy-corpus';
 
 const at = (c: CopyEntry) => `${c.file}:${c.line}`;
@@ -38,6 +40,18 @@ describe('copy rules', () => {
   });
   it('uses one Indonesian pronoun, kamu (Decision D-1)', () => {
     expect(copy.filter(c => /\bAnda\b/i.test(c.id ?? '')).map(c => `${locOf(c, 'id')}: ${c.id}`)).toEqual([]);
+  });
+  it('uses kamu, not Anda, in public/*.html too (Decision D-1)', () => {
+    const dir = resolve(__dirname, '../../public');
+    const pages = readdirSync(dir).filter(f => f.endsWith('.html'));
+    expect(pages.length).toBeGreaterThan(0);
+    const hits: string[] = [];
+    for (const f of pages) {
+      readFileSync(resolve(dir, f), 'utf8').split('\n').forEach((text, i) => {
+        if (/\bAnda\b/.test(text)) hits.push(`public/${f}:${i + 1}: ${text.trim()}`);
+      });
+    }
+    expect(hits).toEqual([]);
   });
   it('keeps Japanese sentences at 40 characters or fewer', () => {
     expect(copy.flatMap(c => sentences(c.ja ?? '', 'ja')

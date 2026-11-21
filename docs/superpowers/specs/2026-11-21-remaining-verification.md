@@ -109,6 +109,8 @@ No source ties an action to each shindo level. The caption list keeps 10 entries
 
 R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブルなどの下にもぐり…」「頭を座布団などで保護し、揺れが収まるのを待つ。」
 
+Fix wave after the final review: after a tap on shindo 0, the tip bubble showed QUAKE_TIPS[0] ("Get under a strong table quickly") next to the R56 caption. Now the bubble says the R56 meaning until another level is tapped: "People do not feel this shaking." (jma-shindo-table, 「人は揺れを感じない」).
+
 ### Show This card (`src/show-this.ts`)
 
 | ID | File:line | Claim (old English) | Source | Source says (JA quote / EN gist) | Verdict | Final English |
