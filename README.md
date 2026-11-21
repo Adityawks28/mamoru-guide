@@ -8,7 +8,7 @@ Built by [PPI Kobe](https://github.com/adityawks28) (Perhimpunan Pelajar Indones
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 20+
+- [Node.js](https://nodejs.org/) 24 (see `.nvmrc`)
 
 ### Install & Run
 
