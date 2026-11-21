@@ -17,14 +17,14 @@
 
 | Outcome | Rows |
 |---|---|
-| Action already right (no text change by this task) | 26 |
-| Corrected by this task | 23 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B23, B25, B27, B28, B30, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
+| Action already right (no text change by this task) | 25 |
+| Corrected by this task | 24 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B22, B23, B25, B27, B28, B30, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
 | Removed, because no official source certifies the line | 3 (B38, B43, B44) |
 | Total | 52 |
 
 Alert names (Part C): 9 rows. Changed 6 (C2, C3, C4, C5, C6, C8), new line 1 (C7), unchanged 2 (C1, C9).
 
-Claim statuses set by this change: verified 3 (`eqnow-4`, `typhoon-prep-4`, `typhoon-prep-5`), changed 14 (`typhoon-prep-1`, `eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stays `needs-medical-review`; it is a first-aid item.
+Claim statuses set by this change: verified 2 (`eqnow-4`, `typhoon-prep-4`), changed 15 (`typhoon-prep-5`, `typhoon-prep-1`, `eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stays `needs-medical-review`; it is a first-aid item.
 
 ## Actions that were removed or replaced
 
@@ -74,11 +74,11 @@ Claim statuses set by this change: verified 3 (`eqnow-4`, `typhoon-prep-4`, `typ
 
 | Row | File:line | Action before (EN) | Source and section | Source says (JA quote / EN gist) | Verdict | Status (claim ID) | Final text (English) |
 |---|---|---|---|---|---|---|---|
-| B18 | tips.ts:51 | Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast. | jma-fukuoka-typhoon 台風への備え | 「風で飛ばされそうな物は飛ばないように固定したり、屋内へ移しましょう。」; 「気象情報をよく把握する」 / Tie down or bring in things that the wind can blow away. Follow the weather information. "Charge your devices": the CAO checklist lists 「予備電池・携帯充電器」 and a CAO lesson page says 「大規模災害時は、バッテリーが命」 (cao-checklist-sonae, cao-ichinitimae-battery). No page says "charge before a typhoon" in those words. | match (partial) | changed (typhoon-prep-1) | Tropical Storm: secure balcony items. Keep spare batteries and a phone charger. Check the forecast. |
+| B18 | tips.ts:51 | Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast. | jma-fukuoka-typhoon 台風への備え | 「風で飛ばされそうな物は飛ばないように固定したり、屋内へ移しましょう。」; 「最新の情報をテレビやラジオ、気象台ホームページから入手してください。」 / Tie down or bring in things that the wind can blow away. Follow the weather information. "Charge your devices": the CAO checklist lists 「予備電池・携帯充電器」 and a CAO lesson page says 「大規模災害時は、バッテリーが命」 (cao-checklist-sonae, cao-ichinitimae-battery). No page says "charge before a typhoon" in those words. | match (partial) | changed (typhoon-prep-1) | Tropical Storm: secure balcony items. Keep spare batteries and a phone charger. Check the forecast. |
 | B19 | tips.ts:52 | Severe Tropical Storm: "tape an X on the windows. Fill the bathtub. Store more water." | jma-fukuoka-typhoon; gov-online-bousai-8072 | 「必要に応じて窓ガラスに飛散防止フィルムやテープなどを張ったり、カーテンやブラインドを下ろすなど」; 「断水に備えて飲料水を確保したり、浴槽に水を張って生活用水を確保するなど」 / Film or tape on the windows, close the curtains, store drinking water, fill the bathtub. No source gives an X shape. | differs | changed (typhoon-prep-2) | Severe Tropical Storm: put film or tape on the windows. Close the curtains. Fill the bathtub. Store water. |
 | B20 | tips.ts:53 | Typhoon: "stay home if you can. Evacuate before the wind is at its strongest." | kantei-hinan 屋内安全確保; kantei-taifu | 「洪水や高潮に関しては、ハザードマップ等で次の３つの条件を確認し、自宅が安全だと判断できる場合は、自宅に留まること（屋内安全確保）も考えてみましょう。」; 「天候が荒れてからでは移動も大変になります」 / Stay home only if the hazard map shows that the home is safe. Moving is hard after the weather turns bad. | differs | changed (typhoon-prep-3) | Typhoon: check the hazard map. If you live in a danger area, leave before the wind and rain get strong. |
 | B21 | tips.ts:54 | Very Strong Typhoon: the power can be off for days. Prepare cash, food, and batteries. | kantei-jishin; gov-online-bousai-8072 | 「停電、都市ガスの停止、水道の断水が起こり、復旧まで時間がかかる場合があります。」; supplies list 「現金」「予備電池」 / Power cuts can take time to fix. Keep cash and spare batteries. | match | verified (typhoon-prep-4) | (No change.) |
-| B22 | tips.ts:55 | Violent Typhoon: stay indoors. Do not go out, not even for a short time. | jma-fukuoka-typhoon | 「台風接近中は不要な外出は控え、危険な場所へは近づかないようにしましょう。」 / Do not go out without need while the typhoon is near. | match | verified (typhoon-prep-5) | (No change.) |
+| B22 | tips.ts:55 | Violent Typhoon: stay indoors. Do not go out, not even for a short time. | jma-fukuoka-typhoon | 「台風接近中は不要な外出は控え、危険な場所へは近づかないようにしましょう。」; 「不要不急な外出は避け、台風が過ぎ去るのを待ちましょう。」 / Do not go out without need while the typhoon is near. Stay away from dangerous places. The page does not ban short trips that are needed. | differs (scope) | changed (typhoon-prep-5) | Violent Typhoon: do not go out unless you need to. Stay away from dangerous places. |
 | B23 | tips.ts:72 | "In a typhoon, tape an X on your windows. This stops glass from flying into the room." | jma-fukuoka-typhoon; gov-online-bousai-8072 | As B19; also 「カーテンを閉めておくことでも室内への飛散防止に効果があります。」 / Closed curtains also help stop glass from flying in. | differs | changed (tip-window-film, new) | Before a typhoon, put film or tape on the windows. Close the curtains. This helps stop glass from flying in. |
 
 ### Drill (`src/drill.ts`)
@@ -145,6 +145,14 @@ Key dates:
 | C9 | typhoon.ts:15-19 | Tropical Storm / Severe Tropical Storm / Typhoon / Very Strong Typhoon / Violent Typhoon | 強い / 非常に強い / 猛烈な (jma-typhoon-strength) | TS / STS / TY (jma-typhoon-terms); "Very Strong Typhoon (TY)", "Violent Typhoon (TY)" (jma-multilingual) | unchanged | No change. |
 
 Glossary (`src/data/glossary.ts`): the source of 高齢者等避難 is now the JMA Nagasaki English sheet (jma-nagasaki-levels-en), because the JMA dictionary rows with this term are in the volcanic warning section. Two terms were added for the alert text. 津波注意報 = "Tsunami Advisory" / "pemberitahuan tsunami" (JMA dictionary). 危険警報 = "Urgent Warning" / "Peringatan Darurat" (JMA English names page; JMA dictionary).
+
+## Quote check (2026-11-21)
+
+Every Japanese quote in this document and in the `CLAIMS` notes was compared with the research files. The quotes that the research files did not hold were checked again on the source pages on 2026-11-21.
+
+- Found on the page, no change: B4 (tfd-mansion-quake), B18 battery sentence and B30 (cao-ichinitimae-battery), B19 (jma-fukuoka-typhoon), B20 and B51 (kantei-hinan), B21 (kantei-jishin), B25 (meti-gas-smell: the page blocks the default client, it loads with a browser user agent), B41 signs (kantei-dosha), B47 (fdma-jalert), B50 (kantei-keihou), C6 (jma-warning-2026-english), eqnow-6 glass note (tfd-quake-10-points).
+- B18: 「気象情報をよく把握する」 is only a menu link on the JMA Fukuoka page. It is replaced by the body sentence 「最新の情報をテレビやラジオ、気象台ホームページから入手してください。」. The tip does not change.
+- B22: the page says 「不要不急な外出は避け、台風が過ぎ去るのを待ちましょう。」, which is avoid going out without need. The old tip said do not go out, not even for a short time. That is more than the page says. The tip is now "Violent Typhoon: do not go out unless you need to. Stay away from dangerous places." (JA 「Violent Typhoon：必要なとき以外は、外に出ないでください。危ない場所に近づかないでください。」, ID "Topan dahsyat: jangan keluar kecuali perlu. Jauhi tempat berbahaya."). `typhoon-prep-5` is now `changed`.
 
 ## Limits
 

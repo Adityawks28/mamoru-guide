@@ -52,7 +52,7 @@ export const TYPHOON_TIPS: Tip[] = [
   { en: "Severe Tropical Storm: put film or tape on the windows. Close the curtains. Fill the bathtub. Store water.", ja: "Severe Tropical Storm：窓に、フィルムかテープをはってください。カーテンを閉めてください。浴そうに水をためてください。水を多めに用意してください。", id: "Badai tropis kuat: pasang film atau lakban di jendela. Tutup tirai. Isi bak mandi. Tambah persediaan air.", claimId: "typhoon-prep-2" },
   { en: "Typhoon: check the hazard map. If you live in a danger area, leave before the wind and rain get strong.", ja: "Typhoon：ハザードマップを見てください。危ない場所に住んでいたら、風と雨が強くなる前に避難してください。", id: "Topan: cek peta bahaya. Jika kamu tinggal di daerah berbahaya, mengungsilah sebelum angin dan hujan kuat.", claimId: "typhoon-prep-3" },
   { en: "Very Strong Typhoon: the power can be off for days. Prepare cash, food, and batteries.", ja: "Very Strong Typhoon：何日も停電することがあります。現金、食べ物、電池を用意してください。", id: "Topan sangat kuat: listrik bisa padam berhari-hari. Siapkan uang tunai, makanan, baterai.", claimId: "typhoon-prep-4" },
-  { en: "Violent Typhoon: stay indoors. Do not go out, not even for a short time.", ja: "Violent Typhoon：外に出ないでください。少しの用事でも、出ないでください。", id: "Topan dahsyat: tetap di dalam. Jangan keluar, walau hanya sebentar.", claimId: "typhoon-prep-5" },
+  { en: "Violent Typhoon: do not go out unless you need to. Stay away from dangerous places.", ja: "Violent Typhoon：必要なとき以外は、外に出ないでください。危ない場所に近づかないでください。", id: "Topan dahsyat: jangan keluar kecuali perlu. Jauhi tempat berbahaya.", claimId: "typhoon-prep-5" },
 ];
 
 // Adapted from mascot.jsx lines 6-22.

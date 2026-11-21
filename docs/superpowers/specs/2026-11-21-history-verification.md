@@ -115,6 +115,14 @@ Claim statuses set by this change: verified 5, changed 23, removed 2, pending 1 
 | A31 | index.html:788 | "NHK World: News and alerts in 19 languages." | nhk-world-app | "19 languages available" for content. Notifications: "Earthquake, Tsunami and Weather Emergency Warning notification" in 11 languages (English, Chinese, French, Hindi, Indonesian, Korean, Portuguese, Russian, Spanish, Thai, Vietnamese). | differs (partial) | no claim | NHK World: News in 19 languages. Earthquake, tsunami and weather emergency warnings in 11 languages, including Indonesian |
 | A32 | index.html:1028-1030 | "Last updated March 2026... We check the content against the latest official guidelines." | jma-warning-2026-press; bda-launch; cao-evac-guideline-r8 | 「新たな防災気象情報の運用開始日について、令和８年５月29日（金）としますので、お知らせします。」 / JMA changed its warning names on 2026-05-29. 防災庁 started on 2026-11-02. The evacuation guideline was revised in 令和8年3月. "March 2026" is older than these changes. | differs | no claim | The date is now the build date (`__BUILD_DATE__`, set by `define` in `vite.config.ts`), shown in English, Japanese and Indonesian. "We check the content against the latest official guidelines" is removed until Task 6 updates the alert names. Text: "<build date>. We update this guide regularly." |
 
+## Quote check (2026-11-21)
+
+Every Japanese quote in this document and in the `CLAIMS` notes was compared with the research files. The quotes that the research files did not hold were checked again on the source pages on 2026-11-21. All are on the pages. No text changed.
+
+- A10: the "largest recorded" sentence is on the JMA tsunami FAQ (jma-faq-tsunami). Claim note `tip-tohoku-40m` marked "Quotes re-fetched 2026-11-21".
+- A34: 「屋外での行動は極めて危険。」 and the tree, pole and block wall sentences are cells of the 猛烈な風 row in the JMA wind table PDF (jma-wind-scale). Claim notes `typhoon-level-2` and `typhoon-level-3` are marked the same way.
+- `tip-kobe-power` note: a missing comma was put back, so the note matches the CAO text 「応急送電の完了は、地震発生後6日後の1月23日15時となった」.
+
 ## Limits
 
 1. The two research passes are the evidence. In review fix round 1, the JMA wind table PDF (A34) and the JMA tsunami FAQ (A10) were read again to confirm the bands and the "largest recorded" sentence. No other fact was added.
