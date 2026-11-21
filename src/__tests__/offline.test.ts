@@ -40,10 +40,11 @@ describe('offline', () => {
     expect(added).toContain('./index.html');
   });
 
-  it('Google Fonts load with CORS so the service worker can keep a copy', () => {
-    const doc = new DOMParser().parseFromString(read('index.html'), 'text/html');
-    const link = doc.querySelector('link[href^="https://fonts.googleapis.com"]')!;
-    expect(link.getAttribute('crossorigin')).toBe('anonymous');
+  it('precaches every font', async () => {
+    const files = publicFiles('fonts', /\.txt$/);
+    expect(files).toHaveLength(5);
+    const added = await install(async () => ({ js: [], css: [] }));
+    expect(added).toEqual(expect.arrayContaining(files));
   });
 
   it('loads Leaflet from the vendored copy, pinned by hash', () => {
