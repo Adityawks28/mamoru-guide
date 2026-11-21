@@ -75,7 +75,9 @@ async function main(): Promise<void> {
   // google/fonts has no OFL.txt for M PLUS Rounded 1c: the copyright line from the
   // font, then the OFL 1.1 text from line 2 of the DotGothic16 file.
   if (mplusCopyright !== 'Copyright 2016 The Rounded M+ Project Authors.') throw new Error(`M PLUS Rounded 1c copyright: ${mplusCopyright}`);
-  const ofl = (await source(LICENSES[1].path, LICENSES[1].sha256)).toString('utf8');
+  const dotOfl = LICENSES.find(l => l.out === 'OFL-DotGothic16.txt');
+  if (!dotOfl) throw new Error('OFL-DotGothic16.txt is not in LICENSES');
+  const ofl = (await source(dotOfl.path, dotOfl.sha256)).toString('utf8');
   writeFileSync(`${OUT}/OFL-MPLUSRounded1c.txt`, mplusCopyright + ofl.slice(ofl.search(/\r?\n/)));
 
   const total = Object.values(files).reduce((sum, f) => sum + f.bytes, 0);
