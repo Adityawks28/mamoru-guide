@@ -28,7 +28,7 @@ describe('copy rules', () => {
     expect(uncovered).toEqual([]);
   });
   it('has no em dash in user-visible text', () => {
-    expect(copy.filter(c => [c.en, c.ja, c.id].some(t => t?.includes('—'))).map(at)).toEqual([]);
+    expect(copy.filter(c => [c.en, c.ja, c.id].some(t => t?.includes('\u2014'))).map(at)).toEqual([]);
   });
   it('keeps English instruction sentences at 20 words or fewer', () => {
     expect(longSentences(copy, 'instruction', 20)).toEqual([]);
