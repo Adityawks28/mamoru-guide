@@ -106,4 +106,13 @@ export const ja: Record<string, string> = {
   'fab.firstaid': '応急手当',
   'fab.shelter':  '避難場所を探す',
   'fab.showthis': '見せるカード',
+
+  // Shelter finder problems
+  'shelter.problem.data': '避難場所（ひなんばしょ）のリストを読みこめませんでした。インターネットにつないで、もう一度ためしてください。',
+  'shelter.problem.map': '🗺️ 地図を見るには、インターネットが必要です。避難場所（ひなんばしょ）のリストは使えます。',
+  'shelter.problem.locationDenied': '位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。下でエリアを選んでください。',
+  'shelter.problem.locationTimeout': '位置情報（いちじょうほう）を調べるのに、時間がかかりすぎました。下でエリアを選んでください。',
+  'shelter.problem.locationUnavailable': '位置情報（いちじょうほう）が使えません。下でエリアを選んでください。',
+  'shelter.problem.locationFailed': '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
+  'shelter.retry': 'もう一度ためす',
 };

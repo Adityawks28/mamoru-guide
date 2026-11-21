@@ -1,6 +1,25 @@
 import { currentLang } from './lang';
 import { loadShelters, type Hazard, type Shelter } from './shelter-data';
 import { showToast } from './toast';
+import { t } from './i18n';
+
+export type ShelterProblem =
+  | 'locationDenied' | 'locationTimeout' | 'locationUnavailable' | 'locationFailed' | 'data' | 'map';
+
+export function problemFromGeolocation(err: unknown): ShelterProblem {
+  const code = (err as { code?: number } | null | undefined)?.code;
+  if (code === 1) return 'locationDenied';
+  if (code === 2) return 'locationUnavailable';
+  if (code === 3) return 'locationTimeout';
+  return 'locationFailed';
+}
+
+function problemHtml(problem: ShelterProblem, retry = false): string {
+  return `<div class="shelter-problem" role="status" data-problem="${problem}">` +
+    `<p data-i18n="shelter.problem.${problem}">${esc(t(`shelter.problem.${problem}`))}</p>` +
+    (retry ? `<button type="button" class="bag-btn shelter-retry" data-i18n="shelter.retry">${esc(t('shelter.retry'))}</button>` : '') +
+    `</div>`;
+}
 
 interface ShelterWithDistance extends Shelter {
   distance: number;
@@ -170,10 +189,19 @@ function renderMap(lat: number, lng: number, nearest: ShelterWithDistance[]): vo
   const map = L.map('shelterMap').setView([lat, lng], 14);
   mapInstance = map;
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const oldNote = mapEl.previousElementSibling;
+  if (oldNote?.matches('.shelter-problem[data-problem="map"]')) oldNote.remove();
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 18,
-  }).addTo(map);
+  });
+  let tileProblemShown = false;
+  tiles.on('tileerror', () => {
+    if (tileProblemShown) return;
+    tileProblemShown = true;
+    mapEl.insertAdjacentHTML('beforebegin', problemHtml('map'));
+  });
+  tiles.addTo(map);
 
   // User marker (blue)
   L.circleMarker([lat, lng], {
@@ -240,7 +268,7 @@ async function renderShelterList(nearest: ShelterWithDistance[]): Promise<void> 
   reapplyLang();
 }
 
-function showManualFallback(): void {
+function showManualFallback(problem: ShelterProblem): void {
   const container = document.getElementById('shelterContainer');
   if (!container) return;
 
@@ -257,11 +285,7 @@ function showManualFallback(): void {
 
   container.innerHTML = `
     <div class="shelter-fallback">
-      <p class="shelter-fallback-msg">
-        <span data-lang="en">📍 You did not allow location access. Choose your area from the list:</span>
-        <span data-lang="ja">📍 位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。リストからエリアを選んでください：</span>
-        <span data-lang="id">📍 Kamu tidak mengizinkan akses lokasi. Pilih areamu dari daftar:</span>
-      </p>
+      ${problemHtml(problem)}
       <select class="shelter-city-select" id="shelterCitySelect">
         <option value="">${getLangText('Choose your area', 'エリアを選んでください', 'Pilih areamu')}</option>
         ${cities.map((c, i) => `<option value="${i}">${c.name}</option>`).join('')}
@@ -277,18 +301,7 @@ function showManualFallback(): void {
     const idx = parseInt((e.target as HTMLSelectElement).value, 10);
     if (isNaN(idx)) return;
     const city = cities[idx];
-    const nearest = await findNearest(city.lat, city.lng, 5);
-    await renderShelterList(nearest);
-    renderStatsBar(nearest);
-
-    try {
-      await loadLeaflet();
-      const mapEl = document.getElementById('shelterMap');
-      if (mapEl) mapEl.style.display = 'block';
-      renderMap(city.lat, city.lng, nearest);
-    } catch {
-      // Map unavailable: list still works
-    }
+    void renderResults(city.lat, city.lng);
   });
 }
 
@@ -306,33 +319,72 @@ function showLoading(): void {
   reapplyLang();
 }
 
-function reportGeolocationError(err: unknown): void {
-  const code = (err as GeolocationPositionError | undefined)?.code;
-  let msg = getLangText(
-    'The app did not get your location. Choose your area below.',
-    '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
-    'Aplikasi tidak mendapat lokasimu. Pilih areamu di bawah.',
-  );
-  if (code === 1) {
-    msg = getLangText(
-      'You did not allow location access. Choose your area below.',
-      '位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。下でエリアを選んでください。',
-      'Kamu tidak mengizinkan akses lokasi. Pilih areamu di bawah.',
-    );
-  } else if (code === 3) {
-    msg = getLangText(
-      'The app did not get your location in time. Choose your area below.',
-      '位置情報（いちじょうほう）を調べるのに、時間がかかりすぎました。下でエリアを選んでください。',
-      'Waktu mencari lokasi habis. Pilih areamu di bawah.',
-    );
-  } else if (code === 2) {
-    msg = getLangText(
-      'Your location is not available. Choose your area below.',
-      '位置情報（いちじょうほう）が使えません。下でエリアを選んでください。',
-      'Lokasimu tidak tersedia. Pilih areamu di bawah.',
-    );
+function reportGeolocationError(problem: ShelterProblem): void {
+  showToast(t(`shelter.problem.${problem}`), 'error');
+}
+
+function showProblem(problem: ShelterProblem, retry: () => void): void {
+  const target = document.getElementById('shelterList') ?? document.getElementById('shelterContainer');
+  if (!target) return;
+  target.innerHTML = problemHtml(problem, true);
+  target.querySelector('.shelter-retry')?.addEventListener('click', retry);
+}
+
+async function showMap(lat: number, lng: number, nearest: ShelterWithDistance[]): Promise<void> {
+  const mapEl = document.getElementById('shelterMap');
+  if (!mapEl) return;
+  mapEl.style.display = 'block';
+  if (mapInstance) {
+    (mapInstance as { remove(): void }).remove();
+    mapInstance = null;
   }
-  showToast(msg, 'error');
+  mapEl.innerHTML = '';
+  mapEl.classList.remove('offline');
+  const noMap = () => {
+    mapEl.classList.add('offline');
+    mapEl.innerHTML = problemHtml('map');
+  };
+  if (navigator.onLine === false) { noMap(); return; }
+  try {
+    await loadLeaflet();
+    renderMap(lat, lng, nearest);
+  } catch {
+    noMap();
+  }
+}
+
+// Renders list, stats, out-of-area note and map. Never rejects: a failure shows the data problem with a retry.
+async function renderResults(lat: number, lng: number): Promise<void> {
+  let nearest: ShelterWithDistance[];
+  try {
+    nearest = await findNearest(lat, lng, 5);
+    const container = document.getElementById('shelterContainer');
+    if (!container) return;
+    if (!document.getElementById('shelterList')) {
+      if (!nearest.length || nearest[0].distance > OUT_OF_AREA_KM) {
+        container.innerHTML = OUT_OF_AREA_HTML;
+        reapplyLang();
+        return;
+      }
+      container.innerHTML = `
+      <div id="shelterMap" class="shelter-map-container"></div>
+      <div class="shelter-result-header">
+        <span data-lang="en">📍 ${nearest.length} nearest evacuation sites</span>
+        <span data-lang="ja">📍 近くの避難場所 ${nearest.length}か所</span>
+        <span data-lang="id">📍 ${nearest.length} tempat evakuasi terdekat</span>
+      </div>
+      <div id="shelterList" class="shelter-list"></div>
+      <div class="shelter-stats-bar" id="shelterStatsBar"></div>
+    `;
+      reapplyLang();
+    }
+    await renderShelterList(nearest);
+    renderStatsBar(nearest);
+  } catch {
+    showProblem('data', () => { void renderResults(lat, lng); });
+    return;
+  }
+  await showMap(lat, lng, nearest);
 }
 
 async function findShelters(useCached?: CachedLocation): Promise<void> {
@@ -348,57 +400,14 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     try {
       coords = useCached ?? await getUserLocation();
     } catch (geoErr) {
-      reportGeolocationError(geoErr);
-      showManualFallback();
+      const problem = problemFromGeolocation(geoErr);
+      reportGeolocationError(problem);
+      showManualFallback(problem);
       return;
     }
     const { lat, lng } = coords;
     if (!useCached) writeCachedLocation(lat, lng);
-    const nearest = await findNearest(lat, lng, 5);
-
-    const container = document.getElementById('shelterContainer');
-    if (!container) return;
-    if (!nearest.length || nearest[0].distance > OUT_OF_AREA_KM) {
-      container.innerHTML = OUT_OF_AREA_HTML;
-      reapplyLang();
-      return;
-    }
-
-    container.innerHTML = `
-      <div id="shelterMap" class="shelter-map-container"></div>
-      <div class="shelter-result-header">
-        <span data-lang="en">📍 ${nearest.length} nearest evacuation sites</span>
-        <span data-lang="ja">📍 近くの避難場所 ${nearest.length}か所</span>
-        <span data-lang="id">📍 ${nearest.length} tempat evakuasi terdekat</span>
-      </div>
-      <div id="shelterList" class="shelter-list"></div>
-      <div class="shelter-stats-bar" id="shelterStatsBar"></div>
-    `;
-    reapplyLang();
-
-    await renderShelterList(nearest);
-    renderStatsBar(nearest);
-
-    // Load map (non-blocking)
-    try {
-      await loadLeaflet();
-      renderMap(lat, lng, nearest);
-    } catch {
-      const mapEl = document.getElementById('shelterMap');
-      if (mapEl) {
-        mapEl.classList.add('offline');
-        mapEl.innerHTML = `
-          <div class="shelter-map-offline">
-            <span data-lang="en">🗺️ The map is not available. Check your internet connection.</span>
-            <span data-lang="ja">🗺️ 地図を表示できません。インターネットの接続を確認してください。</span>
-            <span data-lang="id">🗺️ Peta tidak tersedia. Periksa koneksi internet.</span>
-          </div>
-        `;
-        reapplyLang();
-      }
-    }
-  } catch {
-    showManualFallback();
+    await renderResults(lat, lng);
   } finally {
     if (findBtn) {
       findBtn.disabled = false;

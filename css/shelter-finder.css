@@ -49,12 +49,14 @@
   align-items: center;
   justify-content: center;
 }
-.shelter-map-offline {
+.shelter-problem {
   text-align: center;
   font-size: 14px;
   color: var(--text-muted);
   padding: 20px;
 }
+.shelter-problem p { margin: 0 0 8px; }
+.shelter-retry { min-height: 44px; }
 
 /* Loading */
 .shelter-loading {
