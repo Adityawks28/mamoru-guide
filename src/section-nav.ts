@@ -21,6 +21,7 @@ export const ROUTE_CHIPS: Record<string, ChipDef[]> = {
     { section: 'drill', i18n: 'chip.drill' },
     { section: 'quiz',  i18n: 'chip.quiz' },
     { section: 'about', i18n: 'chip.about' },
+    { section: 'sources', i18n: 'chip.sources' },
   ],
 };
 

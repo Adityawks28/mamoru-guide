@@ -32,6 +32,7 @@ export const ja: Record<string, string> = {
   'label.drill':     '地震の訓練（くんれん）',
   'label.quiz':      'クイズ',
   'label.about':     'このガイドについて',
+  'label.sources':   '出典（しゅってん）',
   'label.contacts':  '連絡先',
   'label.plan':      'マイプラン',
 
@@ -82,6 +83,7 @@ export const ja: Record<string, string> = {
   'chip.drill':      '🎮 訓練',
   'chip.quiz':       '📝 クイズ',
   'chip.about':      'ℹ 紹介',
+  'chip.sources':    '📚 出典',
 
   // Sources page
   'sources.title': '出典とチェック',

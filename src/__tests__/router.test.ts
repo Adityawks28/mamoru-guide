@@ -1,7 +1,7 @@
 // router.test.ts
 
 import { readFileSync } from 'node:fs';
-import { activateRoute, ROUTE_SECTIONS } from '../router';
+import { activateRoute, resolveRoute, ROUTE_SECTIONS, type RouteDetail } from '../router';
 import { initEmergencyFab } from '../emergency-fab';
 
 const read = (f: string): string => readFileSync(f, 'utf8');
@@ -14,7 +14,7 @@ const ALL_IDS = [
   'hero',
   'emergency-mode',
   'earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts',
-  'drill', 'quiz', 'about',
+  'drill', 'quiz', 'about', 'sources',
   'myplan',
   'shelter',
 ];
@@ -100,7 +100,32 @@ describe('activateRoute()', () => {
 
   it('shows learn sections on #/learn', () => {
     activateRoute('#/learn');
-    expect(visibleSections()).toEqual(['drill', 'quiz', 'about']);
+    expect(visibleSections()).toEqual(['drill', 'quiz', 'about', 'sources']);
+  });
+
+  it('shows only sources on #/sources and #/sources/medical', () => {
+    for (const h of ['#/sources', '#/sources/medical']) {
+      activateRoute(h);
+      expect(visibleSections()).toEqual(['sources']);
+      expect(document.body.dataset.route).toBe('sources');
+    }
+  });
+  it('falls back to landing for a sub-route of a route that takes no param', () => {
+    activateRoute('#/prepare/medical');
+    expect(visibleSections()).toEqual(['hero']);
+  });
+  it('tells listeners the route name and its param', () => {
+    const seen: RouteDetail[] = [];
+    const on = (e: Event) => seen.push((e as CustomEvent<RouteDetail>).detail);
+    document.addEventListener('mamoru:route', on);
+    activateRoute('#/sources/medical'); activateRoute('#/learn');
+    document.removeEventListener('mamoru:route', on);
+    expect(seen).toEqual([{ route: 'sources', param: 'medical' }, { route: 'learn', param: null }]);
+  });
+  it('resolves a param only for a param route', () => {
+    expect(['#/sources/medical', '#/sources', '#/sources/', '#/learn/x'].map(resolveRoute)).toEqual([
+      { route: '#/sources', param: 'medical' }, { route: '#/sources', param: null },
+      { route: '#/', param: null }, { route: '#/', param: null }]);
   });
 
   // --- Plan ---
@@ -151,7 +176,7 @@ describe('activateRoute()', () => {
     activateRoute('#/learn');
     // Prepare sections must now be hidden
     expect(visibleSections()).not.toContain('earthquake');
-    expect(visibleSections()).toEqual(['drill', 'quiz', 'about']);
+    expect(visibleSections()).toEqual(['drill', 'quiz', 'about', 'sources']);
   });
 
   it('does not show sections from multiple routes at once', () => {

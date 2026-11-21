@@ -3,6 +3,7 @@ import { buildSkyline } from './skyline';
 import { initTheme, toggleDayNight } from './theme';
 import { initLang, setLang, currentLang } from './lang';
 import { initRouter } from './router';
+import { initSourcesLoader } from './sources-loader';
 import { initScrollReveal } from './scroll-reveal';
 import { initMobileNav } from './nav';
 import { initEmergencyFab } from './emergency-fab';
@@ -55,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   buildSkyline();
   initTheme();
   initLang();
+  // Before the router: its first activateRoute fires the event.
+  initSourcesLoader();
   initRouter();
   initScrollReveal();
   initMobileNav();

@@ -32,6 +32,7 @@ export const en: Record<string, string> = {
   'label.drill':     'EARTHQUAKE DRILL',
   'label.quiz':      'QUIZ',
   'label.about':     'ABOUT',
+  'label.sources':   'SOURCES',
   'label.contacts':  'CONTACTS',
   'label.plan':      'MY PLAN',
 
@@ -82,6 +83,7 @@ export const en: Record<string, string> = {
   'chip.drill':      '🎮 Drill',
   'chip.quiz':       '📝 Quiz',
   'chip.about':      'ℹ About',
+  'chip.sources':    '📚 Sources',
 
   // Sources page
   'sources.title': 'Sources and checks',
