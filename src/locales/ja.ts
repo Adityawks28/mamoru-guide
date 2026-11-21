@@ -9,7 +9,7 @@ export const ja: Record<string, string> = {
   'nav.plan':      'マイプラン',
 
   // Hero
-  'hero.subtitle': '日本にいる留学生のための防災ガイド',
+  'hero.subtitle': '日本にいる留学生のための、防災（ぼうさい）ガイド',
 
   // Mode selector
   'mode.emergency.title':   '緊急',
@@ -17,7 +17,7 @@ export const ja: Record<string, string> = {
   'mode.prepare.title':     '準備する',
   'mode.prepare.desc':      '計画を立てます。避難場所（ひなんばしょ）を探します。',
   'mode.learn.title':       '学ぶ',
-  'mode.learn.desc':        '訓練・ことば・クイズ',
+  'mode.learn.desc':        '訓練（くんれん）・ことば・クイズ',
 
   // Emergency mode
   'em.title':       '🚨 緊急',
@@ -38,7 +38,7 @@ export const ja: Record<string, string> = {
   'chip.typhoon':    '🌀 台風',
   'chip.vocab':      '🗣 言葉',
   'chip.showthis':   '💬 カード',
-  'chip.bag':        '🎒 防災袋',
+  'chip.bag':        '🎒 非常袋',
   'chip.firstaid':   '🩹 応急手当',
   'chip.contacts':   '📞 連絡先',
   'chip.drill':      '🎮 訓練',
@@ -46,8 +46,8 @@ export const ja: Record<string, string> = {
   'chip.about':      'ℹ 紹介',
 
   // Earthquake section
-  'eq.title':    '日本の震度（ゆれの強さ）',
-  'eq.subtitle': '震度は、その場所でのゆれの強さです。マグニチュードは、地震そのものの大きさです。行をタップすると、ゆれを体験できます。',
+  'eq.title':    '日本の震度（しんど）',
+  'eq.subtitle': '震度（しんど）は、その場所でのゆれの強さです。マグニチュードは、地震そのものの大きさです。行をタップすると、ゆれを体験（たいけん）できます。',
   'eq.do':       '✓ すること',
   'eq.dont':     '✗ しないこと',
 
@@ -60,11 +60,11 @@ export const ja: Record<string, string> = {
 
   // Show This section
   'showthis.title':    '見せるカード Show This Card',
-  'showthis.subtitle': '日本語が話せないときは、このカードを近くの人に見せてください。日本語の文字が大きいので、相手がすぐに読めます。スワイプするか、矢印をタップすると、ほかの文が見られます。',
+  'showthis.subtitle': '日本語が話せないときは、近くの人にこのカードを見せてください。日本語の文字が大きいので、相手はすぐに読めます。スワイプするか、矢印（やじるし）をタップすると、ほかの文が見られます。',
 
   // Bag game section
-  'bag.title':    '🎒 非常袋（ひじょうぶくろ）· バッグをつめよう',
-  'bag.subtitle': 'このゲームでは、バッグに入れられるのは<strong>10kgまで</strong>です。これはゲームのルールです。大阪府は、重さの目安を、男性は約15kg、女性は約10kgとしています。重さは、だいたいの目安です。マモルは、1kg重くなるたびに、それを感じます。全部は入りません。物をタップすると、入れたり出したりできます。',
+  'bag.title':    '🎒 非常袋（ひじょうぶくろ）· バッグに物を入れましょう',
+  'bag.subtitle': 'このゲームでは、バッグに<strong>10kgまで</strong>入ります。これはゲームのルールです。大阪府の重さの目安（めやす）は、男性は約15kg、女性は約10kgです。重さは、だいたいの目安です。マモルは、1kg重くなるたびに、それを感じます。全部は入りません。物をタップすると、入れたり出したりできます。',
   'bag.stat.items':  'アイテム',
   'bag.stat.score':  'スコア',
   'bag.stat.weight': '重さ',
@@ -74,7 +74,7 @@ export const ja: Record<string, string> = {
 
   // Contacts section
   'contacts.title':    '緊急連絡先',
-  'contacts.subtitle': '連絡先をタップすると、電話をかけられます。緊急のことが起きる前に、この番号を保存してください。緊急のときは、電話がすぐにつながりにくくなります。',
+  'contacts.subtitle': '連絡先をタップすると、電話をかけられます。今のうちに、この番号を保存（ほぞん）してください。緊急のときは、電話がすぐにつながりにくくなります。',
   'contacts.filter.all':     'すべて',
   'contacts.filter.emerg':   '緊急',
   'contacts.filter.medical': '医療',
@@ -83,11 +83,11 @@ export const ja: Record<string, string> = {
   'contacts.filter.mental':  'こころの健康',
 
   // Plan section
-  'plan.title':    '緊急カード＆防災準備',
-  'plan.subtitle': 'プロフィールと計画を書いてください。項目の名前は、英語と日本語で書いてあります。あなたが話せないときも、救助する人・医者・警察があなたの情報を読めます。印刷して、財布とカバンに入れてください。家にも1枚置いてください。',
+  'plan.title':    '緊急カードと防災の準備',
+  'plan.subtitle': 'プロフィールと計画を書いてください。項目（こうもく）の名前は、英語と日本語で書いてあります。救助（きゅうじょ）する人や医師（いし）、警察が、あなたの情報を読めます。あなたが話せないときも、読めます。印刷（いんさつ）してください。財布とカバンに入れて、家にも1枚置いてください。',
   'plan.btn.save':  '💾 保存',
   'plan.btn.print': '🖨️ ワークシートを印刷',
-  'plan.print.fullIds': '在留カードと保険証の番号を全部印刷します。オフのときは、最後の4文字だけ印刷します。',
+  'plan.print.fullIds': '在留カードと保険証（ほけんしょう）の番号を全部印刷します。オフのときは、最後の4文字だけ印刷します。',
   'plan.btn.show':  '🆘 プランを見せる',
   'plan.btn.clear': '🗑️ 消す',
   'plan.btn.next':  '次へ →',
@@ -101,14 +101,14 @@ export const ja: Record<string, string> = {
   'about.title': 'このガイドについて',
 
   // Drill section
-  'drill.title':    '地震訓練',
-  'drill.subtitle': '地震が起きたときのことを、練習で体験します。急いで決めてください。正しい行動を1つずつ学びます。',
-  'drill.btn.start': '🚨 訓練開始',
+  'drill.title':    '地震の訓練（くんれん）',
+  'drill.subtitle': '練習の地震を体験（たいけん）します。すぐに決めてください。正しい行動を、1つずつ学びます。',
+  'drill.btn.start': '🚨 訓練（くんれん）スタート',
 
   // Quiz section
   'quiz.title':    '防災クイズ',
-  'quiz.subtitle': '防災の知識をテストします。問題は10問で、いろいろな場面を見て答えます。地震、台風、津波、緊急のときにすることについての問題です。',
-  'quiz.btn.start': '🎯 クイズ開始',
+  'quiz.subtitle': '防災（ぼうさい）について、知っていることをテストします。災害の場面の問題が、10問あります。地震、台風、津波、緊急のときの行動について答えます。',
+  'quiz.btn.start': '🎯 クイズスタート',
 
   // Footer
   'footer.copy': '守るガイド · Adityaが作りました。',

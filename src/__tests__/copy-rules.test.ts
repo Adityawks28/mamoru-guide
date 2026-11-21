@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { loadCopy, sentences, wordCount, sourceFiles, readSource, type CopyEntry } from './helpers/copy-corpus';
+import { loadCopy, sentences, wordCount, sourceFiles, readSource, locOf, type CopyEntry } from './helpers/copy-corpus';
 
 const at = (c: CopyEntry) => `${c.file}:${c.line}`;
 
@@ -37,5 +37,9 @@ describe('copy rules', () => {
     expect(longSentences(copy, 'descriptive', 25)).toEqual([]);
   });
   it.todo('uses one Indonesian pronoun (Decision D-1) (enabled by Task 9a)');
-  it.todo('keeps Japanese sentences at 40 characters or fewer (enabled by Task 8)');
+  it('keeps Japanese sentences at 40 characters or fewer', () => {
+    expect(copy.flatMap(c => sentences(c.ja ?? '', 'ja')
+      .filter(s => s.length > 40)
+      .map(s => `${locOf(c, 'ja')} (${s.length}): ${s}`))).toEqual([]);
+  });
 });

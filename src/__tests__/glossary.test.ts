@@ -49,6 +49,8 @@ describe('term glossary', () => {
   it('glossary terms are consistent in English', () => {
     expect(mismatches(loadCopy(), GLOSSARY, 'en')).toEqual([]);
   });
-  it.todo('glossary terms are consistent in Japanese (enabled by Task 8)');
+  it('glossary terms are consistent in Japanese', () => {
+    expect(mismatches(loadCopy(), GLOSSARY, 'ja')).toEqual([]);
+  });
   it.todo('glossary terms are consistent in Indonesian (enabled by Task 9a)');
 });

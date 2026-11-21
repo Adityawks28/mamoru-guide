@@ -63,10 +63,10 @@ const HAZARD_LABELS: Record<Hazard, [string, string, string, string]> = {
   earthquake: ['🏚️', 'Earthquake', '地震', 'Gempa'],
   tsunami: ['🌊', 'Tsunami', '津波', 'Tsunami'],
   fire: ['🔥', 'Large fire', '大きな火事', 'Kebakaran besar'],
-  flood: ['💧', 'Flood', '洪水', 'Banjir'],
-  inland: ['🌧️', 'Heavy rain flooding', '内水氾濫', 'Banjir hujan deras'],
-  surge: ['🌀', 'Storm surge', '高潮', 'Gelombang badai'],
-  landslide: ['⛰️', 'Landslide', '土砂災害', 'Tanah longsor'],
+  flood: ['💧', 'Flood', '洪水（こうずい）', 'Banjir'],
+  inland: ['🌧️', 'Heavy rain flooding', '内水氾濫（ないすいはんらん）', 'Banjir hujan deras'],
+  surge: ['🌀', 'Storm surge', '高潮（たかしお）', 'Gelombang badai'],
+  landslide: ['⛰️', 'Landslide', '土砂災害（どしゃさいがい）', 'Tanah longsor'],
   volcano: ['🌋', 'Volcano', '火山', 'Gunung api'],
 };
 const HAZARD_ORDER = Object.keys(HAZARD_LABELS) as Hazard[];
@@ -80,7 +80,7 @@ function sourceNote(asOf: string): string {
   return `
     <p class="shelter-source">
       <span data-lang="en">Source: 国土地理院 (GSI) designated emergency evacuation sites, data from ${asOf}. Sites can change. Check the hazard map of your city too.</span>
-      <span data-lang="ja">出典：国土地理院「指定緊急避難場所データ」（${asOf}のデータ）。避難場所は変わることがあります。住んでいる市のハザードマップも見てください。</span>
+      <span data-lang="ja">出典（しゅってん）は、国土地理院（こくどちりいん）です。「指定緊急避難場所データ」の、${asOf}のデータです。避難場所（ひなんばしょ）は、変わることがあります。住んでいる市のハザードマップも見てください。</span>
       <span data-lang="id">Sumber: 国土地理院 (GSI), data tempat evakuasi darurat resmi per ${asOf}. Tempat evakuasi bisa berubah. Periksa juga peta bahaya kota Anda.</span>
     </p>`;
 }
@@ -89,7 +89,7 @@ const OUT_OF_AREA_HTML = `
   <div class="shelter-out-of-area">
     <p>
       <span data-lang="en">📍 You are outside the area of our list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
-      <span data-lang="ja">📍 今いる場所は、このリストの範囲の外です。リストにあるのは、神戸市、芦屋市、西宮市、尼崎市、伊丹市、宝塚市、明石市、大阪市です。近くの避難場所は、国土地理院のハザードマップで探してください：</span>
+      <span data-lang="ja">📍 今いる場所は、このリストの地域の外です。このリストには、神戸市、芦屋市（あしやし）、西宮市（にしのみやし）があります。尼崎市（あまがさきし）、伊丹市（いたみし）、宝塚市（たからづかし）もあります。明石市（あかしし）と大阪市もあります。近くの避難場所（ひなんばしょ）を探してください。国土地理院（こくどちりいん）のハザードマップで探せます：</span>
       <span data-lang="id">📍 Anda berada di luar area daftar kami. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekat Anda di peta bahaya resmi GSI:</span>
     </p>
     <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
@@ -207,7 +207,7 @@ function renderStatsBar(nearest: ShelterWithDistance[]): void {
       <div class="shelter-stat-chip-value">${nearest.length}</div>
     </div>
     <div class="shelter-stat-chip">
-      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">一番近い</span><span data-lang="id">TERDEKAT</span></div>
+      <div class="shelter-stat-chip-label"><span data-lang="en">NEAREST</span><span data-lang="ja">いちばん近い</span><span data-lang="id">TERDEKAT</span></div>
       <div class="shelter-stat-chip-value">${formatDistance(nearest1.distance)}</div>
     </div>
     <div class="shelter-stat-chip">
@@ -259,7 +259,7 @@ function showManualFallback(): void {
     <div class="shelter-fallback">
       <p class="shelter-fallback-msg">
         <span data-lang="en">📍 You did not allow location access. Choose your area from the list:</span>
-        <span data-lang="ja">📍 位置情報の利用が拒否されました。リストからエリアを選んでください：</span>
+        <span data-lang="ja">📍 位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。リストからエリアを選んでください：</span>
         <span data-lang="id">📍 Akses lokasi ditolak. Pilih area Anda dari daftar:</span>
       </p>
       <select class="shelter-city-select" id="shelterCitySelect">
@@ -310,25 +310,25 @@ function reportGeolocationError(err: unknown): void {
   const code = (err as GeolocationPositionError | undefined)?.code;
   let msg = getLangText(
     'The app did not get your location. Choose your area below.',
-    '位置情報を取得できませんでした。下でエリアを選んでください。',
+    '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
     'Lokasi Anda tidak bisa didapat. Pilih area di bawah.',
   );
   if (code === 1) {
     msg = getLangText(
       'You did not allow location access. Choose your area below.',
-      '位置情報の利用が拒否されました。下でエリアを選んでください。',
+      '位置情報（いちじょうほう）を使うことを、許可（きょか）しませんでした。下でエリアを選んでください。',
       'Izin lokasi ditolak. Pilih area Anda di bawah.',
     );
   } else if (code === 3) {
     msg = getLangText(
       'The app did not get your location in time. Choose your area below.',
-      '位置情報の取得に時間がかかりすぎました。下でエリアを選んでください。',
+      '位置情報（いちじょうほう）を調べるのに、時間がかかりすぎました。下でエリアを選んでください。',
       'Waktu mencari lokasi habis. Pilih area Anda di bawah.',
     );
   } else if (code === 2) {
     msg = getLangText(
       'Your location is not available. Choose your area below.',
-      '位置情報が使えません。下でエリアを選んでください。',
+      '位置情報（いちじょうほう）が使えません。下でエリアを選んでください。',
       'Lokasi Anda tidak tersedia. Pilih area Anda di bawah.',
     );
   }
