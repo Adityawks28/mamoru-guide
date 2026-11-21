@@ -76,9 +76,10 @@ describe('fonts', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('has one token for pixel text, defined once', () => {
+  it('has one token for pixel labels and one for pixel sentences, each defined once', () => {
     const defs = CSS_FILES.flatMap(f => [...css(f).matchAll(/(--(?:pixel|arcade)-font)\s*:/g)].map(m => `${f}: ${m[1]}`));
     expect(defs).toEqual(['variables.css: --pixel-font']);
+    expect(CSS_FILES.flatMap(f => [...css(f).matchAll(/--pixel-text\s*:/g)].map(() => f))).toEqual(['variables.css']);
     expect(CSS_FILES.filter(f => /var\(--arcade[,)]|var\(--arcade-font\)/.test(css(f)))).toEqual([]);
   });
 
@@ -121,10 +122,36 @@ describe('fonts', () => {
     expect(small).toEqual([]);
   });
 
-  it('shows the Japanese tip at 14px or more, the size DotGothic16 kanji need', () => {
-    const rule = declarations(css('hero-arcade.css'), /(?:^|[;\s])font-size\s*:\s*([^;]+)/g)
-      .find(d => d.selector.split(',').map(s => s.trim()).includes('body.lang-ja .pb-t'));
-    expect(rule, 'body.lang-ja .pb-t { font-size }').toBeDefined();
-    expect(smallestPx(rule!.value)).toBeGreaterThanOrEqual(14);
+  // Sentences read in DotGothic16 (--pixel-text): Press Start 2P wraps them into two or three words a line,
+  // and its digits do not match the Japanese next to them (ruling R36).
+  const SENTENCES: Record<string, string[]> = {
+    'hero-arcade.css': ['.pb-t', '.mascot-hint'],
+    'earthquake-room.css': ['.mr-procedure', '.mamoru-room .tip-bubble'],
+    'character.css': ['.tip-bubble'],
+    'layout.css': ['.toast'],
+  };
+  const ruleBodies = (file: string, selector: string) =>
+    [...css(file).matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+      .filter(([, sel]) => sel.split(',').map(s => s.trim().replace(/\s+/g, ' ')).includes(selector))
+      .map(([, , body]) => body);
+
+  it('--pixel-text puts DotGothic16 first, for sentences', () => {
+    const value = css('variables.css').match(/--pixel-text:\s*([^;]+);/)?.[1] ?? '';
+    expect(value.split(',').map(f => f.trim().replace(/^['"]|['"]$/g, ''))).toEqual(['DotGothic16', 'monospace']);
+  });
+
+  it('sets pixel sentences in --pixel-text at 14px or more, in every language', () => {
+    const wrong: string[] = [];
+    for (const [file, selectors] of Object.entries(SENTENCES)) {
+      for (const selector of selectors) {
+        const bodies = ruleBodies(file, selector);
+        if (!bodies.some(b => /font-family:\s*var\(--pixel-text\)/.test(b))) wrong.push(`${file}: ${selector} font-family`);
+        if (bodies.some(b => /font-family:/.test(b) && !/var\(--pixel-text\)/.test(b.match(/font-family:[^;]+/)![0]))) wrong.push(`${file}: ${selector} other font`);
+        const sizes = [...bodies, ...ruleBodies(file, `body.lang-ja ${selector}`), ...ruleBodies(file, `body.lang-id ${selector}`)]
+          .flatMap(b => [...b.matchAll(/font-size:\s*([^;]+)/g)].map(m => smallestPx(m[1])));
+        if (!sizes.length || Math.min(...sizes) < 14) wrong.push(`${file}: ${selector} size ${sizes.join('/')}`);
+      }
+    }
+    expect(wrong).toEqual([]);
   });
 });

@@ -259,8 +259,8 @@ body.day-mode .section-nav {
   position: fixed; bottom: -60px; right: 20px;
   background: var(--safe-green);
   color: #fff;
-  font-family: var(--pixel-font);
-  font-size: 12px;
+  font-family: var(--pixel-text);
+  font-size: 14px;
   padding: 12px 20px;
   border-radius: 4px;
   z-index: 200;
@@ -416,6 +416,5 @@ body.lang-ja .section-chip,
 body.lang-ja .section-label,
 body.lang-ja .nav-links a,
 body.lang-ja .emergency-title,
-body.lang-ja .toast,
 body.lang-ja .mobile-menu a,
 body.lang-ja .mobile-theme-btn { font-size: 14px; }

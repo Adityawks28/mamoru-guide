@@ -1,6 +1,8 @@
 :root {
   /* The Latin pixel face has no Japanese glyphs; DotGothic16 draws them in the same pixel style. */
   --pixel-font: 'Press Start 2P', 'DotGothic16', monospace;
+  /* Sentences: the Latin pixel face wraps them two or three words a line; DotGothic16 is narrower and its digits match its kana and kanji. */
+  --pixel-text: 'DotGothic16', monospace;
   --harbor-navy: #0f1f3d;
   --port-fog: #1e3a5f;
   --rokko-green: #2d5a3d;
