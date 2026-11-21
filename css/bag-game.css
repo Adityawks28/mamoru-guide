@@ -268,6 +268,7 @@ body.day-mode .bag-result {
 @media (prefers-reduced-motion: reduce) {
   .bag-item { transition: none; }
   .bag-item.rejected { animation: none; }
+  .bag-stat-value.over { animation: none; }
   /* Same selectors as above: a shorter one loses to [data-load] on specificity. */
   #bag-scene[data-load="light"] .mamoru-sprite,
   #bag-scene[data-load="heavy"] .mamoru-sprite,

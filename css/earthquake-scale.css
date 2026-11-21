@@ -86,3 +86,8 @@ body.day-mode .scale-row:focus-visible,
 body.day-mode .scale-row[aria-pressed="true"] {
   background: rgba(255,255,255,0.96);
 }
+
+/* reduced motion: the level 7 row keeps a still glow instead of the pulse */
+@media (prefers-reduced-motion: reduce) {
+  .scale-row.s7 { animation: none; box-shadow: inset 0 0 8px rgba(232,64,64,0.2); }
+}

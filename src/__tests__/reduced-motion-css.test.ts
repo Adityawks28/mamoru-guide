@@ -92,4 +92,12 @@ describe('reduced motion in CSS', () => {
     const missing = loads.flatMap(r => r.selectors.filter(s => !stopped(s, r)));
     expect(missing).toEqual([]);
   });
+
+  it('stops every looping animation', () => {
+    const loops = RULES.filter(r => !r.reduced
+      && /\binfinite\b/.test(`${r.decls.get('animation') ?? ''} ${r.decls.get('animation-iteration-count') ?? ''}`));
+    expect(loops.length).toBeGreaterThan(20);
+    const missing = loops.flatMap(r => r.selectors.filter(s => !stopped(s, r)).map(s => `${r.file}: ${s}`));
+    expect(missing).toEqual([]);
+  });
 });
