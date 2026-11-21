@@ -43,7 +43,7 @@ Aditya works alone and is no longer in PPI Kobe. No outside reviewer is availabl
 | D-3 | Japanese pixel font: DotGothic16 after Press Start 2P | Press Start 2P has no Japanese glyphs, so 65 rules fall back to a random system monospace font. DotGothic16 is a free pixel font with Japanese glyphs. |
 | D-4 | Medical review: a verification agent compares every step with the official source text, and a second agent checks that comparison. The "not yet reviewed by a medical professional" note stays on every card. | No qualified person is available. An AI check finds differences from official guides; it does not replace a medical review, and the note tells the user that. |
 | D-5 | Japanese review: a rule test plus an agent review against the やさしい日本語 guidelines. Aditya reads the result. | No native reviewer is available. Aditya reviews the Indonesian as a native speaker. |
-| D-6 | Text that says "PPI Kobe made this" (`index.html:424-426,983-985`, README) | Open: ask Aditya before any change. |
+| D-6 | Remove PPI Kobe. The maker is "Aditya", linked to https://github.com/Adityawks28. The footer PPI Kobe pixel logo becomes the Mamo-kun sprite. | Aditya decided on 2026-11-21: they work alone and left PPI Kobe. First name only shares the least personal data. Mamo-kun reuses existing art. |
 
 ## Trusted sources (check each URL is live, record the date checked)
 
@@ -189,6 +189,17 @@ describe('copy rules', () => {
 - [ ] **Step 3:** Fix or remove in all three languages. Replace "Last updated March 2026" (`index.html:1028`) with the build date from `import.meta.env` set in `vite.config.ts` `define`.
 - [ ] **Step 4:** Run `npm test`. Commit `fix(facts): source every history number, remove the unsourced ones`.
 
+### Task 5b: Made by Aditya (Decision D-6)
+
+**Files:**
+- Modify: `index.html:9` (author meta), `index.html:424-426` (hero line), `index.html:974-985` (About card), `index.html:1113-1176` (footer SVG logo), `index.html:1222` and `src/locales/en.ts:114`, `src/locales/ja.ts:114`, `src/locales/id.ts:114` (footer.copy), `README.md:5`, `css/layout.css:189` (rename `.ppi-logo-svg` to `.footer-mascot`), `src/contacts.ts:34` (comment only)
+- Create: `src/__tests__/authorship.test.ts`
+
+- [ ] **Step 1: Write the failing test:** no non-test file outside `docs/` and `anti-slop/` contains `PPI` or `Perhimpunan`; `index.html` has `<meta name="author" content="Aditya">`; the footer copy in all three locales contains `Aditya`.
+- [ ] **Step 2:** Run `npx vitest run src/__tests__/authorship.test.ts`. Expected: FAIL.
+- [ ] **Step 3:** Rewrite in all three languages. Hero: say Aditya made it in Kobe, keep the 1995 reference only if Task 5 kept it. About card: title "About the maker"; body: Aditya made this guide alone, as a free tool for people in Japan who find disaster information hard to read; link the GitHub profile. Do not invent biography facts. Footer: "Mamoru Guide 守る · Made by Aditya." Replace the footer SVG with the Mamo-kun sprite markup the hero already uses (reuse its classes or sprite function, `aria-hidden="true"`). Keep the Indonesian embassy contact; change only its comment.
+- [ ] **Step 4:** Run `npm test` and `npm run build`. Expected: PASS. Commit `feat: credit Aditya as the maker, replace the PPI Kobe logo with Mamo-kun`.
+
 ### Task 6: Verify the safety actions
 
 **Files:**
@@ -251,8 +262,8 @@ Each task uses the failure lists from Task 1 and Task 2. Each task keeps every `
 
 1. Merge PR #25 (Node 24).
 2. Task 0 (audit) and Task 1 to Task 2 (guards), in parallel.
-3. Aditya picks the audit numbers and answers D-6.
-4. Task 3 to Task 6 (facts).
+3. Aditya picks the audit numbers.
+4. Task 3 to Task 6, with Task 5b after Task 5 (facts and authorship).
 5. Task 7, Task 8, Task 9a (wording), one PR each.
 6. Task 9 (fonts), then Task 10 (animations). Text is final by then, so the screenshots and GIFs stay valid.
 7. Phase 0 fixes (comment cleanup, dead code).
