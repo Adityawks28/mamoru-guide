@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { loadCopy, sentences, wordCount, type CopyEntry } from './helpers/copy-corpus';
+import { loadCopy, sentences, wordCount, sourceFiles, readSource, type CopyEntry } from './helpers/copy-corpus';
 
 const at = (c: CopyEntry) => `${c.file}:${c.line}`;
 
@@ -14,6 +14,18 @@ describe('copy rules', () => {
   it('finds the trilingual corpus', () => expect(copy.length).toBeGreaterThan(400));
   it('has all three languages for every entry', () => {
     expect(copy.filter(c => !c.en || !c.ja || !c.id).map(at)).toEqual([]);
+  });
+  it('covers every Indonesian "Anda" line in the source by location', () => {
+    const uncovered: string[] = [];
+    for (const file of sourceFiles()) {
+      readSource(file).split('\n').forEach((text, i) => {
+        if (!/\bAnda\b/.test(text)) return;
+        const line = i + 1;
+        const hit = copy.some(c => c.loc.id && c.loc.id.file === file && line >= c.loc.id.line && line <= c.loc.id.end);
+        if (!hit) uncovered.push(`${file}:${line}: ${text.trim().slice(0, 100)}`);
+      });
+    }
+    expect(uncovered).toEqual([]);
   });
   it('has no em dash in user-visible text', () => {
     expect(copy.filter(c => [c.en, c.ja, c.id].some(t => t?.includes('—'))).map(at)).toEqual([]);
