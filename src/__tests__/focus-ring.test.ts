@@ -23,7 +23,7 @@ function offendingRules(): string[] {
 describe('focus ring', () => {
   it('is never cancelled by a :focus rule', () => {
     // css/base.css:49 defines the ring inside :where(), which has ZERO
-    // specificity — any later class rule silently wins. Cancelling the
+    // specificity: any later class rule silently wins. Cancelling the
     // outline there leaves keyboard users with no visible focus.
     expect(offendingRules()).toEqual([]);
   });

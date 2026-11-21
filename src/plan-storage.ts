@@ -74,5 +74,5 @@ export function migrateV1ToV2(): EmergencyPlan | null {
     if (!MAPPED.has(k)) plan.legacy[k] = v;
   }
   return plan;
-  // NOTE: does NOT remove v1 key — caller owns cleanup
+  // NOTE: does NOT remove v1 key, caller owns cleanup
 }

@@ -1,5 +1,5 @@
 /**
- * vite-sw-manifest.ts — Vite plugin: generate asset-manifest.json after build
+ * vite-sw-manifest.ts: Vite plugin: generate asset-manifest.json after build
  *
  * WHY THIS EXISTS:
  *   Vite adds a content hash to every output filename (e.g. index-a3f9b2.js).
@@ -9,7 +9,7 @@
  *   a manifest file at build time and let the SW read it at runtime.
  *
  * OUTPUT:
- *   public/asset-manifest.json — written after every `npm run build`
+ *   public/asset-manifest.json, written after every `npm run build`
  *   Shape: { "js": ["assets/index-abc123.js"], "css": ["assets/style-def456.css"] }
  *
  * USAGE in vite.config.ts:

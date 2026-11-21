@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 // On mobile .hamburger is a 44px flex column with 8px padding, leaving 24px
 // for three 2px bars. Vertical margins on the bars overflow that box, and flex
-// shrinks the bars to 0px — the menu button renders blank. jsdom has no
+// shrinks the bars to 0px, the menu button renders blank. jsdom has no
 // layout, so guard the rule itself.
 describe('hamburger icon', () => {
   const css = readFileSync(resolve(process.cwd(), 'css/layout.css'), 'utf8');

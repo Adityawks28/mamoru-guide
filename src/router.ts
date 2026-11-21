@@ -1,4 +1,4 @@
-// router.ts — hash-based view router
+// router.ts: hash-based view router
 // Maps #/route → section IDs to show. Everything else gets route-hidden.
 
 import { mountSectionNav } from './section-nav';

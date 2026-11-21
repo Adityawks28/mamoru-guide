@@ -1,4 +1,4 @@
-// i18n.ts — locale dictionary system
+// i18n.ts: locale dictionary system
 // Keys use dot-notation: 'nav.emergency', 'mode.learn.title', etc.
 // Coexists with the old [data-lang] CSS approach during migration.
 
@@ -9,7 +9,7 @@ import { id } from './locales/id';
 
 const LOCALES: Record<Language, Record<string, string>> = { en, ja, id };
 
-// Internal language state — updated by lang.ts via setI18nLang().
+// Internal language state: updated by lang.ts via setI18nLang().
 // Avoids a circular import (lang.ts ↔ i18n.ts).
 let _lang: Language = 'en';
 

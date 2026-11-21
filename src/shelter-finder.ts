@@ -287,7 +287,7 @@ function showManualFallback(): void {
       if (mapEl) mapEl.style.display = 'block';
       renderMap(city.lat, city.lng, nearest);
     } catch {
-      // Map unavailable — list still works
+      // Map unavailable: list still works
     }
   });
 }

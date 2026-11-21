@@ -42,7 +42,7 @@ self.addEventListener('activate', event => {
 // Fetch strategy:
 //   - Navigations + CSS use stale-while-revalidate: serve the cached copy fast,
 //     but refresh it from the network in the background so a redeploy shows up on
-//     the NEXT load — without needing a manual CACHE_NAME bump every time. Falls
+//     the NEXT load: without needing a manual CACHE_NAME bump every time. Falls
 //     back to cache (and index.html for navigations) when offline.
 //   - Everything else (content-hashed JS bundles, images, fonts) stays
 //     cache-first: a new build changes the hashed URL, so it's a cache miss → net.

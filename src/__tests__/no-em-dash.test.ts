@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-const DASH = '—';
+const DASH = '\u2014';
 const BINARY = /\.(png|jpe?g|gif|webp|ico|svg|woff2?|ttf|pmtiles|pbf|mp3|ogg|wav|zip|pdf)$/i;
 
 describe('no em dash in shipped sources', () => {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * build-shelter-data.mjs — official evacuation sites for the shelter finder
+ * build-shelter-data.mjs: official evacuation sites for the shelter finder
  *
  * Downloads the GSI (国土地理院) 指定緊急避難場所 GeoJSON tiles that cover
  * Kobe, Hanshin and Osaka, keeps the cities below, and writes

@@ -1,5 +1,5 @@
 /**
- * storage.ts — Typed localStorage wrapper
+ * storage.ts: Typed localStorage wrapper
  *
  * All localStorage keys used by the app are declared here in one place.
  * This prevents typos, key collisions, and makes it easy to see exactly
@@ -9,7 +9,7 @@
  */
 
 // ---------------------------------------------------------------------------
-// Schema — every localStorage key the app uses, with its value type
+// Schema: every localStorage key the app uses, with its value type
 // ---------------------------------------------------------------------------
 
 export interface StorageSchema {
@@ -19,17 +19,17 @@ export interface StorageSchema {
   /** Active theme: 'day' | 'night' */
   'mamoru-theme': string;
 
-  /** v1 emergency plan — flat key/value form data (kept for migration only) */
+  /** v1 emergency plan: flat key/value form data (kept for migration only) */
   'mamoru-emergency-plan': string;
 
-  /** v2 emergency plan — structured JSON (EmergencyPlan type from plan-model.ts) */
+  /** v2 emergency plan: structured JSON (EmergencyPlan type from plan-model.ts) */
   'mamoru-plan-v2': string;
 
-  /** Saved primary/backup shelters — JSON (SavedShelters type from shelter-storage.ts) */
+  /** Saved primary/backup shelters: JSON (SavedShelters type from shelter-storage.ts) */
   'mamoru-shelters': string;
 
   /**
-   * Active accessibility modes — space-separated list of class names.
+   * Active accessibility modes: space-separated list of class names.
    * Possible values: 'a11y-large-text', 'a11y-high-contrast',
    *                  'a11y-simplified', 'a11y-reduced-motion'
    * Empty string means no user preference set (system defaults apply).
