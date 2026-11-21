@@ -12,7 +12,7 @@ export const QUAKE_TIPS: Tip[] = [
   { en: "If you are outside, crouch in an open area. Stay away from walls and vending machines.", ja: "外にいるときは、広い場所でしゃがんでください。壁や自動販売機（じどうはんばいき）から離れてください。", id: "Jika di luar, jongkok di tempat terbuka. Jauhi tembok dan mesin penjual otomatis." },
   { en: "Switch off the breaker when you leave. Electrical fires can start when the power comes back on.", ja: "家を出るときは、ブレーカーを切ってください。電気がもどったときに、火事になることがあります。これを通電火災（つうでんかさい）といいます。", id: "Matikan breaker listrik saat kamu pergi. Kebakaran listrik bisa terjadi saat listrik menyala lagi.", claimId: "tip-breaker-fire" },
   { en: "Wear shoes. After a big earthquake, there can be broken glass on the floor.", ja: "靴をはいてください。大きな地震のあとは、床にガラスの破片（はへん）が落ちていることがあります。", id: "Pakai sepatu. Setelah gempa besar, bisa ada pecahan kaca di lantai.", claimId: "tip-shoes-glass" },
-  { en: "A tsunami can come after the earthquake. Go to high ground. Do not wait for sirens.", ja: "地震のあと、津波が来ることがあります。高い所へ逃げてください。サイレンを待たないでください。", id: "Tsunami bisa datang setelah gempa. Naik ke tempat tinggi. Jangan tunggu sirene." },
+  { en: "Near the coast, if the shaking is strong or long, go to high ground now. Do not wait for a warning.", ja: "海の近くで、強いゆれや長いゆれを感じたら、すぐに高い所へ逃げてください。警報（けいほう）を待たないでください。", id: "Jika kamu dekat pantai dan guncangannya kuat atau lama, segera ke tempat tinggi. Jangan tunggu peringatan.", claimId: "eqnow-7" },
   { en: "Keep spare batteries and a phone charger ready. In 1995, some areas of Kobe had no power for up to 6 days.", ja: "予備（よび）の電池と、スマホの充電器を用意してください。1995年の神戸では、長い所で6日間、電気が止まりました。", id: "Siapkan baterai cadangan dan pengisi daya ponsel. Pada 1995, sebagian Kobe tanpa listrik sampai 6 hari.", claimId: "tip-kobe-power" },
 ];
 
