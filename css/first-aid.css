@@ -242,3 +242,11 @@ body.day-mode .firstaid-nav-btn.primary {
 body.day-mode .firstaid-dot {
   background: rgba(0, 0, 0, 0.15);
 }
+
+/* Medical review note (Decision D-4) */
+.firstaid-review-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 12px 0;
+}

@@ -41,9 +41,9 @@ describe('claims registry', () => {
     }
   });
 
-  it('first-aid claims are pending medical review until Task 4 applies them', () => {
+  it('every first-aid step has a verified or changed claim (Task 4)', () => {
     for (const cat of categories) {
-      for (const s of cat.steps) expect(['needs-medical-review', 'verified', 'changed', 'removed']).toContain(CLAIMS[s.claimId].status);
+      for (const s of cat.steps) expect(['verified', 'changed'], s.claimId).toContain(CLAIMS[s.claimId].status);
     }
   });
 
@@ -63,13 +63,14 @@ describe('claims registry', () => {
     for (const id of Object.keys(CLAIMS)) expect(id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
   });
 
-  it('every claim is used by at least one item', () => {
+  it('every claim is used by at least one item, unless it is removed', () => {
     const used = new Set<string>([
       ...categories.flatMap((c) => c.steps.map((s) => s.claimId)),
       ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
       ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
     ]);
-    for (const id of Object.keys(CLAIMS)) expect(used.has(id), id).toBe(true);
+    // A removed claim stays in CLAIMS as a record, and no item may use it.
+    for (const [id, c] of Object.entries(CLAIMS)) expect(used.has(id), id).toBe(c.status !== 'removed');
   });
 });
 
