@@ -1,9 +1,17 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { loadLeaflet } from '../shelter-finder';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join, resolve } from 'node:path';
+import { loadLeaflet, LEAFLET_SRI } from '../shelter-finder';
 import { contacts } from '../contacts';
 
 const read = (f: string) => readFileSync(resolve(process.cwd(), f), 'utf8');
+
+// Files under public/<dir>, as './'-prefixed paths like the PRECACHE list.
+export function publicFiles(dir: string, skip: RegExp): string[] {
+  const walk = (d: string): string[] => readdirSync(resolve(process.cwd(), 'public', d), { withFileTypes: true })
+    .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);
+  return walk(dir).filter(f => !skip.test(f)).map(f => './' + f);
+}
 
 // Runs public/sw.js against a fake worker scope and returns what install cached.
 async function install(manifest: () => Promise<unknown>): Promise<string[]> {
@@ -38,15 +46,48 @@ describe('offline', () => {
     expect(link.getAttribute('crossorigin')).toBe('anonymous');
   });
 
-  it('Leaflet from the CDN is pinned by hash, so a tampered copy will not run', () => {
+  it('loads Leaflet from the vendored copy, pinned by hash', () => {
     document.head.innerHTML = '';
     void loadLeaflet().catch(() => {});
     const css = document.head.querySelector<HTMLLinkElement>('link[href*="leaflet"]')!;
     const js = document.head.querySelector<HTMLScriptElement>('script[src*="leaflet"]')!;
-    for (const el of [css, js]) {
-      expect(el.integrity).toMatch(/^sha256-[A-Za-z0-9+/]{43}=$/);
-      expect(el.crossOrigin).toBe('anonymous');
+    expect(css.getAttribute('href')).toMatch(/vendor\/leaflet\/leaflet\.css$/);
+    expect(js.getAttribute('src')).toMatch(/vendor\/leaflet\/leaflet\.js$/);
+    expect(css.href).not.toContain('unpkg');
+    expect(js.src).not.toContain('unpkg');
+    expect(css.integrity).toBe(LEAFLET_SRI.css);
+    expect(js.integrity).toBe(LEAFLET_SRI.js);
+  });
+
+  it('the vendored files are the published Leaflet 1.9.4', () => {
+    const hash = (f: string) => 'sha256-' + createHash('sha256').update(readFileSync(resolve(process.cwd(), f))).digest('base64');
+    expect(hash('public/vendor/leaflet/leaflet.js')).toBe(LEAFLET_SRI.js);
+    expect(hash('public/vendor/leaflet/leaflet.css')).toBe(LEAFLET_SRI.css);
+  });
+
+  it('precaches every vendored Leaflet file', async () => {
+    const files = publicFiles('vendor/leaflet', /LICENSE$/);
+    expect(files).toHaveLength(7);
+    const added = await install(async () => ({ js: [], css: [] }));
+    expect(added).toEqual(expect.arrayContaining(files));
+  });
+
+  it('every precached path exists, so one missing file cannot break the install', async () => {
+    const added = await install(async () => ({ js: [], css: [] }));
+    for (const url of added) {
+      if (url === './') continue;
+      const file = url === './index.html' ? 'index.html' : 'public/' + url.slice(2);
+      expect(existsSync(resolve(process.cwd(), file)), url).toBe(true);
     }
+  });
+
+  it('no source file requests unpkg.com', () => {
+    const walk = (d: string): string[] => readdirSync(d, { withFileTypes: true })
+      .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);
+    const offenders = walk(resolve(process.cwd(), 'src'))
+      .filter(f => !f.endsWith('offline.test.ts'))
+      .filter(f => readFileSync(f, 'utf8').includes('unpkg.com'));
+    expect(offenders).toEqual([]);
   });
 });
 

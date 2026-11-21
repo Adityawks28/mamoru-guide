@@ -7,6 +7,13 @@ const PRECACHE = [
   './img/favicon.svg',
   './img/icons/icon-192.svg',
   './img/icons/icon-512.svg',
+  './vendor/leaflet/leaflet.js',
+  './vendor/leaflet/leaflet.css',
+  './vendor/leaflet/images/layers.png',
+  './vendor/leaflet/images/layers-2x.png',
+  './vendor/leaflet/images/marker-icon.png',
+  './vendor/leaflet/images/marker-icon-2x.png',
+  './vendor/leaflet/images/marker-shadow.png',
 ];
 
 // Install: cache the whole app on the first visit, so it works offline from

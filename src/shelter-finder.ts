@@ -113,23 +113,27 @@ const OUT_OF_AREA_HTML = `
     <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
   </div>`;
 
-// Hashes as published for Leaflet 1.9.4: the browser refuses a CDN copy that
-// does not match, and CORS mode lets the service worker cache it.
+// Hashes as published for Leaflet 1.9.4. The app serves its own copy
+// (public/vendor/leaflet/), so the map code is available offline.
+export const LEAFLET_SRI = {
+  js: 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=',
+  css: 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',
+} as const;
+
 export function loadLeaflet(): Promise<void> {
   if (leafletLoaded) return Promise.resolve();
 
+  const base = import.meta.env.BASE_URL + 'vendor/leaflet/';
   return new Promise((resolve, reject) => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-    css.crossOrigin = 'anonymous';
+    css.href = base + 'leaflet.css';
+    css.integrity = LEAFLET_SRI.css;
     document.head.appendChild(css);
 
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-    script.crossOrigin = 'anonymous';
+    script.src = base + 'leaflet.js';
+    script.integrity = LEAFLET_SRI.js;
     script.onload = () => { leafletLoaded = true; resolve(); };
     script.onerror = () => {
       css.remove();
