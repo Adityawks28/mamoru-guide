@@ -20,10 +20,9 @@ export function initSourcesLoader(
     const { route, param } = (e as CustomEvent<RouteDetail>).detail;
     if (route !== 'learn' && route !== 'sources') return;
     pending ??= load();
-    pending.then(
-      mod => mod.showSources(param),
-      () => { pending = null; showError(); },
-    );
+    pending
+      .then(mod => mod.showSources(param))
+      .catch(() => { pending = null; showError(); });
   };
 
   document.addEventListener('mamoru:route', onRoute);

@@ -36,4 +36,14 @@ describe('sources loader', () => {
     expect(load).toHaveBeenCalledTimes(2);
     expect(show).toHaveBeenCalledWith(null);
   });
+  it('shows the load error when showSources throws, then tries again', async () => {
+    const show = vi.fn().mockImplementationOnce(() => { throw new Error('boom'); });
+    const load = vi.fn(async () => ({ showSources: show }));
+    stop = initSourcesLoader(load);
+    fire('learn'); await flush();
+    expect(document.querySelector('#sourcesList [data-i18n="sources.loadError"]')!.textContent).toBe(t('sources.loadError'));
+    fire('learn'); await flush();
+    expect(load).toHaveBeenCalledTimes(2);
+    expect(show).toHaveBeenCalledTimes(2);
+  });
 });
