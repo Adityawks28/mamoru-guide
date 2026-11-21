@@ -55,9 +55,9 @@ export const STEPS: NowStep[] = [
     en: 'Switch off the BREAKER and the gas before you leave',
     ja: '家を出る前に、ブレーカーを切って、ガスを止めてください',
     id: 'Matikan BREAKER listrik dan gas sebelum keluar',
-    detail_en: 'Many fires start when the power comes back on. Kobe 1995: fire burned about 7,000 buildings.',
-    detail_ja: '電気がもどったときに、火事が起きることがあります（通電火災）。1995年の神戸では、火事で約7,000棟が焼けました。',
-    detail_id: 'Banyak kebakaran terjadi saat listrik menyala lagi. Kobe 1995: api membakar sekitar 7.000 bangunan.',
+    detail_en: 'Electrical fires can start when the power comes back on. In 1995, fires burned down about 7,000 buildings.',
+    detail_ja: '電気がもどったときに、火事が起きることがあります（通電火災）。1995年の地震では、火事で約7,000棟が焼けました。',
+    detail_id: 'Kebakaran listrik bisa terjadi saat listrik menyala lagi. Pada 1995, api membakar habis sekitar 7.000 bangunan.',
   },
   {
     claimId: 'eqnow-6',
