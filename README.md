@@ -2,7 +2,7 @@
 
 Disaster preparedness guide for international students in Japan. Interactive PWA with earthquake scale, emergency vocabulary, bag packing game, and evacuation planning — in English, Japanese, and Indonesian.
 
-Made by [Aditya](https://github.com/Adityawks28).
+Built by Aditya, inspired by the 防災リーダー program by KICC (https://github.com/Adityawks28)
 
 ## Getting Started
 
