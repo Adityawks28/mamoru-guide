@@ -1,6 +1,6 @@
 import { createActor, type Action } from './actor';
 import { FIRSTAID_TIPS } from './tips';
-import { onMotionChange } from './motion';
+import { motionAllowed, onMotionChange } from './motion';
 import type { SpriteOptions } from './sprite';
 
 type Step =
@@ -74,6 +74,6 @@ export function initFirstAidScene(): void {
     if (allowed) tipTimer = window.setInterval(() => { if (current === null) showTip(tipIdx + 1); }, TIP_INTERVAL_MS);
     act(current);
   }
-  applyMotion(true);
+  applyMotion(motionAllowed());
   onMotionChange(applyMotion);
 }

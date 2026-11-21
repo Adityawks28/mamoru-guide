@@ -133,8 +133,11 @@ export function initMascot(): void {
     renderFact();
   }
 
+  // The idle timers run only while motion is allowed and the tab is visible.
+  const running = (): boolean => allowed && !document.hidden;
+
   function scheduleFactTimer(): void {
-    if (!allowed) return;
+    if (!running()) return;
     factTimer = window.setInterval(nextFact, FACT_INTERVAL_MS);
   }
   function clearFactTimer(): void {
@@ -142,18 +145,20 @@ export function initMascot(): void {
   }
 
   function scheduleBlink(): void {
-    if (!allowed) return;
+    if (!running()) return;
     const delay = BLINK_MIN_MS + Math.random() * (BLINK_MAX_MS - BLINK_MIN_MS);
     blinkTimer = window.setTimeout(() => {
       updateSprite(sprite, { blink: true });
-      window.setTimeout(() => {
+      blinkTimer = window.setTimeout(() => {
         updateSprite(sprite, { blink: false });
         scheduleBlink();
       }, BLINK_DURATION_MS);
     }, delay);
   }
+  // Also opens the eyes, in case the timer stops in the middle of a blink.
   function clearBlink(): void {
     if (blinkTimer !== null) { window.clearTimeout(blinkTimer); blinkTimer = null; }
+    if (sprite.dataset.blink) updateSprite(sprite, { blink: false });
   }
 
   function onPointerMove(e: MouseEvent): void {
@@ -244,6 +249,14 @@ export function initMascot(): void {
     }
   }
 
+  function onVisibility(): void {
+    clearFactTimer();
+    clearBlink();
+    scheduleFactTimer();
+    scheduleBlink();
+  }
+
   applyMotion(allowed);
   onMotionChange(applyMotion);
+  document.addEventListener('visibilitychange', onVisibility);
 }

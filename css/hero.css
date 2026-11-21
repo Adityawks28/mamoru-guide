@@ -137,5 +137,5 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
   .hero-title, .hero-kanji, .hero-subtitle { animation: none; opacity: 1; transform: none; }
   .px-blink-a { animation: none; }
   .px-blink-b { animation: none; visibility: hidden; }
-  .mascot-char { animation: none; }
+  .mascot-char, .scroll-hint { animation: none; }
 }

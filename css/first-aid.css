@@ -254,3 +254,7 @@ body.day-mode .firstaid-dot {
 /* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
 body.lang-ja .firstaid-header-title,
 body.lang-ja .firstaid-progress { font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .firstaid-timer.running { animation: none; }
+}

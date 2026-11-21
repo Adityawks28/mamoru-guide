@@ -1,5 +1,7 @@
 import { showToast } from './toast';
 import { currentLang } from './lang';
+import { motionAllowed } from './character/motion';
+import { REVIEW_NOTE } from './first-aid';
 
 interface DrillScenario {
   situation_en: string;
@@ -11,6 +13,8 @@ interface DrillScenario {
   explain_ja: string;
   explain_id: string;
   shake?: boolean;
+  /** First-aid content: show the medical review note (Decision D-4). */
+  firstAid?: boolean;
   claimId: string;
 }
 
@@ -27,9 +31,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'Call a friend to ask what to do', ja: '友達に電話して、どうすればいいか聞く', id: 'Telepon teman untuk bertanya apa yang harus dilakukan' },
     ],
     correct: 1,
-    explain_en: 'DROP to the ground. Take COVER under strong furniture. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
-    explain_ja: '床に体を低くしてください（DROP）。じょうぶな家具の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
-    explain_id: 'MERUNDUK ke lantai. BERLINDUNG di bawah perabot yang kuat. BERTAHAN. Jangan berlari saat guncangan. Itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
+    explain_en: 'DROP to the ground. Take COVER under a strong table. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
+    explain_ja: '床に体を低くしてください（DROP）。じょうぶな机の下に入ってください（COVER）。しっかりつかまってください（HOLD ON）。ゆれている間は、走らないでください。危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
+    explain_id: 'MERUNDUK ke lantai. BERLINDUNG di bawah meja yang kuat. BERTAHAN. Jangan berlari saat guncangan. Itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
     shake: true,
   },
   {
@@ -62,6 +66,7 @@ export const scenarios: DrillScenario[] = [
     explain_en: 'Press firmly and directly on the wound with the cleanest cloth you have. Call 119 for help. Do not move an injured person unless they are in immediate danger.',
     explain_ja: 'いちばんきれいな布で、傷口（きずぐち）を強く直接押さえてください。119番に電話してください。けがをした人は、動かさないでください。動かすのは、その場所がすぐに危険なときだけです。',
     explain_id: 'Tekan luka dengan kuat menggunakan kain paling bersih yang ada. Hubungi 119 untuk minta bantuan. Jangan pindahkan orang yang terluka, kecuali dia dalam bahaya langsung.',
+    firstAid: true,
   },
   {
     claimId: 'drill-step-4',
@@ -131,6 +136,7 @@ function reapplyLang(): void {
 }
 
 function triggerShake(container: HTMLElement): void {
+  if (!motionAllowed()) return;
   container.classList.add('shaking');
   if (navigator.vibrate) {
     navigator.vibrate([100, 50, 100, 50, 200]);
@@ -259,6 +265,7 @@ function handleDrillAnswer(idx: number): void {
         <span data-lang="ja">${s.explain_ja}</span>
         <span data-lang="id">${s.explain_id}</span>
       </div>
+      ${s.firstAid ? REVIEW_NOTE : ''}
       <button class="drill-next-btn" id="drillNextBtn">
         ${currentScenario < scenarios.length - 1
           ? getLangText('Next Scenario →', '次のシナリオ →', 'Skenario Berikutnya →')

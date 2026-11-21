@@ -268,7 +268,12 @@ body.day-mode .bag-result {
 @media (prefers-reduced-motion: reduce) {
   .bag-item { transition: none; }
   .bag-item.rejected { animation: none; }
-  #bag-scene .mamoru-sprite { animation: none; }
+  .bag-stat-value.over { animation: none; }
+  /* Same selectors as above: a shorter one loses to [data-load] on specificity. */
+  #bag-scene[data-load="light"] .mamoru-sprite,
+  #bag-scene[data-load="heavy"] .mamoru-sprite,
+  #bag-scene[data-load="strain"] .mamoru-sprite,
+  #bag-scene[data-load="reject"] .mamoru-sprite { animation: none; }
 }
 
 /* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */

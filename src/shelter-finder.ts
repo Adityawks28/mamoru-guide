@@ -88,9 +88,9 @@ function sourceNote(asOf: string): string {
 const OUT_OF_AREA_HTML = `
   <div class="shelter-out-of-area">
     <p>
-      <span data-lang="en">📍 You are outside the area of our list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
+      <span data-lang="en">📍 You are outside the area of this list. The list covers Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, and Osaka City. Find the evacuation sites near you on the official GSI hazard map:</span>
       <span data-lang="ja">📍 今いる場所は、このリストの地域の外です。このリストには、神戸市、芦屋市（あしやし）、西宮市（にしのみやし）があります。尼崎市（あまがさきし）、伊丹市（いたみし）、宝塚市（たからづかし）もあります。明石市（あかしし）と大阪市もあります。近くの避難場所（ひなんばしょ）を探してください。国土地理院（こくどちりいん）のハザードマップで探せます：</span>
-      <span data-lang="id">📍 Kamu berada di luar area daftar kami. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekatmu di peta bahaya resmi GSI:</span>
+      <span data-lang="id">📍 Kamu berada di luar area daftar ini. Daftar ini mencakup Kobe, Ashiya, Nishinomiya, Amagasaki, Itami, Takarazuka, Akashi, dan Kota Osaka. Cari tempat evakuasi di dekatmu di peta bahaya resmi GSI:</span>
     </p>
     <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
   </div>`;

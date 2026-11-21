@@ -41,10 +41,14 @@ describe('claims registry', () => {
     }
   });
 
-  it('every first-aid step has a verified or changed claim (Task 4)', () => {
-    for (const cat of categories) {
-      for (const s of cat.steps) expect(['verified', 'changed'], s.claimId).toContain(CLAIMS[s.claimId].status);
-    }
+  it('every claim that an app item uses is verified or changed', () => {
+    const usedIds = [
+      ...categories.flatMap((c) => c.steps.map((s) => s.claimId)),
+      ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
+      ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
+    ];
+    expect(usedIds.length).toBeGreaterThan(0);
+    for (const id of usedIds) expect(['verified', 'changed'], id).toContain(CLAIMS[id].status);
   });
 
   it('verified and changed claims have at least one source', () => {

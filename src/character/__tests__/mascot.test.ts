@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 beforeEach(() => {
   document.body.innerHTML = '<div id="mascot"></div>';
@@ -105,5 +105,65 @@ describe('mascot', () => {
     const before = en();
     vi.advanceTimersByTime(20000);
     expect(en()).toBe(before);
+  });
+
+  describe('when the tab is hidden', () => {
+    let hidden = false;
+    const setHidden = (h: boolean) => {
+      hidden = h;
+      document.dispatchEvent(new Event('visibilitychange'));
+    };
+    const en = () => document.querySelector('#mascot [data-lang="en"]')!.textContent;
+    const blinks = () => document.querySelector('#mascot .mascot-svg')!.getAttribute('data-blink');
+
+    beforeEach(() => {
+      hidden = false;
+      Object.defineProperty(document, 'hidden', { configurable: true, get: () => hidden });
+    });
+    afterEach(() => {
+      delete (document as any).hidden;
+    });
+
+    it('pauses the fact rotation and the blink, and starts them again when visible', async () => {
+      const { initMascot } = await import('../mascot');
+      initMascot();
+      setHidden(true);
+      const before = en();
+      let blinked = false;
+      for (let t = 0; t < 30000; t += 50) {
+        vi.advanceTimersByTime(50);
+        if (blinks()) blinked = true;
+      }
+      expect(en()).toBe(before);
+      expect(blinked).toBe(false);
+
+      setHidden(false);
+      for (let t = 0; t < 8100; t += 50) {
+        vi.advanceTimersByTime(50);
+        if (blinks()) blinked = true;
+      }
+      expect(en()).not.toBe(before);
+      expect(blinked).toBe(true);
+    });
+
+    it('does not leave the eyes shut when the tab hides during a blink', async () => {
+      const { initMascot } = await import('../mascot');
+      initMascot();
+      for (let t = 0; t < 7000 && !blinks(); t += 10) vi.advanceTimersByTime(10);
+      expect(blinks()).toBeTruthy();
+      setHidden(true);
+      expect(blinks()).toBeFalsy();
+      vi.advanceTimersByTime(30000);
+      expect(blinks()).toBeFalsy();
+    });
+
+    it('does not start the timers when the page loads in a hidden tab', async () => {
+      hidden = true;
+      const { initMascot } = await import('../mascot');
+      initMascot();
+      const before = en();
+      vi.advanceTimersByTime(30000);
+      expect(en()).toBe(before);
+    });
   });
 });

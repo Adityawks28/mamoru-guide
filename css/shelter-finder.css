@@ -262,3 +262,8 @@ body.day-mode .shelter-map-container.offline {
 
 /* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
 body.lang-ja .shelter-result-header { font-size: 14px; }
+
+/* reduced motion: the text under the spinner still says the app is busy */
+@media (prefers-reduced-motion: reduce) {
+  .shelter-loading-spinner { animation: none; }
+}
