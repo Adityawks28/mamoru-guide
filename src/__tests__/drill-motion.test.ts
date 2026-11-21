@@ -67,3 +67,19 @@ describe('drill shake and reduced motion', () => {
     expect(vibrate).not.toHaveBeenCalled();
   });
 });
+
+describe('drill first-aid step', () => {
+  it('shows the medical review note under the head wound step only', () => {
+    mockReducedMotion(true);
+    const container = startDrill();
+    vi.advanceTimersByTime(2500);
+    const notes: boolean[] = [];
+    for (let step = 0; step < 6; step++) {
+      container.querySelector<HTMLButtonElement>('.drill-option')!.click();
+      notes.push(!!container.querySelector('#drillExplain .firstaid-review-note'));
+      container.querySelector<HTMLButtonElement>('#drillNextBtn')!.click();
+    }
+    expect(notes).toEqual([false, false, true, false, false, false]);
+    expect(container.querySelector('.drill-result')).toBeTruthy();
+  });
+});

@@ -1,6 +1,7 @@
 import { showToast } from './toast';
 import { currentLang } from './lang';
 import { motionAllowed } from './character/motion';
+import { REVIEW_NOTE } from './first-aid';
 
 interface DrillScenario {
   situation_en: string;
@@ -12,6 +13,8 @@ interface DrillScenario {
   explain_ja: string;
   explain_id: string;
   shake?: boolean;
+  /** First-aid content: show the medical review note (Decision D-4). */
+  firstAid?: boolean;
   claimId: string;
 }
 
@@ -63,6 +66,7 @@ export const scenarios: DrillScenario[] = [
     explain_en: 'Press firmly and directly on the wound with the cleanest cloth you have. Call 119 for help. Do not move an injured person unless they are in immediate danger.',
     explain_ja: 'いちばんきれいな布で、傷口（きずぐち）を強く直接押さえてください。119番に電話してください。けがをした人は、動かさないでください。動かすのは、その場所がすぐに危険なときだけです。',
     explain_id: 'Tekan luka dengan kuat menggunakan kain paling bersih yang ada. Hubungi 119 untuk minta bantuan. Jangan pindahkan orang yang terluka, kecuali dia dalam bahaya langsung.',
+    firstAid: true,
   },
   {
     claimId: 'drill-step-4',
@@ -261,6 +265,7 @@ function handleDrillAnswer(idx: number): void {
         <span data-lang="ja">${s.explain_ja}</span>
         <span data-lang="id">${s.explain_id}</span>
       </div>
+      ${s.firstAid ? REVIEW_NOTE : ''}
       <button class="drill-next-btn" id="drillNextBtn">
         ${currentScenario < scenarios.length - 1
           ? getLangText('Next Scenario →', '次のシナリオ →', 'Skenario Berikutnya →')

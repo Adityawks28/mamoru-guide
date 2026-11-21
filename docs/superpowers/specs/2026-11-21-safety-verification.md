@@ -24,7 +24,7 @@
 
 Alert names (Part C): 9 rows. Changed 6 (C2, C3, C4, C5, C6, C8), new line 1 (C7), unchanged 2 (C1, C9).
 
-Claim statuses set by this change: verified 2 (`eqnow-4`, `typhoon-prep-4`), changed 15 (`typhoon-prep-5`, `typhoon-prep-1`, `eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stays `needs-medical-review`; it is a first-aid item.
+Claim statuses set by this change: verified 2 (`eqnow-4`, `typhoon-prep-4`), changed 15 (`typhoon-prep-5`, `typhoon-prep-1`, `eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stayed `needs-medical-review`; it is a first-aid item. The fix wave after the final review set it to `changed` (remaining verification R55).
 
 ## Actions that were removed or replaced
 

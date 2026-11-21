@@ -11,15 +11,17 @@
 - Verdict: `match` = the source says the same thing. `partial` = the source says part of it, or says it with a smaller scope. `wrong` = the source says something different. `not found` = no checked official source says it.
 - Final English: the new English text, or "removed". Japanese and Indonesian have the same meaning.
 - Source IDs are the keys in `SOURCES` (`src/data/sources.ts`). The Sources section at the end gives the publisher, title and URL of each.
-- Claims: only `drill-step-3` is in `CLAIMS`. It stays `needs-medical-review`; this change adds `shishin-2020-citizen` to its sources. The quiz, the scale, the bag items, the captions and the contacts have no claim IDs; this table is their record.
+- Claims: only `drill-step-3` is in `CLAIMS`. This change adds `shishin-2020-citizen` to its sources. The fix wave after the final review sets it to `changed` (Ruling R17: the status records source agreement, not medical sign-off; see R55). The quiz, the scale, the bag items, the captions and the contacts have no claim IDs; this table is their record.
 
 ## Results
 
 | Outcome | Rows |
 |---|---|
-| Kept, no text change | 38 (R1, R3, R4, R5, R6, R8, R11, R13, R17, R27, R28, R29, R35, R42, R51, R52, R53, R55, R60, R61, R64, R67, R69, R70, R72, R73, R75, R76, R78, R79, R80, R85, R88, R91, R92, R93, R95, R98) |
+| Kept, no text change | 37 (R1, R3, R4, R5, R6, R8, R11, R13, R17, R27, R28, R29, R35, R42, R51, R52, R53, R60, R61, R64, R67, R69, R70, R72, R73, R75, R76, R78, R79, R80, R85, R88, R91, R92, R93, R95, R98) |
 | Cut to a sourced text | 54 (53 rows and X1) |
 | Removed (whole line, option or detail) | 7 (R38, R39, R43, R47, R48, R54, R82) |
+
+R55 (the `drill-step-3` status) changed in the fix wave after the final review. The step text is the same; the drill now shows the review note under it.
 
 R51 needed no change: an earlier commit already gave the code comment the Osaka wording. R60 is kept, and its text now also replaces R57 to R59.
 
@@ -92,6 +94,7 @@ Sources: osaka-pref-bag (大阪府 非常持ち出し品リスト例 and 備蓄�
 | ID | File:line | Claim (old English) | Source | Source says (JA quote / EN gist) | Verdict | Final English |
 |---|---|---|---|---|---|---|
 | R54 | drill.ts:58 (was 59) | Wrong option: "Pour water on the wound to clean it" | shishin-2020-citizen VI-9 | 「可能であれば、すみやかに傷口を水道水など清潔な流水で十分に洗ってください。」 / For cuts and scrapes, washing is the official advice, so this is not a clearly wrong option. | wrong | removed (3 options stay; `correct` stays 0; no new option) |
+| R55 | drill.ts:53 claim status | `drill-step-3` was `needs-medical-review`, with no note on screen | shishin-2020-citizen VI-1, VI-9, VI-10 (R52 to R54) | R52 and R53 match; R54 removed one option. Ruling R17: the status records source agreement. | match | `changed`. The drill now shows the first-aid review note under this step: "No medical professional checked these steps. The steps come from official guidance." (fix wave after the final review) |
 
 ### Earthquake scene captions (`src/character/earthquake-scene.ts:179-184`)
 
