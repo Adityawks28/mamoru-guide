@@ -708,6 +708,19 @@ export const SOURCES: Record<SourceId, Source> = {
     url: 'https://emg.yahoo.co.jp/',
     checked: '2026-11-21',
   },
+  // Checked in a real browser on 2026-11-21 (verification rows R70 and R76).
+  'jhelp-home': {
+    publisher: 'The World Helpline',
+    title: 'TheWorldHelpline.org',
+    url: 'https://jhelp.com/',
+    checked: '2026-11-21',
+  },
+  'yorisoi-n2': {
+    publisher: '一般社団法人 社会的包摂サポートセンター',
+    title: 'よりそいホットライン 外国語による相談',
+    url: 'https://www.since2011.net/yorisoi/n2/',
+    checked: '2026-11-21',
+  },
 };
 
 export type ClaimStatus = 'verified' | 'changed' | 'removed' | 'needs-medical-review' | 'pending';

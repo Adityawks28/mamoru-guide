@@ -2,7 +2,7 @@
 
 - Date: 2026-11-21
 - Scope: the factual lines that the medical, history and safety verifications do not cover. These are the quiz (`src/quiz.ts`), the shindo scale, the bag items (`src/data.ts`), drill step 3 (`src/drill.ts`), the earthquake and bag scene captions (`src/character/`), the Show This card (`src/show-this.ts`), the contacts (`src/contacts.ts`), the locale fact keys (`src/locales/*.ts`) and the remaining page text in `index.html`. The check has 98 rows (R1 to R98) and 1 extra row (X1).
-- Evidence: two independent AI research passes on 2026-11-21. The first pass compared each line with official sources and quoted them. The second pass (the audit) loaded the sources again, checked the quotes and corrected some rows. When the two passes disagreed, the audit decided. The owner checked one page in a browser (R73).
+- Evidence: two independent AI research passes on 2026-11-21. The first pass compared each line with official sources and quoted them. The second pass (the audit) loaded the sources again, checked the quotes and corrected some rows. When the two passes disagreed, the audit decided. The owner checked one page in a browser (R73). The controller checked two more pages in a real browser on 2026-11-21 (R70, R76).
 - Source rule: Lines that no official source certifies are removed. A line stays only when an official page, or the service's own page for its own service, says the same thing.
 - Line numbers are for this commit (after the change). A removed line shows the line where it was.
 
@@ -120,9 +120,11 @@ R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブ
 | R65 | contacts.ts:21 | 119: "Fire, medical emergencies, rescue" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / "rescue" is not on the checked pages. | partial | Fire and ambulance |
 | R66 | contacts.ts:22 | 110: "Crime, accidents, lost property" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / About 33万件 non-urgent calls are a problem. Lost property is not an emergency. | wrong | Crimes and accidents that need the police now |
 | R68 | contacts.ts:26 | AMDA: "Medical advice for foreigners in many languages" | amda-activities; amda-indonesia | "We help you to find medical institutions … provide information on healthcare and welfare systems"; "10:00～16:00" / Not medical advice. | partial | Help to find a hospital, and information on the health and welfare systems, in many languages. 10:00 to 16:00 |
+| R70 | contacts.ts:30 | The World Helpline, 050-6879-9956: "Help with any question, from small questions to emergencies. Open 24 hours, every day" | jhelp-home | Checked in a real browser on 2026-11-21: "Call 24 hours a day, from anywhere about anything, anytime from a simple question to emergency assistance." "… call 050-6879-9956 …" "24 Hours / 7 Days a Week". | match | kept (no text change) |
 | R71 | contacts.ts:31 | Immigration Info: "Questions about visas, residence status, and the zairyu card" | isa-info-center | 「出入国手続、在留手続等に関する一般的なご案内」; 「午前8:30~午後5:15(土日・祝日・年末年始(12/29~1/3)を除く)」. The number 0570-013904 is confirmed (ナビダイヤル). | partial | General questions about entry and residence procedures. Weekdays 8:30 to 17:15 |
 | R73 | contacts.ts:35 | Indonesian Embassy Tokyo, 03-3441-4201 | mofa-emblist-asia | The MOFA page blocks automated access, so the owner opened it in a browser on 2026-11-21. It lists the Embassy of the Republic of Indonesia: 「東京都品川区東五反田5-2-9」(移転 2023-12-01)「電話：03-3441-4201」. | match | kept (no text change) |
 | R74 | contacts.ts:36 | Indonesian Consulate Osaka, 06-6449-9898: "Serves the Kansai region (Kobe, Osaka, Kyoto)" | osaka-pref-consulates; hyogo-pref-consulates | 「在大阪インドネシア共和国総領事館」「06-6449-9898」 on both prefecture lists. Neither list gives the consulate's area. | partial | Number kept. Consular help for Indonesian citizens (area text removed) |
+| R76 | contacts.ts:40 | Yorisoi Hotline, 0120-279-338: "Free help in many languages. Press 2 for foreign languages, every day from 10:00 to 22:00" | yorisoi-n2 | Checked in a real browser on 2026-11-21: "For consultation in foreign languages, please press 2 after the guidance." "The consultation hours for the Foreign Language Line are available from 10:00 a.m. to 10:00 p.m. everyday." 「全国ライン 0120-279-338」. | match | kept (no text change) |
 
 ### Locales and page text (`src/locales/*.ts`, `index.html`)
 
@@ -145,12 +147,11 @@ R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブ
 
 - R92, index.html:796, Yahoo! 防災速報 "Live alerts for your location": kept. The service's own page (yahoo-bousai) says 「さまざまな防災情報を迅速にプッシュ通知」 and 「現在地と国内3地点まで 設定可能」. It is the primary source for its own service.
 - R73, the Tokyo embassy card: kept after the owner's browser check (see the Contacts table).
+- R70 (The World Helpline) and R76 (Yorisoi Hotline): verified in a real browser on 2026-11-21 and kept (see the Contacts table).
 - Q1 option "Stand in a doorway": kept as a wrong option, as the safety verification decided. It states no fact.
 
 ## Open points
 
-- R76: Yorisoi changed its phone guidance on 2026-04-01. The English and Indonesian pages still say "press 2". A test call or a browser check is advised.
-- R70: The World Helpline's site news stops in 2020. A test call is advised.
 - R71: 0570-013904 is a ナビダイヤル (charged call). The card does not say this.
 - Bag item names with no list entry stay as game choices: "Printed hazard map", "Strong shoes", "Emergency contacts (paper)", "Laminated phrase card". The owner decides if they stay.
 
@@ -182,5 +183,7 @@ New in `SOURCES` with this change:
 | npa-quake-driver | 警察庁 | 大地震が発生したときに運転者がとるべき措置 | https://www.npa.go.jp/bureau/traffic/seibi2/saigaiji/daizisinnunntennsya.html | 2026-11-21 |
 | kankocho-safety-tips | 観光庁 | 訪日外国人旅行者の安全確保: ツール (Safety tips) | https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html | 2026-11-21 |
 | yahoo-bousai | LINEヤフー | Yahoo!防災速報 | https://emg.yahoo.co.jp/ | 2026-11-21 |
+| jhelp-home | The World Helpline | TheWorldHelpline.org | https://jhelp.com/ | 2026-11-21 (in a real browser) |
+| yorisoi-n2 | 一般社団法人 社会的包摂サポートセンター | よりそいホットライン 外国語による相談 | https://www.since2011.net/yorisoi/n2/ | 2026-11-21 (in a real browser) |
 
 cao-ichinitimae-battery stays in `SOURCES`: no app line uses it, but the safety verification cites it as evidence for B18 and B30.
