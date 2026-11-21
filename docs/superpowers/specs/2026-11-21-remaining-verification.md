@@ -23,6 +23,8 @@
 
 R55 (the `drill-step-3` status) changed in the fix wave after the final review. The step text is the same; the drill now shows the review note under it.
 
+高潮 (storm surge) in Indonesian: the JMA multilingual dictionary (jma-multilingual, xlsx updated 2026-11-12, row No. 92) gives "Gelombang pasang". The app keeps this term (src/shelter-finder.ts:68, index.html:783), and the glossary now has the row.
+
 R51 needed no change: an earlier commit already gave the code comment the Osaka wording. R60 is kept, and its text now also replaces R57 to R59.
 
 Some cut rows also lose part of their text: R10 (the survival-days sentence and the option "Umbrella"), R74 (the area text), R94 ("Use this time to prepare.") and R96 (two sentences).
