@@ -5,13 +5,15 @@ import { SOURCES } from '../data/sources';
 
 const contains = (text: string | undefined, term: string) => (text ?? '').toLowerCase().includes(term.toLowerCase());
 
-function mismatches(copy: CopyEntry[], terms: ReadonlyArray<GlossaryTerm>): string[] {
+// en and id: an entry whose ja has the term must use the term's en or id.
+// ja: an entry whose en has the term must use the Japanese term, so a やさしい日本語 rewrite cannot drop it.
+function mismatches(copy: CopyEntry[], terms: ReadonlyArray<GlossaryTerm>, lang: 'en' | 'ja' | 'id'): string[] {
+  const key = lang === 'ja' ? 'en' : 'ja';
   const out: string[] = [];
   for (const t of terms) {
     for (const c of copy) {
-      if (!c.ja?.includes(t.ja)) continue;
-      if (!contains(c.en, t.en)) out.push(`${t.ja} en "${t.en}" ${locOf(c, 'en')}: ${c.en}`);
-      if (!contains(c.id, t.id)) out.push(`${t.ja} id "${t.id}" ${locOf(c, 'id')}: ${c.id}`);
+      if (!contains(c[key], t[key])) continue;
+      if (!contains(c[lang], t[lang])) out.push(`${t.ja} ${lang} "${t[lang]}" ${locOf(c, lang)}: ${c[lang]}`);
     }
   }
   return out;
@@ -34,13 +36,17 @@ describe('term glossary', () => {
       .map(outer => `${inner.ja} in ${outer.ja}`));
     expect(broken).toEqual([]);
   });
-  it('reports a string that drops part of a term', () => {
+  it('reports a string that drops part of a term, per language', () => {
     const entry: CopyEntry = { file: 'x.ts', line: 1, key: '', kind: 'descriptive', loc: {}, ja: '避難所へ行く', en: 'Go to the Evacuation Shelter', id: 'Pergi ke pengungsian' };
     const term: GlossaryTerm = { ja: '避難所', reading: 'ひなんじょ', en: 'evacuation shelter', id: 'tempat pengungsian', source: 'x' };
-    expect(mismatches([entry], [term])).toEqual(['避難所 id "tempat pengungsian" x.ts:1: Pergi ke pengungsian']);
+    const plain: CopyEntry = { ...entry, line: 2, ja: 'にげる ところへ 行く' };
+    expect(mismatches([entry], [term], 'en')).toEqual([]);
+    expect(mismatches([entry], [term], 'id')).toEqual(['避難所 id "tempat pengungsian" x.ts:1: Pergi ke pengungsian']);
+    expect(mismatches([entry, plain], [term], 'ja')).toEqual(['避難所 ja "避難所" x.ts:2: にげる ところへ 行く']);
   });
-  // Task 2 failure list: .superpowers/sdd/2026-11-21-content-quality/task-2-failures.md
-  // To enable: expect(mismatches(loadCopy().filter(c => c.file !== 'src/data/glossary.ts'), GLOSSARY)).toEqual([]).
-  // The filter is needed because the corpus walker also reads glossary.ts, whose entries match themselves.
-  it.todo('glossary terms are consistent (enabled by Task 7, 8, 9a)');
+  // Failure lists: .superpowers/sdd/2026-11-21-content-quality/task-2-failures.md
+  // To enable one: import loadCopy, then expect(mismatches(loadCopy(), GLOSSARY, '<lang>')).toEqual([]).
+  it.todo('glossary terms are consistent in English (enabled by Task 7)');
+  it.todo('glossary terms are consistent in Japanese (enabled by Task 8)');
+  it.todo('glossary terms are consistent in Indonesian (enabled by Task 9a)');
 });

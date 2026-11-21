@@ -278,8 +278,10 @@ export function loadCopy(): CopyEntry[] {
     const p = join(locales, `${l}.ts`);
     localeFiles[l] = { file: relative(ROOT, p), src: readFileSync(p, 'utf8') };
   }
+  // The glossary holds reference terms in ja/en/id objects, not user-visible text.
+  const glossary = resolve(ROOT, 'src/data/glossary.ts');
   for (const p of walk(resolve(ROOT, 'src'))) {
-    if (p.startsWith(locales)) continue;
+    if (p.startsWith(locales) || p === glossary) continue;
     const text = readFileSync(p, 'utf8');
     out.push(...fromObjectLiterals(relative(ROOT, p), text));
     out.push(...fromHtml(relative(ROOT, p), text));

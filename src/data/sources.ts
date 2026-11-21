@@ -11,7 +11,7 @@ export interface Source {
 export const SOURCES: Record<SourceId, Source> = {
   'jma-multilingual': {
     publisher: '気象庁 (Japan Meteorological Agency)',
-    title: '多言語辞書データ (気象情報等に関する多言語辞書, xlsx updated 2026-03-26)',
+    title: '多言語辞書データ (気象情報等に関する多言語辞書, xlsx updated 2026-11-12)',
     url: 'https://www.data.jma.go.jp/developer/multilingual.html',
     checked: '2026-11-21',
   },
@@ -19,6 +19,24 @@ export const SOURCES: Record<SourceId, Source> = {
     publisher: '気象庁 (Japan Meteorological Agency)',
     title: 'Aftershocks',
     url: 'https://www.jma.go.jp/jma/en/Activities/aftershock.html',
+    checked: '2026-11-21',
+  },
+  'jma-nagasaki-levels-id': {
+    publisher: '長崎地方気象台 (JMA Nagasaki Local Meteorological Office)',
+    title: 'List of evacuation actions (Indonesian)',
+    url: 'https://www.data.jma.go.jp/nagasaki-c/kikikuru/image/List%20of%20evacuation%20actions_ID.pdf',
+    checked: '2026-11-21',
+  },
+  'cao-evacuation-points-en': {
+    publisher: 'Cabinet Office (Disaster Management) and Fire and Disaster Management Agency',
+    title: 'Evacuation Essentials Under COVID-19 Crisis: 5 points to keep in mind (English)',
+    url: 'https://www.bousai.go.jp/kokusai/evacuation_points/pdf/point_en.pdf',
+    checked: '2026-11-21',
+  },
+  'cao-evacuation-points-id': {
+    publisher: 'Cabinet Office (Disaster Management) and Fire and Disaster Management Agency',
+    title: 'Poin Evakuasi Di Bawah COVID-19 Crisis: 5 hal yang harus diperhatikan (Indonesian)',
+    url: 'https://www.bousai.go.jp/kokusai/evacuation_points/pdf/point_id.pdf',
     checked: '2026-11-21',
   },
   'cao-countermeasures': {
