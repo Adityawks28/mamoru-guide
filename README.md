@@ -28,6 +28,10 @@ npm run preview    # preview the built version locally
 
 Output goes to `dist/`.
 
+### Fonts
+
+Run `npm run fonts` when a text change adds a new character, then commit `public/fonts/` and `scripts/fonts-manifest.json`. The first run needs the internet to download the source fonts.
+
 ### Type Check
 
 ```bash
@@ -38,7 +42,7 @@ npx tsc --noEmit
 
 Automatically deployed to GitHub Pages on every push to `main` via GitHub Actions.
 
-Change CACHE_NAME in public/sw.js on every release.
+The build stamps the service worker cache name with a hash of the build output, so each deploy refreshes the offline copy.
 
 **Setup:** Go to repo Settings → Pages → Source → select **GitHub Actions**.
 

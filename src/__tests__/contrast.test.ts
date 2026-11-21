@@ -79,3 +79,45 @@ describe('WCAG AA contrast for text tokens', () => {
     expect(r).toBeGreaterThanOrEqual(AA_NORMAL);
   });
 });
+
+/** Reads `--name: rgba(r,g,b,a)` and returns its RGB and alpha. */
+function rgbaOf(name: string, occurrence: number): [RGB, number] {
+  const all = [...vars.matchAll(
+    new RegExp(`--${name}\\s*:\\s*rgba\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*([\\d.]+)\\s*\\)`, 'g'),
+  )];
+  expect(all.length).toBeGreaterThan(occurrence);
+  const m = all[occurrence];
+  return [[Number(m[1]), Number(m[2]), Number(m[3])], Number(m[4])];
+}
+
+// .bag-btn.secondary (the shelter Try again and Reload buttons): --accent text
+// and border on the page and on a card, and --accent-contrast on --accent on hover.
+describe('WCAG AA contrast for the secondary button', () => {
+  const bagCss = readFileSync(resolve(__dirname, '../../css/bag-game.css'), 'utf8');
+  const NIGHT_ACCENT = colorOf('meriken-amber', 0);  // :root --accent: var(--meriken-amber)
+  const DAY_ACCENT = colorOf('accent', 0);           // body.day-mode hex match (#8a4f08)
+  const NIGHT_ON_ACCENT = colorOf('accent-contrast', 0);
+  const DAY_ON_ACCENT = colorOf('accent-contrast', 1);
+  const [nightCard, nightCardA] = rgbaOf('card-bg', 0);
+  const [dayCard, dayCardA] = rgbaOf('card-bg', 1);
+
+  it('uses --accent for text and --accent-contrast on hover', () => {
+    expect(bagCss).toMatch(/\.bag-btn\.secondary\s*\{[^}]*color:\s*var\(--accent\)/);
+    expect(bagCss).toMatch(/\.bag-btn\.secondary:hover\s*\{[^}]*background:\s*var\(--accent\);\s*color:\s*var\(--accent-contrast\)/);
+  });
+
+  it('night: --accent clears AA on the page and on a card', () => {
+    expect(ratio(NIGHT_ACCENT, NIGHT_BG)).toBeGreaterThanOrEqual(AA_NORMAL);
+    expect(ratio(NIGHT_ACCENT, composite(nightCard, nightCardA, NIGHT_BG))).toBeGreaterThanOrEqual(AA_NORMAL);
+  });
+
+  it('day: --accent clears AA on the page and on a card', () => {
+    expect(ratio(DAY_ACCENT, DAY_BG)).toBeGreaterThanOrEqual(AA_NORMAL);
+    expect(ratio(DAY_ACCENT, composite(dayCard, dayCardA, DAY_BG))).toBeGreaterThanOrEqual(AA_NORMAL);
+  });
+
+  it('hover: --accent-contrast clears AA on --accent in night and day', () => {
+    expect(ratio(NIGHT_ON_ACCENT, NIGHT_ACCENT)).toBeGreaterThanOrEqual(AA_NORMAL);
+    expect(ratio(DAY_ON_ACCENT, DAY_ACCENT)).toBeGreaterThanOrEqual(AA_NORMAL);
+  });
+});

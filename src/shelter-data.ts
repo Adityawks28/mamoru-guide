@@ -24,14 +24,19 @@ let list: Promise<ShelterList> | null = null;
 
 // Built by scripts/build-shelter-data.mjs. A separate chunk, loaded on the
 // first search; the service worker precaches it with the other assets.
-export function loadShelters(): Promise<ShelterList> {
-  list ??= import('./data/shelters.json').then(({ default: data }) => ({
-    source: data.source,
-    asOf: data.asOf,
-    sites: (data.sites as Row[]).map(([name, lat, lng, flags, address]) => ({
-      name, lat, lng, address,
-      types: HAZARD_BITS.filter((_, i) => flags & (1 << i)),
-    })),
-  }));
+export function loadShelters(load: () => Promise<{ default: unknown }> = () => import('./data/shelters.json')): Promise<ShelterList> {
+  list ??= load().then(({ default: raw }) => {
+    const data = raw as { source: string; asOf: string; sites: unknown[] };
+    return {
+      source: data.source,
+      asOf: data.asOf,
+      sites: (data.sites as Row[]).map(([name, lat, lng, flags, address]) => ({
+        name, lat, lng, address,
+        types: HAZARD_BITS.filter((_, i) => flags & (1 << i)),
+      })),
+    };
+  });
+  // A failed load (for example offline before the worker installed) must not stay cached.
+  list.catch(() => { list = null; });
   return list;
 }
