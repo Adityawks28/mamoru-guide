@@ -17,8 +17,8 @@
 
 | Outcome | Rows |
 |---|---|
-| Action already right (no text change by this task) | 25 |
-| Corrected by this task | 24 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B22, B23, B25, B27, B28, B30, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
+| Action already right (no text change by this task) | 24 |
+| Corrected by this task | 25 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B22, B23, B25, B27, B28, B30, B35, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
 | Removed, because no official source certifies the line | 3 (B38, B43, B44) |
 | Total | 52 |
 
@@ -101,7 +101,7 @@ Claim statuses set by this change: verified 2 (`eqnow-4`, `typhoon-prep-4`), cha
 | B32 | index.html:836 | Close all storm shutters (雨戸). | jma-fukuoka-typhoon | 「窓や雨戸を閉め、しっかりと鍵をかけしましょう。」 | match | kept | (No change.) |
 | B33 | index.html:837 | Fill the bathtub with water to flush the toilet. | jma-fukuoka-typhoon | 「浴槽に水を張って生活用水を確保」 | match | kept | (No change.) |
 | B34 | index.html:838 | Know your evacuation route. | jma-fukuoka-typhoon | 「避難場所として指定されている場所への避難経路を確認しましょう。」 | match | kept | (No change.) |
-| B35 | index.html:848 | Stay indoors, away from windows. | jma-fukuoka-typhoon; gov-online-bousai-8072 | As B22 and B9. | match | kept | (No change.) |
+| B35 | index.html:847 | Stay indoors, away from windows. | jma-fukuoka-typhoon | As B22: 「台風接近中は不要な外出は控え、危険な場所へは近づかないようにしましょう。」; 「不要不急な外出は避け、台風が過ぎ去るのを待ちましょう。」 / Do not go out without need. No recorded typhoon source says to stay indoors at all times or to stay away from windows. B9 uses a gov-online-bousai-8072 window sentence for an earthquake tip; that page returned 403 on 2026-11-21, so its typhoon use is unconfirmed. | differs (scope) | no claim; changed | Do not go out unless you need to |
 | B36 | index.html:849 | Never go outside "to check". | kantei-taifu | 「雨で増水した川や田んぼを見に行って流されてしまったり」 / People who go to look at rivers or rice fields are swept away. | match | kept | (No change.) |
 | B37 | index.html:850 | Stay away from rivers, canals, and underpasses. | kantei-taifu | 「道路のアンダーパス等の地下空間の水没」 / Underpasses fill with water. | match | kept | (No change.) |
 | B38 | index.html:851 | Check NHK / Yahoo! 防災速報. | none | Official pages point to JMA キキクル, not to these apps. Low risk. | not found | removed (no claim) | (Removed from index.html in en/ja/id.) |
@@ -153,6 +153,7 @@ Every Japanese quote in this document and in the `CLAIMS` notes was compared wit
 - Found on the page, no change: B4 (tfd-mansion-quake), B18 battery sentence and B30 (cao-ichinitimae-battery), B19 (jma-fukuoka-typhoon), B20 and B51 (kantei-hinan), B21 (kantei-jishin), B25 (meti-gas-smell: the page blocks the default client, it loads with a browser user agent), B41 signs (kantei-dosha), B47 (fdma-jalert), B50 (kantei-keihou), C6 (jma-warning-2026-english), eqnow-6 glass note (tfd-quake-10-points).
 - B18: 「気象情報をよく把握する」 is only a menu link on the JMA Fukuoka page. It is replaced by the body sentence 「最新の情報をテレビやラジオ、気象台ホームページから入手してください。」. The tip does not change.
 - B22: the page says 「不要不急な外出は避け、台風が過ぎ去るのを待ちましょう。」, which is avoid going out without need. The old tip said do not go out, not even for a short time. That is more than the page says. The tip is now "Violent Typhoon: do not go out unless you need to. Stay away from dangerous places." (JA 「Violent Typhoon：必要なとき以外は、外に出ないでください。危ない場所に近づかないでください。」, ID "Topan dahsyat: jangan keluar kecuali perlu. Jauhi tempat berbahaya."). `typhoon-prep-5` is now `changed`.
+- B35 (typhoon DURING panel, no claim): "Stay indoors, away from windows" said more than the sources. JMA Fukuoka asks people not to go out without need (as B22). No recorded typhoon source says to stay away from windows. The kantei-taifu page (taifu_ooame.html, re-fetched) has no window advice; gov-online-bousai-8072 (B9, an earthquake tip) returned 403, so it cannot certify window advice for typhoons. The line is now "Do not go out unless you need to" (JA 「必要なとき以外は、外に出ない」, ID "Jangan keluar kecuali perlu"). B36, B37 and B39 quotes were found again on the kantei-taifu page.
 
 ## Limits
 

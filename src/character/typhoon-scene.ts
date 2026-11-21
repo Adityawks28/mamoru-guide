@@ -23,7 +23,7 @@ const ACTIONS: Action[] = [
   { frameMs: 250, props: [], frames: [{ sprite: { pose: 'walk', arms: [0, -8] } }, { sprite: { pose: 'run', arms: [8, 0] } }] },
   // Very strong: the power is out, the torch is ready.
   { frameMs: 300, props: ['dark', 'beam'], frames: [{ sprite: { arms: [0, -40], hold: 'torch' } }] },
-  // Violent: stay inside, away from the storm.
+  // Violent: do not go out unless you need to.
   { frameMs: 200, props: ['house', 'rain'], frames: [
     { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: {} }, { sprite: { blink: true } },
   ] },
