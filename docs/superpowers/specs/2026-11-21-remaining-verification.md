@@ -156,10 +156,10 @@ The text reuses the certified strings of `src/contacts.ts` (rows R9, R14, R65 to
 
 | ID | File:line | Claim | Source | Source says (JA quote / EN gist) | Verdict | Final English |
 |---|---|---|---|---|---|---|
-| X2 | index.html:62 | 110: "Crimes and accidents that need the police now" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / 110 is for police. Crimes and accidents that need the police now. | match | Crimes and accidents that need the police now |
-| X3 | index.html:63 | 119: "Fire and ambulance" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / 119 is for fire and ambulance. | match | Fire and ambulance |
-| X4 | index.html:64 | 118: "Accidents and emergencies at sea" | kaiho-118 | 「海上における事件・事故の緊急通報用電話番号」 / 118 is the emergency number for incidents and accidents at sea. | match | Accidents and emergencies at sea |
-| X5 | index.html:65 | 171 name: "Disaster Emergency Message Dial" | ntt-east-171-intro | 「つながりにくい状況になった場合に提供が開始される」 (the service name 災害用伝言ダイヤル is on the same page) / 171 is the disaster voice message service. Official names: 災害用伝言ダイヤル, Disaster Emergency Message Dial, Layanan Pesan Darurat Bencana. | match | Disaster Emergency Message Dial |
+| X2 | index.html:61 | 110: "Crimes and accidents that need the police now" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / 110 is for police. Crimes and accidents that need the police now. | match | Crimes and accidents that need the police now |
+| X3 | index.html:62 | 119: "Fire and ambulance" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / 119 is for fire and ambulance. | match | Fire and ambulance |
+| X4 | index.html:63 | 118: "Accidents and emergencies at sea" | kaiho-118 | 「海上における事件・事故の緊急通報用電話番号」 / 118 is the emergency number for incidents and accidents at sea. | match | Accidents and emergencies at sea |
+| X5 | index.html:64 | 171 name: "Disaster Emergency Message Dial" | ntt-east-171-intro | 「つながりにくい状況になった場合に提供が開始される」 (the service name 災害用伝言ダイヤル is on the same page) / 171 is the disaster voice message service. Official names: 災害用伝言ダイヤル, Disaster Emergency Message Dial, Layanan Pesan Darurat Bencana. | match | Disaster Emergency Message Dial |
 
 ## Lines checked and kept on request
 

@@ -115,4 +115,5 @@ export const en: Record<string, string> = {
   'shelter.problem.locationUnavailable': 'Your location is not available. Choose your area below.',
   'shelter.problem.locationFailed': 'The app did not get your location. Choose your area below.',
   'shelter.retry': 'Try again',
+  'shelter.reload': 'Reload the page',
 };

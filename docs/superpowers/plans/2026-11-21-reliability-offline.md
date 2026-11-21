@@ -59,7 +59,7 @@ App character set: 1,184 characters (731 kanji). With shelter data: 1,662 (1,203
 | `MPLUSRounded1c-ExtraBold.woff2` (800) | app | 173,480 | 1,131,936 |
 | Total | | 788,496 (770 KiB) | 3,788,956 |
 
-Characters the source fonts do not have (they fall back today too): DotGothic16 `⊞✓✗Ōūīōā`; M PLUS Rounded 1c all weights `⊞`; shelter data in M PLUS 400/700 `刎㈱簑蹊塚`.
+Characters the source fonts do not have (they fall back today too): DotGothic16 `⊞✓✗Ōūīōā`; M PLUS Rounded 1c all weights `⊞`; shelter data in M PLUS 400/700 `刎㈱簑蹊` (the data had 塚 as U+FA10; the shelter builder now writes U+585A, which the font has).
 
 ## Review Focus
 
