@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mamoru-guide-v13';
+const CACHE_NAME = 'mamoru-guide-dev';
 const PRECACHE = [
   './',
   './index.html',
