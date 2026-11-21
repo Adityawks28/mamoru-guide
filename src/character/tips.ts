@@ -18,7 +18,7 @@ export const QUAKE_TIPS: Tip[] = [
 
 // Adapted from mamoru-scenarios.jsx lines 21-27.
 export const BAG_TIPS: Tip[] = [
-  { en: "Keep the bag light enough to walk with. Osaka Prefecture suggests about 15 kg for men and 10 kg for women.", ja: "歩いて運べる重さにしてください。大阪府は、男性は約15kg、女性は約10kgを目安にしています。", id: "Tas harus ringan agar bisa dibawa jalan. Prefektur Osaka menyarankan sekitar 15 kg (pria) dan 10 kg (wanita).", claimId: "tip-bag-weight" },
+  { en: "A guide: about 15 kg for men and 10 kg for women.", ja: "重さの目安は、男性は約15kg、女性は約10kgです。", id: "Panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan.", claimId: "tip-bag-weight" },
   { en: "Pack water first. Plan for 3 L per person per day.", ja: "まず水を入れてください。1人1日3Lが目安です。", id: "Masukkan air dulu. Siapkan 3 liter per orang per hari.", claimId: "tip-water-3l" },
   { en: "Pack copies of your residence card and passport.", ja: "在留カードとパスポートのコピーを入れてください。", id: "Bawa fotokopi kartu izin tinggal dan paspor.", claimId: "tip-id-copies" },
   { en: "A whistle needs only a little breath. Blow it to call for help if you are trapped.", ja: "笛は、少しの息で鳴らせます。閉じこめられたら、笛をふいて助けを呼んでください。", id: "Peluit hanya butuh sedikit napas. Tiup untuk minta tolong jika kamu terjebak.", claimId: "tip-whistle" },
@@ -48,7 +48,7 @@ export const FIRSTAID_TIPS: Tip[] = [
 // New pool: typhoonScale has 5 levels (Tropical Storm → Violent Typhoon).
 // The scale on screen shows the English level names in every language.
 export const TYPHOON_TIPS: Tip[] = [
-  { en: "Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast.", ja: "Tropical Storm：ベランダの物を片づけてください。スマホなどを充電してください。天気予報を見てください。", id: "Badai tropis: amankan barang di balkon. Isi daya gawai. Cek prakiraan cuaca.", claimId: "typhoon-prep-1" },
+  { en: "Tropical Storm: secure balcony items. Keep spare batteries and a phone charger. Check the forecast.", ja: "Tropical Storm：ベランダの物を片づけてください。予備の電池と携帯充電器を用意してください。天気予報を見てください。", id: "Badai tropis: amankan barang di balkon. Siapkan baterai cadangan dan pengisi daya ponsel. Cek cuaca.", claimId: "typhoon-prep-1" },
   { en: "Severe Tropical Storm: put film or tape on the windows. Close the curtains. Fill the bathtub. Store water.", ja: "Severe Tropical Storm：窓に、フィルムかテープをはってください。カーテンを閉めてください。浴そうに水をためてください。水を多めに用意してください。", id: "Badai tropis kuat: pasang film atau lakban di jendela. Tutup tirai. Isi bak mandi. Tambah persediaan air.", claimId: "typhoon-prep-2" },
   { en: "Typhoon: check the hazard map. If you live in a danger area, leave before the wind and rain get strong.", ja: "Typhoon：ハザードマップを見てください。危ない場所に住んでいたら、風と雨が強くなる前に避難してください。", id: "Topan: cek peta bahaya. Jika kamu tinggal di daerah berbahaya, mengungsilah sebelum angin dan hujan kuat.", claimId: "typhoon-prep-3" },
   { en: "Very Strong Typhoon: the power can be off for days. Prepare cash, food, and batteries.", ja: "Very Strong Typhoon：何日も停電することがあります。現金、食べ物、電池を用意してください。", id: "Topan sangat kuat: listrik bisa padam berhari-hari. Siapkan uang tunai, makanan, baterai.", claimId: "typhoon-prep-4" },

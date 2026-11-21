@@ -4,7 +4,7 @@
 - Scope: every safety action (what to do) in `src/earthquake-now.ts`, `src/drill.ts`, the typhoon and earthquake tips in `src/character/tips.ts`, the alert cards and the typhoon panels in `index.html`, and the alert names in `index.html`, `src/quiz.ts` and `src/data.ts`. Facts and numbers about past disasters are out of scope; the history verification (Task 5) checks them. First-aid steps are out of scope; the medical verification (Task 4) checks them.
 - Why it matters: people can follow these actions during a real earthquake, tsunami or typhoon. An action stays only when an official source gives it.
 - Evidence: two independent AI research passes on 2026-11-21. The first pass compared each action with official sources and quoted them. The second pass (the audit) downloaded the sources again, checked the quotes, and corrected some rows. When the two passes disagreed, the audit decided. For this change, the key quotes were checked a third time from fresh downloads (Kantei 警戒レベル page, JMA multilingual dictionary, JMA Kumagaya, TFD, METI, Nagano Prefecture, MLIT, TEPCO, JMA Nagasaki, JMA 2026 pages).
-- Source rule: Japanese official sources come first (Ruling R15). Two rows use a utility or a carrier, because each is the primary source for its own service: TEPCO for fallen power lines (B42) and NTT docomo for the phone alarm (B46).
+- Source rule: Lines that no official source certifies are removed. Japanese official sources come first (Ruling R15). Two rows use a utility or a carrier, because each is the primary source for its own service: TEPCO for fallen power lines (B42) and NTT docomo for the phone alarm (B46).
 - Line numbers are for this commit (after the change).
 
 ## Key
@@ -18,14 +18,13 @@
 | Outcome | Rows |
 |---|---|
 | Action already right (no text change by this task) | 26 |
-| Corrected by this task | 22 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B23, B25, B27, B28, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
-| Kept as advice with only a partial source | 1 (B30) |
-| Kept as low-risk advice without an official quote | 3 (B38, B43, B44) |
+| Corrected by this task | 23 (B1, B2, B3, B6, B7, B14, B17, B19, B20, B23, B25, B27, B28, B30, B39, B41, B42, B46, B47, B49, B50, B51, B52) |
+| Removed, because no official source certifies the line | 3 (B38, B43, B44) |
 | Total | 52 |
 
 Alert names (Part C): 9 rows. Changed 6 (C2, C3, C4, C5, C6, C8), new line 1 (C7), unchanged 2 (C1, C9).
 
-Claim statuses set by this change: verified 4 (`eqnow-4`, `typhoon-prep-1`, `typhoon-prep-4`, `typhoon-prep-5`), changed 13 (`eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stays `needs-medical-review`; it is a first-aid item.
+Claim statuses set by this change: verified 3 (`eqnow-4`, `typhoon-prep-4`, `typhoon-prep-5`), changed 14 (`typhoon-prep-1`, `eqnow-1`, `eqnow-2`, `eqnow-3`, `eqnow-6`, `eqnow-7`, `drill-step-2`, `drill-step-5`, `drill-step-6`, `typhoon-prep-2`, `typhoon-prep-3`, and the new `tip-shoes-glass`, `tip-routes`, `tip-window-film`), removed 0. No claim is `pending` after this change. `drill-step-3` (head wound) stays `needs-medical-review`; it is a first-aid item.
 
 ## Actions that were removed or replaced
 
@@ -75,7 +74,7 @@ Claim statuses set by this change: verified 4 (`eqnow-4`, `typhoon-prep-1`, `typ
 
 | Row | File:line | Action before (EN) | Source and section | Source says (JA quote / EN gist) | Verdict | Status (claim ID) | Final text (English) |
 |---|---|---|---|---|---|---|---|
-| B18 | tips.ts:51 | Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast. | jma-fukuoka-typhoon 台風への備え | 「風で飛ばされそうな物は飛ばないように固定したり、屋内へ移しましょう。」; 「気象情報をよく把握する」 / Tie down or bring in things that the wind can blow away. Follow the weather information. "Charge your devices": the CAO checklist lists 「予備電池・携帯充電器」 and a CAO lesson page says 「大規模災害時は、バッテリーが命」 (cao-checklist-sonae, cao-ichinitimae-battery). No page says "charge before a typhoon" in those words. | match | verified (typhoon-prep-1) | (No change.) |
+| B18 | tips.ts:51 | Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast. | jma-fukuoka-typhoon 台風への備え | 「風で飛ばされそうな物は飛ばないように固定したり、屋内へ移しましょう。」; 「気象情報をよく把握する」 / Tie down or bring in things that the wind can blow away. Follow the weather information. "Charge your devices": the CAO checklist lists 「予備電池・携帯充電器」 and a CAO lesson page says 「大規模災害時は、バッテリーが命」 (cao-checklist-sonae, cao-ichinitimae-battery). No page says "charge before a typhoon" in those words. | match (partial) | changed (typhoon-prep-1) | Tropical Storm: secure balcony items. Keep spare batteries and a phone charger. Check the forecast. |
 | B19 | tips.ts:52 | Severe Tropical Storm: "tape an X on the windows. Fill the bathtub. Store more water." | jma-fukuoka-typhoon; gov-online-bousai-8072 | 「必要に応じて窓ガラスに飛散防止フィルムやテープなどを張ったり、カーテンやブラインドを下ろすなど」; 「断水に備えて飲料水を確保したり、浴槽に水を張って生活用水を確保するなど」 / Film or tape on the windows, close the curtains, store drinking water, fill the bathtub. No source gives an X shape. | differs | changed (typhoon-prep-2) | Severe Tropical Storm: put film or tape on the windows. Close the curtains. Fill the bathtub. Store water. |
 | B20 | tips.ts:53 | Typhoon: "stay home if you can. Evacuate before the wind is at its strongest." | kantei-hinan 屋内安全確保; kantei-taifu | 「洪水や高潮に関しては、ハザードマップ等で次の３つの条件を確認し、自宅が安全だと判断できる場合は、自宅に留まること（屋内安全確保）も考えてみましょう。」; 「天候が荒れてからでは移動も大変になります」 / Stay home only if the hazard map shows that the home is safe. Moving is hard after the weather turns bad. | differs | changed (typhoon-prep-3) | Typhoon: check the hazard map. If you live in a danger area, leave before the wind and rain get strong. |
 | B21 | tips.ts:54 | Very Strong Typhoon: the power can be off for days. Prepare cash, food, and batteries. | kantei-jishin; gov-online-bousai-8072 | 「停電、都市ガスの停止、水道の断水が起こり、復旧まで時間がかかる場合があります。」; supplies list 「現金」「予備電池」 / Power cuts can take time to fix. Keep cash and spare batteries. | match | verified (typhoon-prep-4) | (No change.) |
@@ -90,14 +89,14 @@ Claim statuses set by this change: verified 4 (`eqnow-4`, `typhoon-prep-1`, `typ
 | B25 | drill.ts:47 | Gas smell: "Open the windows to let air in. Leave by the stairs. After an earthquake, NEVER use elevators, electric switches, or open flames. A gas leak can cause an explosion." | meti-gas-smell; tfd-mansion-quake | 「ガスの臭いがしたら、火気を使用したり換気扇や電気のスイッチには絶対に触らないでください。窓を開けて換気をし、器具栓・ガス栓とガスメーターの元栓を閉め、すぐにガス事業者へ連絡してください。」; 「震度４程度以上の地震が発生した場合、エレベーターが停止し、閉じ込められる。」 / No fire, no switches; open the windows; close the gas valves; call the gas company. At about shindo 4 or more, an elevator can stop and trap people. | differs (missing steps) | changed (drill-step-2) | Open the windows. Do not use fire or electric switches. Close the gas valve. Use the stairs: an elevator can stop and trap you. Call the gas company. |
 | B26 | drill.ts:79 | Tsunami: move inland to high ground at once; never go toward the water or into a basement. | kantei-tsunami; jma-tsunami-info | 「いち早く海岸から離れ、可能な限り高い場所へ避難してください。」 / Leave the coast fast and go as high as you can. | match | changed (drill-step-4) by Task 5 ("3rd floor" removed); action kept | (No change by this task.) |
 | B27 | drill.ts:95 | Aftershock: "Always do the same thing: Drop, Cover, Hold On. The doorway idea is out of date. Inside walls give no special protection." | tfd-quake-10-points point 1; jma-kumagaya-edu; jma-aftershock-ja | As B2: 「物が『落ちてこない』『倒れてこない』『移動してこない』空間に身を寄せ」. No Japanese source discusses doorways or inside walls. | not found (doorway, inside walls) | changed (drill-step-5) | (Task 5 fact kept.) Do the same as in the first earthquake: drop, cover and hold on. Go where nothing can fall, tip over or move. |
-| B28 | drill.ts:112 | Go back only when the authorities say it is safe. Check NHK or city announcements. | kantei-tsunami | 「津波警報・注意報が解除され安全が確認されるまでは決して被災地域には立ち入らないでください。」 / Do not enter the area until the warning ends and safety is confirmed. "A building can have damage that you cannot see" has no official quote (kept as advice). | match (partial) | changed (drill-step-6) | Go back only when the authorities say it is safe. Do not go back while a warning is in effect. A building can have damage that you cannot see. Before you leave, check NHK or city announcements, or ask the evacuation shelter staff. |
+| B28 | drill.ts:112 | Go back only when the authorities say it is safe. Check NHK or city announcements. | kantei-tsunami | 「津波警報・注意報が解除され安全が確認されるまでは決して被災地域には立ち入らないでください。」 / Do not enter the area until the warning ends and safety is confirmed. "A building can have damage that you cannot see" and "check NHK or city announcements" have no official quote (removed). | match | changed (drill-step-6) | Go back only when the authorities say it is safe. Do not go back while a warning is in effect. |
 
 ### Typhoon panels (`index.html`, no claim IDs)
 
 | Row | File:line | Action before (EN) | Source and section | Source says (JA quote / EN gist) | Verdict | Status | Final text (English) |
 |---|---|---|---|---|---|---|---|
 | B29 | index.html:833 | Store water and food for 3 days or more. | kantei-sonae | 「最低3日分の水・食料の備蓄」 / At least 3 days. | match | no claim; changed by Task 5 | (No change by this task.) Store water and food for at least 3 days. One week is better |
-| B30 | index.html:834 | Charge all devices and batteries. | cao-checklist-sonae; cao-ichinitimae-battery | Checklist: 「予備電池・携帯充電器」. Lesson page: 「大規模災害時は、バッテリーが命であると思い知らされました。」 / Keep spare batteries and a phone charger; battery power is vital in a large disaster. No page says "charge before a typhoon" in those words. | match (partial) | kept | (No change.) |
+| B30 | index.html:834 | Charge all devices and batteries. | cao-checklist-sonae; cao-ichinitimae-battery | Checklist: 「予備電池・携帯充電器」. Lesson page: 「大規模災害時は、バッテリーが命であると思い知らされました。」 / Keep spare batteries and a phone charger; battery power is vital in a large disaster. No page says "charge before a typhoon" in those words. | differs (partial) | changed (typhoon-prep-1 for the tip; no claim for the panel) | Keep spare batteries and a phone charger ready. (Tip and typhoon BEFORE panel, en/ja/id.) |
 | B31 | index.html:835 | Bring in or tie down outdoor items (bikes, laundry). | jma-fukuoka-typhoon | 「風で飛ばされそうな物は飛ばないように固定したり、屋内へ移しましょう。」 | match | kept | (No change.) |
 | B32 | index.html:836 | Close all storm shutters (雨戸). | jma-fukuoka-typhoon | 「窓や雨戸を閉め、しっかりと鍵をかけしましょう。」 | match | kept | (No change.) |
 | B33 | index.html:837 | Fill the bathtub with water to flush the toilet. | jma-fukuoka-typhoon | 「浴槽に水を張って生活用水を確保」 | match | kept | (No change.) |
@@ -105,13 +104,13 @@ Claim statuses set by this change: verified 4 (`eqnow-4`, `typhoon-prep-1`, `typ
 | B35 | index.html:848 | Stay indoors, away from windows. | jma-fukuoka-typhoon; gov-online-bousai-8072 | As B22 and B9. | match | kept | (No change.) |
 | B36 | index.html:849 | Never go outside "to check". | kantei-taifu | 「雨で増水した川や田んぼを見に行って流されてしまったり」 / People who go to look at rivers or rice fields are swept away. | match | kept | (No change.) |
 | B37 | index.html:850 | Stay away from rivers, canals, and underpasses. | kantei-taifu | 「道路のアンダーパス等の地下空間の水没」 / Underpasses fill with water. | match | kept | (No change.) |
-| B38 | index.html:851 | Check NHK / Yahoo! 防災速報. | none | Official pages point to JMA キキクル, not to these apps. Low risk. | not found (low risk) | kept | (No change.) |
+| B38 | index.html:851 | Check NHK / Yahoo! 防災速報. | none | Official pages point to JMA キキクル, not to these apps. Low risk. | not found | removed (no claim) | (Removed from index.html in en/ja/id.) |
 | B39 | index.html:852 | "If there is flooding: go to an upper floor" | kantei-hinan; kantei-taifu | 「立退き避難が危険な場合は、自宅の上の階や崖から離れた部屋など、少しでも安全な場所へ移動し」; 「崖から離れた２階の部屋で待機」 / Upstairs, away from slopes, is the last option when leaving is dangerous. | differs | no claim; changed | If it is too late to leave, go to an upper floor, away from slopes |
 | B40 | index.html:853 | Be careful of the "eye": calm does not mean over. | jma-typhoon-wind | 「眼が通過した後は風向きが反対の強い風が吹き返します。」 / After the eye passes, strong wind comes back from the other side. | match | kept | (No change.) |
 | B41 | index.html:863 | "Watch for landslides: the risk stays high" | nagano-sabo-after-rain; mlit-sabo-long-rain; kantei-dosha | 「雨が止んだ後でも土砂災害発生の可能性がある」; 「雨の強さや今後の雨の降り方（弱くなる、雨が止む）に関わらず」; signs 「がけや地面にひび割れができる」「小石がバラバラと落ちてくる」「井戸や川の水が濁る」 / Landslides can happen after the rain stops. Signs: cracks, small falling stones, muddy water. | differs | no claim; changed | Landslides can still happen after the rain stops. Watch for cracks, small falling stones or muddy water on slopes |
 | B42 | index.html:864 | Stay away from flooded roads and fallen power lines. | kantei-taifu; tepco-typhoon | 「浸水した道路で側溝の境界が見えにくいために転落」; 「切れてたれ下がっている電線には、絶対に手を触れないでください。」 / Flooded roads hide ditches. Never touch a fallen power line. | match | no claim; changed (sentence added) | Stay away from flooded roads and fallen power lines. Do not touch a fallen power line |
-| B43 | index.html:865 | Check if trains and buses run before you go out. | none | No source. Low risk. | not found (low risk) | kept | (No change.) |
-| B44 | index.html:866 | Tell your landlord or university about damage. | none | No source. Low risk. | not found (low risk) | kept | (No change.) |
+| B43 | index.html:865 | Check if trains and buses run before you go out. | none | No source. Low risk. | not found | removed (no claim) | (Removed from index.html in en/ja/id.) |
+| B44 | index.html:866 | Tell your landlord or university about damage. | none | No source. Low risk. | not found | removed (no claim) | (Removed from index.html in en/ja/id.) |
 | B45 | index.html:867 | Take photos of the damage for insurance. | gov-online-damage-9034 | 「家の被害状況を写真に撮っておきましょう。…損害保険を請求する際などに、たいへん役に立ちます。」 | match | kept | (No change.) |
 
 ### Alert cards and quiz (`index.html`, `src/quiz.ts`, no claim IDs)
@@ -149,8 +148,8 @@ Glossary (`src/data/glossary.ts`): the source of 高齢者等避難 is now the J
 
 ## Limits
 
-- Three low-risk lines have no official quote and stay as advice: "Check NHK / Yahoo! 防災速報", "Check if trains and buses run" and "Tell your landlord or university about damage". "Charge your devices" has only a partial source (B18, B30). "A building can have damage that you cannot see" (drill-step-6) has no official quote: I checked the MLIT and Cabinet Office pages on 被災建築物応急危険度判定 and the 被害認定基準運用指針 (令和8年6月), and none says it in those words.
-- The typhoon scene still draws two strips of tape on the window. The tip text no longer says "X". At the Typhoon level the character now walks to the shelter without the wind prop, because the tip says to leave before the wind gets strong.
+- Three lines had no official quote and are removed: "Check NHK / Yahoo! 防災速報", "Check if trains and buses run" and "Tell your landlord or university about damage". "Charge your devices" had only a partial source, so it now says what the checklist says: keep spare batteries and a phone charger (B18, B30). "A building can have damage that you cannot see" (drill-step-6) has no official quote and is removed: I checked the MLIT and Cabinet Office pages on 被災建築物応急危険度判定 and the 被害認定基準運用指針 (令和8年6月), and none says it in those words.
+- The typhoon scene no longer draws strips of tape on the window, because no source supports taping an X. At the Typhoon level the character now walks to the shelter without the wind prop, because the tip says to leave before the wind gets strong.
 - The JMA Fukuoka page (jma-fukuoka-typhoon) still uses the old term 避難勧告等. We use it only for the household steps.
 - The JMA Nagasaki English sheet predates the 2026 JMA names, but the city-issued names on it did not change.
 

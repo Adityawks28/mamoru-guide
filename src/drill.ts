@@ -109,9 +109,9 @@ export const scenarios: DrillScenario[] = [
       { en: 'Wait 1 hour, then go back', ja: '1時間待ってから戻る', id: 'Tunggu 1 jam, lalu kembali' },
     ],
     correct: 1,
-    explain_en: 'Go back only when the authorities say it is safe. Do not go back while a warning is in effect. A building can have damage that you cannot see. Before you leave, check NHK or city announcements, or ask the evacuation shelter staff.',
-    explain_ja: '市や国が安全だと言うまで、戻らないでください。警報が出ている間は、戻らないでください。建物には、見えないこわれた所があるかもしれません。出る前に、NHKや市のお知らせを確認するか、避難所のスタッフに聞いてください。',
-    explain_id: 'Kembali hanya jika pihak berwenang menyatakan aman. Jangan kembali selama peringatan masih berlaku. Bangunan mungkin punya kerusakan yang tidak terlihat. Sebelum pergi, cek NHK atau pengumuman kota, atau tanya petugas tempat pengungsian.',
+    explain_en: 'Go back only when the authorities say it is safe. Do not go back while a warning is in effect.',
+    explain_ja: '市や国が安全だと言うまで、戻らないでください。警報が出ている間は、戻らないでください。',
+    explain_id: 'Kembali hanya jika pihak berwenang menyatakan aman. Jangan kembali selama peringatan masih berlaku.',
   },
 ];
 

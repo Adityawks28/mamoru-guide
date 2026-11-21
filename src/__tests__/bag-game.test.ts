@@ -7,7 +7,7 @@ describe('emergency bag data', () => {
     expect(total).toBeGreaterThan(MAX_BAG_WEIGHT * 1.3);
   });
 
-  it('uses the 10 kg city guidance as the limit', () => {
+  it('uses 10 kg as the game rule', () => {
     expect(MAX_BAG_WEIGHT).toBe(10);
   });
 

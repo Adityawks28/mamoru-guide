@@ -12,12 +12,11 @@ const ACTIONS: Action[] = [
     { sprite: { arms: [0, 110], hold: 'phone-front', pupil: { x: 0, y: 1 } } },
     { sprite: { arms: [0, 110], hold: 'phone-front', blink: true } },
   ] },
-  // Severe tropical storm: tape the window, one strip at a time.
+  // Severe tropical storm: she stands at the window (no tape is drawn).
   { frameMs: 700, props: ['window'], frames: [
     { sprite: { arms: [0, -130] } },
-    { sprite: { arms: [0, -130] }, props: ['tapeA'] },
-    { sprite: { arms: [0, -120] }, props: ['tapeA', 'tapeB'] },
-    { sprite: { arms: [0, -120], face: 'happy' }, props: ['tapeA', 'tapeB'] },
+    { sprite: { arms: [0, -120] } },
+    { sprite: { arms: [0, -120], face: 'happy' } },
   ] },
   // Typhoon: walk to the shelter early, before the wind gets strong. Feet step
   // in turn ('walk' lifts the left, 'run' the right) and the opposite arm swings out a little.

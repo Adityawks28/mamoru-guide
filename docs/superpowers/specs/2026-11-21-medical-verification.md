@@ -4,7 +4,7 @@
 - Scope: the 8 first-aid cards in `src/first-aid.ts` (one row for each of the 40 old steps, plus 1 new step) and the 8 first-aid tips in `src/character/tips.ts` (`FIRSTAID_TIPS`).
 - Evidence: two independent AI research passes on 2026-11-21. The first pass compared each step with official sources and quoted them. The second pass (the audit) downloaded every source again, checked every quote, and corrected 6 rows. When the two passes disagreed, the audit decided. The quotes below are verbatim from the sources, with the audit's corrections.
 - Reviewer status: no medical professional reviewed these steps. Each card shows this note in English, Japanese and Indonesian (Decision D-4): "A medical professional has not checked these steps yet. The steps come from official guidance."
-- Source rule: Japanese official sources come first. A non-Japanese government source supports a step only when no Japanese source covers it (Ruling R15). Burns 5 (face burns, NHS), Smoke 1 ("crawl", Ready.gov) and Smoke 3 (door check, Ready.gov) use this rule.
+- Source rule: Lines that no official source certifies are removed. Japanese official sources come first. A non-Japanese government source supports a step only when no Japanese source covers it (Ruling R15). Burns 5 (face burns, NHS), Smoke 1 ("crawl", Ready.gov) and Smoke 3 (door check, Ready.gov) use this rule.
 
 ## Limits
 

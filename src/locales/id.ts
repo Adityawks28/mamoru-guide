@@ -64,7 +64,7 @@ export const id: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋 Hijou-bukuro · Isi Tas Darurat',
-  'bag.subtitle': 'Tas Anda bisa memuat <strong>maksimal 10 kg</strong>. Panduan kota di Jepang menyebut sekitar 10 kg untuk perempuan dan 15 kg untuk laki-laki. Dengan berat ini, Anda masih bisa berlari. Berat setiap barang sesuai dengan berat aslinya pada umumnya. Mamoru merasakan setiap kilogramnya. Anda tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
+  'bag.subtitle': 'Dalam game ini, tasmu bisa memuat <strong>maksimal 10 kg</strong>. Ini aturan game. Prefektur Osaka memberi panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan. Berat setiap barang sesuai dengan berat aslinya pada umumnya. Mamoru merasakan setiap kilogramnya. Kamu tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
   'bag.stat.items':  'ITEM',
   'bag.stat.score':  'SKOR',
   'bag.stat.weight': 'BERAT',

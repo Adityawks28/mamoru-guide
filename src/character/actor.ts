@@ -7,7 +7,7 @@ import { motionAllowed } from './motion';
 
 export type Prop =
   | 'patient' | 'cloth' | 'splint' | 'blanket'
-  | 'tap' | 'smoke' | 'window' | 'tapeA' | 'tapeB'
+  | 'tap' | 'smoke' | 'window'
   | 'wind' | 'dark' | 'beam' | 'house' | 'rain';
 
 export interface Frame {
@@ -45,11 +45,6 @@ function px(x: number, y: number, w: number, h: number, fill: string, opacity?: 
   return r;
 }
 
-// A diagonal pixel line, 2×2 per step: how the window tape is drawn.
-function diagonal(x: number, y: number, steps: number, dx: number, fill: string): SVGRectElement[] {
-  return Array.from({ length: steps }, (_, i) => px(x + i * 2 * dx, y + i * 2, 2, 2, fill));
-}
-
 // Each prop: whether it stands in front of the actor, and its pixels for a
 // given tick (props that move use the tick to pick their frame).
 const PROPS: Record<Prop, { front?: boolean; tag?: string; draw(tick: number): SVGElement[] }> = {
@@ -77,8 +72,6 @@ const PROPS: Record<Prop, { front?: boolean; tag?: string; draw(tick: number): S
     return [px(x + 4, y, 14, 3, '#6a6a76', 0.85), px(x, y + 3, 22, 7, '#5a5a66', 0.85)];
   }) },
   window: { draw: () => [px(96, 22, 28, 30, '#a07a4a'), px(98, 24, 24, 26, '#9fd0f0'), px(98, 24, 24, 3, '#c8e8ff'), px(109, 24, 2, 26, '#a07a4a')] },
-  tapeA: { tag: 'tape', draw: () => diagonal(98, 24, 12, 1, '#f5d58a') },
-  tapeB: { tag: 'tape', draw: () => diagonal(120, 24, 12, -1, '#f5d58a') },
   wind: { draw: tick => [0, 1, 2, 3].map(i =>
     px(((tick * 12 + i * 37) % 120), 20 + i * 14, 10, 1, '#dfefff', 0.8)) },
   dark: { draw: () => [px(0, 0, 128, 96, '#05081a', 0.55)] },

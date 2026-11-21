@@ -83,6 +83,6 @@ export const bagItems: BagItem[] = [
   {e:'💻',en:'Laptop + charger',ja:'ノートPC + 充電器',id:'Laptop + pengisi daya',weight:1.8,priority:2,det_en:'Your phone is enough for news and maps.',det_ja:'ニュースや地図は、スマホで十分です。',det_id:'Ponsel sudah cukup untuk berita dan peta.'},
 ];
 
-// Japanese city guides put a grab bag at about 10 kg (women) to 15 kg (men),
-// light enough to run with; Mamoru packs to the lower figure.
+// A game rule, not an official limit. Osaka Prefecture only gives a guide:
+// about 15 kg for men and 10 kg for women.
 export const MAX_BAG_WEIGHT = 10.0;

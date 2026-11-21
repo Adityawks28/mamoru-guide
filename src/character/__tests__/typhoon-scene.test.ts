@@ -50,17 +50,15 @@ describe('typhoon-scene', () => {
     expect(sprite().querySelector('[data-prop="phone"]')).not.toBeNull();
   });
 
-  it('severe storm: tapes the window, one strip at a time', async () => {
+  it('severe storm: stands at the window with no tape drawn', async () => {
     const { initTyphoonScene } = await import('../typhoon-scene');
     initTyphoonScene();
     level(1);
     expect(prop('window')).not.toBeNull();
-    const strips = new Set<number>();
     for (let t = 0; t < 4000; t += 50) {
       vi.advanceTimersByTime(50);
-      strips.add(document.querySelectorAll('#typhoon-scene [data-prop="tape"]').length);
+      expect(document.querySelectorAll('#typhoon-scene [data-prop="tape"]').length).toBe(0);
     }
-    expect([...strips].sort()).toEqual([0, 1, 2]);
   });
 
   it('typhoon: walks to the shelter before the wind gets strong', async () => {
