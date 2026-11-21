@@ -34,6 +34,7 @@
 - Offline: the Warnings tab and the shelter card work offline after the first visit (they ship in the existing vocab chunk and `index.html`, which `public/sw.js` precaches; add nothing outside the build).
 - Tests first: each code task has a failing test, then the code, then `npm test`, `npx tsc --noEmit`, `npm run build`.
 - Visual checks are done by the controller with Claude in Chrome after implementation (see "Visual checks" at the end). Implementers do not use a browser.
+- After adding or changing app text, run `npm run fonts` and commit the regenerated subsets, or `scripts/__tests__/font-subset.test.ts` fails.
 
 ## Decisions
 

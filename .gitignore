@@ -9,3 +9,4 @@ docs/*
 !docs/superpowers/
 !docs/hero.md
 CLAUDE.md
+scripts/.font-cache/

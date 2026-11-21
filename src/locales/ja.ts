@@ -115,4 +115,5 @@ export const ja: Record<string, string> = {
   'shelter.problem.locationUnavailable': '位置情報（いちじょうほう）が使えません。下でエリアを選んでください。',
   'shelter.problem.locationFailed': '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
   'shelter.retry': 'もう一度ためす',
+  'shelter.reload': 'ページを読みこみなおす',
 };

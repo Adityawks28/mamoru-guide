@@ -13,10 +13,15 @@ export function problemFromGeolocation(err: unknown): ShelterProblem {
   return 'locationFailed';
 }
 
-function problemHtml(problem: ShelterProblem, retry = false): string {
+function problemButton(cls: string, key: string): string {
+  return `<button type="button" class="bag-btn secondary ${cls}" data-i18n="${key}">${esc(t(key))}</button>`;
+}
+
+function problemHtml(problem: ShelterProblem, retry = false, reload = false): string {
   return `<div class="shelter-problem" role="status" data-problem="${problem}">` +
     `<p data-i18n="shelter.problem.${problem}">${esc(t(`shelter.problem.${problem}`))}</p>` +
-    (retry ? `<button type="button" class="bag-btn shelter-retry" data-i18n="shelter.retry">${esc(t('shelter.retry'))}</button>` : '') +
+    (retry ? problemButton('shelter-retry', 'shelter.retry') : '') +
+    (reload ? problemButton('shelter-reload', 'shelter.reload') : '') +
     `</div>`;
 }
 
@@ -29,7 +34,11 @@ interface ShelterWithDistance extends Shelter {
 declare const L: any;
 
 let leafletLoaded = false;
+let leafletLoading: Promise<void> | null = null;
 let mapInstance: unknown = null;
+// Each search takes a new number. A search with an old number stops, so the
+// latest search renders and two quick area choices cannot mix their results.
+let latestSearch = 0;
 
 function getLangText(en: string, ja: string, id: string): string {
   if (currentLang === 'ja') return ja;
@@ -56,15 +65,16 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 // outside the cities the list covers.
 const OUT_OF_AREA_KM = 10;
 
-async function findNearest(lat: number, lng: number, count: number): Promise<ShelterWithDistance[]> {
-  const { sites } = await loadShelters();
-  return sites
+async function findNearest(lat: number, lng: number, count: number): Promise<{ nearest: ShelterWithDistance[]; asOf: string }> {
+  const { sites, asOf } = await loadShelters();
+  const nearest = sites
     .map(s => {
       const distance = haversineDistance(lat, lng, s.lat, s.lng);
       return { ...s, distance, walkMinutes: Math.ceil(distance / (4 / 60)) };
     })
     .sort((a, b) => a.distance - b.distance)
     .slice(0, count);
+  return { nearest, asOf };
 }
 
 function formatDistance(km: number): string {
@@ -113,31 +123,39 @@ const OUT_OF_AREA_HTML = `
     <a href="https://disaportal.gsi.go.jp/maps/" target="_blank" rel="noopener noreferrer">重ねるハザードマップ (disaportal.gsi.go.jp)</a>
   </div>`;
 
-// Hashes as published for Leaflet 1.9.4: the browser refuses a CDN copy that
-// does not match, and CORS mode lets the service worker cache it.
+// Hashes as published for Leaflet 1.9.4. The app serves its own copy
+// (public/vendor/leaflet/), so the map code is available offline.
+export const LEAFLET_SRI = {
+  js: 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=',
+  css: 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',
+} as const;
+
 export function loadLeaflet(): Promise<void> {
   if (leafletLoaded) return Promise.resolve();
+  // Two searches at the same time share one load, so the head gets one set of tags.
+  if (leafletLoading) return leafletLoading;
 
-  return new Promise((resolve, reject) => {
+  const base = import.meta.env.BASE_URL + 'vendor/leaflet/';
+  leafletLoading = new Promise<void>((resolve, reject) => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-    css.crossOrigin = 'anonymous';
+    css.href = base + 'leaflet.css';
+    css.integrity = LEAFLET_SRI.css;
     document.head.appendChild(css);
 
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-    script.crossOrigin = 'anonymous';
-    script.onload = () => { leafletLoaded = true; resolve(); };
+    script.src = base + 'leaflet.js';
+    script.integrity = LEAFLET_SRI.js;
+    script.onload = () => { leafletLoaded = true; leafletLoading = null; resolve(); };
     script.onerror = () => {
       css.remove();
       script.remove();
+      leafletLoading = null;
       reject(new Error('Failed to load Leaflet'));
     };
     document.head.appendChild(script);
   });
+  return leafletLoading;
 }
 
 const LAST_LOC_KEY = 'mamoru-shelter-last-location';
@@ -248,10 +266,9 @@ function renderStatsBar(nearest: ShelterWithDistance[]): void {
   reapplyLang();
 }
 
-async function renderShelterList(nearest: ShelterWithDistance[]): Promise<void> {
+function renderShelterList(nearest: ShelterWithDistance[], asOf: string): void {
   const listEl = document.getElementById('shelterList');
   if (!listEl) return;
-  const { asOf } = await loadShelters();
 
   listEl.innerHTML = nearest.map(s => `
     <div class="shelter-card">
@@ -300,7 +317,10 @@ function showManualFallback(problem: ShelterProblem): void {
   `;
   reapplyLang();
 
-  document.getElementById('shelterCitySelect')?.addEventListener('change', async (e) => {
+  const select = document.getElementById('shelterCitySelect') as HTMLSelectElement | null;
+  // The problem text says "Choose your area below": put the keyboard and the screen reader there.
+  select?.focus();
+  select?.addEventListener('change', (e) => {
     const idx = parseInt((e.target as HTMLSelectElement).value, 10);
     if (isNaN(idx)) return;
     const city = cities[idx];
@@ -322,14 +342,17 @@ function showLoading(): void {
   reapplyLang();
 }
 
-function showProblem(problem: ShelterProblem, retry: () => void): void {
+// reload: an online retry failed too, so the page itself may be out of date
+// (for example a chunk from an older deploy). A reload gets the current files.
+function showProblem(problem: ShelterProblem, retry: () => void, reload = false): void {
   const target = document.getElementById('shelterList') ?? document.getElementById('shelterContainer');
   if (!target) return;
-  target.innerHTML = problemHtml(problem, true);
+  target.innerHTML = problemHtml(problem, true, reload);
   target.querySelector('.shelter-retry')?.addEventListener('click', retry);
+  target.querySelector('.shelter-reload')?.addEventListener('click', () => location.reload());
 }
 
-async function showMap(lat: number, lng: number, nearest: ShelterWithDistance[]): Promise<void> {
+async function showMap(lat: number, lng: number, nearest: ShelterWithDistance[], stale: () => boolean): Promise<void> {
   const mapEl = document.getElementById('shelterMap');
   if (!mapEl) return;
   mapEl.style.display = 'block';
@@ -348,17 +371,23 @@ async function showMap(lat: number, lng: number, nearest: ShelterWithDistance[])
   if (navigator.onLine === false) { noMap(); return; }
   try {
     await loadLeaflet();
+    if (stale()) return;
     renderMap(lat, lng, nearest);
   } catch {
-    noMap();
+    if (!stale()) noMap();
   }
 }
 
 // Renders list, stats, out-of-area note and map. Never rejects: a failure shows the data problem with a retry.
-async function renderResults(lat: number, lng: number): Promise<void> {
+// attempt counts the Try again taps; a failed retry while online also offers a reload.
+async function renderResults(lat: number, lng: number, attempt = 0): Promise<void> {
+  const search = ++latestSearch;
+  const stale = () => search !== latestSearch;
   let nearest: ShelterWithDistance[];
   try {
-    nearest = await findNearest(lat, lng, 5);
+    const found = await findNearest(lat, lng, 5);
+    if (stale()) return;
+    nearest = found.nearest;
     const container = document.getElementById('shelterContainer');
     if (!container) return;
     if (!document.getElementById('shelterList')) {
@@ -379,13 +408,14 @@ async function renderResults(lat: number, lng: number): Promise<void> {
     `;
       reapplyLang();
     }
-    await renderShelterList(nearest);
+    renderShelterList(nearest, found.asOf);
     renderStatsBar(nearest);
   } catch {
-    showProblem('data', () => { void renderResults(lat, lng); });
+    if (stale()) return;
+    showProblem('data', () => { void renderResults(lat, lng, attempt + 1); }, attempt > 0 && navigator.onLine !== false);
     return;
   }
-  await showMap(lat, lng, nearest);
+  await showMap(lat, lng, nearest, stale);
 }
 
 async function findShelters(useCached?: CachedLocation): Promise<void> {
