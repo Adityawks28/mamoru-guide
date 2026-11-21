@@ -1,6 +1,7 @@
 import { bagItems, MAX_BAG_WEIGHT } from './data';
 import { showToast } from './toast';
 import { currentLang } from './lang';
+import { t } from './i18n';
 
 let packedItems = new Set<number>();
 
@@ -74,7 +75,8 @@ export function renderBagItems(): void {
           <span class="bag-meta-tag weight">⚖ ${formatWeight(item.weight)}</span>
           <span class="bag-meta-tag ${prClass}">${prLabel}</span>
         </div>
-      </div>`;
+      </div>
+      <span class="bag-item-packed" data-i18n="bag.packed">${t('bag.packed')}</span>`;
     d.onclick = () => toggleBagItem(i);
     d.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBagItem(i); }

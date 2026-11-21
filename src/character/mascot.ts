@@ -106,7 +106,8 @@ export function initMascot(): void {
   const charWrap = document.createElement('div');
   charWrap.className = 'mascot';
   charWrap.setAttribute('role', 'button');
-  charWrap.setAttribute('aria-label', 'Tap Mamoru for the next disaster fact');
+  charWrap.dataset.i18nAria = 'mascot.aria';
+  charWrap.setAttribute('aria-label', t('mascot.aria'));
   charWrap.setAttribute('tabindex', '0');
   const sprite = createSprite({ pose: 'stand', gender: 'male' });
   sprite.classList.add('mascot-svg');

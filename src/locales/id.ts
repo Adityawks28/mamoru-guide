@@ -12,9 +12,32 @@ export const id: Record<string, string> = {
   'hero.subtitle': 'Panduan kesiapsiagaan bencana untuk mahasiswa internasional di Jepang',
 
   // Mascot fact bubble
+  'mascot.aria': 'Ketuk Mamoru untuk fakta bencana berikutnya',
   'mascot.tag':  'TAHUKAH KAMU?',
   'mascot.cta':  '→ KETUK UNTUK LANJUT',
   'mascot.hint': '▼ KETUK UNTUK FAKTA LAIN ▼',
+
+  // Arcade labels: hero eyebrow, hero buttons, section eyebrows
+  'hero.eyebrow':    '▶ MASUKKAN KOIN · 100 ¥ · MULAI ◀',
+  'hero.start':      '▶ MULAI',
+  'hero.makePlan':   '⊞ BUAT RENCANA',
+  'label.intensity': '01 · SKALA INTENSITAS SEISMIK',
+  'label.vocab':     '02 · KOSAKATA DARURAT',
+  'label.showThis':  '03 · TUNJUKKAN INI',
+  'label.bag':       '04 · TAS DARURAT',
+  'label.alerts':    '05 · SISTEM PERINGATAN',
+  'label.typhoon':   '06 · TOPAN',
+  'label.firstAid':  '07 · PERTOLONGAN PERTAMA',
+  'label.shelter':   'CARI TEMPAT EVAKUASI',
+  'label.drill':     '01 · LATIHAN GEMPA',
+  'label.quiz':      '02 · KUIS',
+  'label.about':     '03 · TENTANG',
+  'label.contacts':  '08 · KONTAK',
+  'label.plan':      'RENCANAKU',
+
+  // Scene and game badges
+  'bag.packed':  '✓ MASUK',
+  'scene.avoid': 'JAUHI',
 
   // Mode selector
   'mode.emergency.title':   'Darurat',

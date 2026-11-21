@@ -1,6 +1,9 @@
 // i18n.test.ts
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { t, applyTranslations, setI18nLang } from '../i18n';
+import type { Language } from '../types';
 
 beforeEach(() => {
   // reset to English before each test
@@ -46,6 +49,28 @@ describe('t()', () => {
 
   it('returns the key itself for completely unknown keys even with explicit lang', () => {
     expect(t('totally.missing', 'ja')).toBe('totally.missing');
+  });
+
+  // --- Arcade labels ---
+
+  it('resolves the arcade labels in all 3 languages', () => {
+    expect(['hero.start', 'hero.makePlan', 'label.intensity'].map(k => [t(k, 'en'), t(k, 'ja'), t(k, 'id')])).toEqual([
+      ['▶ PRESS START', '▶ スタート', '▶ MULAI'],
+      ['⊞ MAKE PLAN', '⊞ 計画をつくる', '⊞ BUAT RENCANA'],
+      ['01 · SEISMIC INTENSITY', '01・震度（しんど）', '01 · SKALA INTENSITAS SEISMIK'],
+    ]);
+  });
+
+  it('every eyebrow, arcade button and section label in index.html has a key in all 3 languages', () => {
+    const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const labels = [...doc.querySelectorAll<HTMLElement>('.hero-eyebrow, .arcade-btn, .section-label')];
+    expect(labels.length).toBeGreaterThanOrEqual(16);
+    const missing = labels.filter(el => {
+      const key = el.dataset.i18n;
+      return !key || ['en', 'ja', 'id'].some(l => t(key, l as Language) === key) || t(key, 'ja') === t(key, 'en');
+    }).map(el => el.textContent!.trim());
+    expect(missing).toEqual([]);
   });
 
   // --- Mode selector keys ---
@@ -113,6 +138,14 @@ describe('applyTranslations()', () => {
     const root = buildDOM('<span data-i18n="nav.shelter">?</span>');
     applyTranslations(root);
     expect(root.querySelector('span')!.textContent).toBe('避難場所');
+  });
+
+  it('sets aria-label on [data-i18n-aria] elements', () => {
+    setI18nLang('id');
+    const root = buildDOM('<div role="button" data-i18n-aria="mascot.aria" aria-label="old">x</div>');
+    applyTranslations(root);
+    expect(root.querySelector('div')!.getAttribute('aria-label')).toBe(t('mascot.aria', 'id'));
+    expect(root.querySelector('div')!.textContent).toBe('x');
   });
 
   it('sets innerHTML on [data-i18n-html] elements', () => {

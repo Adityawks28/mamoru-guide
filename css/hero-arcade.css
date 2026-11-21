@@ -272,6 +272,8 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   letter-spacing: 0.12em;
 }
 /* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .arcade-hero .hero-eyebrow,
+body.lang-ja .arcade-btn,
 body.lang-ja .pb-tag,
 body.lang-ja .pb-t,
 body.lang-ja .pb-cta,

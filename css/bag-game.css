@@ -157,8 +157,9 @@
   border-color: var(--safe-green);
   background: rgba(78,203,113,0.1);
 }
-.bag-item.packed::after {
-  content: '\2713 PACKED';
+.bag-item-packed { display: none; }
+.bag-item.packed .bag-item-packed {
+  display: block;
   position: absolute;
   top: 4px; right: 8px;
   /* At 12px the pixel label is about 100px wide and covers the item name, so the badge uses the rounded font. */

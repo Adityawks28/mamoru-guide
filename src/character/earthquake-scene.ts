@@ -1,6 +1,7 @@
 import { createSprite, updateSprite, type Pose } from './sprite';
 import { QUAKE_TIPS } from './tips';
 import { motionAllowed, onMotionChange, playQuake, quakeMs } from './motion';
+import { t } from '../i18n';
 
 const STATE_LOCK_MS = 4000;
 const TIP_INTERVAL_MS = 4500;
@@ -167,8 +168,9 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   // Warning near window.
   const warningGroup = svgEl('g', { class: 'mr-warning' }, shakeGroup);
   svgEl('path', { d: 'M 28 70 Q 30 78 26 84', stroke: '#e84040', 'stroke-width': 1.5, fill: 'none', 'stroke-dasharray': '2 2' }, warningGroup);
-  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, 'font-family': "'Press Start 2P', monospace" }, warningGroup);
-  warningText.textContent = 'AVOID';
+  // A presentation attribute cannot read var(), so the font comes in through style.
+  const warningText = svgEl('text', { x: 6, y: 76, fill: '#e84040', 'font-size': 6, style: 'font-family: var(--pixel-font)', 'data-i18n': 'scene.avoid' }, warningGroup);
+  warningText.textContent = t('scene.avoid');
   warningGroup.style.display = 'none';
 
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };

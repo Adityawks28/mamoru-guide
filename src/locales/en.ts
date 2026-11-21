@@ -12,9 +12,32 @@ export const en: Record<string, string> = {
   'hero.subtitle': 'A disaster preparedness guide for international students in Japan',
 
   // Mascot fact bubble
+  'mascot.aria': 'Tap Mamoru for the next disaster fact',
   'mascot.tag':  'DID YOU KNOW?',
   'mascot.cta':  '→ TAP FOR NEXT',
   'mascot.hint': '▼ TAP FOR NEXT FACT ▼',
+
+  // Arcade labels: hero eyebrow, hero buttons, section eyebrows
+  'hero.eyebrow':    '▶ INSERT COIN · 100 ¥ · PRESS START ◀',
+  'hero.start':      '▶ PRESS START',
+  'hero.makePlan':   '⊞ MAKE PLAN',
+  'label.intensity': '01 · SEISMIC INTENSITY',
+  'label.vocab':     '02 · EMERGENCY VOCABULARY',
+  'label.showThis':  '03 · SHOW THIS',
+  'label.bag':       '04 · EMERGENCY BAG',
+  'label.alerts':    '05 · ALERT SYSTEM',
+  'label.typhoon':   '06 · TYPHOON',
+  'label.firstAid':  '07 · FIRST AID',
+  'label.shelter':   'EVACUATION SITE FINDER',
+  'label.drill':     '01 · EARTHQUAKE DRILL',
+  'label.quiz':      '02 · QUIZ',
+  'label.about':     '03 · ABOUT',
+  'label.contacts':  '08 · CONTACTS',
+  'label.plan':      'MY PLAN',
+
+  // Scene and game badges
+  'bag.packed':  '✓ PACKED',
+  'scene.avoid': 'AVOID',
 
   // Mode selector
   'mode.emergency.title':   'Emergency',

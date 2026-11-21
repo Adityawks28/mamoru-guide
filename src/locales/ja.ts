@@ -12,9 +12,32 @@ export const ja: Record<string, string> = {
   'hero.subtitle': '日本にいる留学生のための、防災（ぼうさい）ガイド',
 
   // Mascot fact bubble
+  'mascot.aria': 'マモルをタップすると、次の災害の話が出ます',
   'mascot.tag':  '知っていますか？',
   'mascot.cta':  '→ タップして次へ',
   'mascot.hint': '▼ タップして次の話へ ▼',
+
+  // Arcade labels: hero eyebrow, hero buttons, section eyebrows
+  'hero.eyebrow':    '▶ コインを入れる · 100円 · スタート ◀',
+  'hero.start':      '▶ スタート',
+  'hero.makePlan':   '⊞ 計画をつくる',
+  'label.intensity': '01・震度（しんど）',
+  'label.vocab':     '02・緊急のことば',
+  'label.showThis':  '03・見せるカード',
+  'label.bag':       '04・非常袋（ひじょうぶくろ）',
+  'label.alerts':    '05・警報（けいほう）',
+  'label.typhoon':   '06・台風',
+  'label.firstAid':  '07・応急手当（おうきゅうてあて）',
+  'label.shelter':   '避難場所を探す',
+  'label.drill':     '01・地震の訓練（くんれん）',
+  'label.quiz':      '02・クイズ',
+  'label.about':     '03・このガイドについて',
+  'label.contacts':  '08・連絡先',
+  'label.plan':      'マイプラン',
+
+  // Scene and game badges
+  'bag.packed':  '✓ 入れた',
+  'scene.avoid': 'はなれて',
 
   // Mode selector
   'mode.emergency.title':   '緊急',

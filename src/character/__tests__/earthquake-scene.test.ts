@@ -37,6 +37,21 @@ describe('earthquake-scene', () => {
     expect(document.querySelector('#earthquake-scene .mr-procedure')).toBeTruthy();
   });
 
+  it('labels the window warning in the pixel font, in the current language', async () => {
+    const { setLang } = await import('../../lang');
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    const words: string[] = [];
+    for (const lang of ['en', 'ja', 'id'] as const) {
+      setLang(lang);
+      initEarthquakeScene();
+      const label = document.querySelector('#earthquake-scene .mr-warning text') as SVGTextElement;
+      expect(label.style.fontFamily, lang).toBe('var(--pixel-font)');
+      words.push(label.textContent!);
+    }
+    expect(words).toEqual(['AVOID', 'はなれて', 'JAUHI']);
+    setLang('en');
+  });
+
   it('builds room hazards: lamp, shelf, doorGlow', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();

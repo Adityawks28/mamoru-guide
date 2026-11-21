@@ -413,6 +413,7 @@ body.day-mode .em-subtitle {
 
 /* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
 body.lang-ja .section-chip,
+body.lang-ja .section-label,
 body.lang-ja .nav-links a,
 body.lang-ja .emergency-title,
 body.lang-ja .toast,

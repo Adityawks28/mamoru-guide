@@ -47,14 +47,15 @@ describe('mascot', () => {
   });
 
   const LABELS = {
-    en: { tag: 'DID YOU KNOW?', cta: '→ TAP FOR NEXT', hint: '▼ TAP FOR NEXT FACT ▼' },
-    ja: { tag: '知っていますか？', cta: '→ タップして次へ', hint: '▼ タップして次の話へ ▼' },
-    id: { tag: 'TAHUKAH KAMU?', cta: '→ KETUK UNTUK LANJUT', hint: '▼ KETUK UNTUK FAKTA LAIN ▼' },
+    en: { tag: 'DID YOU KNOW?', cta: '→ TAP FOR NEXT', hint: '▼ TAP FOR NEXT FACT ▼', aria: 'Tap Mamoru for the next disaster fact' },
+    ja: { tag: '知っていますか？', cta: '→ タップして次へ', hint: '▼ タップして次の話へ ▼', aria: 'マモルをタップすると、次の災害の話が出ます' },
+    id: { tag: 'TAHUKAH KAMU?', cta: '→ KETUK UNTUK LANJUT', hint: '▼ KETUK UNTUK FAKTA LAIN ▼', aria: 'Ketuk Mamoru untuk fakta bencana berikutnya' },
   } as const;
   const labels = () => ({
     tag: document.querySelector('#mascot .pb-tag')!.textContent,
     cta: document.querySelector('#mascot .pb-cta')!.textContent,
     hint: document.querySelector('#mascot .mascot-hint')!.textContent,
+    aria: document.querySelector('#mascot .mascot')!.getAttribute('aria-label'),
   });
 
   it.each(['en', 'ja', 'id'] as const)('labels the bubble and hint in %s when the page starts in that language', async (lang) => {
