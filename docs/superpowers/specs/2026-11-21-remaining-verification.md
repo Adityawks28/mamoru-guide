@@ -1,7 +1,7 @@
 # Verification of the remaining content
 
 - Date: 2026-11-21
-- Scope: the factual lines that the medical, history and safety verifications do not cover. These are the quiz (`src/quiz.ts`), the shindo scale, the bag items (`src/data.ts`), drill step 3 (`src/drill.ts`), the earthquake and bag scene captions (`src/character/`), the Show This card (`src/show-this.ts`), the contacts (`src/contacts.ts`), the locale fact keys (`src/locales/*.ts`) and the remaining page text in `index.html`. The check has 98 rows (R1 to R98) and 1 extra row (X1).
+- Scope: the factual lines that the medical, history and safety verifications do not cover. These are the quiz (`src/quiz.ts`), the shindo scale, the bag items (`src/data.ts`), drill step 3 (`src/drill.ts`), the earthquake and bag scene captions (`src/character/`), the Show This card (`src/show-this.ts`), the contacts (`src/contacts.ts`), the locale fact keys (`src/locales/*.ts`) and the remaining page text in `index.html`. The check has 98 rows (R1 to R98) and 5 extra rows (X1 to X5).
 - Evidence: two independent AI research passes on 2026-11-21. The first pass compared each line with official sources and quoted them. The second pass (the audit) loaded the sources again, checked the quotes and corrected some rows. When the two passes disagreed, the audit decided. The owner checked one page in a browser (R73). The controller checked two more pages in a real browser on 2026-11-21 (R70, R76).
 - Source rule: Lines that no official source certifies are removed. A line stays only when an official page, or the service's own page for its own service, says the same thing.
 - Line numbers are for this commit (after the change). A removed line shows the line where it was.
@@ -149,6 +149,17 @@ Fix wave after the final review: after a tap on shindo 0, the tip bubble showed 
 | R94 | index.html:810 | "A typhoon usually gives you some days of warning. An earthquake does not. Use this time to prepare." | kantei-taifu | 「大雨や台風は、地震災害のように突然襲ってくるものではなく、いつ、どこで、どのくらいの規模のものがやってくるのかなど、ある程度予測することができます。」 / No "days"; no "use this time to prepare" in the checked quotes. | partial | Unlike an earthquake, a typhoon can be forecast to some degree. ("Use this time to prepare." removed.) |
 | R96 | index.html:1000 | "Most disaster information in Japan is only in Japanese. ...international students often miss important safety information..." | jma-multilingual-page; kankocho-safety-tips | JMA publishes weather, earthquake, tsunami and volcano information in 14 languages besides Japanese, including Bahasa Indonesia. 「対応言語は15言語です。」 (Safety tips). No source for "students often miss". | wrong | This guide gives disaster information in three languages, with interactive content. (First two sentences removed.) |
 | R97 | index.html:1015 | "...official sources: JMA, FDMA, Cabinet Office Disaster Prevention, and NHK World safety guidelines." | the verification docs; npa-quake-driver | The checked sources are mainly 首相官邸, 内閣府（防災担当）, 気象庁, 総務省消防庁, 東京消防庁, 警察庁 (R89), prefecture and city pages, and NTT. No "NHK World safety guidelines" were used. | wrong | The information in this guide comes from official sources. These include the Prime Minister's Office (首相官邸) and the Cabinet Office (内閣府 防災). They also include the Japan Meteorological Agency (JMA), the Fire and Disaster Management Agency (FDMA), the Tokyo Fire Department and the National Police Agency. |
+
+### Page without JavaScript (`<noscript>` in `index.html`, Decision R-8)
+
+The text reuses the certified strings of `src/contacts.ts` (rows R9, R14, R65 to R69). Contacts have no `CLAIMS`; this table is their record.
+
+| ID | File:line | Claim | Source | Source says (JA quote / EN gist) | Verdict | Final English |
+|---|---|---|---|---|---|---|
+| X2 | index.html:62 | 110: "Crimes and accidents that need the police now" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / 110 is for police. Crimes and accidents that need the police now. | match | Crimes and accidents that need the police now |
+| X3 | index.html:63 | 119: "Fire and ambulance" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / 119 is for fire and ambulance. | match | Fire and ambulance |
+| X4 | index.html:64 | 118: "Accidents and emergencies at sea" | kaiho-118 | 「海上における事件・事故の緊急通報用電話番号」 / 118 is the emergency number for incidents and accidents at sea. | match | Accidents and emergencies at sea |
+| X5 | index.html:65 | 171 name: "Disaster Emergency Message Dial" | ntt-east-171-intro | 「つながりにくい状況になった場合に提供が開始される」 (the service name 災害用伝言ダイヤル is on the same page) / 171 is the disaster voice message service. Official names: 災害用伝言ダイヤル, Disaster Emergency Message Dial, Layanan Pesan Darurat Bencana. | match | Disaster Emergency Message Dial |
 
 ## Lines checked and kept on request
 

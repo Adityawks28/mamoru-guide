@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadLeaflet } from '../shelter-finder';
+import { contacts } from '../contacts';
 
 const read = (f: string) => readFileSync(resolve(process.cwd(), f), 'utf8');
 
@@ -46,5 +47,42 @@ describe('offline', () => {
       expect(el.integrity).toMatch(/^sha256-[A-Za-z0-9+/]{43}=$/);
       expect(el.crossOrigin).toBe('anonymous');
     }
+  });
+});
+
+describe('without JavaScript', () => {
+  const html = read('index.html');
+  const blocks = html.match(/<noscript>[\s\S]*?<\/noscript>/g) ?? [];
+  const inner = (blocks[0] ?? '').replace(/<\/?noscript>/g, '');
+  const tpl = document.createElement('template');
+  tpl.innerHTML = inner;
+  const text = tpl.content.textContent ?? '';
+
+  it('index.html has one noscript block, before the navbar', () => {
+    expect(blocks).toHaveLength(1);
+    const at = html.indexOf('<noscript>');
+    expect(at).toBeGreaterThan(html.indexOf('<body'));
+    expect(at).toBeLessThan(html.indexOf('<nav class="navbar"'));
+  });
+
+  it('gives 110, 119, 118 and 171 as tap-to-call links', () => {
+    for (const n of ['110', '119', '118', '171']) expect(tpl.content.querySelector(`a[href="tel:${n}"]`)).not.toBeNull();
+  });
+
+  it('uses the certified contact text in all three languages', () => {
+    for (const n of ['110', '119', '118']) {
+      const c = contacts.find(x => x.number === n)!;
+      expect(text).toContain(c.desc_en);
+      expect(text).toContain(c.desc_ja);
+      expect(text).toContain(c.desc_id);
+    }
+    const c = contacts.find(x => x.number === '171')!;
+    expect(text).toContain(c.name_ja);
+    expect(text).toContain(c.name.replace(' (171)', ''));
+    expect(text).toContain(c.name_id.replace(' (171)', ''));
+  });
+
+  it('shows all three languages, because no script sets the language', () => {
+    expect(read('css/base.css')).toMatch(/\.noscript-note \[data-lang\]\s*\{[^}]*display:\s*block/);
   });
 });
