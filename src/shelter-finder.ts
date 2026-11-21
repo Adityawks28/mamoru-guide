@@ -298,7 +298,7 @@ function showLoading(): void {
   container.innerHTML = `
     <div class="shelter-loading">
       <div class="shelter-loading-spinner"></div>
-      <span data-lang="en">Please wait. We look for your location.</span>
+      <span data-lang="en">Please wait. The app looks for your location.</span>
       <span data-lang="ja">今いる場所を探しています...</span>
       <span data-lang="id">Mencari lokasi Anda...</span>
     </div>
@@ -309,7 +309,7 @@ function showLoading(): void {
 function reportGeolocationError(err: unknown): void {
   const code = (err as GeolocationPositionError | undefined)?.code;
   let msg = getLangText(
-    'We did not get your location. Choose your area below.',
+    'The app did not get your location. Choose your area below.',
     '位置情報を取得できませんでした。下でエリアを選んでください。',
     'Lokasi Anda tidak bisa didapat. Pilih area di bawah.',
   );
@@ -321,7 +321,7 @@ function reportGeolocationError(err: unknown): void {
     );
   } else if (code === 3) {
     msg = getLangText(
-      'We did not get your location in time. Choose your area below.',
+      'The app did not get your location in time. Choose your area below.',
       '位置情報の取得に時間がかかりすぎました。下でエリアを選んでください。',
       'Waktu mencari lokasi habis. Pilih area Anda di bawah.',
     );

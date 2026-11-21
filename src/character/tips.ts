@@ -57,7 +57,7 @@ export const TYPHOON_TIPS: Tip[] = [
 
 // Adapted from mascot.jsx lines 6-22.
 export const DISASTER_FACTS: Tip[] = [
-  { en: "The 1995 earthquake reached seismic intensity 7 in parts of Kobe. In Kobe City, 4,571 people died.", ja: "1995年の阪神・淡路大震災では、神戸の一部で震度7になりました。神戸市では、4,571人が亡くなりました。", id: "Gempa Besar Hanshin-Awaji 1995 mencapai shindo 7 di sebagian Kobe. Di Kota Kobe, 4.571 orang meninggal.", claimId: "tip-kobe-deaths" },
+  { en: "Great Hanshin-Awaji Earthquake (1995): seismic intensity 7 in parts of Kobe. 4,571 people died in Kobe City.", ja: "1995年の阪神・淡路大震災では、神戸の一部で震度7になりました。神戸市では、4,571人が亡くなりました。", id: "Gempa Besar Hanshin-Awaji 1995 mencapai shindo 7 di sebagian Kobe. Di Kota Kobe, 4.571 orang meninggal.", claimId: "tip-kobe-deaths" },
   { en: "In recent earthquakes, furniture that fell or moved hurt 30 to 50% of injured people. Fix it to the wall.", ja: "最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、動いたりしたためです。家具を壁に固定してください。", id: "Pada gempa terkini, 30 sampai 50% korban luka terkena perabot jatuh atau bergeser. Ikat perabot ke dinding.", claimId: "tip-furniture-injuries" },
   { en: "Japan has free hazard maps online. Check yours before you sign a lease.", ja: "日本には、無料のハザードマップ（危ない場所の地図）があります。部屋を借りる前に見てください。", id: "Jepang punya peta bahaya gratis secara online. Cek sebelum tanda tangan kontrak sewa.", claimId: "tip-hazard-maps" },
   { en: "In 1995, many older people died. People in their 20s and foreign residents also had high death rates.", ja: "1995年の地震では、多くの高齢者（こうれいしゃ）が亡くなりました。20代の人と外国人も、亡くなった人の割合が高かったです。", id: "Pada 1995, banyak lansia meninggal. Orang usia 20-an dan warga asing juga punya angka kematian tinggi.", claimId: "tip-casualty-groups" },

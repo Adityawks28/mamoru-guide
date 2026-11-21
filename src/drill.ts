@@ -39,7 +39,7 @@ export const scenarios: DrillScenario[] = [
     situation_id: 'Guncangan sudah berhenti. Bangunan tampak utuh, tetapi Anda mencium bau aneh. Apa yang Anda lakukan berikutnya?',
     options: [
       { en: 'Turn on the lights to check the room', ja: '電気をつけて、部屋を確かめる', id: 'Nyalakan lampu untuk memeriksa ruangan' },
-      { en: 'Open the windows. Leave carefully. It can be gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela dan keluar dengan hati-hati. Mungkin itu gas.' },
+      { en: 'Open the windows. Leave carefully. The smell can come from gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela dan keluar dengan hati-hati. Mungkin itu gas.' },
       { en: 'Take the elevator to get out fast', ja: 'エレベーターで早く外に出る', id: 'Naik elevator agar cepat keluar' },
       { en: 'Light a candle to see better', ja: 'ろうそくをつけて、よく見る', id: 'Nyalakan lilin agar lebih jelas' },
     ],
@@ -319,7 +319,7 @@ function showDrillResults(): void {
     currentScenario = 0;
     drillScore = 0;
     startCountdown();
-    showToast(getLangText('🔄 The drill started again', '🔄 訓練をやり直します', '🔄 Latihan dimulai ulang'));
+    showToast(getLangText('🔄 Drill restarted', '🔄 訓練をやり直します', '🔄 Latihan dimulai ulang'));
   });
 }
 

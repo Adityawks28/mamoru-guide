@@ -114,7 +114,7 @@ export const categories: FirstAidCategory[] = [
 // Decision D-4: no medical professional has reviewed these steps, so every card says so.
 const REVIEW_NOTE = `
   <p class="firstaid-review-note">
-    <span data-lang="en">A medical professional did not check these steps yet. The steps come from official guidance.</span>
+    <span data-lang="en">No medical professional checked these steps. The steps come from official guidance.</span>
     <span data-lang="ja">医師などの専門家は、このステップをまだ確認していません。ステップは、公式の情報をもとにしています。</span>
     <span data-lang="id">Tenaga medis profesional belum memeriksa langkah-langkah ini. Langkah-langkah ini berasal dari panduan resmi.</span>
   </p>

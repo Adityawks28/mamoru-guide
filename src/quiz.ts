@@ -135,12 +135,12 @@ const questions: QuizQuestion[] = [
     q_ja: '災害のあと、日本で家族に声の伝言を残すには、どうしますか？',
     q_id: 'Setelah bencana, bagaimana Anda meninggalkan pesan suara untuk keluarga di Jepang?',
     options: [
-      {en:'Call 171 (Disaster Message Dial)',ja:'171に電話する（災害用伝言ダイヤル）',id:'Hubungi 171 (Layanan Pesan Suara Bencana)'},
+      {en:'Call 171 (Disaster Emergency Message Dial)',ja:'171に電話する（災害用伝言ダイヤル）',id:'Hubungi 171 (Layanan Pesan Suara Bencana)'},
       {en:'Send a fax',ja:'FAXを送る',id:'Kirim faks'},
       {en:'Call 110',ja:'110に電話する',id:'Hubungi 110'},
     ],
     correct: 0,
-    explain_en: '171 is the Disaster Message Dial, a voice message service in Japan. It starts when a disaster makes calls to the area hard to connect. Call 171. Press 1 to record and 2 to listen. Calls from NTT East or NTT West phones are free. From other phones, ask your phone company.',
+    explain_en: '171 is the Disaster Emergency Message Dial, a voice message service in Japan. It starts when a disaster makes calls to the area hard to connect. Call 171. Press 1 to record and 2 to listen. Calls from NTT East or NTT West phones are free. From other phones, ask your phone company.',
     explain_ja: '171は災害用伝言ダイヤルです。災害で、その地域への電話がつながりにくくなったときに始まります。171に電話して、1を押すと録音、2を押すと再生です。NTT東日本・NTT西日本の電話からは無料です。ほかの電話からかけるときは、電話会社に聞いてください。',
     explain_id: '171 adalah layanan pesan suara bencana di Jepang. Layanan ini dimulai saat bencana membuat telepon ke daerah itu sulit tersambung. Hubungi 171. Tekan 1 untuk merekam dan 2 untuk mendengar. Panggilan dari telepon NTT East atau NTT West gratis. Dari telepon lain, tanyakan ke perusahaan teleponmu.',
   },
@@ -294,7 +294,7 @@ function showResults(): void {
     currentQuestion = 0;
     score = 0;
     renderQuestion();
-    showToast(getLangText('🔄 The quiz started again', '🔄 クイズをやり直します', '🔄 Kuis dimulai ulang'), 'info');
+    showToast(getLangText('🔄 Quiz restarted', '🔄 クイズをやり直します', '🔄 Kuis dimulai ulang'), 'info');
   });
 }
 

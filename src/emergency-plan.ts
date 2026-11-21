@@ -123,7 +123,7 @@ const EMERGENCY_NUMBERS: [string, string, string][] = [
   ['119', 'Fire / Ambulance', '消防・救急'],
   ['110', 'Police', '警察'],
   ['118', 'Coast Guard', '海上保安庁'],
-  ['171', 'Disaster Message Dial', '災害用伝言ダイヤル'],
+  ['171', 'Disaster Emergency Message Dial', '災害用伝言ダイヤル'],
 ];
 // Browsers use the title as the PDF file name and page header.
 const PRINT_TITLE = 'Mamoru emergency worksheet';
@@ -407,7 +407,7 @@ export function initEmergencyPlan(): void {
     plan = migrated;
     savePlanV2(plan);
     removeItem('mamoru-emergency-plan');
-    showToast(lang3('Your plan now uses the new format ✓', '計画を新しい形式に更新しました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
+    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形式に更新しました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
   } else {
     plan = loadPlanV2();
   }
