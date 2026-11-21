@@ -185,7 +185,7 @@ describe('shelter finder problems', () => {
     expect(unhandled).not.toHaveBeenCalled(); process.off('unhandledRejection', unhandled);
   });
 
-  it('the area list says why location failed, in the same words as the toast', async () => {
+  it('the area list says why location failed, in the shared problem words', async () => {
     mountWithGeoError(3); await start(); await find('.shelter-fallback .shelter-problem');
     expect(document.querySelector('.shelter-fallback .shelter-problem')!.textContent).toContain(t('shelter.problem.locationTimeout', 'en'));
   });
@@ -211,6 +211,68 @@ describe('shelter finder problems', () => {
     }
   });
 
+  it('the Try again button uses the colored secondary style, so it reads in night mode', async () => {
+    failShelters(1);
+    mountAt(SANNOMIYA); await start(); await find('.shelter-retry');
+    expect(document.querySelector('.shelter-retry')!.classList).toContain('secondary');
+  });
+
+  it('offers a reload when Try again fails while the phone is online', async () => {
+    failShelters(Infinity);
+    mountAt(SANNOMIYA); await start(); await find('.shelter-problem[data-problem="data"] .shelter-retry');
+    expect(document.querySelector('.shelter-reload')).toBeNull();
+    document.querySelector<HTMLButtonElement>('.shelter-retry')!.click();
+    await see('.shelter-problem[data-problem="data"] .shelter-reload');
+    const reload = document.querySelector<HTMLButtonElement>('.shelter-reload')!;
+    expect(reload.textContent).toBe(t('shelter.reload', 'en'));
+    expect(reload.classList).toContain('secondary');
+    expect(document.querySelector('.shelter-retry')).not.toBeNull();
+  });
+
+  it('offers no reload when Try again fails offline', async () => {
+    failShelters(Infinity);
+    mountAt(SANNOMIYA); await start(); await find('.shelter-problem[data-problem="data"] .shelter-retry');
+    setOnline(false);
+    const first = document.querySelector('.shelter-problem');
+    document.querySelector<HTMLButtonElement>('.shelter-retry')!.click();
+    await vi.waitFor(() => expect(document.querySelector('.shelter-problem')).not.toBe(first));
+    expect(document.querySelector('.shelter-problem[data-problem="data"]')).not.toBeNull();
+    expect(document.querySelector('.shelter-reload')).toBeNull();
+  });
+
+  it('moves focus to the area list when location fails', async () => {
+    mountWithGeoError(1); await start(); await find('#shelterCitySelect');
+    expect(document.activeElement?.id).toBe('shelterCitySelect');
+  });
+
+  it('shows only the latest area when two are chosen quickly', async () => {
+    vi.doMock('../shelter-data', async (orig) => {
+      const real = await orig<typeof import('../shelter-data')>();
+      let n = 0;
+      return { ...real, loadShelters: async () => {
+        if (n++ === 0) await new Promise(r => setTimeout(r, 60));
+        return real.loadShelters();
+      } };
+    });
+    mountWithGeoError(1); await start(); await find('#shelterCitySelect');
+    const select = document.getElementById('shelterCitySelect') as HTMLSelectElement;
+    select.value = '0'; select.dispatchEvent(new Event('change'));
+    select.value = '5'; select.dispatchEvent(new Event('change'));
+    await see('.shelter-card');
+    await new Promise(r => setTimeout(r, 120));
+    const addresses = [...document.querySelectorAll('.shelter-card .shelter-address')].map(a => a.textContent ?? '');
+    expect(addresses).toHaveLength(5);
+    for (const a of addresses) expect(a).toContain('明石市');
+    expect(document.head.querySelectorAll('script[src*="leaflet"]')).toHaveLength(1);
+  });
+
+  it('adds one Leaflet script when two map loads overlap', async () => {
+    const { loadLeaflet } = await start();
+    void loadLeaflet().catch(() => {}); void loadLeaflet().catch(() => {});
+    expect(document.head.querySelectorAll('script[src*="leaflet"]')).toHaveLength(1);
+    expect(document.head.querySelectorAll('link[href*="leaflet"]')).toHaveLength(1);
+  });
+
   it('maps geolocation codes to problems', async () => {
     const { problemFromGeolocation } = await start();
     expect([1, 2, 3, 9].map(c => problemFromGeolocation({ code: c }))).toEqual(
@@ -227,6 +289,7 @@ describe('shelter finder problems', () => {
   it('has every new shelter key in all three languages', () => {
     for (const k of ['data', 'map', 'locationDenied', 'locationTimeout', 'locationUnavailable', 'locationFailed'])
       for (const l of ['en', 'ja', 'id'] as const) expect(t(`shelter.problem.${k}`, l)).not.toBe(`shelter.problem.${k}`);
-    for (const l of ['en', 'ja', 'id'] as const) expect(t('shelter.retry', l)).not.toBe('shelter.retry');
+    for (const k of ['shelter.retry', 'shelter.reload'])
+      for (const l of ['en', 'ja', 'id'] as const) expect(t(k, l)).not.toBe(k);
   });
 });
