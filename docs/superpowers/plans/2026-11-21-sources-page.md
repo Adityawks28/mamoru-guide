@@ -34,6 +34,7 @@
 - Privacy: the section stores nothing.
 - Tests first: each task writes a failing test, then the code, then runs `npm test`, `npx tsc --noEmit`, `npm run build`.
 - Visual checks are for the controller (Claude in Chrome), listed at the end. Implementers do not open a browser.
+- After adding or changing app text, run `npm run fonts` and commit the regenerated subsets, or `scripts/__tests__/font-subset.test.ts` fails.
 
 ## Decisions
 

@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const read = (f: string) => readFileSync(resolve(process.cwd(), f), 'utf8');
@@ -40,9 +40,17 @@ function families(value: string): string[] {
     .filter(f => f && !f.startsWith('ui-') && !GENERIC.has(f));
 }
 
-function loadedFamilies(html: string): string[] {
-  const href = html.match(/<link[^>]+href="(https:\/\/fonts\.googleapis\.com\/css2\?[^"]+)"/)?.[1] ?? '';
-  return [...href.matchAll(/family=([^:&]+)/g)].map(m => decodeURIComponent(m[1]).replace(/\+/g, ' '));
+// The @font-face rules in a stylesheet: family, src and font-display of each.
+function fontFaces(text: string): { family: string; src: string; display: string }[] {
+  return [...text.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/@font-face\s*\{([^}]*)\}/g)].map(([, body]) => ({
+    family: body.match(/font-family:\s*([^;]+)/)?.[1].trim().replace(/^['"]|['"]$/g, '') ?? '',
+    src: body.match(/src:\s*([^;]+)/)?.[1].trim() ?? '',
+    display: body.match(/font-display:\s*([^;]+)/)?.[1].trim() ?? '',
+  }));
+}
+
+function loadedFamilies(text: string): string[] {
+  return fontFaces(text).map(f => f.family);
 }
 
 // Smallest length in a font-size value, in px (rem and em counted against the 16px root).
@@ -70,6 +78,7 @@ describe('fonts', () => {
       read(`css/${file}`).split('\n').forEach((line, i) => {
         if (!/Press Start 2P/.test(line)) return;
         if (file === 'variables.css' && /^\s*--pixel-font:/.test(line)) return;
+        if (file === 'fonts.css' && /^\s*font-family:/.test(line)) return;
         offenders.push(`css/${file}:${i + 1}: ${line.trim()}`);
       });
     }
@@ -91,8 +100,8 @@ describe('fonts', () => {
     expect(list.indexOf('DotGothic16')).toBeLessThan(list.indexOf('monospace'));
   });
 
-  it('loads every font family the CSS names from the Google Fonts link', () => {
-    const loaded = new Set(loadedFamilies(read('index.html')));
+  it('loads every font family the CSS names from the local @font-face rules', () => {
+    const loaded = new Set(loadedFamilies(read('css/fonts.css')));
     const missing = new Set<string>();
     for (const file of CSS_FILES) {
       for (const { value } of declarations(css(file), /(?:font-family|--[\w-]*font)\s*:\s*([^;]+)/g)) {
@@ -102,12 +111,32 @@ describe('fonts', () => {
     expect([...missing]).toEqual([]);
   });
 
-  it('keeps the font link CORS-enabled and swap-displayed, with DotGothic16, in index.html and the 404 page', () => {
-    for (const page of ['index.html', 'public/404.html']) {
-      const link = read(page).match(/<link[^>]+fonts\.googleapis\.com[^>]*>/)?.[0] ?? '';
-      expect(loadedFamilies(link), page).toContain('DotGothic16');
-      expect(link, page).toContain('display=swap');
-      expect(link, page).toContain('crossorigin="anonymous"');
+  it('every @font-face points to a woff2 file in public/fonts, with font-display: swap', () => {
+    const pages: [string, string, number][] = [['css/fonts.css', '/fonts/', 5], ['public/404.html', '/mamoru-guide/fonts/', 4]];
+    for (const [page, prefix, count] of pages) {
+      const faces = fontFaces(read(page));
+      expect(faces, page).toHaveLength(count);
+      for (const { family, src, display } of faces) {
+        const url = src.match(/^url\(['"]?([^'")]+)['"]?\)\s+format\(['"]woff2['"]\)$/)?.[1] ?? '';
+        expect(url.startsWith(prefix), `${page}: ${family} ${src}`).toBe(true);
+        expect(url.endsWith('.woff2'), `${page}: ${family} ${src}`).toBe(true);
+        expect(existsSync(resolve(process.cwd(), 'public/fonts', url.slice(prefix.length))), `${page}: ${url}`).toBe(true);
+        expect(display, `${page}: ${family}`).toBe('swap');
+      }
+    }
+    expect(loadedFamilies(read('public/404.html'))).toContain('DotGothic16');
+  });
+
+  it('index.html and the 404 page make no request to fonts.googleapis.com or fonts.gstatic.com', () => {
+    for (const page of ['index.html', 'public/404.html', ...CSS_FILES.map(f => `css/${f}`)]) {
+      expect(read(page), page).not.toMatch(/fonts\.(googleapis|gstatic)\.com/);
+    }
+    expect(read('index.html')).toMatch(/<link rel="stylesheet" href="css\/fonts\.css">\s*<link rel="stylesheet" href="css\/variables\.css">/);
+  });
+
+  it('each font has its OFL file', () => {
+    for (const name of ['PressStart2P', 'DotGothic16', 'MPLUSRounded1c']) {
+      expect(read(`public/fonts/OFL-${name}.txt`), name).toContain('SIL Open Font License, Version 1.1');
     }
   });
 

@@ -28,6 +28,10 @@ npm run preview    # preview the built version locally
 
 Output goes to `dist/`.
 
+### Fonts
+
+Run `npm run fonts` when a text change adds a new character, then commit `public/fonts/` and `scripts/fonts-manifest.json`. The first run needs the internet to download the source fonts.
+
 ### Type Check
 
 ```bash
