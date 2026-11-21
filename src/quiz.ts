@@ -19,13 +19,13 @@ const questions: QuizQuestion[] = [
     q_id: 'Anda merasakan guncangan kuat di lantai 5. Apa yang Anda lakukan pertama kali?',
     options: [
       {en:'Run to the elevator',ja:'エレベーターまで走る',id:'Lari ke elevator'},
-      {en:'Drop, Cover, Hold On under a desk',ja:'机の下で身を低くし、頭を守る',id:'Merunduk, berlindung, bertahan di bawah meja'},
+      {en:'Drop, Cover, Hold On under a desk',ja:'机の下で身を低くし、頭を守り、動かない',id:'Merunduk, berlindung, bertahan di bawah meja'},
       {en:'Jump out the window',ja:'窓から飛び降りる',id:'Melompat dari jendela'},
       {en:'Stand in a doorway',ja:'ドアの所に立つ',id:'Berdiri di ambang pintu'},
     ],
     correct: 1,
     explain_en: 'Drop, Cover, and Hold On is the recommended action. After strong shaking, do not use an elevator to leave.',
-    explain_ja: '机の下で身を低くし、頭を守るのが、すすめられている行動です。強いゆれのあと、避難（ひなん）にエレベーターを使わないでください。',
+    explain_ja: '机の下で身を低くし、頭を守り、動かないのが、すすめられている行動です。強いゆれのあと、避難（ひなん）にエレベーターを使わないでください。',
     explain_id: 'Merunduk, berlindung, dan bertahan adalah tindakan yang dianjurkan. Setelah guncangan kuat, jangan pakai elevator untuk mengungsi.',
   },
   {
@@ -155,7 +155,7 @@ const questions: QuizQuestion[] = [
     ],
     correct: 1,
     explain_en: 'J-Alert sends urgent national alerts when there is no time to wait, such as missiles, Earthquake Early Warnings and Major Tsunami Warnings.',
-    explain_ja: 'Jアラートは、待つ時間がない急ぎの情報を、国からすぐに知らせます。たとえば、ミサイルや緊急地震速報（きんきゅうじしんそくほう）です。大津波警報（おおつなみけいほう）も、その1つです。',
+    explain_ja: 'Jアラートは、待つ時間がない急ぎの情報を、国からすぐに知らせます。たとえば、ミサイルや緊急地震速報（きんきゅうじしんそくほう）の情報です。大津波警報（おおつなみけいほう）も、その1つです。',
     explain_id: 'J-Alert mengirim peringatan nasional yang mendesak saat tidak ada waktu untuk menunggu, seperti rudal, peringatan dini gempa bumi, dan peringatan bahaya tsunami skala besar.',
   },
 ];
