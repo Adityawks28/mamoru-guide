@@ -13,7 +13,7 @@ export const QUAKE_TIPS: Tip[] = [
   { en: "Switch off the breaker when you leave. Electrical fires can start when the power comes back on.", ja: "家を出るときは、ブレーカーを切ってください。電気がもどったときに、火事になることがあります。これを通電火災（つうでんかさい）といいます。", id: "Matikan breaker listrik saat kamu pergi. Kebakaran listrik bisa terjadi saat listrik menyala lagi.", claimId: "tip-breaker-fire" },
   { en: "Wear shoes. After a big earthquake, there can be broken glass on the floor.", ja: "靴をはいてください。大きな地震のあとは、床にガラスの破片（はへん）が落ちていることがあります。", id: "Pakai sepatu. Setelah gempa besar, bisa ada pecahan kaca di lantai.", claimId: "tip-shoes-glass" },
   { en: "A tsunami can come after the earthquake. Go to high ground. Do not wait for sirens.", ja: "地震のあと、津波が来ることがあります。高い所へ逃げてください。サイレンを待たないでください。", id: "Tsunami bisa datang setelah gempa. Naik ke tempat tinggi. Jangan tunggu sirene." },
-  { en: "Charge your phone now. In 1995, some areas of Kobe had no power for up to 6 days.", ja: "今、スマホを充電してください。1995年の神戸では、長い所で6日間、電気が止まりました。", id: "Isi daya ponselmu sekarang. Pada 1995, sebagian wilayah Kobe tanpa listrik sampai 6 hari.", claimId: "tip-kobe-power" },
+  { en: "Keep spare batteries and a phone charger ready. In 1995, some areas of Kobe had no power for up to 6 days.", ja: "予備（よび）の電池と、スマホの充電器を用意してください。1995年の神戸では、長い所で6日間、電気が止まりました。", id: "Siapkan baterai cadangan dan pengisi daya ponsel. Pada 1995, sebagian Kobe tanpa listrik sampai 6 hari.", claimId: "tip-kobe-power" },
 ];
 
 // Adapted from mamoru-scenarios.jsx lines 21-27.
