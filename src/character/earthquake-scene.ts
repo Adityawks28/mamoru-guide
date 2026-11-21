@@ -176,8 +176,8 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
 
 // No official source ties an action to each shindo level. JMA: at shindo 0 people do not feel the shaking.
 // When you feel shaking, every level gets the same rule (FDMA white paper R5; TFD 10 points, point 1).
-const NOT_FELT = { en: '→ People do not feel it.', ja: '→ 人はゆれを感じません', id: '→ tidak terasa' };
-const PROTECT = { en: '→ Protect yourself. Get under a strong table. Wait until the shaking stops.', ja: '→ 身を守ってください。じょうぶな机の下に入ってください。ゆれがおさまるまで待ってください', id: '→ lindungi diri · masuk ke bawah meja yang kuat · tunggu sampai guncangan berhenti' };
+const NOT_FELT = { en: '→ People do not feel it.', ja: '→ 人はゆれを感じません', id: '→ Orang tidak merasakannya.' };
+const PROTECT = { en: '→ Protect yourself. Get under a strong table. Wait until the shaking stops.', ja: '→ 身を守ってください。じょうぶな机の下に入ってください。ゆれがおさまるまで待ってください', id: '→ Lindungi dirimu. Masuk ke bawah meja yang kuat. Tunggu sampai guncangan berhenti.' };
 const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
   NOT_FELT,
   PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT,

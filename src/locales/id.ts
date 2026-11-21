@@ -15,7 +15,7 @@ export const id: Record<string, string> = {
   'mode.emergency.title':   'Darurat',
   'mode.emergency.desc':    'Saya butuh bantuan sekarang',
   'mode.prepare.title':     'Bersiap',
-  'mode.prepare.desc':      'Buat rencana, cari tempat evakuasi',
+  'mode.prepare.desc':      'Buat rencana. Cari tempat evakuasi.',
   'mode.learn.title':       'Belajar',
   'mode.learn.desc':        'Latihan, kosakata, kuis',
 
@@ -25,10 +25,10 @@ export const id: Record<string, string> = {
   'em.back':        '← Kembali',
   'em.call.title':  'Telepon 119',
   'em.call.desc':   'Pemadam / Ambulans',
-  'em.show.title':  'Tunjukkan Kartu',
+  'em.show.title':  'Tunjukkan Kartu Ini',
   'em.show.desc':   'Frasa Jepang untuk penolong',
   'em.shelter.title': 'Cari Tempat Evakuasi',
-  'em.shelter.desc':  'Titik evakuasi terdekat',
+  'em.shelter.desc':  'Tempat evakuasi terdekat',
   'em.alerts.title':  'Info Peringatan',
   'em.alerts.desc':   'Arti peringatan',
 
@@ -60,10 +60,10 @@ export const id: Record<string, string> = {
 
   // Show This section
   'showthis.title':    'Tunjukkan Kartu Ini 見せるカード',
-  'showthis.subtitle': 'Jika Anda tidak bisa berbahasa Jepang, tunjukkan kartu ini kepada orang di sekitar Anda. Teks Jepangnya besar, jadi orang mudah membacanya. Geser atau ketuk tanda panah untuk melihat frasa lain.',
+  'showthis.subtitle': 'Jika kamu tidak bisa berbahasa Jepang, tunjukkan kartu ini kepada orang di sekitarmu. Teks Jepangnya besar, jadi orang mudah membacanya. Geser atau ketuk tanda panah untuk melihat frasa lain.',
 
   // Bag game section
-  'bag.title':    '🎒 非常袋 Hijou-bukuro · Isi Tas Darurat',
+  'bag.title':    '🎒 非常袋 Hijou-bukuro · Isi Tas Daruratmu',
   'bag.subtitle': 'Dalam game ini, tasmu bisa memuat <strong>maksimal 10 kg</strong>. Ini aturan game. Prefektur Osaka memberi panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan. Setiap berat hanya perkiraan. Mamoru merasakan setiap kilogramnya. Kamu tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
   'bag.stat.items':  'ITEM',
   'bag.stat.score':  'SKOR',
@@ -74,7 +74,7 @@ export const id: Record<string, string> = {
 
   // Contacts section
   'contacts.title':    'Kontak Darurat',
-  'contacts.subtitle': 'Ketuk kontak untuk langsung menelepon. Simpan nomor-nomor ini sebelum terjadi keadaan darurat. Saat darurat, jaringan telepon cepat padat.',
+  'contacts.subtitle': 'Ketuk kontak untuk menelepon nomornya. Simpan nomor-nomor ini sekarang, sebelum keadaan darurat. Saat darurat, jaringan telepon cepat padat.',
   'contacts.filter.all':     'Semua',
   'contacts.filter.emerg':   'Darurat',
   'contacts.filter.medical': 'Medis',
@@ -83,9 +83,9 @@ export const id: Record<string, string> = {
   'contacts.filter.mental':  'Kesehatan Mental',
 
   // Plan section
-  'plan.title':    'Kartu Darurat & Persiapan Saya',
-  'plan.subtitle': 'Isi profil dan rencana Anda. Labelnya dalam bahasa Inggris dan Jepang. Penolong, dokter, dan polisi bisa membaca informasi Anda, walaupun Anda tidak bisa berbicara. Cetak, lalu simpan salinannya di dompet, tas, dan rumah.',
-  'plan.btn.save':  '💾 Simpan',
+  'plan.title':    'Kartu Darurat dan Persiapan Saya',
+  'plan.subtitle': 'Isi profil dan rencanamu. Labelnya dalam bahasa Inggris dan Jepang. Penolong, dokter, dan polisi bisa membaca informasimu, walaupun kamu tidak bisa berbicara. Cetak lembar ini. Simpan satu salinan di dompet, di tas, dan di rumah.',
+  'plan.btn.save':  '💾 Simpan Rencana',
   'plan.btn.print': '🖨️ Cetak Lembar Kerja',
   'plan.print.fullIds': 'Cetak nomor ID lengkap (kartu izin tinggal, asuransi). Jika dimatikan, hanya 4 karakter terakhir yang dicetak.',
   'plan.btn.show':  '🆘 Tunjukkan Rencana',
@@ -95,7 +95,7 @@ export const id: Record<string, string> = {
   'plan.show.title':    '🆘 Info Darurat · 緊急情報',
   'plan.show.subtitle': 'Tolong saya / 助けてください',
   'plan.show.close':    'Tutup',
-  'plan.show.empty':    'Rencana Anda masih kosong. Isi formulir rencana terlebih dahulu. Setelah itu, informasi Anda muncul di sini.',
+  'plan.show.empty':    'Rencanamu masih kosong. Isi formulir rencana dulu. Setelah itu, informasimu muncul di sini.',
 
   // About section
   'about.title': 'Tentang Panduan Ini',
@@ -107,7 +107,7 @@ export const id: Record<string, string> = {
 
   // Quiz section
   'quiz.title':    'Kuis Latihan Bencana',
-  'quiz.subtitle': 'Uji pengetahuan Anda tentang kesiapsiagaan bencana. Ada 10 pertanyaan berdasarkan skenario. Topiknya gempa, topan, tsunami, dan apa yang harus dilakukan saat darurat.',
+  'quiz.subtitle': 'Uji pengetahuanmu tentang kesiapsiagaan bencana. Jawab 10 pertanyaan tentang situasi bencana. Topiknya gempa, topan, tsunami, dan langkah darurat.',
   'quiz.btn.start': '🎯 Mulai Kuis',
 
   // Footer

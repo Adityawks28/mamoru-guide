@@ -36,7 +36,9 @@ describe('copy rules', () => {
   it('keeps English descriptive sentences at 25 words or fewer', () => {
     expect(longSentences(copy, 'descriptive', 25)).toEqual([]);
   });
-  it.todo('uses one Indonesian pronoun (Decision D-1) (enabled by Task 9a)');
+  it('uses one Indonesian pronoun, kamu (Decision D-1)', () => {
+    expect(copy.filter(c => /\bAnda\b/i.test(c.id ?? '')).map(c => `${locOf(c, 'id')}: ${c.id}`)).toEqual([]);
+  });
   it('keeps Japanese sentences at 40 characters or fewer', () => {
     expect(copy.flatMap(c => sentences(c.ja ?? '', 'ja')
       .filter(s => s.length > 40)

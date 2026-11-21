@@ -314,7 +314,7 @@ export function savePlan(): void {
 }
 
 export function clearPlan(): void {
-  if (!confirm('Clear your emergency plan? You cannot undo this.\nあなたの計画を消しますか？元に戻せません。\nHapus rencana darurat Anda? Ini tidak bisa dibatalkan.')) return;
+  if (!confirm('Clear your emergency plan? You cannot undo this.\nあなたの計画を消しますか？元に戻せません。\nHapus rencana daruratmu? Ini tidak bisa dibatalkan.')) return;
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
