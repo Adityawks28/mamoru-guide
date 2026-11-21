@@ -1,4 +1,5 @@
 import { currentLang } from './lang';
+import { sourcesLinkHtml } from './sources-link';
 
 interface FirstAidStep {
   instruction_en: string;
@@ -174,6 +175,7 @@ function renderCategories(): void {
       `).join('')}
     </div>
     ${REVIEW_NOTE}
+    ${sourcesLinkHtml('medical')}
   `;
 
   container.querySelectorAll<HTMLButtonElement>('.firstaid-card').forEach(btn => {
@@ -241,6 +243,7 @@ function renderSteps(): void {
       </span>
     </div>
     ${REVIEW_NOTE}
+    ${sourcesLinkHtml('medical')}
     <div class="firstaid-progress">
       ${getLangText('Step', 'ステップ', 'Langkah')} ${currentStep + 1} / ${cat.steps.length}
     </div>
