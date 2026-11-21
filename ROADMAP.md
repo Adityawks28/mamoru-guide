@@ -48,7 +48,7 @@ International students and residents in Japan who find it hard to get disaster i
 
 ### 5. Trust and partners
 
-- **Sources and Review page.** For each fact: the source, the date it was last checked, and who reviewed it.
+- **Sources and Review page.** For each fact: the source, the date it was last checked, and who reviewed it. Source and date done 2026-11-22: the Sources section in Prepare (`#/sources`) lists each source with its last check date. Still open: who reviewed it, because no reviewer exists yet (Decision D-4 in the content-quality plan).
 - **Orientation pack** for schools and companies: a poster with a QR code, the worksheet, and short workshop slides.
 - **More diverse characters**, for example a hijab option, different skin tones, and a wheelchair user.
 

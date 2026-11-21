@@ -363,6 +363,37 @@ body.day-mode .typhoon-name { color: color-mix(in srgb, var(--lvl) 55%, #000); }
   flex-direction: column;
   gap: 8px;
 }
+.sources-how,
+.source-item,
+.sources-link {
+  font-family: var(--pixel-text);
+  font-size: 14px;
+}
+.sources-group-title {
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  color: var(--accent);
+}
+/* DotGothic16 at 12px is hard to read in kanji. */
+body.lang-ja .sources-group-title {
+  font-size: 14px;
+}
+.source-item {
+  overflow-wrap: anywhere;
+}
+.source-title {
+  color: var(--text);
+  text-decoration: underline;
+}
+.source-publisher,
+.source-checked {
+  color: var(--text-muted);
+}
+.sources-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 .contact-category-header {
   font-family: var(--pixel-font);
   font-size: 12px;
