@@ -480,6 +480,7 @@ body.day-mode .ks-shooter,
   .mascot-hint { animation: none; }
   .ks-petal, .ks-shooter { animation: none; display: none; }
   .mascot-wrap > .mascot { transition: none; }
+  .pixel-bubble { animation: none; }
   .mascot-svg[data-emote] { animation: none; }
   .mk-particle { display: none; }
 }

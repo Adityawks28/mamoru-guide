@@ -100,4 +100,18 @@ describe('reduced motion in CSS', () => {
     const missing = loops.flatMap(r => r.selectors.filter(s => !stopped(s, r)).map(s => `${r.file}: ${s}`));
     expect(missing).toEqual([]);
   });
+
+  // One-shot animations that move or scale a large box (small slides under
+  // 20px, such as the flashcard and tab fades, may stay).
+  it.each([
+    '.pixel-bubble',
+    '.hero-title',
+    '.mr-vase-fall',
+    '.mr-book-fall',
+    '.emergency-fab-panel',
+  ])('stops the one-shot animation on %s', selector => {
+    const rule = RULES.find(r => !r.reduced && r.decls.has('animation') && r.selectors.includes(selector));
+    expect(rule, selector).toBeDefined();
+    expect(stopped(selector, rule!)).toBe(true);
+  });
 });
