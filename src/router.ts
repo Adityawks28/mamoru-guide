@@ -7,13 +7,27 @@ export const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/':          ['hero'],
   '#/emergency': ['emergency-mode'],
   '#/prepare':   ['earthquake', 'alerts', 'typhoon', 'vocab', 'showthis', 'bag', 'firstaid', 'contacts'],
-  '#/learn':     ['drill', 'quiz', 'about'],
+  '#/learn':     ['drill', 'quiz', 'about', 'sources'],
+  '#/sources':   ['sources'],
   '#/plan':      ['myplan'],
   '#/shelter':   ['shelter'],
   '#/firstaid':  ['firstaid'],
   '#/show':      ['showthis'],
   '#/alerts':    ['alerts'],
 };
+
+export interface RouteDetail { route: string; param: string | null }
+
+// Routes that accept one sub-segment, for example #/sources/medical.
+export const PARAM_ROUTES: readonly string[] = ['#/sources'];
+
+export function resolveRoute(hash: string): { route: string; param: string | null } {
+  const has = (key: string): boolean => Object.prototype.hasOwnProperty.call(ROUTE_SECTIONS, key);
+  if (has(hash)) return { route: hash, param: null };
+  const m = /^(#\/[a-z]+)\/([a-z]+)$/.exec(hash);
+  if (m && PARAM_ROUTES.includes(m[1])) return { route: m[1], param: m[2] };
+  return { route: '#/', param: null };
+}
 
 // Legacy v1 anchors → redirect to new route format
 const REDIRECTS: Record<string, string> = {
@@ -43,7 +57,7 @@ export function activateRoute(hash: string): void {
     return;
   }
 
-  const route = Object.prototype.hasOwnProperty.call(ROUTE_SECTIONS, hash) ? hash : '#/';
+  const { route, param } = resolveRoute(hash);
 
   ALL_SECTION_IDS.forEach(id => {
     document.getElementById(id)?.classList.add('route-hidden');
@@ -72,6 +86,9 @@ export function activateRoute(hash: string): void {
   mountSectionNav(routeName);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const detail: RouteDetail = { route: routeName, param };
+  document.dispatchEvent(new CustomEvent<RouteDetail>('mamoru:route', { detail }));
 }
 
 let initialized = false;

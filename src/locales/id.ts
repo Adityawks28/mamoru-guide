@@ -32,6 +32,7 @@ export const id: Record<string, string> = {
   'label.drill':     'LATIHAN GEMPA',
   'label.quiz':      'KUIS',
   'label.about':     'TENTANG',
+  'label.sources':   'SUMBER',
   'label.contacts':  'KONTAK',
   'label.plan':      'RENCANAKU',
 
@@ -82,6 +83,7 @@ export const id: Record<string, string> = {
   'chip.drill':      '🎮 Latihan',
   'chip.quiz':       '📝 Kuis',
   'chip.about':      'ℹ Tentang',
+  'chip.sources':    '📚 Sumber',
 
   // Sources page
   'sources.title': 'Sumber dan pemeriksaan',
