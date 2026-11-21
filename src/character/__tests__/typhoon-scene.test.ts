@@ -95,4 +95,18 @@ describe('typhoon-scene', () => {
     expect(sprite().dataset.pose).toBe('stand');
     expect(prop('wind')).toBeNull();
   });
+
+  it('reduced motion: the tip bubble does not change by itself', async () => {
+    (globalThis as any).window.matchMedia = () => ({
+      matches: true, addEventListener: () => {}, removeEventListener: () => {},
+      onchange: null, addListener: () => {}, removeListener: () => {},
+      media: '', dispatchEvent: () => false,
+    });
+    const { initTyphoonScene } = await import('../typhoon-scene');
+    initTyphoonScene();
+    const tip = () => document.querySelector('#typhoon-scene .tip-bubble [data-lang="en"]')!.textContent;
+    const before = tip();
+    vi.advanceTimersByTime(20000);
+    expect(tip()).toBe(before);
+  });
 });

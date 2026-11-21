@@ -101,7 +101,7 @@ const STEPS: StepDef[] = [
     icon: '🎒', title: 'Supplies and Bag ・ 備蓄・防災袋',
     fields: [
       { key: 'supplies.supplyDays',   label: 'Days of Supplies ・ 備蓄日数',  type: 'select', options: SUPPLY_DAYS },
-      { key: 'supplies.waterLiters',  label: 'Stored Water ・ 水の備蓄量', type: 'text', placeholder: 'e.g. 6 L (2 L/day × 3 days)' },
+      { key: 'supplies.waterLiters',  label: 'Stored Water ・ 水の備蓄量', type: 'text', placeholder: 'e.g. 9 L (3 L/day × 3 days)' },
       { key: 'supplies.foodList',     label: 'Food List ・ 非常食リスト',  type: 'textarea', placeholder: 'e.g. Canned tuna × 4, instant rice × 6', full: true },
       { key: 'supplies.toolsList',    label: 'Equipment List ・ 装備リスト', type: 'textarea', placeholder: 'e.g. Flashlight, radio, first aid kit, whistle', full: true },
       { key: 'supplies.bagLocation',  label: 'Bag Location ・ 非常持ち出し袋の場所', type: 'text', placeholder: 'e.g. Genkan (entrance), next to the shoes' },
@@ -314,7 +314,7 @@ export function savePlan(): void {
 }
 
 export function clearPlan(): void {
-  if (!confirm('Clear your emergency plan? You cannot undo this.\n避難計画を消しますか？元に戻せません。\nHapus rencana darurat Anda? Ini tidak bisa dibatalkan.')) return;
+  if (!confirm('Clear your emergency plan? You cannot undo this.\nあなたの計画を消しますか？元に戻せません。\nHapus rencana daruratmu? Ini tidak bisa dibatalkan.')) return;
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
@@ -368,7 +368,7 @@ function buildWorksheet(): HTMLElement {
 
   ws.append(el('footer', { class: 'ws-foot' }, [
     `Printed ${new Date().toLocaleDateString('en-CA')}.`,
-    'This sheet has personal information. Keep it in a safe place. Shred old copies. 個人情報が書いてあります。安全な場所に保管してください。古い紙は細かく破って捨ててください。',
+    'This sheet has personal information. Keep it in a safe place. Shred old copies. 個人情報が書いてあります。安全な場所に置いてください。古い紙は細かく破って捨ててください。',
     masked ? 'ID numbers show only the last 4 characters. 番号は最後の4文字だけを表示しています。' : '',
     'Mamoru Guide made this sheet on this device. It did not send your data to a server.',
   ].filter(Boolean).join(' ')));
@@ -407,7 +407,7 @@ export function initEmergencyPlan(): void {
     plan = migrated;
     savePlanV2(plan);
     removeItem('mamoru-emergency-plan');
-    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形式に更新しました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
+    showToast(lang3('Plan updated to the new format ✓', '計画を新しい形にしました ✓', 'Rencana diperbarui ke format baru ✓'), 'success');
   } else {
     plan = loadPlanV2();
   }

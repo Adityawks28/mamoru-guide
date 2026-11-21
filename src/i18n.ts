@@ -26,10 +26,15 @@ export function t(key: string, lang?: Language): string {
 
 // Walk `root` (default: document.body) and set textContent of every [data-i18n] element.
 // Elements with [data-i18n-html] get innerHTML instead (for keys that contain markup).
+// Elements with [data-i18n-aria] get their aria-label translated.
 export function applyTranslations(root: Element = document.body): void {
   root.querySelectorAll<HTMLElement>('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n!;
     el.textContent = t(key);
+  });
+
+  root.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach(el => {
+    el.setAttribute('aria-label', t(el.dataset.i18nAria!));
   });
 
   root.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach(el => {

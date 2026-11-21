@@ -92,7 +92,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     if (e.data && e.data.type === 'SW_UPDATED') {
       showToast(lang3(
         'A new version is available. Reload the page to update.',
-        '新しいバージョンがあります。ページを再読み込みしてください。',
+        '新しいバージョンがあります。ページを、もう一度読みこんでください。',
         'Versi baru tersedia. Muat ulang halaman untuk memperbarui.',
       ), 'info');
     }

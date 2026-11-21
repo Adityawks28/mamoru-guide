@@ -33,6 +33,9 @@ export const GLOSSARY: ReadonlyArray<GlossaryTerm> = [
   // JMA lists "skala intensitas gempa bumi / skala intensitas seismik"; the second matches en word for word.
   { ja: '震度', reading: 'しんど', en: 'seismic intensity', id: 'skala intensitas seismik', source: 'jma-multilingual' },
   // id: not in the JMA dictionary; "gempa susulan" is the app's only Indonesian for 余震.
+  // JMA dictionary row 高潮 (No. 92, 特別警報・警報・注意報): en "Storm surge", id "Gelombang pasang". The app already uses it
+  // (shelter finder hazard label, alert level note). Its warning rows use other words (高潮警報 "peringatan pasang laut").
+  { ja: '高潮', reading: 'たかしお', en: 'Storm surge', id: 'Gelombang pasang', source: 'jma-multilingual' },
   { ja: '余震', reading: 'よしん', en: 'aftershock', id: 'gempa susulan', source: 'jma-aftershock' },
   // No official term in any language; en from the ISA guidebook sentence on this fire, id confirmed by Aditya (native speaker).
   { ja: '通電火災', reading: 'つうでんかさい', en: 'electrical fire', id: 'kebakaran listrik', source: 'isa-guidebook-en' },

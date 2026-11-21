@@ -3,9 +3,9 @@ import { formatBuildDate, renderBuildDate } from '../build-date';
 
 const CARD = `
   <p>
-    <span data-lang="en"><span class="build-date" hidden><time></time>. </span>We update this guide regularly.</span>
-    <span data-lang="ja"><span class="build-date" hidden><time></time>。</span>このガイドは定期的に更新しています。</span>
-    <span data-lang="id"><span class="build-date" hidden><time></time>. </span>Kami memperbarui panduan ini secara berkala.</span>
+    <span data-lang="en"><span class="build-date" hidden>Aditya last updated this guide on <time></time>.</span></span>
+    <span data-lang="ja"><span class="build-date" hidden>Adityaが、<time></time>に、このガイドを新しくしました。</span></span>
+    <span data-lang="id"><span class="build-date" hidden>Aditya terakhir memperbarui panduan ini pada <time></time>.</span></span>
   </p>`;
 
 describe('build date', () => {
@@ -22,7 +22,11 @@ describe('build date', () => {
     const wraps = [...document.querySelectorAll<HTMLElement>('.build-date')];
     expect(wraps.map(w => w.hidden)).toEqual([false, false, false]);
     expect(wraps.map(w => w.querySelector('time')!.getAttribute('datetime'))).toEqual(['2026-11-21', '2026-11-21', '2026-11-21']);
-    expect(wraps.map(w => w.textContent)).toEqual(['21 November 2026. ', '2026年11月21日。', '21 November 2026. ']);
+    expect(wraps.map(w => w.textContent)).toEqual([
+      'Aditya last updated this guide on 21 November 2026.',
+      'Adityaが、2026年11月21日に、このガイドを新しくしました。',
+      'Aditya terakhir memperbarui panduan ini pada 21 November 2026.',
+    ]);
   });
 
   it('keeps the date hidden when the build date is missing or malformed', () => {
@@ -38,5 +42,6 @@ describe('build date', () => {
     const html = readFileSync('index.html', 'utf8');
     expect(html.match(/class="build-date" hidden/g)).toHaveLength(3);
     expect(html).not.toMatch(/datetime="2026-03"/);
+    expect(html).not.toMatch(/regularly|secara berkala|定期的/);
   });
 });
