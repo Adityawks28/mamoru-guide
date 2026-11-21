@@ -121,13 +121,13 @@ The first-aid tips in `FIRSTAID_TIPS` repeat card content. Each tip now uses the
 | Claim ID | Old tip (English) | Card row | Status | Final tip (English) |
 |---|---|---|---|---|
 | tip-bleeding-pressure (new) | Bleeding: press firmly on the wound. Direct pressure works better than a special bandage. | Bleeding 2 ("better than a special bandage" has no source) | changed | Bleeding: press firmly on the wound with a clean cloth. Keep pressing until paramedics arrive. |
-| tip-burn-cooling | Burn: cool it in water for 10 min or more. Cover it loosely with a clean cloth. No ice, butter, or toothpaste. | Burns 1, 3 | changed | Burn: cool it under running tap water for 10 to 20 minutes. No ice, butter, or toothpaste. |
+| tip-burn-cooling | Burn: cool it in water for 10 min or more. Cover it loosely with a clean cloth. No ice, butter, or toothpaste. | Burns 1, 3 | changed | Burn: cool under running tap water for 10 to 20 minutes. Large burn: cool for less time. No ice or butter. |
 | tip-cpr-depth | CPR: push hard and fast, 100 to 120 a minute. Adults 5 to 6 cm, children 1/3 of chest depth. Take a course. | CPR 4 | changed | CPR: push hard and fast, 100 to 120 a minute. Adults about 5 cm, children and babies 1/3 of chest depth. |
 | tip-aed-places (new) | AEDs in Japan are in train stations, convenience stores, and schools. Look for the green heart sign. | CPR 5 warning ("green heart sign" has no source) | changed | In Japan, many stations, schools, and some convenience stores have an AED. Look for the AED sign. |
 | tip-smoke-low (new) | Smoke: stay low. Cover your mouth with a wet cloth. Follow the green exit signs. | Smoke 1, 2 | changed | Smoke: stay low. Cover your nose and mouth with any cloth. Do not lose time to make it wet. |
-| tip-shock-position | Blood loss shock: lay them flat, raise the legs. Hard to breathe: half sitting. Always call 119. | Shock 1, 2 | changed | Shock: lay the person flat on their back. Hard to breathe: use the easiest position. Always call 119. |
-| tip-crush-15min | Crushed for more than 15 minutes: DO NOT free them yourself. Call 119 now. | Crush 1 (the ID keeps its old name; the 15 minute rule is gone) | changed | Trapped person: call 119. Make sure the place is safe for you. Free them slowly and carefully. |
-| tip-breathing-444 | If you panic: breathe in for 4 counts, hold for 4, breathe out for 4. | Psychological 2 (the ID keeps its old name; the 4-4-4 count is gone) | changed | Fast breathing from panic: speak calmly. Ask the person to breathe slowly. Help them sit comfortably. |
+| tip-shock-position | Blood loss shock: lay them flat, raise the legs. Hard to breathe: half sitting. Always call 119. | Shock 1, 2 | changed | Shock: lay the person flat on the back. Hard to breathe: easiest position. Vomiting: on the side. Call 119. |
+| tip-crush | Crushed for more than 15 minutes: DO NOT free them yourself. Call 119 now. | Crush 1 (the 15 minute rule is gone) | changed | Trapped person: call 119. Make sure the place is safe for you. Free them slowly and carefully. |
+| tip-breathing | If you panic: breathe in for 4 counts, hold for 4, breathe out for 4. | Psychological 2 (the 4-4-4 count is gone) | changed | Fast breathing from panic: speak calmly. Ask the person to breathe slowly. Help them sit comfortably. |
 
 ## Choices on optional texts
 
