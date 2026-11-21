@@ -1,5 +1,6 @@
 import { showToast } from './toast';
 import { currentLang } from './lang';
+import { motionAllowed } from './character/motion';
 
 interface DrillScenario {
   situation_en: string;
@@ -131,6 +132,7 @@ function reapplyLang(): void {
 }
 
 function triggerShake(container: HTMLElement): void {
+  if (!motionAllowed()) return;
   container.classList.add('shaking');
   if (navigator.vibrate) {
     navigator.vibrate([100, 50, 100, 50, 200]);
