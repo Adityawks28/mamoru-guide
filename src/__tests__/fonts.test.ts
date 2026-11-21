@@ -158,6 +158,7 @@ describe('fonts', () => {
     'earthquake-room.css': ['.mr-procedure', '.mamoru-room .tip-bubble'],
     'character.css': ['.tip-bubble'],
     'layout.css': ['.toast'],
+    'components.css': ['.source-item', '.sources-how', '.sources-link'],
   };
   const ruleBodies = (file: string, selector: string) =>
     [...css(file).matchAll(/([^{}]+)\{([^{}]*)\}/g)]
