@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { locOf, type CopyEntry } from './helpers/copy-corpus';
+import { loadCopy, locOf, type CopyEntry } from './helpers/copy-corpus';
 import { GLOSSARY, type GlossaryTerm } from '../data/glossary';
 import { SOURCES } from '../data/sources';
 
@@ -46,7 +46,9 @@ describe('term glossary', () => {
   });
   // Failure lists: .superpowers/sdd/2026-11-21-content-quality/task-2-failures.md
   // To enable one: import loadCopy, then expect(mismatches(loadCopy(), GLOSSARY, '<lang>')).toEqual([]).
-  it.todo('glossary terms are consistent in English (enabled by Task 7)');
+  it('glossary terms are consistent in English', () => {
+    expect(mismatches(loadCopy(), GLOSSARY, 'en')).toEqual([]);
+  });
   it.todo('glossary terms are consistent in Japanese (enabled by Task 8)');
   it.todo('glossary terms are consistent in Indonesian (enabled by Task 9a)');
 });

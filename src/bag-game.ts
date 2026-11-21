@@ -92,7 +92,7 @@ function updatePackPanel(): void {
   if (!list) return;
 
   if (packedItems.size === 0) {
-    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty. Start packing.</span><span data-lang="ja">空です。物を入れてください。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>`;
+    list.innerHTML = `<div class="bag-pack-empty"><span data-lang="en">Empty. Add items.</span><span data-lang="ja">空です。物を入れてください。</span><span data-lang="id">Kosong. Mulai isi tas.</span></div>`;
     document.body.classList.remove('lang-en', 'lang-ja', 'lang-id');
     document.body.classList.add('lang-' + currentLang);
   } else {

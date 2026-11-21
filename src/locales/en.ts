@@ -5,7 +5,7 @@ export const en: Record<string, string> = {
   'nav.emergency': '🚨 Emergency',
   'nav.prepare':   'Prepare',
   'nav.learn':     'Learn',
-  'nav.shelter':   'Shelter',
+  'nav.shelter':   'Evacuation Shelter',
   'nav.plan':      'My Plan',
 
   // Hero
@@ -15,9 +15,9 @@ export const en: Record<string, string> = {
   'mode.emergency.title':   'Emergency',
   'mode.emergency.desc':    'I need help right now',
   'mode.prepare.title':     'Prepare',
-  'mode.prepare.desc':      'Make a plan, find shelter',
+  'mode.prepare.desc':      'Make a plan. Find an evacuation shelter.',
   'mode.learn.title':       'Learn',
-  'mode.learn.desc':        'Drills, vocabulary, quizzes',
+  'mode.learn.desc':        'Drills, words, quizzes',
 
   // Emergency mode (4-action layout)
   'em.title':       '🚨 EMERGENCY',
@@ -25,10 +25,10 @@ export const en: Record<string, string> = {
   'em.back':        '← Back',
   'em.call.title':  'Call 119',
   'em.call.desc':   'Fire / Ambulance',
-  'em.show.title':  'Show Card',
+  'em.show.title':  'Show This Card',
   'em.show.desc':   'Japanese phrases for helpers',
-  'em.shelter.title': 'Find Shelter',
-  'em.shelter.desc':  'Nearest evacuation point',
+  'em.shelter.title': 'Find an Evacuation Shelter',
+  'em.shelter.desc':  'Nearest evacuation site',
   'em.alerts.title':  'Alert Info',
   'em.alerts.desc':   'What the warnings mean',
 
@@ -74,7 +74,7 @@ export const en: Record<string, string> = {
 
   // Contacts section
   'contacts.title':    'Emergency Contacts',
-  'contacts.subtitle': 'Tap a contact to call the number. Save these numbers before an emergency. In an emergency, phone networks quickly become overloaded.',
+  'contacts.subtitle': 'Tap a contact to call the number. Save these numbers now, before an emergency. In an emergency, phone networks quickly become too busy.',
   'contacts.filter.all':     'All',
   'contacts.filter.emerg':   'Emergency',
   'contacts.filter.medical': 'Medical',
@@ -83,7 +83,7 @@ export const en: Record<string, string> = {
   'contacts.filter.mental':  'Mental Health',
 
   // Plan section
-  'plan.title':    'My Emergency Card & Preparation',
+  'plan.title':    'My Emergency Card and Preparation',
   'plan.subtitle': 'Fill in your profile and your plan. The labels are in English and Japanese. Rescuers, doctors, and police can read your information, even if you cannot speak. Print it. Keep a copy in your wallet, in your bag, and at home.',
   'plan.btn.save':  '💾 Save Plan',
   'plan.btn.print': '🖨️ Print Worksheet',
@@ -102,12 +102,12 @@ export const en: Record<string, string> = {
 
   // Drill section
   'drill.title':    'Earthquake Drill',
-  'drill.subtitle': 'Try a simulated earthquake. Make decisions quickly. Learn the correct actions step by step.',
+  'drill.subtitle': 'Try a practice earthquake. Make decisions quickly. Learn the correct actions step by step.',
   'drill.btn.start': '🚨 Start Drill',
 
   // Quiz section
   'quiz.title':    'Disaster Drill Quiz',
-  'quiz.subtitle': 'Test what you know about disaster preparedness. The quiz has 10 questions based on scenarios. They are about earthquakes, typhoons, tsunamis, and what to do in an emergency.',
+  'quiz.subtitle': 'Test what you know about disaster preparedness. Answer 10 questions about disaster situations. They cover earthquakes, typhoons, tsunamis, and emergency steps.',
   'quiz.btn.start': '🎯 Start Quiz',
 
   // Footer
@@ -115,7 +115,7 @@ export const en: Record<string, string> = {
 
   // FAB labels
   'fab.firstaid': 'First Aid Guide',
-  'fab.shelter':  'Find Shelter',
+  'fab.shelter':  'Find an Evacuation Shelter',
   'fab.showthis': 'Show This Card',
 
   // Common

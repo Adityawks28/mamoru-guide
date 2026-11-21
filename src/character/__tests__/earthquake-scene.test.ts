@@ -66,7 +66,7 @@ describe('earthquake-scene', () => {
     for (let i = 1; i <= 9; i++) {
       shindo(i);
       vi.advanceTimersByTime(3000);
-      expect(procEn(), `row ${i}`).toContain('get under a strong table');
+      expect(procEn(), `row ${i}`).toContain('Get under a strong table');
       expect(actorPose(), `row ${i}`).toBe('cower');
     }
     shindo(0);
@@ -163,11 +163,11 @@ describe('earthquake-scene', () => {
     const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
     expect(procEn()).toBe('');
     shindo(0);
-    expect(procEn()).toContain('people do not feel it');
+    expect(procEn()).toContain('People do not feel it');
     for (const i of [1, 4, 5, 9]) {
       shindo(i);
-      expect(procEn(), `row ${i}`).toContain('protect yourself');
-      expect(procEn(), `row ${i}`).toContain('wait until the shaking stops');
+      expect(procEn(), `row ${i}`).toContain('Protect yourself');
+      expect(procEn(), `row ${i}`).toContain('Wait until the shaking stops');
     }
   });
 

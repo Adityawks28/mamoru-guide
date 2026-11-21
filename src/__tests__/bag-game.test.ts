@@ -12,7 +12,7 @@ describe('emergency bag data', () => {
   });
 
   it('six 500 ml bottles weigh at least the 3 kg of water inside them', () => {
-    const water = bagItems.find(i => i.en.startsWith('Water (500ml × 6)'))!;
+    const water = bagItems.find(i => i.en.startsWith('Water (500 mL × 6)'))!;
     expect(water.weight).toBeGreaterThanOrEqual(3);
   });
 

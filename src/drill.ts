@@ -23,23 +23,23 @@ export const scenarios: DrillScenario[] = [
     options: [
       { en: 'Run to the exit immediately', ja: 'すぐに出口へ走る', id: 'Segera lari ke pintu keluar' },
       { en: 'Drop, Cover, Hold On under the desk', ja: '机の下で身を低くし、頭を守り、動かない（DROP, COVER, HOLD ON）', id: 'Merunduk, berlindung, bertahan di bawah meja' },
-      { en: 'Look out the window to see what is happening', ja: '窓の外を見て、何が起きているか確かめる', id: 'Lihat ke luar jendela untuk melihat apa yang terjadi' },
+      { en: 'Look out the window to see what happens', ja: '窓の外を見て、何が起きているか確かめる', id: 'Lihat ke luar jendela untuk melihat apa yang terjadi' },
       { en: 'Call a friend to ask what to do', ja: '友達に電話して、どうすればいいか聞く', id: 'Telepon teman untuk bertanya apa yang harus dilakukan' },
     ],
     correct: 1,
-    explain_en: 'DROP to the ground. Take COVER under strong furniture. HOLD ON. Running during the shaking is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
+    explain_en: 'DROP to the ground. Take COVER under strong furniture. HOLD ON. Do not run during the shaking. It is dangerous. In recent earthquakes, furniture that fell or moved hurt 30% to 50% of injured people.',
     explain_ja: '床に体を低くし（DROP）、じょうぶな家具の下に入り（COVER）、しっかりつかまります（HOLD ON）。揺れている間に走るのは危険です。最近の地震では、けがをした人の3〜5割が、家具でけがをしました。家具がたおれたり、落ちたり、動いたりしたためです。',
     explain_id: 'MERUNDUK ke lantai, BERLINDUNG di bawah perabot yang kuat, dan BERTAHAN. Berlari saat guncangan itu berbahaya. Pada gempa terkini, 30 sampai 50% korban luka terkena perabot yang jatuh atau bergeser.',
     shake: true,
   },
   {
     claimId: 'drill-step-2',
-    situation_en: 'The shaking has stopped. The building looks OK, but you smell something strange. What do you do next?',
+    situation_en: 'The shaking stopped. The building looks OK, but you smell something strange. What do you do next?',
     situation_ja: '揺れが止まりました。建物はこわれていないようですが、変なにおいがします。次に何をしますか？',
     situation_id: 'Guncangan sudah berhenti. Bangunan tampak utuh, tetapi Anda mencium bau aneh. Apa yang Anda lakukan berikutnya?',
     options: [
       { en: 'Turn on the lights to check the room', ja: '電気をつけて、部屋を確かめる', id: 'Nyalakan lampu untuk memeriksa ruangan' },
-      { en: 'Open the windows and leave carefully. It could be gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela dan keluar dengan hati-hati. Mungkin itu gas.' },
+      { en: 'Open the windows. Leave carefully. It can be gas.', ja: '窓を開けて、気をつけて避難する。ガスかもしれない', id: 'Buka jendela dan keluar dengan hati-hati. Mungkin itu gas.' },
       { en: 'Take the elevator to get out fast', ja: 'エレベーターで早く外に出る', id: 'Naik elevator agar cepat keluar' },
       { en: 'Light a candle to see better', ja: 'ろうそくをつけて、よく見る', id: 'Nyalakan lilin agar lebih jelas' },
     ],
@@ -50,11 +50,11 @@ export const scenarios: DrillScenario[] = [
   },
   {
     claimId: 'drill-step-3',
-    situation_en: 'You are outside now. A person near you is bleeding from a head wound. What do you do?',
+    situation_en: 'You are outside now. A person near you has a head wound that bleeds. What do you do?',
     situation_ja: '外に出ました。近くに、頭から血が出ている人がいます。どうしますか？',
     situation_id: 'Anda sudah di luar. Orang di dekat Anda berdarah dari luka di kepala. Apa yang Anda lakukan?',
     options: [
-      { en: 'Press a clean cloth directly on the wound and call 119', ja: 'きれいな布で傷口を直接押さえて、119番に電話する', id: 'Tekan luka langsung dengan kain bersih dan hubungi 119' },
+      { en: 'Press a clean cloth directly on the wound. Call 119.', ja: 'きれいな布で傷口を直接押さえて、119番に電話する', id: 'Tekan luka langsung dengan kain bersih dan hubungi 119' },
       { en: 'Move the person to a different place first', ja: 'まず別の場所に動かす', id: 'Pindahkan orang itu ke tempat lain dulu' },
       { en: 'Leave the person. Professionals will come.', ja: '何もしない。救急隊が来るから', id: 'Tinggalkan saja. Petugas akan datang.' },
     ],
@@ -69,7 +69,7 @@ export const scenarios: DrillScenario[] = [
     situation_ja: 'スマホに津波警報が出ました。海から500mの所にいます。どうしますか？',
     situation_id: 'Ponsel Anda berbunyi: peringatan tsunami. Anda 500 m dari pantai. Apa yang Anda lakukan?',
     options: [
-      { en: 'Go to the beach to see if a wave is coming', ja: '波が来るか、海を見に行く', id: 'Pergi ke pantai untuk melihat apakah ombak datang' },
+      { en: 'Go to the beach to look for a wave', ja: '波が来るか、海を見に行く', id: 'Pergi ke pantai untuk melihat apakah ombak datang' },
       { en: 'Wait for more details before you decide', ja: 'もっと情報が出るまで待ってから決める', id: 'Tunggu informasi lebih lanjut sebelum memutuskan' },
       { en: 'Go at once to high ground or a tsunami evacuation building', ja: 'すぐに、高台（たかだい）か津波避難ビルへ行く', id: 'Segera pergi ke tempat tinggi atau gedung evakuasi tsunami' },
       { en: 'Go to the basement for shelter', ja: '地下に逃げる', id: 'Berlindung di ruang bawah tanah' },
@@ -319,7 +319,7 @@ function showDrillResults(): void {
     currentScenario = 0;
     drillScore = 0;
     startCountdown();
-    showToast(getLangText('🔄 Drill restarted', '🔄 訓練をやり直します', '🔄 Latihan dimulai ulang'));
+    showToast(getLangText('🔄 The drill started again', '🔄 訓練をやり直します', '🔄 Latihan dimulai ulang'));
   });
 }
 

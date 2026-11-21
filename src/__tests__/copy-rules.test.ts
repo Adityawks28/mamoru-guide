@@ -33,7 +33,9 @@ describe('copy rules', () => {
   it('keeps English instruction sentences at 20 words or fewer', () => {
     expect(longSentences(copy, 'instruction', 20)).toEqual([]);
   });
-  it.todo('keeps English descriptive sentences at 25 words or fewer (enabled by Task 7)');
+  it('keeps English descriptive sentences at 25 words or fewer', () => {
+    expect(longSentences(copy, 'descriptive', 25)).toEqual([]);
+  });
   it.todo('uses one Indonesian pronoun (Decision D-1) (enabled by Task 9a)');
   it.todo('keeps Japanese sentences at 40 characters or fewer (enabled by Task 8)');
 });

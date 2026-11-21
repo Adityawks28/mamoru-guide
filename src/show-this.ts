@@ -38,10 +38,10 @@ const phrases: Record<ShowThisCategory, ShowThisPhrase[]> = {
     { jp: '意識がありません！AEDはどこですか？', rom: 'Ishiki ga arimasen! AED wa doko desu ka?', en: 'This person is unconscious! Where is the AED?', id: 'Orang ini tidak sadar! Di mana AED?', context_en: 'For a heart emergency. Many stations and schools have an AED.', context_ja: '心臓の緊急のときに使います。多くの駅や学校に、AEDがあります。', context_id: 'Untuk keadaan darurat jantung. Banyak stasiun dan sekolah punya AED.' },
   ],
   shelter: [
-    { jp: '避難所はどこですか？', rom: 'Hinanjo wa doko desu ka?', en: 'Where is the evacuation shelter?', id: 'Di mana tempat pengungsian?', context_en: 'Ask where the nearest shelter is.', context_ja: 'いちばん近い避難所の場所を聞きます。', context_id: 'Tanyakan lokasi tempat pengungsian terdekat.' },
+    { jp: '避難所はどこですか？', rom: 'Hinanjo wa doko desu ka?', en: 'Where is the evacuation shelter?', id: 'Di mana tempat pengungsian?', context_en: 'Ask where the nearest evacuation shelter is.', context_ja: 'いちばん近い避難所の場所を聞きます。', context_id: 'Tanyakan lokasi tempat pengungsian terdekat.' },
     { jp: 'ここは安全ですか？', rom: 'Koko wa anzen desu ka?', en: 'Is this place safe?', id: 'Apakah tempat ini aman?', context_en: 'Ask if the place where you are now is safe.', context_ja: '今いる場所が安全か聞きます。', context_id: 'Tanyakan apakah tempat Anda sekarang aman.' },
-    { jp: '水をください', rom: 'Mizu wo kudasai', en: 'Please give me water', id: 'Tolong beri saya air', context_en: 'Ask for drinking water at a shelter.', context_ja: '避難所で飲み水をたのみます。', context_id: 'Minta air minum di tempat pengungsian.' },
-    { jp: '食べ物はありますか？', rom: 'Tabemono wa arimasu ka?', en: 'Is there any food?', id: 'Apakah ada makanan?', context_en: 'Ask if the shelter has food.', context_ja: '避難所に食べ物があるか聞きます。', context_id: 'Tanyakan apakah ada makanan di tempat pengungsian.' },
+    { jp: '水をください', rom: 'Mizu wo kudasai', en: 'Please give me water', id: 'Tolong beri saya air', context_en: 'Ask for drinking water at an evacuation shelter.', context_ja: '避難所で飲み水をたのみます。', context_id: 'Minta air minum di tempat pengungsian.' },
+    { jp: '食べ物はありますか？', rom: 'Tabemono wa arimasu ka?', en: 'Is there any food?', id: 'Apakah ada makanan?', context_en: 'Ask if the evacuation shelter has food.', context_ja: '避難所に食べ物があるか聞きます。', context_id: 'Tanyakan apakah ada makanan di tempat pengungsian.' },
     { jp: '毛布をください', rom: 'Mōfu wo kudasai', en: 'Please give me a blanket', id: 'Tolong beri saya selimut', context_en: 'Ask for a blanket to keep warm.', context_ja: '体を温めるために、毛布をたのみます。', context_id: 'Minta selimut untuk menghangatkan badan.' },
     { jp: 'トイレはどこですか？', rom: 'Toire wa doko desu ka?', en: 'Where is the toilet?', id: 'Di mana toilet?', context_en: 'Ask where the toilet is.', context_ja: 'トイレの場所を聞きます。', context_id: 'Tanyakan di mana toilet.' },
   ],
@@ -50,7 +50,7 @@ const phrases: Record<ShowThisCategory, ShowThisPhrase[]> = {
     { jp: '道に迷いました', rom: 'Michi ni mayoimashita', en: 'I am lost', id: 'Saya tersesat', context_en: 'Ask for directions, or for help to find your way.', context_ja: '道を教えてもらうときに使います。', context_id: 'Minta petunjuk arah atau bantuan mencari jalan.' },
     { jp: '在留カードを持っています', rom: 'Zairyū kādo wo motte imasu', en: 'I have my residence card', id: 'Saya membawa kartu izin tinggal', context_en: 'Show your ID when the police or officials ask for it.', context_ja: '見せるように言われたら、身分証明書を見せます。', context_id: 'Tunjukkan kartu identitas saat polisi atau petugas memintanya.' },
     { jp: '大使館に連絡したいです', rom: 'Taishikan ni renraku shitai desu', en: 'I want to contact my embassy', id: 'Saya ingin menghubungi kedutaan saya', context_en: 'Ask to contact your embassy for help.', context_ja: '大使館に助けてもらうため、連絡したいと伝えます。', context_id: 'Minta untuk menghubungi kedutaan agar mendapat bantuan.' },
-    { jp: '盗まれました', rom: 'Nusumaremashita', en: 'I was robbed / Something was stolen', id: 'Saya dirampok / Barang saya dicuri', context_en: 'Tell the police about a theft.', context_ja: '物を盗まれたことを警察に伝えます。', context_id: 'Laporkan pencurian ke polisi.' },
+    { jp: '盗まれました', rom: 'Nusumaremashita', en: 'Someone stole my things', id: 'Saya dirampok / Barang saya dicuri', context_en: 'Tell the police about a theft.', context_ja: '物を盗まれたことを警察に伝えます。', context_id: 'Laporkan pencurian ke polisi.' },
   ],
   communication: [
     { jp: '電話を貸してください', rom: 'Denwa wo kashite kudasai', en: 'Please lend me your phone', id: 'Tolong pinjamkan telepon Anda', context_en: 'Use this when your phone has no power or you lost it.', context_ja: '携帯電話が使えないときや、なくしたときに使います。', context_id: 'Saat ponsel Anda mati atau hilang.' },

@@ -57,7 +57,7 @@ describe('t()', () => {
   });
 
   it('resolves mode.prepare.desc in all 3 languages', () => {
-    expect(t('mode.prepare.desc', 'en')).toBe('Make a plan, find shelter');
+    expect(t('mode.prepare.desc', 'en')).toBe('Make a plan. Find an evacuation shelter.');
     expect(t('mode.prepare.desc', 'ja')).toBe('計画を立て、避難所を探す');
     expect(t('mode.prepare.desc', 'id')).toBe('Buat rencana, cari tempat berlindung');
   });

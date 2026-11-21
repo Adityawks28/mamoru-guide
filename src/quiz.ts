@@ -49,7 +49,7 @@ const questions: QuizQuestion[] = [
     q_id: 'Saat topan, angin tiba-tiba berhenti dan langit cerah. Apa artinya?',
     options: [
       {en:'The typhoon is over. It is safe to go out.',ja:'台風が終わった。外に出ても大丈夫',id:'Topan sudah selesai. Aman untuk keluar.'},
-      {en:'You are in the eye of the typhoon. More wind is coming.',ja:'台風の目の中にいる。また風が来る',id:'Anda di mata topan. Angin akan datang lagi.'},
+      {en:'You are in the eye of the typhoon. More wind will come.',ja:'台風の目の中にいる。また風が来る',id:'Anda di mata topan. Angin akan datang lagi.'},
       {en:'It was a false alarm',ja:'まちがいの警報だった',id:'Itu peringatan palsu'},
     ],
     correct: 1,
@@ -92,13 +92,13 @@ const questions: QuizQuestion[] = [
     q_ja: 'レベル4の避難指示が出ました。どうしますか？',
     q_id: 'Kamu menerima perintah evakuasi Tingkat 4. Apa yang kamu lakukan?',
     options: [
-      {en:'Start preparing to leave',ja:'避難の準備を始める',id:'Mulai bersiap untuk pergi'},
+      {en:'Get ready to leave',ja:'避難の準備を始める',id:'Mulai bersiap untuk pergi'},
       {en:'Leave the danger area now',ja:'危ない場所から、すぐに避難する',id:'Segera mengungsi dari daerah berbahaya'},
       {en:'Wait until Level 5',ja:'レベル5まで待つ',id:'Tunggu sampai Tingkat 5'},
       {en:'Only elderly people must evacuate',ja:'高齢者だけが避難する',id:'Hanya lansia yang perlu mengungsi'},
     ],
     correct: 1,
-    explain_en: 'At Level 4, everyone in a danger area must leave now. At Level 5, a disaster is happening or is about to happen. It may be too late to leave safely.',
+    explain_en: 'At Level 4, everyone in a danger area must leave now. At Level 5, a disaster is already here or will come very soon. Then it can be too late to leave safely.',
     explain_ja: 'レベル4では、危ない場所にいる人は、全員すぐに避難します。レベル5は、災害が起きているか、すぐに起きそうです。安全に避難するのは、もうむずかしいかもしれません。',
     explain_id: 'Pada Tingkat 4, semua orang di daerah berbahaya harus segera mengungsi. Pada Tingkat 5, bencana sedang atau akan segera terjadi. Mungkin sudah terlambat untuk mengungsi dengan aman.',
   },
@@ -121,12 +121,12 @@ const questions: QuizQuestion[] = [
     q_ja: '地震が起きたとき、エレベーターの中にいます。どうしますか？',
     q_id: 'Anda di dalam elevator saat gempa terjadi. Apa yang Anda lakukan?',
     options: [
-      {en:'Press all the floor buttons and get out at the first stop',ja:'すべての階のボタンを押して、最初に止まった階で降りる',id:'Tekan semua tombol lantai dan keluar di lantai pertama tempat elevator berhenti'},
+      {en:'Press all the floor buttons. Get out at the first stop.',ja:'すべての階のボタンを押して、最初に止まった階で降りる',id:'Tekan semua tombol lantai dan keluar di lantai pertama tempat elevator berhenti'},
       {en:'Force the doors open',ja:'ドアを無理に開ける',id:'Buka pintu secara paksa'},
       {en:'Do nothing and wait',ja:'何もしないで待つ',id:'Diam saja dan menunggu'},
     ],
     correct: 0,
-    explain_en: 'Press all the floor buttons. Get out at the first floor where it stops. Elevators newly installed from fiscal year 2009 must have a device that stops them at the nearest floor in an earthquake.',
+    explain_en: 'Press all the floor buttons. Get out at the first floor where it stops. Since fiscal year 2009, every new elevator must have a device that stops it at the nearest floor in an earthquake.',
     explain_ja: 'すべての階のボタンを押して、最初に止まった階で降りてください。2009年度以降に新しく付けたエレベーターには、地震のとき、近くの階に止める装置（そうち）が必要です。',
     explain_id: 'Tekan semua tombol lantai. Keluar di lantai pertama tempat elevator berhenti. Elevator yang baru dipasang sejak tahun fiskal 2009 wajib punya alat yang menghentikannya di lantai terdekat saat gempa.',
   },
@@ -140,7 +140,7 @@ const questions: QuizQuestion[] = [
       {en:'Call 110',ja:'110に電話する',id:'Hubungi 110'},
     ],
     correct: 0,
-    explain_en: '171 is the disaster voice message service in Japan. It starts when a disaster makes calls to the area hard to connect. Call 171. Press 1 to record and 2 to listen. Calls from NTT East or NTT West phones are free. From other phones, ask your phone company.',
+    explain_en: '171 is the Disaster Message Dial, a voice message service in Japan. It starts when a disaster makes calls to the area hard to connect. Call 171. Press 1 to record and 2 to listen. Calls from NTT East or NTT West phones are free. From other phones, ask your phone company.',
     explain_ja: '171は災害用伝言ダイヤルです。災害で、その地域への電話がつながりにくくなったときに始まります。171に電話して、1を押すと録音、2を押すと再生です。NTT東日本・NTT西日本の電話からは無料です。ほかの電話からかけるときは、電話会社に聞いてください。',
     explain_id: '171 adalah layanan pesan suara bencana di Jepang. Layanan ini dimulai saat bencana membuat telepon ke daerah itu sulit tersambung. Hubungi 171. Tekan 1 untuk merekam dan 2 untuk mendengar. Panggilan dari telepon NTT East atau NTT West gratis. Dari telepon lain, tanyakan ke perusahaan teleponmu.',
   },
@@ -294,7 +294,7 @@ function showResults(): void {
     currentQuestion = 0;
     score = 0;
     renderQuestion();
-    showToast(getLangText('🔄 Quiz restarted', '🔄 クイズをやり直します', '🔄 Kuis dimulai ulang'), 'info');
+    showToast(getLangText('🔄 The quiz started again', '🔄 クイズをやり直します', '🔄 Kuis dimulai ulang'), 'info');
   });
 }
 

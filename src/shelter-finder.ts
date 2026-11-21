@@ -258,7 +258,7 @@ function showManualFallback(): void {
   container.innerHTML = `
     <div class="shelter-fallback">
       <p class="shelter-fallback-msg">
-        <span data-lang="en">📍 Location access denied. Choose your area from the list:</span>
+        <span data-lang="en">📍 You did not allow location access. Choose your area from the list:</span>
         <span data-lang="ja">📍 位置情報の利用が拒否されました。リストからエリアを選んでください：</span>
         <span data-lang="id">📍 Akses lokasi ditolak. Pilih area Anda dari daftar:</span>
       </p>
@@ -298,7 +298,7 @@ function showLoading(): void {
   container.innerHTML = `
     <div class="shelter-loading">
       <div class="shelter-loading-spinner"></div>
-      <span data-lang="en">Finding your location...</span>
+      <span data-lang="en">Please wait. We look for your location.</span>
       <span data-lang="ja">今いる場所を探しています...</span>
       <span data-lang="id">Mencari lokasi Anda...</span>
     </div>
@@ -309,19 +309,19 @@ function showLoading(): void {
 function reportGeolocationError(err: unknown): void {
   const code = (err as GeolocationPositionError | undefined)?.code;
   let msg = getLangText(
-    'Could not get your location. Choose your area below.',
+    'We did not get your location. Choose your area below.',
     '位置情報を取得できませんでした。下でエリアを選んでください。',
     'Lokasi Anda tidak bisa didapat. Pilih area di bawah.',
   );
   if (code === 1) {
     msg = getLangText(
-      'Location permission denied. Choose your area below.',
+      'You did not allow location access. Choose your area below.',
       '位置情報の利用が拒否されました。下でエリアを選んでください。',
       'Izin lokasi ditolak. Pilih area Anda di bawah.',
     );
   } else if (code === 3) {
     msg = getLangText(
-      'Finding your location took too long. Choose your area below.',
+      'We did not get your location in time. Choose your area below.',
       '位置情報の取得に時間がかかりすぎました。下でエリアを選んでください。',
       'Waktu mencari lokasi habis. Pilih area Anda di bawah.',
     );
@@ -367,7 +367,7 @@ async function findShelters(useCached?: CachedLocation): Promise<void> {
     container.innerHTML = `
       <div id="shelterMap" class="shelter-map-container"></div>
       <div class="shelter-result-header">
-        <span data-lang="en">📍 ${nearest.length} nearest shelters</span>
+        <span data-lang="en">📍 ${nearest.length} nearest evacuation sites</span>
         <span data-lang="ja">📍 近くの避難場所 ${nearest.length}か所</span>
         <span data-lang="id">📍 ${nearest.length} tempat perlindungan terdekat</span>
       </div>
