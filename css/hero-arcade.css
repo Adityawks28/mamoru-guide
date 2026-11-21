@@ -526,6 +526,10 @@ body.day-mode .ks-cloud.c3,
   body.day-mode .ks-cloud, [data-theme="day"] .ks-cloud {
     animation: none;
   }
+  /* Stopped at -10% they would stay off-screen, so each waits in the sky. */
+  body.day-mode .ks-cloud.c1, [data-theme="day"] .ks-cloud.c1 { left: 30%; }
+  body.day-mode .ks-cloud.c2, [data-theme="day"] .ks-cloud.c2 { left: 66%; }
+  body.day-mode .ks-cloud.c3, [data-theme="day"] .ks-cloud.c3 { left: 48%; }
 }
 
 /* ───── STARS (night-only) ───── */
@@ -680,6 +684,8 @@ body.day-mode .ks-museum,
 
 @media (prefers-reduced-motion: reduce) {
   .ks-boat, .boat-wake { animation: none; }
+  /* The middle frame of boat-drift: the boat waits in the harbor, not off-screen. */
+  .ks-boat { transform: translateX(calc(50vw + 90px)); }
 }
 
 /* ───── KOBE PORT TOWER ───── */

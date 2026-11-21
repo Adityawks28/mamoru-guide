@@ -114,4 +114,19 @@ describe('reduced motion in CSS', () => {
     expect(rule, selector).toBeDefined();
     expect(stopped(selector, rule!)).toBe(true);
   });
+
+  // The boat and the clouds start off-screen and drift in. Stopped at their
+  // start, they would never show; under reduced motion they wait in view.
+  const reducedDecl = (selector: string, prop: string) =>
+    STOPS.concat(RULES.filter(r => r.reduced)).find(r => r.selectors.includes(selector) && r.decls.has(prop))?.decls.get(prop);
+
+  it('parks the boat in the harbor', () => {
+    expect(reducedDecl('.ks-boat', 'transform')).toMatch(/translateX\(calc\(/);
+  });
+
+  it.each(['c1', 'c2', 'c3'])('parks cloud %s in the sky', c => {
+    const left = reducedDecl(`body.day-mode .ks-cloud.${c}`, 'left');
+    expect(left).toMatch(/^\d+%$/);
+    expect(parseInt(left!, 10)).toBeLessThan(90);
+  });
 });
