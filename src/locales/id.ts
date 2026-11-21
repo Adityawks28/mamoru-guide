@@ -83,6 +83,25 @@ export const id: Record<string, string> = {
   'chip.quiz':       '📝 Kuis',
   'chip.about':      'ℹ Tentang',
 
+  // Sources page
+  'sources.title': 'Sumber dan pemeriksaan',
+  'sources.howTitle': 'Cara panduan ini memeriksa fakta',
+  'sources.howOfficial': 'Panduan ini hanya berisi informasi yang dikonfirmasi oleh sumber resmi.',
+  'sources.howRemoved': 'Aditya menghapus setiap kalimat yang tidak didukung sumber resmi.',
+  'sources.howMedical': 'Langkah pertolongan pertama berasal dari panduan resmi. Tenaga medis profesional belum memeriksanya.',
+  'sources.howLinks': 'Ketuk judul untuk membuka halaman resmi di tab baru. Panduan ini hanya membuka halaman itu kalau kamu mengetuknya.',
+  'sources.lastCheck': 'Pemeriksaan sumber terakhir:',
+  'sources.filterAria': 'Saring sumber menurut bidang',
+  'sources.all': 'Semua',
+  'sources.area.medical': 'Medis',
+  'sources.area.history': 'Sejarah',
+  'sources.area.safety': 'Keselamatan dan peringatan',
+  'sources.area.contacts': 'Kontak',
+  'sources.area.terms': 'Bahasa dan istilah',
+  'sources.checked': 'Diperiksa',
+  'sources.link': 'Lihat sumbernya',
+  'sources.loadError': 'Daftar sumber gagal dimuat. Sambungkan ke internet, lalu buka halaman ini lagi.',
+
   // Bag game section
   'bag.subtitle': 'Dalam game ini, tasmu bisa memuat <strong>maksimal 10 kg</strong>. Ini aturan game. Prefektur Osaka memberi panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan. Setiap berat hanya perkiraan. Mamoru merasakan setiap kilogramnya. Kamu tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
 

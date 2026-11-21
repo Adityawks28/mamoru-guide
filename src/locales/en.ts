@@ -83,6 +83,25 @@ export const en: Record<string, string> = {
   'chip.quiz':       '📝 Quiz',
   'chip.about':      'ℹ About',
 
+  // Sources page
+  'sources.title': 'Sources and checks',
+  'sources.howTitle': 'How this guide checks facts',
+  'sources.howOfficial': 'This guide shows only information that an official source certifies.',
+  'sources.howRemoved': 'Aditya removes each line that no official source supports.',
+  'sources.howMedical': 'The first aid steps come from official guidance. No medical professional checked them.',
+  'sources.howLinks': 'Tap a title to open the official page in a new tab. The guide connects to a page only when you tap it.',
+  'sources.lastCheck': 'Last check of the sources:',
+  'sources.filterAria': 'Filter sources by area',
+  'sources.all': 'All',
+  'sources.area.medical': 'Medical',
+  'sources.area.history': 'History',
+  'sources.area.safety': 'Safety and alerts',
+  'sources.area.contacts': 'Contacts',
+  'sources.area.terms': 'Language and terms',
+  'sources.checked': 'Checked',
+  'sources.link': 'See the sources',
+  'sources.loadError': 'The source list did not load. Connect to the internet, then open this page again.',
+
   // Bag game section
   'bag.subtitle': 'In this game, your bag can hold <strong>10 kg at most</strong>. This is a game rule. Osaka Prefecture gives a guide: about 15 kg for men and 10 kg for women. Each weight is an estimate. Mamoru feels every kilogram. You cannot take everything. Tap an item to put it in the bag or take it out.',
 

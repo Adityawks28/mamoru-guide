@@ -83,6 +83,25 @@ export const ja: Record<string, string> = {
   'chip.quiz':       '📝 クイズ',
   'chip.about':      'ℹ 紹介',
 
+  // Sources page
+  'sources.title': '出典とチェック',
+  'sources.howTitle': 'このガイドの確かめ方',
+  'sources.howOfficial': 'このガイドには、公式の情報源（じょうほうげん）が確かめた情報だけがあります。',
+  'sources.howRemoved': '公式の情報源にない文は、Adityaが消します。',
+  'sources.howMedical': '応急手当（おうきゅうてあて）のステップは、公式の情報をもとにしています。医師（いし）などの専門家（せんもんか）は、まだ確認していません。',
+  'sources.howLinks': 'タイトルをタップすると、公式のページが新しいタブで開きます。タップしないときは、どのページにもつなぎません。',
+  'sources.lastCheck': '出典を最後に確かめた日：',
+  'sources.filterAria': '分野（ぶんや）で出典をしぼりこむ',
+  'sources.all': 'すべて',
+  'sources.area.medical': '医療（いりょう）',
+  'sources.area.history': '歴史（れきし）',
+  'sources.area.safety': '安全と警報（けいほう）',
+  'sources.area.contacts': '連絡先（れんらくさき）',
+  'sources.area.terms': 'ことばと用語（ようご）',
+  'sources.checked': '確認した日',
+  'sources.link': '出典（しゅってん）を見る',
+  'sources.loadError': '出典のリストを読みこめませんでした。インターネットにつないで、もう一度開いてください。',
+
   // Bag game section
   'bag.subtitle': 'このゲームでは、バッグに<strong>10kgまで</strong>入ります。これはゲームのルールです。大阪府の重さの目安（めやす）は、男性は約15kg、女性は約10kgです。重さは、だいたいの目安です。マモルは、1kg重くなるたびに、それを感じます。全部は入りません。物をタップすると、入れたり出したりできます。',
 
