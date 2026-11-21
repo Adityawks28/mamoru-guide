@@ -110,7 +110,7 @@ body.day-mode .ks-mountains path:nth-child(3) { fill: #4a7a58; }
 }
 @keyframes waves { from{background-position:0 0} to{background-position:40px 0} }
 
-/* Sun / Moon — 32×32 pixel art, drawn at whole-pixel scales (4× desktop, 2× stacked) */
+/* Sun / Moon: 32×32 pixel art, drawn at whole-pixel scales (4× desktop, 2× stacked) */
 .celestial-body {
   position: absolute;
   width: 128px; height: 128px;

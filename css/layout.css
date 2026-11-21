@@ -323,7 +323,7 @@ body.day-mode .section-nav {
   transform: translateY(-100%);
   /* When closed, the menu must not occupy a hit-test box over the navbar.
      It is fixed/z-index:999 and translated up, but a transformed element still
-     captures taps in its box — without this it would swallow taps on the navbar
+     captures taps in its box, without this it would swallow taps on the navbar
      mode-toggle, hamburger and share buttons below it (z-index:100). */
   visibility: hidden;
   pointer-events: none;

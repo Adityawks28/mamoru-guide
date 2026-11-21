@@ -217,7 +217,7 @@ export function initEarthquakeScene(): void {
   const shakeGroup = svgEl('g', {}, svg as unknown as SVGElement);
   const parts = buildStaticRoom(shakeGroup);
 
-  // Actor — nested character SVG anchored top-left at the actor group's translate
+  // Actor: nested character SVG anchored top-left at the actor group's translate
   // (matches prototype: target.y is the SPRITE TOP, not its center).
   const actorGroup = svgEl('g', { class: 'mr-actor', transform: `translate(${STAND.x},${STAND.y})` }, shakeGroup);
   const actorSvg = createSprite({ pose: 'stand', gender: 'female' });

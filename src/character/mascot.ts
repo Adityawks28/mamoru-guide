@@ -2,7 +2,7 @@ import { createSprite, updateSprite, type Emote, type SpriteOptions } from './sp
 import { DISASTER_FACTS } from './tips';
 import { motionAllowed, onMotionChange } from './motion';
 
-// Faithful port of prototype mascot.jsx — structure:
+// Faithful port of prototype mascot.jsx, structure:
 //   <#mascot.mascot-wrap>
 //     <div class="pixel-bubble fact-bubble">
 //       <div class="pb-tag">DID YOU KNOW?</div>
@@ -71,7 +71,7 @@ export function initMascot(): void {
   host.classList.add('mascot-wrap');
   host.innerHTML = '';
 
-  // 1) Fact bubble — pixel-bubble with pb-tag/pb-t/pb-sub/pb-cta.
+  // 1) Fact bubble: pixel-bubble with pb-tag/pb-t/pb-sub/pb-cta.
   const bubble = document.createElement('div');
   bubble.className = 'pixel-bubble fact-bubble';
 
@@ -100,7 +100,7 @@ export function initMascot(): void {
 
   host.appendChild(bubble);
 
-  // 2) Character — wrapper div + SVG inside (matches prototype's `.mascot`).
+  // 2) Character: wrapper div + SVG inside (matches prototype's `.mascot`).
   const charWrap = document.createElement('div');
   charWrap.className = 'mascot';
   charWrap.setAttribute('role', 'button');

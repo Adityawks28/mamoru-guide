@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * build-hazard-data.mjs — Phase 2.1/2.2 build-time hazard-data pipeline
+ * build-hazard-data.mjs: Phase 2.1/2.2 build-time hazard-data pipeline
  *
  * WHAT IT DOES (build-time only; never runs in the browser):
  *   For each configured dataset:
@@ -10,13 +10,13 @@
  *     4. reproject to a metric CRS so the outward buffer is true *metres*,
  *     5. simplify  toward the hazard (buffer outward, then simplify keeping
  *                  shapes) so a danger zone is NEVER shrunk by simplification
- *                  — under-warning is the failure mode we refuse,
+ *                  (under-warning is the failure mode we refuse),
  *     6. reproject back to WGS84 (lon/lat) for Leaflet,
  *     7. stamp     every Feature with properties.source + properties.asOf,
  *     8. write     public/data/{flood,tsunami,landslide,earthquake-prob}.geojson,
  *     9. measure   total committed size against the < 2.5 MB Phase-0.3 budget.
  *
- * WHY A SCRIPT (not runtime): constraint 2 — no placeholder/unattributed data
+ * WHY A SCRIPT (not runtime): constraint 2, no placeholder/unattributed data
  *   ever ships, and the *runtime* app must never fetch these hosts. Data prep is
  *   build-time → committed, attributed, date-stamped artifacts.
  *
@@ -82,7 +82,7 @@ const DATASETS = [
       'https://nlftp.mlit.go.jp/ksj/gml/data/A31/A31-12/A31-12_28_GML.zip', // CONFIRM
     ],
     source: '国土交通省 国土数値情報（浸水想定区域データ A31）', // CONFIRM exact label
-    asOf: 'CONFIRM', // e.g. '2012' — from the download page
+    asOf: 'CONFIRM', // e.g. '2012', from the download page
     license: '政府標準利用規約（CC-BY 互換）', // CONFIRM
   },
   {
@@ -170,7 +170,7 @@ async function buildDataset(ds, workRoot) {
   log(`── ${ds.name} ──`);
   if (hasConfirmMarkers(ds)) {
     fail(
-      `dataset "${ds.name}" still has CONFIRM markers — verify URL/asOf/license ` +
+      `dataset "${ds.name}" still has CONFIRM markers, verify URL/asOf/license ` +
       `against the live MLIT/J-SHIS page (needs egress) before building.`,
     );
   }
@@ -230,7 +230,7 @@ async function buildDataset(ds, workRoot) {
 async function main() {
   // Preflight: tooling + system unzip.
   try { execFileSync('unzip', ['-v'], { stdio: 'ignore' }); }
-  catch { fail('`unzip` not found — install it (apt-get install unzip) before running.'); }
+  catch { fail('`unzip` not found, install it (apt-get install unzip) before running.'); }
 
   mkdirSync(OUT_DIR, { recursive: true });
   const workRoot = mkdtempSync(join(tmpdir(), 'hazard-'));

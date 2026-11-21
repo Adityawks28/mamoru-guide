@@ -1,4 +1,4 @@
-// plan-model.ts — typed shape for the v2 emergency plan
+// plan-model.ts: typed shape for the v2 emergency plan
 
 export interface PlanProfile {
   name:          string;
@@ -56,7 +56,7 @@ export interface EmergencyPlan {
   supplies:  PlanSupplies;
   documents: PlanDocuments;
   notes:     string;
-  legacy:    Record<string, string>; // unmapped v1 fields — never discarded
+  legacy:    Record<string, string>; // unmapped v1 fields, never discarded
 }
 
 export function emptyPlan(): EmergencyPlan {

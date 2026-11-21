@@ -92,7 +92,7 @@
     border-top: 2px solid #333 !important;
   }
 
-  /* === EMERGENCY PLAN — Print-Optimized === */
+  /* === EMERGENCY PLAN: Print-Optimized === */
   #myplan {
     page-break-before: always;
     border: 3px solid #333;
@@ -147,7 +147,7 @@
   .plan-btn,
   .plan-actions { display: none !important; }
 
-  /* Emergency numbers — keep visible in print */
+  /* Emergency numbers: keep visible in print */
   .emergency-card {
     border: 2px solid #333 !important;
     background: #fff !important;

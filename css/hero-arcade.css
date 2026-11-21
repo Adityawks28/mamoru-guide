@@ -1,4 +1,4 @@
-/* Hero — faithful port of prototype arcade.css §"KOBE SCENE", §"PIXEL MASCOT",
+/* Hero: faithful port of prototype arcade.css §"KOBE SCENE", §"PIXEL MASCOT",
    §"ARCADE TYPOGRAPHY". JSX class names preserved verbatim so swapping the
    prototype's CSS in is a future no-op. */
 
@@ -224,7 +224,7 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   margin: 0;
 }
 
-/* Pixel speech bubble — pokes out to the upper-right of the mascot frame */
+/* Pixel speech bubble: pokes out to the upper-right of the mascot frame */
 .pixel-bubble {
   position: absolute;
   top: -40px;
@@ -302,7 +302,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 /* ───── TAP REACTIONS ─────
    mascot.ts swaps arms/face frame by frame and sets data-emote for the body
    motion. steps(1, end) holds each keyframe like a sprite frame; offsets are
-   multiples of 3px — one sprite pixel at the hero's 3× scale. */
+   multiples of 3px: one sprite pixel at the hero's 3× scale. */
 .mascot-svg[data-emote] { transform-origin: 50% 100%; }
 .mascot-svg[data-emote="jump"]  { animation: mk-hop   0.62s steps(1, end); }
 .mascot-svg[data-emote="wave"]  { animation: mk-bob   0.72s steps(1, end); }
@@ -425,7 +425,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 }
 
 /* ───── BACKGROUND POLISH ───── */
-/* Cherry blossom petals — day only */
+/* Cherry blossom petals: day only */
 .ks-blossoms { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; }
 .ks-petal { display: none; }
 body.day-mode .ks-petal,
@@ -445,7 +445,7 @@ body.day-mode .ks-petal,
   100% { transform: translate(var(--drift, 0), 100vh) rotate(540deg); }
 }
 
-/* Shooting stars — night only */
+/* Shooting stars: night only */
 .ks-shooters { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
 /* A meteor: bright head on the right, tail behind it, moving along its own
    axis (rotate first, then translateX), fast, then gone (stars.ts spawns
@@ -725,7 +725,7 @@ body.day-mode .ks-tower,
   .ks-tower, .tower-top { animation: none; }
 }
 
-/* ───── MOBILE — scale harbor cluster down ───── */
+/* ───── MOBILE: scale harbor cluster down ───── */
 @media (max-width: 900px) {
   .ks-crystal  { left: 3%;  transform: scale(0.55); transform-origin: bottom left; }
   .ks-ferris   { left: 15%; transform: scale(0.7);  transform-origin: bottom left; }
@@ -737,7 +737,7 @@ body.day-mode .ks-tower,
   .ks-skyline  { left: 0; }
 }
 
-/* ───── HARBOR QUAY — concrete strip between water and buildings ───── */
+/* ───── HARBOR QUAY: concrete strip between water and buildings ───── */
 .ks-quay {
   position: absolute;
   bottom: var(--ks-shore);

@@ -32,7 +32,7 @@
   --mt-near: #081830;
   --star-opacity: 1;
   --water-opacity: 1;
-  /* Harbor cluster — night defaults (per arcade.css:57-61) */
+  /* Harbor cluster: night defaults (per arcade.css:57-61) */
   --crystal-body: #d8e0e8;
   --crystal-crown: #5a6a7a;
   --crystal-line: #6a7a8a;
@@ -43,7 +43,7 @@
   --bridge-tower: #c44048;
   --bridge-cable: #6a4848;
 
-  /* Design tokens — spacing scale (4px base), radii, motion */
+  /* Design tokens: spacing scale (4px base), radii, motion */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;

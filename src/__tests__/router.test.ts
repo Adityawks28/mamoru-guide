@@ -2,7 +2,7 @@
 
 import { activateRoute } from '../router';
 
-// jsdom doesn't implement window.scrollTo — silence the warning
+// jsdom doesn't implement window.scrollTo, silence the warning
 beforeAll(() => { window.scrollTo = () => {}; });
 
 // all section IDs the router manages
@@ -153,7 +153,7 @@ describe('activateRoute()', () => {
   it('does not show sections from multiple routes at once', () => {
     activateRoute('#/shelter');
     const visible = visibleSections();
-    // Only shelter should be visible — nothing from other routes
+    // Only shelter should be visible, nothing from other routes
     expect(visible).toEqual(['shelter']);
     expect(visible).not.toContain('myplan');
     expect(visible).not.toContain('earthquake');

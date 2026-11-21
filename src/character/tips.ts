@@ -33,7 +33,7 @@ export const MAP_TIPS: Tip[] = [
   { en: "Use the route you practiced. On a new route, you can get lost.", ja: "練習した道を使ってください。知らない道では、迷うことがあります。", id: "Pakai rute yang sudah Anda latih. Di jalan baru, Anda bisa tersesat." },
 ];
 
-// New pool — calibrated to category IDs in src/first-aid.ts
+// New pool: calibrated to category IDs in src/first-aid.ts
 // (bleeding / burns / fractures / crush / cpr / shock / smoke / psychological).
 export const FIRSTAID_TIPS: Tip[] = [
   { en: "Bleeding: press firmly on the wound. Direct pressure works better than a special bandage.", ja: "出血：傷口を強く、直接押さえてください。特別な包帯より効果があります。", id: "Pendarahan: tekan luka dengan kuat. Tekanan langsung lebih ampuh dari perban khusus." },
@@ -46,7 +46,7 @@ export const FIRSTAID_TIPS: Tip[] = [
   { en: "If you panic: breathe in for 4 counts, hold for 4, breathe out for 4.", ja: "パニックのとき：4つ数えて息を吸い、4つ止めて、4つで吐いてください。", id: "Saat panik: tarik napas 4 hitungan, tahan 4, buang 4." },
 ];
 
-// New pool — typhoonScale has 5 levels (Tropical Storm → Violent Typhoon).
+// New pool: typhoonScale has 5 levels (Tropical Storm → Violent Typhoon).
 // The scale on screen shows the English level names in every language.
 export const TYPHOON_TIPS: Tip[] = [
   { en: "Tropical Storm: secure items on the balcony. Charge your devices. Check the forecast.", ja: "Tropical Storm：ベランダの物を片づけてください。スマホなどを充電してください。天気予報を見てください。", id: "Badai tropis: amankan barang di balkon. Isi daya gawai. Cek prakiraan cuaca." },

@@ -1,4 +1,4 @@
-/* Mamoru earthquake room scene — ported from prototype scenarios.css. */
+/* Mamoru earthquake room scene: ported from prototype scenarios.css. */
 
 .mamoru-room {
   display: block; /* not .character-scene's flex row: the procedure strip goes under the stage */
@@ -70,7 +70,7 @@
   100% { transform: translateY(0); }
 }
 
-/* door glow — at high intensity */
+/* door glow: at high intensity */
 .mr-door-glow { animation: mr-door-pulse 1s steps(2, jump-none) infinite alternate; }
 @keyframes mr-door-pulse {
   from { opacity: 0.4; }
@@ -84,7 +84,7 @@
   to   { opacity: 0.3; }
 }
 
-/* tip bubble inside the room — pinned top-right */
+/* tip bubble inside the room, pinned top-right */
 .mamoru-room .tip-bubble {
   position: absolute;
   z-index: 8;

@@ -42,7 +42,7 @@ export function initEmergencyFab(): void {
     item.addEventListener('click', close);
   });
 
-  // The EARTHQUAKE NOW button opens a full-screen overlay — close the FAB
+  // The EARTHQUAKE NOW button opens a full-screen overlay, close the FAB
   // (releasing its focus trap) first so focus hands off cleanly to the overlay.
   document.getElementById('fabEarthquakeNow')?.addEventListener('click', () => {
     close();
