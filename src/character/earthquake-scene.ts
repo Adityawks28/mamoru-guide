@@ -16,13 +16,12 @@ const STAND: IntensityTarget = { pose: 'stand', x: 140, y: 92, flip: false };
 // 'cower' (scale 0.5 + crouchY 42) tucks her under the table cavity (room
 // y 126-160); y=77 crowns her head at ~126 with her feet at ~163.
 const UNDER_TABLE: IntensityTarget = { pose: 'cower', x: 210, y: 77, flip: true };
-const COVER: IntensityTarget = { pose: 'cover', x: 175, y: 100, flip: false };
+// The pose follows the caption: at shindo 0 nobody feels it; at every felt
+// level the caption says to get under a strong table (FDMA white paper R5).
 const TARGETS: IntensityTarget[] = [
-  STAND, STAND, { ...STAND, x: 138 },
-  { pose: 'stand', x: 165, y: 92, flip: true },
-  { pose: 'brace', x: 158, y: 92, flip: true },
-  COVER, COVER,
-  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
+  STAND,
+  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
+  UNDER_TABLE, UNDER_TABLE, UNDER_TABLE, UNDER_TABLE,
 ];
 
 interface Hazards {
@@ -37,7 +36,8 @@ interface Hazards {
 
 // What falls at each level follows JMA's shindo descriptions: 4 topples
 // unstable ornaments, 5- drops dishes and books, 5+ can topple unsecured
-// furniture, 6- breaks window glass.
+// furniture, 6- breaks window glass. The door glow (open a door to keep a way
+// out) shows only after the shaking stops (TFD 10 points, point 4).
 function hazardsForIntensity(i: number): Hazards {
   return {
     lampSwing: Math.min(5, Math.ceil(i / 2)),
@@ -254,7 +254,10 @@ export function initEarthquakeScene(): void {
     procId.textContent = p.id;
   }
   showTip(0);
-  showProcedure(0);
+  // No caption before any shaking.
+  procEn.textContent = '';
+  procJa.textContent = '';
+  procId.textContent = '';
 
   function later(ms: number, fn: () => void): void {
     timers.push(window.setTimeout(fn, ms));
@@ -277,10 +280,10 @@ export function initEarthquakeScene(): void {
     }
   }
 
-  function applyHazards(i: number): void {
+  function applyHazards(i: number, settled = true): void {
     const h = hazardsForIntensity(i);
     parts.windowCrack.style.display = h.windowCrack ? '' : 'none';
-    parts.doorGlow.style.display    = h.doorGlow    ? '' : 'none';
+    parts.doorGlow.style.display    = h.doorGlow && settled ? '' : 'none';
     parts.warningGroup.style.display = h.warning    ? '' : 'none';
     parts.vaseStill.style.display   = h.vaseFall    ? 'none' : '';
     parts.vaseFalling.style.display = h.vaseFall    ? '' : 'none';
@@ -331,9 +334,12 @@ export function initEarthquakeScene(): void {
     const ms = quakeMs(i);
     playQuake(shakeGroup, i);
     parts.lamp.style.setProperty('--swing', String(hazardsForIntensity(i).lampSwing));
-    later(ms * 0.3, () => applyHazards(i)); // things fall at the S-wave's peak
+    later(ms * 0.3, () => applyHazards(i, false)); // things fall at the S-wave's peak
     later(ms, () => parts.lamp.style.setProperty('--swing', '1'));
-    later(ms + SETTLE_MS, () => host!.classList.remove('quaking'));
+    later(ms + SETTLE_MS, () => {
+      host!.classList.remove('quaking');
+      applyHazards(i); // the shaking has stopped: now the door can open
+    });
   }
 
   function onShindo(e: Event): void {

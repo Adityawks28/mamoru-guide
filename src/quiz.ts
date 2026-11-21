@@ -53,9 +53,9 @@ const questions: QuizQuestion[] = [
       {en:'It was a false alarm',ja:'まちがいの警報だった',id:'Itu peringatan palsu'},
     ],
     correct: 1,
-    explain_en: 'The eye of a typhoon is calm, but the typhoon is not over. After the eye passes, strong wind blows again from the other direction. Stay indoors.',
-    explain_ja: '台風の目の中は静かですが、台風は終わっていません。目が通りすぎると、反対の向きから、また強い風がふきます。建物の中にいてください。',
-    explain_id: 'Mata topan itu tenang, tetapi topannya belum selesai. Setelah mata topan lewat, angin kencang bertiup lagi dari arah sebaliknya. Tetap di dalam ruangan.',
+    explain_en: 'The eye of a typhoon is calm, but the typhoon is not over. After the eye passes, strong wind blows again from the other direction. Do not go out unless you need to.',
+    explain_ja: '台風の目の中は静かですが、台風は終わっていません。目が通りすぎると、反対の向きから、また強い風がふきます。必要がなければ、外に出ないでください。',
+    explain_id: 'Mata topan itu tenang, tetapi topannya belum selesai. Setelah mata topan lewat, angin kencang bertiup lagi dari arah sebaliknya. Jangan keluar kecuali perlu.',
   },
   {
     q_en: 'You smell gas after an earthquake. What do you do?',
@@ -150,12 +150,12 @@ const questions: QuizQuestion[] = [
     q_id: 'Apa arti sirene J-Alert?',
     options: [
       {en:'Lunch break',ja:'昼休み',id:'Istirahat makan siang'},
-      {en:'Urgent national alert: a missile, an Earthquake Early Warning or a Major Tsunami Warning',ja:'国からの急ぐお知らせ：ミサイル、緊急地震速報、大津波警報',id:'Peringatan nasional yang mendesak: rudal, peringatan dini gempa bumi, atau peringatan bahaya tsunami skala besar'},
+      {en:'Urgent national alert: a missile, an Earthquake Early Warning or a Major Tsunami Warning',ja:'国からの緊急のお知らせ：ミサイル、緊急地震速報、大津波警報',id:'Peringatan nasional yang mendesak: rudal, peringatan dini gempa bumi, atau peringatan bahaya tsunami skala besar'},
       {en:'Monthly test. Ignore it.',ja:'毎月のテスト。気にしなくてよい',id:'Tes bulanan. Abaikan saja.'},
     ],
     correct: 1,
     explain_en: 'J-Alert sends urgent national alerts when there is no time to wait, such as missiles, Earthquake Early Warnings and Major Tsunami Warnings.',
-    explain_ja: 'Jアラートは、ミサイル、緊急地震速報、大津波警報など、時間の余裕がない急ぐ情報を、国からすぐに知らせます。',
+    explain_ja: 'Jアラートは、ミサイル、緊急地震速報、大津波警報など、対応する時間の余裕がない情報を、国からすぐに知らせます。',
     explain_id: 'J-Alert mengirim peringatan nasional yang mendesak saat tidak ada waktu untuk menunggu, seperti rudal, peringatan dini gempa bumi, dan peringatan bahaya tsunami skala besar.',
   },
 ];

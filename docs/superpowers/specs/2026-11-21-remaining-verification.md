@@ -18,8 +18,8 @@
 | Outcome | Rows |
 |---|---|
 | Kept, no text change | 38 (R1, R3, R4, R5, R6, R8, R11, R13, R17, R27, R28, R29, R35, R42, R51, R52, R53, R55, R60, R61, R64, R67, R69, R70, R72, R73, R75, R76, R78, R79, R80, R85, R88, R91, R92, R93, R95, R98) |
-| Cut to a sourced text | 55 (54 rows and X1) |
-| Removed (whole line, option or detail) | 6 (R38, R39, R43, R47, R54, R82) |
+| Cut to a sourced text | 54 (53 rows and X1) |
+| Removed (whole line, option or detail) | 7 (R38, R39, R43, R47, R48, R54, R82) |
 
 R51 needed no change: an earlier commit already gave the code comment the Osaka wording. R60 is kept, and its text now also replaces R57 to R59.
 
@@ -34,7 +34,7 @@ Every question keeps exactly one correct, sourced answer.
 | ID | File:line | Claim (old English) | Source | Source says (JA quote / EN gist) | Verdict | Final English |
 |---|---|---|---|---|---|---|
 | R2 | quiz.ts:27 | Q1 explanation: "...Never use an elevator during an earthquake." | fdma-hakusho-r5; edogawa-elevator | 「全ての階のボタンを押し、最初に停止した階で降りる。」; 「強い揺れがあった後にマンションや高層ビルから避難するとき…稼働していたとしてもエレベーターを使用してはいけません。」 / Do not use an elevator to leave after strong shaking. | partial | Drop, Cover, and Hold On is the recommended action. After strong shaking, do not use an elevator to leave. |
-| R7 | quiz.ts:56 | Q3 explanation: "...the other side of the storm hits with the same or more force. Stay indoors." | jma-typhoon-wind; jma-fukuoka-typhoon | 「決して台風が去ったわけではありません。」「眼が通過した後は風向きが反対の強い風が吹き返します。」; 「不要不急な外出は避け」 / No source says "the same or more force". | partial | The eye of a typhoon is calm, but the typhoon is not over. After the eye passes, strong wind blows again from the other direction. Stay indoors. |
+| R7 | quiz.ts:56 | Q3 explanation: "...the other side of the storm hits with the same or more force. Stay indoors." | jma-typhoon-wind; jma-fukuoka-typhoon | 「決して台風が去ったわけではありません。」「眼が通過した後は風向きが反対の強い風が吹き返します。」; 「台風接近中は不要な外出は控え、危険な場所へは近づかないようにしましょう。」 / No source says "the same or more force". JMA Fukuoka says not to go out without need, so "Stay indoors" is cut to that rule. | partial | The eye of a typhoon is calm, but the typhoon is not over. After the eye passes, strong wind blows again from the other direction. Do not go out unless you need to. |
 | R9 | quiz.ts:86 | Q5 explanation: "...118 is for the coast guard. 911 does NOT work in Japan." | jnto-mi-guide; keishicho-110; kaiho-118 | 119: "When there is a fire or traffic accident. When someone is seriously sick or injured."; 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」; 「海上における事件・事故の緊急通報用電話番号」. No official page says anything about 911. The option "911" stays as a wrong option. | partial | 119 is for fire and ambulance. 110 is for police. 118 is for accidents and incidents at sea (Japan Coast Guard). |
 | R10 | quiz.ts:106 | Q7 question: "What is the most important item in your emergency bag?" | osaka-pref-bag; gov-online-bousai-8072 | Osaka bag list starts with 貴重品 「現金(公衆電話用に10円玉も）」; 「飲料水（500mlペットボトル）」 is under 飲料水・非常食. No source ranks one item as "most important". | not found | Which item is on the official emergency bag lists? |
 | R10 | quiz.ts:112 (was 113) | Q7 option "Umbrella" | osaka-pref-bag | 「雨具」 is on the Osaka home-stock list, so "Umbrella" is not a clearly wrong option. | removed | removed (options: Laptop, Water, Books; `correct` stays 1) |
@@ -82,7 +82,7 @@ Sources: osaka-pref-bag (大阪府 非常持ち出し品リスト例 and 備蓄�
 | R45 | data.ts:77 | Multitool: "For cutting, opening cans, and repairs." | osaka-pref-bag | 「十徳ナイフ」 | partial | A knife with several tools (十徳ナイフ). |
 | R46 | data.ts:81 | Extra water: "Water for day 2. It is heavy, but it is hard to replace." | osaka-pref-bag; kantei-sonae | 「飲料水（1人一日3ℓを目安に）」 / "hard to replace" has no source. | partial | More drinking water. Plan for 3 L per person per day. |
 | R47 | data.ts:82 | Canned food: "It is heavy. Light alpha rice can replace it." | gov-online-bousai-8072 | 「缶詰」 is on the list. No source compares weights. | partial | removed (detail) |
-| R48 | data.ts:83 | Laptop: "Your phone is enough for news and maps." | osaka-pref-bag; gov-online-bousai-8072 | Neither bag list has a laptop. No source for the old sentence. | not found | It is not on the government lists. |
+| R48 | data.ts:83 | Laptop: "Your phone is enough for news and maps." | osaka-pref-bag; gov-online-bousai-8072 | Neither bag list has a laptop. No source for the old sentence. A sentence "It is not on the government lists" would suggest that every other item is on an official list, which is not true for all of them. | not found | removed (detail) |
 | R49 | en/ja/id.ts:67; index.html:681 | "Each item has a typical real weight." / "Each item shows its usual real weight" | osaka-pref-bag | No official source gives item weights. The 15 kg / 10 kg sentence on the same line is the Osaka guide: 「重さの目安は男性で15Kg、女性で10kg程度。※あくまで目安です。」 | not found | Each weight is an estimate. |
 | R50 | bag-scene.ts:30 | "It is getting heavy. You may walk for an hour to the shelter." | none | No source for the walking time. | not found | It is getting heavy. |
 | X1 | bag-scene.ts:31 | "Hah… hah… Too heavy to run. Take something out." | osaka-pref-bag | 「自分で持って避難できる量にしましょう。」 / An amount that you can carry when you evacuate; no "run". | partial | Hah… hah… Too heavy. Take something out. |
@@ -95,7 +95,7 @@ Sources: osaka-pref-bag (大阪府 非常持ち出し品リスト例 and 備蓄�
 
 ### Earthquake scene captions (`src/character/earthquake-scene.ts:179-184`)
 
-No source ties an action to each shindo level. The caption list keeps 10 entries: index 0 is the JMA shindo 0 text, and indexes 1 to 9 use the R60 text.
+No source ties an action to each shindo level. The caption list keeps 10 entries: index 0 is the JMA shindo 0 text, and indexes 1 to 9 use the R60 text. Before any shaking, the caption is empty. The actor's pose follows the caption: she stands at shindo 0 and gets under the table at every felt level. The door glow (open a door to keep a way out) shows only after the shaking stops (tfd-quake-10-points point 4, as R81).
 
 | ID | File:line | Claim (old English) | Source | Source says (JA quote / EN gist) | Verdict | Final English |
 |---|---|---|---|---|---|---|
@@ -119,7 +119,7 @@ R60 (indexes 5 to 9, kept, `match`): fdma-hakusho-r5 「丈夫な机やテーブ
 |---|---|---|---|---|---|---|
 | R65 | contacts.ts:21 | 119: "Fire, medical emergencies, rescue" | jnto-mi-guide | "When there is a fire or traffic accident. When someone is seriously sick or injured. 119" / "rescue" is not on the checked pages. | partial | Fire and ambulance |
 | R66 | contacts.ts:22 | 110: "Crime, accidents, lost property" | keishicho-110 | 「110番は、事件・事故等、緊急時に警察に通報するための緊急通報ダイヤルです。」 / About 33万件 non-urgent calls are a problem. Lost property is not an emergency. | wrong | Crimes and accidents that need the police now |
-| R68 | contacts.ts:26 | AMDA: "Medical advice for foreigners in many languages" | amda-activities; amda-indonesia | "We help you to find medical institutions … provide information on healthcare and welfare systems"; "10:00～16:00" / Not medical advice. | partial | Help to find a hospital, and information on the health system, in many languages. 10:00 to 16:00 |
+| R68 | contacts.ts:26 | AMDA: "Medical advice for foreigners in many languages" | amda-activities; amda-indonesia | "We help you to find medical institutions … provide information on healthcare and welfare systems"; "10:00～16:00" / Not medical advice. | partial | Help to find a hospital, and information on the health and welfare systems, in many languages. 10:00 to 16:00 |
 | R71 | contacts.ts:31 | Immigration Info: "Questions about visas, residence status, and the zairyu card" | isa-info-center | 「出入国手続、在留手続等に関する一般的なご案内」; 「午前8:30~午後5:15(土日・祝日・年末年始(12/29~1/3)を除く)」. The number 0570-013904 is confirmed (ナビダイヤル). | partial | General questions about entry and residence procedures. Weekdays 8:30 to 17:15 |
 | R73 | contacts.ts:35 | Indonesian Embassy Tokyo, 03-3441-4201 | mofa-emblist-asia | The MOFA page blocks automated access, so the owner opened it in a browser on 2026-11-21. It lists the Embassy of the Republic of Indonesia: 「東京都品川区東五反田5-2-9」(移転 2023-12-01)「電話：03-3441-4201」. | match | kept (no text change) |
 | R74 | contacts.ts:36 | Indonesian Consulate Osaka, 06-6449-9898: "Serves the Kansai region (Kobe, Osaka, Kyoto)" | osaka-pref-consulates; hyogo-pref-consulates | 「在大阪インドネシア共和国総領事館」「06-6449-9898」 on both prefecture lists. Neither list gives the consulate's area. | partial | Number kept. Consular help for Indonesian citizens (area text removed) |
@@ -183,4 +183,4 @@ New in `SOURCES` with this change:
 | kankocho-safety-tips | 観光庁 | 訪日外国人旅行者の安全確保: ツール (Safety tips) | https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html | 2026-11-21 |
 | yahoo-bousai | LINEヤフー | Yahoo!防災速報 | https://emg.yahoo.co.jp/ | 2026-11-21 |
 
-Removed from `SOURCES`: cao-ichinitimae-battery. No claim or app line used it. The safety verification still records its URL as evidence for B18 and B30.
+cao-ichinitimae-battery stays in `SOURCES`: no app line uses it, but the safety verification cites it as evidence for B18 and B30.

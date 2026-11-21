@@ -576,6 +576,12 @@ export const SOURCES: Record<SourceId, Source> = {
     url: 'https://www.kantei.go.jp/jp/content/000182715.pdf',
     checked: '2026-11-21',
   },
+  'cao-ichinitimae-battery': {
+    publisher: '内閣府 防災担当 (Cabinet Office, Disaster Management), 一日前プロジェクト',
+    title: 'ワンセグや災害優先携帯もバッテリーが命',
+    url: 'https://www.bousai.go.jp/kyoiku/keigen/ichinitimae/thh25002.html',
+    checked: '2026-11-21',
+  },
   'jma-warning-2026-english': {
     publisher: '気象庁 (Japan Meteorological Agency)',
     title: '警戒レベル相当情報の英語表記について',

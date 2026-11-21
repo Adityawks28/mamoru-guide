@@ -59,12 +59,34 @@ describe('earthquake-scene', () => {
   const actorX = () => Number(document.querySelector('#earthquake-scene .mr-actor')!
     .getAttribute('transform')!.match(/translate\((-?\d+)/)![1]);
 
-  it('shindo 4 → braces once she gets there', async () => {
+  it('the pose follows the caption: stand at 0, under the table at every felt level', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
-    shindo(4);
-    vi.advanceTimersByTime(1500);
-    expect(actorPose()).toBe('brace');
+    const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
+    for (let i = 1; i <= 9; i++) {
+      shindo(i);
+      vi.advanceTimersByTime(3000);
+      expect(procEn(), `row ${i}`).toContain('get under a strong table');
+      expect(actorPose(), `row ${i}`).toBe('cower');
+    }
+    shindo(0);
+    vi.advanceTimersByTime(3000);
+    expect(actorPose()).toBe('stand');
+  });
+
+  it('the door glow shows only after the shaking stops', async () => {
+    const { initEarthquakeScene } = await import('../earthquake-scene');
+    initEarthquakeScene();
+    const room = document.getElementById('earthquake-scene')!;
+    const glow = () => (document.querySelector('#earthquake-scene .mr-door-glow') as SVGGElement).style.display;
+    expect(glow()).toBe('none');
+    shindo(9);
+    for (let t = 0; t < 20000 && room.classList.contains('quaking'); t += 100) {
+      expect(glow()).toBe('none');
+      vi.advanceTimersByTime(100);
+    }
+    expect(room.classList.contains('quaking')).toBe(false);
+    expect(glow()).toBe('');
   });
 
   it('walks to the table in whole steps instead of sliding', async () => {
@@ -135,10 +157,12 @@ describe('earthquake-scene', () => {
     expect(room.classList.contains('quaking')).toBe(false);
   });
 
-  it('shindo 0 is not felt; every felt level gets the same sourced rule, up to shindo 7', async () => {
+  it('no caption before shaking; shindo 0 is not felt; every felt level gets the same sourced rule', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
+    expect(procEn()).toBe('');
+    shindo(0);
     expect(procEn()).toContain('people do not feel it');
     for (const i of [1, 4, 5, 9]) {
       shindo(i);
