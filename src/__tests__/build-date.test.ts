@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { formatBuildDate, renderBuildDate } from '../main';
+import { formatBuildDate, renderBuildDate } from '../build-date';
 
 const CARD = `
   <p>

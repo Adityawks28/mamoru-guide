@@ -10,8 +10,8 @@ export default defineConfig({
   },
   base: '/mamoru-guide/',
   define: {
-    // The About section shows this as "Last updated" (YYYY-MM-DD, UTC).
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+    // The About section shows this as "Last updated" (YYYY-MM-DD, Japan time).
+    __BUILD_DATE__: JSON.stringify(new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).format(new Date())),
   },
   plugins: [
     // Generates dist/asset-manifest.json after every build so the

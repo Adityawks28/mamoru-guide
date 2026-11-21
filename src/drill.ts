@@ -93,7 +93,7 @@ export const scenarios: DrillScenario[] = [
     ],
     correct: 1,
     explain_en: 'After a big earthquake, another earthquake of the same size can come. JMA asks people to stay alert for about 1 week. Always do the same thing: Drop, Cover, Hold On. The doorway idea is out of date. Inside walls give no special protection.',
-    explain_ja: '大きな地震のあと、同じくらいの大きさの地震が来ることがあります。気象庁は、約1週間、注意するように呼びかけています。いつも同じように、身を低くし、頭を守り、動かないでください。ドアの所や内側の壁の近くが、特に安全ということはありません。',
+    explain_ja: '大きな地震のあと、同じくらいの大きさの地震が来ることがあります。気象庁（きしょうちょう）は、約1週間、注意するように呼びかけています。いつも同じように、身を低くし、頭を守り、動かないでください。ドアの所や内側の壁の近くが、特に安全ということはありません。',
     explain_id: 'Setelah gempa besar, gempa lain yang sama kuatnya bisa terjadi. JMA meminta orang waspada sekitar 1 minggu. Selalu lakukan hal yang sama: merunduk, berlindung, bertahan. Mitos berdiri di ambang pintu sudah usang. Dinding dalam tidak memberi perlindungan khusus.',
     shake: true,
   },
