@@ -174,15 +174,13 @@ function buildStaticRoom(shakeGroup: SVGGElement): RoomParts {
   return { shelfGroup, vaseStill, vaseFalling, bookStill, bookFalling, windowCrack, doorGlow, warningGroup, pictureFrame, lamp, tableGroup };
 }
 
-const CALM = { en: '→ stay calm and watch', ja: '→ 落ち着いて、まわりを見てください', id: '→ tetap tenang, amati sekitar' };
-const DROP = { en: '→ drop, cover, hold on', ja: '→ 身を低くして、頭を守り、動かないでください', id: '→ merunduk, berlindung, bertahan' };
-const HIDE = { en: '→ get under a strong table', ja: '→ じょうぶな机の下に入ってください', id: '→ masuk ke bawah meja yang kuat' };
+// No official source ties an action to each shindo level. JMA: at shindo 0 people do not feel the shaking.
+// When you feel shaking, every level gets the same rule (FDMA white paper R5; TFD 10 points, point 1).
+const NOT_FELT = { en: '→ people do not feel it', ja: '→ 人は揺れを感じません', id: '→ tidak terasa' };
+const PROTECT = { en: '→ protect yourself · get under a strong table · wait until the shaking stops', ja: '→ 身を守ってください。じょうぶな机の下に入り、揺れがおさまるまで待ってください', id: '→ lindungi diri · masuk ke bawah meja yang kuat · tunggu sampai guncangan berhenti' };
 const PROCEDURE_TEXT: { en: string; ja: string; id: string }[] = [
-  CALM, CALM, CALM,
-  { en: '→ move away from windows', ja: '→ 窓から離れてください', id: '→ menjauh dari jendela' },
-  { en: '→ steady yourself · open the door', ja: '→ 体を支えて、ドアを開けてください', id: '→ jaga keseimbangan · buka pintu' },
-  DROP, DROP, HIDE, HIDE,
-  { en: '→ hide · protect your head · wait until the shaking stops', ja: '→ 隠れて、頭を守り、揺れが止まるまで待ってください', id: '→ sembunyi · lindungi kepala · tunggu sampai guncangan berhenti' },
+  NOT_FELT,
+  PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT, PROTECT,
 ];
 
 export function initEarthquakeScene(): void {

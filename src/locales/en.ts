@@ -47,7 +47,7 @@ export const en: Record<string, string> = {
 
   // Earthquake section
   'eq.title':    "Japan's Seismic Intensity Scale (震度 Shindo)",
-  'eq.subtitle': 'Shindo measures the shaking that you feel, not the energy of the earthquake. Tap a row to feel the shaking.',
+  'eq.subtitle': 'Shindo (seismic intensity) is the strength of the shaking at a place. Magnitude is the size of the earthquake itself. Tap a row to feel the shaking.',
   'eq.do':       '✓ DO',
   'eq.dont':     '✗ DON\'T',
 
@@ -64,7 +64,7 @@ export const en: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋 Hijou-bukuro · Pack Your Bag',
-  'bag.subtitle': 'In this game, your bag can hold <strong>10 kg at most</strong>. This is a game rule. Osaka Prefecture gives a guide: about 15 kg for men and 10 kg for women. Each item has a typical real weight. Mamoru feels every kilogram. You cannot take everything. Tap an item to put it in the bag or take it out.',
+  'bag.subtitle': 'In this game, your bag can hold <strong>10 kg at most</strong>. This is a game rule. Osaka Prefecture gives a guide: about 15 kg for men and 10 kg for women. Each weight is an estimate. Mamoru feels every kilogram. You cannot take everything. Tap an item to put it in the bag or take it out.',
   'bag.stat.items':  'ITEMS',
   'bag.stat.score':  'SCORE',
   'bag.stat.weight': 'WEIGHT',

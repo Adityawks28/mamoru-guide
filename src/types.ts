@@ -28,9 +28,10 @@ export interface BagItem {
   id: string;
   weight: number;
   priority: number;
-  det_en: string;
-  det_ja: string;
-  det_id: string;
+  /** Left out when no official list supports a detail for the item. */
+  det_en?: string;
+  det_ja?: string;
+  det_id?: string;
 }
 
 export type Language = 'en' | 'ja' | 'id';

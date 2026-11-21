@@ -56,7 +56,6 @@ export const scenarios: DrillScenario[] = [
     options: [
       { en: 'Press a clean cloth directly on the wound and call 119', ja: 'きれいな布で傷口を直接押さえて、119番に電話する', id: 'Tekan luka langsung dengan kain bersih dan hubungi 119' },
       { en: 'Move the person to a different place first', ja: 'まず別の場所に動かす', id: 'Pindahkan orang itu ke tempat lain dulu' },
-      { en: 'Pour water on the wound to clean it', ja: '傷口に水をかけて洗う', id: 'Siram luka dengan air untuk membersihkannya' },
       { en: 'Leave the person. Professionals will come.', ja: '何もしない。救急隊が来るから', id: 'Tinggalkan saja. Petugas akan datang.' },
     ],
     correct: 0,

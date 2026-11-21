@@ -135,17 +135,16 @@ describe('earthquake-scene', () => {
     expect(room.classList.contains('quaking')).toBe(false);
   });
 
-  it('every row gets its own advice, up to shindo 7', async () => {
+  it('shindo 0 is not felt; every felt level gets the same sourced rule, up to shindo 7', async () => {
     const { initEarthquakeScene } = await import('../earthquake-scene');
     initEarthquakeScene();
     const procEn = () => document.querySelector('#earthquake-scene .mr-procedure [data-lang="en"]')!.textContent;
-    expect(procEn()).toContain('stay calm');
-    shindo(5);
-    expect(procEn()).toContain('drop, cover');
-    shindo(8);
-    expect(procEn()).toContain('strong table');
-    shindo(9);
-    expect(procEn()).toContain('protect your head');
+    expect(procEn()).toContain('people do not feel it');
+    for (const i of [1, 4, 5, 9]) {
+      shindo(i);
+      expect(procEn(), `row ${i}`).toContain('protect yourself');
+      expect(procEn(), `row ${i}`).toContain('wait until the shaking stops');
+    }
   });
 
   it('with reduced motion the room still shows the result, without moving', async () => {

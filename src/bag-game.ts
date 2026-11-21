@@ -69,7 +69,7 @@ export function renderBagItems(): void {
       <div class="bag-item-emoji">${item.e}</div>
       <div class="bag-item-info">
         <div class="bag-item-name"><span data-lang="en">${item.en}</span><span data-lang="ja">${item.ja}</span><span data-lang="id">${item.id}</span></div>
-        <div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>
+        ${item.det_en ? `<div class="bag-item-detail"><span data-lang="en">${item.det_en}</span><span data-lang="ja">${item.det_ja}</span><span data-lang="id">${item.det_id}</span></div>` : ''}
         <div class="bag-item-meta">
           <span class="bag-meta-tag weight">⚖ ${formatWeight(item.weight)}</span>
           <span class="bag-meta-tag ${prClass}">${prLabel}</span>

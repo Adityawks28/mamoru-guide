@@ -47,7 +47,7 @@ export const id: Record<string, string> = {
 
   // Earthquake section
   'eq.title':    'Skala Intensitas Seismik Jepang (震度 Shindo)',
-  'eq.subtitle': 'Shindo mengukur guncangan yang Anda rasakan, bukan energi gempanya. Ketuk satu baris untuk merasakan guncangannya.',
+  'eq.subtitle': 'Shindo (skala intensitas seismik) adalah kekuatan guncangan di suatu tempat. Magnitudo adalah ukuran gempa itu sendiri. Ketuk satu baris untuk merasakan guncangannya.',
   'eq.do':       '✓ LAKUKAN',
   'eq.dont':     '✗ JANGAN',
 
@@ -64,7 +64,7 @@ export const id: Record<string, string> = {
 
   // Bag game section
   'bag.title':    '🎒 非常袋 Hijou-bukuro · Isi Tas Darurat',
-  'bag.subtitle': 'Dalam game ini, tasmu bisa memuat <strong>maksimal 10 kg</strong>. Ini aturan game. Prefektur Osaka memberi panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan. Berat setiap barang sesuai dengan berat aslinya pada umumnya. Mamoru merasakan setiap kilogramnya. Kamu tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
+  'bag.subtitle': 'Dalam game ini, tasmu bisa memuat <strong>maksimal 10 kg</strong>. Ini aturan game. Prefektur Osaka memberi panduan: sekitar 15 kg untuk laki-laki dan 10 kg untuk perempuan. Setiap berat hanya perkiraan. Mamoru merasakan setiap kilogramnya. Kamu tidak bisa membawa semuanya. Ketuk barang untuk memasukkannya ke tas atau mengeluarkannya.',
   'bag.stat.items':  'ITEM',
   'bag.stat.score':  'SKOR',
   'bag.stat.weight': 'BERAT',
