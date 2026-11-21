@@ -13,9 +13,7 @@ interface Manifest {
 const manifest = (): Manifest => JSON.parse(readFileSync(resolve(ROOT, 'scripts/fonts-manifest.json'), 'utf8'));
 
 // Glyphs the source fonts do not have. The browser draws them from a system font.
-// Shelter data has 塚 as the compatibility ideograph U+FA10, written as an escape
-// because an editor can normalize it to U+585A, which the font has.
-const SHELTER_MISSING = '刎㈱簑蹊\uFA10';
+const SHELTER_MISSING = '刎㈱簑蹊';
 const KNOWN_MISSING: Record<string, string> = {
   'DotGothic16-Regular.woff2': '⊞✓✗Ōūīōā',
   'MPLUSRounded1c-Regular.woff2': '⊞' + SHELTER_MISSING,

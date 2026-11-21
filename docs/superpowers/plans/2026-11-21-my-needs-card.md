@@ -35,6 +35,7 @@
 - Privacy: personal data only through `src/storage.ts` / `src/plan-storage.ts`; a visible note where the user enters it.
 - TDD: failing test, code, then `npm test`, `npx tsc --noEmit`, `npm run build`.
 - Visual checks are for the controller (see "Visual check list"); implementers do not use a browser.
+- After adding or changing app text, run `npm run fonts` and commit the regenerated subsets, or `scripts/__tests__/font-subset.test.ts` fails.
 
 ## Decisions
 
