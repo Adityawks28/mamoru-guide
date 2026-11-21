@@ -34,14 +34,15 @@ describe('mascot', () => {
     expect(wrap.querySelector('.mascot-hint')).toBeTruthy();
   });
 
-  it('bubble has pb-tag, pb-t with EN, pb-sub with JA + ID, pb-cta', async () => {
+  it('bubble has pb-tag, the fact in EN, JA and ID inside pb-t, and pb-cta', async () => {
     const { initMascot } = await import('../mascot');
     initMascot();
     const bubble = document.querySelector('#mascot .pixel-bubble')!;
     expect(bubble.querySelector('.pb-tag')!.textContent).toBe('DID YOU KNOW?');
-    expect(bubble.querySelector('.pb-t [data-lang="en"]')).toBeTruthy();
-    expect(bubble.querySelector('.pb-sub [data-lang="ja"]')).toBeTruthy();
-    expect(bubble.querySelector('.pb-sub [data-lang="id"]')).toBeTruthy();
+    for (const lang of ['en', 'ja', 'id']) {
+      expect(bubble.querySelector(`.pb-t [data-lang="${lang}"]`)!.textContent, lang).not.toBe('');
+    }
+    expect(bubble.querySelector('.pb-sub')).toBeNull();
     expect(bubble.querySelector('.pb-cta')!.textContent).toContain('TAP FOR NEXT');
   });
 

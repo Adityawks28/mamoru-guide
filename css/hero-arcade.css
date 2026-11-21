@@ -3,8 +3,6 @@
    prototype's CSS in is a future no-op. */
 
 :root {
-  --arcade-font: 'Press Start 2P', monospace;
-  --pixel-font: 'VT323', monospace;
   --amber: #f5a623;
   --amber-glow: #ffc44d;
   --neon-cyan: #4cc9f0;
@@ -76,8 +74,8 @@ body.day-mode .kobe-scene {
 
 /* ───── ARCADE TYPOGRAPHY ───── */
 .arcade-hero .hero-eyebrow {
-  font-family: var(--arcade-font);
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   letter-spacing: 0.15em;
   color: var(--crt-yellow);
   text-shadow: 0 0 10px rgba(255, 224, 64, 0.6);
@@ -90,7 +88,7 @@ body.day-mode .kobe-scene {
 }
 
 .arcade-hero .arcade-title {
-  font-family: var(--arcade-font);
+  font-family: var(--pixel-font);
   font-style: normal;
   font-weight: 400;
   font-size: clamp(36px, 5vw, 64px);
@@ -104,7 +102,7 @@ body.day-mode .kobe-scene {
   margin: 0 0 24px;
 }
 .arcade-hero .kanji-large {
-  font-family: 'Noto Serif JP', serif;
+  font-family: 'DotGothic16', sans-serif;
   font-size: 16px;
   color: var(--neon-cyan);
   text-shadow: 0 0 8px rgba(76, 201, 240, 0.5);
@@ -112,9 +110,9 @@ body.day-mode .kobe-scene {
   display: block;
 }
 .arcade-hero .hero-sub {
-  font-family: var(--pixel-font);
-  font-size: 22px;
-  line-height: 1.4;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
   color: #e8e0d0;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.3);
   max-width: 50ch;
@@ -136,8 +134,8 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   margin-bottom: 32px;
 }
 .arcade-btn {
-  font-family: var(--arcade-font);
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   letter-spacing: 0.1em;
   padding: 16px 22px;
   border-radius: 0;
@@ -178,11 +176,11 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
 .mascot-wrap::before {
   content: 'MASCOT.EXE';
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 12px;
   background: var(--harbor-deep);
-  font-family: var(--arcade-font);
-  font-size: 8px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   padding: 2px 6px;
   color: var(--amber);
   letter-spacing: 0.1em;
@@ -215,9 +213,13 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
 }
 
 .mascot-hint {
-  font-family: var(--arcade-font);
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  line-height: 1.5;
   letter-spacing: 0.1em;
+  text-align: center;
+  /* The longer Indonesian hint wraps here instead of widening the mascot frame. */
+  max-width: 300px;
   color: var(--crt-yellow);
   text-shadow: 0 0 6px rgba(255, 224, 64, 0.6);
   animation: arcade-blink 1.4s step-end infinite;
@@ -235,12 +237,12 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   padding: 10px 14px;
   border: 3px solid var(--amber);
   box-shadow: 4px 4px 0 var(--harbor-deep);
-  font-family: var(--arcade-font);
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   letter-spacing: 0.05em;
   line-height: 1.5;
   z-index: 20;
-  max-width: 220px;
+  max-width: 260px;
   animation: bubble-pop 0.15s steps(2);
 }
 .pixel-bubble::before {
@@ -254,30 +256,29 @@ body.day-mode .arcade-btn.btn-ghost { color: var(--portopia-blue); border-color:
   border-top-color: var(--amber);
 }
 .pb-tag {
-  font-size: 8px;
+  font-size: 12px;
   color: #c62828; /* --crt-red is 3.6:1 on the paper bubble */
   letter-spacing: 0.12em;
   margin-bottom: 4px;
 }
 .pb-t {
   color: var(--harbor-deep);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
 }
-.pb-sub {
-  font-size: 7px;
-  color: #5a5a8a;
-  margin-top: 6px;
-  letter-spacing: 0.1em;
-  line-height: 1.5;
-}
-body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
 .pb-cta {
   margin-top: 8px;
-  font-size: 8px;
+  font-size: 12px;
   color: #c62828;
   letter-spacing: 0.12em;
 }
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .pb-tag,
+body.lang-ja .pb-t,
+body.lang-ja .pb-cta,
+body.lang-ja .mascot-hint,
+body.lang-ja .mode-rail .mode-card .mode-title { font-size: 14px; }
+body.lang-ja .pb-t { line-height: 1.6; }
 @keyframes bubble-pop {
   0%   { transform: scale(0); }
   50%  { transform: scale(1.1); }
@@ -395,7 +396,7 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
   height: 56px;
   display: grid;
   place-items: center;
-  font-family: 'Noto Serif JP', serif;
+  font-family: 'DotGothic16', sans-serif;
   font-size: 28px;
   color: var(--amber);
   background: var(--harbor-deep);
@@ -408,15 +409,15 @@ body.lang-id .pb-sub [data-lang="id"] { display: block; margin-top: 2px; }
   box-shadow: 2px 2px 0 var(--harbor-deep), 0 0 12px rgba(232, 64, 64, 0.4);
 }
 .mode-rail .mode-card .mode-title {
-  font-family: var(--arcade-font);
-  font-size: 11px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   line-height: 1.4;
   color: var(--amber);
   margin-bottom: 4px;
 }
 .mode-rail .mode-card .mode-desc {
-  font-family: var(--pixel-font);
-  font-size: 16px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 14px;
   color: #c8d4e6;
 }
 .mode-rail .mode-card .mode-arrow {

@@ -41,7 +41,7 @@
 .scale-row[aria-pressed="true"] { background: rgba(15,31,61,0.95); }
 .scale-row[aria-pressed="true"] { border-left-width: 8px; }
 .scale-row .num {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 20px;
   min-width: 50px;
   text-align: center;

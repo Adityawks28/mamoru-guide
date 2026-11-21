@@ -41,8 +41,8 @@ body.day-mode .section-nav {
   border: 2px solid var(--card-border);
   border-radius: 4px;
   color: var(--text-main);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   letter-spacing: 0.5px;
   padding: 8px 12px;
   min-height: 44px;
@@ -63,7 +63,7 @@ body.day-mode .section-nav {
 
 @media (max-width: 640px) {
   .section-nav-inner { padding: 2px 12px; }
-  .section-chip { font-size: 8px; padding: 7px 10px; min-height: 44px; }
+  .section-chip { padding: 7px 10px; min-height: 44px; }
 }
 
 @media print {
@@ -75,7 +75,7 @@ body.day-mode .section-nav {
   background: transparent;
   border: 2px solid var(--accent);
   color: var(--accent);
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   cursor: pointer;
   min-width: 44px;
@@ -107,17 +107,17 @@ body.day-mode .section-nav {
 }
 .nav-logo-mark { flex-shrink: 0; font-family: 'M PLUS Rounded 1c', sans-serif; }
 .nav-logo span {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   color: var(--meriken-amber);
   font-size: 14px;
 }
 .nav-right { display: flex; align-items: center; gap: 12px; }
-.nav-links { display:flex; gap: 28px; }
+.nav-links { display:flex; gap: 20px; }
 .nav-links a {
   color: var(--kitano-white);
   text-decoration: none;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   letter-spacing: 1px;
   padding: 6px 0;
   opacity: 0.75;
@@ -135,8 +135,8 @@ body.day-mode .section-nav {
   min-width: 44px;
   min-height: 44px;
   padding: 6px 10px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -155,14 +155,14 @@ body.day-mode .section-nav {
 }
 .section.visible { opacity:1; transform:translateY(0); }
 .section-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--portopia-blue);
   letter-spacing: 2px;
   margin-bottom: 8px;
 }
 .section-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: clamp(16px, 3vw, 22px);
   color: var(--meriken-amber);
   margin-bottom: 8px;
@@ -194,8 +194,8 @@ body.day-mode .section-nav {
   margin-bottom: 24px;
 }
 .emergency-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   color: var(--meriken-amber);
   margin-bottom: 12px;
   letter-spacing: 1px;
@@ -230,14 +230,14 @@ body.day-mode .section-nav {
   font-size: 24px;
 }
 .emergency-number {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--pixel-font);
   font-size: 24px;
   color: var(--alert-red);
   font-weight: bold;
   letter-spacing: 2px;
 }
 .emergency-label {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   text-align: center;
 }
@@ -252,15 +252,15 @@ body.day-mode .section-nav {
   padding: 0 6px;
 }
 .footer-links a:hover { text-decoration: underline; }
-.footer-copy { font-size: 11px; color: var(--text-soft); }
+.footer-copy { font-size: 12px; color: var(--text-soft); }
 
 /* Toast */
 .toast {
   position: fixed; bottom: -60px; right: 20px;
   background: var(--safe-green);
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   padding: 12px 20px;
   border-radius: 4px;
   z-index: 200;
@@ -338,8 +338,8 @@ body.day-mode .section-nav {
 .mobile-menu a {
   color: var(--text);
   text-decoration: none;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.72rem;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   line-height: 1.5;
   min-height: 48px;
   padding: 0.85rem 2rem;
@@ -362,8 +362,8 @@ body.day-mode .mobile-menu a {
   border: none;
   border-top: 1px solid rgba(255,255,255,0.1);
   color: var(--text);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.72rem;
+  font-family: var(--pixel-font);
+  font-size: 12px;
   line-height: 1.5;
   min-height: 48px;
   padding: 0.85rem 2rem;
@@ -410,3 +410,11 @@ body.day-mode .em-subtitle {
   .mobile-menu { transition: none; }
   .toast { transition: none; }
 }
+
+/* Japanese in pixel text falls back to DotGothic16, whose kanji need 14px to stay readable. */
+body.lang-ja .section-chip,
+body.lang-ja .nav-links a,
+body.lang-ja .emergency-title,
+body.lang-ja .toast,
+body.lang-ja .mobile-menu a,
+body.lang-ja .mobile-theme-btn { font-size: 14px; }

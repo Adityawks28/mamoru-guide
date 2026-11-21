@@ -6,8 +6,7 @@ import { motionAllowed, onMotionChange } from './motion';
 //   <#mascot.mascot-wrap>
 //     <div class="pixel-bubble fact-bubble">
 //       <div class="pb-tag">DID YOU KNOW?</div>
-//       <div class="pb-t"><span data-lang="en">…</span></div>
-//       <div class="pb-sub"><span data-lang="ja">…</span><span data-lang="id">…</span></div>
+//       <div class="pb-t"><span data-lang="en">…</span><span data-lang="ja">…</span><span data-lang="id">…</span></div>
 //       <div class="pb-cta">→ TAP FOR NEXT</div>
 //     </div>
 //     <div class="mascot" role="button"> <!-- the clickable sprite -->
@@ -71,7 +70,7 @@ export function initMascot(): void {
   host.classList.add('mascot-wrap');
   host.innerHTML = '';
 
-  // 1) Fact bubble: pixel-bubble with pb-tag/pb-t/pb-sub/pb-cta.
+  // 1) Fact bubble: pixel-bubble with pb-tag/pb-t/pb-cta.
   const bubble = document.createElement('div');
   bubble.className = 'pixel-bubble fact-bubble';
 
@@ -80,18 +79,14 @@ export function initMascot(): void {
   tag.textContent = 'DID YOU KNOW?';
   bubble.appendChild(tag);
 
-  const tEn = document.createElement('div');
-  tEn.className = 'pb-t';
+  // The fact is the main text in every language, so all three share .pb-t.
+  const fact = document.createElement('div');
+  fact.className = 'pb-t';
   const enSpan = document.createElement('span'); enSpan.dataset.lang = 'en';
-  tEn.appendChild(enSpan);
-  bubble.appendChild(tEn);
-
-  const sub = document.createElement('div');
-  sub.className = 'pb-sub';
   const jaSpan = document.createElement('span'); jaSpan.dataset.lang = 'ja';
   const idSpan = document.createElement('span'); idSpan.dataset.lang = 'id';
-  sub.append(jaSpan, idSpan);
-  bubble.appendChild(sub);
+  fact.append(enSpan, jaSpan, idSpan);
+  bubble.appendChild(fact);
 
   const cta = document.createElement('div');
   cta.className = 'pb-cta';
