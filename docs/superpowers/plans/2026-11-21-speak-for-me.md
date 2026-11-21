@@ -35,6 +35,7 @@
 - Privacy: the reply card write area is never saved (not even in localStorage) and is cleared on close and on route change.
 - TDD: each task writes the failing test first, then the code, then `npm test`, `npx tsc --noEmit`, `npm run build`.
 - Visual checks are done by the controller with Claude in Chrome after implementation (Task 5); implementers do not use a browser.
+- After adding or changing app text, run `npm run fonts` and commit the regenerated subsets, or `scripts/__tests__/font-subset.test.ts` fails.
 
 ## Decisions
 

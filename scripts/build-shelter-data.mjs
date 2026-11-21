@@ -21,6 +21,12 @@ const YS = [405, 406, 407];
 const CITIES = /^(兵庫県|大阪府)(神戸市|芦屋市|西宮市|尼崎市|伊丹市|宝塚市|明石市|大阪市)/;
 const OUT = 'src/data/shelters.json';
 
+// GSI text can hold CJK compatibility ideographs (for example 塚 as U+FA10).
+// The fonts draw the unified form, so map only those to it (NFC does this for
+// them); other characters stay as GSI wrote them.
+const COMPAT_KANJI = /[\uF900-\uFAFF]|[\u{2F800}-\u{2FA1F}]/gu;
+const unifyKanji = text => text.replace(COMPAT_KANJI, c => c.normalize('NFC'));
+
 const sites = new Map();
 for (const layer of LAYERS) {
   for (const x of XS) {
@@ -36,8 +42,9 @@ for (const layer of LAYERS) {
         // disaster1..8 → bits 0..7 (flood, landslide, surge, earthquake, tsunami, fire, inland, volcano)
         let flags = 0;
         for (let i = 1; i <= 8; i++) if (p[`disaster${i}`] === 1) flags |= 1 << (i - 1);
-        const key = `${p.name}|${lat}|${lng}`;
-        sites.set(key, [p.name, +lat.toFixed(6), +lng.toFixed(6), flags | (sites.get(key)?.[3] ?? 0), p.address.replace(/^(兵庫県|大阪府)/, '')]);
+        const name = unifyKanji(p.name);
+        const key = `${name}|${lat}|${lng}`;
+        sites.set(key, [name, +lat.toFixed(6), +lng.toFixed(6), flags | (sites.get(key)?.[3] ?? 0), unifyKanji(p.address.replace(/^(兵庫県|大阪府)/, ''))]);
       }
     }
   }
