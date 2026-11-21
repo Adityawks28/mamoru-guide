@@ -47,6 +47,14 @@ describe('shelter data', () => {
     expect(park.types.sort()).toEqual(['earthquake', 'fire', 'tsunami']);
   });
 
+  it('has no CJK compatibility ideographs, so every kanji is the one the font draws', async () => {
+    const { sites } = await loadShelters();
+    const compat = /[\uF900-\uFAFF]|[\u{2F800}-\u{2FA1F}]/u;
+    const odd = sites.flatMap(s => [s.name, s.address]).filter(text => compat.test(text) && text.normalize('NFC') !== text);
+    expect(odd).toEqual([]);
+    expect(sites.some(s => s.name === '宝塚文化芸術センター庭園及び花のみち・さくら橋公園')).toBe(true);
+  });
+
   it('never lists a beach park as a tsunami site when GSI does not', async () => {
     const { sites } = await loadShelters();
     const beach = sites.find(s => s.name === '須磨海浜公園')!;
