@@ -175,4 +175,11 @@ export const id: Record<string, string> = {
   'needs.clear.confirm': 'Hapus kartu kebutuhanmu? Ini akan menghapus "Alergi makanan", "Alergi lain", "Obat", "Kebutuhan makanan", "Bahasa yang saya bisa", "Kontak darurat", dan "Catatan". Isi rencana yang lain tetap ada. Kamu tidak bisa membatalkan ini.',
   'needs.toast.saved': 'Kartu kebutuhan disimpan',
   'needs.toast.cleared': 'Kartu kebutuhan dihapus',
+  'vc.title': 'Cek suara',
+  'vc.note': 'Nyalakan mode pesawat. Lalu ketuk Cek suara.',
+  'vc.check': 'Cek suara',
+  'vc.speak': 'Bicara',
+  'vc.selected': 'Aplikasi memakai:',
+  'vc.none': 'Perangkat ini tidak punya suara bahasa Jepang.',
+  'vc.missing': 'Browser ini tidak bisa membacakan teks.',
 };
