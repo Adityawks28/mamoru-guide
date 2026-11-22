@@ -1,5 +1,33 @@
 import { getItem, setItem, removeItem } from './storage';
-import { EmergencyPlan, emptyPlan } from './plan-model';
+import { EmergencyPlan, PlanNeeds, emptyPlan, emptyNeeds } from './plan-model';
+import { FOOD_ALLERGENS, DIET_NEEDS, NEED_LANGUAGES, CONTACT_RELATIONS } from './data/needs';
+
+function pickKeys<T extends string>(raw: unknown, options: readonly { key: string }[]): T[] {
+  if (!Array.isArray(raw)) return [];
+  const allowed = new Set(options.map(o => o.key));
+  return [...new Set(raw.filter((v): v is T => typeof v === 'string' && allowed.has(v)))];
+}
+
+const str = (v: unknown): string => (typeof v === 'string' ? v : '');
+
+export function normalizeNeeds(raw: unknown): PlanNeeds {
+  if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return emptyNeeds();
+  const r = raw as Record<string, unknown>;
+  const relation = str(r.contactRelation);
+  return {
+    foodAllergies:   pickKeys(r.foodAllergies, FOOD_ALLERGENS),
+    otherAllergies:  str(r.otherAllergies),
+    medicines:       str(r.medicines),
+    diet:            pickKeys(r.diet, DIET_NEEDS),
+    dietOther:       str(r.dietOther),
+    languages:       pickKeys(r.languages, NEED_LANGUAGES),
+    languagesOther:  str(r.languagesOther),
+    contactName:     str(r.contactName),
+    contactRelation: CONTACT_RELATIONS.some(o => o.key === relation) ? relation : '',
+    contactPhone:    str(r.contactPhone),
+    notes:           str(r.notes),
+  };
+}
 
 export function loadPlanV2(): EmergencyPlan {
   const raw = getItem('mamoru-plan-v2');
@@ -7,7 +35,7 @@ export function loadPlanV2(): EmergencyPlan {
   try {
     const parsed = JSON.parse(raw) as EmergencyPlan;
     if (parsed.version !== 2) return emptyPlan();
-    return parsed;
+    return { ...parsed, needs: normalizeNeeds(parsed.needs) };
   } catch { return emptyPlan(); }
 }
 

@@ -52,6 +52,20 @@ export interface PlanDocuments {
   storageLocation: string;
 }
 
+export interface PlanNeeds {
+  foodAllergies:  FoodAllergen[];
+  otherAllergies: string;
+  medicines:      string;
+  diet:           DietNeed[];
+  dietOther:      string;
+  languages:      string[]; // keys of NEED_LANGUAGES
+  languagesOther: string;
+  contactName:    string;
+  contactRelation: string;  // key of CONTACT_RELATIONS, or ''
+  contactPhone:   string;
+  notes:          string;
+}
+
 export interface EmergencyPlan {
   version:   2;
   profile:   PlanProfile;
@@ -60,6 +74,7 @@ export interface EmergencyPlan {
   shelters:  PlanShelters;
   supplies:  PlanSupplies;
   documents: PlanDocuments;
+  needs:     PlanNeeds;
   notes:     string;
   legacy:    Record<string, string>; // unmapped v1 fields, never discarded
 }
@@ -73,7 +88,22 @@ export function emptyPlan(): EmergencyPlan {
     shelters:  { primary: '', backup: '', highGround: '', meetingPoint: '', walkTime: '', routeNotes: '' },
     supplies:  { supplyDays: '', waterLiters: '', foodList: '', toolsList: '', bagLocation: '' },
     documents: { copiedDocs: '', storageLocation: '' },
+    needs:     emptyNeeds(),
     notes:     '',
     legacy:    {},
   };
+}
+
+export function emptyNeeds(): PlanNeeds {
+  return {
+    foodAllergies: [], otherAllergies: '', medicines: '',
+    diet: [], dietOther: '',
+    languages: [], languagesOther: '',
+    contactName: '', contactRelation: '', contactPhone: '',
+    notes: '',
+  };
+}
+
+export function hasNeeds(n: PlanNeeds): boolean {
+  return Object.values(n).some(v => (Array.isArray(v) ? v.length > 0 : v.trim() !== ''));
 }

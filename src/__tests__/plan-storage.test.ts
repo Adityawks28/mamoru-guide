@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { loadPlanV2, savePlanV2, clearPlanV2, migrateV1ToV2 } from '../plan-storage';
-import { emptyPlan } from '../plan-model';
+import { CONTACT_RELATIONS } from '../data/needs';
+import { emptyPlan, emptyNeeds, hasNeeds, type EmergencyPlan } from '../plan-model';
 
 beforeEach(() => {
   localStorage.removeItem('mamoru-plan-v2');
@@ -157,5 +158,57 @@ describe('clearPlanV2()', () => {
     clearPlanV2();
     expect(localStorage.getItem('mamoru-plan-v2')).toBeNull();
     expect(loadPlanV2()).toEqual(emptyPlan());
+  });
+});
+
+// ─── needs group ───────────────────────────────────────────────────────────
+
+describe('needs group', () => {
+  it('adds an empty needs group to a plan saved before this change', () => {
+    const old = { ...emptyPlan(), profile: { ...emptyPlan().profile, name: 'Aditya' } } as Partial<EmergencyPlan>;
+    delete old.needs;
+    localStorage.setItem('mamoru-plan-v2', JSON.stringify(old));
+    const p = loadPlanV2();
+    expect(p.profile.name).toBe('Aditya');
+    expect(p.needs).toEqual(emptyNeeds());
+  });
+  it('keeps known needs and drops unknown keys and wrong types', () => {
+    localStorage.setItem('mamoru-plan-v2', JSON.stringify({ ...emptyPlan(), needs: {
+      foodAllergies: ['soba', 'durian', 7], diet: 'halal', languages: ['id', 'xx'],
+      medicines: 'Insulin', notes: 42, contactRelation: 'boss' } }));
+    const n = loadPlanV2().needs;
+    expect(n.foodAllergies).toEqual(['soba']);
+    expect(n.diet).toEqual([]);
+    expect(n.languages).toEqual(['id']);
+    expect(n.medicines).toBe('Insulin');
+    expect(n.notes).toBe('');
+    expect(n.contactRelation).toBe('');
+  });
+  it('round-trips every needs field', () => {
+    const plan = emptyPlan();
+    plan.needs = {
+      foodAllergies: ['ebi', 'kashu'],
+      otherAllergies: 'Kiwi',
+      medicines: 'Insulin',
+      diet: ['halal', 'no-pork'],
+      dietOther: 'No gelatin',
+      languages: ['id', 'ja-easy'],
+      languagesOther: 'Minang',
+      contactName: 'Siti',
+      contactRelation: CONTACT_RELATIONS[0].key,
+      contactPhone: '090-1234-5678',
+      notes: 'Carry an inhaler',
+    };
+    savePlanV2(plan);
+    expect(loadPlanV2().needs).toEqual(plan.needs);
+  });
+  it('hasNeeds is false for emptyNeeds and for spaces only, true for one ticked allergen', () => {
+    expect(hasNeeds(emptyNeeds())).toBe(false);
+    expect(hasNeeds({ ...emptyNeeds(), notes: '  ' })).toBe(false);
+    expect(hasNeeds({ ...emptyNeeds(), foodAllergies: ['tamago'] })).toBe(true);
+  });
+  it('migrateV1ToV2 leaves needs empty (Decision N-2)', () => {
+    localStorage.setItem('mamoru-emergency-plan', JSON.stringify({ medications: 'Ventolin', languages: 'English' }));
+    expect(migrateV1ToV2()!.needs).toEqual(emptyNeeds());
   });
 });

@@ -22,7 +22,7 @@ export interface StorageSchema {
   /** v1 emergency plan: flat key/value form data (kept for migration only) */
   'mamoru-emergency-plan': string;
 
-  /** v2 emergency plan: structured JSON (EmergencyPlan type from plan-model.ts) */
+  /** v2 emergency plan: structured JSON (EmergencyPlan type from plan-model.ts), including the needs group */
   'mamoru-plan-v2': string;
 
   /** Saved primary/backup shelters: JSON (SavedShelters type from shelter-storage.ts) */
