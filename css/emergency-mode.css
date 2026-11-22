@@ -201,14 +201,14 @@ body.day-mode .em-back {
 /* A button, so it needs the link reset and the same font as the cards. */
 button.em-card { font: inherit; cursor: pointer; width: 100%; }
 .em-card-needs {
-  border-color: rgba(255,107,157,0.4);
-  background: linear-gradient(160deg, rgba(255,107,157,0.16), var(--card-bg));
+  border-color: color-mix(in srgb, var(--maiko-sakura) 40%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--maiko-sakura) 16%, transparent), var(--card-bg));
 }
 .em-card-needs:hover {
-  border-color: #ff6b9d;
-  box-shadow: 0 8px 24px rgba(255,107,157,0.25);
+  border-color: var(--maiko-sakura);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--maiko-sakura) 25%, transparent);
 }
-.em-card-needs .em-card-title { color: #ff8fb3; }
+.em-card-needs .em-card-title { color: var(--maiko-sakura); }
 
 @media (max-width: 540px) {
   #emergency-mode { padding: 16px 14px 24px; }
@@ -236,7 +236,7 @@ body.day-mode .em-card-show .em-card-title {
 }
 
 body.day-mode .em-card-needs .em-card-title {
-  color: #a3224f;
+  color: var(--accent);
 }
 
 body.day-mode .em-card-shelter .em-card-title {

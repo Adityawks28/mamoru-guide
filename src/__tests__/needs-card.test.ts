@@ -88,4 +88,10 @@ describe('needs card', () => {
     const css = readFileSync(resolve(__dirname, '../../css/print.css'), 'utf8');
     expect(css).toMatch(/body\.print-needs-only\s*>\s*:not\(\.needs-card-overlay\)\s*\{\s*display:\s*none/);
   });
+  it('colours the emergency needs card with theme tokens only', () => {
+    const css = readFileSync(resolve(__dirname, '../../css/emergency-mode.css'), 'utf8');
+    const rules = [...css.matchAll(/[^{}]*\.em-card-needs[^{}]*\{[^}]*\}/g)].map(m => m[0]).join('\n');
+    expect(rules).toContain('--maiko-sakura');
+    expect(rules).not.toMatch(/#[0-9a-fA-F]{3,8}\b|rgba?\(/);
+  });
 });
