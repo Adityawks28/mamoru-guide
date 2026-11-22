@@ -16,9 +16,9 @@ export interface WarningWord {
 export const WARNING_WORDS: ReadonlyArray<WarningWord> = [
   {
     term: '警戒レベル', rom: 'Keikai reberu', claimId: 'warn-alert-level',
-    instruction_en: 'Levels 1 and 2 come from JMA, and Levels 3 to 5 come from your city. Leave by Level 4.',
+    instruction_en: 'Levels 1 and 2 come from JMA and others, and Levels 3 to 5 come from your city. Leave by Level 4.',
     instruction_ja: 'レベル1と2は、気象庁（きしょうちょう）などが出します。レベル3から5は、市町村（しちょうそん）が出します。レベル4までに避難（ひなん）してください。',
-    instruction_id: 'Tingkat 1 dan 2 berasal dari JMA, dan Tingkat 3 sampai 5 berasal dari kota tempat tinggalmu. Mengungsilah paling lambat di Tingkat 4.',
+    instruction_id: 'Tingkat 1 dan 2 berasal dari JMA dan lainnya, dan Tingkat 3 sampai 5 berasal dari kota tempat tinggalmu. Mengungsilah paling lambat di Tingkat 4.',
   },
   {
     term: 'レベル２大雨注意報', rom: 'Reberu ni ooame chuuihou', claimId: 'warn-level-2-advisory',
@@ -41,13 +41,13 @@ export const WARNING_WORDS: ReadonlyArray<WarningWord> = [
   {
     term: '避難指示', rom: 'Hinan shiji', claimId: 'warn-level-4-instruction',
     instruction_en: 'Everyone in a danger area must leave.',
-    instruction_ja: '危ない場所にいる人は、全員避難（ひなん）してください。',
+    instruction_ja: '危ない場所にいる人は、全員（ぜんいん）避難（ひなん）してください。',
     instruction_id: 'Semua orang di daerah berbahaya harus mengungsi.',
   },
   {
     term: 'レベル４大雨危険警報', rom: 'Reberu yon ooame kiken keihou', claimId: 'warn-level-4-urgent',
     instruction_en: 'Do the same as for alert level 4. Everyone in a danger area must leave.',
-    instruction_ja: '警戒レベル（けいかいレベル）4と同じことをしてください。危ない場所にいる人は、全員避難（ひなん）してください。',
+    instruction_ja: '警戒レベル（けいかいレベル）4と同じことをしてください。危ない場所にいる人は、全員（ぜんいん）避難（ひなん）してください。',
     instruction_id: 'Lakukan hal yang sama seperti tingkat peringatan 4. Semua orang di daerah berbahaya harus mengungsi.',
   },
   {
@@ -64,9 +64,9 @@ export const WARNING_WORDS: ReadonlyArray<WarningWord> = [
   },
   {
     term: '津波注意報', rom: 'Tsunami chuuihou', claimId: 'warn-tsunami-advisory',
-    instruction_en: 'Get out of the water and leave the coast.',
-    instruction_ja: '海から上がってください。海岸（かいがん）から離れてください。',
-    instruction_id: 'Keluar dari air dan jauhi pantai.',
+    instruction_en: 'If you are in the sea, get out of the water and leave the coast.',
+    instruction_ja: '海の中にいる人は、海から上がってください。海岸（かいがん）から離れてください。',
+    instruction_id: 'Kalau kamu ada di laut, keluar dari air dan jauhi pantai.',
   },
   {
     term: '津波警報', rom: 'Tsunami keihou', claimId: 'warn-tsunami-warning',
