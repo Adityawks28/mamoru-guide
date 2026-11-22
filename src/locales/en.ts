@@ -137,4 +137,17 @@ export const en: Record<string, string> = {
   'shelter.problem.locationFailed': 'The app did not get your location. Choose your area below.',
   'shelter.retry': 'Try again',
   'shelter.reload': 'Reload the page',
+  // Needs card
+  'needs.card.title': 'What I need',
+  'needs.card.lead': 'I do not understand Japanese well. Please read this card.',
+  'needs.card.allergies': 'I have allergies. I cannot eat these.',
+  'needs.card.otherAllergies': 'Other allergies',
+  'needs.card.medicines': 'Medicines I use',
+  'needs.card.diet': 'My food needs',
+  'needs.card.languages': 'Languages I speak',
+  'needs.card.contact': 'Emergency contact. Please call this number.',
+  'needs.card.notes': 'Notes',
+  'needs.card.close': 'Close',
+  'needs.card.print': 'Print',
+  'needs.card.empty': 'Your needs card is empty. Fill in the "My needs card" step in My Plan.',
 };

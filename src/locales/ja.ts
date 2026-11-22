@@ -137,4 +137,17 @@ export const ja: Record<string, string> = {
   'shelter.problem.locationFailed': '位置情報（いちじょうほう）がわかりませんでした。下でエリアを選んでください。',
   'shelter.retry': 'もう一度ためす',
   'shelter.reload': 'ページを読みこみなおす',
+  // Needs card
+  'needs.card.title': 'わたしに必要（ひつよう）なこと',
+  'needs.card.lead': 'わたしは日本語がよくわかりません。このカードを読（よ）んでください。',
+  'needs.card.allergies': 'アレルギーがあります。これを食べられません。',
+  'needs.card.otherAllergies': 'ほかのアレルギー',
+  'needs.card.medicines': '使（つか）っている薬（くすり）',
+  'needs.card.diet': '食べ物で気をつけること',
+  'needs.card.languages': '話（はな）せることば',
+  'needs.card.contact': '緊急（きんきゅう）連絡先（れんらくさき）。この番号に電話してください。',
+  'needs.card.notes': 'メモ',
+  'needs.card.close': '閉（と）じる',
+  'needs.card.print': '印刷（いんさつ）',
+  'needs.card.empty': '必要（ひつよう）なことカードは空（から）です。「マイプラン」の「必要（ひつよう）なことカード」に書（か）いてください。',
 };
