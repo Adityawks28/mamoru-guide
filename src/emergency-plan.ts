@@ -5,7 +5,7 @@ import { removeItem } from './storage';
 import { EmergencyPlan, emptyPlan, emptyNeeds } from './plan-model';
 import { loadPlanV2, savePlanV2, clearPlanV2, migrateV1ToV2 } from './plan-storage';
 import { showPlan } from './show-plan';
-import { showNeedsCard } from './needs-card';
+import { showNeedsCard, printNeedsCard } from './needs-card';
 import { renderNeedsStep, clearNeedsConfirmText } from './needs-step';
 
 type FieldType = 'text' | 'textarea' | 'select';
@@ -285,8 +285,7 @@ function renderNeeds(): HTMLElement {
     change: scheduleSave,
     save() { flushSave(); showToast(t('needs.toast.saved'), 'success'); },
     show() { flushSave(); showNeedsCard(); },
-    // Task 5 turns this into printing; until then it opens the card.
-    print() { flushSave(); showNeedsCard(); },
+    print() { flushSave(); printNeedsCard(); },
     clear() {
       if (!confirm(clearNeedsConfirmText())) return;
       plan.needs = emptyNeeds();
@@ -456,6 +455,7 @@ export function initEmergencyPlan(): void {
   printFullIds = false;
   // Ctrl+P / the browser menu on the plan page prints the worksheet too.
   window.addEventListener('beforeprint', () => {
+    if (document.querySelector('.needs-card-overlay')) return;
     if (document.body.dataset.route === 'plan') preparePrint();
   });
   window.addEventListener('afterprint', endPrint);

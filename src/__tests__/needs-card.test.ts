@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { buildNeedsCard, showNeedsCard } from '../needs-card';
+import { buildNeedsCard, showNeedsCard, initNeedsCard, printNeedsCard } from '../needs-card';
 import { emptyNeeds, emptyPlan, type PlanNeeds } from '../plan-model';
 import { savePlanV2 } from '../plan-storage';
 import { t } from '../i18n';
@@ -63,4 +63,29 @@ describe('needs card', () => {
   });
   it('never uses innerHTML', () =>
     expect(readFileSync(resolve(__dirname, '../needs-card.ts'), 'utf8')).not.toMatch(/innerHTML|insertAdjacentHTML/));
+  it('opens the card from emergency mode', () => {
+    document.body.innerHTML = '<button id="emNeedsBtn"></button>';
+    initNeedsCard();
+    document.getElementById('emNeedsBtn')!.click();
+    expect(document.querySelector('.needs-card-overlay')).not.toBeNull();
+  });
+  it('prints only the needs card, then puts the page back', () => {
+    window.print = vi.fn();
+    initNeedsCard();
+    printNeedsCard();
+    expect(document.body.classList.contains('print-needs-only')).toBe(true);
+    expect(window.print).toHaveBeenCalled();
+    window.dispatchEvent(new Event('afterprint'));
+    expect(document.body.classList.contains('print-needs-only')).toBe(false);
+  });
+  it('prints from the Print button on the card', () => {
+    window.print = vi.fn();
+    showNeedsCard();
+    (document.querySelector('.needs-print') as HTMLElement).click();
+    expect(window.print).toHaveBeenCalled();
+  });
+  it('print.css shows only the needs card in needs print mode', () => {
+    const css = readFileSync(resolve(__dirname, '../../css/print.css'), 'utf8');
+    expect(css).toMatch(/body\.print-needs-only\s*>\s*:not\(\.needs-card-overlay\)\s*\{\s*display:\s*none/);
+  });
 });
