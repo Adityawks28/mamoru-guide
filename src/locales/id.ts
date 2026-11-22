@@ -137,4 +137,17 @@ export const id: Record<string, string> = {
   'shelter.problem.locationFailed': 'Aplikasi tidak mendapat lokasimu. Pilih areamu di bawah.',
   'shelter.retry': 'Coba lagi',
   'shelter.reload': 'Muat ulang halaman',
+  // Needs card
+  'needs.card.title': 'Yang saya butuhkan',
+  'needs.card.lead': 'Saya kurang paham bahasa Jepang. Tolong baca kartu ini.',
+  'needs.card.allergies': 'Saya punya alergi. Saya tidak bisa makan ini.',
+  'needs.card.otherAllergies': 'Alergi lain',
+  'needs.card.medicines': 'Obat yang saya pakai',
+  'needs.card.diet': 'Kebutuhan makanan saya',
+  'needs.card.languages': 'Bahasa yang saya bisa',
+  'needs.card.contact': 'Kontak darurat. Tolong hubungi nomor ini.',
+  'needs.card.notes': 'Catatan',
+  'needs.card.close': 'Tutup',
+  'needs.card.print': 'Cetak',
+  'needs.card.empty': 'Kartu kebutuhanmu masih kosong. Isi langkah "Kartu kebutuhan saya" di Rencana Saya.',
 };

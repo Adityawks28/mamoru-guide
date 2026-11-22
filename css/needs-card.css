@@ -1,0 +1,91 @@
+/* Full-screen needs card: shown to a person who reads Japanese. */
+.needs-card-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  background: var(--bg-main);
+  color: var(--text-main);
+  padding: var(--space-md);
+}
+.needs-bar {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  max-width: 720px;
+  margin: 0 auto var(--space-md);
+}
+.needs-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface);
+  color: var(--text-main);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-family: var(--pixel-text);
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+.needs-btn .needs-ja { font-size: 1.125rem; }
+.needs-btn .needs-sub { display: block; }
+.needs-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: var(--space-xl);
+}
+.needs-title {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.needs-ja {
+  font-family: var(--pixel-text);
+  font-size: clamp(1.5rem, 6vw, 2.25rem);
+  line-height: 1.4;
+  color: var(--text-main);
+}
+.needs-sub {
+  font-family: var(--pixel-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+p.needs-ja, p.needs-sub { margin: var(--space-sm) 0 0; }
+.needs-sec {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.needs-head { margin-bottom: var(--space-sm); }
+.needs-head .needs-ja { font-size: clamp(1.25rem, 5vw, 1.75rem); color: var(--accent); }
+.needs-list { list-style: none; margin: 0; padding: 0; }
+.needs-item { margin-bottom: var(--space-sm); }
+.needs-item .needs-ja, .needs-item .needs-sub { display: block; }
+.needs-free {
+  font-family: var(--pixel-text);
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-top: var(--space-sm);
+}
+.needs-phone {
+  display: inline-block;
+  min-height: 44px;
+  font-family: var(--pixel-text);
+  font-size: clamp(1.5rem, 6vw, 2.25rem);
+  color: var(--text-main);
+  overflow-wrap: anywhere;
+  margin-top: var(--space-sm);
+}
+.needs-empty { font-family: var(--pixel-text); font-size: 1rem; line-height: 1.6; }
+
+@media print {
+  body:has(.needs-card-overlay) > :not(.needs-card-overlay) { display: none !important; }
+  .needs-card-overlay { position: static; overflow: visible; }
+  .needs-bar { display: none; }
+}
