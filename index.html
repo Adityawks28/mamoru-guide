@@ -574,6 +574,7 @@
     <button class="tab-btn" id="vocabTabPlaces" data-tab="places" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelPlaces" onclick="switchTab('places','vocab')">🗺️ <span data-lang="en">Places</span><span data-lang="ja">場所</span><span data-lang="id">Tempat</span></button>
     <button class="tab-btn" id="vocabTabHelp" data-tab="help" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelHelp" onclick="switchTab('help','vocab')">🆘 <span data-lang="en">Help</span><span data-lang="ja">助け</span><span data-lang="id">Bantuan</span></button>
     <button class="tab-btn" id="vocabTabMedical" data-tab="medical" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelMedical" onclick="switchTab('medical','vocab')">🏥 <span data-lang="en">Medical</span><span data-lang="ja">医療</span><span data-lang="id">Medis</span></button>
+    <button class="tab-btn" id="vocabTabWarnings" data-tab="warnings" role="tab" aria-selected="false" tabindex="-1" aria-controls="vocabPanelWarnings" onclick="switchTab('warnings','vocab')">⚠️ <span data-lang="en">Warnings</span><span data-lang="ja">警報（けいほう）</span><span data-lang="id">Peringatan</span></button>
   </div>
 
   <div class="tab-content active" id="vocabPanelDanger" data-tab="danger" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabDanger" tabindex="0">
@@ -624,6 +625,16 @@
         <button class="bag-btn secondary" onclick="nextCard('medical')" aria-label="Next">▶</button>
       </div>
       <div id="vocabFlashcardMedical"></div>
+    </div>
+  </div>
+  <div class="tab-content" id="vocabPanelWarnings" data-tab="warnings" data-group="vocab" role="tabpanel" aria-labelledby="vocabTabWarnings" tabindex="0">
+    <div class="flashcard-stage">
+      <div class="flashcard-nav">
+        <button class="bag-btn secondary" onclick="prevCard('warnings')" aria-label="Previous">◀</button>
+        <span class="flashcard-counter" id="fcCounterWarnings" aria-live="polite">1 / 14</span>
+        <button class="bag-btn secondary" onclick="nextCard('warnings')" aria-label="Next">▶</button>
+      </div>
+      <div id="vocabFlashcardWarnings"></div>
     </div>
   </div>
 

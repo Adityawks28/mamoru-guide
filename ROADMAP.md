@@ -33,7 +33,7 @@ International students and residents in Japan who find it hard to get disaster i
 
 ### 2. Learning to read Japan's warnings
 
-- **Warning words.** Learn the words seen on TV, alerts, and signs, for example 避難指示, 津波警報, and the difference between 避難場所 and 避難所.
+- ~~**Warning words.** Learn the words seen on TV, alerts, and signs, for example 避難指示, 津波警報, and the difference between 避難場所 and 避難所.~~ Done 2026-11-22: a Warnings tab in the Vocabulary section has 14 sourced words, each with its reading and what to do (docs/superpowers/specs/2026-11-21-warning-words-verification.md). The shelter card is open: no official Indonesian term for 避難所 is distinct from 避難場所.
 - **Furigana switch.** Show the reading above every kanji in the Japanese text.
 
 ### 3. Life in an evacuation shelter
