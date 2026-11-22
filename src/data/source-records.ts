@@ -1,14 +1,17 @@
 import type { SourceId } from './sources';
 
-// Source IDs that the four docs/superpowers/specs/*-verification.md records cite.
+// Source IDs that the five docs/superpowers/specs/*-verification.md records cite.
 // source-groups.test.ts keeps this list equal to them.
 export const RECORD_SOURCES: ReadonlyArray<SourceId> = [
   'amda-activities',
   'amda-indonesia',
   'bda-launch',
   'cao-checklist-sonae',
+  'cao-countermeasures',
   'cao-evac-guideline-r8',
   'cao-evac-leaflet-en',
+  'cao-evacuation-points-en',
+  'cao-evacuation-points-id',
   'cao-ichinitimae-battery',
   'cao-kouhou-r03',
   'cao-kyokun-1-1-2',
@@ -33,6 +36,8 @@ export const RECORD_SOURCES: ReadonlyArray<SourceId> = [
   'gov-online-bousai-8072',
   'gov-online-damage-9034',
   'hyogo-pref-consulates',
+  'isa-guidebook-en',
+  'isa-guidebook-id',
   'isa-info-center',
   'jfem-aed-placement-ja',
   'jhelp-home',
@@ -45,6 +50,7 @@ export const RECORD_SOURCES: ReadonlyArray<SourceId> = [
   'jma-multilingual',
   'jma-multilingual-page',
   'jma-nagasaki-levels-en',
+  'jma-nagasaki-levels-id',
   'jma-shindo-table',
   'jma-tsunami-info',
   'jma-tsunami-kaizen-2012',

@@ -22,9 +22,9 @@ describe('sources page', () => {
     showSources(null);
     expect(titles().map(h => h.dataset.i18n)).toEqual(SOURCE_AREAS.map(a => `sources.area.${a}`));
   });
-  it('shows 113 sources with publisher, title link and checked date', () => {
+  it('shows 116 sources with publisher, title link and checked date', () => {
     showSources(null);
-    expect(document.querySelectorAll('.source-item')).toHaveLength(113);
+    expect(document.querySelectorAll('.source-item')).toHaveLength(116);
     const li = document.querySelector('.source-item')!;
     expect(li.querySelector('.source-publisher')!.textContent).toBe(SOURCES['fdma-385-cpr-2025'].publisher);
     expect(li.querySelector('a.source-title')!.textContent).toBe(SOURCES['fdma-385-cpr-2025'].title);
