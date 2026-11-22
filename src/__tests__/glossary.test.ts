@@ -29,6 +29,9 @@ describe('term glossary', () => {
   it('cites a known source with an https url for every term', () => {
     expect(GLOSSARY.filter(t => !SOURCES[t.source]?.url.startsWith('https://')).map(t => t.ja)).toEqual([]);
   });
+  it('writes the level number after レベル as a full-width digit (Decision W-5)', () => {
+    expect(GLOSSARY.filter(t => /レベル[0-9]/.test(t.ja)).map(t => t.ja)).toEqual([]);
+  });
   it('keeps a nested term nested in en and id', () => {
     const broken = GLOSSARY.flatMap(inner => GLOSSARY
       .filter(outer => outer !== inner && outer.ja.includes(inner.ja))
