@@ -166,18 +166,18 @@ export const questions: QuizQuestion[] = [
     q_id: 'Kamu sedang berenang di laut. 津波注意報 (pemberitahuan tsunami) dikeluarkan. Apa yang kamu lakukan?',
     options: [
       {en:'Keep swimming. A tsunami advisory needs no evacuation.',ja:'泳ぎ続ける。津波注意報では避難しなくてよい',id:'Terus berenang. Pemberitahuan tsunami tidak perlu evakuasi.'},
-      {en:'Get out of the water and leave the coast.',ja:'海から上がってください。海岸（かいがん）から離れてください。',id:'Keluar dari air dan jauhi pantai.'},
+      {en:'If you are in the sea, get out of the water and leave the coast.',ja:'海の中にいる人は、海から上がってください。海岸（かいがん）から離れてください。',id:'Kalau kamu ada di laut, keluar dari air dan jauhi pantai.'},
       {en:'Stay in the water and swim away from the beach.',ja:'海の中にいて、浜から泳いで離れる',id:'Tetap di air dan berenang menjauh dari pantai.'},
     ],
     correct: 1,
-    explain_en: 'Get out of the water and leave the coast. People at the coast for swimming must evacuate even for a Tsunami Advisory.',
-    explain_ja: '海から上がってください。海岸（かいがん）から離れてください。海水浴（かいすいよく）などで海岸の近くにいる人は、津波注意報でも避難が必要です。',
-    explain_id: 'Keluar dari air dan jauhi pantai. Orang yang berada di dekat pantai untuk berenang harus mengungsi, bahkan saat ada pemberitahuan tsunami.',
+    explain_en: 'If you are in the sea, get out of the water and leave the coast. People at the coast for swimming must evacuate even for a Tsunami Advisory.',
+    explain_ja: '海の中にいる人は、海から上がってください。海岸（かいがん）から離れてください。海水浴（かいすいよく）などで海岸の近くにいる人は、津波注意報でも避難が必要です。',
+    explain_id: 'Kalau kamu ada di laut, keluar dari air dan jauhi pantai. Orang yang berada di dekat pantai untuk berenang harus mengungsi, bahkan saat ada pemberitahuan tsunami.',
   },
   {
     claimId: 'warn-level-3-elderly',
     q_en: 'Your city issues alert level 3, 高齢者等避難 (Evacuation of the Elderly, etc.). What do you do?',
-    q_ja: '市から警戒レベル3 高齢者等避難が出ました。どうしますか？',
+    q_ja: '市から警戒レベル（けいかいレベル）3が出ました。高齢者等避難（こうれいしゃとうひなん）です。どうしますか？',
     q_id: 'Kotamu mengeluarkan tingkat peringatan 3, 高齢者等避難 (Proses Evakuasi Lansia, dll.). Apa yang kamu lakukan?',
     options: [
       {en:'Everyone leaves the danger area now.',ja:'みんな、すぐに危ない場所から避難する',id:'Semua orang langsung mengungsi dari daerah berbahaya.'},
@@ -330,6 +330,9 @@ function showResults(): void {
 }
 
 export function initQuiz(): void {
+  document.querySelectorAll('[data-quiz-count]').forEach((el) => {
+    el.textContent = String(questions.length);
+  });
   const startBtn = document.getElementById('quizStartBtn');
   if (!startBtn) return;
   startBtn.addEventListener('click', () => {
