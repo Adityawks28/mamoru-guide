@@ -14,6 +14,7 @@ export const ROUTE_SECTIONS: Record<string, string[]> = {
   '#/firstaid':  ['firstaid'],
   '#/show':      ['showthis'],
   '#/alerts':    ['alerts'],
+  '#/voice-check': ['voicecheck'],
 };
 
 export interface RouteDetail { route: string; param: string | null }

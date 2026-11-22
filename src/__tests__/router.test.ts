@@ -17,6 +17,7 @@ const ALL_IDS = [
   'drill', 'quiz', 'about', 'sources',
   'myplan',
   'shelter',
+  'voicecheck',
 ];
 
 function buildDOM(): void {
@@ -73,6 +74,11 @@ describe('activateRoute()', () => {
   it('sets body data-route to "home" on #/', () => {
     activateRoute('#/');
     expect(document.body.dataset.route).toBe('home');
+  });
+
+  it('shows only voicecheck on #/voice-check', () => {
+    activateRoute('#/voice-check');
+    expect(visibleSections()).toEqual(['voicecheck']);
   });
 
   // --- Emergency ---

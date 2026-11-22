@@ -175,4 +175,11 @@ export const en: Record<string, string> = {
   'needs.clear.confirm': 'Delete your needs card? This deletes "Food allergies", "Other allergies", "Medicines", "Food needs", "Languages I speak", "Emergency contact" and "Notes". The rest of your plan stays. You cannot undo this.',
   'needs.toast.saved': 'Needs card saved',
   'needs.toast.cleared': 'Needs card cleared',
+  'vc.title': 'Voice check',
+  'vc.note': 'Turn on airplane mode. Then tap Check voices.',
+  'vc.check': 'Check voices',
+  'vc.speak': 'Speak',
+  'vc.selected': 'The app uses:',
+  'vc.none': 'This device has no Japanese voice.',
+  'vc.missing': 'This browser cannot read text aloud.',
 };
