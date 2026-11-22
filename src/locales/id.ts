@@ -149,5 +149,5 @@ export const id: Record<string, string> = {
   'needs.card.notes': 'Catatan',
   'needs.card.close': 'Tutup',
   'needs.card.print': 'Cetak',
-  'needs.card.empty': 'Kartu kebutuhanmu masih kosong. Isi langkah "Kartu kebutuhan saya" di Rencana Saya.',
+  'needs.card.empty': 'Kartu kebutuhanmu masih kosong. Isi langkah "Kartu kebutuhan saya" di Rencana.',
 };

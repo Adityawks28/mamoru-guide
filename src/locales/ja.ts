@@ -149,5 +149,5 @@ export const ja: Record<string, string> = {
   'needs.card.notes': 'メモ',
   'needs.card.close': '閉（と）じる',
   'needs.card.print': '印刷（いんさつ）',
-  'needs.card.empty': '必要（ひつよう）なことカードは空（から）です。「わたしのプラン」の「必要なことカード」のステップに書（か）いてください。',
+  'needs.card.empty': '必要（ひつよう）なことカードは空（から）です。「マイプラン」の「必要（ひつよう）なことカード」に書（か）いてください。',
 };

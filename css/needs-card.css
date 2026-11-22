@@ -83,9 +83,3 @@ p.needs-ja, p.needs-sub { margin: var(--space-sm) 0 0; }
   margin-top: var(--space-sm);
 }
 .needs-empty { font-family: var(--pixel-text); font-size: 1rem; line-height: 1.6; }
-
-@media print {
-  body:has(.needs-card-overlay) > :not(.needs-card-overlay) { display: none !important; }
-  .needs-card-overlay { position: static; overflow: visible; }
-  .needs-bar { display: none; }
-}

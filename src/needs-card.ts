@@ -123,6 +123,12 @@ export function buildNeedsCard(needs: PlanNeeds, lang: Language): HTMLElement {
 }
 
 let trap: TrapHandle | null = null;
+let printHandler: () => void = () => {};
+
+// Printing is wired by its own task; the Print button calls this hook.
+export function setNeedsPrintHandler(fn: () => void): void {
+  printHandler = fn;
+}
 
 export function closeNeedsCard(): void {
   document.querySelector('.needs-card-overlay')?.remove();
@@ -147,7 +153,7 @@ export function showNeedsCard(): void {
   const print = el('button', 'needs-btn needs-print');
   print.type = 'button';
   print.append(...pair('span', t('needs.card.print', 'ja'), t('needs.card.print', lang), lang));
-  print.addEventListener('click', () => window.print());
+  print.addEventListener('click', () => printHandler());
   bar.append(close, print);
 
   overlay.append(bar, buildNeedsCard(loadPlanV2().needs, lang));
