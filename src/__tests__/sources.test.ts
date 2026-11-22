@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { SOURCES, CLAIMS } from '../data/sources';
 import { WARNING_WORDS } from '../data/warning-words';
+import { FOOD_ALLERGENS_CLAIM } from '../data/needs';
 import { questions } from '../quiz';
 import { categories } from '../first-aid';
 import { STEPS } from '../earthquake-now';
@@ -17,6 +18,7 @@ function usedClaimIds(): string[] {
     ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
     ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
     ...WARNING_WORDS.map((w) => w.claimId),
+    FOOD_ALLERGENS_CLAIM,
     ...questions.map((q) => q.claimId).filter((x): x is string => !!x),
   ];
 }
