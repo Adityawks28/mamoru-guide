@@ -17,6 +17,7 @@ export function setLang(lang: Language): void {
   localStorage.setItem('mamoru-lang', lang);
   setI18nLang(lang);
   applyTranslations();
+  document.dispatchEvent(new CustomEvent('mamoru:langchange', { detail: { lang } }));
 }
 
 export function initLang(): void {
