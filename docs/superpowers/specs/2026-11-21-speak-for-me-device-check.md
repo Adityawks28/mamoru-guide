@@ -15,8 +15,21 @@ Use the preview fallback now. The PRs are not merged yet.
 3. Connect the phone to the same Wi-Fi.
 4. On the phone, open `http://<computer-LAN-IP>:4173/mamoru-guide/#/voice-check`.
 
-A plain-http LAN address may not register the service worker on phones.
-Then the airplane-mode reload test (step 3 below) is only real on https.
+A plain-http LAN address is not a secure context.
+Safari on iPhone and Chrome on Android do not register a service worker there.
+In airplane mode the phone cannot reach the computer.
+So steps 3 and 8 of the owner checklist work only on the https live URL, after the PR merges.
+
+Use these short steps for a preview run:
+
+1. Open the page from the phone while online.
+2. Do not reload the page.
+3. Turn on airplane mode. Check that Wi-Fi and mobile data are both off.
+4. Tap Check voices. Copy every row into the result table.
+5. Tap Speak on each Japanese row. Write if you hear 「けがをしました」.
+6. Write "preview, no reload" in the Notes column.
+
+This still answers the go/no-go question: does a local Japanese voice speak with no network?
 
 After the merge, use the live URL (P-8):
 `https://adityawks28.github.io/mamoru-guide/#/voice-check`
@@ -24,6 +37,7 @@ After the merge, use the live URL (P-8):
 ## Owner checklist
 
 Do this once on an iPhone (Safari) and once on an Android phone (Chrome).
+Use it on the https live URL only.
 
 1. Open the page online once. Then reload it once, so the service worker caches the app.
 2. Turn on airplane mode. Check that Wi-Fi and mobile data are both off.
