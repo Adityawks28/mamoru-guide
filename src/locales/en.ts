@@ -70,6 +70,8 @@ export const en: Record<string, string> = {
   'em.shelter.desc':  'Nearest evacuation site',
   'em.alerts.title':  'Alert Info',
   'em.alerts.desc':   'What the warnings mean',
+  'em.needs.title':  'Show My Needs',
+  'em.needs.desc':   'Allergies, medicines, food, contact',
 
   // Section chip-nav (Prepare / Learn jump-nav)
   'chip.earthquake': '🏚 Earthquake',

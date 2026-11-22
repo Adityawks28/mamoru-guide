@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   import('./quiz').then(m => m.initQuiz());
   import('./contacts').then(m => m.initContacts());
   import('./shelter-finder').then(m => m.initShelterFinder());
+  import('./needs-card').then(m => m.initNeedsCard());
   import('./emergency-plan').then(m => { m.initEmergencyPlan(); Object.assign(window, { savePlan: m.savePlan, clearPlan: m.clearPlan, printPlan: m.printPlan }); });
   import('./character/earthquake-scene').then(m => m.initEarthquakeScene());
   import('./character/firstaid-scene').then(m => m.initFirstAidScene());

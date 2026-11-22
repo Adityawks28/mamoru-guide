@@ -70,6 +70,8 @@ export const ja: Record<string, string> = {
   'em.shelter.desc':  'いちばん近い避難場所',
   'em.alerts.title':  '警報情報',
   'em.alerts.desc':   '警報の意味',
+  'em.needs.title':  '必要（ひつよう）なことを見（み）せる',
+  'em.needs.desc':   'アレルギー、薬（くすり）、食（た）べ物（もの）、連絡先（れんらくさき）',
 
   // Section chip-nav
   'chip.earthquake': '🏚 地震',

@@ -1,6 +1,7 @@
 import { emptyPlan } from '../plan-model';
 import { savePlanV2 } from '../plan-storage';
 import { initEmergencyPlan, printPlan } from '../emergency-plan';
+import { showNeedsCard, closeNeedsCard } from '../needs-card';
 
 function demoPlan() {
   const p = emptyPlan();
@@ -112,5 +113,15 @@ describe('printed worksheet', () => {
     document.body.dataset.route = 'prepare';
     window.dispatchEvent(new Event('beforeprint'));
     expect(sheet()).toBeNull();
+  });
+});
+
+describe('needs card printing', () => {
+  it('does not print the worksheet while the needs card is open', () => {
+    start();
+    showNeedsCard();
+    window.dispatchEvent(new Event('beforeprint'));
+    expect(sheet()).toBeNull();
+    closeNeedsCard();
   });
 });

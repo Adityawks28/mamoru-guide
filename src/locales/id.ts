@@ -70,6 +70,8 @@ export const id: Record<string, string> = {
   'em.shelter.desc':  'Tempat evakuasi terdekat',
   'em.alerts.title':  'Info Peringatan',
   'em.alerts.desc':   'Arti peringatan',
+  'em.needs.title':  'Tunjukkan Kebutuhan Saya',
+  'em.needs.desc':   'Alergi, obat, makanan, kontak',
 
   // Section chip-nav
   'chip.earthquake': '🏚 Gempa',

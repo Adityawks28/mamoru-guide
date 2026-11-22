@@ -118,7 +118,7 @@ body.day-mode .em-back {
   gap: 16px;
 }
 .em-grid-secondary {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .em-card {
@@ -198,6 +198,18 @@ body.day-mode .em-back {
 }
 .em-card-alerts .em-card-title { color: var(--portopia-blue); }
 
+/* A button, so it needs the link reset and the same font as the cards. */
+button.em-card { font: inherit; cursor: pointer; width: 100%; }
+.em-card-needs {
+  border-color: color-mix(in srgb, var(--maiko-sakura) 40%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--maiko-sakura) 16%, transparent), var(--card-bg));
+}
+.em-card-needs:hover {
+  border-color: var(--maiko-sakura);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--maiko-sakura) 25%, transparent);
+}
+.em-card-needs .em-card-title { color: var(--maiko-sakura); }
+
 @media (max-width: 540px) {
   #emergency-mode { padding: 16px 14px 24px; }
   .em-back {
@@ -220,6 +232,10 @@ body.day-mode .em-back {
 }
 
 body.day-mode .em-card-show .em-card-title {
+  color: var(--accent);
+}
+
+body.day-mode .em-card-needs .em-card-title {
   color: var(--accent);
 }
 

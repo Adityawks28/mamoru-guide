@@ -123,13 +123,6 @@ export function buildNeedsCard(needs: PlanNeeds, lang: Language): HTMLElement {
 }
 
 let trap: TrapHandle | null = null;
-let printHandler: () => void = () => {};
-
-// Printing is wired by its own task; the Print button calls this hook.
-export function setNeedsPrintHandler(fn: () => void): void {
-  printHandler = fn;
-}
-
 export function closeNeedsCard(): void {
   document.querySelector('.needs-card-overlay')?.remove();
   document.body.style.overflow = '';
@@ -153,7 +146,7 @@ export function showNeedsCard(): void {
   const print = el('button', 'needs-btn needs-print');
   print.type = 'button';
   print.append(...pair('span', t('needs.card.print', 'ja'), t('needs.card.print', lang), lang));
-  print.addEventListener('click', () => printHandler());
+  print.addEventListener('click', printNeedsCard);
   bar.append(close, print);
 
   overlay.append(bar, buildNeedsCard(loadPlanV2().needs, lang));
@@ -161,4 +154,26 @@ export function showNeedsCard(): void {
   document.body.style.overflow = 'hidden';
   trap = trapFocus(overlay, closeNeedsCard);
   close.focus();
+}
+
+export function printNeedsCard(): void {
+  if (!document.querySelector('.needs-card-overlay')) showNeedsCard();
+  document.body.classList.add('print-needs-only');
+  window.print();
+}
+
+let initialised = false;
+
+export function initNeedsCard(): void {
+  if (initialised) return;
+  initialised = true;
+  // Delegated, so the button works whenever emergency mode renders it.
+  document.addEventListener('click', e => {
+    if ((e.target as Element | null)?.closest('#emNeedsBtn')) showNeedsCard();
+  });
+  // Ctrl+P while the card is open prints the card, not the page behind it.
+  window.addEventListener('beforeprint', () => {
+    if (document.querySelector('.needs-card-overlay')) document.body.classList.add('print-needs-only');
+  });
+  window.addEventListener('afterprint', () => document.body.classList.remove('print-needs-only'));
 }
