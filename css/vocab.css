@@ -57,6 +57,7 @@
 .flashcard-card.cat-action { border-left-color: var(--safe-green); }
 .flashcard-card.cat-places { border-left-color: var(--portopia-blue); }
 .flashcard-card.cat-help   { border-left-color: var(--meriken-amber); }
+.flashcard-card.cat-warnings { border-left-color: var(--motomachi-brick); }
 .flashcard-jp {
   font-size: clamp(32px, 6vw, 52px);
   font-weight: 900;
@@ -68,6 +69,14 @@
   color: var(--portopia-blue);
   font-style: italic;
   margin-bottom: 20px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  letter-spacing: 0.03em;
+}
+.flashcard-reading {
+  font-size: 16px;
+  color: var(--portopia-blue);
+  font-style: italic;
+  margin-bottom: 4px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   letter-spacing: 0.03em;
 }
@@ -87,6 +96,15 @@
 .flashcard-translation {
   font-size: 15px;
   line-height: 1.5;
+}
+.flashcard-instruction {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 480px;
+  margin: 20px auto 0;
+  padding-top: 16px;
+  border-top: 2px solid var(--card-border);
+  text-align: left;
 }
 .flashcard-translation .flag {
   font-size: 16px;

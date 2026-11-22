@@ -7,6 +7,7 @@ const cardIndex: Record<VocabCategory, number> = {
   places: 0,
   help: 0,
   medical: 0,
+  warnings: 0,
 };
 
 function renderFlashcard(cat: VocabCategory): void {
@@ -24,13 +25,19 @@ function renderFlashcard(cat: VocabCategory): void {
   old.replaceWith(container);
   container.className = `flashcard-card cat-${cat}`;
   container.innerHTML = `
-    <div class="flashcard-jp">${v.jp}</div>
+    <div class="flashcard-jp" lang="ja">${v.jp}</div>
+    ${v.reading ? `<div class="flashcard-reading" lang="ja">${v.reading}</div>` : ''}
     <div class="flashcard-romaji">${v.rom}</div>
     <hr class="flashcard-divider">
     <div class="flashcard-translations">
       <div class="flashcard-translation"><span class="flag">🇬🇧</span>${v.en}</div>
       <div class="flashcard-translation"><span class="flag">🇮🇩</span>${v.id}</div>
-    </div>`;
+    </div>
+    ${v.instruction ? `<p class="flashcard-instruction">
+      <span data-lang="en">${v.instruction.en}</span>
+      <span data-lang="ja" lang="ja">${v.instruction.ja}</span>
+      <span data-lang="id">${v.instruction.id}</span>
+    </p>` : ''}`;
 }
 
 function cap(s: string): string {
@@ -73,7 +80,7 @@ export function switchTab(tabId: string, group: string): void {
 }
 
 export function initVocab(): void {
-  const cats: VocabCategory[] = ['danger', 'action', 'places', 'help', 'medical'];
+  const cats: VocabCategory[] = ['danger', 'action', 'places', 'help', 'medical', 'warnings'];
   cats.forEach(cat => renderFlashcard(cat));
 
   // Roving-tabindex arrow navigation between the vocab category tabs.

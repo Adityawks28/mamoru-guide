@@ -1,4 +1,5 @@
 import type { ScaleEntry, VocabData, BagItem } from './types';
+import { warningVocab } from './data/warning-words';
 
 export const scaleData: ScaleEntry[] = [
   {n:'0',jp:'震度0',colors:['#8a8a9a','#556'],en:'People do not feel it.',ja:'人はゆれを感じません。',id:'Tidak terasa.',icon:'🏠',pct:0},
@@ -54,7 +55,8 @@ export const vocabData: VocabData = {
     {jp:'心臓病があります',rom:'Shinzoubyou ga arimasu',en:'I have heart disease',id:'Saya punya penyakit jantung'},
     {jp:'薬を飲んでいます',rom:'Kusuri wo nonde imasu',en:'I take medicine',id:'Saya sedang minum obat'},
     {jp:'妊娠中です',rom:'Ninshin-chuu desu',en:'I am pregnant',id:'Saya sedang hamil'},
-  ]
+  ],
+  warnings: warningVocab(),
 };
 
 export const bagItems: BagItem[] = [
