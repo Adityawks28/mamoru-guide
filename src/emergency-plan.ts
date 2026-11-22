@@ -291,6 +291,7 @@ function renderNeeds(): HTMLElement {
       plan.needs = emptyNeeds();
       flushSave();
       goToStep(NEEDS_STEP);
+      document.querySelector<HTMLElement>('.needs-step .wizard-step-header')?.focus();
       showToast(t('needs.toast.cleared'), 'success');
     },
   });

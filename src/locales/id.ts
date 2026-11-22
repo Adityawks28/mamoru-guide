@@ -155,7 +155,7 @@ export const id: Record<string, string> = {
   'needs.step.title': '🧾 Kartu kebutuhan saya',
   'needs.step.intro': 'Tulis hal yang perlu diketahui penolong. Mamoru menampilkannya di satu kartu dalam bahasa Jepang.',
   'needs.food': 'Alergi makanan',
-  'needs.food.hint': 'Ini daftar resmi alergen di Jepang. Tulis alergi lain di bawah.',
+  'needs.food.hint': 'Label makanan di Jepang wajib mencantumkan 9 alergen ini. Tulis alergi lain di bawah.',
   'needs.otherAllergies': 'Alergi lain',
   'needs.medicines': 'Obat',
   'needs.diet': 'Kebutuhan makanan',
@@ -172,7 +172,7 @@ export const id: Record<string, string> = {
   'needs.btn.show': '🆘 Tunjukkan kebutuhan saya',
   'needs.btn.print': '🖨️ Cetak kartu kebutuhan saya',
   'needs.btn.clear': '🗑️ Hapus kebutuhan saya',
-  'needs.clear.confirm': 'Hapus kartu kebutuhanmu? Ini akan menghapus alergi makanan, alergi lain, obat, kebutuhan makanan, bahasa yang saya bisa, kontak darurat, dan catatan. Isi rencana yang lain tetap ada. Kamu tidak bisa membatalkan ini.',
+  'needs.clear.confirm': 'Hapus kartu kebutuhanmu? Ini akan menghapus "Alergi makanan", "Alergi lain", "Obat", "Kebutuhan makanan", "Bahasa yang saya bisa", "Kontak darurat", dan "Catatan". Isi rencana yang lain tetap ada. Kamu tidak bisa membatalkan ini.',
   'needs.toast.saved': 'Kartu kebutuhan disimpan',
   'needs.toast.cleared': 'Kartu kebutuhan dihapus',
 };

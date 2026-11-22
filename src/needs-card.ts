@@ -56,7 +56,7 @@ const free = (text: string): HTMLElement => el('div', 'needs-free', text);
 
 // Keeps digits and plus so a typed quote or space cannot change the link.
 function phoneLink(phone: string): HTMLElement {
-  const digits = phone.replace(/[^\d+]/g, '');
+  const digits = phone.normalize('NFKC').replace(/[^\d+]/g, '');
   if (!digits) return el('span', 'needs-free', phone);
   const a = el('a', 'needs-phone', phone);
   a.href = `tel:${digits}`;
@@ -157,6 +157,7 @@ export function showNeedsCard(): void {
 }
 
 export function printNeedsCard(): void {
+  initNeedsCard();
   if (!document.querySelector('.needs-card-overlay')) showNeedsCard();
   document.body.classList.add('print-needs-only');
   window.print();

@@ -4,6 +4,7 @@ import { loadPlanV2, savePlanV2 } from '../plan-storage';
 import { initEmergencyPlan, clearPlan } from '../emergency-plan';
 import { clearNeedsConfirmText } from '../needs-step';
 import { closeNeedsCard } from '../needs-card';
+import { FOOD_ALLERGENS } from '../data/needs';
 import { setLang } from '../lang';
 import { t } from '../i18n';
 
@@ -92,6 +93,19 @@ describe('needs step', () => {
         expect(text, `${lang} ${k}`).toContain(t(k, lang).toLowerCase());
     }
     expect(clearNeedsConfirmText()).toBe(t('needs.clear.confirm'));
+  });
+
+  it('moves focus to the step heading after clearing', () => {
+    start(); dot(6).click();
+    type('medicines', 'Insulin');
+    window.confirm = vi.fn(() => true);
+    button(t('needs.btn.clear')).click();
+    expect(document.activeElement).toBe(document.querySelector('.needs-step .wizard-step-header'));
+  });
+
+  it('states in the food hint the number of allergens in the list', () => {
+    for (const lang of ['en', 'ja', 'id'] as const)
+      expect(t('needs.food.hint', lang).match(/\d+/)![0], lang).toBe(String(FOOD_ALLERGENS.length));
   });
 
   it('clears only the needs after confirmation', () => {
