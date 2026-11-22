@@ -844,6 +844,13 @@ export const SOURCES: Record<SourceId, Source> = {
     checked: '2026-11-21',
     area: 'contacts',
   },
+  'caa-allergen-labeling': {
+    publisher: '消費者庁 (Consumer Affairs Agency)',
+    title: '食物アレルギー表示に関する情報 (特定原材料 9品目, 令和8年4月時点; 加工食品の食物アレルギー表示ハンドブック 令和8年4月版 p.4, p.9)',
+    url: 'https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/',
+    checked: '2026-11-22',
+    area: 'medical',
+  },
 };
 
 export type ClaimStatus = 'verified' | 'changed' | 'removed' | 'needs-medical-review' | 'pending';
@@ -970,4 +977,7 @@ export const CLAIMS: Record<string, Claim> = {
   'warn-eew': { sources: ['kantei-jishin', 'jma-multilingual'], status: 'verified', note: 'W13: 「あわてずにまずは身の安全を確保してください」 首相官邸 地震; JMA 多言語辞書 rows 749, 773' },
   'warn-jalert': { sources: ['fdma-jalert'], status: 'verified', note: 'W14: 「弾道ミサイル情報、緊急地震速報、大津波警報など…瞬時に伝達するシステム」 FDMA Jアラートの概要' },
   'warn-evac-site': { sources: ['kantei-hinan', 'jma-multilingual'], status: 'verified', note: 'W15: 「避難場所は災害の危険から緊急的に逃れるための場所で、災害の種類ごとに市町村が指定しています」 首相官邸 避難のタイミングと避難場所; JMA 多言語辞書 row 368' },
+
+  // Needs card: the allergen list of docs/superpowers/specs/2026-11-22-needs-verification.md (row N1).
+  'needs-food-allergens': { sources: ['caa-allergen-labeling'], status: 'verified', note: 'N1: 「特定原材料：えび、カシューナッツ、かに、くるみ、小麦、そば、卵、乳、落花生（ピーナッツ）」 消費者庁 加工食品の食物アレルギー表示ハンドブック(令和8年4月版) p.4; 食品表示基準で表示を義務付け. 特定原材料に準ずるもの (20品目, 推奨) is not used' },
 };

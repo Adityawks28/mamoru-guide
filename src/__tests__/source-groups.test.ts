@@ -19,7 +19,7 @@ describe('source areas', () => {
   it('counts the sources in each area', () => {
     const n: Record<string, number> = {};
     for (const s of Object.values(SOURCES)) n[s.area] = (n[s.area] ?? 0) + 1;
-    expect(n).toEqual({ terms: 16, medical: 29, history: 14, safety: 46, contacts: 13 });
+    expect(n).toEqual({ terms: 16, medical: 30, history: 14, safety: 46, contacts: 13 });
   });
   it('puts sample sources in their areas', () => {
     expect([SOURCES['who-pfa-ja'].area, SOURCES['fdma-hanshin-final'].area, SOURCES['kantei-keihou'].area,
@@ -34,9 +34,9 @@ describe('record sources', () => {
 });
 
 describe('visible sources', () => {
-  it('shows 116 sources and hides the 2 that nothing uses', () => {
+  it('shows 117 sources and hides the 2 that nothing uses', () => {
     const shown = visibleSourceIds();
-    expect(shown).toHaveLength(116);
+    expect(shown).toHaveLength(117);
     expect(Object.keys(SOURCES).filter(id => !shown.includes(id))).toEqual(HIDDEN);
   });
   it('keeps the SOURCES order', () => {

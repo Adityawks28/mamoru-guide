@@ -22,9 +22,9 @@ describe('sources page', () => {
     showSources(null);
     expect(titles().map(h => h.dataset.i18n)).toEqual(SOURCE_AREAS.map(a => `sources.area.${a}`));
   });
-  it('shows 116 sources with publisher, title link and checked date', () => {
+  it('shows 117 sources with publisher, title link and checked date', () => {
     showSources(null);
-    expect(document.querySelectorAll('.source-item')).toHaveLength(116);
+    expect(document.querySelectorAll('.source-item')).toHaveLength(117);
     const li = document.querySelector('.source-item')!;
     expect(li.querySelector('.source-publisher')!.textContent).toBe(SOURCES['fdma-385-cpr-2025'].publisher);
     expect(li.querySelector('a.source-title')!.textContent).toBe(SOURCES['fdma-385-cpr-2025'].title);
@@ -82,7 +82,7 @@ describe('sources page', () => {
   it('writes the latest check date', () => {
     showSources(null);
     const time = document.getElementById('sourcesLastCheck')!;
-    expect([time.textContent, time.getAttribute('datetime')]).toEqual(['2026-11-21', '2026-11-21']);
+    expect([time.textContent, time.getAttribute('datetime')]).toEqual(['2026-11-22', '2026-11-22']);
   });
   it('renders data as text, not markup', () => {
     const list = document.createElement('div');

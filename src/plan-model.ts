@@ -1,5 +1,10 @@
 // plan-model.ts: typed shape for the v2 emergency plan
 
+// The nine 特定原材料 (mandatory allergen labeling) of 消費者庁, April 2026.
+export type FoodAllergen =
+  | 'ebi' | 'kashu' | 'kani' | 'kurumi' | 'komugi' | 'soba' | 'tamago' | 'nyu' | 'rakkasei';
+export type DietNeed = 'halal' | 'vegetarian' | 'vegan' | 'no-pork' | 'no-beef' | 'no-alcohol';
+
 export interface PlanProfile {
   name:          string;
   nameKana:      string;

@@ -1,11 +1,12 @@
 import type { SourceId } from './sources';
 
-// Source IDs that the five docs/superpowers/specs/*-verification.md records cite.
+// Source IDs that the docs/superpowers/specs/*-verification.md records cite.
 // source-groups.test.ts keeps this list equal to them.
 export const RECORD_SOURCES: ReadonlyArray<SourceId> = [
   'amda-activities',
   'amda-indonesia',
   'bda-launch',
+  'caa-allergen-labeling',
   'cao-checklist-sonae',
   'cao-countermeasures',
   'cao-evac-guideline-r8',
