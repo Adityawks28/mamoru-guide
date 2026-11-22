@@ -34,7 +34,7 @@ function formLabel(x: Triple): string {
 }
 // Rescuers read the printed sheet, so it stays in English and Japanese.
 function sheetLabel(x: Triple): string {
-  return `${x.label_en} ・ ${x.label_ja}`;
+  return `${x.label_en} ・ ${x.label_ja.replace(/（[ぁ-ゖー]+）/g, '')}`;
 }
 const placeholderOf = (f: FieldDef): string | undefined =>
   lang3(f.placeholder_en ?? '', f.placeholder_ja ?? '', f.placeholder_id ?? '') || undefined;
@@ -56,9 +56,9 @@ const SUPPLY_DAYS: FieldOption[] = [
   { value: '0', label_en: 'None yet', label_ja: 'まだない', label_id: 'Belum ada' },
   { value: '1', label_en: '1 day', label_ja: '1日', label_id: '1 hari' },
   { value: '2', label_en: '2 days', label_ja: '2日', label_id: '2 hari' },
-  { value: '3', label_en: '3 days (minimum)', label_ja: '3日（最低限）', label_id: '3 hari (minimum)' },
+  { value: '3', label_en: '3 days (minimum)', label_ja: '3日（最低限（さいていげん））', label_id: '3 hari (minimum)' },
   { value: '5', label_en: '5 days', label_ja: '5日', label_id: '5 hari' },
-  { value: '7', label_en: '7 days (ideal)', label_ja: '7日（理想）', label_id: '7 hari (ideal)' },
+  { value: '7', label_en: '7 days (ideal)', label_ja: '7日（理想（りそう））', label_id: '7 hari (ideal)' },
 ];
 
 const DOC_OPTIONS: FieldOption[] = [
@@ -71,61 +71,61 @@ const DOC_OPTIONS: FieldOption[] = [
 
 const STEPS: StepDef[] = [
   {
-    icon: '👤', label_en: 'Identity', label_ja: '身元', label_id: 'Identitas',
+    icon: '👤', label_en: 'Identity', label_ja: '身元（みもと）', label_id: 'Identitas',
     fields: [
-      { key: 'profile.name', label_en: 'Full Name', label_ja: '氏名', label_id: 'Nama Lengkap', type: 'text', placeholder_en: 'e.g. Aditya Wirayutha', placeholder_ja: '例：Aditya Wirayutha', placeholder_id: 'mis. Aditya Wirayutha', autocomplete: 'name' },
-      { key: 'profile.nameKana', label_en: 'Name in Katakana', label_ja: '氏名（カタカナ）', label_id: 'Nama dalam Katakana', type: 'text', placeholder_en: 'e.g. アディティヤ', placeholder_ja: '例：アディティヤ', placeholder_id: 'mis. アディティヤ' },
-      { key: 'profile.nationality', label_en: 'Nationality', label_ja: '国籍', label_id: 'Kewarganegaraan', type: 'text', placeholder_en: 'e.g. Indonesia / インドネシア', placeholder_ja: '例：インドネシア', placeholder_id: 'mis. Indonesia / インドネシア' },
-      { key: 'profile.languages', label_en: 'Languages Spoken', label_ja: '話せる言語', label_id: 'Bahasa yang Saya Kuasai', type: 'text', placeholder_en: 'e.g. English, Indonesian, basic Japanese', placeholder_ja: '例：英語、インドネシア語、少しの日本語', placeholder_id: 'mis. Inggris, Indonesia, sedikit bahasa Jepang' },
-      { key: 'profile.bloodType', label_en: 'Blood Type', label_ja: '血液型', label_id: 'Golongan Darah', type: 'select', options: BLOOD_TYPES },
-      { key: 'profile.dob', label_en: 'Date of Birth', label_ja: '生年月日', label_id: 'Tanggal Lahir', type: 'text', placeholder_en: 'e.g. 1998/05/12', placeholder_ja: '例：1998/05/12', placeholder_id: 'mis. 1998/05/12', autocomplete: 'bday' },
+      { key: 'profile.name', label_en: 'Full Name', label_ja: '氏名（しめい）', label_id: 'Nama Lengkap', type: 'text', placeholder_en: 'e.g. Aditya Wirayutha', placeholder_ja: '例：Aditya Wirayutha', placeholder_id: 'mis. Aditya Wirayutha', autocomplete: 'name' },
+      { key: 'profile.nameKana', label_en: 'Name in Katakana', label_ja: '氏名（しめい）（カタカナ）', label_id: 'Nama dalam Katakana', type: 'text', placeholder_en: 'e.g. アディティヤ', placeholder_ja: '例：アディティヤ', placeholder_id: 'mis. アディティヤ' },
+      { key: 'profile.nationality', label_en: 'Nationality', label_ja: '国籍（こくせき）', label_id: 'Kewarganegaraan', type: 'text', placeholder_en: 'e.g. Indonesia / インドネシア', placeholder_ja: '例：インドネシア', placeholder_id: 'mis. Indonesia / インドネシア' },
+      { key: 'profile.languages', label_en: 'Languages Spoken', label_ja: '話せる言語（げんご）', label_id: 'Bahasa yang Saya Kuasai', type: 'text', placeholder_en: 'e.g. English, Indonesian, basic Japanese', placeholder_ja: '例：英語（えいご）、インドネシア語、少しの日本語（にほんご）', placeholder_id: 'mis. Inggris, Indonesia, sedikit bahasa Jepang' },
+      { key: 'profile.bloodType', label_en: 'Blood Type', label_ja: '血液型（けつえきがた）', label_id: 'Golongan Darah', type: 'select', options: BLOOD_TYPES },
+      { key: 'profile.dob', label_en: 'Date of Birth', label_ja: '生年月日（せいねんがっぴ）', label_id: 'Tanggal Lahir', type: 'text', placeholder_en: 'e.g. 1998/05/12', placeholder_ja: '例：1998/05/12', placeholder_id: 'mis. 1998/05/12', autocomplete: 'bday' },
     ],
   },
   {
-    icon: '💊', label_en: 'Medical', label_ja: '医療情報', label_id: 'Info Medis',
+    icon: '💊', label_en: 'Medical', label_ja: '医療情報（いりょうじょうほう）', label_id: 'Info Medis',
     fields: [
-      { key: 'medical.conditions', label_en: 'Medical Conditions / Allergies', label_ja: '持病・アレルギー', label_id: 'Penyakit / Alergi Saya', type: 'textarea', placeholder_en: 'e.g. Peanut allergy (ピーナッツアレルギー), Asthma', placeholder_ja: '例：ピーナッツアレルギー、ぜんそく', placeholder_id: 'mis. Alergi kacang (ピーナッツアレルギー), asma', full: true },
-      { key: 'medical.medications', label_en: 'Current Medications', label_ja: '服用中の薬', label_id: 'Obat yang Saya Minum', type: 'textarea', placeholder_en: 'e.g. Insulin (インスリン), Ventolin inhaler', placeholder_ja: '例：インスリン、吸入薬', placeholder_id: 'mis. Insulin (インスリン), inhaler Ventolin', full: true },
+      { key: 'medical.conditions', label_en: 'Medical Conditions / Allergies', label_ja: '持病（じびょう）・アレルギー', label_id: 'Penyakit / Alergi Saya', type: 'textarea', placeholder_en: 'e.g. Peanut allergy (ピーナッツアレルギー), Asthma', placeholder_ja: '例：ピーナッツアレルギー、ぜんそく', placeholder_id: 'mis. Alergi kacang (ピーナッツアレルギー), asma', full: true },
+      { key: 'medical.medications', label_en: 'Current Medications', label_ja: '服用中（ふくようちゅう）の薬', label_id: 'Obat yang Saya Minum', type: 'textarea', placeholder_en: 'e.g. Insulin (インスリン), Ventolin inhaler', placeholder_ja: '例：インスリン、吸入薬（きゅうにゅうやく）', placeholder_id: 'mis. Insulin (インスリン), inhaler Ventolin', full: true },
     ],
   },
   {
-    icon: '📍', label_en: 'Address and ID', label_ja: '住所・身分証', label_id: 'Alamat dan Identitas',
+    icon: '📍', label_en: 'Address and ID', label_ja: '住所（じゅうしょ）・身分証（みぶんしょう）', label_id: 'Alamat dan Identitas',
     fields: [
-      { key: 'profile.address', label_en: 'Address', label_ja: '住所', label_id: 'Alamat', type: 'text', placeholder_en: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', placeholder_ja: '例：神戸市中央区...', placeholder_id: 'mis. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
-      { key: 'profile.university', label_en: 'School / University', label_ja: '学校名', label_id: 'Sekolah / Universitas', type: 'text', placeholder_en: 'e.g. Kobe University / 神戸大学', placeholder_ja: '例：神戸大学', placeholder_id: 'mis. Universitas Kobe / 神戸大学', autocomplete: 'organization' },
-      { key: 'profile.residenceCard', label_en: 'Residence Card #', label_ja: '在留カード番号', label_id: 'Nomor Kartu Izin Tinggal', type: 'text', placeholder_en: 'e.g. AB12345678CD', placeholder_ja: '例：AB12345678CD', placeholder_id: 'mis. AB12345678CD' },
-      { key: 'profile.insurance', label_en: 'Insurance #', label_ja: '保険証番号', label_id: 'Nomor Kartu Asuransi', type: 'text', placeholder_en: 'e.g. National Health Insurance number', placeholder_ja: '例：国民健康保険の番号', placeholder_id: 'mis. Nomor asuransi kesehatan nasional' },
+      { key: 'profile.address', label_en: 'Address', label_ja: '住所（じゅうしょ）', label_id: 'Alamat', type: 'text', placeholder_en: 'e.g. 神戸市中央区... / Kobe-shi, Chuo-ku', placeholder_ja: '例：神戸市（こうべし）中央区（ちゅうおうく）...', placeholder_id: 'mis. 神戸市中央区... / Kobe-shi, Chuo-ku', full: true, autocomplete: 'street-address' },
+      { key: 'profile.university', label_en: 'School / University', label_ja: '学校名（がっこうめい）', label_id: 'Sekolah / Universitas', type: 'text', placeholder_en: 'e.g. Kobe University / 神戸大学', placeholder_ja: '例：神戸大学（こうべだいがく）', placeholder_id: 'mis. Universitas Kobe / 神戸大学', autocomplete: 'organization' },
+      { key: 'profile.residenceCard', label_en: 'Residence Card #', label_ja: '在留（ざいりゅう）カード番号', label_id: 'Nomor Kartu Izin Tinggal', type: 'text', placeholder_en: 'e.g. AB12345678CD', placeholder_ja: '例：AB12345678CD', placeholder_id: 'mis. AB12345678CD' },
+      { key: 'profile.insurance', label_en: 'Insurance #', label_ja: '保険証番号（ほけんしょうばんごう）', label_id: 'Nomor Kartu Asuransi', type: 'text', placeholder_en: 'e.g. National Health Insurance number', placeholder_ja: '例：国民健康保険（こくみんけんこうほけん）の番号', placeholder_id: 'mis. Nomor asuransi kesehatan nasional' },
     ],
   },
   {
-    icon: '🏃', label_en: 'Evacuation Sites', label_ja: '避難場所', label_id: 'Tempat Evakuasi',
+    icon: '🏃', label_en: 'Evacuation Sites', label_ja: '避難場所（ひなんばしょ）', label_id: 'Tempat Evakuasi',
     fields: [
-      { key: 'shelters.primary', label_en: 'First Evacuation Site', label_ja: '第1避難場所', label_id: 'Tempat Evakuasi Pertama', type: 'text', placeholder_en: 'e.g. Higashi Yuenchi Park (500 m)', placeholder_ja: '例：東遊園地（500m）', placeholder_id: 'mis. Taman Higashi Yuenchi (500 m)' },
-      { key: 'shelters.backup', label_en: 'Second Evacuation Site', label_ja: '第2避難場所', label_id: 'Tempat Evakuasi Kedua', type: 'text', placeholder_en: 'e.g. Ward Community Center (1.2 km)', placeholder_ja: '例：区民センター（1.2km）', placeholder_id: 'mis. Balai warga kecamatan (1,2 km)' },
-      { key: 'shelters.highGround', label_en: 'High Ground (Tsunami)', label_ja: '高台（津波）', label_id: 'Dataran Tinggi (Tsunami)', type: 'text', placeholder_en: 'e.g. Kitano-cho hillside (800 m)', placeholder_ja: '例：北野町の丘（800m）', placeholder_id: 'mis. Lereng bukit Kitano-cho (800 m)' },
-      { key: 'shelters.meetingPoint', label_en: 'Meeting Point', label_ja: '集合場所', label_id: 'Titik Kumpul', type: 'text', placeholder_en: 'e.g. Front gate of Kobe University', placeholder_ja: '例：神戸大学の正門', placeholder_id: 'mis. Gerbang depan Universitas Kobe' },
-      { key: 'shelters.walkTime', label_en: 'Walking Time', label_ja: '徒歩時間', label_id: 'Waktu Jalan Kaki', type: 'text', placeholder_en: 'e.g. 10 minute walk', placeholder_ja: '例：歩いて10分', placeholder_id: 'mis. Jalan kaki 10 menit' },
-      { key: 'shelters.routeNotes', label_en: 'Evacuation Route Notes', label_ja: '避難ルート', label_id: 'Catatan Jalur Evakuasi', type: 'textarea', placeholder_en: 'e.g. Go north on Flower Road. Turn right at City Hall.', placeholder_ja: '例：フラワーロードを北へ。市役所で右に曲がる。', placeholder_id: 'mis. Jalan ke utara di Flower Road. Belok kanan di Balai Kota.', full: true },
+      { key: 'shelters.primary', label_en: 'First Evacuation Site', label_ja: '第1避難場所（ひなんばしょ）', label_id: 'Tempat Evakuasi Pertama', type: 'text', placeholder_en: 'e.g. Higashi Yuenchi Park (500 m)', placeholder_ja: '例：東遊園地（ひがしゆうえんち）（500m）', placeholder_id: 'mis. Taman Higashi Yuenchi (500 m)' },
+      { key: 'shelters.backup', label_en: 'Second Evacuation Site', label_ja: '第2避難場所（ひなんばしょ）', label_id: 'Tempat Evakuasi Kedua', type: 'text', placeholder_en: 'e.g. Ward Community Center (1.2 km)', placeholder_ja: '例：区民（くみん）センター（1.2km）', placeholder_id: 'mis. Balai warga kecamatan (1,2 km)' },
+      { key: 'shelters.highGround', label_en: 'High Ground (Tsunami)', label_ja: '高台（たかだい）（津波（つなみ））', label_id: 'Dataran Tinggi (Tsunami)', type: 'text', placeholder_en: 'e.g. Kitano-cho hillside (800 m)', placeholder_ja: '例：北野町（きたのちょう）の丘（おか）（800m）', placeholder_id: 'mis. Lereng bukit Kitano-cho (800 m)' },
+      { key: 'shelters.meetingPoint', label_en: 'Meeting Point', label_ja: '集合場所（しゅうごうばしょ）', label_id: 'Titik Kumpul', type: 'text', placeholder_en: 'e.g. Front gate of Kobe University', placeholder_ja: '例：神戸大学（こうべだいがく）の正門（せいもん）', placeholder_id: 'mis. Gerbang depan Universitas Kobe' },
+      { key: 'shelters.walkTime', label_en: 'Walking Time', label_ja: '徒歩時間（とほじかん）', label_id: 'Waktu Jalan Kaki', type: 'text', placeholder_en: 'e.g. 10 minute walk', placeholder_ja: '例：歩いて10分', placeholder_id: 'mis. Jalan kaki 10 menit' },
+      { key: 'shelters.routeNotes', label_en: 'Evacuation Route Notes', label_ja: '避難（ひなん）ルート', label_id: 'Catatan Jalur Evakuasi', type: 'textarea', placeholder_en: 'e.g. Go north on Flower Road. Turn right at City Hall.', placeholder_ja: '例：フラワーロードを北（きた）へ。市役所（しやくしょ）で右（みぎ）に曲（ま）がる。', placeholder_id: 'mis. Jalan ke utara di Flower Road. Belok kanan di Balai Kota.', full: true },
     ],
   },
   {
-    icon: '📞', label_en: 'Contacts', label_ja: '緊急連絡先', label_id: 'Kontak Darurat',
+    icon: '📞', label_en: 'Contacts', label_ja: '緊急連絡先（きんきゅうれんらくさき）', label_id: 'Kontak Darurat',
     fields: [
-      { key: 'contacts.contact1', label_en: 'Contact 1', label_ja: '連絡先1', label_id: 'Kontak 1', type: 'text', placeholder_en: 'e.g. Budi, 080-1234-5678', placeholder_ja: '例：Budi、080-1234-5678', placeholder_id: 'mis. Budi, 080-1234-5678' },
-      { key: 'contacts.contact2', label_en: 'Contact 2', label_ja: '連絡先2', label_id: 'Kontak 2', type: 'text', placeholder_en: 'e.g. University office, 078-XXX-XXXX', placeholder_ja: '例：大学の事務室、078-XXX-XXXX', placeholder_id: 'mis. Kantor universitas, 078-XXX-XXXX' },
-      { key: 'contacts.familyAbroad', label_en: 'Family in Your Home Country', label_ja: '母国の家族', label_id: 'Keluarga di Negara Asal Saya', type: 'text', placeholder_en: 'e.g. Mom, +62-812-XXX-XXXX', placeholder_ja: '例：母、+62-812-XXX-XXXX', placeholder_id: 'mis. Ibu, +62-812-XXX-XXXX' },
-      { key: 'contacts.embassy', label_en: 'Embassy / Consulate', label_ja: '大使館・領事館', label_id: 'Kedutaan / Konsulat', type: 'text', placeholder_en: 'e.g. KJRI Osaka, 06-6449-9898', placeholder_ja: '例：KJRI大阪、06-6449-9898', placeholder_id: 'mis. KJRI Osaka, 06-6449-9898' },
+      { key: 'contacts.contact1', label_en: 'Contact 1', label_ja: '連絡先（れんらくさき）1', label_id: 'Kontak 1', type: 'text', placeholder_en: 'e.g. Budi, 080-1234-5678', placeholder_ja: '例：Budi、080-1234-5678', placeholder_id: 'mis. Budi, 080-1234-5678' },
+      { key: 'contacts.contact2', label_en: 'Contact 2', label_ja: '連絡先2', label_id: 'Kontak 2', type: 'text', placeholder_en: 'e.g. University office, 078-XXX-XXXX', placeholder_ja: '例：大学の事務室（じむしつ）、078-XXX-XXXX', placeholder_id: 'mis. Kantor universitas, 078-XXX-XXXX' },
+      { key: 'contacts.familyAbroad', label_en: 'Family in Your Home Country', label_ja: '母国（ぼこく）の家族（かぞく）', label_id: 'Keluarga di Negara Asal Saya', type: 'text', placeholder_en: 'e.g. Mom, +62-812-XXX-XXXX', placeholder_ja: '例：母（はは）、+62-812-XXX-XXXX', placeholder_id: 'mis. Ibu, +62-812-XXX-XXXX' },
+      { key: 'contacts.embassy', label_en: 'Embassy / Consulate', label_ja: '大使館（たいしかん）・領事館（りょうじかん）', label_id: 'Kedutaan / Konsulat', type: 'text', placeholder_en: 'e.g. KJRI Osaka, 06-6449-9898', placeholder_ja: '例：KJRI大阪（おおさか）、06-6449-9898', placeholder_id: 'mis. KJRI Osaka, 06-6449-9898' },
     ],
   },
   {
-    icon: '🎒', label_en: 'Supplies and Bag', label_ja: '備蓄・防災袋', label_id: 'Persediaan dan Tas',
+    icon: '🎒', label_en: 'Supplies and Bag', label_ja: '備蓄（びちく）・防災袋（ぼうさいぶくろ）', label_id: 'Persediaan dan Tas',
     fields: [
-      { key: 'supplies.supplyDays', label_en: 'Days of Supplies', label_ja: '備蓄日数', label_id: 'Persediaan untuk Berapa Hari', type: 'select', options: SUPPLY_DAYS },
-      { key: 'supplies.waterLiters', label_en: 'Stored Water', label_ja: '水の備蓄量', label_id: 'Air yang Disimpan', type: 'text', placeholder_en: 'e.g. 9 L (3 L/day × 3 days)', placeholder_ja: '例：9L（1日3L × 3日）', placeholder_id: 'mis. 9 L (3 L/hari × 3 hari)' },
-      { key: 'supplies.foodList', label_en: 'Food List', label_ja: '非常食リスト', label_id: 'Daftar Makanan', type: 'textarea', placeholder_en: 'e.g. Canned tuna × 4, instant rice × 6', placeholder_ja: '例：ツナ缶 × 4、アルファ米 × 6', placeholder_id: 'mis. Tuna kaleng × 4, nasi instan × 6', full: true },
-      { key: 'supplies.toolsList', label_en: 'Equipment List', label_ja: '装備リスト', label_id: 'Daftar Perlengkapan', type: 'textarea', placeholder_en: 'e.g. Flashlight, radio, first aid kit, whistle', placeholder_ja: '例：懐中電灯、ラジオ、救急セット、笛', placeholder_id: 'mis. Senter, radio, kotak P3K, peluit', full: true },
-      { key: 'supplies.bagLocation', label_en: 'Bag Location', label_ja: '非常持ち出し袋の場所', label_id: 'Lokasi Tas Darurat', type: 'text', placeholder_en: 'e.g. Genkan (entrance), next to the shoes', placeholder_ja: '例：玄関、くつの横', placeholder_id: 'mis. Genkan (pintu masuk), di samping sepatu' },
-      { key: 'documents.copiedDocs', label_en: 'Document Copies', label_ja: '書類のコピー', label_id: 'Salinan Dokumen', type: 'select', options: DOC_OPTIONS },
+      { key: 'supplies.supplyDays', label_en: 'Days of Supplies', label_ja: '備蓄日数（びちくにっすう）', label_id: 'Persediaan untuk Berapa Hari', type: 'select', options: SUPPLY_DAYS },
+      { key: 'supplies.waterLiters', label_en: 'Stored Water', label_ja: '水の備蓄（びちく）量', label_id: 'Air yang Disimpan', type: 'text', placeholder_en: 'e.g. 9 L (3 L/day × 3 days)', placeholder_ja: '例：9L（1日3L × 3日）', placeholder_id: 'mis. 9 L (3 L/hari × 3 hari)' },
+      { key: 'supplies.foodList', label_en: 'Food List', label_ja: '非常食（ひじょうしょく）リスト', label_id: 'Daftar Makanan', type: 'textarea', placeholder_en: 'e.g. Canned tuna × 4, instant rice × 6', placeholder_ja: '例：ツナ缶（かん） × 4、インスタントのごはん × 6', placeholder_id: 'mis. Tuna kaleng × 4, nasi instan × 6', full: true },
+      { key: 'supplies.toolsList', label_en: 'Equipment List', label_ja: '装備（そうび）リスト', label_id: 'Daftar Perlengkapan', type: 'textarea', placeholder_en: 'e.g. Flashlight, radio, first aid kit, whistle', placeholder_ja: '例：懐中電灯（かいちゅうでんとう）、ラジオ、救急（きゅうきゅう）セット、笛', placeholder_id: 'mis. Senter, radio, kotak P3K, peluit', full: true },
+      { key: 'supplies.bagLocation', label_en: 'Bag Location', label_ja: '非常持ち出し袋（ひじょうもちだしぶくろ）の場所', label_id: 'Lokasi Tas Darurat', type: 'text', placeholder_en: 'e.g. Genkan (entrance), next to the shoes', placeholder_ja: '例：玄関（げんかん）、くつの横（よこ）', placeholder_id: 'mis. Genkan (pintu masuk), di samping sepatu' },
+      { key: 'documents.copiedDocs', label_en: 'Document Copies', label_ja: '書類（しょるい）のコピー', label_id: 'Salinan Dokumen', type: 'select', options: DOC_OPTIONS },
     ],
   },
 ];
@@ -247,7 +247,7 @@ function renderStepCard(step: StepDef): HTMLElement {
 
 function renderReview(): HTMLElement {
   const card = el('div', { class: 'wizard-step' });
-  card.appendChild(el('div', { class: 'wizard-step-header' }, `✅  ${formLabel({ label_en: 'Review & Print', label_ja: '確認・印刷', label_id: 'Tinjau dan Cetak' })}`));
+  card.appendChild(el('div', { class: 'wizard-step-header' }, `✅  ${formLabel({ label_en: 'Review & Print', label_ja: '確認（かくにん）・印刷（いんさつ）', label_id: 'Tinjau dan Cetak' })}`));
 
   const review = el('div', { class: 'wizard-review' });
   STEPS.forEach(step => {

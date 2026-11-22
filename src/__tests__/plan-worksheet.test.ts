@@ -135,17 +135,17 @@ describe('wizard languages', () => {
   it('shows the user language next to Japanese, and Japanese alone in ja', () => {
     setLang('id');
     start();
-    expect(firstLabel()).toBe('Nama Lengkap ・ 氏名');
+    expect(firstLabel()).toBe('Nama Lengkap ・ 氏名（しめい）');
     setLang('ja');
-    expect(firstLabel()).toBe('氏名');
+    expect(firstLabel()).toBe('氏名（しめい）');
     setLang('en');
-    expect(firstLabel()).toBe('Full Name ・ 氏名');
+    expect(firstLabel()).toBe('Full Name ・ 氏名（しめい）');
   });
 
   it('re-renders the wizard when the language changes, without a click', () => {
     start();
     setLang('id');
-    expect(firstLabel()).toBe('Nama Lengkap ・ 氏名');
+    expect(firstLabel()).toBe('Nama Lengkap ・ 氏名（しめい）');
     expect(document.querySelector('.wizard-field input')!.getAttribute('placeholder')).toBe('mis. Aditya Wirayutha');
   });
 
@@ -163,5 +163,19 @@ describe('wizard languages', () => {
     printPlan();
     expect(sheetText()).toContain('Full Name ・ 氏名');
     expect(sheetText()).toContain('Evacuation Sites ・ 避難場所');
+  });
+});
+
+describe('Japanese readings', () => {
+  it('shows readings in the ja form but not on the printed sheet', () => {
+    setLang('ja');
+    start();
+    expect(document.querySelector('.wizard-field label')!.textContent).toBe('氏名（しめい）');
+    printPlan();
+    expect(sheetText()).toContain('Full Name ・ 氏名');
+    expect(sheetText()).toContain('High Ground (Tsunami) ・ 高台（津波）');
+    expect(sheetText()).toContain('Residence Card # ・ 在留カード番号');
+    expect(sheetText()).not.toMatch(/（[ぁ-ゖー]+）/);
+    setLang('en');
   });
 });
