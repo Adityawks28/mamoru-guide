@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { buildNeedsCard, showNeedsCard, initNeedsCard, printNeedsCard } from '../needs-card';
+import { buildNeedsCard, closeNeedsCard, showNeedsCard, initNeedsCard, printNeedsCard } from '../needs-card';
 import { emptyNeeds, emptyPlan, type PlanNeeds } from '../plan-model';
 import { savePlanV2 } from '../plan-storage';
 import { t } from '../i18n';
@@ -11,6 +11,8 @@ const full = (): PlanNeeds => ({ ...emptyNeeds(), foodAllergies: ['soba', 'rakka
   contactRelation: 'friend', contactPhone: '080-1234-5678', notes: 'Line 1\nLine 2' });
 
 beforeEach(() => {
+  closeNeedsCard();
+  document.body.className = '';
   document.body.innerHTML = '';
   document.body.style.overflow = '';
   localStorage.removeItem('mamoru-plan-v2');
@@ -38,6 +40,10 @@ describe('needs card', () => {
     const a = buildNeedsCard({ ...full(), contactPhone: '+81 80-1234"x' }, 'en').querySelector('a')!;
     expect(a.getAttribute('href')).toBe('tel:+81801234');
     expect(a.textContent).toBe('+81 80-1234"x');
+  });
+  it('links a full-width phone number', () => {
+    const a = buildNeedsCard({ ...full(), contactPhone: '０８０－１２３４－５６７８' }, 'ja').querySelector('a')!;
+    expect(a.getAttribute('href')).toBe('tel:08012345678');
   });
   it('leaves out empty sections and shows the empty note for an empty card', () => {
     expect(buildNeedsCard({ ...emptyNeeds(), medicines: 'X' }, 'en').querySelectorAll('.needs-sec').length).toBe(1);
@@ -71,7 +77,6 @@ describe('needs card', () => {
   });
   it('prints only the needs card, then puts the page back', () => {
     window.print = vi.fn();
-    initNeedsCard();
     printNeedsCard();
     expect(document.body.classList.contains('print-needs-only')).toBe(true);
     expect(window.print).toHaveBeenCalled();

@@ -155,7 +155,7 @@ export const en: Record<string, string> = {
   'needs.step.title': '🧾 My needs card',
   'needs.step.intro': 'Fill in what a helper must know. Mamoru shows it on one card in Japanese.',
   'needs.food': 'Food allergies',
-  'needs.food.hint': 'This is the official Japanese list of allergens. Write other allergies below.',
+  'needs.food.hint': 'Food labels in Japan must show these 9 allergens. Write other allergies below.',
   'needs.otherAllergies': 'Other allergies',
   'needs.medicines': 'Medicines',
   'needs.diet': 'Food needs',
@@ -172,7 +172,7 @@ export const en: Record<string, string> = {
   'needs.btn.show': '🆘 Show my needs',
   'needs.btn.print': '🖨️ Print my needs card',
   'needs.btn.clear': '🗑️ Clear my needs',
-  'needs.clear.confirm': 'Delete your needs card? This deletes your food allergies, other allergies, medicines, food needs, languages I speak, emergency contact and notes. The rest of your plan stays. You cannot undo this.',
+  'needs.clear.confirm': 'Delete your needs card? This deletes "Food allergies", "Other allergies", "Medicines", "Food needs", "Languages I speak", "Emergency contact" and "Notes". The rest of your plan stays. You cannot undo this.',
   'needs.toast.saved': 'Needs card saved',
   'needs.toast.cleared': 'Needs card cleared',
 };

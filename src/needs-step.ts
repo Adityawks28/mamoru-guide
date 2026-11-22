@@ -108,6 +108,7 @@ function relationField(needs: PlanNeeds, on: NeedsStepActions): HTMLElement {
 export function renderNeedsStep(needs: PlanNeeds, on: NeedsStepActions): HTMLElement {
   const card = el('div', 'wizard-step needs-step');
   const header = i18n('div', 'needs.step.title', 'wizard-step-header');
+  header.tabIndex = -1;
   card.append(header, i18n('p', 'needs.step.intro', 'needs-intro'));
 
   card.append(group(needs, on, 'foodAllergies', 'needs.food', FOOD_ALLERGENS, 'needs.food.hint'));

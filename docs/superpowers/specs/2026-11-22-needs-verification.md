@@ -36,6 +36,8 @@
 - 13 presets come from the dictionary: en, zh, ko, pt, es, id, vi, tl (タガログ語), th, ne, km, my (ビルマ語), mn. The key for タガログ語 is `tl`.
 - The Japanese language names are the column names as the dictionary writes them. Readings are added only for 英語, 中国語, 韓国語. Indonesian and English names are the app's own labels (Aditya reviews the Indonesian).
 
+- The hint above the allergen checkboxes says only what the CAA source says: food labels in Japan must show these 9 allergens (the 20 other items are only recommended). The number in the hint is tested against `FOOD_ALLERGENS.length`.
+
 ## Sources
 
 | ID | Publisher | Title (section) | URL | Checked |

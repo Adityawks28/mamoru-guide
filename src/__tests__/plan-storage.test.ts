@@ -184,6 +184,14 @@ describe('needs group', () => {
     expect(n.notes).toBe('');
     expect(n.contactRelation).toBe('');
   });
+  it.each([[null], [[]], ['x']])('loads needs = %j without throwing and normalizes it', bad => {
+    localStorage.setItem('mamoru-plan-v2', JSON.stringify({ ...emptyPlan(), needs: bad }));
+    expect(loadPlanV2().needs).toEqual(emptyNeeds());
+  });
+  it('drops duplicate keys in a needs list', () => {
+    localStorage.setItem('mamoru-plan-v2', JSON.stringify({ ...emptyPlan(), needs: { foodAllergies: ['soba', 'soba'] } }));
+    expect(loadPlanV2().needs.foodAllergies).toEqual(['soba']);
+  });
   it('round-trips every needs field', () => {
     const plan = emptyPlan();
     plan.needs = {
