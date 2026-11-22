@@ -954,4 +954,20 @@ export const CLAIMS: Record<string, Claim> = {
   'drill-step-4': { sources: ['kantei-tsunami', 'jma-tsunami-info', 'cao-tsunami-building-advice'], status: 'changed', note: '"3rd floor or higher" removed: the old CAO 3-storey guideline was abolished (H29.7.5). Now: high ground or a tsunami evacuation building, as high as you can; a tsunami can be higher than the forecast. 首相官邸 津波; JMA 津波警報' },
   'drill-step-5': { sources: ['jma-aftershock-ja', 'tfd-quake-10-points', 'jma-kumagaya-edu'], status: 'changed', note: 'Fact (Task 5): an earthquake of the same size can come; JMA asks for caution for about 1 week (JMA 大地震後の地震活動). Action: "The doorway idea is out of date. Inside walls give no special protection" removed (no Japanese source on doorways or inside walls). Now: drop, cover and hold on, as in the first earthquake; go where nothing can fall, tip over or move (TFD 10のポイント 1; JMA Kumagaya Ver.5). Same rule as eqnow-2' },
   'drill-step-6': { sources: ['kantei-tsunami'], status: 'changed', note: 'Go back only when it is safe; do not go back while a warning is in effect (警報・注意報が解除され安全が確認されるまでは決して被災地域には立ち入らない, 首相官邸 津波). Removed: hidden building damage and "check NHK or city announcements" (no official quote)' },
+
+  // Warning words: one claim per row of docs/superpowers/specs/2026-11-21-warning-words-verification.md.
+  'warn-alert-level': { sources: ['kantei-keihou', 'jma-multilingual'], status: 'verified', note: 'W1: 「※警戒レベル１・２の情報は気象庁などから、警戒レベル３～５の情報は市町村から発表されます。」 首相官邸 防災気象情報と警戒レベル; JMA 多言語辞書 row 7' },
+  'warn-level-2-advisory': { sources: ['kantei-keihou', 'jma-warning-2026-english'], status: 'verified', note: 'W3: 「ハザードマップで…避難行動を確認しておきましょう」 首相官邸 防災気象情報と警戒レベル; JMA 警戒レベル相当情報の英語表記' },
+  'warn-level-3-elderly': { sources: ['kantei-keihou', 'jma-nagasaki-levels-en'], status: 'verified', note: 'W4: 「高齢の方や障がいのある方…避難に時間のかかる方…は危険な場所から避難し、それ以外の人は避難の準備をすること」 首相官邸 防災気象情報と警戒レベル; JMA Nagasaki level sheet' },
+  'warn-level-3-warning': { sources: ['jma-warning-2026', 'kantei-keihou', 'jma-warning-2026-english'], status: 'verified', note: 'W5: 「レベル３大雨警報」 matches alert level 3 (JMA 新たな防災気象情報); action as W4 (首相官邸)' },
+  'warn-level-4-instruction': { sources: ['kantei-keihou', 'jma-nagasaki-levels-en'], status: 'verified', note: 'W6: 「危険な場所から全員避難することです」, no time word. 首相官邸 防災気象情報と警戒レベル; JMA Nagasaki level sheet' },
+  'warn-level-4-urgent': { sources: ['jma-warning-2026', 'kantei-keihou', 'jma-warning-2026-english'], status: 'verified', note: 'W7: 「レベル４大雨危険警報」 matches alert level 4 (JMA 新たな防災気象情報); action as W6 (首相官邸)' },
+  'warn-level-5-safety': { sources: ['kantei-keihou', 'jma-nagasaki-levels-en'], status: 'verified', note: 'W8: 「直ちに命を守る行動をとってください」 首相官邸 防災気象情報と警戒レベル; JMA Nagasaki level sheet' },
+  'warn-level-5-emergency': { sources: ['jma-warning-2026', 'kantei-keihou', 'jma-warning-2026-english'], status: 'verified', note: 'W9: 「レベル５大雨特別警報」 matches alert level 5 (JMA 新たな防災気象情報); action as W8 (首相官邸)' },
+  'warn-tsunami-advisory': { sources: ['jma-tsunami-info', 'kantei-tsunami'], status: 'verified', note: 'W10: 「海の中にいる人はただちに海から上がって、海岸から離れてください」 JMA 津波警報・注意報; 首相官邸 津波' },
+  'warn-tsunami-warning': { sources: ['jma-tsunami-info'], status: 'verified', note: 'W11: 「ただちに高台や避難ビルなど安全な場所へ避難してください」 JMA 津波警報・注意報' },
+  'warn-tsunami-major': { sources: ['jma-tsunami-info', 'kantei-tsunami'], status: 'verified', note: 'W12: 「東日本大震災のような巨大な津波が襲うおそれがあります。ただちにできる限りの避難をしましょう」 JMA 津波警報・注意報; 首相官邸 津波' },
+  'warn-eew': { sources: ['kantei-jishin', 'jma-multilingual'], status: 'verified', note: 'W13: 「あわてずにまずは身の安全を確保してください」 首相官邸 地震; JMA 多言語辞書 rows 749, 773' },
+  'warn-jalert': { sources: ['fdma-jalert'], status: 'verified', note: 'W14: 「弾道ミサイル情報、緊急地震速報、大津波警報など…瞬時に伝達するシステム」 FDMA Jアラートの概要' },
+  'warn-evac-site': { sources: ['kantei-hinan', 'jma-multilingual'], status: 'verified', note: 'W15: 「避難場所は災害の危険から緊急的に逃れるための場所で、災害の種類ごとに市町村が指定しています」 首相官邸 避難のタイミングと避難場所; JMA 多言語辞書 row 368' },
 };

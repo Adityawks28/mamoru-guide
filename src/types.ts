@@ -15,6 +15,10 @@ export interface VocabItem {
   rom: string;
   en: string;
   id: string;
+  /** Kana reading, shown on the Warnings flashcards. */
+  reading?: string;
+  /** What to do when you see or hear the word. */
+  instruction?: { en: string; ja: string; id: string };
 }
 
 export type VocabCategory = 'danger' | 'action' | 'places' | 'help' | 'medical';

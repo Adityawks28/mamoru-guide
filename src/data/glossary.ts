@@ -11,6 +11,18 @@ export interface GlossaryTerm {
 
 // Every app string whose Japanese contains `ja` must use `en` and `id` (case-insensitive).
 export const GLOSSARY: ReadonlyArray<GlossaryTerm> = [
+  // en and id: JMA dictionary row 警戒レベル (jma-multilingual); the JMA Nagasaki sheets (jma-nagasaki-levels-id) say "Level siaga" in one column.
+  { ja: '警戒レベル', reading: 'けいかいレベル', en: 'Alert level', id: 'tingkat peringatan', source: 'jma-multilingual' },
+  // en: JMA 警戒レベル相当情報の英語表記について; id: JMA dictionary row "Pemberitahuan Hujan Lebat Tingkat 2" (jma-multilingual).
+  { ja: 'レベル２大雨注意報', reading: 'レベルにおおあめちゅういほう', en: 'Level 2 Advisory (Heavy Rain)', id: 'Pemberitahuan Hujan Lebat Tingkat 2', source: 'jma-warning-2026-english' },
+  // en: JMA 警戒レベル相当情報の英語表記について; id: JMA dictionary row "Peringatan Hujan Lebat Tingkat 3" (jma-multilingual).
+  { ja: 'レベル３大雨警報', reading: 'レベルさんおおあめけいほう', en: 'Level 3 Warning (Heavy Rain)', id: 'Peringatan Hujan Lebat Tingkat 3', source: 'jma-warning-2026-english' },
+  // en: JMA 警戒レベル相当情報の英語表記について; id: JMA dictionary row "Peringatan Darurat Hujan Lebat Tingkat 4" (jma-multilingual).
+  { ja: 'レベル４大雨危険警報', reading: 'レベルよんおおあめきけんけいほう', en: 'Level 4 Urgent Warning (Heavy Rain)', id: 'Peringatan Darurat Hujan Lebat Tingkat 4', source: 'jma-warning-2026-english' },
+  // en: JMA 警戒レベル相当情報の英語表記について; id: JMA dictionary row "Peringatan Khusus Hujan Lebat Tingkat 5" (jma-multilingual).
+  { ja: 'レベル５大雨特別警報', reading: 'レベルごおおあめとくべつけいほう', en: 'Level 5 Emergency Warning (Heavy Rain)', id: 'Peringatan Khusus Hujan Lebat Tingkat 5', source: 'jma-warning-2026-english' },
+  // en: FDMA writes "J-ALERT" next to Jアラート (fdma-jalert); no Indonesian official form, so the proper name stays (Decision W-6).
+  { ja: 'Jアラート', reading: 'ジェイアラート', en: 'J-Alert', id: 'J-Alert', source: 'fdma-jalert' },
   // id: the Indonesian edition of the same leaflet (cao-evacuation-points-id).
   { ja: '避難所', reading: 'ひなんじょ', en: 'evacuation shelter', id: 'tempat pengungsian', source: 'cao-evacuation-points-en' },
   // id: ISA guidebook heading for 避難場所 (isa-guidebook-id); JMA has "lokasi evakuasi" only inside a sentence.

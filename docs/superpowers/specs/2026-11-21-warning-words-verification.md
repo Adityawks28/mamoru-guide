@@ -88,6 +88,7 @@ Note for the controller: the current glossary entry 避難所 (`src/data/glossar
 
 - New glossary term 警戒レベル (en "Alert level", id "tingkat peringatan"): `index.html:791` says "Ada 5 tingkat siaga." in Indonesian for 「警戒レベル（けいかいレベル）は5つあります。」. The glossary test will list it. The official form is "tingkat peringatan" (jma-multilingual row 7, jma-nagasaki-levels-id). jma-nagasaki-levels-id also uses "Level siaga" in one column; the JMA dictionary is the national form.
 - Japanese lines write the level digit half-width (レベル4), like the alert card. Decision W-5 (full-width) applies to glossary `ja` values; no final line contains a full-width level name.
+- Done in Task 2: `index.html:791` now says "Ada 5 tingkat peringatan." (was "tingkat siaga"), the glossary term for 警戒レベル.
 - W13 does not reuse B48. Its line is cut to the Kantei quote 「あわてずにまずは身の安全を確保してください」 (stay calm, protect yourself first). B48's "Drop and cover IMMEDIATELY" on the alert card is out of scope here.
 - W6 and W7 do not reuse B50's "must leave now". Kantei says 「危険な場所から全員避難」 with no time word, so the lines say "must leave" / 全員避難 / "harus mengungsi" (Ruling R8).
 

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { SOURCES, CLAIMS } from '../data/sources';
+import { WARNING_WORDS } from '../data/warning-words';
 import { categories } from '../first-aid';
 import { STEPS } from '../earthquake-now';
 import { scenarios } from '../drill';
@@ -9,6 +10,14 @@ import {
 } from '../character/tips';
 
 const allTips = [QUAKE_TIPS, BAG_TIPS, MAP_TIPS, FIRSTAID_TIPS, TYPHOON_TIPS, DISASTER_FACTS].flat();
+function usedClaimIds(): string[] {
+  return [
+    ...categories.flatMap((c) => c.steps.map((s) => s.claimId)),
+    ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
+    ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
+    ...WARNING_WORDS.map((w) => w.claimId),
+  ];
+}
 const hasDigit = (t: { en: string; ja: string; id: string }) => /\d/.test(t.en + t.ja + t.id);
 
 describe('claims registry', () => {
@@ -42,11 +51,7 @@ describe('claims registry', () => {
   });
 
   it('every claim that an app item uses is verified or changed', () => {
-    const usedIds = [
-      ...categories.flatMap((c) => c.steps.map((s) => s.claimId)),
-      ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
-      ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
-    ];
+    const usedIds = usedClaimIds();
     expect(usedIds.length).toBeGreaterThan(0);
     for (const id of usedIds) expect(['verified', 'changed'], id).toContain(CLAIMS[id].status);
   });
@@ -68,11 +73,7 @@ describe('claims registry', () => {
   });
 
   it('every claim is used by at least one item, unless it is removed', () => {
-    const used = new Set<string>([
-      ...categories.flatMap((c) => c.steps.map((s) => s.claimId)),
-      ...allTips.map((t) => t.claimId).filter((x): x is string => !!x),
-      ...[...STEPS, ...scenarios, ...typhoonScale].map((x) => x.claimId),
-    ]);
+    const used = new Set<string>(usedClaimIds());
     // A removed claim stays in CLAIMS as a record, and no item may use it.
     for (const [id, c] of Object.entries(CLAIMS)) expect(used.has(id), id).toBe(c.status !== 'removed');
   });
