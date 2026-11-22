@@ -2,9 +2,11 @@ import { showToast } from './toast';
 import { t } from './i18n';
 import { currentLang } from './lang';
 import { removeItem } from './storage';
-import { EmergencyPlan, emptyPlan } from './plan-model';
+import { EmergencyPlan, emptyPlan, emptyNeeds } from './plan-model';
 import { loadPlanV2, savePlanV2, clearPlanV2, migrateV1ToV2 } from './plan-storage';
 import { showPlan } from './show-plan';
+import { showNeedsCard } from './needs-card';
+import { renderNeedsStep, clearNeedsConfirmText } from './needs-step';
 
 type FieldType = 'text' | 'textarea' | 'select';
 interface FieldOption { value: string; label: string }
@@ -110,8 +112,9 @@ const STEPS: StepDef[] = [
   },
 ];
 
-const REVIEW_STEP = STEPS.length; // index 6
-const TOTAL_STEPS = STEPS.length + 1;
+const NEEDS_STEP = STEPS.length; // index 6
+const REVIEW_STEP = STEPS.length + 1;
+const TOTAL_STEPS = STEPS.length + 2;
 
 // Printed worksheet: medical right after identity, since that is what a
 // rescuer reads first. ID numbers print as their last 4 characters unless the
@@ -257,16 +260,41 @@ function renderReview(): HTMLElement {
   const actions = el('div', { class: 'wizard-review-actions' });
   const saveBtn  = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-next' }, t('plan.btn.save'));
   const showBtn  = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-show' }, t('plan.btn.show'));
+  const needsBtn = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-show' }, t('needs.btn.show'));
   const printBtn = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-prev' }, t('plan.btn.print'));
   const clearBtn = el('button', { type: 'button', class: 'wizard-nav-btn wizard-btn-clear' }, t('plan.btn.clear'));
   saveBtn.addEventListener('click',  () => savePlan());
   showBtn.addEventListener('click',  () => showPlan());
+  needsBtn.addEventListener('click', () => { flushSave(); showNeedsCard(); });
   printBtn.addEventListener('click', () => printPlan());
   clearBtn.addEventListener('click', () => clearPlan());
-  actions.append(saveBtn, showBtn, printBtn, clearBtn);
+  actions.append(saveBtn, showBtn, needsBtn, printBtn, clearBtn);
   card.appendChild(actions);
 
   return card;
+}
+
+function flushSave(): void {
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = undefined;
+  savePlanV2(plan);
+}
+
+function renderNeeds(): HTMLElement {
+  return renderNeedsStep(plan.needs, {
+    change: scheduleSave,
+    save() { flushSave(); showToast(t('needs.toast.saved'), 'success'); },
+    show() { flushSave(); showNeedsCard(); },
+    // Task 5 turns this into printing; until then it opens the card.
+    print() { flushSave(); showNeedsCard(); },
+    clear() {
+      if (!confirm(clearNeedsConfirmText())) return;
+      plan.needs = emptyNeeds();
+      flushSave();
+      goToStep(NEEDS_STEP);
+      showToast(t('needs.toast.cleared'), 'success');
+    },
+  });
 }
 
 function renderNav(): HTMLElement {
@@ -293,7 +321,10 @@ function goToStep(n: number): void {
   if (!wizard) return;
   wizard.replaceChildren();
   wizard.appendChild(renderProgress());
-  wizard.appendChild(currentStep === REVIEW_STEP ? renderReview() : renderStepCard(STEPS[currentStep]));
+  wizard.appendChild(
+    currentStep === REVIEW_STEP ? renderReview()
+    : currentStep === NEEDS_STEP ? renderNeeds()
+    : renderStepCard(STEPS[currentStep]));
   wizard.appendChild(renderNav());
 }
 
@@ -303,6 +334,10 @@ function handleInput(e: Event): void {
   if (!path) return;
   const value = (target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement).value;
   setVal(plan, path, value);
+  scheduleSave();
+}
+
+function scheduleSave(): void {
   if (saveTimer) clearTimeout(saveTimer);
   saveTimer = setTimeout(() => savePlanV2(plan), 1000);
 }
@@ -314,7 +349,11 @@ export function savePlan(): void {
 }
 
 export function clearPlan(): void {
-  if (!confirm('Clear your emergency plan? You cannot undo this.\nあなたの計画を消しますか？元に戻せません。\nHapus rencana daruratmu? Ini tidak bisa dibatalkan.')) return;
+  if (!confirm([
+    'Clear your emergency plan? You cannot undo this. This also deletes your needs card.',
+    'あなたの計画を消しますか？元に戻せません。必要（ひつよう）なことカードも消（き）えます。',
+    'Hapus rencana daruratmu? Ini tidak bisa dibatalkan. Kartu kebutuhanmu juga dihapus.',
+  ].join('\n'))) return;
   clearPlanV2();
   plan = emptyPlan();
   goToStep(0);
