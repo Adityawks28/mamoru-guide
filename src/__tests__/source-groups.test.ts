@@ -9,7 +9,7 @@ const specs = resolve(__dirname, '../../docs/superpowers/specs');
 const recordText = readdirSync(specs).filter(f => f.endsWith('-verification.md'))
   .map(f => readFileSync(resolve(specs, f), 'utf8')).join('\n');
 const cited = (id: string) => new RegExp(`(^|[^a-z0-9-])${id}([^a-z0-9-]|$)`).test(recordText);
-const HIDDEN = ['jma-nagasaki-levels-id', 'cao-evacuation-points-id', 'isa-guidebook-id', 'kemenkes-rjp', 'alodokter-crush'];
+const HIDDEN = ['kemenkes-rjp', 'alodokter-crush'];
 const src = (area: SourceArea, checked = '2026-11-21'): Source => ({ publisher: 'P', title: 'T', url: 'https://example.org', checked, area });
 
 describe('source areas', () => {
@@ -34,9 +34,9 @@ describe('record sources', () => {
 });
 
 describe('visible sources', () => {
-  it('shows 113 sources and hides the 5 that nothing uses', () => {
+  it('shows 116 sources and hides the 2 that nothing uses', () => {
     const shown = visibleSourceIds();
-    expect(shown).toHaveLength(113);
+    expect(shown).toHaveLength(116);
     expect(Object.keys(SOURCES).filter(id => !shown.includes(id))).toEqual(HIDDEN);
   });
   it('keeps the SOURCES order', () => {
